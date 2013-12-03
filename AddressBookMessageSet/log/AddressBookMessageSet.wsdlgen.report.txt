@@ -1,0 +1,70 @@
+Summary of selections: WSDL files generation
+
+The selected message set:
+/AddressBookMessageSet/AddressBookMessageSet
+
+The generated WSDL files will go into:
+/AddressBookMessageSet/AddressBookMessageSet
+
+The version of WSDL to be generated: 1.1
+The version of SOAP to be generated: 1.1
+
+The selected style for WSDL generation: document
+The WSDL Namespace: http://com.jms.addressbook
+
+The following operations will be created:
+SaveAddress (Request-Response)
+FindAddress (Request-Response)
+
+The following bindings are selected:
+SOAP over JMS.
+
+The following WSDL files will be generated:
+/AddressBookMessageSet/AddressBookMessageSet/AddressBookMessageSetService.wsdl
+
+
+Generating XML Schema files from Message Definition files
+Generating schema for no XML Wire format
+Generating schema using the strict option
+All complex types and groups with a Content validation of "Open" or "Open defined" will be generated as if they had Content validation "Closed"
+All complex types and groups with a Composition of "Ordered set" or "Unordered set" will be generated with a Composition of "Sequence"
+All complex types and groups with a Composition of "Message" will be generated with a Composition of "Choice"
+
+
+Processing File : "/AddressBookMessageSet/AddressBookMessageSet/com/addressbook/AddressBook_InlineSchema1.mxsd"
+
+Creating global type "mrm:_Name" to replace anonymous type in the global element "mrm:Name"
+Creating global type "mrm:_SaveAddressResponse" to replace anonymous type in the global element "mrm:SaveAddressResponse"
+Saving File : "/AddressBookMessageSet/AddressBookMessageSet/com/addressbook/AddressBook_InlineSchema1.xsd" 
+
+Generating XML Schema file \AddressBookMessageSet\AddressBookMessageSet\com\addressbook\AddressBook_InlineSchema1.mxsd from Message Definition file \AddressBookMessageSet\AddressBookMessageSet\com\addressbook\AddressBook_InlineSchema1.xsd
+Creating new WSDL Service file '\AddressBookMessageSet\AddressBookMessageSet\AddressBookMessageSetService.wsdl'
+Setting wsdl definition name for 'AddressBookMessageSetService.wsdl': AddressBookMessageSet
+Setting wsdl definition targetNamespace for 'AddressBookMessageSetService.wsdl': http://com.jms.addressbook
+Adding namespace: xmlns for 'AddressBookMessageSetService.wsdl':mrm=http://addressbook.com/
+Adding namespace: xmlns for 'AddressBookMessageSetService.wsdl':jms=http://schemas.xmlsoap.org/soap/jms
+Adding namespace: xmlns for 'AddressBookMessageSetService.wsdl':soap=http://schemas.xmlsoap.org/wsdl/soap/
+Adding namespace: xmlns for 'AddressBookMessageSetService.wsdl':xsd=http://www.w3.org/2001/XMLSchema
+Adding namespace: xmlns for 'AddressBookMessageSetService.wsdl':wsdl=http://schemas.xmlsoap.org/wsdl/
+Creating new WSDL Interface file '\AddressBookMessageSet\AddressBookMessageSet\AddressBookMessageSetService.wsdl'
+Creating portType for WSDL Interface: AddressBookMessageSetPortType
+Creating portType operation 'SaveAddress'
+Creating message 'SaveAddress_in'
+Creating message 'SaveAddress_out'
+Creating portType operation 'FindAddress'
+Creating message 'FindAddress_in'
+Creating message 'FindAddress_out'
+Creating message 'FindAddress_fault1'
+Creating SOAP over JMS binding 'AddressBookMessageSetSOAP_JMS_Binding'
+Creating binding operation 'SaveAddress' for binding 'AddressBookMessageSetSOAP_JMS_Binding'
+Creating binding operation 'FindAddress' for binding 'AddressBookMessageSetSOAP_JMS_Binding'
+Creating SOAP over JMS service 'AddressBookSOAP_JMS_Service'
+Creating port 'JMSSOAPPort' for service 'AddressBookSOAP_JMS_Service'
+
+Elapsed time processing this WSDL definition: 0.703 seconds
+Number of warnings for this WSDL definition: 0
+
+
+Number of files processed: 2
+
+

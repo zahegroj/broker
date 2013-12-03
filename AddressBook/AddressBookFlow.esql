@@ -1,0 +1,70 @@
+/*Sample program for use with IBM WebSphere Message Broker
+© Copyright International Business Machines Corporation 2009, 2010 
+Licensed Materials - Property of IBM*/
+
+DECLARE ns NAMESPACE 'http://addressbook.com/';
+DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+DECLARE Tree SHARED ROW;
+
+CREATE COMPUTE MODULE AddressBookFlow_SaveCompute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		/*
+		 * Declare a reference to the SOAP body so we can easily access
+		 * all of the elements.
+		 */
+		DECLARE body REFERENCE TO InputRoot.SOAP.Body;
+		/**
+		 *  Atomic section, accessing the shared variable.
+		 */
+		InsertPerson : BEGIN ATOMIC
+			DECLARE I INTEGER;
+			-- ESQL Lists are indexed from 1.
+			SET I = CARDINALITY(Tree.Persons[]) + 1;
+			-- Add the person at the end of the list.
+			SET Tree.Persons[I] = body;	
+		END InsertPerson;
+		SET OutputRoot.SOAP.Body.ns:SaveAddressResponse = 'true';			
+		RETURN TRUE;
+	END;
+END MODULE;
+
+
+CREATE COMPUTE MODULE AddressBookFlow_FindCompute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE address ROW;
+		
+		/**
+		* Select all the People whose name match the input. 
+		*/
+		SET address.addresses[] =  
+		(
+			SELECT A.ns:Person.ns:Address 
+			FROM Tree.Persons[] AS A
+			WHERE A.ns:Person.ns:Name = InputRoot.SOAP.Body.ns:Name
+		);
+		/*
+		* Check that there was at least one match and return the first.
+		* This does not return the entire list.
+		*/
+		IF EXISTS(address.addresses[]) THEN 
+			SET OutputRoot.SOAP.Body = address.addresses[1];
+		ELSE
+		    /**
+		    * Otherwise set the status code to 500 and construct a SOAP Fault.
+			*/
+			SET OutputLocalEnvironment.Destination.SOAP.Reply.Transport.HTTP.ReplyStatusCode = 500;
+			/*
+			 * Construct the SOAP fault.
+			 */
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Server Error';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.ns:FindAddressFault.ns:Comment = 'Address does not exist';			
+		END IF;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;
+

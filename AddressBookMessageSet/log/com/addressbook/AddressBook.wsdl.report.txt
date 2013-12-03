@@ -1,0 +1,32 @@
+
+
+Importing file: D:\Webservices\AddressBook\AddressBook.wsdl
+
+Copying source WSDL AddressBook.wsdl to AddressBook.wsdl.
+The WSDL import will proceed with bindings AddressBookJMSBinding, AddressBookPortBinding.
+Creating wsdl schema document for file:///D:/Webservices/AddressBook/AddressBook.wsdl.
+Parsing wsdl binding {http://addressbook.com/}AddressBookJMSBinding.
+Parsing wsdl binding input SaveAddress.
+Parsing wsdl binding output SaveAddress.
+Parsing wsdl binding input FindAddress.
+Parsing wsdl binding output FindAddress.
+Parsing wsdl binding fault FindAddressFault.
+Parsing wsdl binding {http://addressbook.com/}AddressBookPortBinding.
+Parsing wsdl binding input SaveAddress.
+Parsing wsdl binding output SaveAddress.
+Parsing wsdl binding input FindAddress.
+Parsing wsdl binding output FindAddress.
+Parsing wsdl binding fault FindAddressFault.
+Processing doc style for operation SaveAddress.
+Processing doc style for operation FindAddress.
+Populating WSDL schema AddressBookMessageSet/com/addressbook/AddressBook.mxsd.
+Creating file AddressBookMessageSet/com/addressbook/AddressBook.mxsd in the workspace.
+Creating file AddressBookMessageSet/com/addressbook/AddressBook_InlineSchema1.mxsd in the workspace.
+
+Elapsed time processing this message definition file: 0.937 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

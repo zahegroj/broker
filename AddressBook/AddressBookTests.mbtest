@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.etools.mft.unittest.core.models.client="http:///com/ibm/etools/mft/unittest/core/models/client.ecore" xmlns:com.ibm.wbit.comptest.common.models.event="http:///com/ibm/etools/mft/unittest/common/models/event.ecore" xmlns:jms="http:///com/ibm//etools/mft/unittest/common/model2/jms" xmlns:model2="http:///com/ibm//etools/mft/unittest/common/model2" xmlns:mq="http:///com/ibm//etools/mft/unittest/common/model2/mq">
+  <com.ibm.etools.mft.unittest.core.models.client:EclipseClient iD="1203443617453-723" eventTrace="/1" clientID="1203443617453-723">
+    <scopes xsi:type="model2:FlowTestScope" name="Configuration" iD="default">
+      <settings xsi:type="model2:FlowSettings"/>
+      <settings xsi:type="model2:DeploymentSettings" deployOption="DEPLOY_NEVER"/>
+      <settings xsi:type="mq:MQSettings"/>
+      <settings xsi:type="jms:JMSSettings"/>
+      <settings xsi:type="mq:MQMessageHeaders"/>
+      <settings xsi:type="jms:JMSMessageHeaders"/>
+      <messageHeaders xsi:type="mq:MQHeader" iD="1203443617453-726" headerName="Default Header"/>
+    </scopes>
+  </com.ibm.etools.mft.unittest.core.models.client:EclipseClient>
+  <com.ibm.wbit.comptest.common.models.event:ExecutionEventTrace iD="1203443617453-724" children="/2 /3 /4 /5 /6"/>
+  <mq:InteractiveMQEnqueueEvent iD="1203443633500-728" timestamp="1203443633500" host="localhost" port="0" queueManager="MB8QMGR" queue="ADDRESSBOOK_IN">
+    <request xsi:type="model2:TestMessage" iD="1203443633500-729" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;request>&#xD;&#xA;  &lt;operation>saveAddress&lt;/operation>&#xD;&#xA;  &lt;Name>Dave1&lt;/Name>&#xD;&#xA;  &lt;City>Carlisle&lt;/City>&#xD;&#xA;  &lt;Street>Welton&lt;/Street>&#xD;&#xA;  &lt;Province>Cumbria&lt;/Province>&#xD;&#xA;  &lt;PostalCode>NE2 3HP&lt;/PostalCode>&#xD;&#xA;  &lt;Area>1&lt;/Area>&#xD;&#xA;  &lt;Prefix>2&lt;/Prefix>&#xD;&#xA;  &lt;Local>3&lt;/Local>&#xD;&#xA;&lt;/request>"/>
+      <properties name="SHOW_HEX_VIEW"/>
+      <properties name="linkedFile"/>
+    </request>
+  </mq:InteractiveMQEnqueueEvent>
+  <mq:InteractiveMQDequeueEvent iD="1203443634796-730" timestamp="1203443634796" host="localhost" port="0" queueManager="MB8QMGR" queue="ADDRESSBOOK_OUT">
+    <request xsi:type="model2:TestMessage" iD="1203443634796-731"/>
+  </mq:InteractiveMQDequeueEvent>
+  <mq:InteractiveMQEnqueueEvent iD="1203443635859-732" timestamp="1203443635859" host="localhost" port="0" queueManager="MB8QMGR" queue="ADDRESSBOOK_IN">
+    <request xsi:type="model2:TestMessage" iD="1203443635859-733" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;request>&#xD;&#xA;  &lt;operation>findAddress&lt;/operation>&#xD;&#xA;  &lt;Name>Dave1&lt;/Name>&#xD;&#xA;&lt;/request>"/>
+    </request>
+  </mq:InteractiveMQEnqueueEvent>
+  <mq:InteractiveMQDequeueEvent iD="1203443637062-734" timestamp="1203443637062" host="localhost" port="0" queueManager="MB8QMGR" queue="ADDRESSBOOK_OUT">
+    <request xsi:type="model2:TestMessage" iD="1203443637062-735"/>
+  </mq:InteractiveMQDequeueEvent>
+  <mq:InteractiveMQDequeueEvent iD="1273149852765-176" timestamp="1273149852765" host="localhost" port="0" queueManager="MB8QMGR" queue="ADDRESSBOOK_FAULT">
+    <request xsi:type="model2:TestMessage" iD="1273149852765-177"/>
+  </mq:InteractiveMQDequeueEvent>
+</xmi:XMI>

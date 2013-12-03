@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.etools.mft.unittest.core.models.client="http:///com/ibm/etools/mft/unittest/core/models/client.ecore" xmlns:com.ibm.wbit.comptest.common.models.event="http:///com/ibm/etools/mft/unittest/common/models/event.ecore" xmlns:com.ibm.wbit.comptest.common.models.value="http:///com/ibm/etools/mft/unittest/common/models/value.ecore" xmlns:jms="http:///com/ibm//etools/mft/unittest/common/model2/jms" xmlns:model2="http:///com/ibm//etools/mft/unittest/common/model2" xmlns:mq="http:///com/ibm//etools/mft/unittest/common/model2/mq">
+  <com.ibm.etools.mft.unittest.core.models.client:EclipseClient iD="1203665548953-0" eventTrace="/1" clientID="1203665548953-0">
+    <scopes xsi:type="model2:FlowTestScope" name="Configuration" iD="default">
+      <testModules xsi:type="model2:TestMsgFlow" name="/AddressBook/AddressBookProviderFlow.msgflow" iD="1203665584125-8"/>
+      <settings xsi:type="model2:FlowSettings"/>
+      <settings xsi:type="model2:DeploymentSettings" useSameLocation="false" overrideConfigurableProperty="false" barFile="/AddressBook/AddressSampleProvider.bar"/>
+      <settings xsi:type="mq:MQSettings"/>
+      <settings xsi:type="jms:JMSSettings"/>
+      <settings xsi:type="mq:MQMessageHeaders"/>
+      <settings xsi:type="jms:JMSMessageHeaders"/>
+      <messageHeaders xsi:type="mq:MQHeader" iD="1203665548953-3" headerName="Default Header"/>
+    </scopes>
+  </com.ibm.etools.mft.unittest.core.models.client:EclipseClient>
+  <com.ibm.wbit.comptest.common.models.event:ExecutionEventTrace iD="1203665548953-1" children="/2 /3"/>
+  <model2:InteractiveInputNodeInvocationEvent iD="1203665548968-4" timestamp="1203665548968" msgFlow="/AddressBook/AddressBookProviderFlow.msgflow" nodeId="FCMComposite_1_1" testScopeID="default" nodeName="SOAP Input" nodeType="ComIbmSOAPInput.msgnode">
+    <request xsi:type="model2:TestMessage" iD="1203665584250-9">
+      <properties name="plainText"/>
+      <properties name="WSDL_URI" stringValue="platform:/resource/AddressBookMessageSet/AddressBookMessageSet/com/addressbook/AddressBook.wsdl"/>
+      <properties name="messageSource" stringValue="structureView"/>
+      <properties name="WSDL_OPERATION_NAME" stringValue="SaveAddress"/>
+      <properties name="WSDL_OPERATION_IN_NAME"/>
+      <properties name="WSDL_OPERATION_OUT_NAME"/>
+      <properties name="SOAP_OPERATION" stringValue="http://addressbook.com/SaveAddress"/>
+      <parameters xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Envelope" iD="1203665584593-10" type="http://schemas.xmlsoap.org/soap/envelope/#Envelope" typeDisplayText="Envelope" factoryId="WSDL">
+        <properties name="ELEMENT_URI" stringValue="http://schemas.xmlsoap.org/soap/envelope/#Envelope"/>
+        <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Header" iD="1203665584593-11" type="http://schemas.xmlsoap.org/soap/envelope/#Header" typeDisplayText="Header" factoryId="WSDL" unsettable="true" unset="true">
+          <properties name="ELEMENT_URI" stringValue="http://schemas.xmlsoap.org/soap/envelope/#Header"/>
+        </elements>
+        <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Body" iD="1203665584593-12" type="http://schemas.xmlsoap.org/soap/envelope/#Body" typeDisplayText="Body" factoryId="WSDL" unsettable="true">
+          <properties name="ELEMENT_URI" stringValue="http://schemas.xmlsoap.org/soap/envelope/#Body"/>
+          <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Person" iD="1203665584781-20" type="http://addressbook.com/#PersonType" typeDisplayText="PersonType" factoryId="WSDL">
+            <properties name="ELEMENT_URI" stringValue="http://addressbook.com/#Person"/>
+            <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="Name" iD="1203665584781-21" type="string" typeDisplayText="string" factoryId="WSDL" unsettable="true" value="Dave"/>
+            <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Address" iD="1203665584781-22" type="http://addressbook.com/#AddressType" typeDisplayText="AddressType" factoryId="WSDL" unsettable="true">
+              <properties name="ELEMENT_URI" stringValue="http://addressbook.com/#Address"/>
+              <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="City" iD="1203665584781-23" type="string" typeDisplayText="string" factoryId="WSDL" unsettable="true" value="Carlisle"/>
+              <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="Street" iD="1203665584781-24" type="string" typeDisplayText="string" factoryId="WSDL" unsettable="true" value="Welton"/>
+              <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="Province" iD="1203665584781-25" type="string" typeDisplayText="string" factoryId="WSDL" unsettable="true" value="Cumbria"/>
+              <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="PostalCode" iD="1203665584781-26" type="string" typeDisplayText="string" factoryId="WSDL" unsettable="true" value="NE2 3HP"/>
+              <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="PhoneNumber" iD="1203665584781-27" type="http://addressbook.com/#PhoneNumberType" typeDisplayText="PhoneNumberType" factoryId="WSDL" unsettable="true">
+                <properties name="ELEMENT_URI" stringValue="http://addressbook.com/#PhoneNumber"/>
+                <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="Area" iD="1203665584781-28" type="int" typeDisplayText="int" factoryId="WSDL" unsettable="true" value="1"/>
+                <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="Prefix" iD="1203665584781-29" type="int" typeDisplayText="int" factoryId="WSDL" unsettable="true" value="2"/>
+                <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="Local" iD="1203665584781-30" type="int" typeDisplayText="int" factoryId="WSDL" unsettable="true" value="3"/>
+              </elements>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="encodingStyle" iD="1203665584593-19" type="anyURI" typeDisplayText="anyURI" factoryId="WSDL" unsettable="true" unset="true" value="&lt;unset>" attributeDeclaration="true"/>
+      </parameters>
+    </request>
+  </model2:InteractiveInputNodeInvocationEvent>
+  <model2:InteractiveInputNodeInvocationEvent iD="1203666087250-31" timestamp="1203666087250" msgFlow="/AddressBook/AddressBookProviderFlow.msgflow" nodeId="FCMComposite_1_1" testScopeID="default" nodeName="SOAP Input" nodeType="ComIbmSOAPInput.msgnode">
+    <request xsi:type="model2:TestMessage" iD="1203666087265-32">
+      <properties name="plainText" stringValue="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot; xmlns:tns=&quot;http://addressbook.com/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;>&#xD;&#xA;  &lt;soapenv:Body>&#xD;&#xA;    &lt;tns:Name>Dave&lt;/tns:Name>&#xD;&#xA;  &lt;/soapenv:Body>&#xD;&#xA;&lt;/soapenv:Envelope>&#xD;&#xA;"/>
+      <properties name="WSDL_URI" stringValue="platform:/resource/AddressBookMessageSet/AddressBookMessageSet/com/addressbook/AddressBook.wsdl"/>
+      <properties name="messageSource" stringValue="structureView"/>
+      <properties name="WSDL_OPERATION_NAME" stringValue="FindAddress"/>
+      <properties name="WSDL_OPERATION_IN_NAME"/>
+      <properties name="WSDL_OPERATION_OUT_NAME"/>
+      <properties name="SOAP_OPERATION" stringValue="http://addressbook.com/FindAddress"/>
+      <parameters xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Envelope" iD="1203666087265-33" type="http://schemas.xmlsoap.org/soap/envelope/#Envelope" typeDisplayText="Envelope" factoryId="WSDL">
+        <properties name="ELEMENT_URI" stringValue="http://schemas.xmlsoap.org/soap/envelope/#Envelope"/>
+        <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Header" iD="1203666087265-34" type="http://schemas.xmlsoap.org/soap/envelope/#Header" typeDisplayText="Header" factoryId="WSDL" unsettable="true" unset="true">
+          <properties name="ELEMENT_URI" stringValue="http://schemas.xmlsoap.org/soap/envelope/#Header"/>
+        </elements>
+        <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Body" iD="1203666087265-35" type="http://schemas.xmlsoap.org/soap/envelope/#Body" typeDisplayText="Body" factoryId="WSDL" unsettable="true">
+          <properties name="ELEMENT_URI" stringValue="http://schemas.xmlsoap.org/soap/envelope/#Body"/>
+          <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueStructure" name="Name" iD="1203666090546-54" type="http://addressbook.com/#Name_._type" typeDisplayText="string" factoryId="WSDL">
+            <properties name="ELEMENT_URI" stringValue="http://addressbook.com/#Name"/>
+            <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name=":0" iD="1203666090546-55" type="string" typeDisplayText="string" factoryId="WSDL" unsettable="true" value="Dave"/>
+          </elements>
+        </elements>
+        <elements xsi:type="com.ibm.wbit.comptest.common.models.value:ValueField" name="encodingStyle" iD="1203666087265-42" type="anyURI" typeDisplayText="anyURI" factoryId="WSDL" unsettable="true" unset="true" value="&lt;unset>" attributeDeclaration="true"/>
+      </parameters>
+    </request>
+  </model2:InteractiveInputNodeInvocationEvent>
+</xmi:XMI>
