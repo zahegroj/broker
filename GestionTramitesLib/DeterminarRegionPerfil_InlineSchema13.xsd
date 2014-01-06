@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+        
+                <element name="telefono" type="tns:Telefono"/>
+            <complexType name="Telefono">
+    	<sequence>
+    		<element name="numero" type="string"/>
+    		<element name="region" type="string"/>
+    		<element name="estatus" type="string"/>
+    	</sequence>
+    </complexType>
+        </schema>
