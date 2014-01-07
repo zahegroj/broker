@@ -1,0 +1,25 @@
+
+
+Importing file: D:\Webservices\49819A.st.4\OrderService\OrderService.wsdl
+
+Copying source WSDL OrderService.wsdl to OrderService.wsdl.
+The WSDL import will proceed with bindings OrderServiceJMSBinding, OrderServiceSOAP.
+Creating wsdl schema document for file:///D:/Webservices/49819A.st.4/OrderService/OrderService.wsdl.
+Parsing wsdl binding {http://www.acmeOrders.com/OrderService}OrderServiceJMSBinding.
+Parsing wsdl binding input submitPO.
+Parsing wsdl binding output submitPO.
+Parsing wsdl binding {http://www.acmeOrders.com/OrderService}OrderServiceSOAP.
+Parsing wsdl binding input submitPO.
+Parsing wsdl binding output submitPO.
+Processing doc style for operation submitPO.
+Populating WSDL schema SOAPNodesSampleMessageSet/com/acmeorders/www/orderservice/OrderService.mxsd.
+Creating file SOAPNodesSampleMessageSet/com/acmeorders/www/orderservice/OrderService.mxsd in the workspace.
+Creating file SOAPNodesSampleMessageSet/com/acmeorders/www/orderservice/OrderService_InlineSchema1.mxsd in the workspace.
+
+Elapsed time processing this message definition file: 1.063 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

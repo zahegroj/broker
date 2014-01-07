@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MSGModel:MRMessageSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:MSGModel="MSGModel.xmi" xmi:id="MRMessageSet_1" name="Video" namespacesEnabled="true" currentMessageSetId="MRMessageSetID_1">
+  <MRMessageSetRep xmi:type="MSGModel:MRCWFMessageSetRep" xmi:id="MRCWFMessageSetRep_1" name="CWF1" daysInFirstWeekOfTheYear="Four" firstDayOfWeek="Monday" timeZoneID="0" booleanTrueValue="31" booleanFalseValue="30" booleanNullValue="00"/>
+  <MRMessageSetRep xmi:type="MSGModel:MRXMLMessageSetRep" xmi:id="MRXMLMessageSetRep_1" name="XML1" timeZoneID="0" doctypeSystemID="www.mrmnames.net/JL7OAHK002001" doctypePublicID="JL7OAHK002001"/>
+  <MRMessageSetRep xmi:type="MSGModel:MRTDSMessageSetRep" xmi:id="MRTDSMessageSetRep_1" name="TDS1" centuryWindow="53" timeZoneID="0" messagingStandard="Unknown" groupIndicator="" groupTerminator="" tagDataSeparator="" decimalPoint="." escapeCharacter="" reservedChars="" outputCompressionTechnique="None" inputCompressionTechnique="None" defaultCCSID="367" delimiter=""/>
+  <MRMessageSetID xmi:id="MRMessageSetID_1" repositoryId="-1700853107" messageSetId="1" level="1"/>
+</MSGModel:MRMessageSet>

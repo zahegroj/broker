@@ -1,0 +1,22 @@
+/*
+Sample program for use with IBM WebSphere Message Broker
+© Copyright International Business Machines Corporation 2007, 2010
+Licensed Materials - Property of IBM
+*/
+DECLARE ns NAMESPACE 'http://www.acmeOrders.com/OrderService';
+
+
+CREATE COMPUTE MODULE SOAPNodesSampleProviderFlow_Compute_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot.XMLNSC.ns:submitPOResponse.orderStatus = 'AVAILABLE';
+		SET OutputRoot.XMLNSC.ns:submitPOResponse.orderAmt = 50;
+		SET OutputRoot.XMLNSC.ns:submitPOResponse.partNo = InputRoot.XMLNSC.ns:submitPORequest.partNo;
+		SET OutputRoot.XMLNSC.ns:submitPOResponse.partQuantity = InputRoot.XMLNSC.ns:submitPORequest.partQuantity;
+		
+		RETURN TRUE;
+
+	END;
+
+END MODULE;

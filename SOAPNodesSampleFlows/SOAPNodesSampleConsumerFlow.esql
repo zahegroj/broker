@@ -1,0 +1,31 @@
+/*
+Sample program for use with IBM WebSphere Message Broker
+© Copyright International Business Machines Corporation 2007, 2010
+Licensed Materials - Property of IBM
+*/
+CREATE COMPUTE MODULE SOAPNodesSampleConsumerFlow_Compute_Request
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.ns:submitPORequest.partNo = InputRoot.XMLNSC.OrderMessage.localElement.PartNumber;
+		SET OutputRoot.XMLNSC.ns:submitPORequest.partQuantity = InputRoot.XMLNSC.OrderMessage.localElement.Quantity;
+		SET OutputRoot.XMLNSC.ns:submitPORequest.personName.firstName = InputRoot.XMLNSC.OrderMessage.localElement.FirstName;
+		SET OutputRoot.XMLNSC.ns:submitPORequest.personName.lastName = InputRoot.XMLNSC.OrderMessage.localElement.LastName;
+		SET OutputRoot.XMLNSC.ns:submitPORequest.address.street = InputRoot.XMLNSC.OrderMessage.localElement.Street;
+		SET OutputRoot.XMLNSC.ns:submitPORequest.address.city = InputRoot.XMLNSC.OrderMessage.localElement.City;
+		SET OutputRoot.XMLNSC.ns:submitPORequest.address.zipCode = InputRoot.XMLNSC.OrderMessage.localElement.ZipCode;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE SOAPNodesSampleConsumerFlow_Compute_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+
+

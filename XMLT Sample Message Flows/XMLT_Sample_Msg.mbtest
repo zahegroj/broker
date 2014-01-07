@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.etools.mft.unittest.core.models.client="http:///com/ibm/etools/mft/unittest/core/models/client.ecore" xmlns:com.ibm.wbit.comptest.common.models.event="http:///com/ibm/etools/mft/unittest/common/models/event.ecore" xmlns:jms="http:///com/ibm//etools/mft/unittest/common/model2/jms" xmlns:model2="http:///com/ibm//etools/mft/unittest/common/model2" xmlns:mq="http:///com/ibm//etools/mft/unittest/common/model2/mq">
+  <com.ibm.etools.mft.unittest.core.models.client:EclipseClient iD="1181720851656-301" eventTrace="/1" clientID="1181720851656-301">
+    <scopes xsi:type="model2:FlowTestScope" iD="1181720851656-304">
+      <testModules xsi:type="model2:TestMsgFlow" iD="1181720851656-307"/>
+      <settings xsi:type="model2:FlowSettings"/>
+      <settings xsi:type="model2:DeploymentSettings"/>
+      <settings xsi:type="mq:MQSettings"/>
+      <settings xsi:type="jms:JMSSettings"/>
+      <settings xsi:type="mq:MQMessageHeaders"/>
+      <settings xsi:type="jms:JMSMessageHeaders"/>
+      <messageHeaders xsi:type="mq:MQHeader" iD="1181720851656-305" putApplicationName=".0\eclipse\jre\bin\javaw.exe" putApplicationType="11" userId="argostr     " headerName="Header from .enqueue"/>
+    </scopes>
+  </com.ibm.etools.mft.unittest.core.models.client:EclipseClient>
+  <com.ibm.wbit.comptest.common.models.event:ExecutionEventTrace iD="1181720851656-302" children="/2 /3"/>
+  <mq:InteractiveMQEnqueueEvent iD="1181720851656-303" timestamp="1181720851656" host="localhost" port="0" queueManager="MB8QMGR" queue="XMLT_IN" mqmdId="1181720851656-305">
+    <request xsi:type="model2:TestMessage" iD="1181720851656-306" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;SaleEnvelope>&#xD;&#xA; &lt;Header>&#xD;&#xA;  &lt;SaleListCount>1&lt;/SaleListCount>&#xD;&#xA; &lt;/Header>&#xD;&#xA; &lt;SaleList>&#xD;&#xA;  &lt;Invoice>&#xD;&#xA;   &lt;Initial>K&lt;/Initial>&#xD;&#xA;   &lt;Initial>A&lt;/Initial>&#xD;&#xA;   &lt;Surname>Braithwaite&lt;/Surname>&#xD;&#xA;   &lt;Item>&#xD;&#xA;    &lt;Code>00&lt;/Code>&#xD;&#xA;    &lt;Code>01&lt;/Code>&#xD;&#xA;    &lt;Code>02&lt;/Code>&#xD;&#xA;    &lt;Description>Twister&lt;/Description>&#xD;&#xA;    &lt;Category>Games&lt;/Category>&#xD;&#xA;    &lt;Price>00.30&lt;/Price>&#xD;&#xA;    &lt;Quantity>01&lt;/Quantity>&#xD;&#xA;   &lt;/Item>&#xD;&#xA;   &lt;Item>&#xD;&#xA;    &lt;Code>02&lt;/Code>&#xD;&#xA;    &lt;Code>03&lt;/Code>&#xD;&#xA;    &lt;Code>01&lt;/Code>&#xD;&#xA;    &lt;Description>The Times Newspaper&lt;/Description>&#xD;&#xA;    &lt;Category>Books and Media&lt;/Category>&#xD;&#xA;    &lt;Price>00.20&lt;/Price>&#xD;&#xA;    &lt;Quantity>01&lt;/Quantity>&#xD;&#xA;   &lt;/Item>&#xD;&#xA;   &lt;Balance>00.50&lt;/Balance>&#xD;&#xA;   &lt;Currency>Sterling&lt;/Currency>&#xD;&#xA;  &lt;/Invoice>&#xD;&#xA;  &lt;Invoice>&#xD;&#xA;   &lt;Initial>T&lt;/Initial>&#xD;&#xA;   &lt;Initial>J&lt;/Initial>&#xD;&#xA;   &lt;Surname>Dunnwin&lt;/Surname>&#xD;&#xA;   &lt;Item>&#xD;&#xA;    &lt;Code>04&lt;/Code>&#xD;&#xA;    &lt;Code>05&lt;/Code>&#xD;&#xA;    &lt;Code>01&lt;/Code>&#xD;&#xA;    &lt;Description>The Origin of Species&lt;/Description>&#xD;&#xA;    &lt;Category>Books and Media&lt;/Category>&#xD;&#xA;    &lt;Price>22.34&lt;/Price>&#xD;&#xA;    &lt;Quantity>02&lt;/Quantity>&#xD;&#xA;   &lt;/Item>&#xD;&#xA;   &lt;Item>&#xD;&#xA;    &lt;Code>06&lt;/Code>&#xD;&#xA;    &lt;Code>07&lt;/Code>&#xD;&#xA;    &lt;Code>01&lt;/Code>&#xD;&#xA;    &lt;Description>Microscope&lt;/Description>&#xD;&#xA;    &lt;Category>Miscellaneous&lt;/Category>&#xD;&#xA;    &lt;Price>36.20&lt;/Price>&#xD;&#xA;    &lt;Quantity>01&lt;/Quantity>&#xD;&#xA;   &lt;/Item>&#xD;&#xA;   &lt;Balance>81.84&lt;/Balance>&#xD;&#xA;   &lt;Currency>Euros&lt;/Currency>&#xD;&#xA;  &lt;/Invoice>&#xD;&#xA; &lt;/SaleList>&#xD;&#xA; &lt;Trailer>&#xD;&#xA;  &lt;CompletionTime>12.00.00&lt;/CompletionTime>&#xD;&#xA; &lt;/Trailer>&#xD;&#xA;&lt;/SaleEnvelope>"/>
+    </request>
+  </mq:InteractiveMQEnqueueEvent>
+  <mq:InteractiveMQDequeueEvent iD="1187790218890-753" timestamp="1187790218890" host="localhost" port="0" queueManager="MB8QMGR" queue="XMLT_OUT">
+    <request xsi:type="model2:TestMessage" iD="1187790218890-754"/>
+  </mq:InteractiveMQDequeueEvent>
+</xmi:XMI>

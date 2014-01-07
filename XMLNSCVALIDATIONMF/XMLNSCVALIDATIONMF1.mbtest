@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.etools.mft.unittest.core.models.client="http:///com/ibm/etools/mft/unittest/core/models/client.ecore" xmlns:com.ibm.wbit.comptest.common.models.event="http:///com/ibm/etools/mft/unittest/common/models/event.ecore" xmlns:jms="http:///com/ibm//etools/mft/unittest/common/model2/jms" xmlns:model2="http:///com/ibm//etools/mft/unittest/common/model2" xmlns:mq="http:///com/ibm//etools/mft/unittest/common/model2/mq">
+  <com.ibm.etools.mft.unittest.core.models.client:EclipseClient iD="1189427705031-0" eventTrace="/1" clientID="1189427705031-0" stopped="true">
+    <scopes xsi:type="model2:FlowTestScope" name="Configuration" iD="default">
+      <testModules xsi:type="model2:TestMsgFlow" name="/XMLNSCVALIDATIONMF/XMLNSCVALIDATIONMF1.msgflow" iD="1189427705078-4">
+        <monitors xsi:type="mq:MQMonitor" name="XMLNSCVALIDATIONMF1.OUT" iD="1189434426156-309" host="localhost" port="0" queueManager="MB8QMGR" queue="XMLNSCVALIDATIONMF1.OUT"/>
+        <monitors xsi:type="mq:MQMonitor" name="XMLNSCVALIDATIONMF1.FAIL" iD="1189434426156-310" host="localhost" port="0" queueManager="MB8QMGR" queue="XMLNSCVALIDATIONMF1.FAIL"/>
+        <inputNodes xsi:type="mq:MQInputNode" nodeName="MQInput" queue="XMLNSCVALIDATIONMF1.IN"/>
+      </testModules>
+      <settings xsi:type="model2:FlowSettings"/>
+      <settings xsi:type="model2:DeploymentSettings" runtimeEnvType="WebSphere Message Broker v8.0" runtimeInstance="MB8BROKER^MB8BROKER^XMLNSCVALIDATION^localhost^0" deployOption="DEPLOY_NEVER" barFile="/XMLNSCVALIDATIONMF/XMLNSCVALIDATION.bar"/>
+      <settings xsi:type="mq:MQSettings" purgeMQMessage="false"/>
+      <settings xsi:type="jms:JMSSettings"/>
+      <settings xsi:type="mq:MQMessageHeaders"/>
+      <settings xsi:type="jms:JMSMessageHeaders"/>
+      <messageHeaders xsi:type="mq:MQHeader" iD="1189427705031-3" headerName="Default Header"/>
+    </scopes>
+  </com.ibm.etools.mft.unittest.core.models.client:EclipseClient>
+  <com.ibm.wbit.comptest.common.models.event:ExecutionEventTrace iD="1189427705031-1" children="/2"/>
+  <model2:InteractiveInputNodeInvocationEvent iD="1189434511375-645" timestamp="1189434511375" msgFlow="/XMLNSCVALIDATIONMF/XMLNSCVALIDATIONMF1.msgflow" nodeId="FCMComposite_1_1" testScopeID="default" nodeName="MQInput" nodeType="ComIbmMQInput.msgnode">
+    <request xsi:type="model2:TestMessage" iD="1189434511390-646" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="plainText" stringValue=""/>
+      <properties name="WSDL_URI"/>
+      <properties name="WSDL_OPERATION_IN_NAME"/>
+      <properties name="WSDL_OPERATION_NAME"/>
+      <properties name="WSDL_OPERATION_OUT_NAME"/>
+      <properties name="messageSource" stringValue="sourceView"/>
+    </request>
+  </model2:InteractiveInputNodeInvocationEvent>
+</xmi:XMI>
