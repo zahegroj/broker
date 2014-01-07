@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/ReasignarTramite" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+
+        
+                <element name="cobranza" type="tns:Cobranza"/>
+            <complexType name="Cobranza">
+    	<sequence>
+    		<element name="estatus" type="string"/>
+    		<element name="accion" type="string"/>
+    		<element name="motivo" type="string"/>
+    	</sequence>
+    </complexType>
+        </schema>

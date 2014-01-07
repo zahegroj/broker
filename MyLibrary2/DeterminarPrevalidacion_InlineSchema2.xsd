@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Perfil" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      
+	
+
+
+
+	
+            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Perfil"/>
+            <complexType name="AsesorCAC">
+		<sequence>
+			<element name="perfil" type="pref:Perfil"/>
+		</sequence>
+	</complexType>
+            <element name="asesorCAC" type="tns:AsesorCAC"/>
+        </schema>

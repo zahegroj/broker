@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      
+	
+	
+            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono"/>
+            <element name="cuenta" type="tns:Cuenta"/>
+            <complexType name="Cuenta">
+		<sequence>
+			<element name="estatus" type="string"/>
+			<element name="telefono" type="pref:Telefono"/>
+			<element name="limiteCredito" type="double"/>
+			<element name="tipoSaldoExistente" type="string"/>
+			<element name="porcentajeCredito" type="double"/>
+			<element name="cargoPendienteFacturar" type="double"/>
+			<element name="saldoMes" type="double"/>
+			<element name="saldoActual" type="double"/>
+			<element name="saldoEstimado" type="double"/>
+			<element name="saldoPendienteFacturar" type="double"/>
+			<element name="saldoFacturadoNoVencido" type="double"/>
+			<element name="saldoFacturadoVencido" type="double"/>
+		</sequence>
+	</complexType>
+        </schema>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+        
+                <element name="aclaracionSaldos" type="tns:AclaracionSaldos"/>
+            <complexType name="AclaracionSaldos">
+    	<sequence>
+    		<element name="tipoTramite" type="string"/>
+    		<element name="estado" type="string"/>
+    		<element name="escenario" type="string"/>
+    	</sequence>
+    </complexType>
+        </schema>

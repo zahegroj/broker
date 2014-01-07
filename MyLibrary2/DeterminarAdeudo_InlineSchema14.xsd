@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:pref1="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns:pref2="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                  
+
+
+
+
+	
+	
+	
+	
+            	<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC">
+	</xsd:import>
+            <xsd:element name="tramite" type="tns:Tramite"/>
+            <xsd:complexType name="Tramite">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="tipoTramite" type="xsd:string">
+			</xsd:element>
+			<xsd:element minOccurs="1" name="estado" type="xsd:string">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="cac" type="pref:CAC">
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="aclaracionSaldos" type="pref1:AclaracionSaldos">
+			</xsd:element>
+			<xsd:element minOccurs="0" name="asesor" type="pref2:AsesorCAC"/>
+		</xsd:sequence>
+	</xsd:complexType>
+        </xsd:schema>

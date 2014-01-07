@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      
+	
+	
+	
+	
+            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
+            <element name="peticionReasignarTramite" type="tns:PeticionReasignarTramite">
+	</element>
+            <complexType name="PeticionReasignarTramite">
+		<sequence>
+			<element name="tramite" type="pref:Tramite"/>
+		</sequence>
+	</complexType>
+            <element name="resultadoReasignarTramite" type="tns:ResultadoReasignarTramite"/>
+            <complexType name="ResultadoReasignarTramite">
+		<sequence>
+			<element name="puedeReasignarTramite" type="boolean"/>
+			<element name="comentario" type="string"/>
+		</sequence>
+	</complexType>
+        </schema>
