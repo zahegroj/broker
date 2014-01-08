@@ -4,7 +4,7 @@
 	
 	
 	
-            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
+            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" schemaLocation="Reglas_InlineSchema_Tramite.xsd"/>
             <element name="peticionPreValidacion" type="tns:PeticionPreValidacion"/>
             <complexType name="PeticionPreValidacion">
 		<sequence>

@@ -9,7 +9,13 @@
 
     
         
-                <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza">
+                <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" schemaLocation="Reglas_InlineSchema_Cobranza.xsd">
+	</import>
+				<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" schemaLocation="Reglas_InlineSchema_Tramite.xsd">
+	</import>
+				<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" schemaLocation="Reglas_InlineSchema_Cuenta.xsd">
+	</import>
+				<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Factura" schemaLocation="Reglas_InlineSchema_Factura.xsd">
 	</import>
             <element name="peticionDeterminarAdeudo" type="tns:PeticionDeterminarAdeudo"/>
             <complexType name="DeterminarAdeudo">

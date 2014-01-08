@@ -2,7 +2,7 @@
       
 	
 	
-            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono"/>
+            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" schemaLocation="Reglas_InlineSchema_Telefono.xsd"/>
             <element name="cuenta" type="tns:Cuenta"/>
             <complexType name="Cuenta">
 		<sequence>

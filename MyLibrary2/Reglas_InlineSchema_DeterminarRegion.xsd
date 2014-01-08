@@ -4,7 +4,7 @@
 	
 	
 	
-            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC"/>
+            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" schemaLocation="Reglas_InlineSchema_AsesorCAC.xsd"/>
             <complexType name="PeticionDeterminarRegion">
 		<sequence>
 			<element name="asesorCAC" type="pref:AsesorCAC"/>

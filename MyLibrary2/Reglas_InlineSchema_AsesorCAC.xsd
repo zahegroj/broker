@@ -5,7 +5,7 @@
 
 
 	
-            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Perfil"/>
+            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Perfil" schemaLocation="Reglas_InlineSchema_Perfil.xsd"/>
             <complexType name="AsesorCAC">
 		<sequence>
 			<element name="perfil" type="pref:Perfil"/>
