@@ -3,6 +3,7 @@
 	<name>MyLibrary2</name>
 	<comment></comment>
 	<projects>
+		<project>SOAPLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
