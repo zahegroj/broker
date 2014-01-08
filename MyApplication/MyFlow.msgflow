@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_DeterminarAdeudo_DeterminarAdeudo_MyFlow.msgflow="gen/DeterminarAdeudo_DeterminarAdeudo_MyFlow.msgflow" xmlns:gen_DeterminarRegionPerfil_DeterminarRegionPerfil_MyFlow.msgflow="gen/DeterminarRegionPerfil_DeterminarRegionPerfil_MyFlow.msgflow"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_DeterminarAdeudo_DeterminarAdeudo_MyFlow.msgflow="gen/DeterminarAdeudo_DeterminarAdeudo_MyFlow.msgflow" xmlns:gen_DeterminarRegionPerfil_DeterminarRegionPerfil_MyFlow.msgflow="gen/DeterminarRegionPerfil_DeterminarRegionPerfil_MyFlow.msgflow"
     xmlns:gen_GestionTramitesReglas_MyFlow.msgflow="gen/GestionTramitesReglas_MyFlow.msgflow" xmlns:gen_PrevalidacionCliente_DeterminarPrevalidacion_MyFlow.msgflow="gen/PrevalidacionCliente_DeterminarPrevalidacion_MyFlow.msgflow" xmlns:gen_ReasignarTramite_ReasignarTramite_MyFlow.msgflow="gen/ReasignarTramite_ReasignarTramite_MyFlow.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="MyFlow.msgflow"
     nsPrefix="MyFlow.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
@@ -40,7 +40,17 @@
         <shortDescription xmi:type="utility:ConstantString" string="Invoca la operación WSDL y extrae la respuesta del mensaje SOAP."/>
         <longDescription xmi:type="utility:ConstantString" string="Este subflujo invoca la operación WSDL y extrae el cuerpo del mensaje de respuesta."/>
       </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="404,291" mappingExpression="msl://{default}#determinarPrevalidacion">
+        <translation xmi:type="utility:ConstantString" string="Mapping"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="762,322" mappingExpression="msl://{default}#determinarPrevalidacionResponse">
+        <translation xmi:type="utility:ConstantString" string="Mapping1"/>
+      </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.determinarPrevalidacionRequest" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.PrevalidacionClienteResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>
