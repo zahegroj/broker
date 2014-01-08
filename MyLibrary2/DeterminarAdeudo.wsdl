@@ -2,12 +2,12 @@
   <wsdl:documentation>
     <wsdl:appinfo source="WMQI_APPINFO">
       <MRWSDLAppInfo imported="true">
-        <generatedXSD location="DeterminarAdeudo_InlineSchema2.xsd"/>
-        <generatedXSD location="DeterminarAdeudo_InlineSchema3.xsd"/>
-        <generatedXSD location="DeterminarAdeudo_InlineSchema4.xsd"/>
-        <generatedXSD location="DeterminarAdeudo_InlineSchema5.xsd"/>
-        <generatedXSD location="DeterminarAdeudo_InlineSchema6.xsd"/>
-        <generatedXSD location="DeterminarAdeudo_InlineSchema7.xsd"/>
+        <generatedXSD location="Reglas_InlineSchema_AclaracionSaldos.xsd"/>
+        <generatedXSD location="Reglas_InlineSchema_AsesorCAC.xsd"/>
+        <generatedXSD location="Reglas_InlineSchema_CAC.xsd"/>
+        <generatedXSD location="Reglas_InlineSchema_Cobranza.xsd"/>
+        <generatedXSD location="Reglas_InlineSchema_Cuenta.xsd"/>
+        <generatedXSD location="Reglas_InlineSchema_DeterminarAdeudo.xsd"/>
         <generatedXSD location="DeterminarAdeudo_InlineSchema8.xsd"/>
         <generatedXSD location="DeterminarAdeudo_InlineSchema9.xsd"/>
         <generatedXSD location="DeterminarAdeudo_InlineSchema11.xsd"/>
@@ -24,27 +24,27 @@
   <wsdl:types>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos">
 
-<xsd:include schemaLocation="DeterminarAdeudo_InlineSchema2.xsd"/>
+<xsd:include schemaLocation="Reglas_InlineSchema_AclaracionSaldos.xsd"/>
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Perfil" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC">
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Perfil"/>
 
-<xsd:include schemaLocation="DeterminarAdeudo_InlineSchema3.xsd"/>
+<xsd:include schemaLocation="Reglas_InlineSchema_AsesorCAC.xsd"/>
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/CAC">
 
 
-<xsd:include schemaLocation="DeterminarAdeudo_InlineSchema4.xsd"/>
+<xsd:include schemaLocation="Reglas_InlineSchema_CAC.xsd"/>
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza">
 
 
-<xsd:include schemaLocation="DeterminarAdeudo_InlineSchema5.xsd"/>
+<xsd:include schemaLocation="Reglas_InlineSchema_Cobranza.xsd"/>
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta">
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono"/>
 
-<xsd:include schemaLocation="DeterminarAdeudo_InlineSchema6.xsd"/>
+<xsd:include schemaLocation="Reglas_InlineSchema_Cuenta.xsd"/>
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:pref1="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" xmlns:pref2="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns:pref3="http://www.telcel.com.mx/CAC/GestorTramites/Factura" xmlns:pref4="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo">
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza">
@@ -55,7 +55,7 @@
 	</import>
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
 
-<xsd:include schemaLocation="DeterminarAdeudo_InlineSchema7.xsd"/>
+<xsd:include schemaLocation="Reglas_InlineSchema_DeterminarAdeudo.xsd"/>
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion">
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC"/>
