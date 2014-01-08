@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
     <input path="/GestionTramitesReglas.xsd"/>
-    <output path="/Reglas_InlineSchema_DeterminarPrevalidacion_param.xsd"/>
+    <output path="/DeterminarPrevalidacion_InlineSchema16.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="determinarPrevalidacion">
         <input namespace="http://www.telcel.com.mx/gestiontramites/reglas/types/v1" path="mb:msg(determinarPrevalidacionRequest,assembly,,Properties)"/>
-        <output namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente/param" path="mb:msg(peticionPrevalidacion,assembly,XMLNSC,Properties)"/>
+        <output namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" path="mb:msg(PrevalidacionClienteRequest,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>
             <output path="Properties"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/tipoTramite"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/tipoTramite"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/tipoTramite"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/estado"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/estado"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/estado"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/cac/identificador"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/cac/identificador"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/cac/identificador"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/cac/region"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/cac/region"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/cac/region"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/aclaracionSaldos/tipoTramite"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/aclaracionSaldos/tipoTramite"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/aclaracionSaldos/tipoTramite"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/aclaracionSaldos/estado"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/aclaracionSaldos/estado"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/aclaracionSaldos/estado"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/aclaracionSaldos/escenario"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/aclaracionSaldos/escenario"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/aclaracionSaldos/escenario"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/asesor/perfil/perfilPac"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/perfilPac"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/perfilPac"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/asesor/perfil/habilitado"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/habilitado"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/habilitado"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/asesor/perfil/regiones/region"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/region"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/region"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/asesor/perfil/nivelAcceso"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/nivelAcceso"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/nivelAcceso"/>
         </move>
         <move>
             <input path="determinarPrevalidacionRequest/request/tramite/asesor/perfil/flujoNegocio"/>
-            <output path="peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/flujoNegocio"/>
+            <output path="PrevalidacionClienteRequest/peticionPrevalidacion/peticionPreValidacion/tramite/asesor/perfil/flujoNegocio"/>
         </move>
     </mappingDeclaration>
 </mappingRoot>

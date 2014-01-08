@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
-    <input path="/Reglas_InlineSchema_DeterminarPrevalidacion_param.xsd"/>
+    <input path="/DeterminarPrevalidacion_InlineSchema16.xsd"/>
     <output path="/GestionTramitesReglas.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="determinarPrevalidacionResponse">
-        <input namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente/param" path="mb:msg(resultadoPrevalidacion,assembly,XMLNSC,Properties)"/>
+        <input namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" path="mb:msg(PrevalidacionClienteResponse,assembly,,Properties)"/>
         <output namespace="http://www.telcel.com.mx/gestiontramites/reglas/types/v1" path="mb:msg(determinarPrevalidacionResponse,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>
             <output path="Properties"/>
         </move>
         <move>
-            <input path="resultadoPrevalidacion/resultadoPreValidacion/requierePrevalidacion"/>
+            <input path="PrevalidacionClienteResponse/resultadoPrevalidacion/resultadoPreValidacion/requierePrevalidacion"/>
             <output path="determinarPrevalidacionResponse/response/requierePrevalidacion"/>
         </move>
         <move>
-            <input path="resultadoPrevalidacion/resultadoPreValidacion/comentario"/>
+            <input path="PrevalidacionClienteResponse/resultadoPrevalidacion/resultadoPreValidacion/comentario"/>
             <output path="determinarPrevalidacionResponse/response/comentario"/>
         </move>
     </mappingDeclaration>
