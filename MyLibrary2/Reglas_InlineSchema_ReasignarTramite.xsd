@@ -4,8 +4,8 @@
 	
 	
 	
-            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
-            <element name="peticionReasignarTramite" type="tns:PeticionReasignarTramite">
+	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" schemaLocation="Reglas_InlineSchema_Tramite.xsd"/>
+	<element name="peticionReasignarTramite" type="tns:PeticionReasignarTramite">
 	</element>
             <complexType name="PeticionReasignarTramite">
 		<sequence>

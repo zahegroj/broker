@@ -8,8 +8,9 @@
 	
 	
 	
-            	<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC">
-	</xsd:import>
+    <xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC" schemaLocation="Reglas_InlineSchema_CAC.xsd"></xsd:import>
+	<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" schemaLocation="Reglas_InlineSchema_AclaracionSaldos.xsd"></xsd:import>
+	<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" schemaLocation="Reglas_InlineSchema_AsesorCAC.xsd"></xsd:import>
             <xsd:element name="tramite" type="tns:Tramite"/>
             <xsd:complexType name="Tramite">
 		<xsd:sequence>

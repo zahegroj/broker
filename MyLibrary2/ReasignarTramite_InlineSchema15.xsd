@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/ReasignarTramite/param" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/ReasignarTramite" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xom1="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-                                  <xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite"/>
+                                  <xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" schemaLocation="Reglas_InlineSchema_ReasignarTramite.xsd"/>
             <xsd:element name="peticionReasignar">
         <xsd:complexType>
           <xsd:sequence>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:param="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                                        <xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param"/>
+                                        <xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param" schemaLocation="DeterminarAdeudo_InlineSchema16.xsd"/>
             <xsd:element ibmSchExtn:docRoot="true" name="DeterminarAdeudoRequest">
         <xsd:complexType>
           <xsd:sequence>

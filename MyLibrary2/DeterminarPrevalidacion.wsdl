@@ -104,7 +104,7 @@
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente">
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
 
-<xsd:include schemaLocation="Reglas_InlineSchema_Perfil.xsd"/>
+<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Perfil.xsd"/> -->
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite">
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
@@ -125,11 +125,11 @@
 
 
 
-<xsd:include schemaLocation="Reglas_InlineSchema_Telefono.xsd"/>
+<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Telefono.xsd"/> -->
     </xsd:schema>
     <xsd:schema targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente/param" xmlns:xom1="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente">
 <xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente"/>
-<xsd:include schemaLocation="Reglas_InlineSchema_Tramite.xsd"/>
+<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Tramite.xsd"/> -->
     </xsd:schema>
     <xsd:schema targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" xmlns:param="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente/param" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente/param"/>

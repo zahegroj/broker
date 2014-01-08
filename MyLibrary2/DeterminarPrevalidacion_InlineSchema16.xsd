@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:param="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente/param" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente/param" schemaLocation="Reglas_InlineSchema_DeterminarPrevalidacion_param.xsd"></xsd:import>
                                                     <xsd:element ibmSchExtn:docRoot="true" name="PrevalidacionClienteRequest">
         <xsd:complexType>
           <xsd:sequence>

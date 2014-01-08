@@ -60,7 +60,7 @@
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion">
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC"/>
 
-<xsd:include schemaLocation="Reglas_InlineSchema_Factura.xsd"/>
+<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Factura.xsd"/> -->
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Factura" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Factura">
 
@@ -109,11 +109,11 @@
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite">
 <import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
 
-<xsd:include schemaLocation="Reglas_InlineSchema_Telefono.xsd"/>
+<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Telefono.xsd"/> -->
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Telefono">
 
-<xsd:include schemaLocation="Reglas_InlineSchema_Tramite.xsd"/>
+<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Tramite.xsd"/> -->
     </schema>
     <xsd:schema targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:pref1="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns:pref2="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Tramite">
 <xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC">
