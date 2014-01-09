@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmAggregateReply.msgnode="ComIbmAggregateReply.msgnode" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" xmi:id="EPackage_1"
+    nsURI="XML_FlightQueryIn.msgflow" nsPrefix="XML_FlightQueryIn.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" xmi:id="FCMComposite_1" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" xmi:id="TranslatableString_1" key="XML_FlightQueryIn" bundleName="XML_FlightQueryIn" pluginId="com.ibm.etools.mft.samples.airline.xml.res"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" xmi:id="GIFFileGraphic_1" resourceName="platform:/plugin/com.ibm.etools.mft.samples.airline.xml.res/icons/full/obj16/XML_FlightQueryIn.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" xmi:id="GIFFileGraphic_2" resourceName="platform:/plugin/com.ibm.etools.mft.samples.airline.xml.res/icons/full/obj30/XML_FlightQueryIn.gif"/>
+    <longDescription xmi:type="utility:ConstantString" string="Sample program for use with IBM WebSphere Message Broker&#xD;&#xA;© Copyright International Business Machines Corporation 2003, 2010 &#xD;&#xA;Licensed Materials - Property of IBM&#xD;&#xA;"/>
+    <composition xmi:id="Composition_1">
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="26,105" queueName="XML_FLIGHTQUERY_REPLIES" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" xmi:id="ConstantString_1" string="XML_FLIGHTQUERY_REPLIES"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="456,69" queueName="XML_FLIGHTQUERY_OUT">
+        <translation xmi:type="utility:ConstantString" xmi:id="ConstantString_2" string="XML_FLIGHTQUERY_OUT"/>
+      </nodes>
+      <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="179,68" aggregateName="FLIGHTDETAILSAGG" unsolicitedTimeout="60">
+        <translation xmi:type="utility:ConstantString" string="AggregateReplies"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="309,69" computeExpression="esql://routine/#BuildOutputMessage.Main">
+        <translation xmi:type="utility:ConstantString" string="BuildOutputMessage"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="306,139" computeExpression="esql://routine/#ProcessTimeout.Main">
+        <translation xmi:type="utility:ConstantString" string="ProcessTimeout"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="410,237" queueName="XML_FLIGHTQUERY_TIMEOUT">
+        <translation xmi:type="utility:ConstantString" xmi:id="ConstantString_7" string="XML_FLIGHTQUERY_TIMEOUT"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="190,246" queueName="XML_FLIGHTQUERY_FAIL">
+        <translation xmi:type="utility:ConstantString" xmi:id="ConstantString_8" string="XML_FLIGHTQUERY_FAIL"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="143,182" destination="localError" pattern="==== Exception caught in input node XML_FLIGHTQUERY_REPLIES =======&#xD;&#xA;&#xD;&#xA;Environment is:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;Exception List is:&#xD;&#xA;${ExceptionList}" messageNumber="3052">
+        <translation xmi:type="utility:ConstantString" string="LogException"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.timeout" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer xmi:id="PropertyOrganizer_1"/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

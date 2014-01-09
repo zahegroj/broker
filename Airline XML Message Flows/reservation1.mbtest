@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.etools.mft.unittest.core.models.client="http:///com/ibm/etools/mft/unittest/core/models/client.ecore" xmlns:com.ibm.wbit.comptest.common.models.event="http:///com/ibm/etools/mft/unittest/common/models/event.ecore" xmlns:jms="http:///com/ibm//etools/mft/unittest/common/model2/jms" xmlns:model2="http:///com/ibm//etools/mft/unittest/common/model2" xmlns:mq="http:///com/ibm//etools/mft/unittest/common/model2/mq">
+  <com.ibm.etools.mft.unittest.core.models.client:EclipseClient iD="1181720946671-413" eventTrace="/1" clientID="1181720946671-413">
+    <scopes xsi:type="model2:FlowTestScope" iD="1181720946671-416">
+      <testModules xsi:type="model2:TestMsgFlow" iD="1181720946671-419"/>
+      <settings xsi:type="model2:FlowSettings"/>
+      <settings xsi:type="model2:DeploymentSettings"/>
+      <settings xsi:type="mq:MQSettings"/>
+      <settings xsi:type="jms:JMSSettings"/>
+      <settings xsi:type="mq:MQMessageHeaders"/>
+      <settings xsi:type="jms:JMSMessageHeaders"/>
+      <messageHeaders xsi:type="mq:MQHeader" iD="1181720946671-417" putApplicationType="11" headerName="Header from .enqueue"/>
+    </scopes>
+  </com.ibm.etools.mft.unittest.core.models.client:EclipseClient>
+  <com.ibm.wbit.comptest.common.models.event:ExecutionEventTrace iD="1181720946671-414" children="/2 /3"/>
+  <mq:InteractiveMQEnqueueEvent iD="1181720946671-415" timestamp="1181720946671" host="localhost" port="0" queueManager="MB8QMGR" queue="XML_RESERVATION_IN" mqmdId="1181720946671-417">
+    <request xsi:type="model2:TestMessage" iD="1181720946671-418" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="&lt;Reservation>&lt;FlightDetails>&lt;FlightNumber>CA937&lt;/FlightNumber>&lt;FlightDate>20030525&lt;/FlightDate>&lt;/FlightDetails>&lt;ListOfPassengers>&lt;PassengerDetails>&lt;FirstName>Mary&lt;/FirstName>&lt;LastName>Smith&lt;/LastName>&lt;Class>F&lt;/Class>&lt;/PassengerDetails>&lt;PassengerDetails>&lt;FirstName>Diane&lt;/FirstName>&lt;LastName>Rose&lt;/LastName>&lt;Class>Y&lt;/Class>&lt;/PassengerDetails>&lt;PassengerDetails>&lt;FirstName>Debra&lt;/FirstName>&lt;LastName>Wiess&lt;/LastName>&lt;Class>Y&lt;/Class>&lt;/PassengerDetails>&lt;PassengerDetails>&lt;FirstName>Atila&lt;/FirstName>&lt;LastName>Wiess&lt;/LastName>&lt;Class>F&lt;/Class>&lt;/PassengerDetails>&lt;/ListOfPassengers>&lt;Request>M&lt;/Request>&lt;/Reservation>"/>
+    </request>
+  </mq:InteractiveMQEnqueueEvent>
+  <mq:InteractiveMQDequeueEvent iD="1187782626875-18" timestamp="1187782626875" host="localhost" port="0" queueManager="MB8QMGR" queue="XML_RESERVATION_OUT">
+    <request xsi:type="model2:TestMessage" iD="1187782626875-19"/>
+  </mq:InteractiveMQDequeueEvent>
+</xmi:XMI>
