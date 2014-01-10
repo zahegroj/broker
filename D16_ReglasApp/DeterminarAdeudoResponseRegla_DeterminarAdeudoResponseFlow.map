@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/DeterminarAdeudo_InlineSchema17.xsd"/>
+    <output path="/reglas/GestionTramitesReglas.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="DeterminarAdeudoResponseRegla_DeterminarAdeudoResponseFlow">
+        <input namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" path="mb:msg(DeterminarAdeudoResponse,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarAdeudoResponse,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/tipoTramite"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/tipoTramite"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/estado"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/estado"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/cac/identificador"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/cac/identificador"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/cac/region"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/cac/region"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/aclaracionSaldos/tipoTramite"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/aclaracionSaldos/tipoTramite"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/aclaracionSaldos/estado"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/aclaracionSaldos/estado"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/aclaracionSaldos/escenario"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/aclaracionSaldos/escenario"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/asesor/perfil/perfilPac"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/perfilPac"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/asesor/perfil/habilitado"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/habilitado"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/asesor/perfil/region"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/regiones/region"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/asesor/perfil/nivelAcceso"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/nivelAcceso"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/asesor/perfil/flujoNegocio"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/flujoNegocio"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cobranza/estatus"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cobranza/estatus"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cobranza/accion"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cobranza/accion"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cobranza/motivo"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cobranza/motivo"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/estatus"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/estatus"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/telefono/numero"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/telefono/numero"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/telefono/region"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/telefono/region"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/telefono/estatus"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/telefono/estatus"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/limiteCredito"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/limiteCredito"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/tipoSaldoExistente"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/tipoSaldoExistente"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/porcentajeCredito"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/porcentajeCredito"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/cargoPendienteFacturar"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/cargoPendienteFacturar"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoMes"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoMes"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoActual"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoActual"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoEstimado"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoEstimado"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoPendienteFacturar"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoPendienteFacturar"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoFacturadoNoVencido"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoFacturadoNoVencido"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoFacturadoVencido"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoFacturadoVencido"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/factura/montoMinimoPagar"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/factura/montoMinimoPagar"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/factura/fechaLimitePago"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/factura/fechaLimitePago"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/factura/variableFechaLimitePago"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/factura/variableFechaLimitePago"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/requirePagar"/>
+            <output path="determinarAdeudoResponse/response/requirePagar"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/requiereAutorizacion"/>
+            <output path="determinarAdeudoResponse/response/requiereAutorizacion"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/comentario"/>
+            <output path="determinarAdeudoResponse/response/comentario"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

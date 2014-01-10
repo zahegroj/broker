@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DeterminarAdeudoDecisionService" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo">
+	<wsdl:documentation>
+		<wsdl:appinfo source="WMQI_APPINFO">
+			<MRWSDLAppInfo imported="true">
+				<generatedXSD location="Reglas_InlineSchema_AclaracionSaldos.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_AsesorCAC.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_CAC.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_Cobranza.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_Cuenta.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_DeterminarAdeudo.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_Factura.xsd"/>
+				<generatedXSD location="DeterminarAdeudo_InlineSchema9.xsd"/>
+				<generatedXSD location="DeterminarAdeudo_InlineSchema11.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_PrevalidacionCliente.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_Telefono.xsd"/>
+				<generatedXSD location="Reglas_InlineSchema_Tramite.xsd"/>
+				<generatedXSD location="DeterminarAdeudo_InlineSchema15.xsd"/>
+				<generatedXSD location="DeterminarAdeudo_InlineSchema16.xsd"/>
+				<generatedXSD location="DeterminarAdeudo_InlineSchema17.xsd"/>
+				<binding hasEncoding="false" imported="true" name="D16_GestorTramitesRuleAPPDeterminarAdeudoBinding" originalBindingStyle="document"/>
+			</MRWSDLAppInfo>
+		</wsdl:appinfo>
+	</wsdl:documentation>
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos">
+			<xsd:include schemaLocation="Reglas_InlineSchema_AclaracionSaldos.xsd"/>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Perfil" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC">
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Perfil"/>
+			<xsd:include schemaLocation="Reglas_InlineSchema_AsesorCAC.xsd"/>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/CAC" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC">
+			<xsd:include schemaLocation="Reglas_InlineSchema_CAC.xsd"/>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza">
+			<xsd:include schemaLocation="Reglas_InlineSchema_Cobranza.xsd"/>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta">
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono"/>
+			<xsd:include schemaLocation="Reglas_InlineSchema_Cuenta.xsd"/>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:pref1="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" xmlns:pref2="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns:pref3="http://www.telcel.com.mx/CAC/GestorTramites/Factura" xmlns:pref4="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo">
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Factura"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
+			<xsd:include schemaLocation="Reglas_InlineSchema_DeterminarAdeudo.xsd"/>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion">
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC"/>
+			<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Factura.xsd"/> -->
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Factura" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Factura">
+
+
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns:pref1="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:pref10="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:pref11="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:pref12="http://www.telcel.com.mx/CAC/GestorTramites/Perfil" xmlns:pref13="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion" xmlns:pref2="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" xmlns:pref3="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns:pref4="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:pref5="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionClliente" xmlns:pref6="http://www.telcel.com.mx/CAC/GestorTramites/Factura" xmlns:pref7="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo" xmlns:pref8="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente" xmlns:pref9="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" xmlns:tns="http://www.example.org/GestorTramites" elementFormDefault="qualified" targetNamespace="http://www.example.org/GestorTramites">
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Factura"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Perfil"></import>
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion"/>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Perfil" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Perfil">
+
+
+
+
+
+
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente">
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
+			<xsd:include schemaLocation="Reglas_InlineSchema_PrevalidacionCliente.xsd"/>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite">
+			<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite"/>
+			<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Telefono.xsd"/> -->
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono">
+			<!-- <xsd:include schemaLocation="Reglas_InlineSchema_Tramite.xsd"/> -->
+		</schema>
+		<xsd:schema xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:pref1="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns:pref2="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite">
+			<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC"></xsd:import>
+			<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos"></xsd:import>
+			<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC"/>
+		</xsd:schema>
+		<xsd:schema xmlns:xom1="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param">
+			<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo"/>
+			<xsd:include schemaLocation="DeterminarAdeudo_InlineSchema16.xsd"/>
+		</xsd:schema>
+		<xsd:schema xmlns:param="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo">
+			<xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param"/>
+			<xsd:include schemaLocation="DeterminarAdeudo_InlineSchema17.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="DeterminarAdeudoSoapFault">
+		<wsdl:part element="dstns:DeterminarAdeudoException" name="fault"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DeterminarAdeudoResponse">
+		<wsdl:part element="dstns:DeterminarAdeudoResponse" name="DeterminarAdeudoResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="DeterminarAdeudoRequest">
+		<wsdl:part element="dstns:DeterminarAdeudoRequest" name="DeterminarAdeudoRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="DeterminarAdeudoDecisionService">
+		<wsdl:operation name="DeterminarAdeudo">
+			<wsdl:input message="dstns:DeterminarAdeudoRequest" name="DeterminarAdeudoRequest"></wsdl:input>
+			<wsdl:output message="dstns:DeterminarAdeudoResponse" name="DeterminarAdeudoResponse"></wsdl:output>
+			<wsdl:fault message="dstns:DeterminarAdeudoSoapFault" name="DeterminarAdeudoSoapFault"></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="D16_GestorTramitesRuleAPPDeterminarAdeudoBinding" type="dstns:DeterminarAdeudoDecisionService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="DeterminarAdeudo">
+			<soap:operation soapAction="DeterminarAdeudo" style="document"/>
+			<wsdl:input name="DeterminarAdeudoRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="DeterminarAdeudoResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="DeterminarAdeudoSoapFault">
+				<soap:fault name="DeterminarAdeudoSoapFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DeterminarAdeudoDecisionService">
+		<wsdl:port binding="dstns:D16_GestorTramitesRuleAPPDeterminarAdeudoBinding" name="D16_GestorTramitesRuleAPPDeterminarAdeudoPort">
+			<soap:address location="http://10.191.80.41:9081/DecisionService/ws/D16_GestorTramitesRuleAPP/1.0/DeterminarAdeudo/1.0/v75"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

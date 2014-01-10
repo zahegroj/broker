@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions name="GestionTramitesInfoCliente" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="GestionTramitesInfoClienteBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
+	<types>
+		<xsd:schema>
+<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" schemaLocation="GestionTramitesInfoCliente.xsd"/>
+<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
+</xsd:schema>
+	</types>
+
+	<message name="consultarDatosClienteMsg">
+		<part element="types:consultarDatosClienteRequest" name="parameters"/>
+	</message>
+	<message name="consultarDatosClienteMsgResponse">
+		<part element="types:consultarDatosClienteResponse" name="parameters"/>
+	</message>
+	<message name="consultarDatosCobranzaMsg">
+		<part element="types:consultarDatosCobranzaRequest" name="parameters"/>
+	</message>
+	<message name="consultarDatosCobranzaMsgResponse">
+		<part element="types:consultarDatosCobranzaResponse" name="parameters"/>
+	</message>
+
+	<message name="gestionTramitesWMBExceptionMsg">
+		<part element="comun:gestionTramitesWMBException" name="fault"/>
+	</message>
+
+	<portType name="GestionTramitesInfoClientePort">
+		<operation name="consultarDatosCliente">
+			<input message="this:consultarDatosClienteMsg"/>
+			<output message="this:consultarDatosClienteMsgResponse"/>
+			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+		</operation>
+		<operation name="consultarDatosCobranza">
+			<input message="this:consultarDatosCobranzaMsg"/>
+			<output message="this:consultarDatosCobranzaMsgResponse"/>
+			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+		</operation>
+	</portType>
+
+	<binding name="GestionTramitesInfoClienteBinding" type="this:GestionTramitesInfoClientePort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="consultarDatosCliente">
+			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/consultarDatosCliente"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="GestionTramitesWMBException">
+				<soap:fault name="GestionTramitesWMBException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="consultarDatosCobranza">
+			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/consultarDatosCobranza"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="GestionTramitesWMBException">
+				<soap:fault name="GestionTramitesWMBException" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+
+	<service name="GestionTramitesInfoClienteService">
+		<port binding="this:GestionTramitesInfoClienteBinding" name="GestionTramitesInfoClienteHTTPSOAPPort">
+			<soap:address location="http://localhost:7800/gestiontramites/wmb/InfoClienteService"/>
+		</port>
+	</service>
+</definitions>

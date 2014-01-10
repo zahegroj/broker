@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_SiantelGetPerfilTelefonoInvokeFlow.msgflow="gen/SiantelGetPerfilTelefonoInvokeFlow.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="SiantelFlow.msgflow"
+    nsPrefix="SiantelFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="SiantelFlow" bundleName="SiantelFlow" pluginId="D16_M2KFlowsLib"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_M2KFlowsLib/icons/full/obj16/SiantelFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_M2KFlowsLib/icons/full/obj30/SiantelFlow.gif"/>
+    <composition>
+      <nodes xmi:type="gen_SiantelGetPerfilTelefonoInvokeFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="391,183">
+        <translation xmi:type="utility:ConstantString" string="SiantelGetPerfilTelefonoInvokeFlow"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="66,218">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="SiantelFlow" pluginId="D16_M2KFlowsLib"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="792,245">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="SiantelFlow" pluginId="D16_M2KFlowsLib"/>
+      </nodes>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

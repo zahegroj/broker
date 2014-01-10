@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><schema targetNamespace="http://ws.portabilidad.dsaf.gsa.sds.telcel.com" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:impl="http://ws.portabilidad.dsaf.gsa.sds.telcel.com" xmlns:intf="http://ws.portabilidad.dsaf.gsa.sds.telcel.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            	 	 	 	 	 	 	<element ibmSchExtn:docRoot="true" name="getFzaVtaPrepagoResponse">
+		<complexType>
+		 <sequence>
+			<element name="getFzaVtaPrepagoReturn" nillable="true" type="string"/>
+		 </sequence>
+		</complexType>
+	 </element>
+            <element ibmSchExtn:docRoot="true" name="getPerfilTelefono">
+		<complexType>
+		 <sequence>
+			<element name="xml" nillable="true" type="string"/>
+		 </sequence>
+		</complexType>
+	 </element>
+            <element ibmSchExtn:docRoot="true" name="getPerfilTelefonoResponse">
+		<complexType>
+		 <sequence>
+			<element name="getPerfilTelefonoReturn" nillable="true" type="string"/>
+		 </sequence>
+		</complexType>
+	 </element>
+            <element ibmSchExtn:docRoot="true" name="getFzaVtaPospago">
+		<complexType>
+		 <sequence>
+			<element name="region" nillable="true" type="string"/>
+			<element name="cveFzaVta" nillable="true" type="string"/>
+		 </sequence>
+		</complexType>
+	 </element>
+            <element ibmSchExtn:docRoot="true" name="getFzaVtaPospagoResponse">
+		<complexType>
+		 <sequence>
+			<element name="getFzaVtaPospagoReturn" nillable="true" type="string"/>
+		 </sequence>
+		</complexType>
+	 </element>
+            <element ibmSchExtn:docRoot="true" name="getFzaVtaPrepago">
+		<complexType>
+		 <sequence>
+			<element name="region" nillable="true" type="string"/>
+			<element name="cveFzaVta" nillable="true" type="string"/>
+		 </sequence>
+		</complexType>
+	 </element>
+        </schema>

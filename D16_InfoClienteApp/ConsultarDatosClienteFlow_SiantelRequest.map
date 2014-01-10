@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/infoCliente/GestionTramitesInfoCliente.xsd"/>
+    <output path="/SiantelSchema.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ConsultarDatosClienteFlow_SiantelRequest">
+        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" path="mb:msg(consultarDatosClienteRequest,assembly,,Properties)"/>
+        <output path="mb:msg(SolicitudPerfilTelefono,assembly,XMLNSC,LocalEnvironment,Properties)">
+            <cast path="LocalEnvironment/Variables/any" qualifier="{http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema}consultarDatosClienteRequest"/>
+        </output>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="consultarDatosClienteRequest/request/sistemaSiantel"/>
+            <output path="SolicitudPerfilTelefono/Sistema"/>
+        </move>
+        <move>
+            <input path="consultarDatosClienteRequest/request/regionCAC"/>
+            <output path="SolicitudPerfilTelefono/RegionSolicitud"/>
+        </move>
+        <move>
+            <input path="consultarDatosClienteRequest/request/telefono"/>
+            <output path="SolicitudPerfilTelefono/Telefono"/>
+        </move>
+        <move>
+            <input path="consultarDatosClienteRequest"/>
+            <output path="LocalEnvironment/Variables/consultarDatosClienteRequest"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

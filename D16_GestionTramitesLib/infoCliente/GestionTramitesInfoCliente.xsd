@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDatosClienteRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDatosClienteRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDatosClienteResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDatosClienteResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDatosCobranzaRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDatosCobranzaRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDatosCobranzaResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDatosCobranzaResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="ConsultarDatosClienteRequestType">
+		<xsd:sequence>
+			<xsd:element name="usuarioM2K" type="xsd:string"/>
+			<xsd:element name="telefono" type="xsd:string"/>
+			<xsd:element name="sistemaSiantel" type="xsd:string"/>
+			<xsd:element name="regionCAC" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDatosClienteResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDatosCobranzaRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDatosCobranzaResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

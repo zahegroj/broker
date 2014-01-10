@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarEncabezadoRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarEncabezadoRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarEncabezadoResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarEncabezadoResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarConsumosRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarConsumosRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarConsumosResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarConsumosResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleConexionesRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetalleConexionesRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleConexionesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetalleConexionesResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPlanesYServiciosRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarPlanesYServiciosRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPlanesYServiciosResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarPlanesYServiciosResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePlanTarifarioRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetallePlanTarifarioRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePlanTarifarioResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetallePlanTarifarioResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleProductoRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetalleProductoRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleProductoResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetalleProductoResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPagosYAjustesRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarPagosYAjustesRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPagosYAjustesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarPagosYAjustesResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleReversionRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetalleReversionRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleReversionResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetalleReversionResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPromocionesRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarPromocionesRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPromocionesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarPromocionesResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePromocionRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetallePromocionRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePromocionResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetallePromocionResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarHistorialCuentaRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarHistorialCuentaRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarHistorialCuentaResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarHistorialCuentaResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- types -->
+	<xsd:complexType name="ConsultarEncabezadoRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarEncabezadoResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarConsumosRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarConsumosResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleConexionesRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleConexionesResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPlanesYServiciosRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPlanesYServiciosResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetallePlanTarifarioRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetallePlanTarifarioResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleProductoRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleProductoResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPagosYAjustesRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPagosYAjustesResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleReversionRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleReversionResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPromocionesRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPromocionesResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetallePromocionRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetallePromocionResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarHistorialCuentaRequestType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarHistorialCuentaResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
