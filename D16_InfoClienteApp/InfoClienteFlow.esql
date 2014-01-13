@@ -1,0 +1,23 @@
+
+
+CREATE FILTER MODULE PerfilTelefonoGrupoCorpo_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF Root.XMLNSC.PerfilTelefono.GrupoCorpo='TELCEL' THEN
+			RETURN TRUE;
+		END IF;
+		RETURN FALSE;
+	END;
+
+END MODULE;
+
+CREATE FILTER MODULE PerfilTelefonoPlataforma_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF Root.XMLNSC.PerfilTelefono.Plataforma='POSPAGO' THEN
+			RETURN TRUE;
+		END IF;
+		RETURN FALSE;
+	END;
+
+END MODULE;

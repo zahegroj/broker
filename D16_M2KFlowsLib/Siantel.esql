@@ -1,0 +1,10 @@
+DECLARE ns NAMESPACE 'http://ws.portabilidad.dsaf.gsa.sds.telcel.com';
+DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+
+CREATE COMPUTE MODULE Siantel_CreateStringRequest
+	 CREATE FUNCTION Main() RETURNS BOOLEAN
+	 BEGIN
+	 	SET OutputRoot.SOAP.Body.ns:getPerfilTelefono.xml = InputRoot.XMLNSC.SolicitudPerfilTelefono.Sistema;
+	 	RETURN TRUE;
+	 END;
+END MODULE;

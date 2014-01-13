@@ -17,6 +17,9 @@
       <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="746,195">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="SUMIQ_CFlow" pluginId="D16_M2KFlowsLib"/>
       </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output1" location="749,99">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Fault" bundleName="SUMIQ_CFlow" pluginId="D16_M2KFlowsLib"/>
+      </nodes>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

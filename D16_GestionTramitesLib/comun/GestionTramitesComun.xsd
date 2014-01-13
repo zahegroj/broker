@@ -5,7 +5,21 @@
 		<xsd:sequence>
 			<xsd:element name="servicio" type="xsd:string"/>
 			<xsd:element name="operacion" type="xsd:string"/> <!-- Para m2k FUNCTION_ACTION -->
-			<xsd:element name="error" type="xsd:string"/>
+			<xsd:element name="errores" type="this:ArrayOfError"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfError">
+		<xsd:sequence>
+			<xsd:element name="error" type="this:Error" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Error">
+		<xsd:sequence>
+			<xsd:element name="codigo" type="xsd:string" />
+			<xsd:element name="mensaje" type="xsd:string" />
+			<xsd:element name="tipoError" type="xsd:string" /> <!--  -->
 		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema><!-- catalogo de servicios --><!-- 1. M2K --><!-- 2. SIANTEL --><!-- 3. SMS --><!-- 4. IMEI --><!-- 5. RN Determinar Adeudo --><!-- 6. RN Determinar Region Perfil --><!-- 7. RN Determinar Prevalidacion --><!-- 8. RN Reasignar Tramite -->

@@ -6,6 +6,7 @@
 		<project>D16_GestionTramitesLib</project>
 		<project>D16_ServiciosTelcelLib</project>
 		<project>D16_M2KFlowsLib</project>
+		<project>D16_Soap_EnvelopLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

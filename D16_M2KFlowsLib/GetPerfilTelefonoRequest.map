@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/m2kSchema.xsd"/>
+    <output path="/siantel/PerfilTelefonoService_InlineSchema1.xsd" var="out"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="GetPerfilTelefonoRequest">
+        <input path="mb:msg(SolicitudPerfilTelefono,assembly,XMLNSC,Properties)"/>
+        <output namespace="http://ws.portabilidad.dsaf.gsa.sds.telcel.com" path="$out/mb:msg(getPerfilTelefono,assembly,XMLNSC,Properties)" var="MessageAssembly"/>
+        <move>
+            <input path="Properties"/>
+            <output path="$MessageAssembly/Properties"/>
+        </move>
+        <assign value="XXXXXXXXX">
+            <output path="$MessageAssembly/getPerfilTelefono/xml"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/m2kSchema.xsd"/>
+    <output path="/m2kSchema.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ConsultarDatosClienteFlow_SUMIQ_CRequest">
+        <input path="mb:msg(PerfilTelefono,assembly,XMLNSC,LocalEnvironment,Properties)">
+            <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K"/>
+        </input>
+        <output path="mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment"/>
+            <output path="LocalEnvironment"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment/Variables/usuarioM2K"/>
+            <output path="Request/user"/>
+        </move>
+        <convert defaultValue="0">
+            <input path="PerfilTelefono/Region"/>
+            <output path="Request/region"/>
+        </convert>
+        <move>
+            <input path="PerfilTelefono/Telefono"/>
+            <output path="Request/inputParameters/servicio/p01telefono/text()"/>
+        </move>
+        <assign value="10">
+            <output path="Request/inputParameters/servicio/p01telefono/@longitud"/>
+        </assign>
+        <assign value="9">
+            <output path="Request/inputParameters/servicio/p02cuenta/@longitud"/>
+        </assign>
+        <assign value="SUMIQ">
+            <output path="Request/function"/>
+        </assign>
+        <assign value="C">
+            <output path="Request/action"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>
