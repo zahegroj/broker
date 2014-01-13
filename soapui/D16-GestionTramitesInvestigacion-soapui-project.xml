@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesInvestigacion" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesInvestigacionBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/gestiontramites/wmb/investigacion}GestionTramitesInvestigacionBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Dropbox/wmb/wsdl/GestionTramitesInvestigacion.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesInvestigacion.wsdl"><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesInvestigacion.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesInvestigacion" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/investigacion" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="GestionTramitesInvestigacion.xsd" namespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema"/>
+      <xsd:import schemaLocation="GestionTramitesComun.xsd" namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema"/>
+    </xsd:schema>
+  </types>
+  <message name="consultarEncabezadoMsg">
+    <part name="parameters" element="types:consultarEncabezadoRequest"/>
+  </message>
+  <message name="consultarEncabezadoMsgResponse">
+    <part name="parameters" element="types:consultarEncabezadoResponse"/>
+  </message>
+  <message name="consultarConsumosMsg">
+    <part name="parameters" element="types:consultarConsumosRequest"/>
+  </message>
+  <message name="consultarConsumosMsgResponse">
+    <part name="parameters" element="types:consultarConsumosResponse"/>
+  </message>
+  <message name="consultarDetalleConexionesMsg">
+    <part name="parameters" element="types:consultarDetalleConexionesRequest"/>
+  </message>
+  <message name="consultarDetalleConexionesMsgResponse">
+    <part name="parameters" element="types:consultarDetalleConexionesResponse"/>
+  </message>
+  <message name="consultarPlanesYServiciosMsg">
+    <part name="parameters" element="types:consultarPlanesYServiciosRequest"/>
+  </message>
+  <message name="consultarPlanesYServiciosMsgResponse">
+    <part name="parameters" element="types:consultarPlanesYServiciosResponse"/>
+  </message>
+  <message name="consultarDetallePlanTarifarioMsg">
+    <part name="parameters" element="types:consultarDetallePlanTarifarioRequest"/>
+  </message>
+  <message name="consultarDetallePlanTarifarioMsgResponse">
+    <part name="parameters" element="types:consultarDetallePlanTarifarioResponse"/>
+  </message>
+  <message name="consultarDetalleProductoMsg">
+    <part name="parameters" element="types:consultarDetalleProductoRequest"/>
+  </message>
+  <message name="consultarDetalleProductoMsgResponse">
+    <part name="parameters" element="types:consultarDetalleProductoResponse"/>
+  </message>
+  <message name="consultarPagosYAjustesMsg">
+    <part name="parameters" element="types:consultarPagosYAjustesRequest"/>
+  </message>
+  <message name="consultarPagosYAjustesMsgResponse">
+    <part name="parameters" element="types:consultarPagosYAjustesResponse"/>
+  </message>
+  <message name="consultarDetalleReversionMsg">
+    <part name="parameters" element="types:consultarDetalleReversionRequest"/>
+  </message>
+  <message name="consultarDetalleReversionMsgResponse">
+    <part name="parameters" element="types:consultarDetalleReversionResponse"/>
+  </message>
+  <message name="consultarPromocionesMsg">
+    <part name="parameters" element="types:consultarPromocionesRequest"/>
+  </message>
+  <message name="consultarPromocionesMsgResponse">
+    <part name="parameters" element="types:consultarPromocionesResponse"/>
+  </message>
+  <message name="consultarDetallePromocionMsg">
+    <part name="parameters" element="types:consultarDetallePromocionRequest"/>
+  </message>
+  <message name="consultarDetallePromocionMsgResponse">
+    <part name="parameters" element="types:consultarDetallePromocionResponse"/>
+  </message>
+  <message name="consultarHistorialCuentaMsg">
+    <part name="parameters" element="types:consultarHistorialCuentaRequest"/>
+  </message>
+  <message name="consultarHistorialCuentaMsgResponse">
+    <part name="parameters" element="types:consultarHistorialCuentaResponse"/>
+  </message>
+  <message name="gestionTramitesWMBExceptionMsg">
+    <part name="fault" element="comun:gestionTramitesWMBException"/>
+  </message>
+  <portType name="GestionTramitesInvestigacionPort">
+    <operation name="consultarEncabezado">
+      <input message="this:consultarEncabezadoMsg"/>
+      <output message="this:consultarEncabezadoMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarConsumos">
+      <input message="this:consultarConsumosMsg"/>
+      <output message="this:consultarConsumosMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetalleConexiones">
+      <input message="this:consultarDetalleConexionesMsg"/>
+      <output message="this:consultarDetalleConexionesMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarPlanesYServicios">
+      <input message="this:consultarPlanesYServiciosMsg"/>
+      <output message="this:consultarPlanesYServiciosMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetallePlanTarifario">
+      <input message="this:consultarDetallePlanTarifarioMsg"/>
+      <output message="this:consultarDetallePlanTarifarioMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetalleProducto">
+      <input message="this:consultarDetalleProductoMsg"/>
+      <output message="this:consultarDetalleProductoMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarPagosYAjustes">
+      <input message="this:consultarPagosYAjustesMsg"/>
+      <output message="this:consultarPagosYAjustesMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetalleReversion">
+      <input message="this:consultarDetalleReversionMsg"/>
+      <output message="this:consultarDetalleReversionMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarPromociones">
+      <input message="this:consultarPromocionesMsg"/>
+      <output message="this:consultarPromocionesMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetallePromocion">
+      <input message="this:consultarDetallePromocionMsg"/>
+      <output message="this:consultarDetallePromocionMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarHistorialCuenta">
+      <input message="this:consultarHistorialCuentaMsg"/>
+      <output message="this:consultarHistorialCuentaMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+  </portType>
+  <binding name="GestionTramitesInvestigacionBinding" type="this:GestionTramitesInvestigacionPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="consultarEncabezado">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarEncabezado"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarConsumos">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarConsumos"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetalleConexiones">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarPlanesYServicios">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetallePlanTarifario">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetalleProducto">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleProducto"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarPagosYAjustes">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetalleReversion">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleReversion"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarPromociones">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPromociones"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetallePromocion">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetallePromocion"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="consultarHistorialCuenta">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="GestionTramitesInvestigacionService">
+    <port binding="this:GestionTramitesInvestigacionBinding" name="GestionTramitesInvestigacionHTTPSOAPPort">
+      <soap:address location="http://localhost:7800/gestiontramites/wmb/InvestigacionService"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesInvestigacion.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+  <xsd:element name="consultarEncabezadoRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarEncabezadoRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarEncabezadoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarEncabezadoResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarConsumosRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarConsumosRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarConsumosResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarConsumosResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetalleConexionesRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetalleConexionesRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetalleConexionesResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetalleConexionesResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarPlanesYServiciosRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarPlanesYServiciosRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarPlanesYServiciosResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarPlanesYServiciosResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetallePlanTarifarioRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetallePlanTarifarioRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetallePlanTarifarioResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetallePlanTarifarioResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetalleProductoRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetalleProductoRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetalleProductoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetalleProductoResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarPagosYAjustesRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarPagosYAjustesRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarPagosYAjustesResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarPagosYAjustesResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetalleReversionRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetalleReversionRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetalleReversionResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetalleReversionResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarPromocionesRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarPromocionesRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarPromocionesResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarPromocionesResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetallePromocionRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetallePromocionRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarDetallePromocionResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetallePromocionResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarHistorialCuentaRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarHistorialCuentaRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="consultarHistorialCuentaResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarHistorialCuentaResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <!--types-->
+  <xsd:complexType name="ConsultarEncabezadoRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarEncabezadoResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarConsumosRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarConsumosResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleConexionesRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleConexionesResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPlanesYServiciosRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPlanesYServiciosResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetallePlanTarifarioRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetallePlanTarifarioResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleProductoRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleProductoResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPagosYAjustesRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPagosYAjustesResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleReversionRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleReversionResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPromocionesRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPromocionesResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetallePromocionRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetallePromocionResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarHistorialCuentaRequestType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarHistorialCuentaResponseType">
+    <xsd:sequence>
+      <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesComun.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
+  <xsd:element name="gestionTramitesWMBException" type="this:GestionTramitesWMBException"/>
+  <xsd:complexType name="GestionTramitesWMBException">
+    <xsd:sequence>
+      <xsd:element name="servicio" type="xsd:string"/>
+      <xsd:element name="operacion" type="xsd:string"/>
+      <!--Para m2k FUNCTION_ACTION-->
+      <xsd:element name="error" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<!--catalogo de servicios-->
+<!--1. M2K-->
+<!--2. SIANTEL-->
+<!--3. SMS-->
+<!--4. IMEI-->
+<!--5. RN Determinar Adeudo-->
+<!--6. RN Determinar Region Perfil-->
+<!--7. RN Determinar Prevalidacion-->
+<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarConsumos" name="consultarConsumos" bindingOperationName="consultarConsumos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarConsumosRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarConsumosRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarConsumos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleConexiones" name="consultarDetalleConexiones" bindingOperationName="consultarDetalleConexiones" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleConexionesRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarDetalleConexionesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario" name="consultarDetallePlanTarifario" bindingOperationName="consultarDetallePlanTarifario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetallePlanTarifarioRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarDetallePlanTarifarioRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleProducto" name="consultarDetalleProducto" bindingOperationName="consultarDetalleProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleProductoRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarDetalleProductoRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleProducto"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetallePromocion" name="consultarDetallePromocion" bindingOperationName="consultarDetallePromocion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetallePromocionRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarDetallePromocionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetallePromocion"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleReversion" name="consultarDetalleReversion" bindingOperationName="consultarDetalleReversion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleReversionRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarDetalleReversionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleReversion"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarEncabezado" name="consultarEncabezado" bindingOperationName="consultarEncabezado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarEncabezadoRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarEncabezadoRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarEncabezado"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarHistorialCuenta" name="consultarHistorialCuenta" bindingOperationName="consultarHistorialCuenta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarHistorialCuentaRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarHistorialCuentaRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPagosYAjustes" name="consultarPagosYAjustes" bindingOperationName="consultarPagosYAjustes" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarPagosYAjustesRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarPagosYAjustesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPlanesYServicios" name="consultarPlanesYServicios" bindingOperationName="consultarPlanesYServicios" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarPlanesYServiciosRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarPlanesYServiciosRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPromociones" name="consultarPromociones" bindingOperationName="consultarPromociones" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarPromocionesRequest>
+         <sch:request>
+            <sch:param>?</sch:param>
+         </sch:request>
+      </sch:consultarPromocionesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPromociones"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

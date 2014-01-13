@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Telcel_M2K" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="Port">8087</con:setting><con:setting id="Set endpoint for HTTP Tunnel:">https://191.9.3.249:8087/telcel-ws-web/services/ControlWebService</con:setting><con:setting id="HTTP tunnel - KeyStore"/><con:setting id="HTTP tunnel - Password"/><con:setting id="HTTP tunnel - KeyPassword"/><con:setting id="HTTP tunnel - TrustStore"/><con:setting id="HTTP tunnel - TrustStore Password"/><con:setting id="Reuse request state">false</con:setting><con:setting id="HTTP tunnel - Set SSL Client Key Store path"/><con:setting id="Content types to monitor">*/html, */xml, */soap+xml, */json, */x-json, */javascript, */x-amf</con:setting><con:setting id="HTTP tunnel - Set SSL Client Key Store Password"/><con:setting id="Max Log">100</con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ControlWebServiceSoapBinding" type="wsdl" bindingName="{http://servicios.web.m2k.sds.telcel.com}ControlWebServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://10.188.82.89:9081/telcel-ws-web/services/ControlWebService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://10.188.82.89:9081/telcel-ws-web/services/ControlWebService?wsdl"><con:part><con:url>http://10.188.82.89:9081/telcel-ws-web/services/ControlWebService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://servicios.web.m2k.sds.telcel.com" xmlns:impl="http://servicios.web.m2k.sds.telcel.com" xmlns:intf="http://servicios.web.m2k.sds.telcel.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <schema targetNamespace="http://servicios.web.m2k.sds.telcel.com" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="ejecutaServicioResponse">
+        <complexType>
+          <sequence>
+            <element name="ejecutaServicioReturn" nillable="true" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ejecutaServicio">
+        <complexType>
+          <sequence>
+            <element name="xml" nillable="true" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="ejecutaServicioResponse">
+    <wsdl:part element="impl:ejecutaServicioResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ejecutaServicioRequest">
+    <wsdl:part element="impl:ejecutaServicio" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ControlWebService">
+    <wsdl:operation name="ejecutaServicio">
+      <wsdl:input message="impl:ejecutaServicioRequest" name="ejecutaServicioRequest"></wsdl:input>
+      <wsdl:output message="impl:ejecutaServicioResponse" name="ejecutaServicioResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ControlWebServiceSoapBinding" type="impl:ControlWebService">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ejecutaServicio">
+      <wsdlsoap:operation soapAction="ejecutaServicio"/>
+      <wsdl:input name="ejecutaServicioRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ejecutaServicioResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ControlWebServiceService">
+    <wsdl:port binding="impl:ControlWebServiceSoapBinding" name="ControlWebService">
+      <wsdlsoap:address location="http://10.188.82.89:9081/telcel-ws-web/services/ControlWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:endpoint>http://jzapatah:9081/telcel-ws-web/services/ControlWebService</con:endpoint><con:endpoint>http://10.188.85.158:9082/telcel-ws-web/services/ControlWebService</con:endpoint><con:endpoint>http://10.188.82.88:9081/telcel-ws-web/services/ControlWebService</con:endpoint><con:endpoint>http://191.9.3.249:8087/telcel-ws-web/services/ControlWebService</con:endpoint><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:endpoint>http://10.191.80.36:9080/telcel-ws-web/services/ControlWebService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="ejecutaServicio" name="ejecutaServicio" bindingOperationName="ejecutaServicio" type="Request-Response" outputName="ejecutaServicioResponse" inputName="ejecutaServicioRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="SUMIQ"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://191.9.3.249:8087/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml>
+<![CDATA[
+<Request>
+    <user>SVBPM51</user>
+    <region>9</region>
+    <function>I*7E</function>
+    <action>C</action>
+    <inputParameters>
+        <servicio>
+            <p01telefono longitud="10">5527671654</p01telefono>
+            <p02cuenta longitud="09"></p02cuenta>
+        </servicio>
+    </inputParameters>
+</Request>]]]]>><![CDATA[
+		</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="PRICE"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml>
+<![CDATA[
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Request>
+<user>VI9M2KW</user>
+<region>I</region>
+<function>I*1E</function>
+<action>C</action>
+<inputParameters>
+<servicio>
+<p01telefono longitud='10'>5545447045</p01telefono>
+<p02cuenta   longitud='09'>5795767</p02cuenta>
+</servicio>
+</inputParameters>
+</Request>]]]]>><![CDATA[
+         </xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="RETC2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+		<xml>
+<![CDATA[
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Request>
+<user>VI9M2KW</user>
+<region>I</region>
+<function>I*1E</function>
+<action>C</action>
+<inputParameters>
+<servicio>
+<p01telefono longitud='10'>5533348118</p01telefono>
+<p02cuenta   longitud='09'></p02cuenta>
+</servicio>
+</inputParameters>
+</Request>]]]]>><![CDATA[
+		</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="CPAST"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.188.82.88:9081/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml>
+<![CDATA[
+<Request>
+<user>VI9M2KW</user>
+<region>I</region>
+<function>I*3B</function>
+<action>C</action>
+<inputParameters>
+<servicio>
+<p01cuenta longitud='09'>7177886</p01cuenta>
+<p02maxRegistros>1</p02maxRegistros>
+</servicio>
+</inputParameters>
+</Request>
+]]]]>><![CDATA[
+         </xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="REACT"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?><Request><user>VI9M2KW</user><region>I</region><function>I*I5</function><action>C</action><inputParameters><servicio><p01telefono longitud='10'>5554220535</p01telefono><p02cuenta longitud='09'></p02cuenta></servicio></inputParameters></Request>]]]]>><![CDATA[</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="RETUS"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?><Request><user>VI9M2KW</user><region>I</region><function>I*0F</function><action>C</action><inputParameters><servicio><p01telefono longitud="10">5554220535</p01telefono></servicio></inputParameters></Request>]]]]>><![CDATA[</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC43"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+<xml><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
+<Request>
+ <user>SVBPM51</user>
+ <region>9</region>
+ <function>I*S3</function>
+ <action>C</action>
+ <inputParameters>
+  <servicio>
+ <p01telefono longitud="10">5527675152</p01telefono>
+  <p02cuenta longitud="09">004969905</p02cuenta>
+  <p03fechaConexion longitud="08">09/07/13</p03fechaConexion>
+  <p04horaConexion longitud="08">05:52:01</p04horaConexion>
+  <p05refDtConnect longitud="07"></p05refDtConnect>
+  <p06refTmConnect longitud="06"></p06refTmConnect>
+  <p07ChargingId longitud="10"></p07ChargingId>
+  <p08refDataVolUp longitud="12"></p08refDataVolUp>
+  <p09refDataVolDown longitud="12"></p09refDataVolDown>
+  <p10refServiceClass longitud="04"></p10refServiceClass>
+  </servicio>
+ </inputParameters>
+</Request>
+]]]]>><![CDATA[</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC45"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml>
+<![CDATA[
+<Request>
+  <user>SVBPM51</user>
+  <region>9</region>
+  <function>I*S5</function>
+  <action>D</action>
+  <inputParameters>
+  <servicio>
+   <p01telefono longitud='10'>5527671654</p01telefono>
+   <p02cuenta longitud='09'></p02cuenta>
+   <p03fechaInicio longitud='08'>28/08/13</p03fechaInicio>
+   <p04fechaFin longitud='08'>27/09/13</p04fechaFin>
+   <p05fechaPiv longitud='07'>2130925</p05fechaPiv>
+   <p06horaPiv longitud='07'>1102530</p06horaPiv>
+   <p07fuentePiv longitud='06'>GSRAT9</p07fuentePiv>
+   <p08secuenciaPiv longitud='07'>0372093</p08secuenciaPiv>
+   <p09telMarcadoPiv longitud='10'>5553591010</p09telMarcadoPiv>
+  </servicio>
+  </inputParameters>
+ </Request>]]]]>><![CDATA[
+		</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+
+
+Referencia separada
+2130925 1102530 GSRAT9 0372093 5553591010]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC46"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+<xml><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
+ <Request>
+  <user>SVBPM51</user>
+  <region>8</region>
+  <function>I*S6</function>
+  <action>D</action>
+  <inputParameters>
+  <servicio>
+   <p01telefono longitud='10'>5527671654</p01telefono>
+   <p02cuenta longitud='09'>6385120</p02cuenta>
+   <p03fechaInicio longitud='08'>12/08/13</p03fechaInicio>
+   <p04fechaFin longitud='08'>11/09/13</p04fechaFin>
+   <p05tipoComentarioPiv longitud='05'></p05tipoComentarioPiv>
+   <p06fechaPiv longitud='07'></p06fechaPiv>
+   <p07horaPiv longitud='07'></p07horaPiv>
+   <p08secPiv longitud='03'></p08secPiv>
+  </servicio>
+  </inputParameters>
+ </Request>
+]]]]>><![CDATA[
+
+
+</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC47"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
+<Request>
+  <user>SVBPM51</user>
+  <region>9</region>
+  <function>I*S7</function>
+  <action>C</action>
+  <inputParameters>
+    <servicio>
+      <p01fechaPago longitud="07">1960701</p01fechaPago>
+      <p02numPago longitud="05">00049</p02numPago>
+      <p03tipoPago longitud="02">MA</p03tipoPago>
+      <p04secPago longitud="05">00014</p04secPago>
+      <p05referencia longitud="07">0000000</p05referencia>
+    </servicio>
+  </inputParameters>
+</Request>
+]]]]>><![CDATA[</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="request" name="ejecutaServicio - SUMIQ"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ControlWebServiceSoapBinding</con:interface><con:operation>ejecutaServicio</con:operation><con:request name="ejecutaServicio - SUMIQ"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://jzapatah:9081/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml>
+<![CDATA[
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Request>
+	<user>VI9M2KW</user>
+	<region>I</region>
+	<function>I*1E</function>
+	<action>C</action>
+	<inputParameters>
+		<servicio>
+			<p01telefono longitud='10'>5533348118</p01telefono>
+			<p02cuenta   longitud='09'></p02cuenta>
+		</servicio>
+	</inputParameters>
+</Request>]]]]>><![CDATA[
+         </xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="ejecutaServicio" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="ejecutaServicio - PRICE"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ControlWebServiceSoapBinding</con:interface><con:operation>ejecutaServicio</con:operation><con:request name="ejecutaServicio - PRICE"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://jzapatah:9081/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml>
+<![CDATA[
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Request>
+	<user>VI9M2KW</user>
+	<region>I</region>
+	<function>I*9F</function>
+	<action>C</action>
+	<inputParameters>
+		<servicio>
+			<p01cveplan longitud='05'>GR122</p01cveplan>
+		</servicio>
+	</inputParameters>
+</Request>]]]]>><![CDATA[
+		</xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="ejecutaServicio" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="ejecutaServicio - RETC2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ControlWebServiceSoapBinding</con:interface><con:operation>ejecutaServicio</con:operation><con:request name="ejecutaServicio - RETC2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://jzapatah:9081/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicio>
+         <xml>
+<![CDATA[
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Request>
+	<user>VI9M2KW</user>
+	<region>I</region>
+	<function>I*1E</function>
+	<action>C</action>
+	<inputParameters>
+		<servicio>
+			<p01telefono longitud='10'>5533348118</p01telefono>
+			<p02cuenta   longitud='09'></p02cuenta>
+		</servicio>
+	</inputParameters>
+</Request>]]]]>><![CDATA[
+         </xml>
+      </ser:ejecutaServicio>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="ejecutaServicio" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="9081" path="/telcel-ws-web/services/ControlWebService" host="jzapatah" name="ControlWebServiceSoapBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="ejecutaServicio" interface="ControlWebServiceSoapBinding" operation="ejecutaServicio"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="SUMIQ" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicioResponse>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?><RespuestaOK><ESTATUS IDPETICION="1089a25a-aa36-4de8-a907-40fa62ae2de4">EXITO</ESTATUS><MENSAJE>PG010 OPERACION EXITOSA</MENSAJE><Errores><Codigo><![CDATA[SD026]]]]]]>><![CDATA[><![CDATA[</Codigo><Mensaje><![CDATA[   NO DEPOSIT FOUND FOR ACCOUNT]]]]]]>><![CDATA[><![CDATA[</Mensaje><Codigo><![CDATA[CM041]]]]]]>><![CDATA[><![CDATA[</Codigo><Mensaje><![CDATA[   LAST PAY DATE NOT FOUND]]]]]]>><![CDATA[><![CDATA[</Mensaje></Errores><DesactivacionesNoPago><![CDATA[0]]]]]]>><![CDATA[><![CDATA[</DesactivacionesNoPago><NotasCobroEnviadas><![CDATA[0]]]]]]>><![CDATA[><![CDATA[</NotasCobroEnviadas><PromesasPagosIncumplidas><![CDATA[0]]]]]]>><![CDATA[><![CDATA[</PromesasPagosIncumplidas><RentaMensualPromedio><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</RentaMensualPromedio><ChequesDevueltos><![CDATA[0]]]]]]>><![CDATA[><![CDATA[</ChequesDevueltos><CicloFacturacion><![CDATA[24]]]]]]>><![CDATA[><![CDATA[</CicloFacturacion><ClaseCredito><![CDATA[MB MUY BUENO 1000.00 SE]]]]]]>><![CDATA[><![CDATA[</ClaseCredito><CuentaPadre><![CDATA[0]]]]]]>><![CDATA[><![CDATA[</CuentaPadre><EstatusCobranza><![CDATA[BN BUENA SIN HISTORIA]]]]]]>><![CDATA[><![CDATA[</EstatusCobranza><EstatusCuenta><![CDATA[AC  ACTIVA]]]]]]>><![CDATA[><![CDATA[</EstatusCuenta><FechaAlta><![CDATA[14/07/11]]]]]]>><![CDATA[><![CDATA[</FechaAlta><FechaCancelacion><![CDATA[]]]]]]>><![CDATA[><![CDATA[</FechaCancelacion><FechaUltimaFactura><![CDATA[]]]]]]>><![CDATA[><![CDATA[</FechaUltimaFactura><FechaUltimoPago><![CDATA[]]]]]]>><![CDATA[><![CDATA[</FechaUltimoPago><Importe><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</Importe><NombreCliente><![CDATA[EMPLOYEE TELCEL]]]]]]>><![CDATA[><![CDATA[</NombreCliente><NumerosTelcel><![CDATA[1]]]]]]>><![CDATA[><![CDATA[</NumerosTelcel><NumeroSuspensiones><![CDATA[0]]]]]]>><![CDATA[><![CDATA[</NumeroSuspensiones><PenalizacionIVA><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</PenalizacionIVA><PromedioTiempoAire><![CDATA[99,999.00]]]]]]>><![CDATA[><![CDATA[</PromedioTiempoAire><Saldo><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</Saldo><Saldo120><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</Saldo120><Saldo30><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</Saldo30><Saldo60><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</Saldo60><Saldo90><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</Saldo90><SaldoActual><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</SaldoActual><SaldoEstimado><![CDATA[7.03]]]]]]>><![CDATA[><![CDATA[</SaldoEstimado><SaldoMes><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</SaldoMes><SaldoPenalizacion><![CDATA[7.03]]]]]]>><![CDATA[><![CDATA[</SaldoPenalizacion><TipoCuenta><![CDATA[IN]]]]]]>><![CDATA[><![CDATA[</TipoCuenta><TotalDeposito><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</TotalDeposito><TotalDisputa><![CDATA[0.00]]]]]]>><![CDATA[><![CDATA[</TotalDisputa><Cuenta><![CDATA[5715426]]]]]]>><![CDATA[><![CDATA[</Cuenta><FechaFactura1><![CDATA[]]]]]]>><![CDATA[><![CDATA[</FechaFactura1><FechaFactura2><![CDATA[]]]]]]>><![CDATA[><![CDATA[</FechaFactura2><FechaFactura3><![CDATA[]]]]]]>><![CDATA[><![CDATA[</FechaFactura3><FechaFactura4><![CDATA[]]]]]]>><![CDATA[><![CDATA[</FechaFactura4><ImporteFactura1><![CDATA[]]]]]]>><![CDATA[><![CDATA[</ImporteFactura1><ImporteFactura2><![CDATA[]]]]]]>><![CDATA[><![CDATA[</ImporteFactura2><ImporteFactura3><![CDATA[]]]]]]>><![CDATA[><![CDATA[</ImporteFactura3><ImporteFactura4><![CDATA[]]]]]]>><![CDATA[><![CDATA[</ImporteFactura4><UltimaFechaFactura1><![CDATA[]]]]]]>><![CDATA[><![CDATA[</UltimaFechaFactura1><UltimaFechaFactura2><![CDATA[]]]]]]>><![CDATA[><![CDATA[</UltimaFechaFactura2><UltimaFechaFactura3><![CDATA[]]]]]]>><![CDATA[><![CDATA[</UltimaFechaFactura3><UltimaFechaFactura4><![CDATA[]]]]]]>><![CDATA[><![CDATA[</UltimaFechaFactura4></RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
+      </ser:ejecutaServicioResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="PRICE" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicioResponse>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?><RespuestaOK><ESTATUS IDPETICION="b2e88e18-9710-4390-b879-dda9639ec643">EXITO</ESTATUS><MENSAJE>PG010 OPERACION EXITOSA</MENSAJE><AplicarNuevosUsuarios><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</AplicarNuevosUsuarios><CambiosAlSiguienteCiclo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</CambiosAlSiguienteCiclo><ClavePlanTarifario><![CDATA[]]]]]]>><![CDATA[><![CDATA[</ClavePlanTarifario><ClaveTipoCliente><![CDATA[MI]]]]]]>><![CDATA[><![CDATA[</ClaveTipoCliente><CobroMixto><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</CobroMixto><DescuentoTipoCliente><![CDATA[CLIENTE MINORISTA]]]]]]>><![CDATA[><![CDATA[</DescuentoTipoCliente><GrupoPlan><![CDATA[]]]]]]>><![CDATA[><![CDATA[</GrupoPlan><PlanDescuento><![CDATA[]]]]]]>><![CDATA[><![CDATA[</PlanDescuento><PlanOrigen><![CDATA[]]]]]]>><![CDATA[><![CDATA[</PlanOrigen><PlanTarifario><![CDATA[PL REG GSM 1200 12 M]]]]]]>><![CDATA[><![CDATA[</PlanTarifario><ProductosTO><AlgorCalculaCosto><![CDATA[RALGOBAS]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[AST5P]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[AST5P]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[      0.00]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[CR]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[BUZ I]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[      0.00]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[CR]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[CONF1]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[      0.00]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[AN]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[FIANZ]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[FIAN1]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[      0.00]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[CR]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[IDL00]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[      0.00]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[CR]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[LLES1]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOBAS]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[MENTT]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[MTT01]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/10]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[MENTX]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[M5634]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[MENTX]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[MTX50]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOBAS]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/09]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[NOAIR]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[NOAIR]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/10]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[   1749.97]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[CR]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[R1182]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[   1699.00]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[CR]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[R1182]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[20/08/02]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TACCG]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[I1009]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TACCG]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[T1185]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/02/04]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TACCS]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[S0296]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TACC1]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[C1104]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/06]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TACFS]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[R2059]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/06]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TACXS]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[Q2059]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[25/03/03]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TAEI1]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[A1373]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[25/03/03]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TAEI2]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[E1373]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[20/08/02]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TAG01]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[I1009]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TAIRE]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[T1185]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOBAS]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TAMWI]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[TAMWI]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TAOPE]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[O0894]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TAOPS]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[N0894]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TATTE]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[J0894]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TATTS]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[H0894]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TATXE]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[L0894]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOALL]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TATXS]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[K0894]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[RALGOBAS]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[TA]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TA900]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[PERIO]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[TA900]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo><AlgorCalculaCosto><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AlgorCalculaCosto><Estatus><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estatus><FechaEfectiva><![CDATA[01/01/90]]]]]]>><![CDATA[><![CDATA[</FechaEfectiva><Importe><![CDATA[      0.00]]]]]]>><![CDATA[><![CDATA[</Importe><MinImporteProrateo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</MinImporteProrateo><Peridiocidad><![CDATA[CR]]]]]]>><![CDATA[><![CDATA[</Peridiocidad><PorAdelantado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</PorAdelantado><Producto><![CDATA[TRAN1]]]]]]>><![CDATA[><![CDATA[</Producto><TablaPeriodo><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaPeriodo><TablaTarifa><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TablaTarifa><Prorateo><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</Prorateo></ProductosTO><RegulPorTarifa><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</RegulPorTarifa><TasacionPorVolumen><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</TasacionPorVolumen><TipoContrato><![CDATA[F]]]]]]>><![CDATA[><![CDATA[</TipoContrato><TipoPlan><![CDATA[US]]]]]]>><![CDATA[><![CDATA[</TipoPlan><TipoServicio><![CDATA[V]]]]]]>><![CDATA[><![CDATA[</TipoServicio><UnidadTasasion><![CDATA[60]]]]]]>><![CDATA[><![CDATA[</UnidadTasasion><Errores><Codigo><![CDATA[PG012]]]]]]>><![CDATA[><![CDATA[</Codigo><Mensaje><![CDATA[   NO MORE ENTRIES IN GROUP]]]]]]>><![CDATA[><![CDATA[</Mensaje></Errores></RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
+      </ser:ejecutaServicioResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="RETC2" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:ejecutaServicioResponse>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?><RespuestaOK><ESTATUS IDPETICION="d6e16320-ac3f-4bf8-afd1-0fca8c72072e">EXITO</ESTATUS><MENSAJE>PG010 OPERACION EXITOSA</MENSAJE><AnalistaCredito><![CDATA[XO1997]]]]]]>><![CDATA[><![CDATA[</AnalistaCredito><ApartadoPostal><![CDATA[]]]]]]>><![CDATA[><![CDATA[</ApartadoPostal><AperturaCredito><![CDATA[]]]]]]>><![CDATA[><![CDATA[</AperturaCredito><Banco><![CDATA[BANAMX TC]]]]]]>><![CDATA[><![CDATA[</Banco><BancoDomicializado><![CDATA[]]]]]]>><![CDATA[><![CDATA[</BancoDomicializado><BancoPropietario><![CDATA[]]]]]]>><![CDATA[><![CDATA[</BancoPropietario><Calle><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Calle><CancelacionPagosAtras><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</CancelacionPagosAtras><CancelacionSaldo><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</CancelacionSaldo><ClaseCredito><![CDATA[MB]]]]]]>><![CDATA[><![CDATA[</ClaseCredito><ClaveExento><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</ClaveExento><Colonia><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Colonia><ContactoA><![CDATA[]]]]]]>><![CDATA[><![CDATA[</ContactoA><ContactoB><![CDATA[]]]]]]>><![CDATA[><![CDATA[</ContactoB><Cp><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Cp><CuentaConsolidada><![CDATA[]]]]]]>><![CDATA[><![CDATA[</CuentaConsolidada><Delegacion><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Delegacion><EstAcctBal><![CDATA[46.65]]]]]]>><![CDATA[><![CDATA[</EstAcctBal><Estado><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Estado><EstadoCortesia><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</EstadoCortesia><EstatusCuenta><![CDATA[AC]]]]]]>><![CDATA[><![CDATA[</EstatusCuenta><ExentoImpuestoEstado><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</ExentoImpuestoEstado><ExentoImpuestoFederal><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</ExentoImpuestoFederal><ExentoImpuestoLocal><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</ExentoImpuestoLocal><FecClaseCred><![CDATA[10/09/1]]]]]]>><![CDATA[><![CDATA[</FecClaseCred><FormaPago><![CDATA[TC]]]]]]>><![CDATA[><![CDATA[</FormaPago><Interior><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Interior><Limite><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Limite><LimiteCredito><![CDATA[700]]]]]]>><![CDATA[><![CDATA[</LimiteCredito><LimiteUso><![CDATA[700.00]]]]]]>><![CDATA[><![CDATA[</LimiteUso><Nombre><![CDATA[HERNANDEZ BOBADILLA ARELY]]]]]]>><![CDATA[><![CDATA[</Nombre><Numero><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Numero><NumeroCredito><![CDATA[]]]]]]>><![CDATA[><![CDATA[</NumeroCredito><NumeroCuenta><![CDATA[5290010520901338]]]]]]>><![CDATA[><![CDATA[</NumeroCuenta><NumeroExencionEstado><![CDATA[]]]]]]>><![CDATA[><![CDATA[</NumeroExencionEstado><NumeroExencionFederal><![CDATA[]]]]]]>><![CDATA[><![CDATA[</NumeroExencionFederal><OrdenDeCompra><![CDATA[]]]]]]>><![CDATA[><![CDATA[</OrdenDeCompra><Pais><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Pais><RelacionDepartamental><![CDATA[NONCO]]]]]]>><![CDATA[><![CDATA[</RelacionDepartamental><ReservaNumero><![CDATA[N]]]]]]>><![CDATA[><![CDATA[</ReservaNumero><ResponsabilidadFactura><![CDATA[S]]]]]]>><![CDATA[><![CDATA[</ResponsabilidadFactura><ResponsabilidadNegociacion><![CDATA[R09]]]]]]>><![CDATA[><![CDATA[</ResponsabilidadNegociacion><ResponsabilidadPago><![CDATA[R09]]]]]]>><![CDATA[><![CDATA[</ResponsabilidadPago><Rfc><![CDATA[HEBA910327000]]]]]]>><![CDATA[><![CDATA[</Rfc><TcAnterior><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TcAnterior><Tcc><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Tcc><Telefono><![CDATA[]]]]]]>><![CDATA[><![CDATA[</Telefono><TipoConsolidada><![CDATA[NC]]]]]]>><![CDATA[><![CDATA[</TipoConsolidada><TipoCuenta><![CDATA[IN]]]]]]>><![CDATA[><![CDATA[</TipoCuenta><VenceImpuestoEstado><![CDATA[]]]]]]>><![CDATA[><![CDATA[</VenceImpuestoEstado><VenceImpuestoFederal><![CDATA[]]]]]]>><![CDATA[><![CDATA[</VenceImpuestoFederal><VencimientoCredito><![CDATA[]]]]]]>><![CDATA[><![CDATA[</VencimientoCredito><TipoAnterior><![CDATA[]]]]]]>><![CDATA[><![CDATA[</TipoAnterior><Errores></Errores></RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
+      </ser:ejecutaServicioResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>

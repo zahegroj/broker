@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesReglas" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesReglasBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/gestiontramites/wmb/reglas}GestionTramitesReglasBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Dropbox/wmb/wsdl/GestionTramitesReglas.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesReglas.wsdl"><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesReglas.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesReglas" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/reglas" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="GestionTramitesReglas.xsd" namespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema"/>
+      <xsd:import schemaLocation="GestionTramitesComun.xsd" namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema"/>
+    </xsd:schema>
+  </types>
+  <message name="determinarPrevalidacionMsg">
+    <part name="parameters" element="types:determinarPrevalidacionRequest"/>
+  </message>
+  <message name="determinarPrevalidacionMsgResponse">
+    <part name="parameters" element="types:determinarPrevalidacionResponse"/>
+  </message>
+  <message name="determinarAdeudoMsg">
+    <part name="parameters" element="types:determinarAdeudoRequest"/>
+  </message>
+  <message name="determinarAdeudoMsgResponse">
+    <part name="parameters" element="types:determinarAdeudoResponse"/>
+  </message>
+  <message name="determinarRegionPerfilMsg">
+    <part name="parameters" element="types:determinarRegionPerfilRequest"/>
+  </message>
+  <message name="determinarRegionPerfilMsgResponse">
+    <part name="parameters" element="types:determinarRegionPerfilResponse"/>
+  </message>
+  <message name="reasignarTramiteMsg">
+    <part name="parameters" element="types:reasignarTramiteRequest"/>
+  </message>
+  <message name="reasignarTramiteMsgResponse">
+    <part name="parameters" element="types:reasignarTramiteResponse"/>
+  </message>
+  <message name="gestionTramitesWMBExceptionMsg">
+    <part name="fault" element="comun:gestionTramitesWMBException"/>
+  </message>
+  <portType name="GestionTramitesReglasPort">
+    <operation name="determinarPrevalidacion">
+      <input message="this:determinarPrevalidacionMsg"/>
+      <output message="this:determinarPrevalidacionMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="determinarAdeudo">
+      <input message="this:determinarAdeudoMsg"/>
+      <output message="this:determinarAdeudoMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="determinarRegionPerfil">
+      <input message="this:determinarRegionPerfilMsg"/>
+      <output message="this:determinarRegionPerfilMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="reasignarTramite">
+      <input message="this:reasignarTramiteMsg"/>
+      <output message="this:reasignarTramiteMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+  </portType>
+  <binding name="GestionTramitesReglasBinding" type="this:GestionTramitesReglasPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="determinarPrevalidacion">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarPrevalidacion"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="determinarAdeudo">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarAdeudo"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="determinarRegionPerfil">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarRegionPerfil"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+    <operation name="reasignarTramite">
+      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/reglas/reasignarTramite"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="GestionTramitesReglasService">
+    <port binding="this:GestionTramitesReglasBinding" name="GestionTramitesReglasHTTPSOAPPort">
+      <soap:address location="http://localhost:7800/gestiontramites/wmb/ReglasService"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesReglas.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+  <xsd:element name="determinarPrevalidacionRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:DeterminarPrevalidacionRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="determinarPrevalidacionResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:DeterminarPrevalidacionResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="determinarAdeudoRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:DeterminarAdeudoRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="determinarAdeudoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:DeterminarAdeudoResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="determinarRegionPerfilRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:DeterminarRegionPerfilRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="determinarRegionPerfilResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:DeterminarRegionPerfilResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="reasignarTramiteRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ReasignarTramiteRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="reasignarTramiteResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ReasignarTramiteResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:complexType name="DeterminarPrevalidacionRequestType">
+    <xsd:sequence>
+      <xsd:element name="tramite" type="this:Tramite"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeterminarPrevalidacionResponseType">
+    <xsd:sequence>
+      <xsd:element name="requierePrevalidacion" type="xsd:boolean"/>
+      <xsd:element name="comentario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeterminarAdeudoRequestType">
+    <xsd:sequence>
+      <xsd:element form="qualified" maxOccurs="1" minOccurs="0" name="DecisionID" type="xsd:string"/>
+      <xsd:element name="determinarAdeudo" type="this:DeterminarAdeudo"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeterminarAdeudoResponseType">
+    <xsd:sequence>
+      <xsd:element form="qualified" name="DecisionID" type="xsd:string"/>
+      <xsd:element name="determinarAdeudo" type="this:DeterminarAdeudo"/>
+      <xsd:element name="requirePagar" type="xsd:boolean"/>
+      <xsd:element name="requiereAutorizacion" type="xsd:boolean"/>
+      <xsd:element name="comentario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeterminarRegionPerfilRequestType">
+    <xsd:sequence>
+      <xsd:element name="asesorCAC" type="this:AsesorCAC"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeterminarRegionPerfilResponseType">
+    <xsd:sequence>
+      <xsd:element name="asesorCAC" type="this:AsesorCAC"/>
+      <xsd:element name="comentario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReasignarTramiteRequestType">
+    <xsd:sequence>
+      <xsd:element name="tramite" type="this:Tramite"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReasignarTramiteResponseType">
+    <xsd:sequence>
+      <xsd:element name="puedeReasignarTramite" type="xsd:boolean"/>
+      <xsd:element name="comentario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--Tipos para DeterminarRegionPerfil-->
+  <xsd:complexType name="AsesorCAC">
+    <xsd:sequence>
+      <xsd:element name="perfil" type="this:Perfil"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Perfil">
+    <xsd:sequence>
+      <xsd:element name="perfilPac" type="xsd:string" minOccurs="1"/>
+      <xsd:element name="habilitado" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="regiones" type="this:ArrayOfRegiones" minOccurs="0"/>
+      <xsd:element name="nivelAcceso" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="flujoNegocio" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfRegiones">
+    <xsd:sequence>
+      <xsd:element name="region" type="xsd:string" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--Tipos para DeterminarRegionPerfil-->
+  <!--Tipos para Reasignar Tramite-->
+  <xsd:complexType name="Tramite">
+    <xsd:sequence>
+      <xsd:element name="tipoTramite" type="xsd:string" minOccurs="1"/>
+      <xsd:element name="estado" type="xsd:string" minOccurs="1"/>
+      <xsd:element name="cac" type="this:CAC" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="aclaracionSaldos" type="this:AclaracionSaldos" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="asesor" type="this:AsesorCAC" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CAC">
+    <xsd:sequence>
+      <xsd:element name="identificador" type="xsd:string" minOccurs="1"/>
+      <xsd:element name="region" type="xsd:string" minOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AclaracionSaldos">
+    <xsd:sequence>
+      <xsd:element name="tipoTramite" type="xsd:string"/>
+      <xsd:element name="estado" type="xsd:string"/>
+      <xsd:element name="escenario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--Tipos para Reasignar Tramite-->
+  <!--Tipos para Determinar Adeudo-->
+  <xsd:complexType name="DeterminarAdeudo">
+    <xsd:sequence>
+      <xsd:element name="tramite" type="this:Tramite"/>
+      <xsd:element name="cobranza" type="this:Cobranza"/>
+      <xsd:element name="cuenta" type="this:Cuenta"/>
+      <xsd:element name="factura" type="this:Factura"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Cobranza">
+    <xsd:sequence>
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="accion" type="xsd:string"/>
+      <xsd:element name="motivo" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Cuenta">
+    <xsd:sequence>
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="telefono" type="this:Telefono"/>
+      <xsd:element name="limiteCredito" type="xsd:double"/>
+      <xsd:element name="tipoSaldoExistente" type="xsd:string"/>
+      <xsd:element name="porcentajeCredito" type="xsd:double"/>
+      <xsd:element name="cargoPendienteFacturar" type="xsd:double"/>
+      <xsd:element name="saldoMes" type="xsd:double"/>
+      <xsd:element name="saldoActual" type="xsd:double"/>
+      <xsd:element name="saldoEstimado" type="xsd:double"/>
+      <xsd:element name="saldoPendienteFacturar" type="xsd:double"/>
+      <xsd:element name="saldoFacturadoNoVencido" type="xsd:double"/>
+      <xsd:element name="saldoFacturadoVencido" type="xsd:double"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Factura">
+    <xsd:sequence>
+      <xsd:element name="montoMinimoPagar" type="xsd:double"/>
+      <xsd:element name="fechaLimitePago" type="xsd:date"/>
+      <xsd:element name="variableFechaLimitePago" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Telefono">
+    <xsd:sequence>
+      <xsd:element name="numero" type="xsd:string"/>
+      <xsd:element name="region" type="xsd:string"/>
+      <xsd:element name="estatus" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--Tipos para Determinar Adeudo-->
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesComun.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
+  <xsd:element name="gestionTramitesWMBException" type="this:GestionTramitesWMBException"/>
+  <xsd:complexType name="GestionTramitesWMBException">
+    <xsd:sequence>
+      <xsd:element name="servicio" type="xsd:string"/>
+      <xsd:element name="operacion" type="xsd:string"/>
+      <!--Para m2k FUNCTION_ACTION-->
+      <xsd:element name="error" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<!--catalogo de servicios-->
+<!--1. M2K-->
+<!--2. SIANTEL-->
+<!--3. SMS-->
+<!--4. IMEI-->
+<!--5. RN Determinar Adeudo-->
+<!--6. RN Determinar Region Perfil-->
+<!--7. RN Determinar Prevalidacion-->
+<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarAdeudo" name="determinarAdeudo" bindingOperationName="determinarAdeudo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:determinarAdeudoRequest>
+         <sch:request>
+            <!--Optional:-->
+            <sch:DecisionID>?</sch:DecisionID>
+            <sch:determinarAdeudo>
+               <sch:tramite>
+                  <sch:tipoTramite>?</sch:tipoTramite>
+                  <sch:estado>?</sch:estado>
+                  <!--Optional:-->
+                  <sch:cac>
+                     <sch:identificador>?</sch:identificador>
+                     <sch:region>?</sch:region>
+                  </sch:cac>
+                  <!--Optional:-->
+                  <sch:aclaracionSaldos>
+                     <sch:tipoTramite>?</sch:tipoTramite>
+                     <sch:estado>?</sch:estado>
+                     <sch:escenario>?</sch:escenario>
+                  </sch:aclaracionSaldos>
+                  <!--Optional:-->
+                  <sch:asesor>
+                     <sch:perfil>
+                        <sch:perfilPac>?</sch:perfilPac>
+                        <!--Optional:-->
+                        <sch:habilitado>false</sch:habilitado>
+                        <!--Optional:-->
+                        <sch:regiones>
+                           <!--1 or more repetitions:-->
+                           <sch:region>?</sch:region>
+                        </sch:regiones>
+                        <!--Optional:-->
+                        <sch:nivelAcceso>?</sch:nivelAcceso>
+                        <!--Optional:-->
+                        <sch:flujoNegocio>?</sch:flujoNegocio>
+                     </sch:perfil>
+                  </sch:asesor>
+               </sch:tramite>
+               <sch:cobranza>
+                  <sch:estatus>?</sch:estatus>
+                  <sch:accion>?</sch:accion>
+                  <sch:motivo>?</sch:motivo>
+               </sch:cobranza>
+               <sch:cuenta>
+                  <sch:estatus>?</sch:estatus>
+                  <sch:telefono>
+                     <sch:numero>?</sch:numero>
+                     <sch:region>?</sch:region>
+                     <sch:estatus>?</sch:estatus>
+                  </sch:telefono>
+                  <sch:limiteCredito>1.0</sch:limiteCredito>
+                  <sch:tipoSaldoExistente>?</sch:tipoSaldoExistente>
+                  <sch:porcentajeCredito>1.0</sch:porcentajeCredito>
+                  <sch:cargoPendienteFacturar>1.0</sch:cargoPendienteFacturar>
+                  <sch:saldoMes>1.0</sch:saldoMes>
+                  <sch:saldoActual>1.0</sch:saldoActual>
+                  <sch:saldoEstimado>1.0</sch:saldoEstimado>
+                  <sch:saldoPendienteFacturar>1.0</sch:saldoPendienteFacturar>
+                  <sch:saldoFacturadoNoVencido>1.0</sch:saldoFacturadoNoVencido>
+                  <sch:saldoFacturadoVencido>1.0</sch:saldoFacturadoVencido>
+               </sch:cuenta>
+               <sch:factura>
+                  <sch:montoMinimoPagar>1.0</sch:montoMinimoPagar>
+                  <sch:fechaLimitePago>2013-05-12</sch:fechaLimitePago>
+                  <sch:variableFechaLimitePago>?</sch:variableFechaLimitePago>
+               </sch:factura>
+            </sch:determinarAdeudo>
+         </sch:request>
+      </sch:determinarAdeudoRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarAdeudo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarPrevalidacion" name="determinarPrevalidacion" bindingOperationName="determinarPrevalidacion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:determinarPrevalidacionRequest>
+         <sch:request>
+            <sch:tramite>
+               <sch:tipoTramite>?</sch:tipoTramite>
+               <sch:estado>?</sch:estado>
+               <!--Optional:-->
+               <sch:cac>
+                  <sch:identificador>?</sch:identificador>
+                  <sch:region>?</sch:region>
+               </sch:cac>
+               <!--Optional:-->
+               <sch:aclaracionSaldos>
+                  <sch:tipoTramite>?</sch:tipoTramite>
+                  <sch:estado>?</sch:estado>
+                  <sch:escenario>?</sch:escenario>
+               </sch:aclaracionSaldos>
+               <!--Optional:-->
+               <sch:asesor>
+                  <sch:perfil>
+                     <sch:perfilPac>?</sch:perfilPac>
+                     <!--Optional:-->
+                     <sch:habilitado>false</sch:habilitado>
+                     <!--Optional:-->
+                     <sch:regiones>
+                        <!--1 or more repetitions:-->
+                        <sch:region>?</sch:region>
+                     </sch:regiones>
+                     <!--Optional:-->
+                     <sch:nivelAcceso>?</sch:nivelAcceso>
+                     <!--Optional:-->
+                     <sch:flujoNegocio>?</sch:flujoNegocio>
+                  </sch:perfil>
+               </sch:asesor>
+            </sch:tramite>
+         </sch:request>
+      </sch:determinarPrevalidacionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarPrevalidacion"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarRegionPerfil" name="determinarRegionPerfil" bindingOperationName="determinarRegionPerfil" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:determinarRegionPerfilRequest>
+         <sch:request>
+            <sch:asesorCAC>
+               <sch:perfil>
+                  <sch:perfilPac>?</sch:perfilPac>
+                  <!--Optional:-->
+                  <sch:habilitado>false</sch:habilitado>
+                  <!--Optional:-->
+                  <sch:regiones>
+                     <!--1 or more repetitions:-->
+                     <sch:region>?</sch:region>
+                  </sch:regiones>
+                  <!--Optional:-->
+                  <sch:nivelAcceso>?</sch:nivelAcceso>
+                  <!--Optional:-->
+                  <sch:flujoNegocio>?</sch:flujoNegocio>
+               </sch:perfil>
+            </sch:asesorCAC>
+         </sch:request>
+      </sch:determinarRegionPerfilRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarRegionPerfil"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/reasignarTramite" name="reasignarTramite" bindingOperationName="reasignarTramite" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:reasignarTramiteRequest>
+         <sch:request>
+            <sch:tramite>
+               <sch:tipoTramite>?</sch:tipoTramite>
+               <sch:estado>?</sch:estado>
+               <!--Optional:-->
+               <sch:cac>
+                  <sch:identificador>?</sch:identificador>
+                  <sch:region>?</sch:region>
+               </sch:cac>
+               <!--Optional:-->
+               <sch:aclaracionSaldos>
+                  <sch:tipoTramite>?</sch:tipoTramite>
+                  <sch:estado>?</sch:estado>
+                  <sch:escenario>?</sch:escenario>
+               </sch:aclaracionSaldos>
+               <!--Optional:-->
+               <sch:asesor>
+                  <sch:perfil>
+                     <sch:perfilPac>?</sch:perfilPac>
+                     <!--Optional:-->
+                     <sch:habilitado>false</sch:habilitado>
+                     <!--Optional:-->
+                     <sch:regiones>
+                        <!--1 or more repetitions:-->
+                        <sch:region>?</sch:region>
+                     </sch:regiones>
+                     <!--Optional:-->
+                     <sch:nivelAcceso>?</sch:nivelAcceso>
+                     <!--Optional:-->
+                     <sch:flujoNegocio>?</sch:flujoNegocio>
+                  </sch:perfil>
+               </sch:asesor>
+            </sch:tramite>
+         </sch:request>
+      </sch:reasignarTramiteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/reasignarTramite"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

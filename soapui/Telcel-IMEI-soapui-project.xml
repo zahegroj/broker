@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Telcel_IMEI" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ImeisACWSSoapBinding" type="wsdl" bindingName="{http://ws.imeisac.dsaf.gsa.telcel.com}ImeisACWSSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://servportabilidad.telcel.com/IMEISAC/services/ImeisACWS?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://servportabilidad.telcel.com/IMEISAC/services/ImeisACWS?wsdl"><con:part><con:url>http://servportabilidad.telcel.com/IMEISAC/services/ImeisACWS?wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://ws.imeisac.dsaf.gsa.telcel.com" xmlns:impl="http://ws.imeisac.dsaf.gsa.telcel.com" xmlns:intf="http://ws.imeisac.dsaf.gsa.telcel.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <schema targetNamespace="http://ws.imeisac.dsaf.gsa.telcel.com" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="ConsultaImeiACResponse">
+        <complexType>
+          <sequence>
+            <element name="ConsultaImeiACReturn" nillable="true" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ConsultaImeiAC">
+        <complexType>
+          <sequence>
+            <element name="consImei" nillable="true" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultaImeiACResponse">
+    <wsdl:part element="impl:ConsultaImeiACResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ConsultaImeiACRequest">
+    <wsdl:part element="impl:ConsultaImeiAC" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ImeisACWS">
+    <wsdl:operation name="ConsultaImeiAC">
+      <wsdl:input message="impl:ConsultaImeiACRequest" name="ConsultaImeiACRequest"></wsdl:input>
+      <wsdl:output message="impl:ConsultaImeiACResponse" name="ConsultaImeiACResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ImeisACWSSoapBinding" type="impl:ImeisACWS">
+    <wsaw:UsingAddressing wsdl:required="false"/>
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ConsultaImeiAC">
+      <wsdlsoap:operation soapAction="ConsultaImeiAC"/>
+      <wsdl:input name="ConsultaImeiACRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ConsultaImeiACResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImeisACWSService">
+    <wsdl:port binding="impl:ImeisACWSSoapBinding" name="ImeisACWS">
+      <wsdlsoap:address location="http://servportabilidad.telcel.com:80/IMEISAC/services/ImeisACWS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://servportabilidad.telcel.com:80/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://archlinux:8081/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://localhost:9081/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://10.191.80.36:9080/IMEISAC/services/ImeisACWS</con:endpoint></con:endpoints><con:operation isOneWay="false" action="ConsultaImeiAC" name="ConsultaImeiAC" bindingOperationName="ConsultaImeiAC" type="Request-Response" outputName="ConsultaImeiACResponse" inputName="ConsultaImeiACRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/IMEISAC/services/ImeisACWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.imeisac.dsaf.gsa.telcel.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ws:ConsultaImeiAC>
+         <consImei>|1|R09|013049009076409|</consImei>
+      </ws:ConsultaImeiAC>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ConsultaImeiAC"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
