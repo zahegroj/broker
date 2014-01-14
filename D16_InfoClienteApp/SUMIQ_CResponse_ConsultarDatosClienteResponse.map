@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/m2k_sumiq_c.xsd"/>
+    <output path="/infoCliente/GestionTramitesInfoCliente.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="SUMIQ_CResponse_ConsultarDatosClienteResponse">
+        <input namespace="http://www.telcel.com.mxs/m2k/sumiq/c" path="mb:msg(RespuestaOK,assembly,XMLNSC,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" path="mb:msg(consultarDatosClienteResponse,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <join>
+            <input path="RespuestaOK/Errores/Codigo" var="Codigo"/>
+            <input path="RespuestaOK/Errores/Mensaje" var="Mensaje"/>
+            <output path="consultarDatosClienteResponse/response/mensajesInformativos/errorInformativo"/>
+            <test lang="XPath">$Codigo-index = $Mensaje-index</test>
+            <move>
+                <input path="$Codigo/."/>
+                <output path="codigo"/>
+            </move>
+            <move>
+                <input path="$Mensaje/."/>
+                <output path="mensaje"/>
+            </move>
+        </join>
+        <move>
+            <input path="RespuestaOK/NombreCliente"/>
+            <output path="consultarDatosClienteResponse/response/nombreCliente"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/Cuenta"/>
+            <output path="consultarDatosClienteResponse/response/cuenta"/>
+        </move>
+        <move automap="true">
+            <input path="RespuestaOK/EstatusCobranza"/>
+            <output path="consultarDatosClienteResponse/response/estatusCobranza"/>
+        </move>
+        <move automap="true">
+            <input path="RespuestaOK/EstatusCuenta"/>
+            <output path="consultarDatosClienteResponse/response/estatusCuenta"/>
+        </move>
+        <move automap="true">
+            <input path="RespuestaOK/SaldoActual"/>
+            <output path="consultarDatosClienteResponse/response/saldoActual"/>
+        </move>
+        <move automap="true">
+            <input path="RespuestaOK/SaldoEstimado"/>
+            <output path="consultarDatosClienteResponse/response/saldoEstimado"/>
+        </move>
+        <move automap="true">
+            <input path="RespuestaOK/SaldoMes"/>
+            <output path="consultarDatosClienteResponse/response/saldoMes"/>
+        </move>
+        <move automap="true">
+            <input path="RespuestaOK/UltimaFechaFactura1"/>
+            <output path="consultarDatosClienteResponse/response/ultimaFechaFactura1"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

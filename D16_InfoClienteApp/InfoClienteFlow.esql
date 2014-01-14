@@ -1,5 +1,3 @@
-
-
 CREATE FILTER MODULE PerfilTelefonoGrupoCorpo_Filter
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
@@ -8,7 +6,6 @@ CREATE FILTER MODULE PerfilTelefonoGrupoCorpo_Filter
 		END IF;
 		RETURN FALSE;
 	END;
-
 END MODULE;
 
 CREATE FILTER MODULE PerfilTelefonoPlataforma_Filter
@@ -19,5 +16,61 @@ CREATE FILTER MODULE PerfilTelefonoPlataforma_Filter
 		END IF;
 		RETURN FALSE;
 	END;
+END MODULE;
 
+CREATE FILTER MODULE RespuestaOK_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF FIELDTYPE (Root.XMLNSC.RespuestaOK) IS NULL THEN
+			RETURN FALSE;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE AsignarFault
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Server Error';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.ns:gestionTramitesWMBException = InputRoot.XMLNSC.ns:gestionTramitesWMBException;
+	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE AsignarFaultNoTelcel
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:servicio = 'GestionTramitesReglasService';
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:operacion = InputRoot.LocalEnvironment.Destination.SOAP.Request.Operation;
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:errores.error.tipo = 'NEGOCIO';
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:errores.error.codigo = '';
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:errores.error.descripcion = 'La línea no es Telcel';
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:errores.error.servicioOrigen = '';
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE AsignarFaultNoPrepago
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:servicio = 'GestionTramitesReglasService';
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:operacion = 'X';
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:errores.error.tipo = 'NEGOCIO';
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:errores.error.codigo = '';
+		SET OutputRoot.XMLNCS.ns:gestionTramitesWMBException.ns:errores.error.descripcion = 'La línea no es Pospago';
+		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.ns:errores.error.servicioOrigen = '';
+		
+		RETURN TRUE;
+	END;
 END MODULE;

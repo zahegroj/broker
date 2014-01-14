@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
 
+	<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd" />
+	
 	<xsd:element ibmSchExtn:docRoot="true" name="consultarDatosClienteRequest">
 		<xsd:complexType>
 			<xsd:sequence>
@@ -43,7 +45,15 @@
 
 	<xsd:complexType name="ConsultarDatosClienteResponseType">
 		<xsd:sequence>
-			<xsd:element name="param" type="xsd:string"/>
+			<xsd:element name="mensajesInformativos" type="comun:ArrayOfErrorInformativo" minOccurs="0" />
+			<xsd:element name="nombreCliente" type="xsd:string"/>
+			<xsd:element name="cuenta" type="xsd:string"/>
+			<xsd:element name="estatusCobranza" type="xsd:string"/>
+			<xsd:element name="estatusCuenta" type="xsd:string"/>
+			<xsd:element name="saldoActual" type="xsd:string"/>
+			<xsd:element name="saldoEstimado" type="xsd:string"/>
+			<xsd:element name="saldoMes" type="xsd:string"/>
+			<xsd:element name="ultimaFechaFactura1" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
 

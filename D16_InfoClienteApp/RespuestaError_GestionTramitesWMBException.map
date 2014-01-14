@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/m2k.xsd"/>
+    <output path="/comun/GestionTramitesComun.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="RespuestaError_GestionTramitesWMBException">
+        <input namespace="http://www.telcel.com.mx/m2k" path="mb:msg(RespuestaError,assembly,XMLNSC,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" path="mb:msg(gestionTramitesWMBException,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <condition>
+            <if>
+                <input path="RespuestaError/PROGRAMA" var="PROGRAMA"/>
+                <output path="gestionTramitesWMBException/errores/error/servicioOrigen"/>
+                <test lang="XPath">$PROGRAMA != ''</test>
+                <move>
+                    <input path="$PROGRAMA/." var="PROGRAMA"/>
+                    <output path="."/>
+                </move>
+            </if>
+            <else>
+                <output path="gestionTramitesWMBException/errores/error/servicioOrigen"/>
+                <assign value="M2K-SUMIQ-C">
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
+        <assign value="SISTEMA">
+            <output path="gestionTramitesWMBException/errores/error/tipo"/>
+        </assign>
+        <assign value="consultarInfoCliente">
+            <output path="gestionTramitesWMBException/operacion"/>
+        </assign>
+        <assign value="Gestion Tramites Info. Cliente">
+            <output path="gestionTramitesWMBException/servicio"/>
+        </assign>
+        <assign value="00000">
+            <output path="gestionTramitesWMBException/errores/error/codigo"/>
+        </assign>
+        <move>
+            <input path="RespuestaError/MENSAJE"/>
+            <output path="gestionTramitesWMBException/errores/error/descripcion"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

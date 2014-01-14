@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.telcel.com.mx/m2k" xmlns="http://www.telcel.com.mx/m2k">
+	<xsd:element name="RespuestaError" type="RespuestaErrorType"/>
+	
+	<xsd:complexType name="RespuestaErrorType">
+		<xsd:sequence>
+			<xsd:element name="ESTATUS" type="EstatusError"/>
+			<xsd:element name="MENSAJE" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="CAMPO-ERRONEO" type="xsd:string"/>
+			<xsd:element name="PROGRAMA" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="EstatusError">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="IDPETICION" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ErroresInfoType">
+		<xsd:sequence>
+			<xsd:group ref="erroresInfoGroup" maxOccurs="unbounded"></xsd:group>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:group name="erroresInfoGroup">
+		<xsd:sequence>
+			<xsd:element name="Codigo" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="Mensaje" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:group>
+	
+	<xsd:complexType name="ResponseBase">
+		<xsd:sequence>
+			<xsd:element name="ESTATUS" type="EstatusError"/>
+			<xsd:element name="MENSAJE" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RequestBase">
+		<xsd:sequence>
+			<xsd:element name="user" type="xsd:string"/>
+			<xsd:element name="region" type="xsd:integer"/>
+			<xsd:element name="function" type="xsd:string"/>
+			<xsd:element name="action" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ElementoBase">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="longitud" type="xsd:integer" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="TelefonoType">
+		<xsd:complexContent>
+			<xsd:extension base="ElementoBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+				
+	<xsd:complexType name="CuentaType">
+		<xsd:complexContent>
+			<xsd:extension base="ElementoBase"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>
