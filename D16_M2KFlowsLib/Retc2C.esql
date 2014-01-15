@@ -1,9 +1,9 @@
-CREATE COMPUTE MODULE SumiqC_CreateStringRequest
+CREATE COMPUTE MODULE Retc2C_CreateStringRequest
 	 CREATE FUNCTION Main() RETURNS BOOLEAN
 	 BEGIN
 	 	DECLARE ns NAMESPACE 'http://servicios.web.m2k.sds.telcel.com';
 		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';		
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/sumiq/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/retc2/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE rootNode REFERENCE TO InputRoot.XMLNSC;
 		

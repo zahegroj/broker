@@ -67,4 +67,27 @@
 			<xsd:extension base="ElementoBase"/>
 		</xsd:complexContent>
 	</xsd:complexType>
+	
+	<xsd:complexType name="FechaType">
+		<xsd:simpleContent>
+			<xsd:extension base="elementoFechaBase"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="elementoFechaBase">
+		<xsd:simpleContent>
+			<xsd:extension base="fechaFormato">
+				<xsd:attribute name="longitud" type="xsd:integer" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<xsd:simpleType name="fechaFormato">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value=""/>
+			<xsd:pattern value="((0[1-9])|([1-2][0-9])|(3[0-1]))/((01)|(03)|(05)|(07)|(08)|(10)|(12))/[0-9]{2}"/>
+			<xsd:pattern value="((0[1-9])|([1-2][0-9])|(30))/((04)|(06)|(09)|(11))/[0-9]{2}"/>
+			<xsd:pattern value="((0[1-9])|([1-2][0-9]))/((02))/[0-9]{2}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
 </xsd:schema>

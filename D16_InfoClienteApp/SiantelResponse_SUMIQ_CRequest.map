@@ -8,7 +8,7 @@
             <cast path="LocalEnvironment/Variables/any" qualifier="telefono" var="any"/>
             <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any1"/>
         </input>
-        <output namespace="http://www.telcel.com.mxs/m2k/sumiq/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
+        <output namespace="http://www.telcel.com.mx/m2k/sumiq/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
         <output path="$out1/mb:msg(telefono,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
         <move>
             <input path="Properties"/>

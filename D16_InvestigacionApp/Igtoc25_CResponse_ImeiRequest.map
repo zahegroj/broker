@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/m2k_igtoc25_c.xsd"/>
+    <output path="/imei.xsd" var="out"/>
+    <output path="/variables.xsd" var="out1"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="Igtoc25_CResponse_ImeiRequest">
+        <input namespace="http://www.telcel.com.mx/m2k/igtoc25/c" path="mb:msg(RespuestaOK,assembly,XMLNSC,LocalEnvironment,Properties)">
+            <cast path="LocalEnvironment/Variables/any" qualifier="region" var="any"/>
+        </input>
+        <output namespace="http://www.telcel.com.mx/imei" path="$out/mb:msg(request,assembly,XMLNSC,LocalEnvironment,Properties)" var="Mensajeensamblado"/>
+        <output path="$out1/mb:msg(region,assembly,XMLNSC,Properties)" var="Mensajeensamblado1"/>
+        <move>
+            <input path="Properties"/>
+            <output path="$Mensajeensamblado/Properties"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/NUM-IMEI"/>
+            <output path="$Mensajeensamblado/request/imei"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment"/>
+            <output path="$Mensajeensamblado/LocalEnvironment"/>
+        </move>
+        <move>
+            <input path="Properties"/>
+            <output path="$Mensajeensamblado1/Properties"/>
+        </move>
+        <assign value="1">
+            <output path="$Mensajeensamblado/request/codigo"/>
+        </assign>
+        <function ref="fn:concat">
+            <input path="LocalEnvironment/Variables/region" var="region"/>
+            <output path="$Mensajeensamblado/request/region"/>
+            <param name="string1" value="'R0'"/>
+            <param name="string2" value="$region"/>
+        </function>
+    </mappingDeclaration>
+</mappingRoot>

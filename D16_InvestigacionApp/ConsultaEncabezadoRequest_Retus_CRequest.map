@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/investigacion/GestionTramitesInvestigacion.xsd"/>
+    <output path="/m2k_retus_c.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ConsultaEncabezadoRequest_Retus_CRequest">
+        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" path="mb:msg(consultarEncabezadoRequest,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/m2k/retus/c" path="mb:msg(Request,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="consultarEncabezadoRequest/request/usuarioM2K"/>
+            <output path="Request/user"/>
+        </move>
+        <move>
+            <input path="consultarEncabezadoRequest/request/telefono"/>
+            <output path="Request/inputParameters/servicio/p01telefono/text()"/>
+        </move>
+        <assign value="10">
+            <output path="Request/inputParameters/servicio/p01telefono/@longitud"/>
+        </assign>
+        <assign value="C">
+            <output path="Request/action"/>
+        </assign>
+        <assign value="I*0F">
+            <output path="Request/function"/>
+        </assign>
+        <convert defaultValue="0">
+            <input path="consultarEncabezadoRequest/request/region"/>
+            <output path="Request/region"/>
+        </convert>
+    </mappingDeclaration>
+</mappingRoot>

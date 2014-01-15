@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/investigacion/GestionTramitesInvestigacion.xsd"/>
+    <output path="/m2k_igtoc25_c.xsd" var="out"/>
+    <output path="/variables.xsd" var="out1"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ConsultarEncabezadoRequest_Igtoc25_CRequest">
+        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" path="mb:msg(consultarEncabezadoRequest,assembly,,LocalEnvironment,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/m2k/igtoc25/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="Mensajeensamblado">
+            <cast path="$Mensajeensamblado/LocalEnvironment/Variables/any" qualifier="region" var="any"/>
+        </output>
+        <move>
+            <input path="Properties"/>
+            <output path="$Mensajeensamblado/Properties"/>
+        </move>
+        <move>
+            <input path="consultarEncabezadoRequest/request/telefono"/>
+            <output path="$Mensajeensamblado/Request/inputParameters/servicio/p02telefono/text()"/>
+        </move>
+        <assign value="10">
+            <output path="$Mensajeensamblado/Request/inputParameters/servicio/p02telefono/@longitud"/>
+        </assign>
+        <move>
+            <input path="consultarEncabezadoRequest/request/usuarioM2K"/>
+            <output path="$Mensajeensamblado/Request/user"/>
+        </move>
+        <convert defaultValue="0">
+            <input path="consultarEncabezadoRequest/request/region"/>
+            <output path="$Mensajeensamblado/Request/region"/>
+        </convert>
+        <assign value="I*PB">
+            <output path="$Mensajeensamblado/Request/function"/>
+        </assign>
+        <assign value="C">
+            <output path="$Mensajeensamblado/Request/action"/>
+        </assign>
+        <assign value="5">
+            <output path="$Mensajeensamblado/Request/inputParameters/servicio/p03producto/@longitud"/>
+        </assign>
+        <assign value="8">
+            <output path="$Mensajeensamblado/Request/inputParameters/servicio/p04fecha/@longitud"/>
+        </assign>
+        <assign value="6">
+            <output path="$Mensajeensamblado/Request/inputParameters/servicio/p01opcion/@longitud"/>
+        </assign>
+        <assign value="GNRAL">
+            <output path="$Mensajeensamblado/Request/inputParameters/servicio/p01opcion/text()"/>
+        </assign>
+        <move>
+            <input path="LocalEnvironment"/>
+            <output path="$Mensajeensamblado/LocalEnvironment"/>
+            <override>
+                <move>
+                    <input path="consultarEncabezadoRequest/request/region"/>
+                    <output path="$Mensajeensamblado/LocalEnvironment/Variables/region"/>
+                </move>
+            </override>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.telcel.com.mxs/m2k/sumiq/c" xmlns="http://www.telcel.com.mxs/m2k/sumiq/c" xmlns:m2k="http://www.telcel.com.mx/m2k">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.telcel.com.mx/m2k/sumiq/c" xmlns="http://www.telcel.com.mx/m2k/sumiq/c" xmlns:m2k="http://www.telcel.com.mx/m2k">
 
 	<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
 	

@@ -2,4 +2,5 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:element name="usuarioM2K" type="xsd:string"/>
 	<xsd:element name="telefono" type="xsd:string"/>
+	<xsd:element name="region" type="xsd:string"/>
 </xsd:schema>

@@ -20,7 +20,7 @@
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="64,250" mappingExpression="msl://{default}#ConsultarDatosClienteRequest_SiantelRequest">
         <translation xmi:type="utility:ConstantString" string="Mapping Siantel Request"/>
       </nodes>
-      <nodes xmi:type="SiantelFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="188,167">
+      <nodes xmi:type="SiantelFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="179,169">
         <translation xmi:type="utility:ConstantString" string="SiantelFlow"/>
       </nodes>
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="385,394" mappingExpression="msl://{default}#SiantelResponse_SUMIQ_CRequest">
