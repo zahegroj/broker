@@ -1,0 +1,107 @@
+/*
+Sample program for use with IBM WebSphere Message Broker
+© Copyright International Business Machines Corporation 2005, 2010 
+Licensed Materials - Property of IBM
+*/
+
+CREATE PROCEDURE CopyMessageHeaders(IN input REFERENCE,
+									IN output REFERENCE)
+BEGIN
+	DECLARE I INTEGER 2;
+	DECLARE J INTEGER CARDINALITY(input.*[]);
+	WHILE I < J DO
+		CREATE LASTCHILD OF output DOMAIN FIELDNAME(input.*[I]);
+		SET output.*[I] = input.*[I];
+		SET I = I + 1;
+	END WHILE;
+END;
+
+CREATE PROCEDURE CopyQuarter(IN input REFERENCE,
+							 IN output REFERENCE,
+							 IN jumps INTEGER)
+BEGIN
+	CALL CopyMessageHeaders(input, output);
+	CREATE LASTCHILD OF output DOMAIN 'XMLNSC';
+	CREATE LASTCHILD OF output.XMLNSC NAME 'SaleEnvelope';
+	DECLARE xmlIn REFERENCE TO input.XMLNSC.SaleEnvelope;
+	DECLARE xmlOut REFERENCE TO output.XMLNSC.SaleEnvelope;
+	IF LASTMOVE(xmlOut) <> TRUE THEN
+		THROW USER EXCEPTION CATALOG 'BIPv610' MESSAGE 2959 VALUES ('could not create output message');
+	END IF;
+
+	DECLARE invoices INTEGER CAST (xmlIn.Header.SaleListCount AS INTEGER);
+	DECLARE quarter INTEGER invoices/4;
+	IF invoices <> (quarter*4) THEN
+		THROW USER EXCEPTION CATALOG 'BIPv610' MESSAGE 2959 VALUES ('not divisible by 4', invoices);
+	END IF;	
+	
+	IF jumps > 3 THEN
+		THROW USER EXCEPTION CATALOG 'BIPv610' MESSAGE 2959 VALUES ('too many jumps', jumps);
+	END IF;		
+	
+	DECLARE count INTEGER 1;
+	DECLARE copyRef REFERENCE TO xmlIn.SaleList[(jumps*quarter)+count];
+	WHILE count <= quarter DO
+		SET xmlOut.SaleList[count] = copyRef;
+		MOVE copyRef NEXTSIBLING;
+		SET count = count + 1;
+	END WHILE;
+END;
+
+CREATE COMPUTE MODULE FanOut_CreateRequest1
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		CALL CopyQuarter(InputRoot, OutputRoot, 0);
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE FanOut_CreateRequest2
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		CALL CopyQuarter(InputRoot, OutputRoot, 1);
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE FanOut_CreateRequest3
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		CALL CopyQuarter(InputRoot, OutputRoot, 2);
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE FanOut_CreateRequest4
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		CALL CopyQuarter(InputRoot, OutputRoot, 3);
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE FanIn_BuildReply
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		SET OutputRoot.MQMD.Version = MQMD_CURRENT_VERSION;
+		CREATE LASTCHILD OF OutputRoot DOMAIN 'XMLNSC';
+		CREATE LASTCHILD OF OutputRoot.XMLNSC NAME 'ComIbmAggregateReplyBody';
+		DECLARE next INTEGER 1;
+		DECLARE repliesIn REFERENCE TO InputRoot.ComIbmAggregateReplyBody.*[next];
+		DECLARE repliesOut REFERENCE TO OutputRoot.XMLNSC.ComIbmAggregateReplyBody;
+		WHILE next <= 4 DO -- 4-way aggregation
+			CREATE LASTCHILD OF repliesOut NAME FIELDNAME(repliesIn);
+			SET repliesOut.*[next].ReplyIdentifier = CAST(repliesIn.Properties.ReplyIdentifier AS CHAR);
+			SET repliesOut.*[next].SaleEnvelope = repliesIn.XMLNSC.SaleEnvelope;
+			MOVE repliesIn NEXTSIBLING;
+			SET next = next + 1;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;
