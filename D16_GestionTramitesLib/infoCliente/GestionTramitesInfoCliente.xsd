@@ -47,12 +47,13 @@
 		<xsd:sequence>
 			<xsd:element name="mensajesInformativos" type="comun:ArrayOfErrorInformativo" minOccurs="0" />
 			<xsd:element name="nombreCliente" type="xsd:string"/>
-			<xsd:element name="cuenta" type="xsd:string"/>
+			<xsd:element name="cuenta" type="xsd:int"/>
 			<xsd:element name="estatusCobranza" type="xsd:string"/>
 			<xsd:element name="estatusCuenta" type="xsd:string"/>
-			<xsd:element name="saldoActual" type="xsd:string"/>
-			<xsd:element name="saldoEstimado" type="xsd:string"/>
-			<xsd:element name="saldoMes" type="xsd:string"/>
+			<xsd:element name="saldoActual" type="xsd:float"/>
+			<xsd:element name="saldoEstimado" type="xsd:float"/>
+			<xsd:element name="saldoMes" type="xsd:float"/>
+			<xsd:element name="importe" type="xsd:float"/>
 			<xsd:element name="facturas" type="this:ArrayOfFactura"/>
 		</xsd:sequence>
 	</xsd:complexType>

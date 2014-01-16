@@ -4,7 +4,6 @@
     <imports>
         <import kind="map" location="/SUMIQ_CResponse_Factura_1.map" namespace="default"/>
         <import kind="map" location="/SUMIQ_CResponse_Factura_2.map" namespace="default"/>
-        <import kind="map" location="/SUMIQ_CResponse_Factura_0.map" namespace="default"/>
         <import kind="map" location="/SUMIQ_CResponse_Factura_3.map" namespace="default"/>
         <import kind="map" location="/SUMIQ_CResponse_Factura_4.map" namespace="default"/>
     </imports>
@@ -38,26 +37,6 @@
             <input path="RespuestaOK/Cuenta" var="Cuenta"/>
             <output path="consultarDatosClienteResponse/response/cuenta"/>
         </move>
-        <move automap="true">
-            <input path="RespuestaOK/EstatusCobranza"/>
-            <output path="consultarDatosClienteResponse/response/estatusCobranza"/>
-        </move>
-        <move automap="true">
-            <input path="RespuestaOK/EstatusCuenta"/>
-            <output path="consultarDatosClienteResponse/response/estatusCuenta"/>
-        </move>
-        <move automap="true">
-            <input path="RespuestaOK/SaldoActual"/>
-            <output path="consultarDatosClienteResponse/response/saldoActual"/>
-        </move>
-        <move automap="true">
-            <input path="RespuestaOK/SaldoEstimado"/>
-            <output path="consultarDatosClienteResponse/response/saldoEstimado"/>
-        </move>
-        <move automap="true">
-            <input path="RespuestaOK/SaldoMes"/>
-            <output path="consultarDatosClienteResponse/response/saldoMes"/>
-        </move>
         <submap ref="map:SUMIQ_CResponse_Factura_1">
             <input path="RespuestaOK"/>
             <output path="consultarDatosClienteResponse/response/facturas/factura[2]"/>
@@ -65,10 +44,6 @@
         <submap ref="map:SUMIQ_CResponse_Factura_2">
             <input path="RespuestaOK"/>
             <output path="consultarDatosClienteResponse/response/facturas/factura[3]"/>
-        </submap>
-        <submap ref="map:SUMIQ_CResponse_Factura_0">
-            <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[1]"/>
         </submap>
         <submap ref="map:SUMIQ_CResponse_Factura_3">
             <input path="RespuestaOK"/>
@@ -78,5 +53,29 @@
             <input path="RespuestaOK"/>
             <output path="consultarDatosClienteResponse/response/facturas/factura[5]"/>
         </submap>
+        <move>
+            <input path="RespuestaOK/Importe"/>
+            <output path="consultarDatosClienteResponse/response/importe"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/SaldoMes"/>
+            <output path="consultarDatosClienteResponse/response/saldoMes"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/SaldoEstimado"/>
+            <output path="consultarDatosClienteResponse/response/saldoEstimado"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/SaldoActual"/>
+            <output path="consultarDatosClienteResponse/response/saldoActual"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/EstatusCuenta"/>
+            <output path="consultarDatosClienteResponse/response/estatusCuenta"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/EstatusCobranza"/>
+            <output path="consultarDatosClienteResponse/response/estatusCobranza"/>
+        </move>
     </mappingDeclaration>
 </mappingRoot>
