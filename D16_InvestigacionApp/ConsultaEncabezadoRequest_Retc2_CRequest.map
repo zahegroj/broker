@@ -3,8 +3,8 @@
     <output path="/m2k_retc2_c.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="ConsultaEncabezadoRequest_Retc2_CRequest">
-        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" path="mb:msg(consultarEncabezadoRequest,assembly,,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/m2k/retc2/c" path="mb:msg(Request,assembly,XMLNSC,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" path="mb:msg(consultarEncabezadoRequest,assembly,,LocalEnvironment,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/m2k/retc2/c" path="mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)"/>
         <move>
             <input path="Properties"/>
             <output path="Properties"/>

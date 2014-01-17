@@ -3,8 +3,8 @@
     <output path="/m2k_retus_c.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="ConsultaEncabezadoRequest_Retus_CRequest">
-        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" path="mb:msg(consultarEncabezadoRequest,assembly,,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/m2k/retus/c" path="mb:msg(Request,assembly,XMLNSC,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" path="mb:msg(consultarEncabezadoRequest,assembly,,LocalEnvironment,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/m2k/retus/c" path="mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)"/>
         <move>
             <input path="Properties"/>
             <output path="Properties"/>
@@ -30,5 +30,9 @@
             <input path="consultarEncabezadoRequest/request/region"/>
             <output path="Request/region"/>
         </convert>
+        <move>
+            <input path="LocalEnvironment"/>
+            <output path="LocalEnvironment"/>
+        </move>
     </mappingDeclaration>
 </mappingRoot>

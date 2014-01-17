@@ -9,81 +9,89 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj16/ConsultarEncabezadoFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/ConsultarEncabezadoFlow.gif"/>
     <composition>
-      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Entrada" location="-65,252">
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Entrada" location="-52,355">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="ConsultarEncabezadoFlow" pluginId="D16_InvestigacionApp"/>
       </nodes>
       <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="1463,486">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="ConsultarEncabezadoFlow" pluginId="D16_InvestigacionApp"/>
       </nodes>
-      <nodes xmi:type="IGTOC25_CFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="331,111">
+      <nodes xmi:type="IGTOC25_CFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="364,105">
         <translation xmi:type="utility:ConstantString" string="IGTOC25_CFlow"/>
       </nodes>
-      <nodes xmi:type="RETUS_CFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="344,252">
+      <nodes xmi:type="RETUS_CFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="374,356">
         <translation xmi:type="utility:ConstantString" string="RETUS_CFlow"/>
       </nodes>
-      <nodes xmi:type="RETC2_CFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="363,431">
+      <nodes xmi:type="RETC2_CFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="371,559">
         <translation xmi:type="utility:ConstantString" string="RETC2_CFlow"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="151,161" mappingExpression="msl://{default}#ConsultarEncabezadoRequest_Igtoc25_CRequest">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="223,101" mappingExpression="msl://{default}#ConsultarEncabezadoRequest_Igtoc25_CRequest">
         <translation xmi:type="utility:ConstantString" string="Mapping Request"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="149,248" mappingExpression="msl://{default}#ConsultaEncabezadoRequest_Retus_CRequest">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="222,352" mappingExpression="msl://{default}#ConsultaEncabezadoRequest_Retus_CRequest">
         <translation xmi:type="utility:ConstantString" string="Mapping Request"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="153,352" mappingExpression="msl://{default}#ConsultaEncabezadoRequest_Retc2_CRequest">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="224,555" mappingExpression="msl://{default}#ConsultaEncabezadoRequest_Retc2_CRequest">
         <translation xmi:type="utility:ConstantString" string="Mapping Request"/>
       </nodes>
-      <nodes xmi:type="ImeiFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_11" location="661,108">
+      <nodes xmi:type="ImeiFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_11" location="613,176">
         <translation xmi:type="utility:ConstantString" string="ImeiFlow"/>
       </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="286,43" destination="file" filePath="C:\logsMB\igtoc25Request.txt" pattern="${Body}">
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="336,35" destination="file" filePath="c:\logsMB\igtoc25c_request.log" pattern="Environment:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root:&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties:&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList:s&#xD;&#xA;${DestinationList}">
         <translation xmi:type="utility:ConstantString" string="Trace"/>
       </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_15" location="493,31" destination="file" filePath="C:\logsMB\igtoc25Response.txt" pattern="${Body}&#xD;&#xA;&#xD;&#xA;${LocalEnvironment}">
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_15" location="505,30" destination="file" filePath="C:\logsMB\igtoc25Response.txt" pattern="Environment:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root:&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties:&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList:s&#xD;&#xA;${DestinationList}">
         <translation xmi:type="utility:ConstantString" string="Trace1"/>
-      </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="1220,442" mappingExpression="msl://{default}#RespuestaError_GestionTramitesWMBException1">
-        <translation xmi:type="utility:ConstantString" string="Mapping"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="1324,487" computeExpression="esql://routine/#AsignarFault.Main">
         <translation xmi:type="utility:ConstantString" string="Compute"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="554,104" mappingExpression="msl://{default}#Igtoc25_CResponse_ImeiRequest">
-        <translation xmi:type="utility:ConstantString" string="Mapping1"/>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="483,172" mappingExpression="msl://{default}#Igtoc25_CResponse_ImeiRequest">
+        <translation xmi:type="utility:ConstantString" string="Mapping Request"/>
       </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="1183,109" destination="file" filePath="C:\logsMB\salidalog.txt" pattern="Enviroment&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList&#xD;&#xA;${DestinationList}">
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="701,252" destination="file" filePath="C:\logsMB\salidalog.txt" pattern="Environment:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root:&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties:&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList:s&#xD;&#xA;${DestinationList}">
         <translation xmi:type="utility:ConstantString" string="Trace2"/>
       </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="447,351" destination="file" filePath="C:\logsMB\retusLog.txt" pattern="Body&#xD;&#xA;${Body}">
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="501,445" destination="file" filePath="C:\logsMB\retusLog.txt" pattern="Environment:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root:&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties:&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList:s&#xD;&#xA;${DestinationList}">
         <translation xmi:type="utility:ConstantString" string="Trace3"/>
       </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="471,517" destination="file" filePath="C:\logsMB\Retc2Log.txt" pattern="Body&#xD;&#xA;${Body}">
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="502,652" destination="file" filePath="C:\logsMB\Retc2Log.txt" pattern="Environment:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root:&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties:&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList:s&#xD;&#xA;${DestinationList}">
         <translation xmi:type="utility:ConstantString" string="Trace4"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateControl.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="2,252" aggregateName="EncabezadoAggregate">
+      <nodes xmi:type="ComIbmAggregateControl.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="-6,355" aggregateName="EncabezadoAggregate">
         <translation xmi:type="utility:ConstantString" string="Aggregate Control"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="1011,244" aggregateName="EncabezadoAggregate">
+      <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="988,348" aggregateName="EncabezadoAggregate">
         <translation xmi:type="utility:ConstantString" string="Aggregate Reply"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_19" location="1043,430" aggregateName="EncabezadoAggregate">
-        <translation xmi:type="utility:ConstantString" string="Aggregate Reply1"/>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="806,176" folderName="imei_response">
+        <translation xmi:type="utility:ConstantString" string="AggregateImei_Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="783,169" folderName="response_imei">
-        <translation xmi:type="utility:ConstantString" string="Aggregate Request"/>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_20" location="797,352" folderName="retus_c_response">
+        <translation xmi:type="utility:ConstantString" string="AggregateRETUSC_Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_20" location="777,248" folderName="response_retus_c">
-        <translation xmi:type="utility:ConstantString" string="Aggregate Request1"/>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_21" location="795,555" folderName="retc2_c_response">
+        <translation xmi:type="utility:ConstantString" string="AggregateRETC2C_Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_21" location="776,427" folderName="response_retc2_c">
-        <translation xmi:type="utility:ConstantString" string="Aggregate Request2"/>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_22" location="789,101" folderName="igtoc25c_response">
+        <translation xmi:type="utility:ConstantString" string="AggregateIGTOC25C_Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_24" location="1120,349" computeExpression="esql://routine/#FanIn_BuildReply.Main">
+        <translation xmi:type="utility:ConstantString" string="Construir Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_26" location="114,351" computeExpression="esql://routine/#FanOut_CopyRequest.Main">
+        <translation xmi:type="utility:ConstantString" string="Copiar Request"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_28" location="246,250" destination="file" filePath="c:\logsMB\inputFlowCompute.log" pattern="Environment:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root:&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties:&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList:s&#xD;&#xA;${DestinationList}">
+        <translation xmi:type="utility:ConstantString" string="Trace5"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_29" location="113,255" destination="file" filePath="c:\logsMB\inputFlowAggregateControl.log" pattern="Environment:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root:&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties:&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList:s&#xD;&#xA;${DestinationList}">
+        <translation xmi:type="utility:ConstantString" string="Trace6"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Entrada"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Entrada"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_14" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.Salida" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="OutTerminal.Salida" sourceNode="FCMComposite_1_17" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.Salida" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Entrada"/>
@@ -94,18 +102,22 @@
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_22" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.Salida1" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_23" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_13" sourceNode="InTerminal.Entrada" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_24" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_31" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_32" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.Salida" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_33" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_18" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.Salida" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_20" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.Salida" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_21" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_20" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_25" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_21" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_26" targetNode="FCMComposite_1_22" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.Salida" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_27" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_22" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_28" targetNode="FCMComposite_1_24" sourceNode="FCMComposite_1_18" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_31" targetNode="FCMComposite_1_26" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_33" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_26" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_36" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_26" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_37" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_26" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_38" targetNode="FCMComposite_1_28" sourceNode="FCMComposite_1_26" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_39" targetNode="FCMComposite_1_29" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>
