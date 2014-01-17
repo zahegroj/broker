@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmAggregateControl.msgnode="ComIbmAggregateControl.msgnode" xmlns:ComIbmAggregateRequest.msgnode="ComIbmAggregateRequest.msgnode" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:mbmonitor="http://www.ibm.com/wbi/2008/eflow_mbmonitor"
+    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="WSAggregationFanOut.msgflow"
+    nsPrefix="WSAggregationFanOut.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="WSAggregationFanOut" bundleName="WSAggregationFanOut" pluginId="WebServiceAggregationMFP"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WebServiceAggregationMFP/icons/full/obj16/WSAggregationFanOut.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WebServiceAggregationMFP/icons/full/obj30/WSAggregationFanOut.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="11,131" wsdlFileName="WebServiceMessages/com/acmeorders/www/orderservice/WebServiceMessagesService.wsdl" selectedPortType="WebServiceMessagesPortType" selectedBinding="WebServiceMessagesSOAP_HTTP_Binding" selectedPort="WebServiceMessagesSOAP_HTTP_Port" targetNamespace="http://www.acmeOrders.com/OrderService" useHTTPTransport="true" urlSelector="/driverMessage" messageSetProperty="WebServiceMessages"
+          validateFailureAction="exceptionList" componentLevel="node" additionalInstances="9">
+        <translation xmi:type="utility:ConstantString" string="Read overall SOAP request"/>
+        <nsMappingTable nsPrefix="ns" namespace="http://www.acmeOrders.com/OrderService"/>
+        <nsMappingTable nsPrefix="soap" namespace="http://schemas.xmlsoap.org/soap/envelope/"/>
+        <monitorEvents eventSourceDescription="Transaction start" eventSourceName="Read overall SOAP request.transaction.Start" eventIdentity="Read overall SOAP request.TransactionStart">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <applicationData dataLocation="$Root/SOAP/Body/ns:OrderMessage/localElement/PartNumber" isXPath="true" complexData="true">
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+            </applicationData>
+            <globalTransactionCorrelator/>
+            <parentTransactionCorrelator dataLocation="$Root/SOAP/Body/ns:OrderMessage/localElement/PartNumber" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+            </parentTransactionCorrelator>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="Read overall SOAP request.TransactionStart"/>
+            <eventFilter dataLocation="true()" isXPath="true">
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+            </eventFilter>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmAggregateControl.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="159,127" aggregateName="AggregateWebServices" timeoutInterval="3">
+        <translation xmi:type="utility:ConstantString" string="AggregateControl"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_19" location="270,123" computeExpression="esql://routine/#WSAggregationFanOut_Compute.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Create fanout messages"/>
+      </nodes>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_32" location="637,128" folderName="AggregateRequest1">
+        <translation xmi:type="utility:ConstantString" string="AggregateRequest1"/>
+      </nodes>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="642,189" folderName="AggregateRequest2">
+        <translation xmi:type="utility:ConstantString" string="AggregateRequest2"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="431,124" queueName="WSAGGREGATIONSAMPLE.OUT1" transactionMode="yes" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="Queue: WSAGGREGATIONSAMPLE.OUT1"/>
+        <nsMappingTable nsPrefix="soap" namespace="http://schemas.xmlsoap.org/soap/envelope/"/>
+        <nsMappingTable nsPrefix="ns" namespace="http://www.acmeOrders.com/OrderService"/>
+        <monitorEvents eventSourceDescription="In terminal" eventSourceName="Queue: WSAGGREGATIONSAMPLE.OUT1.terminal.in" eventIdentity="Queue: WSAGGREGATIONSAMPLE.OUT1.InTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <applicationData dataLocation="$Root/XMLNSC/soap:Envelope/soap:Body/ns:submitPORequest/partNo" isXPath="true" complexData="true">
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </applicationData>
+            <globalTransactionCorrelator/>
+            <parentTransactionCorrelator dataLocation="$Root/XMLNSC/soap:Envelope/soap:Body/ns:submitPORequest/partNo" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </parentTransactionCorrelator>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="Queue: WSAGGREGATIONSAMPLE.OUT1.InTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true">
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </eventFilter>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="432,185" queueName="WSAGGREGATIONSAMPLE.OUT2" transactionMode="yes" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="Queue: WSAGGREGATIONSAMPLE.OUT2"/>
+        <nsMappingTable nsPrefix="soap" namespace="http://schemas.xmlsoap.org/soap/envelope/"/>
+        <nsMappingTable nsPrefix="ns" namespace="http://www.acmeOrders.com/OrderService"/>
+        <monitorEvents eventSourceDescription="In terminal" eventSourceName="Queue: WSAGGREGATIONSAMPLE.OUT2.terminal.in" eventIdentity="Queue: WSAGGREGATIONSAMPLE.OUT2.InTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <applicationData dataLocation="$Root/XMLNSC/soap:Envelope/soap:Body/ns:submitPORequest/partNo" isXPath="true" complexData="true">
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </applicationData>
+            <globalTransactionCorrelator/>
+            <parentTransactionCorrelator dataLocation="$Root/XMLNSC/soap:Envelope/soap:Body/ns:submitPORequest/partNo" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </parentTransactionCorrelator>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="Queue: WSAGGREGATIONSAMPLE.OUT2.InTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true">
+              <nsPrefixMap prefix="soap" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </eventFilter>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_19" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_16" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_19" sourceNode="FCMComposite_1_17" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_32" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

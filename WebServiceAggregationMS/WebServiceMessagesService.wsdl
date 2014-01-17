@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="WebServiceMessages" targetNamespace="http://www.acmeOrders.com/OrderService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.acmeOrders.com/OrderService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.acmeOrders.com/OrderService" xmlns:mrm="http://www.acmeOrders.com/OrderService">
+      <xsd:include schemaLocation="com/acmeorders/www/orderservice/driverMessage.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="Operation1_in">
+    <wsdl:part element="tns:OrderMessage" name="OrderMessage"/>
+  </wsdl:message>
+  <wsdl:message name="Operation1_out">
+    <wsdl:part element="tns:OrderResponse" name="OrderResponse"/>
+  </wsdl:message>
+  <wsdl:message name="Operation1_fault1">
+    <wsdl:part element="tns:OrderMessage" name="OrderMessage"/>
+  </wsdl:message>
+  <wsdl:portType name="WebServiceMessagesPortType">
+    <wsdl:operation name="Operation1">
+      <wsdl:input message="tns:Operation1_in" name="Operation1_Input"/>
+      <wsdl:output message="tns:Operation1_out" name="Operation1_Output"/>
+      <wsdl:fault message="tns:Operation1_fault1" name="Operation1_Fault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceMessagesSOAP_HTTP_Binding" type="tns:WebServiceMessagesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Operation1">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="Operation1_Input">
+        <soap:body parts="OrderMessage" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="Operation1_Output">
+        <soap:body parts="OrderResponse" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Operation1_Fault">
+        <soap:fault name="Operation1_Fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebServiceMessagesSOAP_HTTP_Service">
+    <wsdl:port binding="tns:WebServiceMessagesSOAP_HTTP_Binding" name="WebServiceMessagesSOAP_HTTP_Port">
+      <soap:address location="http://localhost:7800/driverMessage"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

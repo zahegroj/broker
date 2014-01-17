@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:mbmonitor="http://www.ibm.com/wbi/2008/eflow_mbmonitor" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="WSAggregationTargetWS.msgflow"
+    nsPrefix="WSAggregationTargetWS.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="WSAggregationTargetWS" bundleName="WSAggregationTargetWS" pluginId="AsyncWebServicesAggregation"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/AsyncWebServicesAggregation/icons/full/obj16/WSAggregationTargetWS.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/AsyncWebServicesAggregation/icons/full/obj30/WSAggregationTargetWS.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="24,36" wsdlFileName="WebServiceMessages/com/acmeorders/www/orderservice/OrderService.wsdl" selectedPortType="OrderService" selectedBinding="OrderServiceSOAP" selectedPort="OrderServiceSOAP" targetNamespace="http://www.acmeOrders.com/OrderService" useHTTPTransport="true" urlSelector="/acmeOrders/WADDR/ProcessOrders" usingWsAddressing="true" populateLocalEnvWithWSAInfo="true" messageSetProperty="WebServiceMessages">
+        <translation xmi:type="utility:ConstantString" string="Receive Target Web Service Request"/>
+        <nsMappingTable nsPrefix="soapenv" namespace="http://schemas.xmlsoap.org/soap/envelope/"/>
+        <nsMappingTable nsPrefix="ns" namespace="http://www.acmeOrders.com/OrderService"/>
+        <monitorEvents eventSourceDescription="Transaction start" eventSourceName="Receive Target Web Service Request.transaction.Start" eventIdentity="Receive Target Web Service Request.TransactionStart">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <applicationData dataLocation="$Root/SOAP/Body/ns:submitPORequest/partNo" isXPath="true" complexData="true">
+              <nsPrefixMap prefix="soapenv" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </applicationData>
+            <globalTransactionCorrelator/>
+            <parentTransactionCorrelator dataLocation="$Root/SOAP/Body/ns:submitPORequest/partNo" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="soapenv" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </parentTransactionCorrelator>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="Receive Target Web Service Request.TransactionStart"/>
+            <eventFilter dataLocation="true()" isXPath="true">
+              <nsPrefixMap prefix="soapenv" nsURI="http://schemas.xmlsoap.org/soap/envelope/"/>
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </eventFilter>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="447,33" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="Send Target Web Service Response"/>
+        <nsMappingTable nsPrefix="ns" namespace="http://www.acmeOrders.com/OrderService"/>
+        <monitorEvents eventSourceDescription="In terminal" eventSourceName="Send Target Web Service Response.terminal.in" eventIdentity="Send Target Web Service Response.InTerminal">
+          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
+            <applicationData dataLocation="$Root/SOAP/Body/ns:submitPOResponse/partNo" isXPath="true" complexData="true">
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </applicationData>
+            <globalTransactionCorrelator/>
+            <parentTransactionCorrelator dataLocation="$Root/SOAP/Body/ns:submitPOResponse/partNo" eventCorrelation="dataLocation">
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </parentTransactionCorrelator>
+            <localTransactionCorrelator/>
+            <bitStreamData encoding="none" bitstreamContent="none"/>
+            <eventName literal="Send Target Web Service Response.InTerminal"/>
+            <eventFilter dataLocation="true()" isXPath="true">
+              <nsPrefixMap prefix="ns" nsURI="http://www.acmeOrders.com/OrderService"/>
+            </eventFilter>
+          </eventXMLDoc>
+        </monitorEvents>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="223,32" computeExpression="esql://routine/#WSAggregationTargetWS_Compute.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Create Target Web Service Response"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

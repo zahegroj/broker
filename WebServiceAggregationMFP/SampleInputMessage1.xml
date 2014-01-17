@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope 	xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+ 	xmlns:c="http://www.acmeOrders.com/OrderService"
+ 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<soap:Body>
+		<c:OrderMessage>
+			<localElement>
+				<FirstName>John</FirstName>
+				<LastName>Smith</LastName>
+				<Street>High Street</Street>
+				<City>London</City>
+				<ZipCode>W1A1AA</ZipCode>
+				<PartNumber>ABC1234</PartNumber>
+				<Quantity>1</Quantity>
+			</localElement>
+		</c:OrderMessage>
+	</soap:Body>
+</soap:Envelope>

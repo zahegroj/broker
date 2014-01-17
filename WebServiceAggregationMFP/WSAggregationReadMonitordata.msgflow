@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCollector.msgnode="ComIbmCollector.msgnode" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFileOutput.msgnode="ComIbmFileOutput.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="WSAggregationReadMonitordata.msgflow"
+    nsPrefix="WSAggregationReadMonitordata.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="WSAggregationReadMonitordata" bundleName="WSAggregationReadMonitordata" pluginId="WebServiceAggregationMFP"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WebServiceAggregationMFP/icons/full/obj16/WSAggregationReadMonitordata.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/WebServiceAggregationMFP/icons/full/obj30/WSAggregationReadMonitordata.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="16,47" queueName="WSAGGREGATIONSAMPLE.MONITOR" messageDomainProperty="XMLNSC" messageSetProperty="WebServiceMessages">
+        <translation xmi:type="utility:ConstantString" string="Queue: WSAGGREGATIONSAMPLE.MONITOR"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCollector.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="244,43" collectionExpiry="60">
+        <inTerminals terminalNodeID="in1" dynamic="true" label="in1"/>
+        <translation xmi:type="utility:ConstantString" string="Assign event message to business data collection"/>
+        <eventHandlerPropertyTable terminal="in1" quantity="100" timeout="10" correlationPath="$Root/XMLNSC//@*[local-name()='parentTransactionId']" correlationPattern=""/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="487,39" computeExpression="esql://routine/#WSAggregationReadMonitordata_Compute.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Produce business data event summary"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="695,44" outputDirectory="WebServiceAggregation" outputFilename="Monitor.xml" outputMode="archiveAndReplaceWithTimestamp">
+        <translation xmi:type="utility:ConstantString" string="Write event summary"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="556,159" outputDirectory="WebServiceAggregation" outputFilename="Monitor.error">
+        <translation xmi:type="utility:ConstantString" string="Write exception details"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="429,154" computeExpression="esql://routine/#WSAggregationReadMonitordata_Compute2.Main">
+        <translation xmi:type="utility:ConstantString" string="Process exception"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="in1"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

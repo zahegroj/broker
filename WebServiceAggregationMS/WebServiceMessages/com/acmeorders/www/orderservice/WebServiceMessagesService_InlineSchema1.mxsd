@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.acmeOrders.com/OrderService" xmlns:mrm="http://www.acmeOrders.com/OrderService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.acmeOrders.com/OrderService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:include schemaLocation="driverMessage.mxsd"/>
+    </xsd:schema>

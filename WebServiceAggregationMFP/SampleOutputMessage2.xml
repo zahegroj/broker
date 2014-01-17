@@ -1,0 +1,10 @@
+<NS1:Envelope xmlns:NS1="http://schemas.xmlsoap.org/soap/envelope/">
+        <NS1:Body>
+                <NS2:OrderResponse xmlns:NS2="http://www.acmeOrders.com/OrderService">
+                        <Status>rejected</Status>
+                        <AMT>4</AMT>
+                        <PartNo>ABC1235</PartNo>
+                        <PartQuantity>2</PartQuantity>
+                </NS2:OrderResponse>
+        </NS1:Body>
+</NS1:Envelope>
