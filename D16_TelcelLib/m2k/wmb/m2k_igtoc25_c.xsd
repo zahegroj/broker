@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/m2k/igtoc25/c" xmlns="http://www.telcel.com.mx/m2k/igtoc25/c" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:m2k="http://www.telcel.com.mx/m2k" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+	
+	<xsd:element ibmSchExtn:docRoot="true" name="Request" type="RequestType"/>
+	
+	<xsd:element ibmSchExtn:docRoot="true" name="RespuestaOK" type="RespuestaOKType"/>
+	
+	<xsd:complexType name="RequestType">
+		<xsd:complexContent>
+			<xsd:extension base="m2k:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="inputParameters" type="InputParametersType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InputParametersType">
+		<xsd:sequence>
+			<xsd:element name="servicio" type="ServicioType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ServicioType">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="p01opcion" type="m2k:ElementoBase"/> 
+			<xsd:element minOccurs="1" name="p02telefono" type="m2k:TelefonoType"/>
+			<xsd:element name="p03producto" type="m2k:ElementoBase"/>
+			<xsd:element name="p04fecha" type="m2k:FechaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RespuestaOKType">
+		<xsd:complexContent>
+			<xsd:extension base="m2k:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="DATOS-RETCS" type="xsd:string"/>
+					<xsd:element name="RFC" type="xsd:string"/>
+					<xsd:element name="CONTRATACION-CLIENTE" type="xsd:string"/>
+					<xsd:element name="CICLO" type="xsd:byte"/>
+					<xsd:element name="TIPO-CUENTA" type="xsd:string"/>
+					<xsd:group maxOccurs="3" minOccurs="3" ref="subgroup_output_igtoc25c"/>
+					<xsd:element name="DATOS-RETUS" type="xsd:string"/>
+					<xsd:element name="NUM-TELCEL" type="xsd:long"/>
+					<xsd:element name="ESTATUS-NUM" type="xsd:string"/>
+					<xsd:element name="TITULARAPELLIDO" type="xsd:string"/>
+					<xsd:element name="TITULARNOMBRE" type="xsd:string"/>
+					<xsd:element name="DATOS-ESNMT" type="xsd:string"/>
+					<xsd:element name="MARCA" type="xsd:string"/>
+					<xsd:element name="MODELO" type="xsd:string"/>
+					<xsd:element name="DATOS-CSING" type="xsd:string"/>
+					<xsd:element name="F-ADENDUM" type="xsd:int"/>
+					<xsd:element name="ADENDUM" type="xsd:byte"/>
+					<xsd:element name="DATOS-PNHST" type="xsd:string"/>
+					<xsd:element name="NUM-IMEI" type="xsd:long"/>
+					<xsd:element name="FEC-CICLO" type="xsd:string"/>
+					<xsd:element name="TIP-PLAN" type="xsd:string"/>
+					<xsd:element name="PLAN" type="xsd:string"/>
+					<xsd:element name="DESCRIP" type="xsd:string"/>
+					<xsd:element name="MOTIVO" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:group name="subgroup_output_igtoc25c">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="DATOF" type="xsd:string"/>
+				<xsd:element name="DATOC" type="xsd:string"/>
+				<xsd:element name="DATOP" type="xsd:string"/>
+			</xsd:choice>
+			<xsd:element name="TIPO" type="xsd:string"/>
+			<xsd:element name="CLL" type="xsd:string"/>
+			<xsd:element name="NUM" type="xsd:string"/>
+			<xsd:element name="INTERIOR" type="xsd:string"/>
+			<xsd:element name="COLONIA" type="xsd:string"/>
+			<xsd:element name="DEL-MUN" type="xsd:string"/>
+			<xsd:element name="EDO" type="xsd:string"/>
+			<xsd:element name="CP" type="xsd:string"/>
+			<xsd:element name="PAIS" type="xsd:string"/>
+			<xsd:element name="CONTACTOAPELLIDO" type="xsd:string"/>
+			<xsd:element name="CONTACTONOMBRE" type="xsd:string"/>
+			<xsd:element name="ATN" type="xsd:string"/>
+			<xsd:element name="NOMAPELLIDOS" type="xsd:string"/>
+			<xsd:element name="NOMNOMBRE" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:group>
+
+</xsd:schema>

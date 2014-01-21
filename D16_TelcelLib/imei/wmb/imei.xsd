@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/imei" xmlns="http://www.telcel.com.mx/imei" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
+	<xsd:element ibmSchExtn:docRoot="true" name="request" type="RequestType"/>
+	
+	<xsd:element ibmSchExtn:docRoot="true" name="response" type="ResponseType"/>
+	
+	<xsd:complexType name="RequestType">
+		<xsd:sequence>
+			<xsd:element name="codigo" type="xsd:string"/>
+			<xsd:element name="region" type="xsd:string"/>
+			<xsd:element name="imei" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ResponseType">
+		<xsd:sequence>
+			<xsd:element name="codigo" type="xsd:string"/>
+			<xsd:element name="claveSap" type="xsd:string"/>
+			<xsd:element name="marca" type="xsd:string"/>
+			<xsd:element name="modelo" type="xsd:string"/>
+			<xsd:element name="grupoArticulo" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

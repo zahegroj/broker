@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:impl="http://ws.imeisac.dsaf.gsa.telcel.com" xmlns:intf="http://ws.imeisac.dsaf.gsa.telcel.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ws.imeisac.dsaf.gsa.telcel.com">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="ImeisACWS_InlineSchema1.xsd"/>
+        <binding hasEncoding="false" imported="true" name="ImeisACWSSoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ws.imeisac.dsaf.gsa.telcel.com">
+      <xsd:include schemaLocation="ImeisACWS_InlineSchema1.xsd"/>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultaImeiACRequest">
+    <wsdl:part element="impl:ConsultaImeiAC" name="parameters">
+		</wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ConsultaImeiACResponse">
+    <wsdl:part element="impl:ConsultaImeiACResponse" name="parameters">
+		</wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ImeisACWS">
+    <wsdl:operation name="ConsultaImeiAC">
+      <wsdl:input message="impl:ConsultaImeiACRequest" name="ConsultaImeiACRequest">
+		</wsdl:input>
+      <wsdl:output message="impl:ConsultaImeiACResponse" name="ConsultaImeiACResponse">
+		</wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ImeisACWSSoapBinding" type="impl:ImeisACWS">
+    <wsaw:UsingAddressing wsdl:required="false"/>
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ConsultaImeiAC">
+      <wsdlsoap:operation soapAction="ConsultaImeiAC"/>
+      <wsdl:input name="ConsultaImeiACRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ConsultaImeiACResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ImeisACWSService">
+    <wsdl:port binding="impl:ImeisACWSSoapBinding" name="ImeisACWS">
+      <wsdlsoap:address location="http://servportabilidad.telcel.com:80/IMEISAC/services/ImeisACWS"/>
+      <!-- <wsdlsoap:address location="http://191.9.3.249:8088/IMEISAC/services/ImeisACWS"/> -->
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/m2k/igtoc64/c" xmlns="http://www.telcel.com.mx/m2k/igtoc64/c" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:m2k="http://www.telcel.com.mx/m2k" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+	
+	<xsd:element ibmSchExtn:docRoot="true" name="Request" type="RequestType"/>
+	
+	<xsd:element ibmSchExtn:docRoot="true" name="RespuestaOK" type="RespuestaOKType"/>
+	
+	<xsd:complexType name="RequestType">
+		<xsd:complexContent>
+			<xsd:extension base="m2k:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="inputParameters" type="InputParametersType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InputParametersType">
+		<xsd:sequence>
+			<xsd:element name="servicio" type="ServicioType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ServicioType">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="p01telefono" type="m2k:TelefonoType"/>
+			<xsd:element minOccurs="0" name="p02cuenta" type="m2k:CuentaType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RespuestaOKType">
+		<xsd:complexContent>
+			<xsd:extension base="m2k:ResponseBase">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Errores" type="m2k:ErroresInfoType"/>
+					<xsd:element name="DesactivacionesNoPago" type="xsd:byte"/>
+					<xsd:element name="NotasCobroEnviadas" type="xsd:byte"/>
+					<xsd:element name="PromesasPagosIncumplidas" type="xsd:byte"/>
+					<xsd:element name="RentaMensualPromedio" type="xsd:float"/>
+					<xsd:element name="ChequesDevueltos" type="xsd:byte"/>
+					<xsd:element name="CicloFacturacion" type="xsd:byte"/>
+					<xsd:element name="ClaseCredito" type="xsd:string"/>
+					<xsd:element name="CuentaPadre" type="xsd:byte"/>
+					<xsd:element name="EstatusCobranza" type="xsd:string"/>
+					<xsd:element name="EstatusCuenta" type="xsd:string"/>
+					<xsd:element name="FechaAlta" type="xsd:string"/>
+					<xsd:element name="FechaCancelacion" type="xsd:string"/>
+					<xsd:element name="FechaUltimaFactura" type="xsd:string"/>
+					<xsd:element name="FechaUltimoPago" type="xsd:string"/>
+					<xsd:element name="Importe" type="xsd:float"/>
+					<xsd:element name="NombreCliente" type="xsd:string"/>
+					<xsd:element name="NumerosTelcel" type="xsd:byte"/>
+					<xsd:element name="NumeroSuspensiones" type="xsd:byte"/>
+					<xsd:element name="PenalizacionIVA" type="xsd:float"/>
+					<xsd:element name="PromedioTiempoAire" type="xsd:string"/>
+					<xsd:element name="Saldo" type="xsd:float"/>
+					<xsd:element name="Saldo120" type="xsd:float"/>
+					<xsd:element name="Saldo30" type="xsd:float"/>
+					<xsd:element name="Saldo60" type="xsd:float"/>
+					<xsd:element name="Saldo90" type="xsd:float"/>
+					<xsd:element name="SaldoActual" type="xsd:float"/>
+					<xsd:element name="SaldoEstimado" type="xsd:float"/>
+					<xsd:element name="SaldoMes" type="xsd:float"/>
+					<xsd:element name="SaldoPenalizacion" type="xsd:float"/>
+					<xsd:element name="TipoCuenta" type="xsd:string"/>
+					<xsd:element name="TotalDeposito" type="xsd:float"/>
+					<xsd:element name="TotalDisputa" type="xsd:float"/>
+					<xsd:element name="Cuenta" type="xsd:int"/>
+					<xsd:element name="FechaFactura1" type="xsd:string"/>
+					<xsd:element name="FechaFactura2" type="xsd:string"/>
+					<xsd:element name="FechaFactura3" type="xsd:string"/>
+					<xsd:element name="FechaFactura4" type="xsd:string"/>
+					<xsd:element name="ImporteFactura1" type="xsd:float"/>
+					<xsd:element name="ImporteFactura2" type="xsd:float"/>
+					<xsd:element name="ImporteFactura3" type="xsd:float"/>
+					<xsd:element name="ImporteFactura4" type="xsd:float"/>
+					<xsd:element name="UltimaFechaFactura1" type="xsd:string"/>
+					<xsd:element name="UltimaFechaFactura2" type="xsd:string"/>
+					<xsd:element name="UltimaFechaFactura3" type="xsd:string"/>
+					<xsd:element name="UltimaFechaFactura4" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

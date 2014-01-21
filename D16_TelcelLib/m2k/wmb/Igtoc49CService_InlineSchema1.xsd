@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/igtoc49/c" xmlns:types="http://www.telcel.com.mx/m2k/igtoc49/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:import namespace="http://www.telcel.com.mx/m2k/igtoc49/c" schemaLocation="m2k_igtoc49_c.xsd"/>
+<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+</xsd:schema>
