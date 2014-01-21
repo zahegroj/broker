@@ -3,6 +3,7 @@
 	<name>D16_FachadasTelcelApp</name>
 	<comment></comment>
 	<projects>
+		<project>D16_TelcelLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

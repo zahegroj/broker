@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_m2k_Igtoc47CElegirOperacionFlow.msgflow="gen/m2k/Igtoc47CElegirOperacionFlow.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="m2k/Igtoc47CFlow.msgflow" nsPrefix="m2k_Igtoc47CFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="Igtoc47CFlow" bundleName="m2k/Igtoc47CFlow" pluginId="D16_FachadasTelcelApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/Igtoc47CFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/Igtoc47CFlow.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="162,232" wsdlFileName="m2k/wmb/Igtoc47CService.wsdl" selectedPortType="Igtoc47CPort" selectedBinding="Igtoc47CBinding" selectedPort="Igtoc47C" targetNamespace="http://www.telcel.com.mx/m2k/wmb/igtoc47/c" useHTTPTransport="true" urlSelector="/m2k/wmb/Igtoc47CService">
+        <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
+      </nodes>
+      <nodes xmi:type="gen_m2k_Igtoc47CElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="312,232">
+        <translation xmi:type="utility:ConstantString" string="ElegirOperacion"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Extrae el cuerpo del mensaje SOAP"/>
+        <longDescription xmi:type="utility:ConstantString" string="Este subflujo extrae el cuerpo del mensaje SOAP y tiene un nodo de salida por operación. Se ha generado mediante una operación arrastrar y soltar de archivo WSDL."/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="462,292">
+        <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>
