@@ -51,7 +51,7 @@
 	<xsd:complexType name="CuentaType">
 		<xsd:simpleContent>
 			<xsd:extension base="cuentaFormato">
-				<xsd:attribute name="longitud" type="longitudFormato"/>
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -59,7 +59,7 @@
 	<xsd:complexType name="FechaType">
 		<xsd:simpleContent>
 			<xsd:extension base="fechaFormato">
-				<xsd:attribute name="longitud" type="longitudFormato"/>
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -67,7 +67,95 @@
 	<xsd:complexType name="TelefonoType">
 		<xsd:simpleContent>
 			<xsd:extension base="telefonoFormato">
-				<xsd:attribute name="longitud" type="longitudFormato"/>
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ProductoType">
+		<xsd:simpleContent>
+			<xsd:extension base="productoFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="AlfanumericoType">
+		<xsd:simpleContent>
+			<xsd:extension base="alfanumericoFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="HoraType">
+		<xsd:simpleContent>
+			<xsd:extension base="horaFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="FechaPivType">
+		<xsd:simpleContent>
+			<xsd:extension base="fechaPivFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="HoraPivType">
+		<xsd:simpleContent>
+			<xsd:extension base="horaPivFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="PlanTarifarioType">
+		<xsd:simpleContent>
+			<xsd:extension base="planTarifarioFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="TipoPagoPivType">
+		<xsd:simpleContent>
+			<xsd:extension base="tipoPagoPivFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SecPagoPivType">
+		<xsd:simpleContent>
+			<xsd:extension base="secPagoPivFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="SecPivType">
+		<xsd:simpleContent>
+			<xsd:extension base="secPivFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="NumPagoType">
+		<xsd:simpleContent>
+			<xsd:extension base="numPagoFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="TipoGrupoType">
+		<xsd:simpleContent>
+			<xsd:extension base="tipoGrupoFormato">
+				<xsd:attribute name="longitud" type="longitudFormato" use="required"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -97,4 +185,71 @@
             <xsd:pattern value="[0-9]{2}"/>
         </xsd:restriction>
     </xsd:simpleType>
+    
+    <xsd:simpleType name="alfanumericoFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="^[a-zA-Z0-9]*$"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="productoFormato">
+    	<xsd:restriction base="alfanumericoFormato">
+    		<xsd:maxLength value="5"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="horaFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|(([0-1][0-9])|(2[0-3])):(([0-5][0-9])):(([0-5][0-9]))"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="fechaPivFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|\d{7}"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="horaPivFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|\d{7}"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+	<xsd:simpleType name="planTarifarioFormato">
+    	<xsd:restriction base="alfanumericoFormato">
+    		<xsd:maxLength value="5"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="tipoPagoPivFormato">
+    	<xsd:restriction base="alfanumericoFormato">
+    		<xsd:maxLength value="2"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="secPagoPivFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|\d{5}"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="secPivFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|\d{3}"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="numPagoFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|\d{5}"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="tipoGrupoFormato">
+    	<xsd:restriction base="alfanumericoFormato">
+    		<xsd:maxLength value="2"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
 </xsd:schema>
