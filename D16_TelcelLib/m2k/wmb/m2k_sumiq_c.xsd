@@ -24,8 +24,8 @@
 	
 	<xsd:complexType name="ServicioType">
 		<xsd:sequence>
-			<xsd:element minOccurs="0" name="p01telefono" type="m2k:TelefonoType"/>
-			<xsd:element minOccurs="0" name="p02cuenta" type="m2k:CuentaType"/>
+			<xsd:element name="p01telefono" type="m2k:TelefonoType"/>
+			<xsd:element name="p02cuenta" type="m2k:CuentaType"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
