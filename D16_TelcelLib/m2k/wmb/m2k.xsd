@@ -51,7 +51,7 @@
 	<xsd:complexType name="CuentaType">
 		<xsd:simpleContent>
 			<xsd:extension base="cuentaFormato">
-				<xsd:attribute ref="longitud"/>
+				<xsd:attribute name="longitud" type="longitudFormato"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -59,7 +59,7 @@
 	<xsd:complexType name="FechaType">
 		<xsd:simpleContent>
 			<xsd:extension base="fechaFormato">
-				<xsd:attribute ref="longitud"/>
+				<xsd:attribute name="longitud" type="longitudFormato"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -67,7 +67,7 @@
 	<xsd:complexType name="TelefonoType">
 		<xsd:simpleContent>
 			<xsd:extension base="telefonoFormato">
-				<xsd:attribute ref="longitud"/>
+				<xsd:attribute name="longitud" type="longitudFormato"/>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -82,21 +82,19 @@
 	
 	<xsd:simpleType name="telefonoFormato">
 		<xsd:restriction base="xsd:string">
-			<xsd:pattern value="|d{10}"/>
+			<xsd:pattern value="|\d{10}"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 	
 	<xsd:simpleType name="cuentaFormato">
 		<xsd:restriction base="xsd:string">
-			<xsd:pattern value="|d{9}"/>
+			<xsd:pattern value="|\d{1,9}"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 	
-	<xsd:attribute name="longitud">
-		<xsd:simpleType>
-			<xsd:restriction base="xsd:string">
-				<xsd:pattern value="[0-9]{2}"/>
-			</xsd:restriction>
-		</xsd:simpleType>
-	</xsd:attribute>
+    <xsd:simpleType name="longitudFormato">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{2}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 </xsd:schema>
