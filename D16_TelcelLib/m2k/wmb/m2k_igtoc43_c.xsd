@@ -24,8 +24,16 @@
 	
 	<xsd:complexType name="ServicioType">
 		<xsd:sequence>
-			<xsd:element minOccurs="0" name="p01telefono" type="m2k:TelefonoType"/>
-			<xsd:element minOccurs="0" name="p02cuenta" type="m2k:CuentaType"/>
+			<xsd:element name="p01telefono" type="m2k:TelefonoType"/>
+			<xsd:element name="p02cuenta" type="m2k:CuentaType"/>
+			<xsd:element name="p03fechaConexion" type="m2k:FechaType"/>
+			<xsd:element name="p04horaConexion" type="m2k:HoraType"/>
+			<xsd:element name="p05refDtConnect" type="m2k:AlfanumericoType"/>
+			<xsd:element name="p06refTmConnect" type="m2k:AlfanumericoType"/>
+			<xsd:element name="p07ChargingId" type="m2k:AlfanumericoType"/>
+			<xsd:element name="p08refDataVolUp" type="m2k:AlfanumericoType"/>
+			<xsd:element name="p09refDataVolDown" type="m2k:AlfanumericoType"/>
+			<xsd:element name="p10refServiceClass" type="m2k:AlfanumericoType"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -33,54 +41,22 @@
 		<xsd:complexContent>
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
-					<xsd:element minOccurs="0" name="Errores" type="m2k:ErroresInfoType"/>
-					<xsd:element name="DesactivacionesNoPago" type="xsd:byte"/>
-					<xsd:element name="NotasCobroEnviadas" type="xsd:byte"/>
-					<xsd:element name="PromesasPagosIncumplidas" type="xsd:byte"/>
-					<xsd:element name="RentaMensualPromedio" type="xsd:float"/>
-					<xsd:element name="ChequesDevueltos" type="xsd:byte"/>
-					<xsd:element name="CicloFacturacion" type="xsd:byte"/>
-					<xsd:element name="ClaseCredito" type="xsd:string"/>
-					<xsd:element name="CuentaPadre" type="xsd:byte"/>
-					<xsd:element name="EstatusCobranza" type="xsd:string"/>
-					<xsd:element name="EstatusCuenta" type="xsd:string"/>
-					<xsd:element name="FechaAlta" type="xsd:string"/>
-					<xsd:element name="FechaCancelacion" type="xsd:string"/>
-					<xsd:element name="FechaUltimaFactura" type="xsd:string"/>
-					<xsd:element name="FechaUltimoPago" type="xsd:string"/>
-					<xsd:element name="Importe" type="xsd:float"/>
-					<xsd:element name="NombreCliente" type="xsd:string"/>
-					<xsd:element name="NumerosTelcel" type="xsd:byte"/>
-					<xsd:element name="NumeroSuspensiones" type="xsd:byte"/>
-					<xsd:element name="PenalizacionIVA" type="xsd:float"/>
-					<xsd:element name="PromedioTiempoAire" type="xsd:string"/>
-					<xsd:element name="Saldo" type="xsd:float"/>
-					<xsd:element name="Saldo120" type="xsd:float"/>
-					<xsd:element name="Saldo30" type="xsd:float"/>
-					<xsd:element name="Saldo60" type="xsd:float"/>
-					<xsd:element name="Saldo90" type="xsd:float"/>
-					<xsd:element name="SaldoActual" type="xsd:float"/>
-					<xsd:element name="SaldoEstimado" type="xsd:float"/>
-					<xsd:element name="SaldoMes" type="xsd:float"/>
-					<xsd:element name="SaldoPenalizacion" type="xsd:float"/>
-					<xsd:element name="TipoCuenta" type="xsd:string"/>
-					<xsd:element name="TotalDeposito" type="xsd:float"/>
-					<xsd:element name="TotalDisputa" type="xsd:float"/>
-					<xsd:element name="Cuenta" type="xsd:int"/>
-					<xsd:element name="FechaFactura1" type="xsd:string"/>
-					<xsd:element name="FechaFactura2" type="xsd:string"/>
-					<xsd:element name="FechaFactura3" type="xsd:string"/>
-					<xsd:element name="FechaFactura4" type="xsd:string"/>
-					<xsd:element name="ImporteFactura1" type="xsd:float"/>
-					<xsd:element name="ImporteFactura2" type="xsd:float"/>
-					<xsd:element name="ImporteFactura3" type="xsd:float"/>
-					<xsd:element name="ImporteFactura4" type="xsd:float"/>
-					<xsd:element name="UltimaFechaFactura1" type="xsd:string"/>
-					<xsd:element name="UltimaFechaFactura2" type="xsd:string"/>
-					<xsd:element name="UltimaFechaFactura3" type="xsd:string"/>
-					<xsd:element name="UltimaFechaFactura4" type="xsd:string"/>
+				<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc43c"/>
+				<xsd:element name="referencia" type="xsd:string"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	
+	<xsd:group name="subgroup_output_igtoc43c">
+		<xsd:sequence>
+			<xsd:element name="FechaConexion" type="xsd:string"/>
+			<xsd:element name="HoraConexion" type="xsd:string"/>
+			<xsd:element name="BytesCargados" type="xsd:string"/>
+			<xsd:element name="BytesDescargados" type="xsd:string"/>
+			<xsd:element name="APN" type="xsd:string"/>
+			<xsd:element name="IMEI" type="xsd:string"/>
+			<xsd:element name="IMSI" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:group>
 </xsd:schema>

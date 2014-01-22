@@ -24,9 +24,9 @@
 	
 	<xsd:complexType name="ServicioType">
 		<xsd:sequence>
-			<xsd:element minOccurs="1" name="p01opcion" type="m2k:ElementoBase"/> 
-			<xsd:element minOccurs="1" name="p02telefono" type="m2k:TelefonoType"/>
-			<xsd:element name="p03producto" type="m2k:ElementoBase"/>
+			<xsd:element name="p01opcion" type="m2k:AlfanumericoType"/> 
+			<xsd:element name="p02telefono" type="m2k:TelefonoType"/>
+			<xsd:element name="p03producto" type="m2k:ProductoType"/>
 			<xsd:element name="p04fecha" type="m2k:FechaType"/>
 		</xsd:sequence>
 	</xsd:complexType>
