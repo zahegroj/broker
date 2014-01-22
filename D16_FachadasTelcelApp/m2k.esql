@@ -1,0 +1,67 @@
+--BROKER SCHEMA m2k
+
+DECLARE m2kNamespace NAMESPACE 'http://www.telcel.com.mx/m2k';
+DECLARE nsm2k NAMESPACE 'http://servicios.web.m2k.sds.telcel.com';
+DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';	
+
+
+CREATE COMPUTE MODULE ConstruirFaultM2K
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		--CALL AsignarFaultM2K(InputRoot.XMLNSC, OutputRoot, 'faultCode', 'faultStsring');
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'xxx';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'xxx';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail = InputRoot.XMLNSC;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FUNCTION AsignarFaultM2K(IN respuestaError REFERENCE, IN outputRootNode REFERENCE, IN faultCode CHARACTER, IN faultString CHARACTER) RETURNS BOOLEAN
+BEGIN	
+	SET outputRootNode.SOAP.Body.soapenv:Fault.faultcode = faultCode;
+	SET outputRootNode.SOAP.Body.soapenv:Fault.faultstring = faultString;
+	SET outputRootNode.SOAP.Body.soapenv:Fault.detail = respuestaError;
+	RETURN TRUE;
+END;
+
+CREATE COMPUTE MODULE Parse_SumiqC_XMLToStringReq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/sumiq/c';
+		DECLARE newNamespace NAMESPACE '';
+		DECLARE mensajeString CHARACTER;
+		
+		CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		SET mensajeString = ParseXMLToString(InputRoot);
+		SET OutputRoot.SOAP.Body.nsm2k:ejecutaServicio.xml = mensajeString;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Parse_SumiqC_StringRespToXML
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/sumiq/c';				
+		DECLARE oldNamespace NAMESPACE '';
+		
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nsm2k:ejecutaServicioResponse.ejecutaServicioReturn);
+		
+		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK) IS NOT NULL THEN
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);
+			--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK.Errores) IS NOT NULL THEN
+			--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.RespuestaOK.Errores, oldNamespace, m2kNamespace);
+			--END IF;			
+			PROPAGATE TO TERMINAL 'out1';
+		END IF;
+		
+		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
+			PROPAGATE TO TERMINAL 'out2';
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
