@@ -29,8 +29,8 @@
 			<xsd:element name="p03fechaInicio" type="m2k:FechaType"/>
 			<xsd:element name="p04fechaFin" type="m2k:FechaType"/>
 			<xsd:element name="p05tipoComentarioPiv" type="m2k:AlfanumericoType"/>
-			<xsd:element name="p06fechaPiv" type="m2k:FechaType"/>
-			<xsd:element name="p07horaPiv" type="m2k:FechaType"/>
+			<xsd:element name="p06fechaPiv" type="m2k:FechaPivType"/>
+			<xsd:element name="p07horaPiv" type="m2k:HoraPivType"/>
 			<xsd:element name="p08secPiv" type="m2k:SecPivType"/>
 		</xsd:sequence>
 	</xsd:complexType>
