@@ -4,6 +4,8 @@
 	
 	<xsd:element ibmSchExtn:docRoot="true" name="PerfilTelefono" type="PerfilTelefonoType"/>
 	
+	<xsd:element ibmSchExtn:docRoot="true" name="Error" type="xsd:string"/>
+	
 	<xsd:complexType name="SolicitudPerfilTelefonoType">
 		<xsd:sequence>
 			<xsd:element name="Sistema" type="xsd:string"/>

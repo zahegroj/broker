@@ -18,11 +18,15 @@
 	<message name="getPerfilTelefonoResponse">
 		<part element="types:PerfilTelefono" name="parameters"/>
 	</message>
+	<message name="getPerfilTelefonoFault">
+		<part element="types:Error" name="parameters"/>
+	</message>
 	
 	<portType name="SiantelPort">
 		<operation name="getPerfilTelefono">
 			<input message="this:getPerfilTelefonoRequest"/>
 			<output message="this:getPerfilTelefonoResponse"/>
+			<fault message="this:getPerfilTelefonoFault" name="fault"/>
 		</operation>
 	</portType>
 	
@@ -36,6 +40,9 @@
 			<output>
 				<soap:body use="literal"/>
 			</output>
+			<fault name="getPerfilTelefonoFault">
+				<soap:fault name="getPerfilTelefonoFault" use="literal"/>
+			</fault>
 		</operation>
 	</binding>
 	

@@ -1,0 +1,49 @@
+DECLARE nssiantel NAMESPACE 'http://ws.portabilidad.dsaf.gsa.sds.telcel.com';	
+
+CREATE COMPUTE MODULE Parse_SiantelGetPerfilTelefono_XMLToStringReq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/siantel';
+		DECLARE newNamespace NAMESPACE '';
+		DECLARE mensajeString CHARACTER;
+		
+		CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		SET mensajeString = ParseXMLToString(InputRoot);
+		SET OutputRoot.SOAP.Body.nssiantel:getPerfilTelefono.xml = mensajeString;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Parse_SiantelGetPerfilTelefono_StringRespToXML
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/siantel';				
+		DECLARE oldNamespace NAMESPACE '';
+		
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		
+		IF InputRoot.XMLNSC.nssiantel:getPerfilTelefonoResponse.getPerfilTelefonoReturn='Salida' THEN
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'xxx';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'xxx';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.newNamespace:Error = 'Ocurrio un error al ejecutar el servicio getPerfilTelefono';
+		ELSE 
+		
+			CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nssiantel:getPerfilTelefonoResponse.getPerfilTelefonoReturn);
+	
+			IF FIELDTYPE (OutputRoot.XMLNSC.PerfilTelefono) IS NOT NULL THEN
+				CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);		
+				--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK.Errores) IS NOT NULL THEN
+				--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.RespuestaOK.Errores, oldNamespace, m2kNamespace);
+				--END IF;			
+				--PROPAGATE TO TERMINAL 'out1';		
+			END IF;
+			
+			--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
+			--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
+			--	PROPAGATE TO TERMINAL 'out2';
+			--END IF;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

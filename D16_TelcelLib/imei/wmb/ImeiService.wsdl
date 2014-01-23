@@ -18,11 +18,15 @@
 	<message name="consultarImeiACMsgResponse">
 		<part element="types:response" name="parameters"/>
 	</message>
+	<message name="consultarImeiACFault">
+		<part element="types:error" name="parameters"/>
+	</message>
 	
 	<portType name="ImeiPort">
 		<operation name="consultarImeiAC">
 			<input message="this:consultarImeiACMsg"/>
 			<output message="this:consultarImeiACMsgResponse"/>
+			<fault message="this:consultarImeiACFault" name="fault"/>
 		</operation>
 	</portType>
 	
@@ -36,6 +40,9 @@
 			<output>
 				<soap:body use="literal"/>
 			</output>
+			<fault name="consultarImeiACFault">
+				<soap:fault name="consultarImeiACFault" use="literal"/>
+			</fault>
 		</operation>
 	</binding>
 	

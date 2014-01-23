@@ -1,0 +1,22 @@
+CREATE COMPUTE MODULE ConstruirFaultImei
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'xxx';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'xxx';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail = InputRoot.XMLNSC;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FILTER MODULE ValidarCodigoError
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsimei NAMESPACE 'http://www.telcel.com.mx/imei';
+		
+		IF Root.XMLNSC.nsimei:response.codigo<>'1' THEN
+			RETURN FALSE;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

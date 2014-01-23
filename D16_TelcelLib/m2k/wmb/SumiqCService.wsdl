@@ -19,15 +19,15 @@
 	<message name="ejecutarServicioMsgResponse">
 		<part element="types:RespuestaOK" name="parameters"/>
 	</message>
-	<message name="respuestaErrorMsg">
-		<part element="comun:RespuestaError" name="fault"/>
+	<message name="respuestaErrorFault">
+		<part element="comun:RespuestaError" name="parameters"/>
 	</message>
 	
 	<portType name="SumiqCPort">
 		<operation name="ejecutarServicio">
 			<input message="this:ejecutarServicioMsg"/>
 			<output message="this:ejecutarServicioMsgResponse"/>
-			<fault message="this:respuestaErrorMsg" name="RespuestaError"/>
+			<fault message="this:respuestaErrorFault" name="fault"/>
 		</operation>
 	</portType>
 	

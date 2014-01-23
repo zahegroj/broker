@@ -31,7 +31,7 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="545,192" computeExpression="esql://routine/#Parse_SumiqC_StringRespToXML.Main">
         <translation xmi:type="utility:ConstantString" string="toXML"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="636,111" computeExpression="esql://routine/#ConstruirFaultM2K.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="643,274" computeExpression="esql://routine/#ConstruirFaultM2K.Main">
         <translation xmi:type="utility:ConstantString" string="BuildFault"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
