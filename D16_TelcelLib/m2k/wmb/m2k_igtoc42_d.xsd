@@ -30,8 +30,8 @@
 			<xsd:element name="p04fechaFin" type="m2k:FechaType"/>
 			<xsd:element name="p05fechaPiv" type="m2k:FechaPivType"/>
 			<xsd:element name="p06lotePiv" type="m2k:AlfanumericoType"/>
-			<xsd:element name="p07tipoPagoPiv" type="m2k:TipoPagoPivType"/>
-			<xsd:element name="p08secPagoPiv" type="m2k:SecPagoPivType"/>
+			<xsd:element name="p07tipoPagoPiv" type="m2k:TipoPagoType"/>
+			<xsd:element name="p08secPagoPiv" type="m2k:SecPagoType"/>
 			<xsd:element name="p09fechaAjustePiv" type="m2k:FechaPivType"/>
 			<xsd:element name="p10codAjustePiv" type="m2k:AlfanumericoType"/>
 			<xsd:element name="p11secUsuarioPiv" type="m2k:AlfanumericoType"/>
