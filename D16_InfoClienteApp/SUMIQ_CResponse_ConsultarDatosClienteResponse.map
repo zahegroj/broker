@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
-    <input path="/m2k_sumiq_c.xsd"/>
+    <input path="/m2k/wmb/m2k_sumiq_c.xsd"/>
     <output path="/infoCliente/GestionTramitesInfoCliente.xsd"/>
     <imports>
         <import kind="map" location="/SUMIQ_CResponse_Factura_1.map" namespace="default"/>
@@ -39,19 +39,19 @@
         </move>
         <submap ref="map:SUMIQ_CResponse_Factura_1">
             <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[2]"/>
+            <output path="consultarDatosClienteResponse/response/facturas/factura[1]"/>
         </submap>
         <submap ref="map:SUMIQ_CResponse_Factura_2">
             <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[3]"/>
+            <output path="consultarDatosClienteResponse/response/facturas/factura[2]"/>
         </submap>
         <submap ref="map:SUMIQ_CResponse_Factura_3">
             <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[4]"/>
+            <output path="consultarDatosClienteResponse/response/facturas/factura[3]"/>
         </submap>
         <submap ref="map:SUMIQ_CResponse_Factura_4">
             <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[5]"/>
+            <output path="consultarDatosClienteResponse/response/facturas/factura[4]"/>
         </submap>
         <move>
             <input path="RespuestaOK/Importe"/>

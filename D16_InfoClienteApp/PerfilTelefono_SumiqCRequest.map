@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/siantel/wmb/siantel.xsd"/>
+    <output path="/m2k/wmb/m2k_sumiq_c.xsd" var="out"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="PerfilTelefono_SumiqCRequest">
+        <input namespace="http://www.telcel.com.mx/siantel" path="mb:msg(PerfilTelefono,assembly,,LocalEnvironment,Properties)">
+            <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any"/>
+        </input>
+        <output namespace="http://www.telcel.com.mx/m2k/sumiq/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
+        <move>
+            <input path="Properties"/>
+            <output path="$MessageAssembly/Properties"/>
+        </move>
+        <convert defaultValue="0">
+            <input path="PerfilTelefono/Region"/>
+            <output path="$MessageAssembly/Request/region"/>
+        </convert>
+        <assign value="I*7E">
+            <output path="$MessageAssembly/Request/function"/>
+        </assign>
+        <assign value="C">
+            <output path="$MessageAssembly/Request/action"/>
+        </assign>
+        <move>
+            <input path="PerfilTelefono/Telefono"/>
+            <output path="$MessageAssembly/Request/inputParameters/servicio/p01telefono/text()"/>
+        </move>
+        <assign value="09">
+            <output path="$MessageAssembly/Request/inputParameters/servicio/p02cuenta/@longitud"/>
+        </assign>
+        <assign value="10">
+            <output path="$MessageAssembly/Request/inputParameters/servicio/p01telefono/@longitud"/>
+        </assign>
+        <move>
+            <input path="LocalEnvironment"/>
+            <output path="$MessageAssembly/LocalEnvironment"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment/Variables/usuarioM2K"/>
+            <output path="$MessageAssembly/Request/user"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>
