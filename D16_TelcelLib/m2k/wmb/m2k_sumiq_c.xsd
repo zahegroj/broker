@@ -37,7 +37,7 @@
 					<xsd:element name="DesactivacionesNoPago" type="xsd:byte"/>
 					<xsd:element name="NotasCobroEnviadas" type="xsd:byte"/>
 					<xsd:element name="PromesasPagosIncumplidas" type="xsd:byte"/>
-					<xsd:element name="RentaMensualPromedio" type="xsd:float"/>
+					<xsd:element name="RentaMensualPromedio" type="m2k:decimalFormato"/>
 					<xsd:element name="ChequesDevueltos" type="xsd:byte"/>
 					<xsd:element name="CicloFacturacion" type="xsd:byte"/>
 					<xsd:element name="ClaseCredito" type="xsd:string"/>
@@ -48,33 +48,33 @@
 					<xsd:element name="FechaCancelacion" type="xsd:string"/>
 					<xsd:element name="FechaUltimaFactura" type="xsd:string"/>
 					<xsd:element name="FechaUltimoPago" type="xsd:string"/>
-					<xsd:element name="Importe" type="xsd:float"/>
+					<xsd:element name="Importe" type="m2k:decimalFormato"/>
 					<xsd:element name="NombreCliente" type="xsd:string"/>
 					<xsd:element name="NumerosTelcel" type="xsd:byte"/>
 					<xsd:element name="NumeroSuspensiones" type="xsd:byte"/>
-					<xsd:element name="PenalizacionIVA" type="xsd:float"/>
+					<xsd:element name="PenalizacionIVA" type="m2k:decimalFormato"/>
 					<xsd:element name="PromedioTiempoAire" type="xsd:string"/>
-					<xsd:element name="Saldo" type="xsd:float"/>
-					<xsd:element name="Saldo120" type="xsd:float"/>
-					<xsd:element name="Saldo30" type="xsd:float"/>
-					<xsd:element name="Saldo60" type="xsd:float"/>
-					<xsd:element name="Saldo90" type="xsd:float"/>
-					<xsd:element name="SaldoActual" type="xsd:float"/>
-					<xsd:element name="SaldoEstimado" type="xsd:float"/>
-					<xsd:element name="SaldoMes" type="xsd:float"/>
-					<xsd:element name="SaldoPenalizacion" type="xsd:float"/>
+					<xsd:element name="Saldo" type="m2k:decimalFormato"/>
+					<xsd:element name="Saldo120" type="m2k:decimalFormato"/>
+					<xsd:element name="Saldo30" type="m2k:decimalFormato"/>
+					<xsd:element name="Saldo60" type="m2k:decimalFormato"/>
+					<xsd:element name="Saldo90" type="m2k:decimalFormato"/>
+					<xsd:element name="SaldoActual" type="m2k:decimalFormato"/>
+					<xsd:element name="SaldoEstimado" type="m2k:decimalFormato"/>
+					<xsd:element name="SaldoMes" type="m2k:decimalFormato"/>
+					<xsd:element name="SaldoPenalizacion" type="m2k:decimalFormato"/>
 					<xsd:element name="TipoCuenta" type="xsd:string"/>
-					<xsd:element name="TotalDeposito" type="xsd:float"/>
-					<xsd:element name="TotalDisputa" type="xsd:float"/>
+					<xsd:element name="TotalDeposito" type="m2k:decimalFormato"/>
+					<xsd:element name="TotalDisputa" type="m2k:decimalFormato"/>
 					<xsd:element name="Cuenta" type="xsd:int"/>
 					<xsd:element name="FechaFactura1" type="xsd:string"/>
 					<xsd:element name="FechaFactura2" type="xsd:string"/>
 					<xsd:element name="FechaFactura3" type="xsd:string"/>
 					<xsd:element name="FechaFactura4" type="xsd:string"/>
-					<xsd:element name="ImporteFactura1" type="xsd:float"/>
-					<xsd:element name="ImporteFactura2" type="xsd:float"/>
-					<xsd:element name="ImporteFactura3" type="xsd:float"/>
-					<xsd:element name="ImporteFactura4" type="xsd:float"/>
+					<xsd:element name="ImporteFactura1" type="m2k:decimalFormato"/>
+					<xsd:element name="ImporteFactura2" type="m2k:decimalFormato"/>
+					<xsd:element name="ImporteFactura3" type="m2k:decimalFormato"/>
+					<xsd:element name="ImporteFactura4" type="m2k:decimalFormato"/>
 					<xsd:element name="UltimaFechaFactura1" type="xsd:string"/>
 					<xsd:element name="UltimaFechaFactura2" type="xsd:string"/>
 					<xsd:element name="UltimaFechaFactura3" type="xsd:string"/>

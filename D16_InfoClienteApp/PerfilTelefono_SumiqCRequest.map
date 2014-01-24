@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
     <input path="/siantel/wmb/siantel.xsd"/>
     <output path="/m2k/wmb/m2k_sumiq_c.xsd" var="out"/>
+    <output path="/variables.xsd" var="out1"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="PerfilTelefono_SumiqCRequest">
         <input namespace="http://www.telcel.com.mx/siantel" path="mb:msg(PerfilTelefono,assembly,,LocalEnvironment,Properties)">
             <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any"/>
+            <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any1"/>
         </input>
         <output namespace="http://www.telcel.com.mx/m2k/sumiq/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
+        <output path="$out1/mb:msg(usuarioM2K,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
         <move>
             <input path="Properties"/>
             <output path="$MessageAssembly/Properties"/>

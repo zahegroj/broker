@@ -36,4 +36,16 @@
 			<xsd:element name="mensaje" type="xsd:string" />
 		</xsd:sequence>
 	</xsd:complexType>
+	
+	<xsd:simpleType name="decimalFormato">
+    	<xsd:restriction base="xsd:decimal">
+    		<xsd:fractionDigits value="2"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="telefonoFormato">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="|\d{10}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
 </xsd:schema><!-- catalogo de servicios --><!-- 1. M2K --><!-- 2. SIANTEL --><!-- 3. SMS --><!-- 4. IMEI --><!-- 5. RN Determinar Adeudo --><!-- 6. RN Determinar Region Perfil --><!-- 7. RN Determinar Prevalidacion --><!-- 8. RN Reasignar Tramite -->

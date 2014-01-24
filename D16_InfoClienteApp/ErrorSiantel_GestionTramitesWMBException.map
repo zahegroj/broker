@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/siantel/wmb/siantel.xsd"/>
+    <output path="/comun/GestionTramitesComun.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ErrorSiantel_GestionTramitesWMBException">
+        <input namespace="http://www.telcel.com.mx/siantel" path="mb:msg(Error,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" path="mb:msg(gestionTramitesWMBException,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="Error"/>
+            <output path="gestionTramitesWMBException/errores/error/descripcion"/>
+        </move>
+        <assign value="SISTEMA">
+            <output path="gestionTramitesWMBException/errores/error/tipo"/>
+        </assign>
+        <assign value="SIANTEL">
+            <output path="gestionTramitesWMBException/errores/error/servicioOrigen"/>
+        </assign>
+        <assign value="00000">
+            <output path="gestionTramitesWMBException/errores/error/codigo"/>
+        </assign>
+        <assign>
+            <output path="gestionTramitesWMBException/servicio"/>
+        </assign>
+        <assign>
+            <output path="gestionTramitesWMBException/operacion"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

@@ -279,4 +279,10 @@
     	</xsd:restriction>
     </xsd:simpleType>
     
+    <xsd:simpleType name="decimalFormato">
+    	<xsd:restriction base="xsd:decimal">
+    		<xsd:fractionDigits value="2"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
 </xsd:schema>

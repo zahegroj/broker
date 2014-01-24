@@ -66,3 +66,14 @@ CREATE COMPUTE MODULE AsignarFault
 		RETURN TRUE;
 	END;
 END MODULE;
+
+CREATE COMPUTE MODULE ExtraerFaultDetail
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputRoot.XMLNSC = InputRoot.SOAP.Body.soapenv:Fault.detail;
+	
+		RETURN TRUE;
+	END;
+END MODULE;

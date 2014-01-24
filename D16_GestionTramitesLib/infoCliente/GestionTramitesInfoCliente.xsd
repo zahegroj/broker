@@ -37,7 +37,7 @@
 	<xsd:complexType name="ConsultarDatosClienteRequestType">
 		<xsd:sequence>
 			<xsd:element name="usuarioM2K" type="xsd:string"/>
-			<xsd:element name="telefono" type="xsd:string"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
 			<xsd:element name="sistemaSiantel" type="xsd:string"/>
 			<xsd:element name="regionCAC" type="xsd:string"/>
 		</xsd:sequence>
@@ -50,10 +50,10 @@
 			<xsd:element name="cuenta" type="xsd:int"/>
 			<xsd:element name="estatusCobranza" type="xsd:string"/>
 			<xsd:element name="estatusCuenta" type="xsd:string"/>
-			<xsd:element name="saldoActual" type="xsd:float"/>
-			<xsd:element name="saldoEstimado" type="xsd:float"/>
-			<xsd:element name="saldoMes" type="xsd:float"/>
-			<xsd:element name="importe" type="xsd:float"/>
+			<xsd:element name="saldoActual" type="comun:decimalFormato"/>
+			<xsd:element name="saldoEstimado" type="comun:decimalFormato"/>
+			<xsd:element name="saldoMes" type="comun:decimalFormato"/>
+			<xsd:element name="importe" type="comun:decimalFormato"/>
 			<xsd:element name="facturas" type="this:ArrayOfFactura"/>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -73,7 +73,7 @@
 	<xsd:complexType name="FacturaType">
 		<xsd:sequence>
 			<xsd:element name="fechaFactura" type="xsd:string"/>
-			<xsd:element name="importeFactura" type="xsd:double"/>
+			<xsd:element name="importeFactura" type="comun:decimalFormato"/>
 			<xsd:element name="ultimaFechaFactura" type="xsd:string"/>
 		</xsd:sequence>
 		<xsd:attribute name="indice" type="xsd:integer"/>

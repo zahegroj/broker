@@ -11,7 +11,7 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="35,85">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="ConsultarDatosClienteFlow" pluginId="D16_InfoClienteApp"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="865,258">
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="913,296">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="ConsultarDatosClienteFlow" pluginId="D16_InfoClienteApp"/>
       </nodes>
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="65,186" mappingExpression="msl://{default}#ConsultarDatosClienteRequest_SiantelRequest">
@@ -26,13 +26,13 @@
       <nodes xmi:type="ComIbmFilter.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="336,256" filterExpression="esql://routine/#PerfilTelefonoPlataforma_Filter.Main">
         <translation xmi:type="utility:ConstantString" string="Es Pospago"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="686,254" mappingExpression="msl://{default}#SUMIQ_CResponse_ConsultarDatosClienteResponse">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="734,292" mappingExpression="msl://{default}#SUMIQ_CResponse_ConsultarDatosClienteResponse">
         <translation xmi:type="utility:ConstantString" string="Mapping Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="591,180" mappingExpression="msl://{default}#RespuestaError_GestionTramitesWMBException">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="700,191" mappingExpression="msl://{default}#RespuestaError_GestionTramitesWMBException">
         <translation xmi:type="utility:ConstantString" string="Mapping Exception"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="701,121" computeExpression="esql://routine/#AsignarFault.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="794,121" computeExpression="esql://routine/#AsignarFault.Main">
         <translation xmi:type="utility:ConstantString" string="Asignar Fault"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="327,120" computeExpression="esql://routine/#AsignarFaultNoTelcel.Main">
@@ -46,10 +46,19 @@
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
       </nodes>
-      <nodes xmi:type="gen_ejecutarServicio_SumiqCService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_8" location="467,246">
+      <nodes xmi:type="gen_ejecutarServicio_SumiqCService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_8" location="462,284">
         <translation xmi:type="utility:ConstantString" string="ejecutarServicio_SumiqCService"/>
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="603,190" computeExpression="esql://routine/#ExtraerFaultDetail.Main">
+        <translation xmi:type="utility:ConstantString" string="Extraer Error"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="508,83" computeExpression="esql://routine/#ExtraerFaultDetail.Main">
+        <translation xmi:type="utility:ConstantString" string="Extraer Error"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="605,84" mappingExpression="msl://{default}#ErrorSiantel_GestionTramitesWMBException">
+        <translation xmi:type="utility:ConstantString" string="Mapping Exception"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_3" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.true" targetTerminalName="InTerminal.in"/>
@@ -63,9 +72,13 @@
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_30" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_18" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.PerfilTelefono" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.RespuestaOK" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_14" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>
