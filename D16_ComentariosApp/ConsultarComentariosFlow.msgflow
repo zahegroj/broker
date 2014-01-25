@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_ejecutarServicio_Igtoc46DService.msgflow="gen/ejecutarServicio_Igtoc46DService.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="ConsultarComentariosFlow.msgflow"
+    nsPrefix="ConsultarComentariosFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="ConsultarComentariosFlow" bundleName="ConsultarComentariosFlow" pluginId="D16_ComentariosApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ComentariosApp/icons/full/obj16/ConsultarComentariosFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ComentariosApp/icons/full/obj30/ConsultarComentariosFlow.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Entrada" location="145,193">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="ConsultarComentariosFlow" pluginId="D16_ComentariosApp"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="789,189">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="ConsultarComentariosFlow" pluginId="D16_ComentariosApp"/>
+      </nodes>
+      <nodes xmi:type="gen_ejecutarServicio_Igtoc46DService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="387,195">
+        <translation xmi:type="utility:ConstantString" string="ejecutarServicio_Igtoc46DService"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Invoca la operación WSDL y extrae la respuesta del mensaje SOAP."/>
+        <longDescription xmi:type="utility:ConstantString" string="Este subflujo invoca la operación WSDL y extrae el cuerpo del mensaje de respuesta."/>
+      </nodes>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

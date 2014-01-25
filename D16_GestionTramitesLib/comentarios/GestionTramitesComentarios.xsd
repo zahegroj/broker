@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
 
+	<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd" />
+	
 	<xsd:element ibmSchExtn:docRoot="true" name="guardarComentarioRequest">
 		<xsd:complexType>
 			<xsd:sequence>
@@ -62,25 +64,60 @@
 
 	<xsd:complexType name="ConsultarComentariosRequestType">
 		<xsd:sequence>
-			<xsd:element name="param" type="xsd:string"/>
+			<xsd:element name="usuarioM2K" type="xsd:string"/>
+			<xsd:element name="regionCAC" type="xsd:string"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+			<xsd:element name="fechainicio" type="comun:fechaFormato"/>
+			<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+			<xsd:element name="referencia" type="this:ReferenciaType" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarComentariosResponseType">
 		<xsd:sequence>
-			<xsd:element name="param" type="xsd:string"/>
+			<xsd:element name="mensajesInformativos" type="comun:ArrayOfErrorInformativo" minOccurs="0" />
+			<xsd:element name="comentarios" type="this:ArrayOfComentario"/>
+			<xsd:element name="referencia" type="this:ReferenciaType"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:complexType name="EnviarSMSRequestType">
 		<xsd:sequence>
-			<xsd:element name="param" type="xsd:string"/>
+			
 		</xsd:sequence>
 	</xsd:complexType>
+	
+	
 
 	<xsd:complexType name="EnviarSMSResponseType">
 		<xsd:sequence>
 			<xsd:element name="param" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaType">
+		<xsd:sequence>
+			<xsd:element name="tipoComentario" type="xsd:string"/>
+			<xsd:element name="fecha" type="xsd:string"/>
+			<xsd:element name="hora" type="xsd:string"/>
+			<xsd:element name="sec" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ComentarioType">
+		<xsd:sequence>
+			<xsd:element name="tipoComentario" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+			<xsd:element name="cveUsuario" type="xsd:string"/>
+			<xsd:element name="comentarios" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfComentario">
+		<xsd:sequence>
+			<xsd:element name="comentario" type="this:ComentarioType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
 </xsd:schema>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/m2k/wmb/m2k_igtoc46_d.xsd"/>
+    <output path="/comentarios/GestionTramitesComentarios.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="Igtoc46DResponse_ConsultarComentariosResponse">
+        <input namespace="http://www.telcel.com.mx/m2k/igtoc46/d" path="mb:msg(RespuestaOK,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" path="mb:msg(consultarComentariosResponse,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <join>
+            <input path="RespuestaOK/Errores/Codigo" var="Codigo"/>
+            <input path="RespuestaOK/Errores/Mensaje" var="Mensaje"/>
+            <output path="consultarComentariosResponse/response/mensajesInformativos/errorInformativo"/>
+            <move automap="true">
+                <input path="$Codigo/."/>
+                <output path="codigo"/>
+            </move>
+            <move automap="true">
+                <input path="$Mensaje/."/>
+                <output path="mensaje"/>
+            </move>
+        </join>
+    </mappingDeclaration>
+</mappingRoot>

@@ -39,6 +39,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
+					<xsd:element minOccurs="0" name="Errores" type="m2k:ErroresInfoType"/>
 					<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc46d"/>
 					<xsd:element name="referencia" type="xsd:string"/>
 				</xsd:sequence>
