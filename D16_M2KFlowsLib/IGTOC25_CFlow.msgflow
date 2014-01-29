@@ -8,26 +8,26 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_M2KFlowsLib/icons/full/obj16/IGTOC25_CFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_M2KFlowsLib/icons/full/obj30/IGTOC25_CFlow.gif"/>
     <composition>
-      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Entrada" location="139,288">
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Entrada" location="45,233">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="IGTOC25_CFlow" pluginId="D16_M2KFlowsLib"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="826,371">
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="681,317">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="IGTOC25_CFlow" pluginId="D16_M2KFlowsLib"/>
       </nodes>
-      <nodes xmi:type="gen_M2KInvokeFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="350,289">
+      <nodes xmi:type="gen_M2KInvokeFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="274,234">
         <translation xmi:type="utility:ConstantString" string="M2KInvokeFlow"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="194,288" computeExpression="esql://routine/#Igtoc25C_CreateStringRequest.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="128,233" computeExpression="esql://routine/#Igtoc25C_CreateStringRequest.Main">
         <translation xmi:type="utility:ConstantString" string="Parse XML to String"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="471,297" computeExpression="esql://routine/#M2K_StringResponseToXML.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="402,242" computeExpression="esql://routine/#M2K_StringResponseToXML.Main">
         <translation xmi:type="utility:ConstantString" string="Parse String to XML"/>
       </nodes>
-      <nodes xmi:type="ComIbmFilter.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="639,298" filterExpression="esql://routine/#RespuestaOK_Filter.Main">
+      <nodes xmi:type="ComIbmFilter.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="568,243" filterExpression="esql://routine/#RespuestaOK_Filter.Main">
         <translation xmi:type="utility:ConstantString" string="Filter"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida1" location="833,229">
-        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Error" bundleName="IGTOC25_CFlow" pluginId="D16_M2KFlowsLib"/>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida1" location="684,182">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Failure" bundleName="IGTOC25_CFlow" pluginId="D16_M2KFlowsLib"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="InTerminal.Entrada" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>

@@ -1,21 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/ReasignarTramite" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-      
-	
-	
-	
-	
-            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" schemaLocation="Reglas_InlineSchema_Tramite.xsd"/>
-            <element name="peticionPreValidacion" type="tns:PeticionPreValidacion"/>
-            <complexType name="PeticionPreValidacion">
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/ReasignarTramite" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente">
+	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" schemaLocation="Reglas_InlineSchema_Tramite.xsd"/>
+	<element name="peticionPreValidacion" type="tns:PeticionPreValidacion"/>
+	<complexType name="PeticionPreValidacion">
 		<sequence>
 			<element name="tramite" type="pref:Tramite"/>
 		</sequence>
 	</complexType>
-            <element name="resultadoPreValidacion" type="tns:ResultadoPreValidacion"/>
-            <complexType name="ResultadoPreValidacion">
+	<element name="resultadoPreValidacion" type="tns:ResultadoPreValidacion"/>
+	<complexType name="ResultadoPreValidacion">
 		<sequence>
 			<element name="requierePrevalidacion" type="boolean"/>
 			<element name="comentario" type="string"/>
 		</sequence>
 	</complexType>
-        </schema>
+</schema>

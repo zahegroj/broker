@@ -8,25 +8,25 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_M2KFlowsLib/icons/full/obj16/RETC2_CFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_M2KFlowsLib/icons/full/obj30/RETC2_CFlow.gif"/>
     <composition>
-      <nodes xmi:type="gen_M2KInvokeFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="372,233">
+      <nodes xmi:type="gen_M2KInvokeFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="300,233">
         <translation xmi:type="utility:ConstantString" string="M2KInvokeFlow"/>
       </nodes>
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="78,232">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="RETC2_CFlow" pluginId="D16_M2KFlowsLib"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="873,369">
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="724,332">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="RETC2_CFlow" pluginId="D16_M2KFlowsLib"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="225,232" computeExpression="esql://routine/#Retc2C_CreateStringRequest.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="151,232" computeExpression="esql://routine/#Retc2C_CreateStringRequest.Main">
         <translation xmi:type="utility:ConstantString" string="Parse XML to String"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="501,241" computeExpression="esql://routine/#M2K_StringResponseToXML.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="424,241" computeExpression="esql://routine/#M2K_StringResponseToXML.Main">
         <translation xmi:type="utility:ConstantString" string="Parse String to XML"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="877,135">
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="728,164">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Failure" bundleName="RETC2_CFlow" pluginId="D16_M2KFlowsLib"/>
       </nodes>
-      <nodes xmi:type="ComIbmFilter.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="705,242" filterExpression="esql://routine/#RespuestaOK_Filter.Main">
+      <nodes xmi:type="ComIbmFilter.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="595,242" filterExpression="esql://routine/#RespuestaOK_Filter.Main">
         <translation xmi:type="utility:ConstantString" string="Filter"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>

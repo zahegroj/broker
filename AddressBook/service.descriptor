@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service:services xmlns:service="http://com.ibm.etools.mft.service">
+  <service:service implementation="gen/AddressBook.msgflow" name="AddressBook" portType="AddressBook" wsdlFileName="AddressBook.wsdl">
+    <service:operations>
+      <service:operation name="SaveAddress" type="request-response">
+        <service:flows>
+          <service:flow location="gen/SaveAddress_Request_Response.subflow" type="Request_Response"/>
+        </service:flows>
+      </service:operation>
+      <service:operation name="FindAddress" type="request-response">
+        <service:flows>
+          <service:flow location="gen/FindAddress_Request_Response.subflow" type="Request_Response"/>
+        </service:flows>
+      </service:operation>
+    </service:operations>
+    <service:errors>
+      <service:flows>
+        <service:flow location="gen/AddressBookInputHTTPTimeoutHandler.subflow" type="Timeout"/>
+        <service:flow location="gen/AddressBookInputFailureHandler.subflow" type="Failure"/>
+        <service:flow location="gen/AddressBookInputCatchHandler.subflow" type="Catch"/>
+      </service:flows>
+    </service:errors>
+  </service:service>
+</service:services>

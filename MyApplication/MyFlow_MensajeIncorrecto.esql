@@ -10,7 +10,7 @@ CREATE COMPUTE MODULE MyFlow_MensajeIncorrecto
 		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Server Error';
 		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.ns:gestionTramitesWMBException.ns:servicio = 'GestionTramitesReglasService';
 		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.ns:gestionTramitesWMBException.ns:operacion = 'X';
-		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.ns:gestionTramitesWMBException.ns:error = 'Error en el mensaje';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.ns:gestionTramitesWMBException.ns:error = InputExceptionList;
 		RETURN TRUE;
 		RETURN TRUE;
 	END;

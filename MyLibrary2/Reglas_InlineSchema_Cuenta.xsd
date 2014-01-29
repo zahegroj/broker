@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-      
-	
-	
-            	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" schemaLocation="Reglas_InlineSchema_Telefono.xsd"/>
-            <element name="cuenta" type="tns:Cuenta"/>
-            <complexType name="Cuenta">
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:pref="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta">
+	<import namespace="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" schemaLocation="Reglas_InlineSchema_Telefono.xsd"/>
+	<element name="cuenta" type="tns:Cuenta"/>
+	<complexType name="Cuenta">
 		<sequence>
 			<element name="estatus" type="string"/>
 			<element name="telefono" type="pref:Telefono"/>
@@ -20,4 +18,4 @@
 			<element name="saldoFacturadoVencido" type="double"/>
 		</sequence>
 	</complexType>
-        </schema>
+</schema>

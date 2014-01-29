@@ -1,12 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" xmlns:ns1="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns:ns10="http://www.telcel.com.mx/CAC/GestorTramites/Perfil" xmlns:ns11="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente" xmlns:ns12="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" xmlns:ns13="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:ns14="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:ns15="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil/param" xmlns:ns2="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:ns3="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:ns4="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" xmlns:ns5="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns:ns6="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo" xmlns:ns7="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion" xmlns:ns8="http://www.telcel.com.mx/CAC/GestorTramites/Factura" xmlns:ns9="http://www.example.org/GestorTramites" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:import namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="IBMdefined/org/xmlsoap/schemas/soap/envelope/soapenv11.xsd"/>
-  <xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil/param" schemaLocation="DeterminarRegionPerfil_InlineSchema16.xsd"/>
-<!-- BEGIN Global group petaining to all wsdl:message definitions -->
-<!-- END Global group -->
-
-
-<!-- BEGIN Message Definitions for the wsdl:operations  -->
-<!-- END Message Definitions -->
-
-
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" xmlns:ns1="http://www.telcel.com.mx/CAC/GestorTramites/AclaracionSaldos" xmlns:ns10="http://www.telcel.com.mx/CAC/GestorTramites/Perfil" xmlns:ns11="http://www.telcel.com.mx/CAC/GestorTramites/PrevalidacionCliente" xmlns:ns12="http://www.telcel.com.mx/CAC/GestorTramites/ReasignarTramite" xmlns:ns13="http://www.telcel.com.mx/CAC/GestorTramites/Telefono" xmlns:ns14="http://www.telcel.com.mx/CAC/GestorTramites/Tramite" xmlns:ns15="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil/param" xmlns:ns2="http://www.telcel.com.mx/CAC/GestorTramites/AsesorCAC" xmlns:ns3="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:ns4="http://www.telcel.com.mx/CAC/GestorTramites/Cobranza" xmlns:ns5="http://www.telcel.com.mx/CAC/GestorTramites/Cuenta" xmlns:ns6="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo" xmlns:ns7="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarRegion" xmlns:ns8="http://www.telcel.com.mx/CAC/GestorTramites/Factura" xmlns:ns9="http://www.example.org/GestorTramites" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil">
+	<xsd:import namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="IBMdefined/org/xmlsoap/schemas/soap/envelope/soapenv11.xsd"/>
+	<xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil/param" schemaLocation="DeterminarRegionPerfil_InlineSchema16.xsd"/>
+	<!-- BEGIN Global group petaining to all wsdl:message definitions -->
+	<!-- END Global group -->
+	<!-- BEGIN Message Definitions for the wsdl:operations	-->
+	<!-- END Message Definitions -->
 </xsd:schema>

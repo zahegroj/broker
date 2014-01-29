@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions targetNamespace="http://servicios.web.m2k.sds.telcel.com" xmlns:impl="http://servicios.web.m2k.sds.telcel.com" xmlns:intf="http://servicios.web.m2k.sds.telcel.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:impl="http://servicios.web.m2k.sds.telcel.com" xmlns:intf="http://servicios.web.m2k.sds.telcel.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://servicios.web.m2k.sds.telcel.com">
   <wsdl:documentation>
     <wsdl:appinfo source="WMQI_APPINFO">
       <MRWSDLAppInfo imported="true">
@@ -7,43 +8,43 @@
       </MRWSDLAppInfo>
     </wsdl:appinfo>
   </wsdl:documentation>
-	<wsdl:types>
-		<schema targetNamespace="http://servicios.web.m2k.sds.telcel.com" xmlns="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="ControlWebService_InlineSchema1.xsd"/>
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://servicios.web.m2k.sds.telcel.com">
+      <xsd:include schemaLocation="ControlWebService_InlineSchema1.xsd"/>
     </schema>
-	</wsdl:types>
-	<wsdl:message name="ejecutaServicioRequest">
-		<wsdl:part element="impl:ejecutaServicio" name="parameters">
+  </wsdl:types>
+  <wsdl:message name="ejecutaServicioRequest">
+    <wsdl:part element="impl:ejecutaServicio" name="parameters">
 		</wsdl:part>
-	</wsdl:message>
-	<wsdl:message name="ejecutaServicioResponse">
-		<wsdl:part element="impl:ejecutaServicioResponse" name="parameters">
+  </wsdl:message>
+  <wsdl:message name="ejecutaServicioResponse">
+    <wsdl:part element="impl:ejecutaServicioResponse" name="parameters">
 		</wsdl:part>
-	</wsdl:message>
-	<wsdl:portType name="ControlWebService">
-		<wsdl:operation name="ejecutaServicio">
-			<wsdl:input message="impl:ejecutaServicioRequest" name="ejecutaServicioRequest">
+  </wsdl:message>
+  <wsdl:portType name="ControlWebService">
+    <wsdl:operation name="ejecutaServicio">
+      <wsdl:input message="impl:ejecutaServicioRequest" name="ejecutaServicioRequest">
 		</wsdl:input>
-			<wsdl:output message="impl:ejecutaServicioResponse" name="ejecutaServicioResponse">
+      <wsdl:output message="impl:ejecutaServicioResponse" name="ejecutaServicioResponse">
 		</wsdl:output>
-		</wsdl:operation>
-	</wsdl:portType>
-	<wsdl:binding name="ControlWebServiceSoapBinding" type="impl:ControlWebService">
-		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-		<wsdl:operation name="ejecutaServicio">
-			<wsdlsoap:operation soapAction="ejecutaServicio"/>
-			<wsdl:input name="ejecutaServicioRequest">
-				<wsdlsoap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output name="ejecutaServicioResponse">
-				<wsdlsoap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-	</wsdl:binding>
-	<wsdl:service name="ControlWebServiceService">
-		<wsdl:port binding="impl:ControlWebServiceSoapBinding" name="ControlWebService">
-			<wsdlsoap:address location="http://serviciosm2k.telcel.com:80/telcel-ws-web/services/ControlWebService"/>
-			<!-- <wsdlsoap:address location="http://10.191.80.36:9080/telcel-ws-web/services/ControlWebService"/> -->
-		</wsdl:port>
-	</wsdl:service>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ControlWebServiceSoapBinding" type="impl:ControlWebService">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ejecutaServicio">
+      <wsdlsoap:operation soapAction="ejecutaServicio"/>
+      <wsdl:input name="ejecutaServicioRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ejecutaServicioResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ControlWebServiceService">
+    <wsdl:port binding="impl:ControlWebServiceSoapBinding" name="ControlWebService">
+      <wsdlsoap:address location="http://serviciosm2k.telcel.com:80/telcel-ws-web/services/ControlWebService"/>
+      <!-- <wsdlsoap:address location="http://10.191.80.36:9080/telcel-ws-web/services/ControlWebService"/> -->
+    </wsdl:port>
+  </wsdl:service>
 </wsdl:definitions>

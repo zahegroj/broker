@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?><schema targetNamespace="http://servicios.web.m2k.sds.telcel.com" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:impl="http://servicios.web.m2k.sds.telcel.com" xmlns:intf="http://servicios.web.m2k.sds.telcel.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-            	 	 	<element ibmSchExtn:docRoot="true" name="ejecutaServicioResponse">
-		<complexType>
-		 <sequence>
-			<element name="ejecutaServicioReturn" nillable="true" type="string"/>
-		 </sequence>
-		</complexType>
-	 </element>
-            <element ibmSchExtn:docRoot="true" name="ejecutaServicio">
-		<complexType>
-		 <sequence>
-			<element name="xml" nillable="true" type="string"/>
-		 </sequence>
-		</complexType>
-	 </element>
-        </schema>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:impl="http://servicios.web.m2k.sds.telcel.com" xmlns:intf="http://servicios.web.m2k.sds.telcel.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://servicios.web.m2k.sds.telcel.com">
+  <element ibmSchExtn:docRoot="true" name="ejecutaServicioResponse">
+    <complexType>
+      <sequence>
+        <element name="ejecutaServicioReturn" nillable="true" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="ejecutaServicio">
+    <complexType>
+      <sequence>
+        <element name="xml" nillable="true" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

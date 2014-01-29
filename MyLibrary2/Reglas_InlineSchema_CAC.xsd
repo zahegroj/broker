@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-
-        
-                <element name="cac" type="tns:CAC"/>
-            <complexType name="CAC">
-    	<sequence>
-    		<element minOccurs="1" name="identificador" type="string"/>
-    		<element minOccurs="1" name="region" type="string"/>
-    	</sequence>
-    </complexType>
-        </schema>
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.telcel.com.mx/CAC/GestorTramites/CAC" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/CAC/GestorTramites/CAC">
+	<element name="cac" type="tns:CAC"/>
+	<complexType name="CAC">
+		<sequence>
+			<element minOccurs="1" name="identificador" type="string"/>
+			<element minOccurs="1" name="region" type="string"/>
+		</sequence>
+	</complexType>
+</schema>

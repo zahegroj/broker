@@ -1,26 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:param="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil/param" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                                        <xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil/param" schemaLocation="DeterminarRegionPerfil_InlineSchema16.xsd"/>
-            <xsd:element ibmSchExtn:docRoot="true" name="DeterminarRegionPerfilRequest">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element form="qualified" maxOccurs="1" minOccurs="0" name="DecisionID" type="xsd:string"/>
-            <xsd:element ref="param:peticionDeterminarRegion"/>
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-            <xsd:element ibmSchExtn:docRoot="true" name="DeterminarRegionPerfilResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element form="qualified" name="DecisionID" type="xsd:string"/>
-            <xsd:element ref="param:resultadoDeterminarRegion"/>
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-            <xsd:element ibmSchExtn:docRoot="true" name="DeterminarRegionPerfilException">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element maxOccurs="1" minOccurs="1" name="exception" nillable="false" type="xsd:string"/>
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-        </xsd:schema>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:param="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil/param" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil">
+	<xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil/param" schemaLocation="DeterminarRegionPerfil_InlineSchema16.xsd"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="DeterminarRegionPerfilRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element form="qualified" maxOccurs="1" minOccurs="0" name="DecisionID" type="xsd:string"/>
+				<xsd:element ref="param:peticionDeterminarRegion"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element ibmSchExtn:docRoot="true" name="DeterminarRegionPerfilResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element form="qualified" name="DecisionID" type="xsd:string"/>
+				<xsd:element ref="param:resultadoDeterminarRegion"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element ibmSchExtn:docRoot="true" name="DeterminarRegionPerfilException">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="1" minOccurs="1" name="exception" nillable="false" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
