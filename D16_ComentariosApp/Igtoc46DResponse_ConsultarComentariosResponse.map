@@ -22,5 +22,48 @@
                 <output path="mensaje"/>
             </move>
         </join>
+        <join>
+            <input path="RespuestaOK/TipoComentario" var="TipoComentario"/>
+            <input path="RespuestaOK/FechaEfectiva" var="FechaEfectiva"/>
+            <input path="RespuestaOK/CveUsuario" var="CveUsuario"/>
+            <input path="RespuestaOK/Comentarios" var="Comentarios"/>
+            <output path="consultarComentariosResponse/response/comentarios/comentario"/>
+            <move automap="true">
+                <input path="$TipoComentario/."/>
+                <output path="tipoComentario"/>
+            </move>
+            <move automap="true">
+                <input path="$FechaEfectiva/."/>
+                <output path="fechaEfectiva"/>
+            </move>
+            <move automap="true">
+                <input path="$CveUsuario/."/>
+                <output path="cveUsuario"/>
+            </move>
+            <move automap="true">
+                <input path="$Comentarios/."/>
+                <output path="comentarios"/>
+            </move>
+        </join>
+        <expression>
+            <input path="RespuestaOK/referencia" var="referencia"/>
+            <output path="consultarComentariosResponse/response/referencia/tipoComentario"/>
+            <code lang="xpath">fn:substring($referencia , 1, 5)</code>
+        </expression>
+        <expression>
+            <input path="RespuestaOK/referencia" var="referencia1"/>
+            <output path="consultarComentariosResponse/response/referencia/fecha"/>
+            <code lang="xpath">fn:substring( $referencia1, 6, 12)</code>
+        </expression>
+        <expression>
+            <input path="RespuestaOK/referencia" var="referencia2"/>
+            <output path="consultarComentariosResponse/response/referencia/hora"/>
+            <code lang="xpath">fn:substring( $referencia2, 13, 19)</code>
+        </expression>
+        <expression>
+            <input path="RespuestaOK/referencia" var="referencia3"/>
+            <output path="consultarComentariosResponse/response/referencia/sec"/>
+            <code lang="xpath">fn:substring( $referencia3, 20, 22)</code>
+        </expression>
     </mappingDeclaration>
 </mappingRoot>
