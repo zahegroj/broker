@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?><definitions name="GestionTramitesComentarios" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comentarios" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <documentation>
-    <appinfo source="WMQI_APPINFO">
-      <MRWSDLAppInfo imported="true">
-        <binding hasEncoding="false" imported="true" name="GestionTramitesComentariosBinding" originalBindingStyle="document"/>
-      </MRWSDLAppInfo>
-    </appinfo>
-  </documentation>
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comentarios" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionTramitesComentarios" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios">
+	<documentation>
+		<appinfo source="WMQI_APPINFO">
+			<MRWSDLAppInfo imported="true">
+				<binding hasEncoding="false" imported="true" name="GestionTramitesComentariosBinding" originalBindingStyle="document"/>
+			</MRWSDLAppInfo>
+		</appinfo>
+	</documentation>
 	<types>
 		<xsd:schema>
-<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" schemaLocation="GestionTramitesComentarios.xsd"/>
-<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
-</xsd:schema>
+			<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" schemaLocation="GestionTramitesComentarios.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
+		</xsd:schema>
 	</types>
-
 	<message name="guardarComentarioMsg">
 		<part element="types:guardarComentarioRequest" name="parameters"/>
 	</message>
@@ -31,11 +31,9 @@
 	<message name="enviarSMSMsgResponse">
 		<part element="types:enviarSMSResponse" name="parameters"/>
 	</message>
-
 	<message name="gestionTramitesWMBExceptionMsg">
 		<part element="comun:gestionTramitesWMBException" name="fault"/>
 	</message>
-
 	<portType name="GestionTramitesComentariosPort">
 		<operation name="guardarComentario">
 			<input message="this:guardarComentarioMsg"/>
@@ -53,7 +51,6 @@
 			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
 		</operation>
 	</portType>
-
 	<binding name="GestionTramitesComentariosBinding" type="this:GestionTramitesComentariosPort">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<operation name="guardarComentario">
@@ -93,7 +90,6 @@
 			</fault>
 		</operation>
 	</binding>
-
 	<service name="GestionTramitesComentariosService">
 		<port binding="this:GestionTramitesComentariosBinding" name="GestionTramitesComentariosHTTPSOAPPort">
 			<soap:address location="http://localhost:7800/gestiontramites/wmb/ComentariosService"/>
