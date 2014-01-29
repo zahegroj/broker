@@ -1,3 +1,28 @@
+CREATE COMPUTE MODULE AsignarFault
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Server Error';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.ns:gestionTramitesWMBException = InputRoot.XMLNSC.ns:gestionTramitesWMBException;
+	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ExtraerFaultDetail
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputRoot.XMLNSC = InputRoot.SOAP.Body.soapenv:Fault.detail;
+	
+		RETURN TRUE;
+	END;
+END MODULE;
+
 CREATE FUNCTION ChangeNamespaceInOutputRoot(In rootNode REFERENCE, In oldNamespace CHARACTER, In newNamespace CHARACTER)
 BEGIN
 	--
