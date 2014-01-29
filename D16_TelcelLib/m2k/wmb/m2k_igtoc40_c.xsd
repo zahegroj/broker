@@ -40,7 +40,7 @@
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
 					<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc40c"/>
-					<xsd:element name="referencia" type="xsd:string"/>
+					<xsd:element name="Referencia" type="xsd:string"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -48,18 +48,18 @@
 	
 	<xsd:group name="subgroup_output_igtoc40c">
 		<xsd:sequence>
-			<xsd:element name="fecha" type="xsd:string"/>
-			<xsd:element name="hora" type="xsd:string"/>
-			<xsd:element name="ciudadOrigen" type="xsd:string"/>
-			<xsd:element name="telMarcado" type="xsd:string"/>
-			<xsd:element name="ciudadDestino" type="xsd:string"/>
-			<xsd:element name="sv" type="xsd:string"/>
-			<xsd:element name="cl" type="xsd:string"/>
-			<xsd:element name="tipoLlamada" type="xsd:string"/>
-			<xsd:element name="minutosTAire" type="xsd:string"/>
-			<xsd:element name="minutosLibre" type="xsd:string"/>
-			<xsd:element name="largaDistancia" type="xsd:string"/>
-			<xsd:element name="total" type="xsd:string"/>
+			<xsd:element name="Fecha" type="xsd:string"/>
+			<xsd:element name="Hora" type="xsd:string"/>
+			<xsd:element name="CiudadOrigen" type="xsd:string"/>
+			<xsd:element name="TelMarcado" type="xsd:string"/>
+			<xsd:element name="CiudadDestino" type="xsd:string"/>
+			<xsd:element name="Sv" type="xsd:string"/>
+			<xsd:element name="Cl" type="xsd:string"/>
+			<xsd:element name="TipoLlamada" type="xsd:string"/>
+			<xsd:element name="MinutosTAire" type="xsd:string"/>
+			<xsd:element name="MinutosLibre" type="xsd:string"/>
+			<xsd:element name="LargaDistancia" type="xsd:string"/>
+			<xsd:element name="Total" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:group>
 	
