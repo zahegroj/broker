@@ -799,4 +799,4 @@
          </sch:request>
       </sch:consultarPromocionesRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPromociones"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPromociones"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

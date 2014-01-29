@@ -70,7 +70,7 @@
 			<xsd:element name="cuenta" type="comun:cuentaFormato"/>
 			<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
 			<xsd:element name="fechaFin" type="comun:fechaFormato"/>
-			<xsd:element name="referencia" type="this:ReferenciaType" minOccurs="0"/>
+			<xsd:element name="referencia" type="this:ReferenciaComentariosType" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -78,7 +78,7 @@
 		<xsd:sequence>
 			<xsd:element name="mensajes" type="comun:ArrayOfMensaje" minOccurs="0" />
 			<xsd:element name="comentarios" type="this:ArrayOfComentario"/>
-			<xsd:element name="referencia" type="this:ReferenciaType"/>
+			<xsd:element name="referencia" type="this:ReferenciaComentariosType"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -96,7 +96,7 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="ReferenciaType">
+	<xsd:complexType name="ReferenciaComentariosType">
 		<xsd:sequence>
 			<xsd:element name="tipoComentarioPiv" type="xsd:string"/>
 			<xsd:element name="fechaPiv" type="xsd:string"/>

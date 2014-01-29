@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>D16_GestionTramitesLib</project>
-		<project>D16_M2KFlowsLib</project>
 		<project>D16_TelcelLib</project>
 	</projects>
 	<buildSpec>
