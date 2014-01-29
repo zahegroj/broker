@@ -1,0 +1,99 @@
+DECLARE nsInvest NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema';
+DECLARE nsComun NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+
+CREATE FILTER MODULE Validar_esRegistrosFacturados
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 IF Root.XMLNSC.nsInvest:consultarConsumosRequest.nsInvest:request.nsInvest:esRegistrosFacturados THEN
+		 	RETURN TRUE;
+		 END IF;
+		 RETURN FALSE;
+	END;
+END MODULE;
+
+CREATE FUNCTION MapConsumosResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.Fecha[]);
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.Fecha[i]) <> '' OR 
+			TRIM(respuestaOK.Hora[i])  <> '' OR
+			TRIM(respuestaOK.CiudadOrigen[i])  <> '' OR
+			TRIM(respuestaOK.TelMarcado[i])    <> '' OR
+			TRIM(respuestaOK.CiudadDestino[i]) <> '' OR
+			TRIM(respuestaOK.Sv[i]) <> '' OR
+			TRIM(respuestaOK.Cl[i]) <> '' OR
+			TRIM(respuestaOK.TipoLlamada[i])  <> '' OR
+			TRIM(respuestaOK.MinutosTAire[i]) <> '' OR
+			TRIM(respuestaOK.MinutosLibre[i]) <> '' OR
+			TRIM(respuestaOK.LargaDistancia[i]) <> '' OR
+			TRIM(respuestaOK.Total[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:fecha = respuestaOK.Fecha[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:hora = respuestaOK.Hora[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:ciudadOrigen = respuestaOK.CiudadOrigen[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:telMarcado = respuestaOK.TelMarcado[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:ciudadDestino = respuestaOK.CiudadDestino[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:sv = respuestaOK.Sv[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:cl = respuestaOK.Cl[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:tipoLlamada = respuestaOK.TipoLlamada[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:minutosTAire = respuestaOK.MinutosTAire[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:minutosLibre = respuestaOK.MinutosLibre[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:largaDistancia = respuestaOK.LargaDistancia[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:total = respuestaOK.Total[i];
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:referencia.nsInvest:fechaPiv = SUBSTRING(respuestaOK.Referencia FROM 1 FOR 7);
+		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:referencia.nsInvest:horaPiv = SUBSTRING(respuestaOK.Referencia FROM 8 FOR 7);
+		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:referencia.nsInvest:fuentePiv = SUBSTRING(respuestaOK.Referencia FROM 15 FOR 6);
+		
+		IF pNamespace = 'http://www.telcel.com.mx/m2k/igtoc45/d' THEN
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:referencia.nsInvest:secuenciaPiv = SUBSTRING(respuestaOK.Referencia FROM 21 FOR 7);
+		END IF;
+
+		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:referencia.nsInvest:telMarcadoPiv = SUBSTRING(respuestaOK.Referencia FROM 28 FOR 10);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos) IS NULL THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+	END IF;
+END;
+
+CREATE COMPUTE MODULE MapIgtoc40cResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc40/c';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarConsumosResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarConsumosResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);		
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarConsumosResponse, oldNamespace, nsInvest);
+		CALL MapConsumosResponse(OutputRoot, respuestaOK, ns);
+		
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapIgtoc45dResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc45/d';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarConsumosResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarConsumosResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarConsumosResponse, oldNamespace, nsInvest);
+		CALL MapConsumosResponse(OutputRoot, respuestaOK, ns);
+	END;
+END MODULE;

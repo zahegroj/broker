@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
     <input path="/investigacion/GestionTramitesInvestigacion.xsd"/>
-    <output path="/m2k_igtoc25_c.xsd" var="out"/>
+    <output path="/m2k/wmb/m2k_igtoc25_c.xsd" var="out"/>
     <output path="/variables.xsd" var="out1"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="ConsultarEncabezadoRequest_Igtoc25_CRequest">
@@ -33,13 +33,13 @@
         <assign value="C">
             <output path="$Mensajeensamblado/Request/action"/>
         </assign>
-        <assign value="5">
+        <assign value="05">
             <output path="$Mensajeensamblado/Request/inputParameters/servicio/p03producto/@longitud"/>
         </assign>
-        <assign value="8">
+        <assign value="08">
             <output path="$Mensajeensamblado/Request/inputParameters/servicio/p04fecha/@longitud"/>
         </assign>
-        <assign value="6">
+        <assign value="06">
             <output path="$Mensajeensamblado/Request/inputParameters/servicio/p01opcion/@longitud"/>
         </assign>
         <assign value="GNRAL">
