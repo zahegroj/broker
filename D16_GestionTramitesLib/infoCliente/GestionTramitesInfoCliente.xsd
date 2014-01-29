@@ -45,7 +45,7 @@
 
 	<xsd:complexType name="ConsultarDatosClienteResponseType">
 		<xsd:sequence>
-			<xsd:element name="mensajesInformativos" type="comun:ArrayOfErrorInformativo" minOccurs="0" />
+			<xsd:element name="mensajes" type="comun:ArrayOfMensaje" minOccurs="0" />
 			<xsd:element name="nombreCliente" type="xsd:string"/>
 			<xsd:element name="cuenta" type="xsd:int"/>
 			<xsd:element name="estatusCobranza" type="xsd:string"/>

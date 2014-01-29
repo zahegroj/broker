@@ -182,7 +182,7 @@
 	<xsd:complexType name="ConsultarEncabezadoRequestType">
 		<xsd:sequence>
 			<xsd:element name="usuarioM2K" type="xsd:string"/>
-			<xsd:element name="telefono" type="xsd:string"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
 			<xsd:element name="region" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -192,85 +192,43 @@
 			<xsd:element name="formaPago" type="xsd:string"/>
 			<xsd:element name="planActual" type="xsd:string"/>
 			<xsd:element name="modelo" type="xsd:string"/>
-			<xsd:element name="imei" type="xsd:string"/>
+			<xsd:element name="imei" type="comun:imeiFormato"/>
 			<xsd:element name="marca" type="xsd:string"/>
 			<xsd:element name="infoImei" type="this:InfoImeiType"/>
 			
 		</xsd:sequence>
 	</xsd:complexType>
-	
-	<xsd:complexType name="InfoImeiType">
-		<xsd:sequence>
-			<xsd:element name="codigo" type="xsd:string"/>
-			<xsd:element name="claveSap" type="xsd:string"/>
-			<xsd:element name="marca" type="xsd:string"/>
-			<xsd:element name="modelo" type="xsd:string"/>
-			<xsd:element name="grupoArticulo" type="xsd:string"/>
-		</xsd:sequence>
-	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarConsumosRequestType">
 		<xsd:sequence>
-			<xsd:element name="recuestBase" type="this:RecuestBaseType"/>
-			<xsd:element name="referencia" type="this:ReferenciaType" minOccurs="0"/>
+			<xsd:element name="usuarioM2K" type="xsd:string"/>
+			<xsd:element name="region" type="xsd:string"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+			<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+			<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+			<xsd:element name="esRegistrosFacturados" type="xsd:boolean"/>
+			<xsd:element name="referencia" type="this:ReferenciaConsumosType" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarConsumosResponseType">
 		<xsd:sequence>
-			<xsd:element name="mensajesInformativos" type="comun:ArrayOfErrorInformativo" minOccurs="0" />
-			<xsd:element name="consumos" type="this:ArrayOfConsumo"/>
-			<xsd:element name="referencia" type="this:ReferenciaType" minOccurs="0"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="RecuestBaseType">
-		<xsd:sequence>
-			<xsd:element name="usuarioM2K" type="xsd:string"/>
-			<xsd:element name="region" type="xsd:string"/>
-			<xsd:element name="telefono" type="xsd:string"/>
-			<xsd:element name="cuenta" type="xsd:string"/>
-			<xsd:element name="fechaInicio" type="xsd:string"/>
-			<xsd:element name="fechaFin" type="xsd:string"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="ConsumoType">
-		<xsd:sequence>
-			<xsd:element name="fecha" type="xsd:string"/>
-			<xsd:element name="hora" type="xsd:string"/>
-			<xsd:element name="ciudadOrigen" type="xsd:string"/>
-			<xsd:element name="telMarcado" type="xsd:string"/>
-			<xsd:element name="ciudadDestino" type="xsd:string"/>
-			<xsd:element name="sv" type="xsd:string"/>
-			<xsd:element name="cl" type="xsd:string"/>
-			<xsd:element name="tipoLlamada" type="xsd:string"/>
-			<xsd:element name="minutosTAire" type="xsd:string"/>
-			<xsd:element name="minutosLibre" type="xsd:string"/>
-			<xsd:element name="largaDistancia" type="xsd:string"/>
-			<xsd:element name="total" type="xsd:string"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="ArrayOfConsumo">
-		<xsd:sequence>
-			<xsd:element name="consumo" type="this:ConsumoType" maxOccurs="unbounded"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	
-	<xsd:complexType name="ReferenciaType">
-		<xsd:sequence>
-			<xsd:element name="fechaPiv" type="xsd:string"/>
-			<xsd:element name="horaPiv" type="xsd:string"/>
-			<xsd:element name="fuentePiv" type="xsd:string"/>
-			<xsd:element name="secuenciaPiv" type="xsd:string"/>
-			<xsd:element name="telMarcadoPiv" type="xsd:string"/>
+			<xsd:element name="mensajes" type="comun:ArrayOfMensaje" minOccurs="0" />
+			<xsd:element name="consumos" type="this:ArrayOfConsumo" minOccurs="0"/>
+			<xsd:element name="referencia" type="this:ReferenciaConsumosType" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarDetalleConexionesRequestType">
 		<xsd:sequence>
-			<xsd:element name="param" type="xsd:string"/>
+			<xsd:element name="usuarioM2K" type="xsd:string"/>
+			<xsd:element name="region" type="xsd:string"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+			<xsd:element name="fechaConexion" type="xsd:string"/>
+			<xsd:element name="horaConexion" type="xsd:string"/>
+			<xsd:element name="referencia" type="this:ReferenciaDetalleConexionType" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -371,6 +329,55 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarHistorialCuentaResponseType">
+		<xsd:sequence>
+			<xsd:element name="param" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InfoImeiType">
+		<xsd:sequence>
+			<xsd:element name="codigo" type="xsd:string"/>
+			<xsd:element name="claveSap" type="xsd:string"/>
+			<xsd:element name="marca" type="xsd:string"/>
+			<xsd:element name="modelo" type="xsd:string"/>
+			<xsd:element name="grupoArticulo" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ConsumoType">
+		<xsd:sequence>
+			<xsd:element name="fecha" type="xsd:string"/>
+			<xsd:element name="hora" type="xsd:string"/>
+			<xsd:element name="ciudadOrigen" type="xsd:string"/>
+			<xsd:element name="telMarcado" type="xsd:string"/>
+			<xsd:element name="ciudadDestino" type="xsd:string"/>
+			<xsd:element name="sv" type="xsd:string"/>
+			<xsd:element name="cl" type="xsd:string"/>
+			<xsd:element name="tipoLlamada" type="xsd:string"/>
+			<xsd:element name="minutosTAire" type="xsd:string"/>
+			<xsd:element name="minutosLibre" type="xsd:string"/>
+			<xsd:element name="largaDistancia" type="xsd:string"/>
+			<xsd:element name="total" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfConsumo">
+		<xsd:sequence>
+			<xsd:element name="consumo" type="this:ConsumoType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaConsumosType">
+		<xsd:sequence>
+			<xsd:element name="fechaPiv" type="xsd:string"/>
+			<xsd:element name="horaPiv" type="xsd:string"/>
+			<xsd:element name="fuentePiv" type="xsd:string"/>
+			<xsd:element name="secuenciaPiv" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="telMarcadoPiv" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaDetalleConexionType">
 		<xsd:sequence>
 			<xsd:element name="param" type="xsd:string"/>
 		</xsd:sequence>

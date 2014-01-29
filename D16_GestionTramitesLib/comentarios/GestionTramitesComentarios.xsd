@@ -65,10 +65,10 @@
 	<xsd:complexType name="ConsultarComentariosRequestType">
 		<xsd:sequence>
 			<xsd:element name="usuarioM2K" type="xsd:string"/>
-			<xsd:element name="regionCAC" type="xsd:string"/>
+			<xsd:element name="region" type="xsd:string"/>
 			<xsd:element name="telefono" type="comun:telefonoFormato"/>
 			<xsd:element name="cuenta" type="comun:cuentaFormato"/>
-			<xsd:element name="fechainicio" type="comun:fechaFormato"/>
+			<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
 			<xsd:element name="fechaFin" type="comun:fechaFormato"/>
 			<xsd:element name="referencia" type="this:ReferenciaType" minOccurs="0"/>
 		</xsd:sequence>
@@ -76,7 +76,7 @@
 
 	<xsd:complexType name="ConsultarComentariosResponseType">
 		<xsd:sequence>
-			<xsd:element name="mensajesInformativos" type="comun:ArrayOfErrorInformativo" minOccurs="0" />
+			<xsd:element name="mensajes" type="comun:ArrayOfMensaje" minOccurs="0" />
 			<xsd:element name="comentarios" type="this:ArrayOfComentario"/>
 			<xsd:element name="referencia" type="this:ReferenciaType"/>
 		</xsd:sequence>
@@ -98,10 +98,10 @@
 	
 	<xsd:complexType name="ReferenciaType">
 		<xsd:sequence>
-			<xsd:element name="tipoComentario" type="xsd:string"/>
-			<xsd:element name="fecha" type="xsd:string"/>
-			<xsd:element name="hora" type="xsd:string"/>
-			<xsd:element name="sec" type="xsd:string"/>
+			<xsd:element name="tipoComentarioPiv" type="xsd:string"/>
+			<xsd:element name="fechaPiv" type="xsd:string"/>
+			<xsd:element name="horaPiv" type="xsd:string"/>
+			<xsd:element name="secPiv" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	

@@ -15,20 +15,6 @@
             <input path="Properties" var="Properties"/>
             <output path="Properties"/>
         </move>
-        <join>
-            <input path="RespuestaOK/Errores/Codigo" var="Codigo"/>
-            <input path="RespuestaOK/Errores/Mensaje" var="Mensaje"/>
-            <output path="consultarDatosClienteResponse/response/mensajesInformativos/errorInformativo"/>
-            <test lang="XPath">$Codigo-index = $Mensaje-index</test>
-            <move>
-                <input path="$Codigo/."/>
-                <output path="codigo"/>
-            </move>
-            <move>
-                <input path="$Mensaje/."/>
-                <output path="mensaje"/>
-            </move>
-        </join>
         <move>
             <input path="RespuestaOK/NombreCliente"/>
             <output path="consultarDatosClienteResponse/response/nombreCliente"/>
@@ -77,5 +63,19 @@
             <input path="RespuestaOK/EstatusCobranza"/>
             <output path="consultarDatosClienteResponse/response/estatusCobranza"/>
         </move>
+        <join>
+            <input path="RespuestaOK/Errores/Codigo" var="Codigo"/>
+            <input path="RespuestaOK/Errores/Mensaje" var="Mensaje"/>
+            <output path="consultarDatosClienteResponse/response/mensajes/mensaje"/>
+            <test lang="XPath">$Codigo-index = $Mensaje-index</test>
+            <move>
+                <input path="$Codigo/."/>
+                <output path="codigo"/>
+            </move>
+            <move>
+                <input path="$Mensaje/."/>
+                <output path="descripcion"/>
+            </move>
+        </join>
     </mappingDeclaration>
 </mappingRoot>
