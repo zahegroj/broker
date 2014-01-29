@@ -8,7 +8,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ComentariosApp/icons/full/obj16/ComentariosMainFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ComentariosApp/icons/full/obj30/ComentariosMainFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="29,168" wsdlFileName="comentarios/GestionTramitesComentarios.wsdl" selectedPortType="GestionTramitesComentariosPort" selectedBinding="GestionTramitesComentariosBinding" selectedPort="GestionTramitesComentariosHTTPSOAPPort" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios" useHTTPTransport="true" urlSelector="/gestiontramites/wmb/ComentariosService">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="29,168" wsdlFileName="comentarios/GestionTramitesComentarios.wsdl" selectedPortType="GestionTramitesComentariosPort" selectedBinding="GestionTramitesComentariosBinding" selectedPort="GestionTramitesComentariosHTTPSOAPPort" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios" useHTTPTransport="true" urlSelector="/gestiontramites/wmb/ComentariosService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_ComentariosElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_6" location="202,164">
