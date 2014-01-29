@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="D16_Telcel_SumiqCService" resourceRoot="" soapui-version="4.5.2" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="SumiqCBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/m2k/wmb/sumiq/c}SumiqCBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/SumiqCService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\SumiqCService.wsdl"><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\SumiqCService.wsdl</con:url><con:content><![CDATA[<definitions name="SumiqC" targetNamespace="http://www.telcel.com.mx/m2k/wmb/sumiq/c" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/sumiq/c" xmlns:types="http://www.telcel.com.mx/m2k/sumiq/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project activeEnvironment="Default" name="D16_Telcel_SumiqCService" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="SumiqCBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/m2k/wmb/sumiq/c}SumiqCBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/SumiqCService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\SumiqCService.wsdl"><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\SumiqCService.wsdl</con:url><con:content><![CDATA[<definitions name="SumiqC" targetNamespace="http://www.telcel.com.mx/m2k/wmb/sumiq/c" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/sumiq/c" xmlns:types="http://www.telcel.com.mx/m2k/sumiq/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <documentation>
     <appinfo source="WMQI_APPINFO">
       <MRWSDLAppInfo imported="true">
@@ -354,7 +354,7 @@
          <action>C</action>
          <inputParameters>
             <servicio>
-               <p01telefono longitud="10">5527671654</p01telefono>
+               <p01telefono longitud="10">5518381597</p01telefono>
                <p02cuenta longitud="09"></p02cuenta>
             </servicio>
          </inputParameters>

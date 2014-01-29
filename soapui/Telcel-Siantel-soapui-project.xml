@@ -116,7 +116,7 @@
       <wsdlsoap:address location="http://servportabilidad.telcel.com:80/D14_PortabilidadWebServices/services/PerfilTelefonoService"/>
     </wsdl:port>
   </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://servportabilidad.telcel.com:80/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:endpoint>http://archlinux:8081/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:endpoint>http://10.191.80.36:9080/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:endpoint>http://MEX-FDKG5S1:8088/mockPerfilTelefonoServiceSoapBinding</con:endpoint><con:endpoint>http://localhost:8088/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="getFzaVtaPospago" name="getFzaVtaPospago" bindingOperationName="getFzaVtaPospago" type="Request-Response" outputName="getFzaVtaPospagoResponse" inputName="getFzaVtaPospagoRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.portabilidad.dsaf.gsa.sds.telcel.com">
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://servportabilidad.telcel.com:80/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:endpoint>http://archlinux:8081/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:endpoint>http://10.191.80.36:9080/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:endpoint>http://MEX-FDKG5S1:8088/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:endpoint>http://localhost:8088/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="getFzaVtaPospago" name="getFzaVtaPospago" bindingOperationName="getFzaVtaPospago" type="Request-Response" outputName="getFzaVtaPospagoResponse" inputName="getFzaVtaPospagoRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.portabilidad.dsaf.gsa.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:getFzaVtaPospago>
@@ -132,7 +132,7 @@
          <cveFzaVta>?</cveFzaVta>
       </ws:getFzaVtaPrepago>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="getFzaVtaPrepago"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="getPerfilTelefono" name="getPerfilTelefono" bindingOperationName="getPerfilTelefono" type="Request-Response" outputName="getPerfilTelefonoResponse" inputName="getPerfilTelefonoRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://MEX-FDKG5S1:8088/mockPerfilTelefonoServiceSoapBinding</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.portabilidad.dsaf.gsa.sds.telcel.com">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="getFzaVtaPrepago"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="getPerfilTelefono" name="getPerfilTelefono" bindingOperationName="getPerfilTelefono" type="Request-Response" outputName="getPerfilTelefonoResponse" inputName="getPerfilTelefonoRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://MEX-FDKG5S1:8088/D14_PortabilidadWebServices/services/PerfilTelefonoService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.portabilidad.dsaf.gsa.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:getPerfilTelefono>
@@ -141,34 +141,15 @@
 ]]]]>><![CDATA[</xml>
       </ws:getPerfilTelefono>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="getPerfilTelefono"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="8088" path="/mockPerfilTelefonoServiceSoapBinding" host="MEX-FDKG5S1" name="PerfilTelefonoServiceSoapBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="getPerfilTelefono" interface="PerfilTelefonoServiceSoapBinding" operation="getPerfilTelefono"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.portabilidad.dsaf.gsa.sds.telcel.com">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="getPerfilTelefono"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="8088" path="/D14_PortabilidadWebServices/services/PerfilTelefonoService" host="MEX-FDKG5S1" name="PerfilTelefonoServiceSoapBinding MockService" bindToHostOnly="false" docroot=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="getPerfilTelefono" interface="PerfilTelefonoServiceSoapBinding" operation="getPerfilTelefono"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.portabilidad.dsaf.gsa.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:getPerfilTelefonoResponse>
-         <getPerfilTelefonoReturn><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?>
-<PerfilTelefono>
-  <Telefono>5527671654</Telefono>
-  <TipoSerie>M</TipoSerie>
-  <IDP>188</IDP>
-  <NombreIDP>RADIOMOVIL DIPSA, S.A. DE C.V.</NombreIDP>
-  <IDO>188</IDO>
-  <NombreIDO>RADIOMOVIL DIPSA, S.A. DE C.V.</NombreIDO>
-  <GrupoCorpo>TELCEL</GrupoCorpo>
-  <Modalidad>CPP</Modalidad>
-  <Poblacion>P9001</Poblacion>
-  <NombrePoblacion>CUAUHTEMOC,DF</NombrePoblacion>
-  <Region>9</Region>
-  <Plataforma>POSPAGO</Plataforma>
-  <Tecnologia>GSM</Tecnologia>
-  <Plan>50</Plan>
-  <NombrePlan>PLAN NORMAL CPP (GSM)</NombrePlan>
-  <TipoPlan>POSPAGO</TipoPlan>
-  <FvtaPrepago>1074</FvtaPrepago>
-  <FvtaPospago>CUSPI</FvtaPospago>
-  <SDP>950</SDP>
-  <CodigoSRV>0</CodigoSRV>
-  <DescripcionSRV>OPERACION EXITOSA</DescripcionSRV>
-</PerfilTelefono>]]]]>><![CDATA[</getPerfilTelefonoReturn>
+         <getPerfilTelefonoReturn><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?><PerfilTelefono><Telefono>5545305932</Telefono><TipoSerie>M</TipoSerie><IDP>188</IDP><NombreIDP>RADIOMOVIL DIPSA, S.A. DE C.V.</NombreIDP><IDO>188</IDO><NombreIDO>RADIOMOVIL DIPSA, S.A. DE C.V.</NombreIDO><GrupoCorpo>TELCEL</GrupoCorpo><Modalidad>CPP</Modalidad><Poblacion>P9001</Poblacion><NombrePoblacion>CUAUHTEMOC,DF</NombrePoblacion><Region>9</Region><Plataforma>POSPAGO</Plataforma><Tecnologia>GSM</Tecnologia><Plan>50</Plan><NombrePlan>PLAN NORMAL CPP (GSM)</NombrePlan><TipoPlan>POSPAGO</TipoPlan><FvtaPrepago>1074</FvtaPrepago><FvtaPospago>CUSPI</FvtaPospago><SDP>950</SDP><CodigoSRV>0</CodigoSRV><DescripcionSRV>OPERACION EXITOSA</DescripcionSRV></PerfilTelefono>]]]]>><![CDATA[</getPerfilTelefonoReturn>
+         <!--
+         <getPerfilTelefonoReturn>Salida</getPerfilTelefonoReturn>
+         <getPerfilTelefonoReturn><![CDATA[<?xml version="1.0" encoding="ISO-8859-1"?><PerfilTelefono><Telefono>5527671654</Telefono><TipoSerie>M</TipoSerie><IDP>188</IDP><NombreIDP>RADIOMOVIL DIPSA, S.A. DE C.V.</NombreIDP><IDO>188</IDO><NombreIDO>RADIOMOVIL DIPSA, S.A. DE C.V.</NombreIDO><GrupoCorpo>TELCEL</GrupoCorpo><Modalidad>CPP</Modalidad><Poblacion>P9001</Poblacion><NombrePoblacion>CUAUHTEMOC,DF</NombrePoblacion><Region>9</Region><Plataforma>POSPAGO</Plataforma><Tecnologia>GSM</Tecnologia><Plan>50</Plan><NombrePlan>PLAN NORMAL CPP (GSM)</NombrePlan><TipoPlan>POSPAGO</TipoPlan><FvtaPrepago>1074</FvtaPrepago><FvtaPospago>CUSPI</FvtaPospago><SDP>950</SDP><CodigoSRV>0</CodigoSRV><DescripcionSRV>OPERACION EXITOSA</DescripcionSRV></PerfilTelefono>]]]]>><![CDATA[</getPerfilTelefonoReturn>
+         -->
       </ws:getPerfilTelefonoResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="getPerfilTelefono"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>

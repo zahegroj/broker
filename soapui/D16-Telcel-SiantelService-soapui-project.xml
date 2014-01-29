@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="D16_Telcel_SiantelService" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="SiantelBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/siantel/wmb}SiantelBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/siantel/wmb/SiantelService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\siantel\wmb\SiantelService.wsdl"><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\siantel\wmb\SiantelService.wsdl</con:url><con:content><![CDATA[<definitions name="SiantelService" targetNamespace="http://www.telcel.com.mx/siantel/wmb" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/siantel/wmb" xmlns:types="http://www.telcel.com.mx/siantel" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="SiantelBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="siantel.xsd" namespace="http://www.telcel.com.mx/siantel"/>
+    </xsd:schema>
+  </types>
+  <message name="getPerfilTelefonoRequest">
+    <part element="types:SolicitudPerfilTelefono" name="parameters"/>
+  </message>
+  <message name="getPerfilTelefonoResponse">
+    <part element="types:PerfilTelefono" name="parameters"/>
+  </message>
+  <portType name="SiantelPort">
+    <operation name="getPerfilTelefono">
+      <input message="this:getPerfilTelefonoRequest"/>
+      <output message="this:getPerfilTelefonoResponse"/>
+    </operation>
+  </portType>
+  <binding name="SiantelBinding" type="this:SiantelPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getPerfilTelefono">
+      <soap:operation soapAction="http://www.telcel.com.mx/siantel/wmb/getPerfilTelefono"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="SiantelService">
+    <port binding="this:SiantelBinding" name="Siantel">
+      <soap:address location="http://localhost:7800/siantel/wmb/SiantelService"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\siantel\wmb\siantel.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.telcel.com.mx/siantel" xmlns="http://www.telcel.com.mx/siantel" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element ibmSchExtn:docRoot="true" name="SolicitudPerfilTelefono" type="SolicitudPerfilTelefonoType"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="PerfilTelefono" type="PerfilTelefonoType"/>
+  <xsd:complexType name="SolicitudPerfilTelefonoType">
+    <xsd:sequence>
+      <xsd:element name="Sistema" type="xsd:string"/>
+      <xsd:element name="RegionSolicitud" type="xsd:string"/>
+      <xsd:element name="Telefono" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PerfilTelefonoType">
+    <xsd:sequence>
+      <xsd:element name="Telefono" type="xsd:string"/>
+      <xsd:element name="TipoSerie" type="xsd:string"/>
+      <xsd:element name="IDP" type="xsd:string"/>
+      <xsd:element name="NombreIDP" type="xsd:string"/>
+      <xsd:element name="IDO" type="xsd:string"/>
+      <xsd:element name="NombreIDO" type="xsd:string"/>
+      <xsd:element name="GrupoCorpo" type="xsd:string"/>
+      <xsd:element name="Modalidad" type="xsd:string"/>
+      <xsd:element name="Poblacion" type="xsd:string"/>
+      <xsd:element name="NombrePoblacion" type="xsd:string"/>
+      <xsd:element name="Region" type="xsd:string"/>
+      <xsd:element name="Plataforma" type="xsd:string"/>
+      <xsd:element name="Tecnologia" type="xsd:string"/>
+      <xsd:element name="Plan" type="xsd:string"/>
+      <xsd:element name="NombrePlan" type="xsd:string"/>
+      <xsd:element name="TipoPlan" type="xsd:string"/>
+      <xsd:element name="FvtaPrepago" type="xsd:string"/>
+      <xsd:element name="FvtaPospago" type="xsd:string"/>
+      <xsd:element name="SDP" type="xsd:string"/>
+      <xsd:element name="CodigoSRV" type="xsd:string"/>
+      <xsd:element name="DescripcionSRV" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/siantel/wmb/SiantelService</con:endpoint><con:endpoint>http://MEX-FDKG5S1:8088/siantel/wmb/SiantelService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/siantel/wmb/getPerfilTelefono" name="getPerfilTelefono" bindingOperationName="getPerfilTelefono" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/siantel/wmb/SiantelService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sian="http://www.telcel.com.mx/siantel">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sian:SolicitudPerfilTelefono>
+         <Sistema>SISACT</Sistema>
+         <RegionSolicitud>7</RegionSolicitud>
+         <Telefono>5527671654</Telefono>
+      </sian:SolicitudPerfilTelefono>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/siantel/wmb/getPerfilTelefono"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="8088" path="/siantel/wmb/SiantelService" host="MEX-FDKG5S1" name="SiantelBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="getPerfilTelefono" interface="SiantelBinding" operation="getPerfilTelefono"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sian="http://www.telcel.com.mx/siantel">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sian:PerfilTelefono>
+		<Telefono>5527671654</Telefono>
+		<TipoSerie>M</TipoSerie>
+		<IDP>188</IDP>
+		<NombreIDP>RADIOMOVIL DIPSA, S.A. DE C.V.</NombreIDP>
+		<IDO>188</IDO>
+		<NombreIDO>RADIOMOVIL DIPSA, S.A. DE C.V.</NombreIDO>
+		<GrupoCorpo>TELCEL</GrupoCorpo>
+		<Modalidad>CPP</Modalidad>
+		<Poblacion>P9001</Poblacion>
+		<NombrePoblacion>CUAUHTEMOC,DF</NombrePoblacion>
+		<Region>9</Region>
+		<Plataforma>POSPAGO</Plataforma>
+		<Tecnologia>GSM</Tecnologia>
+		<Plan>50</Plan>
+		<NombrePlan>PLAN NORMAL CPP (GSM)</NombrePlan>
+		<TipoPlan>POSPAGO</TipoPlan>
+		<FvtaPrepago>1074</FvtaPrepago>
+		<FvtaPospago>CUSPI</FvtaPospago>
+		<SDP>950</SDP>
+		<CodigoSRV>0</CodigoSRV>
+		<DescripcionSRV>OPERACION EXITOSA</DescripcionSRV>
+      </sian:PerfilTelefono>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/siantel/wmb/getPerfilTelefono"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>

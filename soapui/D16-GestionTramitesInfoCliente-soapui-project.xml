@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesInfoCliente" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesInfoClienteBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/gestiontramites/wmb/infoCliente}GestionTramitesInfoClienteBinding" soapVersion="1_1" anonymous="optional" definition="C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/infoCliente/GestionTramitesInfoCliente.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/infoCliente/GestionTramitesInfoCliente.wsdl"><con:part><con:url>file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/infoCliente/GestionTramitesInfoCliente.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesInfoCliente" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesInfoCliente" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesInfoClienteBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/gestiontramites/wmb/infoCliente}GestionTramitesInfoClienteBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/infoCliente/GestionTramitesInfoCliente.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/infoCliente/GestionTramitesInfoCliente.wsdl"><con:part><con:url>file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/infoCliente/GestionTramitesInfoCliente.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesInfoCliente" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <documentation>
     <appinfo source="WMQI_APPINFO">
       <MRWSDLAppInfo imported="true">
@@ -72,7 +72,8 @@
       <soap:address location="http://localhost:7800/gestiontramites/wmb/InfoClienteService"/>
     </port>
   </service>
-</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\infoCliente\GestionTramitesInfoCliente.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\infoCliente\GestionTramitesInfoCliente.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
+  <xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
   <xsd:element ibmSchExtn:docRoot="true" name="consultarDatosClienteRequest">
     <xsd:complexType>
       <xsd:sequence>
@@ -104,14 +105,23 @@
   <xsd:complexType name="ConsultarDatosClienteRequestType">
     <xsd:sequence>
       <xsd:element name="usuarioM2K" type="xsd:string"/>
-      <xsd:element name="telefono" type="xsd:string"/>
+      <xsd:element name="telefono" type="comun:telefonoFormato"/>
       <xsd:element name="sistemaSiantel" type="xsd:string"/>
       <xsd:element name="regionCAC" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="ConsultarDatosClienteResponseType">
     <xsd:sequence>
-      <xsd:element name="param" type="xsd:string"/>
+      <xsd:element name="mensajesInformativos" type="comun:ArrayOfErrorInformativo" minOccurs="0"/>
+      <xsd:element name="nombreCliente" type="xsd:string"/>
+      <xsd:element name="cuenta" type="xsd:int"/>
+      <xsd:element name="estatusCobranza" type="xsd:string"/>
+      <xsd:element name="estatusCuenta" type="xsd:string"/>
+      <xsd:element name="saldoActual" type="comun:decimalFormato"/>
+      <xsd:element name="saldoEstimado" type="comun:decimalFormato"/>
+      <xsd:element name="saldoMes" type="comun:decimalFormato"/>
+      <xsd:element name="importe" type="comun:decimalFormato"/>
+      <xsd:element name="facturas" type="this:ArrayOfFactura"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="ConsultarDatosCobranzaRequestType">
@@ -122,6 +132,19 @@
   <xsd:complexType name="ConsultarDatosCobranzaResponseType">
     <xsd:sequence>
       <xsd:element name="param" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FacturaType">
+    <xsd:sequence>
+      <xsd:element name="fechaFactura" type="xsd:string"/>
+      <xsd:element name="importeFactura" type="comun:decimalFormato"/>
+      <xsd:element name="ultimaFechaFactura" type="xsd:string"/>
+    </xsd:sequence>
+    <xsd:attribute name="indice" type="xsd:integer"/>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfFactura">
+    <xsd:sequence>
+      <xsd:element name="factura" type="this:FacturaType" maxOccurs="unbounded"/>
     </xsd:sequence>
   </xsd:complexType>
 </xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\comun\GestionTramitesComun.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" version="1.0" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
@@ -141,12 +164,33 @@
   </xsd:complexType>
   <xsd:complexType name="Error">
     <xsd:sequence>
+      <xsd:element name="tipo" type="xsd:string"/>
       <xsd:element name="codigo" type="xsd:string"/>
-      <xsd:element name="mensaje" type="xsd:string"/>
-      <xsd:element name="tipoError" type="xsd:string"/>
-      <!---->
+      <xsd:element name="descripcion" type="xsd:string"/>
+      <xsd:element name="servicioOrigen" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
+  <xsd:complexType name="ArrayOfErrorInformativo">
+    <xsd:sequence>
+      <xsd:element name="errorInformativo" type="this:ErrorInformativo" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ErrorInformativo">
+    <xsd:sequence>
+      <xsd:element name="codigo" type="xsd:string"/>
+      <xsd:element name="mensaje" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="decimalFormato">
+    <xsd:restriction base="xsd:decimal">
+      <xsd:fractionDigits value="2"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="telefonoFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{10}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
 </xsd:schema>
 <!--catalogo de servicios-->
 <!--1. M2K-->
@@ -156,13 +200,13 @@
 <!--5. RN Determinar Adeudo-->
 <!--6. RN Determinar Region Perfil-->
 <!--7. RN Determinar Prevalidacion-->
-<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://windows:7801/gestiontramites/wmb/InfoClienteService</con:endpoint><con:endpoint>http://localhost:7801/gestiontramites/wmb/InfoClienteService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/consultarDatosCliente" name="consultarDatosCliente" bindingOperationName="consultarDatosCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/InfoClienteService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema">
+<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://windows:7801/gestiontramites/wmb/InfoClienteService</con:endpoint><con:endpoint>http://localhost:7801/gestiontramites/wmb/InfoClienteService</con:endpoint><con:endpoint>http://localhost:7800/gestiontramites/wmb/InfoClienteService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/consultarDatosCliente" name="consultarDatosCliente" bindingOperationName="consultarDatosCliente" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/InfoClienteService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarDatosClienteRequest>
          <sch:request>
-            <sch:usuarioM2K>SVBPM5</sch:usuarioM2K>
-            <sch:telefono>5527671654</sch:telefono>
+            <sch:usuarioM2K>SVBPM51</sch:usuarioM2K>
+            <sch:telefono>5545305932</sch:telefono>
             <sch:sistemaSiantel>SIS</sch:sistemaSiantel>
             <sch:regionCAC>9</sch:regionCAC>
          </sch:request>
