@@ -10,19 +10,6 @@
             <output path="Properties"/>
         </move>
         <join>
-            <input path="RespuestaOK/Errores/Codigo" var="Codigo"/>
-            <input path="RespuestaOK/Errores/Mensaje" var="Mensaje"/>
-            <output path="consultarComentariosResponse/response/mensajesInformativos/errorInformativo"/>
-            <move automap="true">
-                <input path="$Codigo/."/>
-                <output path="codigo"/>
-            </move>
-            <move automap="true">
-                <input path="$Mensaje/."/>
-                <output path="mensaje"/>
-            </move>
-        </join>
-        <join>
             <input path="RespuestaOK/TipoComentario" var="TipoComentario"/>
             <input path="RespuestaOK/FechaEfectiva" var="FechaEfectiva"/>
             <input path="RespuestaOK/CveUsuario" var="CveUsuario"/>
@@ -65,5 +52,19 @@
                 <output path="sec"/>
             </move>
         </local>
+        <join>
+            <input path="RespuestaOK/Errores/Codigo" var="Codigo"/>
+            <input path="RespuestaOK/Errores/Mensaje" var="Mensaje"/>
+            <output path="consultarComentariosResponse/response/mensajes/mensaje"/>
+            <test lang="XPath">$Codigo-index = $Mensaje-index</test>
+            <move>
+                <input path="$Codigo/."/>
+                <output path="codigo"/>
+            </move>
+            <move>
+                <input path="$Mensaje/."/>
+                <output path="descripcion"/>
+            </move>
+        </join>
     </mappingDeclaration>
 </mappingRoot>
