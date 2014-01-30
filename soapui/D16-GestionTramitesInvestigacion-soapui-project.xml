@@ -703,7 +703,8 @@
                <sch:fuentePiv>?</sch:fuentePiv>
                <sch:secuenciaPiv>?</sch:secuenciaPiv>
                <sch:telMarcadoPiv>?</sch:telMarcadoPiv>
-            </sch:referencia>-->
+            </sch:referencia>
+-->
          </sch:request>
       </sch:consultarConsumosRequest>
    </soapenv:Body>

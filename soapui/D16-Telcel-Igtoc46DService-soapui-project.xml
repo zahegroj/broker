@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="D16_Telcel_Igtoc46DService" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="Igtoc46DBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/m2k/wmb/igtoc46/d}Igtoc46DBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc46DService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\Igtoc46DService.wsdl"><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\Igtoc46DService.wsdl</con:url><con:content><![CDATA[<definitions name="Igtoc46D" targetNamespace="http://www.telcel.com.mx/m2k/wmb/igtoc46/d" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/igtoc46/d" xmlns:types="http://www.telcel.com.mx/m2k/igtoc46/d" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project activeEnvironment="Default" name="D16_Telcel_Igtoc46DService" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="Igtoc46DBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/m2k/wmb/igtoc46/d}Igtoc46DBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc46DService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc46DService.wsdl"><con:part><con:url>file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc46DService.wsdl</con:url><con:content><![CDATA[<definitions name="Igtoc46D" targetNamespace="http://www.telcel.com.mx/m2k/wmb/igtoc46/d" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/igtoc46/d" xmlns:types="http://www.telcel.com.mx/m2k/igtoc46/d" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <documentation>
     <appinfo source="WMQI_APPINFO">
       <MRWSDLAppInfo imported="true">
@@ -19,14 +19,14 @@
   <message name="ejecutarServicioMsgResponse">
     <part element="types:RespuestaOK" name="parameters"/>
   </message>
-  <message name="respuestaErrorMsg">
-    <part element="comun:RespuestaError" name="fault"/>
+  <message name="respuestaErrorFault">
+    <part element="comun:RespuestaError" name="parameters"/>
   </message>
   <portType name="Igtoc46DPort">
     <operation name="ejecutarServicio">
       <input message="this:ejecutarServicioMsg"/>
       <output message="this:ejecutarServicioMsgResponse"/>
-      <fault message="this:respuestaErrorMsg" name="RespuestaError"/>
+      <fault message="this:respuestaErrorFault" name="fault"/>
     </operation>
   </portType>
   <binding name="Igtoc46DBinding" type="this:Igtoc46DPort">
@@ -39,8 +39,8 @@
       <output>
         <soap:body use="literal"/>
       </output>
-      <fault name="RespuestaError">
-        <soap:fault name="RespuestaError" use="literal"/>
+      <fault name="fault">
+        <soap:fault name="fault" use="literal"/>
       </fault>
     </operation>
   </binding>
@@ -74,8 +74,8 @@
       <xsd:element name="p03fechaInicio" type="m2k:FechaType"/>
       <xsd:element name="p04fechaFin" type="m2k:FechaType"/>
       <xsd:element name="p05tipoComentarioPiv" type="m2k:AlfanumericoType"/>
-      <xsd:element name="p06fechaPiv" type="m2k:FechaType"/>
-      <xsd:element name="p07horaPiv" type="m2k:FechaType"/>
+      <xsd:element name="p06fechaPiv" type="m2k:FechaPivType"/>
+      <xsd:element name="p07horaPiv" type="m2k:HoraPivType"/>
       <xsd:element name="p08secPiv" type="m2k:SecPivType"/>
     </xsd:sequence>
   </xsd:complexType>
@@ -83,8 +83,9 @@
     <xsd:complexContent>
       <xsd:extension base="m2k:ResponseBase">
         <xsd:sequence>
+          <xsd:element minOccurs="0" name="Errores" type="m2k:ErroresInfoType"/>
           <xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc46d"/>
-          <xsd:element name="referencia" type="xsd:string"/>
+          <xsd:element name="Referencia" type="xsd:string"/>
         </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
@@ -116,13 +117,13 @@
   </xsd:complexType>
   <xsd:complexType name="ErroresInfoType">
     <xsd:sequence>
-      <xsd:group maxOccurs="unbounded" ref="erroresInfoGroup"/>
+      <xsd:group ref="erroresInfoGroup" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:group name="erroresInfoGroup">
     <xsd:sequence>
-      <xsd:element minOccurs="0" name="Codigo" type="xsd:string"/>
-      <xsd:element minOccurs="0" name="Mensaje" type="xsd:string"/>
+      <xsd:element name="Codigo" type="xsd:string"/>
+      <xsd:element name="Mensaje" type="xsd:string"/>
     </xsd:sequence>
   </xsd:group>
   <xsd:complexType name="ResponseBase">
@@ -134,7 +135,7 @@
   <xsd:complexType name="RequestBase">
     <xsd:sequence>
       <xsd:element name="user" type="xsd:string"/>
-      <xsd:element name="region" type="xsd:integer"/>
+      <xsd:element name="region" type="xsd:string"/>
       <xsd:element name="function" type="xsd:string"/>
       <xsd:element name="action" type="xsd:string"/>
     </xsd:sequence>
@@ -202,16 +203,16 @@
       </xsd:extension>
     </xsd:simpleContent>
   </xsd:complexType>
-  <xsd:complexType name="TipoPagoPivType">
+  <xsd:complexType name="TipoPagoType">
     <xsd:simpleContent>
-      <xsd:extension base="tipoPagoPivFormato">
+      <xsd:extension base="tipoPagoFormato">
         <xsd:attribute name="longitud" type="longitudFormato" use="required"/>
       </xsd:extension>
     </xsd:simpleContent>
   </xsd:complexType>
-  <xsd:complexType name="SecPagoPivType">
+  <xsd:complexType name="SecPagoType">
     <xsd:simpleContent>
-      <xsd:extension base="secPagoPivFormato">
+      <xsd:extension base="secPagoFormato">
         <xsd:attribute name="longitud" type="longitudFormato" use="required"/>
       </xsd:extension>
     </xsd:simpleContent>
@@ -233,6 +234,20 @@
   <xsd:complexType name="TipoGrupoType">
     <xsd:simpleContent>
       <xsd:extension base="tipoGrupoFormato">
+        <xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaType">
+    <xsd:simpleContent>
+      <xsd:extension base="referenciaFormato">
+        <xsd:attribute name="longitud" type="longitudFormato" use="required"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="GenericoType">
+    <xsd:simpleContent>
+      <xsd:extension base="genericoFormato">
         <xsd:attribute name="longitud" type="longitudFormato" use="required"/>
       </xsd:extension>
     </xsd:simpleContent>
@@ -261,7 +276,7 @@
   </xsd:simpleType>
   <xsd:simpleType name="alfanumericoFormato">
     <xsd:restriction base="xsd:string">
-      <xsd:pattern value="^[a-zA-Z0-9]*$"/>
+      <xsd:pattern value="|[a-zA-Z0-9]+"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="productoFormato">
@@ -289,12 +304,12 @@
       <xsd:maxLength value="5"/>
     </xsd:restriction>
   </xsd:simpleType>
-  <xsd:simpleType name="tipoPagoPivFormato">
+  <xsd:simpleType name="tipoPagoFormato">
     <xsd:restriction base="alfanumericoFormato">
       <xsd:maxLength value="2"/>
     </xsd:restriction>
   </xsd:simpleType>
-  <xsd:simpleType name="secPagoPivFormato">
+  <xsd:simpleType name="secPagoFormato">
     <xsd:restriction base="xsd:string">
       <xsd:pattern value="|\d{5}"/>
     </xsd:restriction>
@@ -312,6 +327,19 @@
   <xsd:simpleType name="tipoGrupoFormato">
     <xsd:restriction base="alfanumericoFormato">
       <xsd:maxLength value="2"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="referenciaFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|^[a-zA-Z0-9 ]*$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="genericoFormato">
+    <xsd:restriction base="xsd:string"></xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="decimalFormato">
+    <xsd:restriction base="xsd:decimal">
+      <xsd:fractionDigits value="2"/>
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/m2k/wmb/Igtoc46DService</con:endpoint><con:endpoint>http://localhost:7800/m2k/wmb/Igtoc46DService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/m2k/wmb/igtoc46/d/ejecutarServicio" name="ejecutarServicio" bindingOperationName="ejecutarServicio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7800/m2k/wmb/Igtoc46DService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:d="http://www.telcel.com.mx/m2k/igtoc46/d">
