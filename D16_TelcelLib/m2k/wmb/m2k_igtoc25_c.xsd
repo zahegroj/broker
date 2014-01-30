@@ -38,11 +38,11 @@
 					<xsd:element name="DATOS-RETCS" type="xsd:string"/>
 					<xsd:element name="RFC" type="xsd:string"/>
 					<xsd:element name="CONTRATACION-CLIENTE" type="xsd:string"/>
-					<xsd:element name="CICLO" type="xsd:byte"/>
+					<xsd:element name="CICLO" type="xsd:string"/>
 					<xsd:element name="TIPO-CUENTA" type="xsd:string"/>
 					<xsd:group maxOccurs="3" minOccurs="3" ref="subgroup_output_igtoc25c"/>
 					<xsd:element name="DATOS-RETUS" type="xsd:string"/>
-					<xsd:element name="NUM-TELCEL" type="xsd:long"/>
+					<xsd:element name="NUM-TELCEL" type="xsd:string"/>
 					<xsd:element name="ESTATUS-NUM" type="xsd:string"/>
 					<xsd:element name="TITULARAPELLIDO" type="xsd:string"/>
 					<xsd:element name="TITULARNOMBRE" type="xsd:string"/>
@@ -50,10 +50,10 @@
 					<xsd:element name="MARCA" type="xsd:string"/>
 					<xsd:element name="MODELO" type="xsd:string"/>
 					<xsd:element name="DATOS-CSING" type="xsd:string"/>
-					<xsd:element name="F-ADENDUM" type="xsd:int"/>
-					<xsd:element name="ADENDUM" type="xsd:byte"/>
+					<xsd:element name="F-ADENDUM" type="xsd:string"/>
+					<xsd:element name="ADENDUM" type="xsd:string"/>
 					<xsd:element name="DATOS-PNHST" type="xsd:string"/>
-					<xsd:element name="NUM-IMEI" type="xsd:long"/>
+					<xsd:element name="NUM-IMEI" type="xsd:string"/>
 					<xsd:element name="FEC-CICLO" type="xsd:string"/>
 					<xsd:element name="TIP-PLAN" type="xsd:string"/>
 					<xsd:element name="PLAN" type="xsd:string"/>

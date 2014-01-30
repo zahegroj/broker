@@ -28,6 +28,8 @@
 			<xsd:element name="p02cuenta" type="m2k:CuentaType"/>
 			<xsd:element name="p03fechaInicio" type="m2k:FechaType"/>
 			<xsd:element name="p04fechaFin" type="m2k:FechaType"/>
+			<xsd:element name="p05refTelefono" type="m2k:TelefonoType"/>
+      		<xsd:element name="p06refEffDate" type="m2k:FechaPivType" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -35,17 +37,24 @@
 		<xsd:complexContent>
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
-					<xsd:element name="Tel" type="xsd:string"/>
-					<xsd:element name="FecEfe" type="xsd:float"/>
-					<xsd:element name="Estatus" type="xsd:float"/>
-					<xsd:element name="Motivo" type="xsd:float"/>
-					<xsd:element name="Tecnol" type="xsd:float"/>
-					<xsd:element name="IMEI" type="xsd:string"/>
-					<xsd:element name="ICCID" type="xsd:string"/>
-					<xsd:element name="IMSI" type="xsd:string"/>
-					<xsd:element name="Usuario" type="xsd:string"/>
+					<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc49c"/>
+					<xsd:element name="Referencia" type="xsd:string"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	
+	<xsd:group name="subgroup_output_igtoc49c">
+		<xsd:sequence>
+			<xsd:element name="Tel" type="xsd:string"/>
+			<xsd:element name="FecEfe" type="xsd:string"/>
+			<xsd:element name="Estatus" type="xsd:string"/>
+			<xsd:element name="Motivo" type="xsd:string"/>
+			<xsd:element name="Tecnol" type="xsd:string"/>
+			<xsd:element name="IMEI" type="xsd:string"/>
+			<xsd:element name="ICCID" type="xsd:string"/>
+			<xsd:element name="IMSI" type="xsd:string"/>
+			<xsd:element name="Usuario" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:group>
 </xsd:schema>

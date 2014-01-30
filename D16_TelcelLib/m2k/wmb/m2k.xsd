@@ -21,14 +21,14 @@
 	
 	<xsd:complexType name="ErroresInfoType">
 		<xsd:sequence>
-			<xsd:group maxOccurs="unbounded" ref="erroresInfoGroup"/>
+			<xsd:group ref="erroresInfoGroup" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
 	<xsd:group name="erroresInfoGroup">
 		<xsd:sequence>
-			<xsd:element minOccurs="0" name="Codigo" type="xsd:string"/>
-			<xsd:element minOccurs="0" name="Mensaje" type="xsd:string"/>
+			<xsd:element name="Codigo" type="xsd:string"/>
+			<xsd:element name="Mensaje" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:group>
 	
@@ -42,7 +42,7 @@
 	<xsd:complexType name="RequestBase">
 		<xsd:sequence>
 			<xsd:element name="user" type="xsd:string"/>
-			<xsd:element name="region" type="xsd:integer"/>
+			<xsd:element name="region" type="xsd:string"/>
 			<xsd:element name="function" type="xsd:string"/>
 			<xsd:element name="action" type="xsd:string"/>
 		</xsd:sequence>

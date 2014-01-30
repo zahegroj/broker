@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><definitions name="SiantelService" targetNamespace="http://www.telcel.com.mx/siantel/wmb" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/siantel/wmb" xmlns:types="http://www.telcel.com.mx/siantel" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <documentation>
-    <appinfo source="WMQI_APPINFO">
-      <MRWSDLAppInfo imported="true">
-        <binding hasEncoding="false" imported="true" name="SiantelBinding" originalBindingStyle="document"/>
-      </MRWSDLAppInfo>
-    </appinfo>
-  </documentation>
+	<documentation>
+		<appinfo source="WMQI_APPINFO">
+			<MRWSDLAppInfo imported="true">
+				<binding hasEncoding="false" imported="true" name="SiantelBinding" originalBindingStyle="document"/>
+			</MRWSDLAppInfo>
+		</appinfo>
+	</documentation>
+	
 	<types>
 		<xsd:schema>
-		<xsd:import schemaLocation="siantel.xsd" namespace="http://www.telcel.com.mx/siantel" />
-</xsd:schema>
+			<xsd:import schemaLocation="siantel.xsd" namespace="http://www.telcel.com.mx/siantel" />
+		</xsd:schema>
 	</types>
 	
 	<message name="getPerfilTelefonoRequest">
@@ -40,8 +41,8 @@
 			<output>
 				<soap:body use="literal"/>
 			</output>
-			<fault name="getPerfilTelefonoFault">
-				<soap:fault name="getPerfilTelefonoFault" use="literal"/>
+			<fault name="fault">
+				<soap:fault name="fault" use="literal"/>
 			</fault>
 		</operation>
 	</binding>

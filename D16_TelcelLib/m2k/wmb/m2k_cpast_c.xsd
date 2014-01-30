@@ -24,8 +24,8 @@
 	
 	<xsd:complexType name="ServicioType">
 		<xsd:sequence>
-			<xsd:element minOccurs="0" name="p01telefono" type="m2k:TelefonoType"/>
-			<xsd:element minOccurs="0" name="p02cuenta" type="m2k:CuentaType"/>
+			<xsd:element name="p01cuenta" type="m2k:CuentaType"/>
+			<xsd:element name="p02maxRegistros" type="xsd:integer"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -34,53 +34,44 @@
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
 					<xsd:element minOccurs="0" name="Errores" type="m2k:ErroresInfoType"/>
-					<xsd:element name="DesactivacionesNoPago" type="xsd:byte"/>
-					<xsd:element name="NotasCobroEnviadas" type="xsd:byte"/>
-					<xsd:element name="PromesasPagosIncumplidas" type="xsd:byte"/>
-					<xsd:element name="RentaMensualPromedio" type="xsd:float"/>
-					<xsd:element name="ChequesDevueltos" type="xsd:byte"/>
-					<xsd:element name="CicloFacturacion" type="xsd:byte"/>
-					<xsd:element name="ClaseCredito" type="xsd:string"/>
-					<xsd:element name="CuentaPadre" type="xsd:byte"/>
-					<xsd:element name="EstatusCobranza" type="xsd:string"/>
-					<xsd:element name="EstatusCuenta" type="xsd:string"/>
-					<xsd:element name="FechaAlta" type="xsd:string"/>
-					<xsd:element name="FechaCancelacion" type="xsd:string"/>
-					<xsd:element name="FechaUltimaFactura" type="xsd:string"/>
-					<xsd:element name="FechaUltimoPago" type="xsd:string"/>
-					<xsd:element name="Importe" type="xsd:float"/>
-					<xsd:element name="NombreCliente" type="xsd:string"/>
-					<xsd:element name="NumerosTelcel" type="xsd:byte"/>
-					<xsd:element name="NumeroSuspensiones" type="xsd:byte"/>
-					<xsd:element name="PenalizacionIVA" type="xsd:float"/>
-					<xsd:element name="PromedioTiempoAire" type="xsd:string"/>
-					<xsd:element name="Saldo" type="xsd:float"/>
-					<xsd:element name="Saldo120" type="xsd:float"/>
-					<xsd:element name="Saldo30" type="xsd:float"/>
-					<xsd:element name="Saldo60" type="xsd:float"/>
-					<xsd:element name="Saldo90" type="xsd:float"/>
-					<xsd:element name="SaldoActual" type="xsd:float"/>
-					<xsd:element name="SaldoEstimado" type="xsd:float"/>
-					<xsd:element name="SaldoMes" type="xsd:float"/>
-					<xsd:element name="SaldoPenalizacion" type="xsd:float"/>
-					<xsd:element name="TipoCuenta" type="xsd:string"/>
-					<xsd:element name="TotalDeposito" type="xsd:float"/>
-					<xsd:element name="TotalDisputa" type="xsd:float"/>
-					<xsd:element name="Cuenta" type="xsd:int"/>
-					<xsd:element name="FechaFactura1" type="xsd:string"/>
-					<xsd:element name="FechaFactura2" type="xsd:string"/>
-					<xsd:element name="FechaFactura3" type="xsd:string"/>
-					<xsd:element name="FechaFactura4" type="xsd:string"/>
-					<xsd:element name="ImporteFactura1" type="xsd:float"/>
-					<xsd:element name="ImporteFactura2" type="xsd:float"/>
-					<xsd:element name="ImporteFactura3" type="xsd:float"/>
-					<xsd:element name="ImporteFactura4" type="xsd:float"/>
-					<xsd:element name="UltimaFechaFactura1" type="xsd:string"/>
-					<xsd:element name="UltimaFechaFactura2" type="xsd:string"/>
-					<xsd:element name="UltimaFechaFactura3" type="xsd:string"/>
-					<xsd:element name="UltimaFechaFactura4" type="xsd:string"/>
+					<xsd:element name="Apellido" type="xsd:string"/>
+					<xsd:element name="Nombre" type="xsd:string"/>
+					<xsd:element name="NumFrec1A" type="xsd:string"/>
+					<xsd:element name="NumFrec1B" type="xsd:string"/>
+					<xsd:element name="NumFrec2A" type="xsd:string"/>
+					<xsd:element name="NumFrec2B" type="xsd:string"/>
+					<xsd:element name="NumFrec3A" type="xsd:string"/>
+					<xsd:element name="NumFrec3B" type="xsd:string"/>
+					<xsd:element name="NumFrec4A" type="xsd:string"/>
+					<xsd:element name="NumFrec4B" type="xsd:string"/>
+					<xsd:element name="CveVentasCel" type="xsd:string"/>
+					<xsd:element name="SuspParc" type="xsd:string"/>
+					<xsd:element name="TablaCpast" type="TablaCpastType"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	
+	<xsd:complexType name="TablaCpastType">
+		<xsd:sequence>
+			<xsd:group ref="subgroup_output_tablacpast" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:group name="subgroup_output_tablacpast">
+		<xsd:sequence>
+			<xsd:element name="Fecha" type="xsd:string"/>
+			<xsd:element name="Hora" type="xsd:string"/>
+			<xsd:element name="AccionTomada" type="xsd:string"/>
+			<xsd:element name="Descripcion" type="xsd:string"/>
+			<xsd:element name="Acc" type="xsd:string"/>
+			<xsd:element name="Est" type="xsd:string"/>
+			<xsd:element name="Tipo" type="xsd:string"/>
+			<xsd:element name="RepCobranza" type="xsd:string"/>
+			<xsd:element name="NomContacto" type="xsd:string"/>
+			<xsd:element name="PromesaPago" type="xsd:string"/>
+			<xsd:element name="ImportePago" type="xsd:string"/>
+			<xsd:element name="EstProm" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:group>
 </xsd:schema>

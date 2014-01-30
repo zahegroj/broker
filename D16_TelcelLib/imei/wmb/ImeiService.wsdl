@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><definitions name="Imei" targetNamespace="http://www.telcel.com.mx/imei/wmb" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/imei/wmb" xmlns:types="http://www.telcel.com.mx/imei" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <documentation>
-    <appinfo source="WMQI_APPINFO">
-      <MRWSDLAppInfo imported="true">
-        <binding hasEncoding="false" imported="true" name="ImeiBinding" originalBindingStyle="document"/>
-      </MRWSDLAppInfo>
-    </appinfo>
-  </documentation>
+	<documentation>
+		<appinfo source="WMQI_APPINFO">
+			<MRWSDLAppInfo imported="true">
+				<binding hasEncoding="false" imported="true" name="ImeiBinding" originalBindingStyle="document"/>
+			</MRWSDLAppInfo>
+		</appinfo>
+	</documentation>
+	
 	<types>
 		<xsd:schema>
-		<xsd:import schemaLocation="imei.xsd" namespace="http://www.telcel.com.mx/imei" />
-</xsd:schema>
+			<xsd:import schemaLocation="imei.xsd" namespace="http://www.telcel.com.mx/imei" />
+		</xsd:schema>
 	</types>
 	
 	<message name="consultarImeiACMsg">
@@ -40,8 +41,8 @@
 			<output>
 				<soap:body use="literal"/>
 			</output>
-			<fault name="consultarImeiACFault">
-				<soap:fault name="consultarImeiACFault" use="literal"/>
+			<fault name="fault">
+				<soap:fault name="fault" use="literal"/>
 			</fault>
 		</operation>
 	</binding>

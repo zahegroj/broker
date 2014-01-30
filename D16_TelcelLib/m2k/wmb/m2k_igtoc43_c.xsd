@@ -42,7 +42,7 @@
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
 				<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc43c"/>
-				<xsd:element name="referencia" type="xsd:string"/>
+				<xsd:element name="Referencia" type="xsd:string"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

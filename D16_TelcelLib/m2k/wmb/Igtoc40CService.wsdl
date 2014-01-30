@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><definitions name="Igtoc40C" targetNamespace="http://www.telcel.com.mx/m2k/wmb/igtoc40/c" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/igtoc40/c" xmlns:types="http://www.telcel.com.mx/m2k/igtoc40/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <documentation>
-    <appinfo source="WMQI_APPINFO">
-      <MRWSDLAppInfo imported="true">
-        <binding hasEncoding="false" imported="true" name="Igtoc40CBinding" originalBindingStyle="document"/>
-      </MRWSDLAppInfo>
-    </appinfo>
-  </documentation>
+	<documentation>
+		<appinfo source="WMQI_APPINFO">
+			<MRWSDLAppInfo imported="true">
+				<binding hasEncoding="false" imported="true" name="Igtoc40CBinding" originalBindingStyle="document"/>
+			</MRWSDLAppInfo>
+		</appinfo>
+	</documentation>
+	
 	<types>
 		<xsd:schema>
-<xsd:import namespace="http://www.telcel.com.mx/m2k/igtoc40/c" schemaLocation="m2k_igtoc40_c.xsd"/>
-<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
-</xsd:schema>
+			<xsd:import namespace="http://www.telcel.com.mx/m2k/igtoc40/c" schemaLocation="m2k_igtoc40_c.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+		</xsd:schema>
 	</types>
 	
 	<message name="ejecutarServicioMsg">
@@ -19,15 +20,15 @@
 	<message name="ejecutarServicioMsgResponse">
 		<part element="types:RespuestaOK" name="parameters"/>
 	</message>
-	<message name="respuestaErrorMsg">
-		<part element="comun:RespuestaError" name="fault"/>
+	<message name="respuestaErrorFault">
+		<part element="comun:RespuestaError" name="parameters"/>
 	</message>
 	
 	<portType name="Igtoc40CPort">
 		<operation name="ejecutarServicio">
 			<input message="this:ejecutarServicioMsg"/>
 			<output message="this:ejecutarServicioMsgResponse"/>
-			<fault message="this:respuestaErrorMsg" name="RespuestaError"/>
+			<fault message="this:respuestaErrorFault" name="fault"/>
 		</operation>
 	</portType>
 	
@@ -41,8 +42,8 @@
 			<output>
 				<soap:body use="literal"/>
 			</output>
-			<fault name="RespuestaError">
-				<soap:fault name="RespuestaError" use="literal"/>
+			<fault name="fault">
+				<soap:fault name="fault" use="literal"/>
 			</fault>
 		</operation>
 	</binding>

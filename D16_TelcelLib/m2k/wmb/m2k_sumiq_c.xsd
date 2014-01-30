@@ -34,14 +34,14 @@
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
 					<xsd:element minOccurs="0" name="Errores" type="m2k:ErroresInfoType"/>
-					<xsd:element name="DesactivacionesNoPago" type="xsd:byte"/>
-					<xsd:element name="NotasCobroEnviadas" type="xsd:byte"/>
-					<xsd:element name="PromesasPagosIncumplidas" type="xsd:byte"/>
+					<xsd:element name="DesactivacionesNoPago" type="xsd:string"/>
+					<xsd:element name="NotasCobroEnviadas" type="xsd:string"/>
+					<xsd:element name="PromesasPagosIncumplidas" type="xsd:string"/>
 					<xsd:element name="RentaMensualPromedio" type="xsd:string"/>
-					<xsd:element name="ChequesDevueltos" type="xsd:byte"/>
-					<xsd:element name="CicloFacturacion" type="xsd:byte"/>
+					<xsd:element name="ChequesDevueltos" type="xsd:string"/>
+					<xsd:element name="CicloFacturacion" type="xsd:string"/>
 					<xsd:element name="ClaseCredito" type="xsd:string"/>
-					<xsd:element name="CuentaPadre" type="xsd:byte"/>
+					<xsd:element name="CuentaPadre" type="xsd:string"/>
 					<xsd:element name="EstatusCobranza" type="xsd:string"/>
 					<xsd:element name="EstatusCuenta" type="xsd:string"/>
 					<xsd:element name="FechaAlta" type="xsd:string"/>
@@ -50,8 +50,8 @@
 					<xsd:element name="FechaUltimoPago" type="xsd:string"/>
 					<xsd:element name="Importe" type="xsd:string"/>
 					<xsd:element name="NombreCliente" type="xsd:string"/>
-					<xsd:element name="NumerosTelcel" type="xsd:byte"/>
-					<xsd:element name="NumeroSuspensiones" type="xsd:byte"/>
+					<xsd:element name="NumerosTelcel" type="xsd:string"/>
+					<xsd:element name="NumeroSuspensiones" type="xsd:string"/>
 					<xsd:element name="PenalizacionIVA" type="xsd:string"/>
 					<xsd:element name="PromedioTiempoAire" type="xsd:string"/>
 					<xsd:element name="Saldo" type="xsd:string"/>
@@ -66,7 +66,7 @@
 					<xsd:element name="TipoCuenta" type="xsd:string"/>
 					<xsd:element name="TotalDeposito" type="xsd:string"/>
 					<xsd:element name="TotalDisputa" type="xsd:string"/>
-					<xsd:element name="Cuenta" type="xsd:int"/>
+					<xsd:element name="Cuenta" type="xsd:string"/>
 					<xsd:element name="FechaFactura1" type="xsd:string"/>
 					<xsd:element name="FechaFactura2" type="xsd:string"/>
 					<xsd:element name="FechaFactura3" type="xsd:string"/>

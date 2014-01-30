@@ -9,8 +9,8 @@
   </wsdl:documentation>
 	<wsdl:types>
 		<schema targetNamespace="http://servicios.web.m2k.sds.telcel.com" xmlns="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="ControlWebService_InlineSchema1.xsd"/>
-    </schema>
+			<xsd:include schemaLocation="ControlWebService_InlineSchema1.xsd"/>
+    	</schema>
 	</wsdl:types>
 	<wsdl:message name="ejecutaServicioRequest">
 		<wsdl:part element="impl:ejecutaServicio" name="parameters">

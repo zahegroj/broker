@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/m2k/igtoc52/c" xmlns="http://www.telcel.com.mx/m2k/igtoc52/c" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:m2k="http://www.telcel.com.mx/m2k" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/m2k/igtoc44/d" xmlns="http://www.telcel.com.mx/m2k/igtoc44/d" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:m2k="http://www.telcel.com.mx/m2k" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
 	<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
 	
@@ -28,8 +28,9 @@
 			<xsd:element name="p02cuenta" type="m2k:CuentaType"/>
 			<xsd:element name="p03fechaInicio" type="m2k:FechaType"/>
 			<xsd:element name="p04fechaFin" type="m2k:FechaType"/>
-			<xsd:element name="p05cveDesc" type="m2k:AlfanumericoType"/>
-			<xsd:element name="p06effDt" type="m2k:AlfanumericoType"/>			
+			<xsd:element name="p05claveProdPiv" type="m2k:ProductoType"/>
+			<xsd:element name="p06fechaProdPiv" type="m2k:FechaPivType"/>
+			<xsd:element name="p07estatusProdPiv" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -37,21 +38,19 @@
 		<xsd:complexContent>
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
-					<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc52c"/>
+					<xsd:group ref="subgroup_output_igtoc44d" maxOccurs="unbounded" />
 					<xsd:element name="Referencia" type="xsd:string"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 	
-	<xsd:group name="subgroup_output_igtoc52c">
+	<xsd:group name="subgroup_output_igtoc44d">
 		<xsd:sequence>
-			<xsd:element name="PlanDesc" type="xsd:string"/>
-			<xsd:element name="DescPlanDesc" type="xsd:string"/>
-			<xsd:element name="Periodicidad" type="xsd:string"/>
-			<xsd:element name="FechaEfect" type="xsd:string"/>
-			<xsd:element name="FechaExpira" type="xsd:string"/>
-			<xsd:element name="Status" type="xsd:string"/>
+			<xsd:element name="Producto" type="xsd:string"/>
+			<xsd:element name="InclPlan" type="xsd:string"/>
+			<xsd:element name="FechaEfe" type="xsd:string"/>
+			<xsd:element name="Est" type="xsd:string"/>
 			<xsd:element name="Usuario" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:group>

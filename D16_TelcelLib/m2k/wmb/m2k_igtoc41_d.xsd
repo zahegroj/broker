@@ -42,8 +42,8 @@
 					<xsd:element name="DatInc" type="xsd:string"/>
 					<xsd:element name="CosPl" type="xsd:string"/>
 					<xsd:element name="Producto" type="xsd:string"/>
-					<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc41d"/>
-					<xsd:element name="referencia" type="xsd:string"/>
+					<xsd:group ref="subgroup_output_igtoc41d" maxOccurs="unbounded" />
+					<xsd:element name="Referencia" type="xsd:string"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

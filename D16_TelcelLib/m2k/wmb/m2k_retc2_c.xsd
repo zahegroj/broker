@@ -50,7 +50,7 @@
 					<xsd:element name="Cp" type="xsd:string"/>
 					<xsd:element name="CuentaConsolidada" type="xsd:string"/>
 					<xsd:element name="Delegacion" type="xsd:string"/>
-					<xsd:element name="EstAcctBal" type="xsd:float"/>
+					<xsd:element name="EstAcctBal" type="xsd:string"/>
 					<xsd:element name="Estado" type="xsd:string"/>
 					<xsd:element name="EstadoCortesia" type="xsd:string"/>
 					<xsd:element name="EstatusCuenta" type="xsd:string"/>
@@ -66,7 +66,7 @@
 					<xsd:element name="Nombre" type="xsd:string"/>
 					<xsd:element name="Numero" type="xsd:string"/>
 					<xsd:element name="NumeroCredito" type="xsd:string"/>
-					<xsd:element name="NumeroCuenta" type="xsd:long"/>
+					<xsd:element name="NumeroCuenta" type="xsd:string"/>
 					<xsd:element name="NumeroExencionEstado" type="xsd:string"/>
 					<xsd:element name="NumeroExencionFederal" type="xsd:string"/>
 					<xsd:element name="OrdenDeCompra" type="xsd:string"/>

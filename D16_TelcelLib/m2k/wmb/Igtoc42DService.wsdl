@@ -19,15 +19,15 @@
 	<message name="ejecutarServicioMsgResponse">
 		<part element="types:RespuestaOK" name="parameters"/>
 	</message>
-	<message name="respuestaErrorMsg">
-		<part element="comun:RespuestaError" name="fault"/>
+	<message name="respuestaErrorFault">
+		<part element="comun:RespuestaError" name="parameters"/>
 	</message>
 	
 	<portType name="Igtoc42DPort">
 		<operation name="ejecutarServicio">
 			<input message="this:ejecutarServicioMsg"/>
 			<output message="this:ejecutarServicioMsgResponse"/>
-			<fault message="this:respuestaErrorMsg" name="RespuestaError"/>
+			<fault message="this:respuestaErrorFault" name="fault"/>
 		</operation>
 	</portType>
 	
@@ -41,8 +41,8 @@
 			<output>
 				<soap:body use="literal"/>
 			</output>
-			<fault name="RespuestaError">
-				<soap:fault name="RespuestaError" use="literal"/>
+			<fault name="fault">
+				<soap:fault name="fault" use="literal"/>
 			</fault>
 		</operation>
 	</binding>

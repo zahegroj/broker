@@ -37,7 +37,7 @@
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
 					<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc47c"/>
-					<xsd:element name="referencia" type="xsd:string"/>
+					<xsd:element name="Referencia" type="xsd:string"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -45,11 +45,11 @@
 	
 	<xsd:group name="subgroup_output_igtoc47c">
 		<xsd:sequence>
-			<xsd:element name="FecPago" type="m2k:FechaType"/>
-			<xsd:element name="FecApli" type="m2k:FechaType"/>
+			<xsd:element name="FecPago" type="xsd:string"/>
+			<xsd:element name="FecApli" type="xsd:string"/>
 			<xsd:element name="FecReve" type="xsd:string"/>
-			<xsd:element name="ImpApli" type="xsd:double"/>
-			<xsd:element name="FecFact" type="m2k:FechaType"/>
+			<xsd:element name="ImpApli" type="xsd:string"/>
+			<xsd:element name="FecFact" type="xsd:string"/>
 			<xsd:element name="ForPago" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:group>

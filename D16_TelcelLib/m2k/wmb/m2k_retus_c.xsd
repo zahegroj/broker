@@ -32,11 +32,11 @@
 		<xsd:complexContent>
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
-					<xsd:element name="IndTecno" type="xsd:byte"/>
-					<xsd:element name="GsmIndicator" type="xsd:byte"/>
+					<xsd:element name="IndTecno" type="xsd:string"/>
+					<xsd:element name="GsmIndicator" type="xsd:string"/>
 					<xsd:element name="EstatusNumero" type="xsd:string"/>
 					<xsd:element name="MotivoNumero" type="xsd:string"/>
-					<xsd:element name="Cuenta" type="xsd:int"/>
+					<xsd:element name="Cuenta" type="xsd:string"/>
 					<xsd:element name="EstatusCuenta" type="xsd:string"/>
 					<xsd:element name="Referencia" type="xsd:string"/>
 					<xsd:element name="Apellidos" type="xsd:string"/>
@@ -46,17 +46,17 @@
 					<xsd:element name="Email" type="xsd:string"/>
 					<xsd:element name="TipoCalle" type="xsd:string"/>
 					<xsd:element name="Calle" type="xsd:string"/>
-					<xsd:element name="Numero" type="xsd:byte"/>
+					<xsd:element name="Numero" type="xsd:string"/>
 					<xsd:element name="Interior" type="xsd:string"/>
 					<xsd:element name="Colonia" type="xsd:string"/>
 					<xsd:element name="Ap" type="xsd:string"/>
 					<xsd:element name="TipoDir" type="xsd:string"/>
 					<xsd:element name="Delegacion" type="xsd:string"/>
 					<xsd:element name="Estado" type="xsd:string"/>
-					<xsd:element name="Cp" type="xsd:short"/>
+					<xsd:element name="Cp" type="xsd:string"/>
 					<xsd:element name="Pais" type="xsd:string"/>
 					<xsd:element name="HomeZoneCity" type="xsd:string"/>
-					<xsd:element name="Telefono1" type="xsd:int"/>
+					<xsd:element name="Telefono1" type="xsd:string"/>
 					<xsd:element name="Ext1" type="xsd:string"/>
 					<xsd:element name="Telefono2" type="xsd:string"/>
 					<xsd:element name="Ext2" type="xsd:string"/>
@@ -69,13 +69,13 @@
 					<xsd:element name="FechaAltaUsuario" type="xsd:string"/>
 					<xsd:element name="PlanTarifario" type="xsd:string"/>
 					<xsd:element name="FechaCancelacion" type="xsd:string"/>
-					<xsd:element name="CicloFact" type="xsd:byte"/>
+					<xsd:element name="CicloFact" type="xsd:string"/>
 					<xsd:element name="FechaEfectivaPlan" type="xsd:string"/>
 					<xsd:element name="FechaBajaUsuario" type="xsd:string"/>
-					<xsd:element name="Deposito" type="xsd:float"/>
-					<xsd:element name="PlazoForzoso" type="xsd:byte"/>
+					<xsd:element name="Deposito" type="xsd:string"/>
+					<xsd:element name="PlazoForzoso" type="xsd:string"/>
 					<xsd:element name="BonificacionSN" type="xsd:string"/>
-					<xsd:element name="DepositoRequerido" type="xsd:float"/>
+					<xsd:element name="DepositoRequerido" type="xsd:string"/>
 					<xsd:element name="FechaPlazoForzoso" type="xsd:string"/>
 					<xsd:element name="BonificacionPje" type="xsd:string"/>
 					<xsd:element name="ClaveFianza" type="xsd:string"/>
