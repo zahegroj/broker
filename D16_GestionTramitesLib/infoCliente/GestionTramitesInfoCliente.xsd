@@ -44,18 +44,21 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarDatosClienteResponseType">
-		<xsd:sequence>
-			<xsd:element name="mensajes" type="comun:ArrayOfMensaje" minOccurs="0" />
-			<xsd:element name="nombreCliente" type="xsd:string"/>
-			<xsd:element name="cuenta" type="xsd:int"/>
-			<xsd:element name="estatusCobranza" type="xsd:string"/>
-			<xsd:element name="estatusCuenta" type="xsd:string"/>
-			<xsd:element name="saldoActual" type="comun:decimalFormato"/>
-			<xsd:element name="saldoEstimado" type="comun:decimalFormato"/>
-			<xsd:element name="saldoMes" type="comun:decimalFormato"/>
-			<xsd:element name="importe" type="comun:decimalFormato"/>
-			<xsd:element name="facturas" type="this:ArrayOfFactura"/>
-		</xsd:sequence>
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="nombreCliente" type="xsd:string"/>
+					<xsd:element name="cuenta" type="xsd:int"/>
+					<xsd:element name="estatusCobranza" type="xsd:string"/>
+					<xsd:element name="estatusCuenta" type="xsd:string"/>
+					<xsd:element name="saldoActual" type="comun:decimalFormato"/>
+					<xsd:element name="saldoEstimado" type="comun:decimalFormato"/>
+					<xsd:element name="saldoMes" type="comun:decimalFormato"/>
+					<xsd:element name="importe" type="comun:decimalFormato"/>
+					<xsd:element name="facturas" type="this:ArrayOfFactura"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
 	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarDatosCobranzaRequestType">
