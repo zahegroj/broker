@@ -36,6 +36,7 @@
 					<xsd:element name="ClaveProdto" type="xsd:string"/>
 					<xsd:element name="DescProdto" type="xsd:string"/>
 					<xsd:element name="CostoProdto" type="xsd:string"/>
+					<xsd:element name="CaracProdto" type="xsd:string"/>
 					<xsd:element name="DatoAdicional" type="xsd:string"/>
 					<xsd:element name="Uni" type="xsd:string"/>
 					<xsd:element name="Idgrp" type="xsd:string"/>
