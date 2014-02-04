@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/wmb/igtoc45/d" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/facturacion/wmb/igtoc45/d" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <xsd:import namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="IBMdefined/org/xmlsoap/schemas/soap/envelope/soapenv11.xsd"/>
-  <xsd:import namespace="http://www.telcel.com.mx/di/dss/m2k" schemaLocation="m2k.xsd"/>
+  <xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
   <xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d" schemaLocation="m2k_igtoc45_d.xsd"/>
 
 <!-- BEGIN Global group petaining to all wsdl:message definitions -->

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/cpast/c" xmlns:types="http://www.telcel.com.mx/m2k/cpast/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:import namespace="http://www.telcel.com.mx/m2k/cpast/c" schemaLocation="m2k_cpast_c.xsd"/>
-<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/cobranza/wmb/cpast/c" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c" schemaLocation="m2k_cpast_c.xsd"/>
+<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
 </xsd:schema>
