@@ -1,3 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/imei/wmb" xmlns:types="http://www.telcel.com.mx/imei" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:import namespace="http://www.telcel.com.mx/imei" schemaLocation="imei.xsd"/>
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" xmlns:types="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:import namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" schemaLocation="imei.xsd"/>
 </xsd:schema>

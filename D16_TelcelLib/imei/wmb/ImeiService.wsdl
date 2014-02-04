@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><definitions name="Imei" targetNamespace="http://www.telcel.com.mx/imei/wmb" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/imei/wmb" xmlns:types="http://www.telcel.com.mx/imei" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><definitions name="Imei" targetNamespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" xmlns:types="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<documentation>
 		<appinfo source="WMQI_APPINFO">
 			<MRWSDLAppInfo imported="true">
@@ -9,7 +9,7 @@
 	
 	<types>
 		<xsd:schema>
-			<xsd:import schemaLocation="imei.xsd" namespace="http://www.telcel.com.mx/imei" />
+			<xsd:import schemaLocation="imei.xsd" namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" />
 		</xsd:schema>
 	</types>
 	
@@ -34,7 +34,7 @@
 	<binding name="ImeiBinding" type="this:ImeiPort">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<operation name="consultarImeiAC">
-			<soap:operation soapAction="http://www.telcel.com.mx/imei/wmb/consultarImeiAC"/>
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/gms/sistemasadministrativos/wmb/imei/consultarImeiAC"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -49,7 +49,7 @@
 	
 	<service name="ImeiService">
 		<port binding="this:ImeiBinding" name="Imei">
-			<soap:address location="http://localhost:7800/imei/wmb/ImeiService"/>
+			<soap:address location="http://localhost:7800/di/sds/gsm/sistemasadministrativos/wmb/ImeiService"/>
 		</port>
 	</service>
 </definitions>

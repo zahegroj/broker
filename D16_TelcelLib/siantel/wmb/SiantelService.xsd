@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/siantel/wmb" xmlns:this="http://www.telcel.com.mx/siantel/wmb" xmlns:types="http://www.telcel.com.mx/siantel" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/wmb/siantel" xmlns:this="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/wmb/siantel" xmlns:types="http://www.telcel.com.mxdi/sds/siantel/sistemasadministrativos/siantel" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <xsd:import namespace="http://schemas.xmlsoap.org/soap/envelope/" schemaLocation="IBMdefined/org/xmlsoap/schemas/soap/envelope/soapenv11.xsd"/>
-  <xsd:import namespace="http://www.telcel.com.mx/siantel" schemaLocation="siantel.xsd"/>
+  <xsd:import namespace="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel" schemaLocation="siantel.xsd"/>
 
 <!-- BEGIN Global group petaining to all wsdl:message definitions -->
 <!-- END Global group -->

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/imei" xmlns="http://www.telcel.com.mx/imei" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" xmlns="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	
 	<xsd:element ibmSchExtn:docRoot="true" name="request" type="RequestType"/>
 	

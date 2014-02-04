@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><definitions name="Igtoc41R" targetNamespace="http://www.telcel.com.mx/m2k/wmb/igtoc41/r" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/igtoc41/r" xmlns:types="http://www.telcel.com.mx/m2k/igtoc41/r" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><definitions name="Igtoc41R" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc41/r" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc41/r" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<documentation>
 		<appinfo source="WMQI_APPINFO">
 			<MRWSDLAppInfo imported="true">
@@ -8,8 +8,8 @@
 	</documentation>
 	<types>
 		<xsd:schema>
-			<xsd:import namespace="http://www.telcel.com.mx/m2k/igtoc41/r" schemaLocation="m2k_igtoc41_r.xsd"/>
-			<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r" schemaLocation="m2k_igtoc41_r.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
 		</xsd:schema>
 	</types>
 	
@@ -34,7 +34,7 @@
 	<binding name="Igtoc41RBinding" type="this:Igtoc41RPort">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<operation name="ejecutarServicio">
-			<soap:operation soapAction="http://www.telcel.com.mx/m2k/wmb/igtoc41/r/ejecutarServicio"/>
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc41/r/ejecutarServicio"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -49,7 +49,7 @@
 	
 	<service name="Igtoc41RService">
 		<port binding="this:Igtoc41RBinding" name="Igtoc41R">
-			<soap:address location="http://localhost:7800/m2k/wmb/Igtoc41RService"/>
+			<soap:address location="http://localhost:7800/di/sds/m2k/activaciones/wmb/Igtoc41RService"/>
 		</port>
 	</service>
 </definitions>

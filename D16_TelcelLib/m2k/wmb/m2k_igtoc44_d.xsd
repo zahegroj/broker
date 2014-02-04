@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/m2k/igtoc44/d" xmlns="http://www.telcel.com.mx/m2k/igtoc44/d" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:m2k="http://www.telcel.com.mx/m2k" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc44/d" xmlns="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc44/d" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:m2k="http://www.telcel.com.mx/di/sds/m2k" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-	<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+	<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
 	
 	<xsd:element ibmSchExtn:docRoot="true" name="Request" type="RequestType"/>
 	
@@ -30,7 +30,7 @@
 			<xsd:element name="p04fechaFin" type="m2k:FechaType"/>
 			<xsd:element name="p05claveProdPiv" type="m2k:ProductoType"/>
 			<xsd:element name="p06fechaProdPiv" type="m2k:FechaPivType"/>
-			<xsd:element name="p07estatusProdPiv" type="xsd:string"/>
+			<xsd:element name="p07estatusProdPiv" type="m2k:GenericoType"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	

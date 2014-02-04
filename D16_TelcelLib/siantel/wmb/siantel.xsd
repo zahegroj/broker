@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/siantel" xmlns="http://www.telcel.com.mx/siantel" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel" xmlns="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
  
 	<xsd:element ibmSchExtn:docRoot="true" name="SolicitudPerfilTelefono" type="SolicitudPerfilTelefonoType"/>
 	
