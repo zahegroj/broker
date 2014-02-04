@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/investigacion" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionTramitesInvestigacion" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" xmlns:types="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionTramitesInvestigacion" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion">
   <documentation>
     <appinfo source="WMQI_APPINFO">
       <MRWSDLAppInfo imported="true">
@@ -9,8 +9,8 @@
   </documentation>
   <types>
     <xsd:schema>
-      <xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" schemaLocation="GestionTramitesInvestigacion.xsd"/>
-      <xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
+      <xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" schemaLocation="GestionTramitesInvestigacion.xsd"/>
+      <xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
     </xsd:schema>
   </types>
   <message name="consultarEncabezadoMsg">
@@ -142,7 +142,7 @@
   <binding name="GestionTramitesInvestigacionBinding" type="this:GestionTramitesInvestigacionPort">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="consultarEncabezado">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarEncabezado"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -154,7 +154,7 @@
       </fault>
     </operation>
     <operation name="consultarConsumos">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarConsumos"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -166,7 +166,7 @@
       </fault>
     </operation>
     <operation name="consultarDetalleConexiones">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -178,7 +178,7 @@
       </fault>
     </operation>
     <operation name="consultarPlanesYServicios">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -190,7 +190,7 @@
       </fault>
     </operation>
     <operation name="consultarDetallePlanTarifario">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -202,7 +202,7 @@
       </fault>
     </operation>
     <operation name="consultarDetalleProducto">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleProducto"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleProducto"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -214,7 +214,7 @@
       </fault>
     </operation>
     <operation name="consultarPagosYAjustes">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -226,7 +226,7 @@
       </fault>
     </operation>
     <operation name="consultarDetalleReversion">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetalleReversion"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -238,7 +238,7 @@
       </fault>
     </operation>
     <operation name="consultarPromociones">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarPromociones"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -250,7 +250,7 @@
       </fault>
     </operation>
     <operation name="consultarDetallePromocion">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarDetallePromocion"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePromocion"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -262,7 +262,7 @@
       </fault>
     </operation>
     <operation name="consultarHistorialCuenta">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -276,7 +276,7 @@
   </binding>
   <service name="GestionTramitesInvestigacionService">
     <port binding="this:GestionTramitesInvestigacionBinding" name="GestionTramitesInvestigacionHTTPSOAPPort">
-      <soap:address location="http://localhost:7800/gestiontramites/wmb/InvestigacionService"/>
+      <soap:address location="http://localhost:7800/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService"/>
     </port>
   </service>
 </definitions>

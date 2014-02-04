@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
 
-	<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd" />
+	<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd" />
 
 	<xsd:element ibmSchExtn:docRoot="true" name="consultarEncabezadoRequest">
 		<xsd:complexType>
@@ -316,7 +316,7 @@
 					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
 					<xsd:element name="producto" type="comun:productoFormato"/>
 					<xsd:element name="planTarifario" type="comun:planTarifarioFormato"/>
-					<xsd:element name="referencia" type="this:ReferenciaGrupoLlamadas"/>
+					<xsd:element name="referencia" type="this:ReferenciaGrupoLlamadas" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

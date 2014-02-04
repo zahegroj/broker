@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionTramitesInfoCliente" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente" xmlns:types="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionTramitesInfoCliente" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente">
 	<documentation>
 		<appinfo source="WMQI_APPINFO">
 			<MRWSDLAppInfo imported="true">
@@ -9,8 +9,8 @@
 	</documentation>
 	<types>
 		<xsd:schema>
-			<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" schemaLocation="GestionTramitesInfoCliente.xsd"/>
-			<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" schemaLocation="GestionTramitesInfoCliente.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
 		</xsd:schema>
 	</types>
 	<message name="consultarDatosClienteMsg">
@@ -43,7 +43,7 @@
 	<binding name="GestionTramitesInfoClienteBinding" type="this:GestionTramitesInfoClientePort">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<operation name="consultarDatosCliente">
-			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/consultarDatosCliente"/>
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/consultarDatosCliente"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -55,7 +55,7 @@
 			</fault>
 		</operation>
 		<operation name="consultarDatosCobranza">
-			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/consultarDatosCobranza"/>
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/consultarDatosCobranza"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -69,7 +69,7 @@
 	</binding>
 	<service name="GestionTramitesInfoClienteService">
 		<port binding="this:GestionTramitesInfoClienteBinding" name="GestionTramitesInfoClienteHTTPSOAPPort">
-			<soap:address location="http://localhost:7800/gestiontramites/wmb/InfoClienteService"/>
+			<soap:address location="http://localhost:7800/di/sds/servicioaclientes/gestiontramites/wmb/InfoClienteService"/>
 		</port>
 	</service>
 </definitions>

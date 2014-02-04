@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comentarios" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionTramitesComentarios" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios" xmlns:types="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="GestionTramitesComentarios" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios">
 	<documentation>
 		<appinfo source="WMQI_APPINFO">
 			<MRWSDLAppInfo imported="true">
@@ -9,8 +9,8 @@
 	</documentation>
 	<types>
 		<xsd:schema>
-			<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/schema" schemaLocation="GestionTramitesComentarios.xsd"/>
-			<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema" schemaLocation="GestionTramitesComentarios.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
 		</xsd:schema>
 	</types>
 	<message name="guardarComentarioMsg">
@@ -54,7 +54,7 @@
 	<binding name="GestionTramitesComentariosBinding" type="this:GestionTramitesComentariosPort">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<operation name="guardarComentario">
-			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/guardarComentario"/>
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/guardarComentario"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -66,7 +66,7 @@
 			</fault>
 		</operation>
 		<operation name="consultarComentarios">
-			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/consultarComentarios"/>
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/consultarComentarios"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -78,7 +78,7 @@
 			</fault>
 		</operation>
 		<operation name="enviarSMS">
-			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/comentarios/enviarSMS"/>
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/enviarSMS"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -92,7 +92,7 @@
 	</binding>
 	<service name="GestionTramitesComentariosService">
 		<port binding="this:GestionTramitesComentariosBinding" name="GestionTramitesComentariosHTTPSOAPPort">
-			<soap:address location="http://localhost:7800/gestiontramites/wmb/ComentariosService"/>
+			<soap:address location="http://localhost:7800/di/sds/servicioaclientes/gestiontramites/wmb/ComentariosService"/>
 		</port>
 	</service>
 </definitions>
