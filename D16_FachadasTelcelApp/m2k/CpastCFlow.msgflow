@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/CpastCFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/CpastCFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="58,117" wsdlFileName="m2k/wmb/CpastCService.wsdl" selectedPortType="CpastCPort" selectedBinding="CpastCBinding" selectedPort="CpastC" targetNamespace="http://www.telcel.com.mx/m2k/wmb/cpast/c" useHTTPTransport="true" urlSelector="/m2k/wmb/CpastCService" allowQueryWSDL="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="58,117" wsdlFileName="m2k/wmb/CpastCService.wsdl" selectedPortType="CpastCPort" selectedBinding="CpastCBinding" selectedPort="CpastC" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/wmb/cpast/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/cobranza/wmb/CpastCService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_m2k_CpastCElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="179,113">

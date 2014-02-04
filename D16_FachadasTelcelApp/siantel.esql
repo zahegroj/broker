@@ -3,7 +3,7 @@ DECLARE nssiantel NAMESPACE 'http://ws.portabilidad.dsaf.gsa.sds.telcel.com';
 CREATE COMPUTE MODULE Parse_SiantelGetPerfilTelefono_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/siantel';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -18,7 +18,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_SiantelGetPerfilTelefono_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/siantel';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);

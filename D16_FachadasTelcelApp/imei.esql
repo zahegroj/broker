@@ -12,7 +12,7 @@ END MODULE;
 CREATE FILTER MODULE ValidarCodigoError
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE nsimei NAMESPACE 'http://www.telcel.com.mx/imei';
+		DECLARE nsimei NAMESPACE 'http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei';
 		
 		IF Root.XMLNSC.nsimei:response.codigo<>'1' THEN
 			RETURN FALSE;

@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/SiantelFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/SiantelFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="24,245" wsdlFileName="siantel/wmb/SiantelService.wsdl" selectedPortType="SiantelPort" selectedBinding="SiantelBinding" selectedPort="Siantel" targetNamespace="http://www.telcel.com.mx/siantel/wmb" useHTTPTransport="true" urlSelector="/siantel/wmb/SiantelService" allowQueryWSDL="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="24,245" wsdlFileName="siantel/wmb/SiantelService.wsdl" selectedPortType="SiantelPort" selectedBinding="SiantelBinding" selectedPort="Siantel" targetNamespace="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel/wmb" useHTTPTransport="true" urlSelector="/di/sds/siantel/sistemasadministrativos/wmb/SiantelService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_siantel_SiantelElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="152,241">

@@ -3,8 +3,8 @@
     <output path="/imei/wmb/imei.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="Response_Error">
-        <input namespace="http://www.telcel.com.mx/imei" path="mb:msg(response,assembly,,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/imei" path="mb:msg(error,assembly,XMLNSC,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" path="mb:msg(response,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" path="mb:msg(error,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>
             <output path="Properties"/>

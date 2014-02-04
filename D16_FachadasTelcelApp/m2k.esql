@@ -1,6 +1,6 @@
 --BROKER SCHEMA m2k
 
-DECLARE m2kNamespace NAMESPACE 'http://www.telcel.com.mx/m2k';
+DECLARE m2kNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k';
 DECLARE nsm2k NAMESPACE 'http://servicios.web.m2k.sds.telcel.com';
 DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';	
 
@@ -28,7 +28,7 @@ END;
 CREATE COMPUTE MODULE Parse_SumiqC_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/sumiq/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -43,7 +43,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_SumiqC_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/sumiq/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -69,7 +69,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_RetusC_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/retus/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retus/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -84,7 +84,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_RetusC_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/retus/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones//retus/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -110,7 +110,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_ReactC_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/react/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -125,7 +125,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_ReactC_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/react/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -151,7 +151,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Retc2C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/retc2/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -166,7 +166,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Retc2C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/retc2/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -192,7 +192,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_CpastC_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/cpast/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -207,7 +207,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_CpastC_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/cpast/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -233,7 +233,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc25C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc25/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc25/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -248,7 +248,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc25C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc25/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc25/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -274,7 +274,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc40C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc40/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc40/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -289,7 +289,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc40C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc40/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc40/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -315,7 +315,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc41D_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc41/d';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/d';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -330,7 +330,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc41D_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc41/d';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/d';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -356,7 +356,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc41R_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc41/r';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -371,7 +371,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc41R_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc41/r';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -397,7 +397,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc42D_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc42/d';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc42/d';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -412,7 +412,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc42D_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc42/d';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc42/d';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -438,7 +438,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc43C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc43/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -453,7 +453,48 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc43C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc43/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c';				
+		DECLARE oldNamespace NAMESPACE '';
+		
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nsm2k:ejecutaServicioResponse.ejecutaServicioReturn);
+		
+		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK) IS NOT NULL THEN
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);
+			--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK.Errores) IS NOT NULL THEN
+			--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.RespuestaOK.Errores, oldNamespace, m2kNamespace);
+			--END IF;			
+			PROPAGATE TO TERMINAL 'out1';
+		END IF;
+		
+		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
+			PROPAGATE TO TERMINAL 'out2';
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Parse_Igtoc44D_XMLToStringReq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc44/d';
+		DECLARE newNamespace NAMESPACE '';
+		DECLARE mensajeString CHARACTER;
+		
+		CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		SET mensajeString = ParseXMLToString(InputRoot);
+		SET OutputRoot.SOAP.Body.nsm2k:ejecutaServicio.xml = mensajeString;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Parse_Igtoc44D_StringRespToXML
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc44/d';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -479,7 +520,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc45D_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc45/d';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -494,7 +535,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc45D_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc45/d';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -520,7 +561,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc46D_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc46/d';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc46/d';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -535,7 +576,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc46D_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc46/d';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc46/d';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -561,7 +602,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc47C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc47/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc47/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -576,7 +617,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc47C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc47/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc47/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -602,7 +643,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc48A_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc48/a';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/a';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -617,7 +658,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc48A_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc48/a';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/a';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -643,7 +684,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc48C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc48/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -658,7 +699,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc48C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc48/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -684,7 +725,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc48D_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc48/d';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/d';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -699,7 +740,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc48D_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc48/d';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/d';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -725,7 +766,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc49C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc49/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc49/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -740,7 +781,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc49C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc49/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc49/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -766,7 +807,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc50C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc50/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc50/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -781,7 +822,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc50C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc50/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc50/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -807,7 +848,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc51C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc51/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc51/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -822,7 +863,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc51C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc51/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc51/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -848,7 +889,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc52C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc52/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc52/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -863,7 +904,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc52C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc52/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc52/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
@@ -889,7 +930,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc64C_XMLToStringReq
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc64/c';
+		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
 		
@@ -904,7 +945,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_Igtoc64C_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc64/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);

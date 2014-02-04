@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/SumiqCFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/SumiqCFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="16,183" wsdlFileName="m2k/wmb/SumiqCService.wsdl" selectedPortType="SumiqCPort" selectedBinding="SumiqCBinding" selectedPort="SumiqC" targetNamespace="http://www.telcel.com.mx/m2k/wmb/sumiq/c" useHTTPTransport="true" urlSelector="/m2k/wmb/SumiqCService" allowQueryWSDL="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="16,183" wsdlFileName="m2k/wmb/SumiqCService.wsdl" selectedPortType="SumiqCPort" selectedBinding="SumiqCBinding" selectedPort="SumiqC" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/wmb/sumiq/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/facturacion/wmb/SumiqCService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_m2k_SumiqCElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="138,179">

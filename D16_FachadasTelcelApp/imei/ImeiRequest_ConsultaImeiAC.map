@@ -3,7 +3,7 @@
     <output path="/imei/ImeisACWS_InlineSchema1.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="ImeiRequest_ConsultaImeiAC">
-        <input namespace="http://www.telcel.com.mx/imei" path="mb:msg(request,assembly,,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" path="mb:msg(request,assembly,,Properties)"/>
         <output namespace="http://ws.imeisac.dsaf.gsa.telcel.com" path="mb:msg(ConsultaImeiAC,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>

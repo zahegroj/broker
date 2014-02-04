@@ -7,7 +7,7 @@
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="ConsultaImeiACResponse_ImeiResponse">
         <input namespace="http://ws.imeisac.dsaf.gsa.telcel.com" path="mb:msg(ConsultaImeiACResponse,assembly,,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/imei" path="mb:msg(response,assembly,XMLNSC,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" path="mb:msg(response,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>
             <output path="Properties"/>

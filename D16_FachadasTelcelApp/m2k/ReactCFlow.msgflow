@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/ReactCFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/ReactCFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="15,219" wsdlFileName="m2k/wmb/ReactCService.wsdl" selectedPortType="ReactCPort" selectedBinding="ReactCBinding" selectedPort="ReactC" targetNamespace="http://www.telcel.com.mx/m2k/wmb/react/c" useHTTPTransport="true" urlSelector="/m2k/wmb/ReactCService" allowQueryWSDL="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="15,219" wsdlFileName="m2k/wmb/ReactCService.wsdl" selectedPortType="ReactCPort" selectedBinding="ReactCBinding" selectedPort="ReactC" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/wmb/react/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/cobranza/wmb/ReactCService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_m2k_ReactCElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="106,215">
