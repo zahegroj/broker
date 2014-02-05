@@ -1,0 +1,272 @@
+CREATE COMPUTE MODULE MapIgtoc41dResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/d';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetallePlanTarifarioResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetallePlanTarifarioResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse, oldNamespace, nsInvest);
+		CALL MapDetallePlanTarifResponse(OutputRoot, respuestaOK, ns);
+	END;
+END MODULE;
+
+CREATE FUNCTION MapDetallePlanTarifResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	IF FIELDTYPE (respuestaOK.PlanTarifarioYDesc) IS NOT NULL THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:descripcionPlan = respuestaOK.PlanTarifarioYDesc;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:plazoForzoso = respuestaOK.Plazo;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:tipoPlan = respuestaOK.TipPlan;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:descripcionTipoPlan = respuestaOK.DescTipo;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:minutosIncluidos = respuestaOK.MinInc;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:smsIncluidos = respuestaOK.SmsInc;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:datosIncluidos = respuestaOK.DatInc;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:costoPlan = respuestaOK.CosPl;
+	END IF;
+	
+	
+	DECLARE countArr INT CARDINALITY(respuestaOK.Producto[]);	
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.Producto[i]) <> '' OR 
+			TRIM(respuestaOK.DescProducto[i])  <> '' OR
+			TRIM(respuestaOK.CostpProd[i])  <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:producto = respuestaOK.Producto[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:descripcion = respuestaOK.DescProducto[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:costo = respuestaOK.CostpProd[i];
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:referencia = TRIM(respuestaOK.Referencia);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan) IS NULL AND
+	   FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario) IS NULL THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+	END IF;
+END;
+
+CREATE COMPUTE MODULE GuardarVariablesDetalleProducto
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		
+		DECLARE usuarioM2K CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsComun:usuarioM2K;
+		DECLARE region CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsComun:region;
+		DECLARE telefono CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:telefono;
+		DECLARE cuenta CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:cuenta;
+		DECLARE fechaInicio CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:fechaInicio;
+		DECLARE fechaFin CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:fechaFin;
+		DECLARE producto CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:producto;
+		
+		SET OutputLocalEnvironment.Variables.request[] = 
+						LIST{ROW(telefono AS telefono,
+								cuenta AS cuenta,
+								fechaInicio AS fechaInicio,
+								fechaFin AS fechaFin,
+								usuarioM2K AS usuarioM2K,
+								region AS region,
+								producto AS producto)};
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE GuardarVariablesDetalleProductoTipoGrupo
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		
+		SET OutputLocalEnvironment.variables.tipoGrupo = InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:referencia.nsInvest:tipoGrupo;	
+	END;
+END MODULE;
+
+CREATE FUNCTION MapDetalleProducto(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE)
+BEGIN
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:claveProducto = respuestaOK.ClaveProdto;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:descripcionProducto = respuestaOK.DescProdto;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:costoProducto = respuestaOK.CostoProdto;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:caracteristicasProducto = respuestaOK.CaracProdto;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:minutosIncluidos = 0;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:smsIncluidos = 0;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:datosIncluidos = 0;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:unidad = respuestaOK.Uni;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:claveGrupo = respuestaOK.Idgrp;
+	
+	IF TRIM(respuestaOK.Uni) <> '' THEN
+		IF TRIM(respuestaOK.Uni) = 'KB' THEN
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:datosIncluidos = respuestaOK.DatoAdicional;
+		ELSEIF TRIM(respuestaOK.Uni) = 'MIN' THEN
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:minutosIncluidos = respuestaOK.DatoAdicional;
+		ELSEIF TRIM(respuestaOK.Uni) = 'SMS' THEN
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:smsIncluidos = respuestaOK.DatoAdicional;
+		END IF;
+	END IF;
+END;
+
+CREATE FUNCTION MapGrupoLlamadasResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pTipoGrupo CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.TelGrupo[]);	
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.TelGrupo[i]) <> '' OR 
+			TRIM(respuestaOK.TipoServ[i]) <> '' OR
+			TRIM(respuestaOK.TipoDest[i]) <> '' OR
+			TRIM(respuestaOK.Estatus[i]) <> '' OR
+			TRIM(respuestaOK.FecEfe[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:telefono = respuestaOK.TelGrupo[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:tipoServicio = respuestaOK.TipoServ[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:tipoDestino = respuestaOK.TipoDest[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:estatus = respuestaOK.Estatus[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:fechaEfectiva = respuestaOK.FecEfe[i];
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:referencia.nsInvest:tipoGrupo = pTipoGrupo;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:referencia.nsInvest:idGrupo = SUBSTRING(respuestaOK.Referencia FROM 1 FOR 10);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:referencia.nsInvest:telefono = SUBSTRING(respuestaOK.Referencia FROM 11 FOR 10);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:referencia.nsInvest:effDate = SUBSTRING(respuestaOK.Referencia FROM 21 FOR 7);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas) IS NULL AND
+		FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto) IS NULL THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+	END IF;
+END;
+
+CREATE FILTER MODULE ExisteReferenciaGrupoLlamadas
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		 IF FIELDTYPE (Root.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:referencia) IS NOT NULL THEN
+		 	RETURN TRUE;
+		 END IF;
+		 RETURN FALSE;
+	END;
+END MODULE;
+
+CREATE FILTER MODULE ExisteGrpId
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc50/c';
+		IF  FIELDTYPE (Root.XMLNSC.ns:RespuestaOK.Idgrp) IS NOT NULL AND TRIM(Root.XMLNSC.ns:RespuestaOK.Idgrp) <> '' THEN
+			RETURN TRUE;
+		END IF;
+		RETURN FALSE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapIgtoc50cResp_Igtoc51cReq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc51/c';
+		DECLARE ns50c NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc50/c';
+		DECLARE oldNamespace NAMESPACE '';
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns50c:RespuestaOK;
+		DECLARE requestInput REFERENCE TO InputLocalEnvironment.Variables.request[1];
+		
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'Request';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, ns);
+		
+		SET OutputRoot.XMLNSC.ns:Request.user = InputLocalEnvironment.Variables.request[1].usuarioM2K;
+		SET OutputRoot.XMLNSC.ns:Request.region = InputLocalEnvironment.Variables.request[1].region;
+		SET OutputRoot.XMLNSC.ns:Request.function = 'I*SB';
+		SET OutputRoot.XMLNSC.ns:Request.action = 'C';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p01telefono = InputLocalEnvironment.Variables.request[1].telefono;
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p02cuenta = InputLocalEnvironment.Variables.request[1].cuenta;
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p03fechaInicio = InputLocalEnvironment.Variables.request[1].fechaInicio;
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p04fechaFin = InputLocalEnvironment.Variables.request[1].fechaFin;
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p05producto = InputLocalEnvironment.Variables.request[1].producto;
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p05producto.(XMLNSC.Attribute)longitud VALUE = '05';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p06tipoGrupo = TRIM(respuestaOK.Idgrp);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p06tipoGrupo.(XMLNSC.Attribute)longitud VALUE = '02';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p07idGrupo = '';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p07idGrupo.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p08refTelefono = '';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p08refTelefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p09refEffDt = '';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p09refEffDt.(XMLNSC.Attribute)longitud VALUE = '07';
+		
+		SET OutputLocalEnvironment.Variables.response50c = respuestaOK; 		
+		
+		--DECLARE ClaveProdto CHARACTER respuestaOK.ClaveProdto;
+		--DECLARE DescProdto CHARACTER respuestaOK.DescProdto;
+		--DECLARE CostoProdto CHARACTER respuestaOK.CostoProdto;
+		--DECLARE CaracProdto CHARACTER respuestaOK.CaracProdto;
+		--DECLARE DatoAdicional CHARACTER respuestaOK.DatoAdicional;
+		--DECLARE Uni CHARACTER respuestaOK.Uni;
+		--DECLARE Idgrp CHARACTER respuestaOK.Idgrp;
+
+		--SET OutputLocalEnvironment.Variables.response50c[] = 
+		--								LIST{ROW(ClaveProdto as ClaveProdto,
+		--										DescProdto as DescProdto,
+		--										CostoProdto as CostoProdto,
+		--										CaracProdto as CaracProdto,
+		--										DatoAdicional as DatoAdicional,
+		--										Uni as Uni,
+		--										Idgrp as Idgrp
+		--									)};
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapIgtoc50cResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc50/c';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetalleProductoResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetalleProductoResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);		
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetalleProductoResponse, oldNamespace, nsInvest);
+		
+		CALL MapDetalleProducto(OutputRoot, respuestaOK);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapIgtoc51cResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc51/c';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetalleProductoResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetalleProductoResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);		
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetalleProductoResponse, oldNamespace, nsInvest);
+		
+		DECLARE tipoGrupo CHARACTER;
+		IF FIELDTYPE(InputLocalEnvironment.variables.tipoGrupo) IS NOT NULL THEN
+			SET tipoGrupo = InputLocalEnvironment.variables.tipoGrupo;
+		END IF;
+		
+		IF FIELDTYPE(InputLocalEnvironment.Variables.response50c) IS NOT NULL THEN
+			CALL MapDetalleProducto(OutputRoot, InputLocalEnvironment.Variables.response50c);
+			SET tipoGrupo = InputLocalEnvironment.Variables.response50c.Idgrp;
+		END IF;
+		CALL MapGrupoLlamadasResponse(OutputRoot, respuestaOK, tipoGrupo);
+	END;
+END MODULE;

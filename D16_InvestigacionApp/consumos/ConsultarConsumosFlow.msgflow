@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFilter.msgnode="ComIbmFilter.msgnode" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_consultarConsumos_ejecutarServicio_Igtoc40CService.msgflow="gen/consultarConsumos/ejecutarServicio_Igtoc40CService.msgflow" xmlns:gen_consultarConsumos_ejecutarServicio_Igtoc45DService.msgflow="gen/consultarConsumos/ejecutarServicio_Igtoc45DService.msgflow"
-    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="consultarConsumos/ConsultarConsumosFlow.msgflow"
-    nsPrefix="consultarConsumos_ConsultarConsumosFlow.msgflow">
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFilter.msgnode="ComIbmFilter.msgnode" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_consultarConsumos_ejecutarServicio_Igtoc40CService.msgflow="gen/consumos/ejecutarServicio_Igtoc40CService.msgflow" xmlns:gen_consultarConsumos_ejecutarServicio_Igtoc45DService.msgflow="gen/consumos/ejecutarServicio_Igtoc45DService.msgflow"
+    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="consumos/ConsultarConsumosFlow.msgflow"
+    nsPrefix="consumos_ConsultarConsumosFlow.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
     <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
-    <translation xmi:type="utility:TranslatableString" key="ConsultarConsumosFlow" bundleName="consultarConsumos/ConsultarConsumosFlow" pluginId="D16_InvestigacionApp"/>
+    <translation xmi:type="utility:TranslatableString" key="ConsultarConsumosFlow" bundleName="consumos/ConsultarConsumosFlow" pluginId="D16_InvestigacionApp"/>
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj16/ConsultarConsumosFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/ConsultarConsumosFlow.gif"/>
     <composition>
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="49,247">
-        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="consultarConsumos/ConsultarConsumosFlow" pluginId="D16_InvestigacionApp"/>
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="consumos/ConsultarConsumosFlow" pluginId="D16_InvestigacionApp"/>
       </nodes>
       <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="869,250">
-        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="consultarConsumos/ConsultarConsumosFlow" pluginId="D16_InvestigacionApp"/>
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="consumos/ConsultarConsumosFlow" pluginId="D16_InvestigacionApp"/>
       </nodes>
       <nodes xmi:type="ComIbmFilter.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="121,247" filterExpression="esql://routine/#Validar_esRegistrosFacturados.Main">
         <translation xmi:type="utility:ConstantString" string="registrosFacturados"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="280,347" mappingExpression="msl://{consultarConsumos}#ConsultarConsumosReq_Igtoc45DReq">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="280,347" mappingExpression="msl://{consumos}#ConsultarConsumosReq_Igtoc45DReq">
         <translation xmi:type="utility:ConstantString" string="Mapping Igtoc45C Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="284,147" mappingExpression="msl://{consultarConsumos}#ConsultarConsumosReq_Igtoc40CReq">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="284,147" mappingExpression="msl://{consumos}#ConsultarConsumosReq_Igtoc40CReq">
         <translation xmi:type="utility:ConstantString" string="Mapping Igtoc40C Req"/>
       </nodes>
       <nodes xmi:type="gen_consultarConsumos_ejecutarServicio_Igtoc40CService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="439,151">

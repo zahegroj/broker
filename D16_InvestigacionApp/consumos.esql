@@ -1,5 +1,5 @@
-DECLARE nsInvest NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema';
-DECLARE nsComun NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+DECLARE nsInvest NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema';
+DECLARE nsComun NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
 
 CREATE FILTER MODULE Validar_esRegistrosFacturados
 	CREATE FUNCTION Main() RETURNS BOOLEAN
@@ -54,7 +54,7 @@ BEGIN
 		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:referencia.nsInvest:horaPiv = SUBSTRING(respuestaOK.Referencia FROM 8 FOR 7);
 		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:referencia.nsInvest:fuentePiv = SUBSTRING(respuestaOK.Referencia FROM 15 FOR 6);
 		
-		IF pNamespace = 'http://www.telcel.com.mx/m2k/igtoc45/d' THEN
+		IF pNamespace = 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d' THEN
 			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:referencia.nsInvest:secuenciaPiv = SUBSTRING(respuestaOK.Referencia FROM 21 FOR 7);
 		END IF;
 
@@ -67,10 +67,53 @@ BEGIN
 	END IF;
 END;
 
+CREATE FUNCTION MapDetalleConexionesResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.FechaConexion[]);
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.FechaConexion[i]) <> '' OR 
+			TRIM(respuestaOK.HoraConexion[i])  <> '' OR
+			TRIM(respuestaOK.BytesCargados[i])  <> '' OR
+			TRIM(respuestaOK.BytesDescargados[i])    <> '' OR
+			TRIM(respuestaOK.APN[i]) <> '' OR
+			TRIM(respuestaOK.IMEI[i]) <> '' OR
+			TRIM(respuestaOK.IMSI[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:fechaConexion = respuestaOK.FechaConexion[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:horaConexion = respuestaOK.HoraConexion[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:bytesCargados = respuestaOK.BytesCargados[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:bytesDescargados = respuestaOK.BytesDescargados[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:apn = respuestaOK.APN[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:imei = respuestaOK.IMEI[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:imsi = respuestaOK.IMSI[i];
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:referencia.nsInvest:dtConnect = SUBSTRING(respuestaOK.Referencia FROM 1 FOR 7);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:referencia.nsInvest:tmConnect = SUBSTRING(respuestaOK.Referencia FROM 8 FOR 6);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:referencia.nsInvest:chargingId = SUBSTRING(respuestaOK.Referencia FROM 14 FOR 10);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:referencia.nsInvest:dataVolUp = SUBSTRING(respuestaOK.Referencia FROM 24 FOR 12);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:referencia.nsInvest:dataVolDown = SUBSTRING(respuestaOK.Referencia FROM 36 FOR 12);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:referencia.nsInvest:serviceClass = SUBSTRING(respuestaOK.Referencia FROM 48 FOR 4);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion) IS NULL THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+	END IF;
+END;
+
 CREATE COMPUTE MODULE MapIgtoc40cResp_Response
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc40/c';
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc40/c';
 		DECLARE oldNamespace NAMESPACE '';
 		
 		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
@@ -86,7 +129,7 @@ END MODULE;
 CREATE COMPUTE MODULE MapIgtoc45dResp_Response
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/m2k/igtoc45/d';
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d';
 		DECLARE oldNamespace NAMESPACE '';
 		
 		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
@@ -95,5 +138,20 @@ CREATE COMPUTE MODULE MapIgtoc45dResp_Response
 		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
 		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarConsumosResponse, oldNamespace, nsInvest);
 		CALL MapConsumosResponse(OutputRoot, respuestaOK, ns);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapIgtoc43cResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetalleConexionesResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetalleConexionesResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetalleConexionesResponse, oldNamespace, nsInvest);
+		CALL MapDetalleConexionesResponse(OutputRoot, respuestaOK, ns);
 	END;
 END MODULE;
