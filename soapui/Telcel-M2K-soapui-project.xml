@@ -396,7 +396,7 @@ Referencia separada
 ]]]]>><![CDATA[</xml>
       </ser:ejecutaServicio>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC44_D"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC44_D"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicio>
@@ -444,7 +444,7 @@ Referencia separada
 ]]]]>><![CDATA[</xml>
       </ser:ejecutaServicio>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC48_C"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC48_C"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicio>
@@ -468,7 +468,7 @@ Referencia separada
 ]]]]>><![CDATA[</xml>
       </ser:ejecutaServicio>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC48_D"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC48_D"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicio>
@@ -480,12 +480,12 @@ Referencia separada
  <action>D</action>
  <inputParameters>
   <servicio>
-   <p01telefono longitud="10">5554221441</p01telefono>
-   <p02cuenta longitud="09">900005527</p02cuenta>
-   <p03fechaInicio longitud="08">01/01/13</p03fechaInicio>
-   <p04fechaFin longitud="08">01/07/13</p04fechaFin>
-   <p05planDesc longitud="05">PDCA1</p05planDesc>
-   <p06EffDate longitud="08">34345345</p06EffDate>
+   <p01telefono longitud="10">5545305932</p01telefono>
+   <p02cuenta longitud="09">7071789</p02cuenta>
+   <p03fechaInicio longitud="08">08/11/13</p03fechaInicio>
+   <p04fechaFin longitud="08">07/12/13</p04fechaFin>
+   <p05planDesc longitud="05">RESM3</p05planDesc>
+   <p06EffDate longitud="08">11/01/13</p06EffDate>
    <p07ValCdInd longitud="40"></p07ValCdInd>
    <p08ValTransInd longitud="40"></p08ValTransInd>
    <p09UltFecDes longitud="07"></p09UltFecDes>
@@ -677,63 +677,779 @@ else if( xml.contains("I*7E") )
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<RespuestaOK>
+  <ESTATUS IDPETICION="235bd678-1e44-4e7e-a672-01d95688a025">EXITO</ESTATUS>
+  <MENSAJE>PG013 EXISTEN MAS REGISTRO EN  TABLA</MENSAJE>
+  <Fecha>12/11/13</Fecha>
+  <Hora>10:16:59</Hora>
+  <CiudadOrigen>                </CiudadOrigen>
+  <TelMarcado>0000000000</TelMarcado>
+  <CiudadDestino>CONEXIONGPRS    </CiudadDestino>
+  <Sv>FB</Sv>
+  <Cl>  </Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>     52</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Fecha>12/11/13</Fecha>
+  <Hora>10:16:01</Hora>
+  <CiudadOrigen>                </CiudadOrigen>
+  <TelMarcado>0000000000</TelMarcado>
+  <CiudadDestino>CONEXIONGPRS    </CiudadDestino>
+  <Sv>DI</Sv>
+  <Cl>  </Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>  10570</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Fecha>12/11/13</Fecha>
+  <Hora>10:11:59</Hora>
+  <CiudadOrigen>                </CiudadOrigen>
+  <TelMarcado>0000000000</TelMarcado>
+  <CiudadDestino>CONEXIONGPRS    </CiudadDestino>
+  <Sv>FB</Sv>
+  <Cl>  </Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>   2046</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Fecha>12/11/13</Fecha>
+  <Hora>10:11:01</Hora>
+  <CiudadOrigen>                </CiudadOrigen>
+  <TelMarcado>0000000000</TelMarcado>
+  <CiudadDestino>CONEXIONGPRS    </CiudadDestino>
+  <Sv>DI</Sv>
+  <Cl>  </Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>  11734</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Fecha>11/11/13</Fecha>
+  <Hora>22:16:59</Hora>
+  <CiudadOrigen>                </CiudadOrigen>
+  <TelMarcado>0000000000</TelMarcado>
+  <CiudadDestino>CONEXIONGPRS    </CiudadDestino>
+  <Sv>FB</Sv>
+  <Cl>  </Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>   1913</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Fecha>11/11/13</Fecha>
+  <Hora>22:16:01</Hora>
+  <CiudadOrigen>                </CiudadOrigen>
+  <TelMarcado>0000000000</TelMarcado>
+  <CiudadDestino>CONEXIONGPRS    </CiudadDestino>
+  <Sv>DI</Sv>
+  <Cl>  </Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>   7369</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Fecha>11/11/13</Fecha>
+  <Hora>22:11:59</Hora>
+  <CiudadOrigen>                </CiudadOrigen>
+  <TelMarcado>0000000000</TelMarcado>
+  <CiudadDestino>CONEXIONGPRS    </CiudadDestino>
+  <Sv>FB</Sv>
+  <Cl>  </Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>    128</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Fecha>11/11/13</Fecha>
+  <Hora>22:11:01</Hora>
+  <CiudadOrigen>                </CiudadOrigen>
+  <TelMarcado>0000000000</TelMarcado>
+  <CiudadDestino>CONEXIONGPRS    </CiudadDestino>
+  <Sv>DI</Sv>
+  <Cl>  </Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>    149</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Fecha>11/11/13</Fecha>
+  <Hora>07:42:13</Hora>
+  <CiudadOrigen>TELCEL AREA  D F</CiudadOrigen>
+  <TelMarcado>5552407966</TelMarcado>
+  <CiudadDestino>AREA METROPO DF </CiudadDestino>
+  <Sv>  </Sv>
+  <Cl>PB</Cl>
+  <TipoLlamada>SA</TipoLlamada>
+  <MinutosTAire>   1:00</MinutosTAire>
+  <MinutosLibre>      0</MinutosLibre>
+  <LargaDistancia>      0.00</LargaDistancia>
+  <Total>         0.00</Total>
+  <Referencia>21311110742130GSRAT9       5552407966</Referencia>
+</RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC41_D_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>IGTOC41D</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<RespuestaOK>
+	<ESTATUS IDPETICION="82d697c2-74a3-4939-a51b-d368a291ac7b">EXITO</ESTATUS>
+	<MENSAJE>PG014 NO MAS REGISTROS EN LA TABLA  </MENSAJE>
+	<PlanTarifarioYDesc>M7380 TELCEL500 18 1      </PlanTarifarioYDesc>
+	<Plazo>018</Plazo>
+	<TipPlan>P</TipPlan>
+	<DescTipo>POSPAGO GSM                </DescTipo>
+	<MinInc>      500</MinInc>
+	<SmsInc>      250</SmsInc>
+	<DatInc>       0 KB</DatInc>
+	<CosPl>     430.17</CosPl>
+	<Producto>TRAN0</Producto>
+	<DescProducto>TRANSFERENCIA DE LLAMADAS S/CO</DescProducto>
+	<CostpProd>         0.00</CostpProd>
+	<Producto>LLES1</Producto>
+	<DescProducto>LLAMADA EN ESPERA SIN COSTO   </DescProducto>
+	<CostpProd>         0.00</CostpProd>
+	<Producto>IDL00</Producto>
+	<DescProducto>IDENTIFICADOR DE LLAMADAS ENTR</DescProducto>
+	<CostpProd>         0.00</CostpProd>
+	<Producto>GIQM5</Producto>
+	<DescProducto>Internet Telcel 250MB         </DescProducto>
+	<CostpProd>         0.00</CostpProd>
+	<Producto>CONF1</Producto>
+	<DescProducto>CONFERENCIA TRIPARTITA S/COSTO</DescProducto>
+	<CostpProd>         0.00</CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Producto>     </Producto>
+	<DescProducto>                              </DescProducto>
+	<CostpProd>             </CostpProd>
+	<Referencia>     </Referencia>
+</RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC42_D_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>IGTOC42D</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<RespuestaOK>
+  <ESTATUS IDPETICION="c62fdf0c-e67d-4fb5-933f-1f813858db36">EXITO</ESTATUS>
+  <MENSAJE>PG014 NO MAS REGISTROS EN LA TABLA  </MENSAJE>
+  <Fecha>05/11/13</Fecha>
+  <NombreAjuste>CANCELACION PREVIA  </NombreAjuste>
+  <Cheque>        </Cheque>
+  <OrigenPago>        </OrigenPago>
+  <FormaPago>          </FormaPago>
+  <Importe>        0.00</Importe>
+  <Estatus>APROBADO  </Estatus>
+  <Asesor>IASSC48</Asesor>
+  <DetallePago>                   </DetallePago>
+  <Fecha>05/11/13</Fecha>
+  <NombreAjuste>AJ NO CARGO         </NombreAjuste>
+  <Cheque>        </Cheque>
+  <OrigenPago>        </OrigenPago>
+  <FormaPago>          </FormaPago>
+  <Importe>        0.00</Importe>
+  <Estatus>APROBADO  </Estatus>
+  <Asesor>IASSC48</Asesor>
+  <DetallePago>                   </DetallePago>
+  <Fecha>05/11/13</Fecha>
+  <NombreAjuste>AJ NO CARGO         </NombreAjuste>
+  <Cheque>        </Cheque>
+  <OrigenPago>        </OrigenPago>
+  <FormaPago>          </FormaPago>
+  <Importe>        0.00</Importe>
+  <Estatus>APROBADO  </Estatus>
+  <Asesor>IASSC48</Asesor>
+  <DetallePago>                   </DetallePago>
+  <Fecha>05/11/13</Fecha>
+  <NombreAjuste>Cambio de Plan      </NombreAjuste>
+  <Cheque>        </Cheque>
+  <OrigenPago>        </OrigenPago>
+  <FormaPago>          </FormaPago>
+  <Importe>        0.00</Importe>
+  <Estatus>APROBADO  </Estatus>
+  <Asesor>XOB8D82</Asesor>
+  <DetallePago>                   </DetallePago>
+  <Fecha>29/10/13</Fecha>
+  <NombreAjuste>                    </NombreAjuste>
+  <Cheque>        </Cheque>
+  <OrigenPago>TC SBBMR</OrigenPago>
+  <FormaPago>TARJETA CR</FormaPago>
+  <Importe>      880.78</Importe>
+  <Estatus>APLICADO  </Estatus>
+  <Asesor>ICASC43</Asesor>
+  <DetallePago>213102901760TC14719</DetallePago>
+  <Referencia>                                         </Referencia>
+</RespuestaOK>
+]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC43_C_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<RespuestaOK>
+<ESTATUS IDPETICION="5600516f-ccd7-4a9c-b19b-7eb3c0fd7cdb">EXITO</ESTATUS>
+<MENSAJE>PG014 NO MAS REGISTROS EN LA TABLA  </MENSAJE>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>23:12:15</HoraConexion>
+<BytesCargados>       91443</BytesCargados>
+<BytesDescargados>      187097</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>22:04:36</HoraConexion>
+<BytesCargados>       50890</BytesCargados>
+<BytesDescargados>       81663</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>20:55:48</HoraConexion>
+<BytesCargados>      157800</BytesCargados>
+<BytesDescargados>     1169725</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>19:48:27</HoraConexion>
+<BytesCargados>      100305</BytesCargados>
+<BytesDescargados>      142726</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>17:34:15</HoraConexion>
+<BytesCargados>      242361</BytesCargados>
+<BytesDescargados>      587453</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>17:28:26</HoraConexion>
+<BytesCargados>       54736</BytesCargados>
+<BytesDescargados>      126240</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>15:29:50</HoraConexion>
+<BytesCargados>      584868</BytesCargados>
+<BytesDescargados>     1404686</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>12:09:07</HoraConexion>
+<BytesCargados>      179042</BytesCargados>
+<BytesDescargados>      623024</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<FechaConexion>11/10/13</FechaConexion>
+<HoraConexion>07:50:36</HoraConexion>
+<BytesCargados>      408338</BytesCargados>
+<BytesDescargados>      887392</BytesDescargados>
+<APN>internet.itelcel.com</APN>
+<IMEI>333532323637303</IMEI>
+<IMSI>334020232139752</IMSI>
+<Referencia>                                                   </Referencia>
+</RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC44_D_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<RespuestaOK>
+  <ESTATUS IDPETICION="6a76b080-abd2-4b8e-8106-4d58e02245f5">EXITO</ESTATUS>
+  <MENSAJE>PG014 NO MAS REGISTROS EN LA TABLA  </MENSAJE>
+  <Producto>BUZ I</Producto>
+  <InclPlan>S</InclPlan>
+  <FechaEfe>28/05/12</FechaEfe>
+  <Est>ACTIVO  </Est>
+  <Usuario>VI5ADMW </Usuario>
+  <Producto>CONF1</Producto>
+  <InclPlan>S</InclPlan>
+  <FechaEfe>18/02/12</FechaEfe>
+  <Est>ACTIVO  </Est>
+  <Usuario>XO14FFF </Usuario>
+  <Producto>FJ902</Producto>
+  <InclPlan>S</InclPlan>
+  <FechaEfe>19/01/13</FechaEfe>
+  <Est>ACTIVO  </Est>
+  <Usuario>VEAECAC </Usuario>
+  <Producto>IDL00</Producto>
+  <InclPlan>S</InclPlan>
+  <FechaEfe>18/02/12</FechaEfe>
+  <Est>ACTIVO  </Est>
+  <Usuario>XO14FFF </Usuario>
+  <Producto>IFV09</Producto>
+  <InclPlan>S</InclPlan>
+  <FechaEfe>19/01/13</FechaEfe>
+  <Est>ACTIVO  </Est>
+  <Usuario>VEAECAC </Usuario>
+  <Producto>LINQG</Producto>
+  <InclPlan>N</InclPlan>
+  <FechaEfe>19/01/13</FechaEfe>
+  <Est>ACTIVO  </Est>
+  <Usuario>XOB9EBB </Usuario>
+  <Producto>LLES1</Producto>
+  <InclPlan>S</InclPlan>
+  <FechaEfe>18/02/12</FechaEfe>
+  <Est>ACTIVO  </Est>
+  <Usuario>XO14FFF </Usuario>
+  <Producto>TRAN0</Producto>
+  <InclPlan>S</InclPlan>
+  <FechaEfe>18/02/12</FechaEfe>
+  <Est>ACTIVO  </Est>
+  <Usuario>XO14FFF </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Producto>     </Producto>
+  <InclPlan> </InclPlan>
+  <FechaEfe>        </FechaEfe>
+  <Est>        </Est>
+  <Usuario>        </Usuario>
+  <Referencia>             </Referencia>
+</RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC45_D_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<RespuestaOK>
+	<ESTATUS IDPETICION="9ababdbc-53ee-43e5-bb48-9bf654a1724f">EXITO</ESTATUS>
+	<MENSAJE>PG014 NO MAS REGISTROS EN LA TABLA  </MENSAJE>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Fecha>        </Fecha>
+	<Hora>        </Hora>
+	<CiudadOrigen>                </CiudadOrigen>
+	<TelMarcado>          </TelMarcado>
+	<CiudadDestino>                </CiudadDestino>
+	<Sv>  </Sv>
+	<Cl>  </Cl>
+	<TipoLlamada>  </TipoLlamada>
+	<MinutosTAire>       </MinutosTAire>
+	<MinutosLibre>       </MinutosLibre>
+	<LargaDistancia>          </LargaDistancia>
+	<Total>             </Total>
+	<Referencia>                                     </Referencia>
+</RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC46_D_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<RespuestaOK>
+  <ESTATUS IDPETICION="8e07d1ee-7c06-4aa6-9f11-713790bf7f82">EXITO</ESTATUS>
+  <MENSAJE>PG013 EXISTEN MAS REGISTRO EN  TABLA</MENSAJE>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>06/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>PTO.VTA:CAC PLAZA CARSO-CIR-REDENCION CAMCA-7667 PTO </Comentarios>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>06/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>S. A PET. DE XOB8D82 MARCA: SONY MODELO: C6906  CIR- </Comentarios>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>06/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>PLAN ANTERIOR: M9871 PLAN ACTUAL: M9871  OK          </Comentarios>
+  <TipoComentario>HISTO</TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>5527671654   ACTIVADO  PLAN PRECIOSM9871:FEF 05/11/13</Comentarios>
+  <TipoComentario>CAUTO</TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>REACTIVACION DEL TELEFONO 5527671654 POR: XOB8D82    </Comentarios>
+  <TipoComentario>CAUTO</TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>CAMBIO DE EQ. C/AD Y REACTIVAC 5527671654 XOB8D82    </Comentarios>
+  <TipoComentario>CAUTO</TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>MARCA ANT:SONY  MOD. ANT:LT28I                       </Comentarios>
+  <TipoComentario>CAUTO</TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>DISTRIBUIDOR: CARSO                                  </Comentarios>
+  <TipoComentario>CAUTO</TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOB8D82 </CveUsuario>
+  <Comentarios>BONIFICACION % : 000  MONTO A PAGAR :        0.00    </Comentarios>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>VIBSB08 </CveUsuario>
+  <Comentarios>2000162978353-5689-XOB8D82-CAMBIO DE EQUIPO.SE REALIZ</Comentarios>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>VIBSB08 </CveUsuario>
+  <Comentarios>A CAMAR COM PALN M9871 SAP 502378212 LALO CARSO .    </Comentarios>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOCYD99 </CveUsuario>
+  <Comentarios>*****US SOL. INF DE SEG CEL QUE TIENE ACTIVO LLEVA MA</Comentarios>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOCYD99 </CveUsuario>
+  <Comentarios>S DE UN ANO ACTIVO SE INDICA QUE NO ESTA ACTIVO US CO</Comentarios>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOCYD99 </CveUsuario>
+  <Comentarios>MENTA QUE PAGA 85.00 SE IDNICA SEG TOTAL Y SE EXPLICA</Comentarios>
+  <TipoComentario>     </TipoComentario>
+  <FechaEfectiva>05/11/13</FechaEfectiva>
+  <CveUsuario>XOCYD99 </CveUsuario>
+  <Comentarios> QUE ESTO NO LE CUBRE SE INDICA ANTIVIRUS Y NO APLICA</Comentarios>
+  <Referencia>     21311051422280009</Referencia>
+</RespuestaOK>
+]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC47_C_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<RespuestaOK>
+<ESTATUS IDPETICION="2ea73b67-1905-40b4-929e-affcea5b7207">EXITO</ESTATUS>
+<MENSAJE>PG014 NO MAS REGISTROS EN LA TABLA  </MENSAJE>
+<FecPago>18/07/12</FecPago>
+<FecApli>18/07/12</FecApli>
+<FecReve>        </FecReve>
+<ImpApli>        262.22</ImpApli>
+<FecFact>15/07/12</FecFact>
+<ForPago>TARJETA CR</ForPago>
+<FecPago>        </FecPago>
+<FecApli>        </FecApli>
+<FecReve>        </FecReve>
+<ImpApli>              </ImpApli>
+<FecFact>        </FecFact>
+<ForPago>          </ForPago>
+<FecPago>        </FecPago>
+<FecApli>        </FecApli>
+<FecReve>        </FecReve>
+<ImpApli>              </ImpApli>
+<FecFact>        </FecFact>
+<ForPago>          </ForPago>
+<FecPago>        </FecPago>
+<FecApli>        </FecApli>
+<FecReve>        </FecReve>
+<ImpApli>              </ImpApli>
+<FecFact>        </FecFact>
+<ForPago>          </ForPago>
+<FecPago>        </FecPago>
+<FecApli>        </FecApli>
+<FecReve>        </FecReve>
+<ImpApli>              </ImpApli>
+<FecFact>        </FecFact>
+<ForPago>          </ForPago>
+<FecPago>        </FecPago>
+<FecApli>        </FecApli>
+<FecReve>        </FecReve>
+<ImpApli>              </ImpApli>
+<FecFact>        </FecFact>
+<ForPago>          </ForPago>
+<FecPago>        </FecPago>
+<FecApli>        </FecApli>
+<FecReve>        </FecReve>
+<ImpApli>              </ImpApli>
+<FecFact>        </FecFact>
+<ForPago>          </ForPago>
+<FecPago>        </FecPago>
+<FecApli>        </FecApli>
+<FecReve>        </FecReve>
+<ImpApli>              </ImpApli>
+<FecFact>        </FecFact>
+<ForPago>          </ForPago>
+<Referencia>       </Referencia>
+</RespuestaOK>
+]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC48_A_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<RespuestaOK>
+	<ESTATUS IDPETICION="bebd13ea-ca33-4d0a-9528-75d44d95445d">EXITO</ESTATUS>
+	<MENSAJE>PG014 NO MAS REGISTROS EN LA TABLA</MENSAJE>
+	<Producto></Producto>
+	<FechEfectiva></FechEfectiva>
+	<Producto></Producto>
+	<FechEfectiva></FechEfectiva>
+	<Producto></Producto>
+	<FechEfectiva></FechEfectiva>
+	<Producto></Producto>
+	<FechEfectiva></FechEfectiva>
+	<Producto></Producto>
+	<FechEfectiva></FechEfectiva>
+</RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC48_C_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
@@ -761,21 +1477,178 @@ else if( xml.contains("I*7E") )
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<RespuestaOK>
+	<ESTATUS IDPETICION="4d2b4572-4329-4ef6-aae8-47346b7a5e20">EXITO</ESTATUS>
+	<MENSAJE>PG010 OPERACION EXITOSA             </MENSAJE>
+	<ClaveProdto>TRAN0</ClaveProdto>
+	<DescProdto>TRANSFERENCIA DE LLAMADAS S/CO</DescProdto>
+	<CostoProdto>          0.00</CostoProdto>
+	<CaracProdto>AT</CaracProdto>
+	<DatoAdicional>1100</DatoAdicional>
+	<Uni> SMS</Uni>
+	<Idgrp>1  </Idgrp>
+</RespuestaOK>
+         ]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC51_C_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<RespuestaOK>
+	<ESTATUS IDPETICION="dac58bb9-84b8-4179-8d3f-0c8d574b9143">EXITO</ESTATUS>
+	<MENSAJE>PG013 EXISTEN MAS REGISTRO EN  TABLA</MENSAJE>
+	<TelGrupo>2224736503</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>N  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>2225054260</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>N  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>2441090283</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>N  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>4432194247</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>N  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>5512949702</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>L  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>5518131808</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>L  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>5518462349</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>L  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>5522536693</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>L  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>5537170483</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>L  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>5543948519</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>L  </TipoDest>
+	<Estatus>BA</Estatus>
+	<FecEfe>16/02/13</FecEfe>
+	<TelGrupo>2224736503</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>N  </TipoDest>
+	<Estatus>AC</Estatus>
+	<FecEfe>18/02/13</FecEfe>
+	<TelGrupo>2225054260</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>N  </TipoDest>
+	<Estatus>AC</Estatus>
+	<FecEfe>18/02/13</FecEfe>
+	<TelGrupo>2441065888</TelGrupo>
+	<TipoServ>V</TipoServ>
+	<TipoDest>N  </TipoDest>
+	<Estatus>AC</Estatus>
+	<FecEfe>18/02/13</FecEfe>
+	<Referencia>000682423055129497022130218</Referencia>
+</RespuestaOK>]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="IGTOC52_C_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicioResponse>
-         <ejecutaServicioReturn>?</ejecutaServicioReturn>
+         <ejecutaServicioReturn><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<RespuestaOK>
+	<ESTATUS IDPETICION="697c8d4a-b3d0-4c02-b630-45d5b1998b83">EXITO</ESTATUS>
+	<MENSAJE>PG014 NO MAS REGISTROS EN LA TABLA  </MENSAJE>
+	<PlanDesc>PD1ME</PlanDesc>
+	<DescPlanDesc>GRAT PAQ 1000 SMS 3M</DescPlanDesc>
+	<Periodicidad>DIAS              </Periodicidad>
+	<FechaEfect>08/05/13</FechaEfect>
+	<FechaExpira>08/05/13</FechaExpira>
+	<Status>INACTIVO  </Status>
+	<Usuario>IASBC6G</Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<PlanDesc>     </PlanDesc>
+	<DescPlanDesc>                    </DescPlanDesc>
+	<Periodicidad>                  </Periodicidad>
+	<FechaEfect>        </FechaEfect>
+	<FechaExpira>        </FechaExpira>
+	<Status>          </Status>
+	<Usuario>       </Usuario>
+	<Referencia>            </Referencia>
+</RespuestaOK>
+
+]]]]>><![CDATA[</ejecutaServicioReturn>
       </ser:ejecutaServicioResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/></con:response><con:response name="REACT_C_Resp" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">

@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesReglas" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesReglasBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/gestiontramites/wmb/reglas}GestionTramitesReglasBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Dropbox/wmb/wsdl/GestionTramitesReglas.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesReglas.wsdl"><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesReglas.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesReglas" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/reglas" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:types="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" xmlns:comun="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
+<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesReglas" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesReglasBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas}GestionTramitesReglasBinding" soapVersion="1_1" anonymous="optional" definition="C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/reglas/GestionTramitesReglas.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/reglas/GestionTramitesReglas.wsdl"><con:part><con:url>file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/reglas/GestionTramitesReglas.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesReglas" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas" xmlns:types="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="GestionTramitesReglasBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
   <types>
     <xsd:schema>
-      <xsd:import schemaLocation="GestionTramitesReglas.xsd" namespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema"/>
-      <xsd:import schemaLocation="GestionTramitesComun.xsd" namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema"/>
+      <xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" schemaLocation="GestionTramitesReglas.xsd"/>
+      <xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
     </xsd:schema>
   </types>
   <message name="determinarPrevalidacionMsg">
-    <part name="parameters" element="types:determinarPrevalidacionRequest"/>
+    <part element="types:determinarPrevalidacionRequest" name="parameters"/>
   </message>
   <message name="determinarPrevalidacionMsgResponse">
-    <part name="parameters" element="types:determinarPrevalidacionResponse"/>
+    <part element="types:determinarPrevalidacionResponse" name="parameters"/>
   </message>
   <message name="determinarAdeudoMsg">
-    <part name="parameters" element="types:determinarAdeudoRequest"/>
+    <part element="types:determinarAdeudoRequest" name="parameters"/>
   </message>
   <message name="determinarAdeudoMsgResponse">
-    <part name="parameters" element="types:determinarAdeudoResponse"/>
+    <part element="types:determinarAdeudoResponse" name="parameters"/>
   </message>
   <message name="determinarRegionPerfilMsg">
-    <part name="parameters" element="types:determinarRegionPerfilRequest"/>
+    <part element="types:determinarRegionPerfilRequest" name="parameters"/>
   </message>
   <message name="determinarRegionPerfilMsgResponse">
-    <part name="parameters" element="types:determinarRegionPerfilResponse"/>
+    <part element="types:determinarRegionPerfilResponse" name="parameters"/>
   </message>
   <message name="reasignarTramiteMsg">
-    <part name="parameters" element="types:reasignarTramiteRequest"/>
+    <part element="types:reasignarTramiteRequest" name="parameters"/>
   </message>
   <message name="reasignarTramiteMsgResponse">
-    <part name="parameters" element="types:reasignarTramiteResponse"/>
+    <part element="types:reasignarTramiteResponse" name="parameters"/>
   </message>
   <message name="gestionTramitesWMBExceptionMsg">
-    <part name="fault" element="comun:gestionTramitesWMBException"/>
+    <part element="comun:gestionTramitesWMBException" name="fault"/>
   </message>
   <portType name="GestionTramitesReglasPort">
     <operation name="determinarPrevalidacion">
@@ -58,7 +65,7 @@
   <binding name="GestionTramitesReglasBinding" type="this:GestionTramitesReglasPort">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="determinarPrevalidacion">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarPrevalidacion"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarPrevalidacion"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -66,11 +73,11 @@
         <soap:body use="literal"/>
       </output>
       <fault name="GestionTramitesWMBException">
-        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
       </fault>
     </operation>
     <operation name="determinarAdeudo">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarAdeudo"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarAdeudo"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -78,11 +85,11 @@
         <soap:body use="literal"/>
       </output>
       <fault name="GestionTramitesWMBException">
-        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
       </fault>
     </operation>
     <operation name="determinarRegionPerfil">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarRegionPerfil"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarRegionPerfil"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -90,11 +97,11 @@
         <soap:body use="literal"/>
       </output>
       <fault name="GestionTramitesWMBException">
-        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
       </fault>
     </operation>
     <operation name="reasignarTramite">
-      <soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/wmb/reglas/reasignarTramite"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/reasignarTramite"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -102,66 +109,66 @@
         <soap:body use="literal"/>
       </output>
       <fault name="GestionTramitesWMBException">
-        <soap:fault use="literal" name="GestionTramitesWMBException"/>
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
       </fault>
     </operation>
   </binding>
   <service name="GestionTramitesReglasService">
     <port binding="this:GestionTramitesReglasBinding" name="GestionTramitesReglasHTTPSOAPPort">
-      <soap:address location="http://localhost:7800/gestiontramites/wmb/ReglasService"/>
+      <soap:address location="http://localhost:7800/di/sds/servicioaclientes/gestiontramites/wmb/ReglasService"/>
     </port>
   </service>
-</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesReglas.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
-  <xsd:element name="determinarPrevalidacionRequest">
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\reglas\GestionTramitesReglas.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element ibmSchExtn:docRoot="true" name="determinarPrevalidacionRequest">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="request" type="this:DeterminarPrevalidacionRequestType"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="determinarPrevalidacionResponse">
+  <xsd:element ibmSchExtn:docRoot="true" name="determinarPrevalidacionResponse">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="response" type="this:DeterminarPrevalidacionResponseType"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="determinarAdeudoRequest">
+  <xsd:element ibmSchExtn:docRoot="true" name="determinarAdeudoRequest">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="request" type="this:DeterminarAdeudoRequestType"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="determinarAdeudoResponse">
+  <xsd:element ibmSchExtn:docRoot="true" name="determinarAdeudoResponse">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="response" type="this:DeterminarAdeudoResponseType"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="determinarRegionPerfilRequest">
+  <xsd:element ibmSchExtn:docRoot="true" name="determinarRegionPerfilRequest">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="request" type="this:DeterminarRegionPerfilRequestType"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="determinarRegionPerfilResponse">
+  <xsd:element ibmSchExtn:docRoot="true" name="determinarRegionPerfilResponse">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="response" type="this:DeterminarRegionPerfilResponseType"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="reasignarTramiteRequest">
+  <xsd:element ibmSchExtn:docRoot="true" name="reasignarTramiteRequest">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="request" type="this:ReasignarTramiteRequestType"/>
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element name="reasignarTramiteResponse">
+  <xsd:element ibmSchExtn:docRoot="true" name="reasignarTramiteResponse">
     <xsd:complexType>
       <xsd:sequence>
         <xsd:element name="response" type="this:ReasignarTramiteResponseType"/>
@@ -224,33 +231,33 @@
   </xsd:complexType>
   <xsd:complexType name="Perfil">
     <xsd:sequence>
-      <xsd:element name="perfilPac" type="xsd:string" minOccurs="1"/>
-      <xsd:element name="habilitado" type="xsd:boolean" minOccurs="0"/>
-      <xsd:element name="regiones" type="this:ArrayOfRegiones" minOccurs="0"/>
-      <xsd:element name="nivelAcceso" type="xsd:string" minOccurs="0"/>
-      <xsd:element name="flujoNegocio" type="xsd:string" minOccurs="0"/>
+      <xsd:element minOccurs="1" name="perfilPac" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="habilitado" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="regiones" type="this:ArrayOfRegiones"/>
+      <xsd:element minOccurs="0" name="nivelAcceso" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="flujoNegocio" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="ArrayOfRegiones">
     <xsd:sequence>
-      <xsd:element name="region" type="xsd:string" maxOccurs="unbounded"/>
+      <xsd:element maxOccurs="unbounded" name="region" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
   <!--Tipos para DeterminarRegionPerfil-->
   <!--Tipos para Reasignar Tramite-->
   <xsd:complexType name="Tramite">
     <xsd:sequence>
-      <xsd:element name="tipoTramite" type="xsd:string" minOccurs="1"/>
-      <xsd:element name="estado" type="xsd:string" minOccurs="1"/>
-      <xsd:element name="cac" type="this:CAC" minOccurs="0" maxOccurs="1"/>
-      <xsd:element name="aclaracionSaldos" type="this:AclaracionSaldos" minOccurs="0" maxOccurs="1"/>
-      <xsd:element name="asesor" type="this:AsesorCAC" minOccurs="0"/>
+      <xsd:element minOccurs="1" name="tipoTramite" type="xsd:string"/>
+      <xsd:element minOccurs="1" name="estado" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="cac" type="this:CAC"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="aclaracionSaldos" type="this:AclaracionSaldos"/>
+      <xsd:element minOccurs="0" name="asesor" type="this:AsesorCAC"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="CAC">
     <xsd:sequence>
-      <xsd:element name="identificador" type="xsd:string" minOccurs="1"/>
-      <xsd:element name="region" type="xsd:string" minOccurs="1"/>
+      <xsd:element minOccurs="1" name="identificador" type="xsd:string"/>
+      <xsd:element minOccurs="1" name="region" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="AclaracionSaldos">
@@ -308,16 +315,103 @@
     </xsd:sequence>
   </xsd:complexType>
   <!--Tipos para Determinar Adeudo-->
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesComun.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:this="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\comun\GestionTramitesComun.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" version="1.0" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <xsd:element name="gestionTramitesWMBException" type="this:GestionTramitesWMBException"/>
+  <xsd:complexType name="RequestBase">
+    <xsd:sequence>
+      <xsd:element name="usuarioM2K" type="xsd:string"/>
+      <xsd:element name="region" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ResponseBase">
+    <xsd:sequence>
+      <xsd:element name="mensajes" type="this:ArrayOfMensaje" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
   <xsd:complexType name="GestionTramitesWMBException">
     <xsd:sequence>
       <xsd:element name="servicio" type="xsd:string"/>
       <xsd:element name="operacion" type="xsd:string"/>
       <!--Para m2k FUNCTION_ACTION-->
-      <xsd:element name="error" type="xsd:string"/>
+      <xsd:element name="errores" type="this:ArrayOfError" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
+  <xsd:complexType name="ArrayOfError">
+    <xsd:sequence>
+      <xsd:element name="error" type="this:Error" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Error">
+    <xsd:sequence>
+      <xsd:element name="tipo" type="xsd:string"/>
+      <xsd:element name="codigo" type="xsd:string"/>
+      <xsd:element name="descripcion" type="xsd:string"/>
+      <xsd:element name="servicioOrigen" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfMensaje">
+    <xsd:sequence>
+      <xsd:element name="mensaje" type="this:Mensaje" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Mensaje">
+    <xsd:sequence>
+      <xsd:element name="codigo" type="xsd:string"/>
+      <xsd:element name="descripcion" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="decimalFormato">
+    <xsd:restriction base="xsd:decimal">
+      <xsd:fractionDigits value="2"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="telefonoFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{10}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="fechaFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|(((0[1-9])|([1-2][0-9])|(3[0-1]))/((01)|(03)|(05)|(07)|(08)|(10)|(12))/[0-9]{2})"/>
+      <xsd:pattern value="|(((0[1-9])|([1-2][0-9])|(30))/((04)|(06)|(09)|(11))/[0-9]{2})"/>
+      <xsd:pattern value="|(((0[1-9])|([1-2][0-9]))/((02))/[0-9]{2})"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="cuentaFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{1,9}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="imeiFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{18}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="horaFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|(([0-1][0-9])|(2[0-3])):(([0-5][0-9])):(([0-5][0-9]))"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="alfanumericoFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|[a-zA-Z0-9]+"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="productoFormato">
+    <xsd:restriction base="this:alfanumericoFormato">
+      <xsd:maxLength value="5"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="planTarifarioFormato">
+    <xsd:restriction base="this:alfanumericoFormato">
+      <xsd:maxLength value="5"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="fechaPivFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{7}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
 </xsd:schema>
 <!--catalogo de servicios-->
 <!--1. M2K-->
@@ -327,7 +421,7 @@
 <!--5. RN Determinar Adeudo-->
 <!--6. RN Determinar Region Perfil-->
 <!--7. RN Determinar Prevalidacion-->
-<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarAdeudo" name="determinarAdeudo" bindingOperationName="determinarAdeudo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/ReglasService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarAdeudo" name="determinarAdeudo" bindingOperationName="determinarAdeudo" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:determinarAdeudoRequest>
@@ -399,7 +493,7 @@
          </sch:request>
       </sch:determinarAdeudoRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarAdeudo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarPrevalidacion" name="determinarPrevalidacion" bindingOperationName="determinarPrevalidacion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarAdeudo"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarPrevalidacion" name="determinarPrevalidacion" bindingOperationName="determinarPrevalidacion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:determinarPrevalidacionRequest>
@@ -439,7 +533,7 @@
          </sch:request>
       </sch:determinarPrevalidacionRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarPrevalidacion"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarRegionPerfil" name="determinarRegionPerfil" bindingOperationName="determinarRegionPerfil" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarPrevalidacion"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarRegionPerfil" name="determinarRegionPerfil" bindingOperationName="determinarRegionPerfil" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:determinarRegionPerfilRequest>
@@ -463,7 +557,7 @@
          </sch:request>
       </sch:determinarRegionPerfilRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/determinarRegionPerfil"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/reasignarTramite" name="reasignarTramite" bindingOperationName="reasignarTramite" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://windows:7801/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/determinarRegionPerfil"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/reasignarTramite" name="reasignarTramite" bindingOperationName="reasignarTramite" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/ReglasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:reasignarTramiteRequest>
@@ -503,4 +597,4 @@
          </sch:request>
       </sch:reasignarTramiteRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/gestiontramites/wmb/reglas/reasignarTramite"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/reasignarTramite"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

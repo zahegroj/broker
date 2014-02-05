@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="D16_Telcel_Igtoc43CService" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="Igtoc43CBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/m2k/wmb/igtoc43/c}Igtoc43CBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc43CService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc43CService.wsdl"><con:part><con:url>file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc43CService.wsdl</con:url><con:content><![CDATA[<definitions name="Igtoc43C" targetNamespace="http://www.telcel.com.mx/m2k/wmb/igtoc43/c" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/m2k/wmb/igtoc43/c" xmlns:types="http://www.telcel.com.mx/m2k/igtoc43/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project activeEnvironment="Default" name="D16_Telcel_Igtoc43CService" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="Igtoc43CBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c}Igtoc43CBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc43CService.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc43CService.wsdl"><con:part><con:url>file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_TelcelLib/m2k/wmb/Igtoc43CService.wsdl</con:url><con:content><![CDATA[<definitions name="Igtoc43C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <documentation>
     <appinfo source="WMQI_APPINFO">
       <MRWSDLAppInfo imported="true">
@@ -9,8 +9,8 @@
   </documentation>
   <types>
     <xsd:schema>
-      <xsd:import namespace="http://www.telcel.com.mx/m2k/igtoc43/c" schemaLocation="m2k_igtoc43_c.xsd"/>
-      <xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+      <xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c" schemaLocation="m2k_igtoc43_c.xsd"/>
+      <xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
     </xsd:schema>
   </types>
   <message name="ejecutarServicioMsg">
@@ -32,7 +32,7 @@
   <binding name="Igtoc43CBinding" type="this:Igtoc43CPort">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="ejecutarServicio">
-      <soap:operation soapAction="http://www.telcel.com.mx/m2k/wmb/igtoc43/c/ejecutarServicio"/>
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c/ejecutarServicio"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -46,11 +46,11 @@
   </binding>
   <service name="Igtoc43CService">
     <port binding="this:Igtoc43CBinding" name="Igtoc43C">
-      <soap:address location="http://localhost:7800/m2k/wmb/Igtoc43CService"/>
+      <soap:address location="http://localhost:7800/di/sds/m2k/tasacion/wmb/Igtoc43CService"/>
     </port>
   </service>
-</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\m2k_igtoc43_c.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.telcel.com.mx/m2k/igtoc43/c" xmlns="http://www.telcel.com.mx/m2k/igtoc43/c" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:m2k="http://www.telcel.com.mx/m2k" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\m2k_igtoc43_c.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c" xmlns="http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:m2k="http://www.telcel.com.mx/di/sds/m2k" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
   <xsd:element ibmSchExtn:docRoot="true" name="Request" type="RequestType"/>
   <xsd:element ibmSchExtn:docRoot="true" name="RespuestaOK" type="RespuestaOKType"/>
   <xsd:complexType name="RequestType">
@@ -102,7 +102,7 @@
       <xsd:element name="IMSI" type="xsd:string"/>
     </xsd:sequence>
   </xsd:group>
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\m2k.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.telcel.com.mx/m2k" xmlns="http://www.telcel.com.mx/m2k" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_TelcelLib\m2k\wmb\m2k.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="http://www.telcel.com.mx/di/sds/m2k" xmlns="http://www.telcel.com.mx/di/sds/m2k" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <xsd:element ibmSchExtn:docRoot="true" name="RespuestaError" type="RespuestaErrorType"/>
   <xsd:complexType name="RespuestaErrorType">
     <xsd:sequence>
@@ -346,7 +346,7 @@
       <xsd:fractionDigits value="2"/>
     </xsd:restriction>
   </xsd:simpleType>
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/m2k/wmb/Igtoc43CService</con:endpoint><con:endpoint>http://localhost:7800/m2k/wmb/Igtoc43CService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/m2k/wmb/igtoc43/c/ejecutarServicio" name="ejecutarServicio" bindingOperationName="ejecutarServicio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/m2k/wmb/Igtoc43CService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c="http://www.telcel.com.mx/m2k/igtoc43/c">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/m2k/tasacion/wmb/Igtoc43CService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c/ejecutarServicio" name="ejecutarServicio" bindingOperationName="ejecutarServicio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="IGTOC43C Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/m2k/tasacion/wmb/Igtoc43CService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c="http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c">
    <soapenv:Header/>
    <soapenv:Body>
       <c:Request>
@@ -370,4 +370,4 @@
          </inputParameters>
       </c:Request>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/m2k/wmb/igtoc43/c/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
