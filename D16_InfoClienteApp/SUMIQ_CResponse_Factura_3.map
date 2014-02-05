@@ -3,8 +3,8 @@
     <output path="/infoCliente/GestionTramitesInfoCliente.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="SUMIQ_CResponse_Factura_3">
-        <input namespace="http://www.telcel.com.mx/m2k/sumiq/c" path="RespuestaOK"/>
-        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" path="type('FacturaType')"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="RespuestaOK"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" path="type('FacturaType')"/>
         <move>
             <input path="FechaFactura3"/>
             <output path="fechaFactura"/>

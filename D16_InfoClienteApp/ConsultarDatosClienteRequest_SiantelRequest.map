@@ -4,8 +4,8 @@
     <output path="/variables.xsd" var="out1"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="ConsultarDatosClienteRequest_SiantelRequest">
-        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" path="mb:msg(consultarDatosClienteRequest,assembly,,LocalEnvironment,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/siantel" path="$out/mb:msg(SolicitudPerfilTelefono,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly">
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" path="mb:msg(consultarDatosClienteRequest,assembly,,LocalEnvironment,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel" path="$out/mb:msg(SolicitudPerfilTelefono,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly">
             <cast path="$MessageAssembly/LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any"/>
         </output>
         <move>

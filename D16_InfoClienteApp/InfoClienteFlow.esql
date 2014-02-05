@@ -1,7 +1,7 @@
 CREATE FILTER MODULE PerfilTelefonoGrupoCorpo_Filter
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE nssiantel NAMESPACE 'http://www.telcel.com.mx/siantel';	
+		DECLARE nssiantel NAMESPACE 'http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel';	
 		IF Root.XMLNSC.nssiantel:PerfilTelefono.GrupoCorpo='TELCEL' THEN
 			RETURN TRUE;
 		END IF;
@@ -12,7 +12,7 @@ END MODULE;
 CREATE FILTER MODULE PerfilTelefonoPlataforma_Filter
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE nssiantel NAMESPACE 'http://www.telcel.com.mx/siantel';	
+		DECLARE nssiantel NAMESPACE 'http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel';	
 		IF Root.XMLNSC.nssiantel:PerfilTelefono.Plataforma='POSPAGO' THEN
 			RETURN TRUE;
 		END IF;
@@ -23,7 +23,7 @@ END MODULE;
 CREATE COMPUTE MODULE AsignarFaultNoTelcel
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
 		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		
 		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.servicio = 'GestionTramitesInfoClienteService';
@@ -39,7 +39,7 @@ END MODULE;
 CREATE COMPUTE MODULE AsignarFaultNoPrepago
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
 		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		
 		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.servicio = 'GestionTramitesInfoClienteService';

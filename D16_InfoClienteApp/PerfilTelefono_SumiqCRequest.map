@@ -4,11 +4,11 @@
     <output path="/variables.xsd" var="out1"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="PerfilTelefono_SumiqCRequest">
-        <input namespace="http://www.telcel.com.mx/siantel" path="mb:msg(PerfilTelefono,assembly,,LocalEnvironment,Properties)">
+        <input namespace="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel" path="mb:msg(PerfilTelefono,assembly,,LocalEnvironment,Properties)">
             <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any"/>
             <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any1"/>
         </input>
-        <output namespace="http://www.telcel.com.mx/m2k/sumiq/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
         <output path="$out1/mb:msg(usuarioM2K,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
         <move>
             <input path="Properties"/>

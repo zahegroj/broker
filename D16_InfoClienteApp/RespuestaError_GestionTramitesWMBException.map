@@ -3,8 +3,8 @@
     <output path="/comun/GestionTramitesComun.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="RespuestaError_GestionTramitesWMBException">
-        <input namespace="http://www.telcel.com.mx/m2k" path="mb:msg(RespuestaError,assembly,XMLNSC,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/comun/schema" path="mb:msg(gestionTramitesWMBException,assembly,XMLNSC,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/m2k" path="mb:msg(RespuestaError,assembly,XMLNSC,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" path="mb:msg(gestionTramitesWMBException,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>
             <output path="Properties"/>

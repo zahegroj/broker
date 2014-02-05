@@ -9,8 +9,8 @@
     </imports>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="SUMIQ_CResponse_ConsultarDatosClienteResponse">
-        <input namespace="http://www.telcel.com.mx/m2k/sumiq/c" path="mb:msg(RespuestaOK,assembly,XMLNSC,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/infoCliente/schema" path="mb:msg(consultarDatosClienteResponse,assembly,XMLNSC,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="mb:msg(RespuestaOK,assembly,XMLNSC,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" path="mb:msg(consultarDatosClienteResponse,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties" var="Properties"/>
             <output path="Properties"/>
