@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesInvestigacion" resourceRoot="" soapui-version="4.5.2" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesInvestigacionBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion}GestionTramitesInvestigacionBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/investigacion/GestionTramitesInvestigacion.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\investigacion\GestionTramitesInvestigacion.wsdl"><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\investigacion\GestionTramitesInvestigacion.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesInvestigacion" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" xmlns:types="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesInvestigacion" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesInvestigacionBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion}GestionTramitesInvestigacionBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/investigacion/GestionTramitesInvestigacion.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/investigacion/GestionTramitesInvestigacion.wsdl"><con:part><con:url>file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/investigacion/GestionTramitesInvestigacion.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesInvestigacion" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" xmlns:types="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <documentation>
     <appinfo source="WMQI_APPINFO">
       <MRWSDLAppInfo imported="true">
@@ -586,7 +586,7 @@
           <xsd:element name="telefono" type="comun:telefonoFormato"/>
           <xsd:element name="cuenta" type="comun:cuentaFormato"/>
           <xsd:element name="fechaInicio" type="comun:fechaFormato"/>
-          <xsd:element name="horaFin" type="comun:fechaFormato"/>
+          <xsd:element name="fechaFin" type="comun:fechaFormato"/>
           <xsd:element name="referencia" type="this:ReferenciaPagoYAjusteType" minOccurs="0"/>
         </xsd:sequence>
       </xsd:extension>
@@ -596,7 +596,7 @@
     <xsd:complexContent>
       <xsd:extension base="comun:ResponseBase">
         <xsd:sequence>
-          <xsd:element name="detallesConexion" type="this:ArrayOfPagoYAjuste" minOccurs="0"/>
+          <xsd:element name="pagosYAjustes" type="this:ArrayOfPagoYAjuste" minOccurs="0"/>
           <xsd:element name="referencia" type="this:ReferenciaPagoYAjusteType" minOccurs="0"/>
         </xsd:sequence>
       </xsd:extension>
@@ -1039,6 +1039,7 @@
       <xsd:element name="tipo" type="xsd:string"/>
       <xsd:element name="codigo" type="xsd:string"/>
       <xsd:element name="descripcion" type="xsd:string"/>
+      <xsd:element name="solucion" type="xsd:string"/>
       <xsd:element name="servicioOrigen" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
@@ -1114,13 +1115,13 @@
 <!--5. RN Determinar Adeudo-->
 <!--6. RN Determinar Region Perfil-->
 <!--7. RN Determinar Prevalidacion-->
-<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos" name="consultarConsumos" bindingOperationName="consultarConsumos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:endpoint>http://localhost:7800/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos" name="consultarConsumos" bindingOperationName="consultarConsumos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarConsumosRequest>
          <sch:request>
-            <sch1:usuarioM2K>?</sch1:usuarioM2K>
-            <sch1:region>?</sch1:region>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
             <sch:telefono>5522700538</sch:telefono>
             <sch:cuenta>001862574</sch:cuenta>
             <sch:fechaInicio>21/12/13</sch:fechaInicio>
@@ -1128,12 +1129,12 @@
             <sch:esRegistrosFacturados>false</sch:esRegistrosFacturados>
             <!--Optional:-->
             <sch:referencia>
-               <sch:fechaPiv>?</sch:fechaPiv>
-               <sch:horaPiv>?</sch:horaPiv>
-               <sch:fuentePiv>?</sch:fuentePiv>
-               <!--Optional:-->
-               <sch:secuenciaPiv>?</sch:secuenciaPiv>
-               <sch:telMarcadoPiv>?</sch:telMarcadoPiv>
+               <sch:fechaPiv>2140125</sch:fechaPiv>
+               <sch:horaPiv>1215210</sch:horaPiv>
+               <sch:fuentePiv>GSRAT9</sch:fuentePiv>
+               <!--Optional:->
+               <sch:secuenciaPiv>?</sch:secuenciaPiv-->
+               <sch:telMarcadoPiv>5522327148</sch:telMarcadoPiv>
             </sch:referencia>
          </sch:request>
       </sch:consultarConsumosRequest>
@@ -1143,37 +1144,37 @@
    <soapenv:Body>
       <sch:consultarConsumosRequest>
          <sch:request>
-            <sch1:usuarioM2K>?</sch1:usuarioM2K>
-            <sch1:region>?</sch1:region>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
             <sch:telefono>5527671654</sch:telefono>
             <sch:cuenta>006385120</sch:cuenta>
             <sch:fechaInicio>28/10/13</sch:fechaInicio>
             <sch:fechaFin>13/11/13</sch:fechaFin>
             <sch:esRegistrosFacturados>false</sch:esRegistrosFacturados>
-            <!--Optional:-->
+            <!--Optional:
             <sch:referencia>
                <sch:fechaPiv>?</sch:fechaPiv>
                <sch:horaPiv>?</sch:horaPiv>
                <sch:fuentePiv>?</sch:fuentePiv>
-               <!--Optional:-->
+               <!-Optional:->
                <sch:secuenciaPiv>?</sch:secuenciaPiv>
                <sch:telMarcadoPiv>?</sch:telMarcadoPiv>
-            </sch:referencia>
+            </sch:referencia-->
          </sch:request>
       </sch:consultarConsumosRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones" name="consultarDetalleConexiones" bindingOperationName="consultarDetalleConexiones" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones" name="consultarDetalleConexiones" bindingOperationName="consultarDetalleConexiones" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarDetalleConexionesRequest>
          <sch:request>
-            <sch1:usuarioM2K>?</sch1:usuarioM2K>
-            <sch1:region>?</sch1:region>
-            <sch:telefono>?</sch:telefono>
-            <sch:cuenta>?</sch:cuenta>
-            <sch:fechaConexion>?</sch:fechaConexion>
-            <sch:horaConexion>?</sch:horaConexion>
-            <!--Optional:-->
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527533753</sch:telefono>
+            <sch:cuenta></sch:cuenta>
+            <sch:fechaConexion>25/01/14</sch:fechaConexion>
+            <sch:horaConexion>10:16:46</sch:horaConexion>
+            <!--Optional:
             <sch:referencia>
                <sch:dtConnect>?</sch:dtConnect>
                <sch:tmConnect>?</sch:tmConnect>
@@ -1182,23 +1183,24 @@
                <sch:dataVolDown>?</sch:dataVolDown>
                <sch:serviceClass>?</sch:serviceClass>
             </sch:referencia>
+-->
          </sch:request>
       </sch:consultarDetalleConexionesRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario" name="consultarDetallePlanTarifario" bindingOperationName="consultarDetallePlanTarifario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario" name="consultarDetallePlanTarifario" bindingOperationName="consultarDetallePlanTarifario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarDetallePlanTarifarioRequest>
          <sch:request>
-            <sch1:usuarioM2K>?</sch1:usuarioM2K>
-            <sch1:region>?</sch1:region>
-            <sch:planTarifario>?</sch:planTarifario>
-            <!--Optional:-->
-            <sch:referencia>?</sch:referencia>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:planTarifario>M7380</sch:planTarifario>
+            <!--Optional:
+            <sch:referencia>?</sch:referencia>-->
          </sch:request>
       </sch:consultarDetallePlanTarifarioRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleProducto" name="consultarDetalleProducto" bindingOperationName="consultarDetalleProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleProducto" name="consultarDetalleProducto" bindingOperationName="consultarDetalleProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarDetalleProductoRequest>
@@ -1211,14 +1213,13 @@
             <sch:fechaFin>19/09/13</sch:fechaFin>
             <sch:producto>LINS7</sch:producto>
             <sch:planTarifario>S0913</sch:planTarifario>
-            <!--
+            <!-- Opcional -->
             <sch:referencia>
-             <sch:tipoGrupo>1</sch:tipoGrupo>
-               <sch:idGrupo>1</sch:idGrupo>
-               <sch:telefono>1111111111</sch:telefono>
-               <sch:effDate>1</sch:effDate>
+               <sch:tipoGrupo>XT</sch:tipoGrupo>
+               <sch:idGrupo>0006824230</sch:idGrupo>
+               <sch:telefono>5512949702</sch:telefono>
+               <sch:effDate>2130218</sch:effDate>
             </sch:referencia>
-            -->
          </sch:request>
       </sch:consultarDetalleProductoRequest>
    </soapenv:Body>
@@ -1245,23 +1246,23 @@
          </sch:request>
       </sch:consultarDetallePromocionRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePromocion"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion" name="consultarDetalleReversion" bindingOperationName="consultarDetalleReversion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePromocion"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion" name="consultarDetalleReversion" bindingOperationName="consultarDetalleReversion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarDetalleReversionRequest>
          <sch:request>
-            <sch1:usuarioM2K>?</sch1:usuarioM2K>
-            <sch1:region>?</sch1:region>
-            <sch:fechaPago>?</sch:fechaPago>
-            <sch:numPago>?</sch:numPago>
-            <sch:tipoPago>?</sch:tipoPago>
-            <sch:secPago>?</sch:secPago>
-            <!--Optional:-->
-            <sch:referencia>?</sch:referencia>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:fechaPago>2120718</sch:fechaPago>
+            <sch:numPago>01236</sch:numPago>
+            <sch:tipoPago>TC</sch:tipoPago>
+            <sch:secPago>00163</sch:secPago>
+            <!--Optional:
+            <sch:referencia>?</sch:referencia>-->
          </sch:request>
       </sch:consultarDetalleReversionRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado" name="consultarEncabezado" bindingOperationName="consultarEncabezado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado" name="consultarEncabezado" bindingOperationName="consultarEncabezado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarEncabezadoRequest>
@@ -1272,37 +1273,37 @@
          </sch:request>
       </sch:consultarEncabezadoRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta" name="consultarHistorialCuenta" bindingOperationName="consultarHistorialCuenta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta" name="consultarHistorialCuenta" bindingOperationName="consultarHistorialCuenta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarHistorialCuentaRequest>
          <sch:request>
-            <sch1:usuarioM2K>?</sch1:usuarioM2K>
-            <sch1:region>?</sch1:region>
-            <sch:telefono>?</sch:telefono>
-            <sch:cuenta>?</sch:cuenta>
-            <sch:fechaInicio>?</sch:fechaInicio>
-            <sch:fechaFin>?</sch:fechaFin>
-            <!--Optional:-->
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaInicio>28/10/13</sch:fechaInicio>
+            <sch:fechaFin>13/11/13</sch:fechaFin>
+            <!--Optional:
             <sch:referencia>
                <sch:telefono>?</sch:telefono>
                <sch:effDate>?</sch:effDate>
-            </sch:referencia>
+            </sch:referencia>-->
          </sch:request>
       </sch:consultarHistorialCuentaRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes" name="consultarPagosYAjustes" bindingOperationName="consultarPagosYAjustes" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes" name="consultarPagosYAjustes" bindingOperationName="consultarPagosYAjustes" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarPagosYAjustesRequest>
          <sch:request>
-            <sch1:usuarioM2K>?</sch1:usuarioM2K>
-            <sch1:region>?</sch1:region>
-            <sch:telefono>?</sch:telefono>
-            <sch:cuenta>?</sch:cuenta>
-            <sch:fechaInicio>?</sch:fechaInicio>
-            <sch:horaFin>?</sch:horaFin>
-            <!--Optional:-->
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>006385120</sch:cuenta>
+            <sch:fechaInicio>28/10/13</sch:fechaInicio>
+            <sch:fechaFin>13/11/13</sch:fechaFin>
+            <!--Optional:
             <sch:referencia>
                <sch:fechaPago>?</sch:fechaPago>
                <sch:lotePago>?</sch:lotePago>
@@ -1312,11 +1313,12 @@
                <sch:codAjuste>?</sch:codAjuste>
                <sch:secUsuarioAjuste>?</sch:secUsuarioAjuste>
                <sch:secAjuste>?</sch:secAjuste>
-            </sch:referencia>
+            </sch:referencia>-->
+
          </sch:request>
       </sch:consultarPagosYAjustesRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios" name="consultarPlanesYServicios" bindingOperationName="consultarPlanesYServicios" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios" name="consultarPlanesYServicios" bindingOperationName="consultarPlanesYServicios" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarPlanesYServiciosRequest>
@@ -1341,23 +1343,23 @@
          </sch:request>
       </sch:consultarPlanesYServiciosRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones" name="consultarPromociones" bindingOperationName="consultarPromociones" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones" name="consultarPromociones" bindingOperationName="consultarPromociones" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:consultarPromocionesRequest>
          <sch:request>
-            <sch1:usuarioM2K>?</sch1:usuarioM2K>
-            <sch1:region>?</sch1:region>
-            <sch:telefono>?</sch:telefono>
-            <sch:cuenta>?</sch:cuenta>
-            <sch:fechaInicio>?</sch:fechaInicio>
-            <sch:fechaFin>?</sch:fechaFin>
-            <!--Optional:-->
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5534880046</sch:telefono>
+            <sch:cuenta>4114222</sch:cuenta>
+            <sch:fechaInicio>04/05/13</sch:fechaInicio>
+            <sch:fechaFin>03/06/13</sch:fechaFin>
+            <!--Optional:
             <sch:referencia>
                <sch:cveDesc>?</sch:cveDesc>
                <sch:effDt>?</sch:effDt>
-            </sch:referencia>
+            </sch:referencia>-->
          </sch:request>
       </sch:consultarPromocionesRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

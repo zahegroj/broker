@@ -588,11 +588,24 @@ Referencia separada
 </Request>]]]]>><![CDATA[</xml>
       </ser:ejecutaServicio>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC64_C"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://serviciosm2k.telcel.com/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC64_A"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/telcel-ws-web/services/ControlWebService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicios.web.m2k.sds.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ser:ejecutaServicio>
-         <xml>?</xml>
+         <xml><![CDATA[<Request>
+	<user>SVBPM51</user>
+	<region>9</region>
+	<function>I*TB</function>
+	<action>A</action>
+	<inputParameters>
+		<servicio>
+			<p06telefono longitud='10'>5545305932</p06telefono>
+			<p07cuenta longitud='09'></p07cuenta>
+			<p08tpocomentario longitud='05'></p08tpocomentario>
+			<p09comentario longitud='2650'>ESTA ES UNA PRUEBA</p09comentario>
+		</servicio>
+	</inputParameters>
+</Request>]]]]>><![CDATA[</xml>
       </ser:ejecutaServicio>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ejecutaServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="8088" path="/telcel-ws-web/services/ControlWebService" host="MEX-FDKG5S1" name="M2K MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="ejecutaServicio" interface="ControlWebServiceSoapBinding" operation="ejecutaServicio"><con:settings/><con:dispatchPath>def holder = new com.eviware.soapui.support.XmlHolder( mockRequest.requestContent )

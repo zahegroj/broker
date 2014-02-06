@@ -364,4 +364,26 @@
          </inputParameters>
       </d:Request>
    </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc46/d/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC46D Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/m2k/activaciones/wmb/Igtoc46DService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:d="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc46/d">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <d:Request>
+         <user>SVBPM51</user>
+         <region>9</region>
+         <function>I*S6</function>
+         <action>D</action>
+         <inputParameters>
+            <servicio>
+               <p01telefono longitud="10">5545305932</p01telefono>
+               <p02cuenta longitud="09">6385120</p02cuenta>
+               <p03fechaInicio longitud="08">28/10/13</p03fechaInicio>
+               <p04fechaFin longitud="08">13/11/14</p04fechaFin>
+               <p05tipoComentarioPiv longitud="05"></p05tipoComentarioPiv>
+               <p06fechaPiv longitud="07"></p06fechaPiv>
+               <p07horaPiv longitud="07"></p07horaPiv>
+               <p08secPiv longitud="03"></p08secPiv>
+            </servicio>
+         </inputParameters>
+      </d:Request>
+   </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc46/d/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

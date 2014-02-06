@@ -348,18 +348,18 @@
    <soapenv:Header/>
    <soapenv:Body>
       <c:Request>
-         <user>?</user>
-         <region>?</region>
-         <function>?</function>
-         <action>?</action>
+         <user>SVBPM51</user>
+         <region>9</region>
+         <function>I*S9</function>
+         <action>C</action>
          <inputParameters>
             <servicio>
-               <p01telefono longitud="?">?</p01telefono>
-               <p02cuenta longitud="?">?</p02cuenta>
-               <p03fechaInicio longitud="?">?</p03fechaInicio>
-               <p04fechaFin longitud="?">?</p04fechaFin>
-               <p05refTelefono longitud="?">?</p05refTelefono>
-               <p06refEffDate longitud="?">?</p06refEffDate>
+               <p01telefono longitud="10">5527671654</p01telefono>
+               <p02cuenta longitud="09">6385120</p02cuenta>
+               <p03fechaInicio longitud="08">28/10/13</p03fechaInicio>
+               <p04fechaFin longitud="08">13/11/13</p04fechaFin>
+               <p05refTelefono longitud="10"></p05refTelefono>
+               <p06refEffDate longitud="07"></p06refEffDate>
             </servicio>
          </inputParameters>
       </c:Request>
