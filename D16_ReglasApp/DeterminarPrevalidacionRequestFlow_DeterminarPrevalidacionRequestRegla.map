@@ -3,7 +3,7 @@
     <output path="/DeterminarPrevalidacion_InlineSchema16.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="DeterminarPrevalidacionRequestFlow_DeterminarPrevalidacionRequestRegla">
-        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarPrevalidacionRequest,assembly,,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarPrevalidacionRequest,assembly,,Properties)"/>
         <output namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" path="mb:msg(PrevalidacionClienteRequest,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>

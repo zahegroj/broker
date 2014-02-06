@@ -4,7 +4,7 @@
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="DeterminarAdeudoResponseRegla_DeterminarAdeudoResponseFlow">
         <input namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" path="mb:msg(DeterminarAdeudoResponse,assembly,,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarAdeudoResponse,assembly,XMLNSC,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarAdeudoResponse,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>
             <output path="Properties"/>

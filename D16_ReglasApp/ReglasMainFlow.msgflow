@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ReglasApp/icons/full/obj16/ReglasMainFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ReglasApp/icons/full/obj30/ReglasMainFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="62,251" wsdlFileName="reglas/GestionTramitesReglas.wsdl" selectedPortType="GestionTramitesReglasPort" selectedBinding="GestionTramitesReglasBinding" selectedPort="GestionTramitesReglasHTTPSOAPPort" targetNamespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas" useHTTPTransport="true" urlSelector="/gestiontramites/wmb/ReglasService">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="54,154" wsdlFileName="reglas/GestionTramitesReglas.wsdl" selectedPortType="GestionTramitesReglasPort" selectedBinding="GestionTramitesReglasBinding" selectedPort="GestionTramitesReglasHTTPSOAPPort" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas" useHTTPTransport="true" urlSelector="/di/sds/servicioaclientes/gestiontramites/wmb/ReglasService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_ReglasElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="173,150">

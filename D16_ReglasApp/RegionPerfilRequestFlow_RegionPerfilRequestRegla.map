@@ -3,7 +3,7 @@
     <output path="/DeterminarRegionPerfil_InlineSchema17.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="RegionPerfilRequestFlow_RegionPerfilRequestRegla">
-        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarRegionPerfilRequest,assembly,,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarRegionPerfilRequest,assembly,,Properties)"/>
         <output namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" path="mb:msg(DeterminarRegionPerfilRequest,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>

@@ -3,7 +3,7 @@
     <output path="/ReasignarTramite_InlineSchema16.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="ReasignarTramiteRequestFlow_ReasignarTramiteRequestRegla">
-        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" path="mb:msg(reasignarTramiteRequest,assembly,,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" path="mb:msg(reasignarTramiteRequest,assembly,,Properties)"/>
         <output namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/ReasignarTramite" path="mb:msg(ReasignarTramiteRequest,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>

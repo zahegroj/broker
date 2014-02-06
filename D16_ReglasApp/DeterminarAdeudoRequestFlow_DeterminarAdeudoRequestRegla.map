@@ -3,7 +3,7 @@
     <output path="/DeterminarAdeudo_InlineSchema17.xsd"/>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="DeterminarAdeudoRequestFlow_DeterminarAdeudoRequestRegla">
-        <input namespace="http://www.telcel.com.mx/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarAdeudoRequest,assembly,,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarAdeudoRequest,assembly,,Properties)"/>
         <output namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" path="mb:msg(DeterminarAdeudoRequest,assembly,XMLNSC,Properties)"/>
         <move>
             <input path="Properties"/>
