@@ -1,0 +1,114 @@
+CREATE COMPUTE MODULE MapIgtoc42dResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc42/d';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarPagosYAjustesResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarPagosYAjustesResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarPagosYAjustesResponse, oldNamespace, nsInvest);
+		CALL MapPagosYAjustesResponse(OutputRoot, respuestaOK, ns);
+	END;
+END MODULE;
+
+CREATE FUNCTION MapPagosYAjustesResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.Fecha[]);	
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.Fecha[i]) <> '' OR 
+			TRIM(respuestaOK.NombreAjuste[i]) <> '' OR
+			TRIM(respuestaOK.Cheque[i]) <> '' OR
+			TRIM(respuestaOK.OrigenPago[i]) <> '' OR
+			TRIM(respuestaOK.FormaPago[i]) <> '' OR
+			TRIM(respuestaOK.Importe[i]) <> '' OR
+			TRIM(respuestaOK.Estatus[i]) <> '' OR
+			TRIM(respuestaOK.Asesor[i]) <> '' OR
+			TRIM(respuestaOK.DetallePago[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:fecha = TRIM(respuestaOK.Fecha[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:nombreAjuste = TRIM(respuestaOK.NombreAjuste[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:cheque = TRIM(respuestaOK.Cheque[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:origenPago = TRIM(respuestaOK.OrigenPago[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:formaPago = TRIM(respuestaOK.FormaPago[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:importe = TRIM(respuestaOK.Importe[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:estatus = TRIM(respuestaOK.Estatus[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:asesor = TRIM(respuestaOK.Asesor[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:detallePago = TRIM(respuestaOK.DetallePago[i]);
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:referencia.nsInvest:fechaPago = SUBSTRING(respuestaOK.Referencia FROM 1 FOR 7);
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:referencia.nsInvest:lotePago = SUBSTRING(respuestaOK.Referencia FROM 8 FOR 5);
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:referencia.nsInvest:tipoPago = SUBSTRING(respuestaOK.Referencia FROM 13 FOR 2);
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:referencia.nsInvest:secPago = SUBSTRING(respuestaOK.Referencia FROM 15 FOR 5);
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:referencia.nsInvest:fechaAjuste = SUBSTRING(respuestaOK.Referencia FROM 20 FOR 7);
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:referencia.nsInvest:codAjuste = SUBSTRING(respuestaOK.Referencia FROM 27 FOR 5);
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:referencia.nsInvest:secUsuarioAjuste = SUBSTRING(respuestaOK.Referencia FROM 32 FOR 7);
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:referencia.nsInvest:secAjuste = SUBSTRING(respuestaOK.Referencia FROM 39 FOR 3);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes) IS NULL THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+	END IF;
+END;
+
+CREATE COMPUTE MODULE MapIgtoc47cResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc47/c';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetalleReversionResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetalleReversionResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetalleReversionResponse, oldNamespace, nsInvest);
+		CALL MapReversionesResponse(OutputRoot, respuestaOK, ns);
+	END;
+END MODULE;
+
+CREATE FUNCTION MapReversionesResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.FecPago[]);	
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.FecPago[i]) <> '' OR 
+			TRIM(respuestaOK.FecApli[i]) <> '' OR
+			TRIM(respuestaOK.FecReve[i]) <> '' OR
+			TRIM(respuestaOK.ImpApli[i]) <> '' OR
+			TRIM(respuestaOK.FecFact[i]) <> '' OR
+			TRIM(respuestaOK.ForPago[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:fechaPago = TRIM(respuestaOK.FecPago[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:fechaAplicacion = TRIM(respuestaOK.FecApli[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:fechaReversion = TRIM(respuestaOK.FecReve[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:importeAplicado = TRIM(respuestaOK.ImpApli[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:fechaFactura = TRIM(respuestaOK.FecFact[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:formaPago = TRIM(respuestaOK.ForPago[i]);			
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:referencia = TRIM(respuestaOK.Referencia);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones) IS NULL THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+	END IF;
+END;

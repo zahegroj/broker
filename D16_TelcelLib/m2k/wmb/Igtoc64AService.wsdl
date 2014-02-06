@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><definitions name="Igtoc64C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/c" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/c" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><definitions name="Igtoc64C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/a" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<documentation>
 		<appinfo source="WMQI_APPINFO">
 			<MRWSDLAppInfo imported="true">
@@ -9,7 +9,7 @@
 	
 	<types>
 		<xsd:schema>
-			<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/c" schemaLocation="m2k_igtoc64_c.xsd"/>
+			<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/a" schemaLocation="m2k_igtoc64_a.xsd"/>
 			<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
 		</xsd:schema>
 	</types>

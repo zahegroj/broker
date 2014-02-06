@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/comentarios/GestionTramitesComentarios.xsd"/>
+    <output path="/m2k/wmb/m2k_igtoc64_a.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="GuardarComentarioReq_Igtoc64AReq">
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema" path="mb:msg(guardarComentarioRequest,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/a" path="mb:msg(Request,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="guardarComentarioRequest/request/usuarioM2K"/>
+            <output path="Request/user"/>
+        </move>
+        <move>
+            <input path="guardarComentarioRequest/request/region"/>
+            <output path="Request/region"/>
+        </move>
+        <assign value="I*TB">
+            <output path="Request/function"/>
+        </assign>
+        <assign value="A">
+            <output path="Request/action"/>
+        </assign>
+        <move>
+            <input path="guardarComentarioRequest/request/telefono"/>
+            <output path="Request/inputParameters/servicio/p06telefono/text()"/>
+        </move>
+        <assign value="10">
+            <output path="Request/inputParameters/servicio/p06telefono/@longitud"/>
+        </assign>
+        <move>
+            <input path="guardarComentarioRequest/request/comentario"/>
+            <output path="Request/inputParameters/servicio/p09comentario/text()"/>
+        </move>
+        <assign value="2650">
+            <output path="Request/inputParameters/servicio/p09comentario/@longitud"/>
+        </assign>
+        <assign value="09">
+            <output path="Request/inputParameters/servicio/p07cuenta/@longitud"/>
+        </assign>
+        <assign value="05">
+            <output path="Request/inputParameters/servicio/p08tpocomentario/@longitud"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

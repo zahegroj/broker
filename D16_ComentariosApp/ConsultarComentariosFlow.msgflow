@@ -11,7 +11,7 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Entrada" location="39,193">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="ConsultarComentariosFlow" pluginId="D16_ComentariosApp"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="944,209">
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="684,206">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="ConsultarComentariosFlow" pluginId="D16_ComentariosApp"/>
       </nodes>
       <nodes xmi:type="gen_ejecutarServicio_Igtoc46DService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="304,197">
@@ -22,26 +22,13 @@
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="123,193" mappingExpression="msl://{default}#ConsultarComentarioRequest_Igtoc46DRequest">
         <translation xmi:type="utility:ConstantString" string="Mapping Igtoc46DRequest"/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="596,205" mappingExpression="msl://{default}#Igtoc46DResponse_ConsultarComentariosResponse">
-        <translation xmi:type="utility:ConstantString" string="Mapping Response"/>
-      </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="501,86" computeExpression="esql://routine/#ExtraerFaultDetail.Main">
-        <translation xmi:type="utility:ConstantString" string="Extraer Error"/>
-      </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="778,91" computeExpression="esql://routine/#AsignarFault.Main">
-        <translation xmi:type="utility:ConstantString" string="Asignar Fault"/>
-      </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="638,87" mappingExpression="msl://{default}#RespuestaErrorComentario_GestionTramitesWMBException">
-        <translation xmi:type="utility:ConstantString" string="Mapping Error"/>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="517,205" computeExpression="esql://routine/#MapIgtoc46dResp_Response.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Response"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="InTerminal.Entrada" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.RespuestaOK" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="OutTerminal.Salida" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="OutTerminal.Salida" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

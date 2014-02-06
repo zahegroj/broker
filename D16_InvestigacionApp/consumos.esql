@@ -62,8 +62,8 @@ BEGIN
 	END IF;
 
 	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos) IS NULL THEN
-		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
-		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
 	END IF;
 END;
 
@@ -105,8 +105,8 @@ BEGIN
 	END IF;
 
 	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion) IS NULL THEN
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
 	END IF;
 END;
 

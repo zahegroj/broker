@@ -41,7 +41,6 @@
 					<xsd:element name="SmsInc" type="xsd:string"/>
 					<xsd:element name="DatInc" type="xsd:string"/>
 					<xsd:element name="CosPl" type="xsd:string"/>
-					<xsd:element name="Producto" type="xsd:string"/>
 					<xsd:group ref="subgroup_output_igtoc41d" maxOccurs="unbounded" />
 					<xsd:element name="Referencia" type="xsd:string"/>
 				</xsd:sequence>
@@ -51,9 +50,9 @@
 	
 	<xsd:group name="subgroup_output_igtoc41d">
 		<xsd:sequence>
+			<xsd:element name="Producto" type="xsd:string"/>
 			<xsd:element name="DescProducto" type="xsd:string"/>
 			<xsd:element name="CostpProd" type="xsd:string"/>
-			<xsd:element name="Producto" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:group>
 	

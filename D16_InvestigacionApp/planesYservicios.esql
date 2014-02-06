@@ -16,14 +16,14 @@ END MODULE;
 CREATE FUNCTION MapDetallePlanTarifResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
 BEGIN
 	IF FIELDTYPE (respuestaOK.PlanTarifarioYDesc) IS NOT NULL THEN
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:descripcionPlan = respuestaOK.PlanTarifarioYDesc;
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:plazoForzoso = respuestaOK.Plazo;
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:tipoPlan = respuestaOK.TipPlan;
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:descripcionTipoPlan = respuestaOK.DescTipo;
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:minutosIncluidos = respuestaOK.MinInc;
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:smsIncluidos = respuestaOK.SmsInc;
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:datosIncluidos = respuestaOK.DatInc;
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:costoPlan = respuestaOK.CosPl;
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:descripcionPlan = TRIM(respuestaOK.PlanTarifarioYDesc);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:plazoForzoso = TRIM(respuestaOK.Plazo);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:tipoPlan = TRIM(respuestaOK.TipPlan);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:descripcionTipoPlan = TRIM(respuestaOK.DescTipo);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:minutosIncluidos = TRIM(respuestaOK.MinInc);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:smsIncluidos = TRIM(respuestaOK.SmsInc);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:datosIncluidos = TRIM(respuestaOK.DatInc);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:costoPlan = TRIM(respuestaOK.CosPl);
 	END IF;
 	
 	
@@ -37,9 +37,9 @@ BEGIN
 			TRIM(respuestaOK.DescProducto[i])  <> '' OR
 			TRIM(respuestaOK.CostpProd[i])  <> '' THEN
 			
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:producto = respuestaOK.Producto[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:descripcion = respuestaOK.DescProducto[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:costo = respuestaOK.CostpProd[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:producto = TRIM(respuestaOK.Producto[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:descripcion = TRIM(respuestaOK.DescProducto[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:costo = TRIM(respuestaOK.CostpProd[i]);
 			SET j = j + 1;
 		END IF;
 		SET i = i + 1;
@@ -51,8 +51,8 @@ BEGIN
 
 	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan) IS NULL AND
 	   FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario) IS NULL THEN
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
 	END IF;
 END;
 
@@ -91,23 +91,23 @@ END MODULE;
 
 CREATE FUNCTION MapDetalleProducto(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE)
 BEGIN
-	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:claveProducto = respuestaOK.ClaveProdto;
-	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:descripcionProducto = respuestaOK.DescProdto;
-	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:costoProducto = respuestaOK.CostoProdto;
-	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:caracteristicasProducto = respuestaOK.CaracProdto;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:claveProducto = TRIM(respuestaOK.ClaveProdto);
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:descripcionProducto = TRIM(respuestaOK.DescProdto);
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:costoProducto = TRIM(respuestaOK.CostoProdto);
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:caracteristicasProducto = TRIM(respuestaOK.CaracProdto);
 	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:minutosIncluidos = 0;
 	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:smsIncluidos = 0;
 	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:datosIncluidos = 0;
-	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:unidad = respuestaOK.Uni;
-	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:claveGrupo = respuestaOK.Idgrp;
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:unidad = TRIM(respuestaOK.Uni);
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:claveGrupo = TRIM(respuestaOK.Idgrp);
 	
 	IF TRIM(respuestaOK.Uni) <> '' THEN
 		IF TRIM(respuestaOK.Uni) = 'KB' THEN
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:datosIncluidos = respuestaOK.DatoAdicional;
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:datosIncluidos = TRIM(respuestaOK.DatoAdicional);
 		ELSEIF TRIM(respuestaOK.Uni) = 'MIN' THEN
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:minutosIncluidos = respuestaOK.DatoAdicional;
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:minutosIncluidos = TRIM(respuestaOK.DatoAdicional);
 		ELSEIF TRIM(respuestaOK.Uni) = 'SMS' THEN
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:smsIncluidos = respuestaOK.DatoAdicional;
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:smsIncluidos = TRIM(respuestaOK.DatoAdicional);
 		END IF;
 	END IF;
 END;
@@ -126,11 +126,11 @@ BEGIN
 			TRIM(respuestaOK.Estatus[i]) <> '' OR
 			TRIM(respuestaOK.FecEfe[i]) <> '' THEN
 			
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:telefono = respuestaOK.TelGrupo[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:tipoServicio = respuestaOK.TipoServ[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:tipoDestino = respuestaOK.TipoDest[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:estatus = respuestaOK.Estatus[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:fechaEfectiva = respuestaOK.FecEfe[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:telefono = TRIM(respuestaOK.TelGrupo[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:tipoServicio = TRIM(respuestaOK.TipoServ[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:tipoDestino = TRIM(respuestaOK.TipoDest[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:estatus = TRIM(respuestaOK.Estatus[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas.nsInvest:llamada[j].nsInvest:fechaEfectiva = TRIM(respuestaOK.FecEfe[i]);
 			SET j = j + 1;
 		END IF;
 		SET i = i + 1;
@@ -145,8 +145,8 @@ BEGIN
 
 	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:grupoLlamadas) IS NULL AND
 		FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto) IS NULL THEN
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
 	END IF;
 END;
 

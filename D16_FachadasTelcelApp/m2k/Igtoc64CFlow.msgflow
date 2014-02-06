@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/Igtoc64CFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/Igtoc64CFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="28,223" wsdlFileName="m2k/wmb/Igtoc64CService.wsdl" selectedPortType="Igtoc64CPort" selectedBinding="Igtoc64CBinding" selectedPort="Igtoc64C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Igtoc64CService" allowQueryWSDL="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="28,223" wsdlFileName="m2k/wmb/Igtoc64AService.wsdl" selectedPortType="Igtoc64CPort" selectedBinding="Igtoc64CBinding" selectedPort="Igtoc64C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Igtoc64CService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_m2k_Igtoc64CElegiroperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="125,219">
@@ -25,10 +25,10 @@
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="545,232" computeExpression="esql://routine/#Parse_Igtoc64C_StringRespToXML.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="545,232" computeExpression="esql://routine/#Parse_Igtoc64A_StringRespToXML.Main">
         <translation xmi:type="utility:ConstantString" string="toXML"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="256,223" computeExpression="esql://routine/#Parse_Igtoc64C_XMLToStringReq.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="256,223" computeExpression="esql://routine/#Parse_Igtoc64A_XMLToStringReq.Main">
         <translation xmi:type="utility:ConstantString" string="toString"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="643,314" computeExpression="esql://routine/#ConstruirFaultM2K.Main">

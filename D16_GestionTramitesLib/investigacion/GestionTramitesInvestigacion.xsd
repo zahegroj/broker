@@ -341,7 +341,7 @@
 					<xsd:element name="telefono" type="comun:telefonoFormato"/>
 					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
 					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
-					<xsd:element name="horaFin" type="comun:fechaFormato"/>
+					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
 					<xsd:element name="referencia" type="this:ReferenciaPagoYAjusteType" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:extension>
@@ -352,7 +352,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="comun:ResponseBase">
 				<xsd:sequence>
-					<xsd:element name="detallesConexion" type="this:ArrayOfPagoYAjuste" minOccurs="0"/>
+					<xsd:element name="pagosYAjustes" type="this:ArrayOfPagoYAjuste" minOccurs="0"/>
 					<xsd:element name="referencia" type="this:ReferenciaPagoYAjusteType" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:extension>
@@ -596,7 +596,7 @@
 		<xsd:sequence>
 			<xsd:element name="planDescuento" type="xsd:string"/>
 			<xsd:element name="descripcion" type="xsd:string"/>
-			<xsd:element name="Periodicidad" type="xsd:string"/>
+			<xsd:element name="periodicidad" type="xsd:string"/>
 			<xsd:element name="fechaEfectiva" type="xsd:string"/>
 			<xsd:element name="fechaExpiracion" type="xsd:string"/>
 			<xsd:element name="estatus" type="xsd:string"/>

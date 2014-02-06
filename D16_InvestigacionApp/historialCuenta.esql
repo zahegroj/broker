@@ -1,0 +1,57 @@
+CREATE COMPUTE MODULE MapIgtoc49cResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc49/c';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarHistorialCuentaResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarHistorialCuentaResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarHistorialCuentaResponse, oldNamespace, nsInvest);
+		CALL MapHistorialCuentaResponse(OutputRoot, respuestaOK, ns);
+	END;
+END MODULE;
+
+CREATE FUNCTION MapHistorialCuentaResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.Tel[]);	
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.Tel[i]) <> '' OR 
+			TRIM(respuestaOK.FecEfe[i]) <> '' OR
+			TRIM(respuestaOK.Estatus[i]) <> '' OR
+			TRIM(respuestaOK.Motivo[i]) <> '' OR
+			TRIM(respuestaOK.Tecnol[i]) <> '' OR
+			TRIM(respuestaOK.IMEI[i]) <> '' OR
+			TRIM(respuestaOK.ICCID[i]) <> '' OR 
+			TRIM(respuestaOK.IMSI[i]) <> '' OR
+			TRIM(respuestaOK.Usuario[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:telefono = TRIM(respuestaOK.Tel[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:fechaEfectiva = TRIM(respuestaOK.FecEfe[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:estatus = TRIM(respuestaOK.Estatus[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:motivo = TRIM(respuestaOK.Motivo[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:tecnologia = TRIM(respuestaOK.Tecnol[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:imei = TRIM(respuestaOK.IMEI[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:iccid = TRIM(respuestaOK.ICCID[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:imsi = TRIM(respuestaOK.IMSI[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros.nsInvest:registro[j].nsInvest:usuario = TRIM(respuestaOK.Usuario[i]);	
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:referencia.nsInvest:telefono = SUBSTRING(respuestaOK.Referencia FROM 1 FOR 10);
+		SET outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:referencia.nsInvest:effDate = SUBSTRING(respuestaOK.Referencia FROM 11 FOR 7);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarHistorialCuentaResponse.nsInvest:response.nsInvest:registros) IS NULL THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+	END IF;
+END;

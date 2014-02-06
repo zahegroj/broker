@@ -36,6 +36,7 @@
 		<xsd:sequence>
 			<xsd:element name="ESTATUS" type="EstatusError"/>
 			<xsd:element minOccurs="0" name="MENSAJE" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="PROGRAMA" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -176,6 +177,14 @@
 		</xsd:simpleContent>
 	</xsd:complexType>
 	
+	<xsd:complexType name="ComentarioType">
+		<xsd:simpleContent>
+			<xsd:extension base="genericoFormato">
+				<xsd:attribute name="longitud" type="longitudComentarioFormato" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
 	<xsd:simpleType name="fechaFormato">
 		<xsd:restriction base="xsd:string">
 			<xsd:pattern value="|(((0[1-9])|([1-2][0-9])|(3[0-1]))/((01)|(03)|(05)|(07)|(08)|(10)|(12))/[0-9]{2})"/>
@@ -199,6 +208,12 @@
     <xsd:simpleType name="longitudFormato">
         <xsd:restriction base="xsd:string">
             <xsd:pattern value="[0-9]{2}"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+     <xsd:simpleType name="longitudComentarioFormato">
+        <xsd:restriction base="xsd:string">
+            <xsd:pattern value="[0-9]{4}"/>
         </xsd:restriction>
     </xsd:simpleType>
     

@@ -112,4 +112,10 @@
     		<xsd:pattern value="|\d{7}"/>
     	</xsd:restriction>
     </xsd:simpleType>
+    
+    <xsd:simpleType name="smsFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:maxLength value="150"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
 </xsd:schema><!-- catalogo de servicios --><!-- 1. M2K --><!-- 2. SIANTEL --><!-- 3. SMS --><!-- 4. IMEI --><!-- 5. RN Determinar Adeudo --><!-- 6. RN Determinar Region Perfil --><!-- 7. RN Determinar Prevalidacion --><!-- 8. RN Reasignar Tramite -->
