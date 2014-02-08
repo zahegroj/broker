@@ -59,7 +59,7 @@
    <soapenv:Header/>
    <soapenv:Body>
       <ws:ConsultaImeiACResponse>
-         <ConsultaImeiACReturn>|1|70003736|APPLE IPHONE 4S 16GB GSM-SPA BLACK||M_EQ3G_TN|</ConsultaImeiACReturn>
+         <ConsultaImeiACReturn>|-1|70003736|APPLE IPHONE 4S 16GB GSM-SPA BLACK||M_EQ3G_TN|</ConsultaImeiACReturn>
          <!--
          <ConsultaImeiACReturn>|1|70003736|APPLE IPHONE 4S 16GB GSM-SPA BLACK||M_EQ3G_TN|</ConsultaImeiACReturn>
          <ConsultaImeiACReturn>|-1|Error al procesar peticion||||</ConsultaImeiACReturn>

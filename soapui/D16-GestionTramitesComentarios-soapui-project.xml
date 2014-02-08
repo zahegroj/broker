@@ -331,15 +331,16 @@
             <sch1:region>9</sch1:region>
             <sch:telefono>5527671654</sch:telefono>
             <sch:cuenta>6385120</sch:cuenta>
-            <sch:fechaInicio>28/10/13</sch:fechaInicio>
-            <sch:fechaFin>13/11/13</sch:fechaFin>
+            <sch:fechaInicio>28/10/14</sch:fechaInicio>
+            <sch:fechaFin>13/11/14</sch:fechaFin>
             <!--Optional:
             <sch:referencia>
                <sch:tipoComentario></sch:tipoComentario>
                <sch:fechaComentario>2131105</sch:fechaComentario>
                <sch:horaAudit>1422280</sch:horaAudit>
                <sch:sec>009</sch:sec>
-            </sch:referencia>-->
+            </sch:referencia>
+-->
          </sch:request>
       </sch:consultarComentariosRequest>
    </soapenv:Body>
@@ -361,7 +362,8 @@
                <sch:fechaComentario>?</sch:fechaComentario>
                <sch:horaAudit>?</sch:horaAudit>
                <sch:sec>?</sch:sec>
-            </sch:referencia>-->
+            </sch:referencia>
+-->
          </sch:request>
       </sch:consultarComentariosRequest>
    </soapenv:Body>
