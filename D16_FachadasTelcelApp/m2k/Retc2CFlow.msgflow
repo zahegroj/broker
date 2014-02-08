@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/Retc2CFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/Retc2CFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="27,195" wsdlFileName="m2k/wmb/Retc2CService.wsdl" selectedPortType="Retc2CPort" selectedBinding="Retc2CBinding" selectedPort="Retc2C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/retc2/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Retc2CService" allowQueryWSDL="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="27,195" wsdlFileName="m2k/wmb/Retc2CService.wsdl" selectedPortType="Retc2CPort" selectedBinding="Retc2CBinding" selectedPort="Retc2C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/retc2/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Retc2CService" allowQueryWSDL="true" usingWsAddressing="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="735,205">
