@@ -84,7 +84,7 @@ END MODULE;
 CREATE COMPUTE MODULE Parse_RetusC_StringRespToXML
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones//retus/c';				
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retus/c';
 		DECLARE oldNamespace NAMESPACE '';
 		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
