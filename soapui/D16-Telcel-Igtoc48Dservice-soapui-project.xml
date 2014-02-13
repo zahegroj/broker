@@ -365,4 +365,28 @@
          </inputParameters>
       </d:Request>
    </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc48/d/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC48D Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/m2k/activaciones/wmb/Igtoc48DService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:d="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/d">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <d:Request>
+         <user>SVBPM51</user>
+         <region>9</region>
+         <function>I*S8</function>
+         <action>D</action>
+         <inputParameters>
+            <servicio>
+               <p01telefono longitud="10">5534880046</p01telefono>
+               <p02cuenta longitud="09">4114222</p02cuenta>
+               <p03fechaInicio longitud="08">04/05/13</p03fechaInicio>
+               <p04fechaFin longitud="08">03/06/13</p04fechaFin>
+               <p05planDesc longitud="05">PD1ME</p05planDesc>
+               <p06EffDate longitud="08">08/05/13</p06EffDate>
+               <p07ValCdInd longitud="40">aaaa</p07ValCdInd>
+               <p08ValTransInd longitud="40">aaaa</p08ValTransInd>
+               <p09UltFecDes longitud="07">aaaa</p09UltFecDes>
+               <p10PriFecDes longitud="07">aaaa</p10PriFecDes>
+            </servicio>
+         </inputParameters>
+      </d:Request>
+   </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc48/d/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

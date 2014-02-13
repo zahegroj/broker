@@ -355,9 +355,9 @@
                <p02cuenta longitud="09">6385120</p02cuenta>
                <p03fechaInicio longitud="08">28/10/13</p03fechaInicio>
                <p04fechaFin longitud="08">13/11/13</p04fechaFin>
-               <p05claveProdPiv longitud="05" />
-               <p06fechaProdPiv longitud="07" />
-               <p07estatusProdPiv longitud="01" />
+               <p05claveProdPiv longitud="05">IDL00</p05claveProdPiv>
+               <p06fechaProdPiv longitud="07">2180212</p06fechaProdPiv>
+               <p07estatusProdPiv longitud="01">ACTIVO</p07estatusProdPiv>
             </servicio>
          </inputParameters>
       </d:Request>

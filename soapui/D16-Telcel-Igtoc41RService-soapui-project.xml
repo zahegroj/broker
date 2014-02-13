@@ -359,4 +359,23 @@
          </inputParameters>
       </r:Request>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc41/r/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc41/r/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IGTOC41R Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/m2k/activaciones/wmb/Igtoc41RService</con:endpoint><con:request><![CDATA[<NS1:Envelope xmlns:NS1="http://schemas.xmlsoap.org/soap/envelope/">
+   <NS1:Body>
+      <NS2:Request xmlns:NS2="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r">
+         <user>SVBPM51</user>
+         <region>9</region>
+         <function>I*S1</function>
+         <action>R</action>
+         <inputParameters>
+            <servicio>
+               <p01telefono longitud="10">5527671654</p01telefono>
+               <p02cuenta longitud="09">6385120</p02cuenta>
+               <p03fechaInicio longitud="08">28/10/13</p03fechaInicio>
+               <p04fechaFin longitud="08">13/11/13</p04fechaFin>
+               <p05planPiv longitud="05"/>
+               <p06fechaPiv longitud="07"/>
+            </servicio>
+         </inputParameters>
+      </NS2:Request>
+   </NS1:Body>
+</NS1:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc41/r/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
