@@ -1,6 +1,3 @@
-DECLARE nsComent NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema';
-DECLARE nsComun NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
-
 CREATE COMPUTE MODULE MapIgtoc46dResp_Response
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
