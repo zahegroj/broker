@@ -1,0 +1,54 @@
+BROKER SCHEMA encabezado
+
+
+CREATE COMPUTE MODULE consultarEncabezadoMQtoSOAP_SetSOAPContextRETUSRequest
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot             = InputRoot;
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext 
+			= InputRoot.MQMD.CorrelId;
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier 
+			= InputRoot.MQMD.MsgId;			
+		
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarEncabezadoMQtoSOAP_SetSOAPContextRETC2Request
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot             = InputRoot;
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext 
+			= InputRoot.MQMD.CorrelId;
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier 
+			= InputRoot.MQMD.MsgId;	
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarEncabezadoMQtoSOAP_SetSOAPIGTOC25Request
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		SET OutputRoot             = InputRoot;
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext 
+			= InputRoot.MQMD.CorrelId;
+		
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier 
+			= InputRoot.MQMD.MsgId;	
+		
+		RETURN TRUE;
+	END;
+END MODULE;
