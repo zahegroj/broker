@@ -29,7 +29,7 @@
 			<xsd:element name="p03fechaInicio" type="m2k:FechaType"/>
 			<xsd:element name="p04fechaFin" type="m2k:FechaType"/>
 			<xsd:element name="p05planDesc" type="m2k:PlanTarifarioType"/>
-			<xsd:element name="p06EffDate" type="m2k:AlfanumericoType"/>
+			<xsd:element name="p06EffDate" type="m2k:FechaType"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
