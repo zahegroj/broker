@@ -26,6 +26,8 @@ CREATE COMPUTE MODULE AsignarFaultNoTelcel
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
 		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		
 		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.servicio = 'GestionTramitesInfoClienteService';
 		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.operacion = InputRoot.LocalEnvironment.Destination.SOAP.Request.Operation;
 		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.tipo = 'NEGOCIO';
@@ -41,6 +43,8 @@ CREATE COMPUTE MODULE AsignarFaultNoPrepago
 	BEGIN
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
 		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
 		
 		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.servicio = 'GestionTramitesInfoClienteService';
 		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.operacion = 'X';
