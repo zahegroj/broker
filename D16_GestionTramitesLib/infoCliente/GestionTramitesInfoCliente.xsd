@@ -48,13 +48,13 @@
 			<xsd:extension base="comun:ResponseBase">
 				<xsd:sequence>
 					<xsd:element name="nombreCliente" type="xsd:string"/>
-					<xsd:element name="cuenta" type="xsd:int"/>
+					<xsd:element name="cuenta" type="xsd:string"/>
 					<xsd:element name="estatusCobranza" type="xsd:string"/>
 					<xsd:element name="estatusCuenta" type="xsd:string"/>
-					<xsd:element name="saldoActual" type="comun:decimalFormato"/>
-					<xsd:element name="saldoEstimado" type="comun:decimalFormato"/>
-					<xsd:element name="saldoMes" type="comun:decimalFormato"/>
-					<xsd:element name="importe" type="comun:decimalFormato"/>
+					<xsd:element name="saldoActual" type="xsd:string"/>
+					<xsd:element name="saldoEstimado" type="xsd:string"/>
+					<xsd:element name="saldoMes" type="xsd:string"/>
+					<xsd:element name="importe" type="xsd:string"/>
 					<xsd:element name="facturas" type="this:ArrayOfFactura"/>
 				</xsd:sequence>
 			</xsd:extension>
@@ -62,21 +62,32 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarDatosCobranzaRequestType">
-		<xsd:sequence>
-			<xsd:element name="param" type="xsd:string"/>
-		</xsd:sequence>
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>					
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
 	</xsd:complexType>
 
 	<xsd:complexType name="ConsultarDatosCobranzaResponseType">
 		<xsd:sequence>
-			<xsd:element name="param" type="xsd:string"/>
+			<!-- RETC2 C -->
+			<xsd:element name="limiteCredito" type="xsd:string"/>
+			<!-- CPAST C -->
+			<xsd:element name="accionCobranza" type="xsd:string"/>
+			<xsd:element name="motivoCobranza" type="xsd:string"/>
+			<!-- REACT C -->
+			<xsd:element name="montoMinimoPagar" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
 	<xsd:complexType name="FacturaType">
 		<xsd:sequence>
 			<xsd:element name="fechaFactura" type="xsd:string"/>
-			<xsd:element name="importeFactura" type="comun:decimalFormato"/>
+			<xsd:element name="importeFactura" type="xsd:string"/>
 			<xsd:element name="ultimaFechaFactura" type="xsd:string"/>
 		</xsd:sequence>
 		<xsd:attribute name="indice" type="xsd:integer"/>

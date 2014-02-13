@@ -274,7 +274,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="comun:ResponseBase">
 				<xsd:sequence>
-					<xsd:element name="planesTarifarios" type="this:ArrayOfServicioAdicional" minOccurs="0"/>
+					<xsd:element name="planesTarifarios" type="this:ArrayOfPlanTarifario" minOccurs="0"/>
 					<xsd:element name="referenciaPlanesTarifarios" type="this:ReferenciaPlanTarifario" minOccurs="0"/>
 					<xsd:element name="serviciosAdicionales" type="this:ArrayOfServicioAdicional" minOccurs="0"/>
 					<xsd:element name="referenciaServiciosAdicionales" type="this:ReferenciaServicioAdicional" minOccurs="0"/>
@@ -417,9 +417,9 @@
 					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
 					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
 					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
-					<xsd:element name="planDesc" type="comun:planTarifarioFormato"/>
-					<xsd:element name="effDate" type="xsd:string"/>
-					<xsd:element name="referenciaDetallePromocion" type="this:ReferenciaDetallePromocionType" minOccurs="0"/>
+					<xsd:element name="planDescuento" type="comun:planTarifarioFormato"/>
+					<xsd:element name="fechaEfectiva" type="xsd:string"/>
+					<xsd:element name="referencia" type="this:ReferenciaDetallePromocionType" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -637,7 +637,7 @@
 	
 	<xsd:complexType name="ArrayOfDetallePromocion">
 		<xsd:sequence>
-			<xsd:element name="descPromocion" type="this:DetallePromocionType" maxOccurs="unbounded"/>
+			<xsd:element name="detallePromocion" type="this:DetallePromocionType" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -659,7 +659,7 @@
 	
 	<xsd:complexType name="ArrayOfAplicacionProducto">
 		<xsd:sequence>
-			<xsd:element name="descPromocion" type="this:AplicacionProductoType" maxOccurs="unbounded"/>
+			<xsd:element name="aplicProducto" type="this:AplicacionProductoType" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
