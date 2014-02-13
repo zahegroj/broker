@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:consumos_ConsultarConsumosFlow.msgflow="consumos/ConsultarConsumosFlow.msgflow" xmlns:consumos_ConsultarDetalleConexionesFlow.msgflow="consumos/ConsultarDetalleConexionesFlow.msgflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_InvestigacionElegirOperacionFlow.msgflow="gen/InvestigacionElegirOperacionFlow.msgflow"
-    xmlns:historialCuenta_ConsultarHistorialCuentaFlow.msgflow="historialCuenta/ConsultarHistorialCuentaFlow.msgflow" xmlns:pagosYajustes_ConsultarDetalleReversionFlow.msgflow="pagosYajustes/ConsultarDetalleReversionFlow.msgflow" xmlns:pagosYajustes_ConsultarPagosYAjustesFlow.msgflow="pagosYajustes/ConsultarPagosYAjustesFlow.msgflow" xmlns:planesYservicios_ConsultarDetallePlanTarifarioFlow.msgflow="planesYservicios/ConsultarDetallePlanTarifarioFlow.msgflow" xmlns:planesYservicios_ConsultarDetalleProductoFlow.msgflow="planesYservicios/ConsultarDetalleProductoFlow.msgflow"
-    xmlns:promociones_ConsultarPromocionesFlow.msgflow="promociones/ConsultarPromocionesFlow.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="InvestigacionMainFlow.msgflow"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:consumos_ConsultarConsumosFlow.msgflow="consumos/ConsultarConsumosFlow.msgflow" xmlns:consumos_ConsultarDetalleConexionesFlow.msgflow="consumos/ConsultarDetalleConexionesFlow.msgflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:encabezado_consultarEncabezadoFanOut.msgflow="encabezado/consultarEncabezadoFanOut.msgflow"
+    xmlns:gen_InvestigacionElegirOperacionFlow.msgflow="gen/InvestigacionElegirOperacionFlow.msgflow" xmlns:historialCuenta_ConsultarHistorialCuentaFlow.msgflow="historialCuenta/ConsultarHistorialCuentaFlow.msgflow" xmlns:pagosYajustes_ConsultarDetalleReversionFlow.msgflow="pagosYajustes/ConsultarDetalleReversionFlow.msgflow" xmlns:pagosYajustes_ConsultarPagosYAjustesFlow.msgflow="pagosYajustes/ConsultarPagosYAjustesFlow.msgflow" xmlns:planesYservicios_ConsultarDetallePlanTarifarioFlow.msgflow="planesYservicios/ConsultarDetallePlanTarifarioFlow.msgflow"
+    xmlns:planesYservicios_ConsultarDetalleProductoFlow.msgflow="planesYservicios/ConsultarDetalleProductoFlow.msgflow" xmlns:planesYservicios_ConsultarPlanesYServiciosFanOutFlow.msgflow="planesYservicios/ConsultarPlanesYServiciosFanOutFlow.msgflow" xmlns:promociones_ConsultarDetallePromocionFanOutFlow.msgflow="promociones/ConsultarDetallePromocionFanOutFlow.msgflow" xmlns:promociones_ConsultarPromocionesFlow.msgflow="promociones/ConsultarPromocionesFlow.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="InvestigacionMainFlow.msgflow"
     nsPrefix="InvestigacionMainFlow.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
     <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
@@ -11,16 +11,13 @@
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/InvestigacionMainFlow.gif"/>
     <composition>
       <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="31,374" wsdlFileName="investigacion/GestionTramitesInvestigacion.wsdl" selectedPortType="GestionTramitesInvestigacionPort" selectedBinding="GestionTramitesInvestigacionBinding" selectedPort="GestionTramitesInvestigacionHTTPSOAPPort" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" useHTTPTransport="true" urlSelector="/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService"
-          allowQueryWSDL="true">
+          allowQueryWSDL="true" componentLevel="node" additionalInstances="9">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_InvestigacionElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="119,370">
         <translation xmi:type="utility:ConstantString" string="GestionTramitesInvestigacion"/>
         <shortDescription xmi:type="utility:ConstantString" string="Extrae el cuerpo del mensaje SOAP"/>
         <longDescription xmi:type="utility:ConstantString" string="Este subflujo extrae el cuerpo del mensaje SOAP y tiene un nodo de salida por operación. Se ha generado mediante una operación arrastrar y soltar de archivo WSDL."/>
-      </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="255,169" destination="file" filePath="c:\consultarEncabezadoReq.log" pattern="Environment:&#xD;&#xA;${Environment}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}&#xD;&#xA;&#xD;&#xA;Root:&#xD;&#xA;${Root}&#xD;&#xA;&#xD;&#xA;Body:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;Properties:&#xD;&#xA;${Properties}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;DestinationList:s&#xD;&#xA;${DestinationList}">
-        <translation xmi:type="utility:ConstantString" string="Trace"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="870,377" validateMaster="contentAndValue">
         <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
@@ -49,9 +46,16 @@
       <nodes xmi:type="historialCuenta_ConsultarHistorialCuentaFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_13" location="478,751">
         <translation xmi:type="utility:ConstantString" string="ConsultarHistorialCuentaFlow"/>
       </nodes>
+      <nodes xmi:type="planesYservicios_ConsultarPlanesYServiciosFanOutFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_14" location="454,836">
+        <translation xmi:type="utility:ConstantString" string="ConsultarPlanesYServiciosFanOutFlow"/>
+      </nodes>
+      <nodes xmi:type="promociones_ConsultarDetallePromocionFanOutFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_10" location="454,920">
+        <translation xmi:type="utility:ConstantString" string="ConsultarDetallePromocionFanOutFlow"/>
+      </nodes>
+      <nodes xmi:type="encabezado_consultarEncabezadoFanOut.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_5" location="470,30">
+        <translation xmi:type="utility:ConstantString" string="consultarEncabezadoFanOut"/>
+      </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarEncabezadoRequest" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarConsumosRequest" targetTerminalName="InTerminal.Input"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarDetalleConexionesRequest" targetTerminalName="InTerminal.Input"/>
@@ -68,6 +72,11 @@
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_18" targetNode="FCMComposite_1_13" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarHistorialCuentaRequest" targetTerminalName="InTerminal.Input"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_19" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_20" targetNode="FCMComposite_1_14" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarPlanesYServiciosRequest" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_21" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_22" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarDetallePromocionRequest" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_23" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarEncabezadoRequest" targetTerminalName="InTerminal.Entrada"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

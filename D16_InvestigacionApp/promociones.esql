@@ -47,7 +47,331 @@ BEGIN
 	END IF;
 
 	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarPromocionesResponse.nsInvest:response.nsInvest:promociones) IS NULL THEN
-		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
-		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+		SET outputRootNode.XMLNSC.nsInvest:consultarPromocionesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarPromocionesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
 	END IF;
 END;
+
+CREATE FILTER MODULE ValidarReferenciaDetallePromocion
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF FIELDTYPE(Root.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:referencia) IS NOT NULL THEN
+			RETURN TRUE;
+		END IF;
+		RETURN FALSE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapIgtoc48dResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/d';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetallePromocionResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetallePromocionResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse, oldNamespace, nsInvest);
+		CALL MapDetallePromocion(OutputRoot, respuestaOK, ns);
+	END;
+END MODULE;
+
+CREATE FUNCTION MapDetallePromocion(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.Estatus[]);	
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.Estatus[i]) <> '' OR 
+			TRIM(respuestaOK.Periodo[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion.nsInvest:detallePromocion[j].nsInvest:estatus = TRIM(respuestaOK.Estatus[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion.nsInvest:detallePromocion[j].nsInvest:periodo = TRIM(respuestaOK.Periodo[i]);
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest.referencia.nsInvest:valCdInd = SUBSTRING(respuestaOK.Referencia FROM 1 FOR 40);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest.referencia.nsInvest:valTransInd = SUBSTRING(respuestaOK.Referencia FROM 41 FOR 40);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest.referencia.nsInvest:ultFecDes = SUBSTRING(respuestaOK.Referencia FROM 81 FOR 7);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest.referencia.nsInvest:priFecDes = SUBSTRING(respuestaOK.Referencia FROM 8 FOR 7);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion) IS NULL THEN
+		DECLARE countMsg INT CARDINALITY(outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje[]);
+		
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje[countMsg+1].nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje[countMsg+1].nsComun:descripcion = 'No se encontraron detalles de promocion';
+	END IF;
+END;
+
+CREATE FUNCTION MapAplicacionProducto(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.Producto[]);	
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.Producto[i]) <> '' OR 
+			TRIM(respuestaOK.FechEfectiva[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto.nsInvest:aplicProducto[j].nsInvest:producto = TRIM(respuestaOK.Producto[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto.nsInvest:aplicProducto[j].nsInvest:fechaEfectiva = TRIM(respuestaOK.FechEfectiva[i]);
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto) IS NULL THEN
+		DECLARE countMsg INT CARDINALITY(outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje[]);
+		
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje[countMsg+1].nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje[countMsg+1].nsComun:descripcion = 'No se encontraron aplicaciones de producto';
+	END IF;
+END;
+
+CREATE COMPUTE MODULE MapDetallePromocionReq_Igtoc48cReq_FanOut
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/c';
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsComun:usuarioM2K;		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsComun:region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S8';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'C';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaInicio;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaFin;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planDesc = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:planDescuento;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planDesc.(XMLNSC.Attribute)longitud VALUE = '05';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06EffDate = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaEfectiva;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06EffDate.(XMLNSC.Attribute)longitud VALUE = '08';
+		
+		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
+		RETURN FALSE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapDetallePromocionReq_Igtoc48aReq_FanOut
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/a';
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsComun:usuarioM2K;		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsComun:region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S8';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'A';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaInicio;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaFin;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planDesc = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:planDescuento;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planDesc.(XMLNSC.Attribute)longitud VALUE = '05';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06EffDate = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaEfectiva;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06EffDate.(XMLNSC.Attribute)longitud VALUE = '08';
+		
+		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
+		RETURN FALSE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapDetallePromocionReq_Igtoc48dReq_FanOut
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/d';
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsComun:usuarioM2K;		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsComun:region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S8';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'D';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaInicio;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaFin;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planDesc = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:planDescuento;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planDesc.(XMLNSC.Attribute)longitud VALUE = '05';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06EffDate = InputRoot.XMLNSC.nsInvest:consultarDetallePromocionRequest.nsInvest:request.nsInvest:fechaEfectiva;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06EffDate.(XMLNSC.Attribute)longitud VALUE = '08';		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07ValCdInd = '';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07ValCdInd.(XMLNSC.Attribute)longitud VALUE = '40';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p08ValTransInd = '';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p08ValTransInd.(XMLNSC.Attribute)longitud VALUE = '40';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p09UltFecDes = '';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p09UltFecDes.(XMLNSC.Attribute)longitud VALUE = '07';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p10PriFecDes = '';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p10PriFecDes.(XMLNSC.Attribute)longitud VALUE = '07';
+		
+		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
+		RETURN FALSE;
+	END;
+END MODULE;
+
+
+CREATE COMPUTE MODULE Igtoc48cReq_MQtoSOAP
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId; 
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Igtoc48aReq_MQtoSOAP
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId; 
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Igtoc48dReq_MQtoSOAP
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId; 
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Igtoc48cResp_SOAPtoMQ
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.SOAP.Response.UserContext;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = InputRoot.SOAP.Body;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Igtoc48aResp_SOAPtoMQ
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.SOAP.Response.UserContext;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = InputRoot.SOAP.Body;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Igtoc48dResp_SOAPtoMQ
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.SOAP.Response.UserContext;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = InputRoot.SOAP.Body;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildConsultarDetallePromocionResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		DECLARE nsIgtoc48c NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/c';
+		DECLARE nsIgtoc48a NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/a';
+		DECLARE nsIgtoc48d NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/d';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.ComIbmAggregateReplyBody.*[<].MQMD.MsgId;
+		
+		DECLARE respuestaOK48c REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48c:RespuestaOK;
+		DECLARE respuestaOK48a REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48aReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48a:RespuestaOK;
+		DECLARE respuestaOK48d REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48dReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48d:RespuestaOK;
+		
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetallePromocionResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetallePromocionResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse, oldNamespace, nsInvest);
+		
+		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveDescuento = TRIM(respuestaOK48c.CveDescuento);
+		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:periodoDescuento = TRIM(respuestaOK48c.Periodo) || ' ' || TRIM(respuestaOK48c.DescripcionPeriodo);
+		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveProducto = TRIM(respuestaOK48c.CveProducto[1]);
+		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:descripcionProducto = TRIM(respuestaOK48c.DescripProducto[1]);
+		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveAjustePromocion = TRIM(respuestaOK48c.CveAjuste);
+		
+		CALL MapAplicacionProducto(OutputRoot, respuestaOK48a, nsIgtoc48a);
+		CALL MapDetallePromocion(OutputRoot, respuestaOK48d, nsIgtoc48d);
+		
+
+		
+		IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes) IS NOT NULL THEN
+			SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes;
+			SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion;
+			
+			IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto) IS NOT NULL THEN
+				SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto;
+			END IF;
+			
+			IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion) IS NOT NULL THEN
+				SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion;
+			END IF;
+			
+			IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion) IS NOT NULL THEN
+				SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion;
+			END IF;
+		ELSE
+			SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC; 
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

@@ -1,6 +1,3 @@
-DECLARE nsInvest NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema';
-DECLARE nsComun NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
-
 CREATE FILTER MODULE Validar_esRegistrosFacturados
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
