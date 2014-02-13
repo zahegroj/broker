@@ -12,7 +12,7 @@
       <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="27,195" wsdlFileName="m2k/wmb/Retc2CService.wsdl" selectedPortType="Retc2CPort" selectedBinding="Retc2CBinding" selectedPort="Retc2C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/retc2/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Retc2CService" allowQueryWSDL="true" usingWsAddressing="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="735,205">
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="735,205" validateMaster="contentAndValue">
         <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
       </nodes>
       <nodes xmi:type="gen_m2k_Retc2CElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="139,191">
