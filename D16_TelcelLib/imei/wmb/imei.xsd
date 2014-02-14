@@ -11,6 +11,7 @@
 			<xsd:element name="codigo" type="xsd:string"/>
 			<xsd:element name="region" type="imeiRegionFormato"/>
 			<xsd:element name="imei" type="imeiFormato"/>
+			<xsd:element name="datosIgtoc25c" type="DatosIgtoc25C" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -21,6 +22,15 @@
 			<xsd:element name="marca" type="xsd:string"/>
 			<xsd:element name="modelo" type="xsd:string"/>
 			<xsd:element name="grupoArticulo" type="xsd:string"/>
+			<xsd:element name="datosIgtoc25c" type="DatosIgtoc25C" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="DatosIgtoc25C">
+		<xsd:sequence>
+			<xsd:element name="modelo" type="xsd:string"/>
+			<xsd:element name="numImei" type="xsd:string"/>
+			<xsd:element name="marca" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
