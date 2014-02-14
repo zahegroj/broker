@@ -1,9 +1,0 @@
-BROKER SCHEMA encabezado
-
-DECLARE ns482 NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-DECLARE ns108 NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retus/c';
-DECLARE ns103 NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';
-DECLARE ns84  NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc25/c';
-DECLARE ns    NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema';
-DECLARE ns285 NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
-DECLARE ns170 NAMESPACE 'http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei';
