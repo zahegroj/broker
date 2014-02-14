@@ -48,7 +48,7 @@
       <wsdlsoap:address location="http://servportabilidad.telcel.com:80/IMEISAC/services/ImeisACWS"/>
     </wsdl:port>
   </wsdl:service>
-</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://servportabilidad.telcel.com:80/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://archlinux:8081/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://localhost:9081/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://10.191.80.36:9080/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://localhost:8088/IMEISAC/services/ImeisACWS</con:endpoint></con:endpoints><con:operation isOneWay="false" action="ConsultaImeiAC" name="ConsultaImeiAC" bindingOperationName="ConsultaImeiAC" type="Request-Response" outputName="ConsultaImeiACResponse" inputName="ConsultaImeiACRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/IMEISAC/services/ImeisACWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.imeisac.dsaf.gsa.telcel.com">
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://servportabilidad.telcel.com:80/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://archlinux:8081/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://localhost:9081/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://10.191.80.36:9080/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://localhost:8088/IMEISAC/services/ImeisACWS</con:endpoint><con:endpoint>http://localhost:7802/IMEISAC/services/ImeisACWSPrueba</con:endpoint></con:endpoints><con:operation isOneWay="false" action="ConsultaImeiAC" name="ConsultaImeiAC" bindingOperationName="ConsultaImeiAC" type="Request-Response" outputName="ConsultaImeiACResponse" inputName="ConsultaImeiACRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8088/IMEISAC/services/ImeisACWS</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.imeisac.dsaf.gsa.telcel.com">
    <soapenv:Header/>
    <soapenv:Body>
       <ws:ConsultaImeiAC>
@@ -59,7 +59,7 @@
    <soapenv:Header/>
    <soapenv:Body>
       <ws:ConsultaImeiACResponse>
-         <ConsultaImeiACReturn>|1|70003736|APPLE IPHONE 4S 16GB GSM-SPA BLACK||M_EQ3G_TN|</ConsultaImeiACReturn>
+         <ConsultaImeiACReturn>|1|70003736|APPLE IPHONE 4S 16GB GSM-SPA BLACK|xxxx|M_EQ3G_TN|</ConsultaImeiACReturn>
          <!--
          <ConsultaImeiACReturn>|1|70003736|APPLE IPHONE 4S 16GB GSM-SPA BLACK||M_EQ3G_TN|</ConsultaImeiACReturn>
          <ConsultaImeiACReturn>|-1|Error al procesar peticion||||</ConsultaImeiACReturn>
