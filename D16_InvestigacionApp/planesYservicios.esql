@@ -23,7 +23,7 @@ BEGIN
 		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:minutosIncluidos = TRIM(respuestaOK.MinInc);
 		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:smsIncluidos = TRIM(respuestaOK.SmsInc);
 		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:datosIncluidos = TRIM(respuestaOK.DatInc);
-		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:costoPlan = TRIM(respuestaOK.CosPl);
+		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:costoPlan = REPLACE(TRIM(respuestaOK.CosPl), ',', '');
 	END IF;
 	
 	
@@ -39,7 +39,7 @@ BEGIN
 			
 			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:producto = TRIM(respuestaOK.Producto[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:descripcion = TRIM(respuestaOK.DescProducto[i]);
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:costo = TRIM(respuestaOK.CostpProd[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:productosDePlan.nsInvest:producto[j].nsInvest:costo = REPLACE(TRIM(respuestaOK.CostpProd[i]), ',', '');
 			SET j = j + 1;
 		END IF;
 		SET i = i + 1;
@@ -93,7 +93,7 @@ CREATE FUNCTION MapDetalleProducto(IN outputRootNode REFERENCE, IN respuestaOK R
 BEGIN
 	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:claveProducto = TRIM(respuestaOK.ClaveProdto);
 	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:descripcionProducto = TRIM(respuestaOK.DescProdto);
-	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:costoProducto = TRIM(respuestaOK.CostoProdto);
+	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:costoProducto = REPLACE(TRIM(respuestaOK.CostoProdto), ',', '');
 	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:caracteristicasProducto = TRIM(respuestaOK.CaracProdto);
 	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:minutosIncluidos = 0;
 	SET outputRootNode.XMLNSC.nsInvest:consultarDetalleProductoResponse.nsInvest:response.nsInvest:detalleProducto.nsInvest:smsIncluidos = 0;

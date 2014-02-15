@@ -36,7 +36,7 @@ BEGIN
 			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:cheque = TRIM(respuestaOK.Cheque[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:origenPago = TRIM(respuestaOK.OrigenPago[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:formaPago = TRIM(respuestaOK.FormaPago[i]);
-			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:importe = TRIM(respuestaOK.Importe[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:importe = REPLACE(TRIM(respuestaOK.Importe[i]), ',', '');
 			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:estatus = TRIM(respuestaOK.Estatus[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:asesor = TRIM(respuestaOK.Asesor[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsInvest:pagosYAjustes.nsInvest:pagoYAjuste[j].nsInvest:detallePago = TRIM(respuestaOK.DetallePago[i]);
@@ -95,7 +95,7 @@ BEGIN
 			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:fechaPago = TRIM(respuestaOK.FecPago[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:fechaAplicacion = TRIM(respuestaOK.FecApli[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:fechaReversion = TRIM(respuestaOK.FecReve[i]);
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:importeAplicado = TRIM(respuestaOK.ImpApli[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:importeAplicado = REPLACE(TRIM(respuestaOK.ImpApli[i]), ',', '');
 			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:fechaFactura = TRIM(respuestaOK.FecFact[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleReversionResponse.nsInvest:response.nsInvest:reversiones.nsInvest:reversion[j].nsInvest:formaPago = TRIM(respuestaOK.ForPago[i]);			
 			SET j = j + 1;

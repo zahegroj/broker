@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="false" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
     <input path="/m2k/wmb/m2k_sumiq_c.xsd"/>
     <output path="/infoCliente/GestionTramitesInfoCliente.xsd"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="SUMIQ_CResponse_Factura_4">
         <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="RespuestaOK"/>
@@ -9,10 +12,13 @@
             <input path="FechaFactura4"/>
             <output path="fechaFactura"/>
         </move>
-        <move>
-            <input path="ImporteFactura4"/>
+        <function ref="fn:replace">
+            <input path="ImporteFactura4" var="ImporteFactura4"/>
             <output path="importeFactura"/>
-        </move>
+            <param name="input" value="$ImporteFactura4"/>
+            <param name="pattern" value="','"/>
+            <param name="replacement" value="''"/>
+        </function>
         <move>
             <input path="UltimaFechaFactura4"/>
             <output path="ultimaFechaFactura"/>

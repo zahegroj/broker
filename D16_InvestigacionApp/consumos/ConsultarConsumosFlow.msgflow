@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFilter.msgnode="ComIbmFilter.msgnode" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_consultarConsumos_ejecutarServicio_Igtoc40CService.msgflow="gen/consumos/ejecutarServicio_Igtoc40CService.msgflow" xmlns:gen_consultarConsumos_ejecutarServicio_Igtoc45DService.msgflow="gen/consumos/ejecutarServicio_Igtoc45DService.msgflow"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFilter.msgnode="ComIbmFilter.msgnode" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_consumos_ejecutarServicio_Igtoc40CService.msgflow="gen/consumos/ejecutarServicio_Igtoc40CService.msgflow" xmlns:gen_consumos_ejecutarServicio_Igtoc45DService.msgflow="gen/consumos/ejecutarServicio_Igtoc45DService.msgflow"
     xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="consumos/ConsultarConsumosFlow.msgflow"
     nsPrefix="consumos_ConsultarConsumosFlow.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
@@ -24,12 +24,12 @@
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="284,147" mappingExpression="msl://{consumos}#ConsultarConsumosReq_Igtoc40CReq">
         <translation xmi:type="utility:ConstantString" string="Mapping Igtoc40C Req"/>
       </nodes>
-      <nodes xmi:type="gen_consultarConsumos_ejecutarServicio_Igtoc40CService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="439,151">
+      <nodes xmi:type="gen_consumos_ejecutarServicio_Igtoc40CService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="439,151">
         <translation xmi:type="utility:ConstantString" string="ejecutarServicio_Igtoc40CService"/>
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
       </nodes>
-      <nodes xmi:type="gen_consultarConsumos_ejecutarServicio_Igtoc45DService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_5" location="438,351">
+      <nodes xmi:type="gen_consumos_ejecutarServicio_Igtoc45DService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_5" location="438,351">
         <translation xmi:type="utility:ConstantString" string="ejecutarServicio_Igtoc45DService"/>
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
@@ -42,13 +42,13 @@
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.false" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.true" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_19" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.RespuestaOK" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.RespuestaOK" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

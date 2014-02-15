@@ -7,6 +7,9 @@
         <import kind="map" location="/SUMIQ_CResponse_Factura_3.map" namespace="default"/>
         <import kind="map" location="/SUMIQ_CResponse_Factura_4.map" namespace="default"/>
     </imports>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="SUMIQ_CResponse_ConsultarDatosClienteResponse">
         <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="mb:msg(RespuestaOK,assembly,XMLNSC,Properties)"/>
@@ -39,22 +42,34 @@
             <input path="RespuestaOK"/>
             <output path="consultarDatosClienteResponse/response/facturas/factura[4]"/>
         </submap>
-        <move>
-            <input path="RespuestaOK/Importe"/>
+        <function ref="fn:replace">
+            <input path="RespuestaOK/Importe" var="Importe"/>
             <output path="consultarDatosClienteResponse/response/importe"/>
-        </move>
-        <move>
-            <input path="RespuestaOK/SaldoMes"/>
+            <param name="input" value="$Importe"/>
+            <param name="pattern" value="','"/>
+            <param name="replacement" value="''"/>
+        </function>
+        <function ref="fn:replace">
+            <input path="RespuestaOK/SaldoMes" var="SaldoMes"/>
             <output path="consultarDatosClienteResponse/response/saldoMes"/>
-        </move>
-        <move>
-            <input path="RespuestaOK/SaldoEstimado"/>
+            <param name="input" value="$SaldoMes"/>
+            <param name="pattern" value="','"/>
+            <param name="replacement" value="''"/>
+        </function>
+        <function ref="fn:replace">
+            <input path="RespuestaOK/SaldoEstimado" var="SaldoEstimado"/>
             <output path="consultarDatosClienteResponse/response/saldoEstimado"/>
-        </move>
-        <move>
-            <input path="RespuestaOK/SaldoActual"/>
+            <param name="input" value="$SaldoEstimado"/>
+            <param name="pattern" value="','"/>
+            <param name="replacement" value="''"/>
+        </function>
+        <function ref="fn:replace">
+            <input path="RespuestaOK/SaldoActual" var="SaldoActual"/>
             <output path="consultarDatosClienteResponse/response/saldoActual"/>
-        </move>
+            <param name="input" value="$SaldoActual"/>
+            <param name="pattern" value="','"/>
+            <param name="replacement" value="''"/>
+        </function>
         <move>
             <input path="RespuestaOK/EstatusCuenta"/>
             <output path="consultarDatosClienteResponse/response/estatusCuenta"/>

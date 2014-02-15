@@ -29,18 +29,18 @@ BEGIN
 			TRIM(respuestaOK.LargaDistancia[i]) <> '' OR
 			TRIM(respuestaOK.Total[i]) <> '' THEN
 			
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:fecha = respuestaOK.Fecha[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:hora = respuestaOK.Hora[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:ciudadOrigen = respuestaOK.CiudadOrigen[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:telMarcado = respuestaOK.TelMarcado[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:ciudadDestino = respuestaOK.CiudadDestino[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:sv = respuestaOK.Sv[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:cl = respuestaOK.Cl[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:tipoLlamada = respuestaOK.TipoLlamada[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:minutosTAire = respuestaOK.MinutosTAire[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:minutosLibre = respuestaOK.MinutosLibre[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:largaDistancia = respuestaOK.LargaDistancia[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:total = respuestaOK.Total[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:fecha = TRIM(respuestaOK.Fecha[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:hora = TRIM(respuestaOK.Hora[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:ciudadOrigen = TRIM(respuestaOK.CiudadOrigen[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:telMarcado = TRIM(respuestaOK.TelMarcado[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:ciudadDestino = TRIM(respuestaOK.CiudadDestino[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:sv = TRIM(respuestaOK.Sv[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:cl = TRIM(respuestaOK.Cl[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:tipoLlamada = TRIM(respuestaOK.TipoLlamada[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:minutosTAire = TRIM(respuestaOK.MinutosTAire[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:minutosLibre = TRIM(respuestaOK.MinutosLibre[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:largaDistancia = TRIM(respuestaOK.LargaDistancia[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:total = TRIM(respuestaOK.Total[i]);
 			SET j = j + 1;
 		END IF;
 		SET i = i + 1;
@@ -80,13 +80,13 @@ BEGIN
 			TRIM(respuestaOK.IMEI[i]) <> '' OR
 			TRIM(respuestaOK.IMSI[i]) <> '' THEN
 			
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:fechaConexion = respuestaOK.FechaConexion[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:horaConexion = respuestaOK.HoraConexion[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:bytesCargados = respuestaOK.BytesCargados[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:bytesDescargados = respuestaOK.BytesDescargados[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:apn = respuestaOK.APN[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:imei = respuestaOK.IMEI[i];
-			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:imsi = respuestaOK.IMSI[i];
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:fechaConexion = TRIM(respuestaOK.FechaConexion[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:horaConexion = TRIM(respuestaOK.HoraConexion[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:bytesCargados = TRIM(respuestaOK.BytesCargados[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:bytesDescargados = TRIM(respuestaOK.BytesDescargados[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:apn = TRIM(respuestaOK.APN[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:imei = TRIM(respuestaOK.IMEI[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarDetalleConexionesResponse.nsInvest:response.nsInvest:detallesConexion.nsInvest:detalleConexion[j].nsInvest:imsi = TRIM(respuestaOK.IMSI[i]);
 			SET j = j + 1;
 		END IF;
 		SET i = i + 1;
