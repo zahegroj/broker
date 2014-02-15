@@ -193,8 +193,8 @@
 		<xsd:complexContent>
 			<xsd:extension base="comun:ResponseBase">
 				<xsd:sequence>
-					<xsd:element name="formaPago" type="xsd:string"/>
-					<xsd:element name="planTarifario" type="xsd:string"/>
+					<xsd:element name="formaPago" type="comun:alfanumericoFormato"/>
+					<xsd:element name="planTarifario" type="comun:planTarifarioFormato"/>
 					<xsd:element name="modelo" type="xsd:string"/>
 					<xsd:element name="imei" type="comun:imeiFormato"/>
 					<xsd:element name="marca" type="xsd:string"/>
@@ -466,7 +466,7 @@
 	<!-- encabezado -->
 	<xsd:complexType name="InfoImeiType">
 		<xsd:sequence>
-			<xsd:element name="codigo" type="xsd:string"/>
+			<xsd:element name="codigo" type="comun:numericoFormato"/>
 			<xsd:element name="claveSap" type="xsd:string"/>
 			<xsd:element name="marca" type="xsd:string"/>
 			<xsd:element name="modelo" type="xsd:string"/>
@@ -477,10 +477,10 @@
 	<!--  consumos -->
 	<xsd:complexType name="ConsumoType">
 		<xsd:sequence>
-			<xsd:element name="fecha" type="xsd:string"/>
-			<xsd:element name="hora" type="xsd:string"/>
+			<xsd:element name="fecha" type="comun:fechaFormato"/>
+			<xsd:element name="hora" type="comun:horaFormato"/>
 			<xsd:element name="ciudadOrigen" type="xsd:string"/>
-			<xsd:element name="telMarcado" type="xsd:string"/>
+			<xsd:element name="telMarcado" type="comun:telefonoFormato"/>
 			<xsd:element name="ciudadDestino" type="xsd:string"/>
 			<xsd:element name="sv" type="xsd:string"/>
 			<xsd:element name="cl" type="xsd:string"/>
@@ -500,23 +500,23 @@
 	
 	<xsd:complexType name="ReferenciaConsumosType">
 		<xsd:sequence>
-			<xsd:element name="fechaPiv" type="xsd:string"/>
-			<xsd:element name="horaPiv" type="xsd:string"/>
-			<xsd:element name="fuentePiv" type="xsd:string"/>
+			<xsd:element name="fechaPiv" type="comun:fechaPivFormato"/>
+			<xsd:element name="horaPiv" type="comun:horaPivFormato"/>
+			<xsd:element name="fuentePiv" type="comun:alfanumericoFormato"/>
 			<xsd:element name="secuenciaPiv" type="xsd:string" minOccurs="0"/>
-			<xsd:element name="telMarcadoPiv" type="xsd:string"/>
+			<xsd:element name="telMarcadoPiv" type="comun:telefonoFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
 	<!--  detalle conexiones -->
 	<xsd:complexType name="DetalleConexionType">
 		<xsd:sequence>
-			<xsd:element name="fechaConexion" type="xsd:string"/>
-			<xsd:element name="horaConexion" type="xsd:string"/>
-			<xsd:element name="bytesCargados" type="xsd:string"/>
-			<xsd:element name="bytesDescargados" type="xsd:string"/>
+			<xsd:element name="fechaConexion" type="comun:fechaFormato"/>
+			<xsd:element name="horaConexion" type="comun:horaFormato"/>
+			<xsd:element name="bytesCargados" type="comun:numericoFormato"/>
+			<xsd:element name="bytesDescargados" type="comun:numericoFormato"/>
 			<xsd:element name="apn" type="xsd:string"/>
-			<xsd:element name="imei" type="xsd:string"/>
+			<xsd:element name="imei" type="comun:imeiFormato"/>
 			<xsd:element name="imsi" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -541,14 +541,14 @@
 	<!--  pagos y ajustes -->
 	<xsd:complexType name="PagoYAjusteType">
 		<xsd:sequence>
-			<xsd:element name="fecha" type="xsd:string"/>
+			<xsd:element name="fecha" type="comun:fechaFormato"/>
 			<xsd:element name="nombreAjuste" type="xsd:string"/>
 			<xsd:element name="cheque" type="xsd:string"/>
 			<xsd:element name="origenPago" type="xsd:string"/>
 			<xsd:element name="formaPago" type="xsd:string"/>
-			<xsd:element name="importe" type="xsd:string"/>
+			<xsd:element name="importe" type="comun:decimalFormato"/>
 			<xsd:element name="estatus" type="xsd:string"/>
-			<xsd:element name="asesor" type="xsd:string"/>
+			<xsd:element name="asesor" type="comun:alfanumericoFormato"/>
 			<xsd:element name="detallePago" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -561,11 +561,11 @@
 	
 	<xsd:complexType name="ReferenciaPagoYAjusteType">
 		<xsd:sequence>
-			<xsd:element name="fechaPago" type="xsd:string"/>
+			<xsd:element name="fechaPago" type="comun:fechaPivFormato"/>
 			<xsd:element name="lotePago" type="xsd:string"/>
 			<xsd:element name="tipoPago" type="xsd:string"/>
 			<xsd:element name="secPago" type="xsd:string"/>
-			<xsd:element name="fechaAjuste" type="xsd:string"/>
+			<xsd:element name="fechaAjuste" type="comun:fechaPivFormato"/>
 			<xsd:element name="codAjuste" type="xsd:string"/>
 			<xsd:element name="secUsuarioAjuste" type="xsd:string"/>
 			<xsd:element name="secAjuste" type="xsd:string"/>
@@ -575,11 +575,11 @@
 	<!--  reversiones -->
 	<xsd:complexType name="ReversionType">
 		<xsd:sequence>
-			<xsd:element name="fechaPago" type="xsd:string"/>
-			<xsd:element name="fechaAplicacion" type="xsd:string"/>
-			<xsd:element name="fechaReversion" type="xsd:string"/>
-			<xsd:element name="importeAplicado" type="xsd:string"/>
-			<xsd:element name="fechaFactura" type="xsd:string"/>
+			<xsd:element name="fechaPago" type="comun:fechaFormato"/>
+			<xsd:element name="fechaAplicacion" type="comun:fechaFormato"/>
+			<xsd:element name="fechaReversion" type="comun:fechaFormato"/>
+			<xsd:element name="importeAplicado" type="comun:decimalFormato"/>
+			<xsd:element name="fechaFactura" type="comun:fechaFormato"/>
 			<xsd:element name="formaPago" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -594,13 +594,13 @@
 	
 	<xsd:complexType name="PromocionType">
 		<xsd:sequence>
-			<xsd:element name="planDescuento" type="xsd:string"/>
+			<xsd:element name="planDescuento" type="comun:alfanumericoFormato"/>
 			<xsd:element name="descripcion" type="xsd:string"/>
 			<xsd:element name="periodicidad" type="xsd:string"/>
-			<xsd:element name="fechaEfectiva" type="xsd:string"/>
-			<xsd:element name="fechaExpiracion" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+			<xsd:element name="fechaExpiracion" type="comun:fechaFormato"/>
 			<xsd:element name="estatus" type="xsd:string"/>
-			<xsd:element name="usuario" type="xsd:string"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -612,17 +612,17 @@
 	
 	<xsd:complexType name="ReferenciaPromocionType">
 		<xsd:sequence>
-			<xsd:element name="cveDesc" type="xsd:string"/>
-			<xsd:element name="effDt" type="xsd:string"/>
+			<xsd:element name="cveDesc" type="comun:alfanumericoFormato"/>
+			<xsd:element name="effDt" type="comun:fechaPivFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<!-- detalle promociones -->
 	<xsd:complexType name="DescPromocionType">
 		<xsd:sequence> <!-- igtoc48c -->
-			<xsd:element name="claveDescuento" type="xsd:string"/>
+			<xsd:element name="claveDescuento" type="comun:alfanumericoFormato"/>
 			<xsd:element name="periodoDescuento" type="xsd:string"/>
-			<xsd:element name="claveProducto" type="xsd:string"/>
+			<xsd:element name="claveProducto" type="comun:productoFormato"/>
 			<xsd:element name="descripcionProducto" type="xsd:string"/>
 			<xsd:element name="claveAjustePromocion" type="xsd:string"/>
 		</xsd:sequence>
@@ -666,15 +666,15 @@
 	<!-- historial de la cuenta -->
 	<xsd:complexType name="HistorialCuentaType">
 		<xsd:sequence>
-			<xsd:element name="telefono" type="xsd:string"/>
-			<xsd:element name="fechaEfectiva" type="xsd:string"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
 			<xsd:element name="estatus" type="xsd:string"/>
 			<xsd:element name="motivo" type="xsd:string"/>
 			<xsd:element name="tecnologia" type="xsd:string"/>
-			<xsd:element name="imei" type="xsd:string"/>
-			<xsd:element name="iccid" type="xsd:string"/>
-			<xsd:element name="imsi" type="xsd:string"/>
-			<xsd:element name="usuario" type="xsd:string"/>
+			<xsd:element name="imei" type="comun:imeiFormato"/>
+			<xsd:element name="iccid" type="comun:numericoFormato"/>
+			<xsd:element name="imsi" type="comun:numericoFormato"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -686,33 +686,33 @@
 	
 	<xsd:complexType name="ReferenciaHistorialCuenta">
 		<xsd:sequence>
-			<xsd:element name="telefono" type="xsd:string"/>
-			<xsd:element name="effDate" type="xsd:string"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="effDate" type="comun:fechaPivFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
 	<!-- detalle de producto -->
 	<xsd:complexType name="DetalleProductoType">
 		<xsd:sequence>
-			<xsd:element name="claveProducto" type="xsd:string"/>
+			<xsd:element name="claveProducto" type="comun:productoFormato"/>
 			<xsd:element name="descripcionProducto" type="xsd:string"/>
-			<xsd:element name="costoProducto" type="xsd:string"/>
+			<xsd:element name="costoProducto" type="comun:decimalFormato"/>
 			<xsd:element name="caracteristicasProducto" type="xsd:string"/>
-			<xsd:element name="minutosIncluidos" type="xsd:string"/>
-			<xsd:element name="smsIncluidos" type="xsd:string"/>
-			<xsd:element name="datosIncluidos" type="xsd:string"/>
-			<xsd:element name="unidad" type="xsd:string"/>
-			<xsd:element name="claveGrupo" type="xsd:string"/>
+			<xsd:element name="minutosIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="smsIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="datosIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="unidad" type="comun:alfanumericoFormato"/>
+			<xsd:element name="claveGrupo" type="comun:alfanumericoFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
 	<xsd:complexType name="LlamadaType">
 		<xsd:sequence>
-			<xsd:element name="telefono" type="xsd:string"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
 			<xsd:element name="tipoServicio" type="xsd:string"/>
 			<xsd:element name="tipoDestino" type="xsd:string"/>
 			<xsd:element name="estatus" type="xsd:string"/>
-			<xsd:element name="fechaEfectiva" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -724,10 +724,10 @@
 	
 	<xsd:complexType name="ReferenciaGrupoLlamadas">
 		<xsd:sequence>
-			<xsd:element name="tipoGrupo" type="xsd:string"/>
-			<xsd:element name="idGrupo" type="xsd:string"/>
-			<xsd:element name="telefono" type="xsd:string"/>
-			<xsd:element name="effDate" type="xsd:string"/>
+			<xsd:element name="tipoGrupo" type="comun:alfanumericoFormato"/>
+			<xsd:element name="idGrupo" type="comun:numericoFormato"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="effDate" type="comun:fechaPivFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -735,21 +735,21 @@
 	<xsd:complexType name="DetallePlanTariafioType">
 		<xsd:sequence>
 			<xsd:element name="descripcionPlan" type="xsd:string"/>
-			<xsd:element name="plazoForzoso" type="xsd:string"/>
+			<xsd:element name="plazoForzoso" type="comun:alfanumericoFormato"/>
 			<xsd:element name="tipoPlan" type="xsd:string"/>
 			<xsd:element name="descripcionTipoPlan" type="xsd:string"/>
-			<xsd:element name="minutosIncluidos" type="xsd:string"/>
-			<xsd:element name="smsIncluidos" type="xsd:string"/>
+			<xsd:element name="minutosIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="smsIncluidos" type="comun:numericoFormato"/>
 			<xsd:element name="datosIncluidos" type="xsd:string"/>
-			<xsd:element name="costoPlan" type="xsd:string"/>
+			<xsd:element name="costoPlan" type="comun:decimalFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
 	<xsd:complexType name="ProductoDePlanType">
 		<xsd:sequence>
-			<xsd:element name="producto" type="xsd:string"/>
+			<xsd:element name="producto" type="comun:productoFormato"/>
 			<xsd:element name="descripcion" type="xsd:string"/>
-			<xsd:element name="costo" type="xsd:string"/>
+			<xsd:element name="costo" type="comun:decimalFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -763,9 +763,9 @@
 	<xsd:complexType name="PlanTarifarioType">
 		<xsd:sequence> <!-- 41R -->
 			<xsd:element name="descripcion" type="xsd:string"/>
-			<xsd:element name="fechaEfectiva" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
 			<xsd:element name="estatus" type="xsd:string"/>
-			<xsd:element name="usuario" type="xsd:string"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -777,18 +777,18 @@
 	
 	<xsd:complexType name="ReferenciaPlanTarifario">
 		<xsd:sequence>
-			<xsd:element name="plan" type="xsd:string"/>
-			<xsd:element name="fecha" type="xsd:string"/>
+			<xsd:element name="plan" type="comun:planTarifarioFormato"/>
+			<xsd:element name="fecha" type="comun:fechaPivFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
 	<xsd:complexType name="ServicioAdicionalType">
 		<xsd:sequence> <!-- 44D -->
-			<xsd:element name="producto" type="xsd:string"/>
+			<xsd:element name="producto" type="comun:productoFormato"/>
 			<xsd:element name="incluidoEnPlan" type="xsd:string"/>
-			<xsd:element name="fechaEfectiva" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
 			<xsd:element name="estatus" type="xsd:string"/>
-			<xsd:element name="usuario" type="xsd:string"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -800,8 +800,8 @@
 	
 	<xsd:complexType name="ReferenciaServicioAdicional">
 		<xsd:sequence>
-			<xsd:element name="claveProd" type="xsd:string"/>
-			<xsd:element name="fechaProd" type="xsd:string"/>
+			<xsd:element name="claveProd" type="comun:productoFormato"/>
+			<xsd:element name="fechaProd" type="comun:fechaPivFormato"/>
 			<xsd:element name="estatusProd" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>

@@ -36,10 +36,10 @@
 
 	<xsd:complexType name="ConsultarDatosClienteRequestType">
 		<xsd:sequence>
-			<xsd:element name="usuarioM2K" type="xsd:string"/>
+			<xsd:element name="usuarioM2K" type="comun:alfanumericoFormato"/>
 			<xsd:element name="telefono" type="comun:telefonoFormato"/>
 			<xsd:element name="sistemaSiantel" type="xsd:string"/>
-			<xsd:element name="regionCAC" type="xsd:string"/>
+			<xsd:element name="regionCAC" type="comun:numericoFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -48,13 +48,13 @@
 			<xsd:extension base="comun:ResponseBase">
 				<xsd:sequence>
 					<xsd:element name="nombreCliente" type="xsd:string"/>
-					<xsd:element name="cuenta" type="xsd:string"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
 					<xsd:element name="estatusCobranza" type="xsd:string"/>
 					<xsd:element name="estatusCuenta" type="xsd:string"/>
-					<xsd:element name="saldoActual" type="xsd:string"/>
-					<xsd:element name="saldoEstimado" type="xsd:string"/>
-					<xsd:element name="saldoMes" type="xsd:string"/>
-					<xsd:element name="importe" type="xsd:string"/>
+					<xsd:element name="saldoActual" type="comun:decimalFormato"/>
+					<xsd:element name="saldoEstimado" type="comun:decimalFormato"/>
+					<xsd:element name="saldoMes" type="comun:decimalFormato"/>
+					<xsd:element name="importe" type="comun:decimalFormato"/>
 					<xsd:element name="facturas" type="this:ArrayOfFactura"/>
 				</xsd:sequence>
 			</xsd:extension>
@@ -75,20 +75,20 @@
 	<xsd:complexType name="ConsultarDatosCobranzaResponseType">
 		<xsd:sequence>
 			<!-- RETC2 C -->
-			<xsd:element name="limiteCredito" type="xsd:string"/>
+			<xsd:element name="limiteCredito" type="comun:decimalFormato"/>
 			<!-- CPAST C -->
 			<xsd:element name="accionCobranza" type="xsd:string"/>
 			<xsd:element name="motivoCobranza" type="xsd:string"/>
 			<!-- REACT C -->
-			<xsd:element name="montoMinimoPagar" type="xsd:string"/>
+			<xsd:element name="montoMinimoPagar" type="comun:decimalFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
 	<xsd:complexType name="FacturaType">
 		<xsd:sequence>
-			<xsd:element name="fechaFactura" type="xsd:string"/>
-			<xsd:element name="importeFactura" type="xsd:string"/>
-			<xsd:element name="ultimaFechaFactura" type="xsd:string"/>
+			<xsd:element name="fechaFactura" type="comun:fechaFormato"/>
+			<xsd:element name="importeFactura" type="comun:decimalFormato"/>
+			<xsd:element name="ultimaFechaFactura" type="comun:fechaFormato"/>
 		</xsd:sequence>
 		<xsd:attribute name="indice" type="xsd:integer"/>
 	</xsd:complexType>

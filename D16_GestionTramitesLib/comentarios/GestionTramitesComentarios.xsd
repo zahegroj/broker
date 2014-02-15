@@ -109,8 +109,8 @@
 	<xsd:complexType name="ComentarioType">
 		<xsd:sequence>
 			<xsd:element name="tipoComentario" type="xsd:string"/>
-			<xsd:element name="fechaEfectiva" type="xsd:string"/>
-			<xsd:element name="usuario" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
 			<xsd:element name="comentario" type="xsd:string"/>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -123,10 +123,10 @@
 		
 	<xsd:complexType name="ReferenciaComentariosType">
 		<xsd:sequence>
-			<xsd:element name="tipoComentario" type="xsd:string"/>
-			<xsd:element name="fechaComentario" type="xsd:string"/>
-			<xsd:element name="horaAudit" type="xsd:string"/>
-			<xsd:element name="sec" type="xsd:string"/>
+			<xsd:element name="tipoComentario" type="comun:alfanumericoFormato"/>
+			<xsd:element name="fechaComentario" type="comun:fechaPivFormato"/>
+			<xsd:element name="horaAudit" type="comun:numericoFormato"/>
+			<xsd:element name="sec" type="comun:secFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 </xsd:schema>

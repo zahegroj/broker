@@ -3,8 +3,8 @@
 
 	<xsd:complexType name="RequestBase">
 		<xsd:sequence>
-			<xsd:element name="usuarioM2K" type="xsd:string"/>
-			<xsd:element name="region" type="xsd:string"/>
+			<xsd:element name="usuarioM2K" type="this:alfanumericoFormato"/>
+			<xsd:element name="region" type="this:numericoFormato"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -35,6 +35,7 @@
 			<xsd:element name="descripcion" type="xsd:string" />
 			<xsd:element name="solucion" type="xsd:string"/>
 			<xsd:element name="servicioOrigen" type="xsd:string" />
+			<xsd:element name="idPeticion" type="xsd:string" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -91,7 +92,7 @@
     
     <xsd:simpleType name="alfanumericoFormato">
     	<xsd:restriction base="xsd:string">
-    		<xsd:pattern value="|[a-zA-Z0-9]+"/>
+    		<xsd:pattern value="|[a-zA-Z0-9 ]+"/>
     	</xsd:restriction>
     </xsd:simpleType>
     
@@ -113,9 +114,27 @@
     	</xsd:restriction>
     </xsd:simpleType>
     
+    <xsd:simpleType name="horaPivFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|\d{7}"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
     <xsd:simpleType name="smsFormato">
     	<xsd:restriction base="xsd:string">
     		<xsd:maxLength value="150"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="secFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|\d{3}"/>
+    	</xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="numericoFormato">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="|[0-9]+"/>
     	</xsd:restriction>
     </xsd:simpleType>
 </xsd:schema><!-- catalogo de servicios --><!-- 1. M2K --><!-- 2. SIANTEL --><!-- 3. SMS --><!-- 4. IMEI --><!-- 5. RN Determinar Adeudo --><!-- 6. RN Determinar Region Perfil --><!-- 7. RN Determinar Prevalidacion --><!-- 8. RN Reasignar Tramite -->
