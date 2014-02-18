@@ -30,14 +30,14 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="430,280" computeExpression="esql://routine/#MapDetallePromocionReq_Igtoc48dReq_FanOut.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Map Igtoc48D Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="584,56" queueName="IGTOC48C_OUT" transactionMode="yes" validateMaster="none">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48C_OUT"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="563,56" queueName="QL.GT_PROM_IGTOC48C.OUT" transactionMode="yes" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48C.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="579,166" queueName="IGTOC48A_OUT" transactionMode="yes" validateMaster="none">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48A_OUT"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="565,166" queueName="QL.GT_PROM_IGTOC48A.OUT" transactionMode="yes" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48A.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="580,281" queueName="IGTOC48D_OUT" transactionMode="yes" validateMaster="none">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48D_OUT"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="566,281" queueName="QL.GT_PROM_IGTOC48D.OUT" transactionMode="yes" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48D.OUT"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="612,428" computeExpression="esql://routine/#MapIgtoc48dResp_Response.Main">
         <translation xmi:type="utility:ConstantString" string="Map Response"/>
@@ -50,13 +50,13 @@
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="720,60" folderName="AggregateIgtoc48cReq">
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="766,60" folderName="AggregateIgtoc48cReq">
         <translation xmi:type="utility:ConstantString" string="Aggregate Request"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="714,170" folderName="AggregateIgtoc48aReq">
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="763,170" folderName="AggregateIgtoc48aReq">
         <translation xmi:type="utility:ConstantString" string="Aggregate Request1"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="716,285" folderName="AggregateIgtoc48dReq">
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="763,285" folderName="AggregateIgtoc48dReq">
         <translation xmi:type="utility:ConstantString" string="Aggregate Request2"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_4" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>

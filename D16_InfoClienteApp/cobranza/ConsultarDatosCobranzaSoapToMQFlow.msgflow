@@ -17,14 +17,14 @@
       <nodes xmi:type="ComIbmSOAPAsyncResponse.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="85,315" asyncRequestCorrelator="ReactC_Async" populateLocalEnvWithWSAInfo="true">
         <translation xmi:type="utility:ConstantString" string="ReactC Asynchronous Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="511,96" queueName="CPASTC_AGGR_IN">
-        <translation xmi:type="utility:ConstantString" string="CPASTC_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="511,96" queueName="QL.GT_COB_CPASTC_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_COB_CPASTC_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="507,201" queueName="RETC2C_AGGR_IN">
-        <translation xmi:type="utility:ConstantString" string="RETC2C_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="507,201" queueName="QL.GT_COB_RETC2C_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_COB_RETC2C_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="507,312" queueName="REACTC_AGGR_IN">
-        <translation xmi:type="utility:ConstantString" string="REACTC_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="507,312" queueName="QL.GT_COB_REACTC_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_COB_REACTC_AGGR.IN"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="275,95" computeExpression="esql://routine/#CpastcResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="CpastC Response Aggregation"/>

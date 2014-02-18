@@ -8,16 +8,19 @@
             <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any"/>
             <cast path="LocalEnvironment/Variables/any" qualifier="usuarioM2K" var="any1"/>
         </input>
-        <output namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="$out/mb:msg(Request,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly">
+            <cast path="$MessageAssembly/LocalEnvironment/Variables/any" qualifier="region" var="any2"/>
+            <cast path="$MessageAssembly/LocalEnvironment/Variables/any" qualifier="plataforma" var="any3"/>
+        </output>
         <output path="$out1/mb:msg(usuarioM2K,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
         <move>
             <input path="Properties"/>
             <output path="$MessageAssembly/Properties"/>
         </move>
-        <convert defaultValue="0">
+        <move>
             <input path="PerfilTelefono/Region"/>
             <output path="$MessageAssembly/Request/region"/>
-        </convert>
+        </move>
         <assign value="I*7E">
             <output path="$MessageAssembly/Request/function"/>
         </assign>
@@ -37,6 +40,16 @@
         <move>
             <input path="LocalEnvironment"/>
             <output path="$MessageAssembly/LocalEnvironment"/>
+            <override>
+                <move>
+                    <input path="PerfilTelefono/Region"/>
+                    <output path="$MessageAssembly/LocalEnvironment/Variables/region"/>
+                </move>
+                <move>
+                    <input path="PerfilTelefono/Plataforma"/>
+                    <output path="$MessageAssembly/LocalEnvironment/Variables/plataforma"/>
+                </move>
+            </override>
         </move>
         <move>
             <input path="LocalEnvironment/Variables/usuarioM2K"/>

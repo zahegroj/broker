@@ -11,7 +11,7 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.in" location="20,20">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.in" bundleName="gen/siantel/getPerfilTelefono_PerfilTelefonoService" pluginId="D16_FachadasTelcelApp"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="siantel/PerfilTelefonoService.wsdl" selectedPortType="PerfilTelefonoService" selectedBinding="PerfilTelefonoServiceSoapBinding" selectedOperation="getPerfilTelefono" selectedPort="PerfilTelefonoService" targetNamespace="http://ws.portabilidad.dsaf.gsa.sds.telcel.com" useHTTPTransport="true" webServiceURL="http://10.0.2.2:8088/D14_PortabilidadWebServices/services/PerfilTelefonoService"
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="siantel/PerfilTelefonoService.wsdl" selectedPortType="PerfilTelefonoService" selectedBinding="PerfilTelefonoServiceSoapBinding" selectedOperation="getPerfilTelefono" selectedPort="PerfilTelefonoService" targetNamespace="http://ws.portabilidad.dsaf.gsa.sds.telcel.com" useHTTPTransport="true" webServiceURL="http://servportabilidad.telcel.com:80/D14_PortabilidadWebServices/services/PerfilTelefonoService"
           sslProtocol="TLS">
         <translation xmi:type="utility:ConstantString" string="Request"/>
       </nodes>

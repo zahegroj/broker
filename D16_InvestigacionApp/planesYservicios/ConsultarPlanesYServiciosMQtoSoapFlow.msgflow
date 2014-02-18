@@ -8,11 +8,11 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj16/ConsultarPlanesYServiciosMQtoSoapFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/ConsultarPlanesYServiciosMQtoSoapFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="79,103" queueName="IGTOC41R_OUT" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC41R_OUT"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="17,103" queueName="QL.GT_PYS_IGTOC41R.OUT" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PYS_IGTOC41R.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="79,304" queueName="IGTOC44D_OUT" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC44D_OUT"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="18,304" queueName="QL.GT_PYS_IGTOC44D.OUT" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PYS_IGTOC44D.OUT"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="246,103" computeExpression="esql://routine/#Igtoc41rReq_MQtoSOAP.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Context SOAP"/>

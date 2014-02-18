@@ -15,16 +15,16 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="369,63" computeExpression="esql://routine/#MapPlanesYServiciosReq_Igtoc41rReq_FanOut.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Map Igtoc41r Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="490,64" queueName="IGTOC41R_OUT" transactionMode="yes" validateMaster="none">
-        <translation xmi:type="utility:ConstantString" string="IGTOC41R_OUT"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="490,64" queueName="QL.GT_PYS_IGTOC41R.OUT" transactionMode="yes" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PYS_IGTOC41R.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="490,200" queueName="IGTOC44D_OUT" transactionMode="yes" validateMaster="none">
-        <translation xmi:type="utility:ConstantString" string="IGTOC44D_OUT"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="490,200" queueName="QL.GT_PYS_IGTOC44D.OUT" transactionMode="yes" validateMaster="none">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PYS_IGTOC44D.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="606,68" folderName="AggregateIgtoc41rReq">
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="681,68" folderName="AggregateIgtoc41rReq">
         <translation xmi:type="utility:ConstantString" string="Aggregate Request"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="604,204" folderName="AggregateIgtoc44dReq">
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="679,204" folderName="AggregateIgtoc44dReq">
         <translation xmi:type="utility:ConstantString" string="Aggregate Request1"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="364,199" computeExpression="esql://routine/#MapPlanesYServiciosReq_Igtoc44dReq_FanOut.Main" computeMode="destinationAndMessage">

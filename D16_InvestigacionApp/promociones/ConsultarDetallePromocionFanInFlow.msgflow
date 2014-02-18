@@ -8,14 +8,14 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj16/ConsultarDetallePromocionFanInFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/ConsultarDetallePromocionFanInFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="96,83" queueName="IGTOC48C_AGGR_IN" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48C_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="38,83" queueName="QL.GT_PROM_IGTOC48C_AGGR.IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48C_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="92,189" queueName="IGTOC48A_AGGR_IN" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48A_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="34,189" queueName="QL.GT_PROM_IGTOC48A_AGGR.IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48A_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="94,294" queueName="IGTOC48D_AGGR_IN" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48D_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="36,294" queueName="QL.GT_PROM_IGTOC48D_AGGR.IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48D_AGGR.IN"/>
       </nodes>
       <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="288,185" aggregateName="AggregateDetallePromocion" unsolicitedTimeout="5">
         <translation xmi:type="utility:ConstantString" string="Aggregate Reply"/>

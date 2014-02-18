@@ -8,14 +8,14 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj16/ConsultarDetallePromocionMQtoSoapFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/ConsultarDetallePromocionMQtoSoapFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="66,74" queueName="IGTOC48C_OUT" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48C_OUT"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="40,74" queueName="QL.GT_PROM_IGTOC48C.OUT" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48C.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="67,180" queueName="IGTOC48A_OUT" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48A_OUT"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="41,180" queueName="QL.GT_PROM_IGTOC48A.OUT" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48A.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="67,290" queueName="IGTOC48D_OUT" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48D_OUT"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="41,290" queueName="QL.GT_PROM_IGTOC48D.OUT" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48D.OUT"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPAsyncRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="399,75" asyncResponseCorrelator="Igtoc48C_Async" wsdlFileName="m2k/wmb/Igtoc48CService.wsdl" selectedPortType="Igtoc48CPort" selectedBinding="Igtoc48CBinding" selectedOperation="ejecutarServicio" selectedPort="Igtoc48C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc48/c" messageSetProperty="" useHTTPTransport="true" webServiceURL="http://localhost:7801/di/sds/m2k/activaciones/wmb/Igtoc48CService"
           sslProtocol="TLS">

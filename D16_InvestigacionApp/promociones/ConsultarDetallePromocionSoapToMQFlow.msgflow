@@ -17,14 +17,14 @@
       <nodes xmi:type="ComIbmSOAPAsyncResponse.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="82,277" asyncRequestCorrelator="Igtoc48D_Async" populateLocalEnvWithWSAInfo="true" componentLevel="node" parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
         <translation xmi:type="utility:ConstantString" string="IGTOC48D Asynchronous Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="524,77" queueName="IGTOC48C_AGGR_IN">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48C_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="524,77" queueName="QL.GT_PROM_IGTOC48C_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48C_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="526,174" queueName="IGTOC48A_AGGR_IN">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48A_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="526,174" queueName="QL.GT_PROM_IGTOC48A_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48A_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="528,274" queueName="IGTOC48D_AGGR_IN">
-        <translation xmi:type="utility:ConstantString" string="IGTOC48D_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="528,274" queueName="QL.GT_PROM_IGTOC48D_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PROM_IGTOC48D_AGGR.IN"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="306,76" computeExpression="esql://routine/#Igtoc48cResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Igtoc48C Response Aggregation"/>

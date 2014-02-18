@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
     <input path="/DeterminarAdeudo_InlineSchema17.xsd"/>
     <output path="/reglas/GestionTramitesReglas.xsd"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="DeterminarAdeudoResponseRegla_DeterminarAdeudoResponseFlow">
         <input namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" path="mb:msg(DeterminarAdeudoResponse,assembly,,Properties)"/>
@@ -85,50 +88,60 @@
             <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/telefono/estatus"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/telefono/estatus"/>
         </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/limiteCredito"/>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/limiteCredito" var="limiteCredito"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/limiteCredito"/>
-        </move>
+            <param name="arg" value="$limiteCredito"/>
+        </function>
         <move>
             <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/tipoSaldoExistente"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/tipoSaldoExistente"/>
         </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/porcentajeCredito"/>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/porcentajeCredito" var="porcentajeCredito"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/porcentajeCredito"/>
-        </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/cargoPendienteFacturar"/>
+            <param name="arg" value="$porcentajeCredito"/>
+        </function>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/cargoPendienteFacturar" var="cargoPendienteFacturar"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/cargoPendienteFacturar"/>
-        </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoMes"/>
+            <param name="arg" value="$cargoPendienteFacturar"/>
+        </function>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoMes" var="saldoMes"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoMes"/>
-        </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoActual"/>
+            <param name="arg" value="$saldoMes"/>
+        </function>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoActual" var="saldoActual"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoActual"/>
-        </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoEstimado"/>
+            <param name="arg" value="$saldoActual"/>
+        </function>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoEstimado" var="saldoEstimado"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoEstimado"/>
-        </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoPendienteFacturar"/>
+            <param name="arg" value="$saldoEstimado"/>
+        </function>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoPendienteFacturar" var="saldoPendienteFacturar"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoPendienteFacturar"/>
-        </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoFacturadoNoVencido"/>
+            <param name="arg" value="$saldoPendienteFacturar"/>
+        </function>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoFacturadoNoVencido" var="saldoFacturadoNoVencido"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoFacturadoNoVencido"/>
-        </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoFacturadoVencido"/>
+            <param name="arg" value="$saldoFacturadoNoVencido"/>
+        </function>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/cuenta/saldoFacturadoVencido" var="saldoFacturadoVencido"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/cuenta/saldoFacturadoVencido"/>
-        </move>
-        <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/factura/montoMinimoPagar"/>
+            <param name="arg" value="$saldoFacturadoVencido"/>
+        </function>
+        <function ref="fn:number">
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/factura/montoMinimoPagar" var="montoMinimoPagar"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/factura/montoMinimoPagar"/>
-        </move>
+            <param name="arg" value="$montoMinimoPagar"/>
+        </function>
         <move>
             <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/factura/fechaLimitePago"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/factura/fechaLimitePago"/>
@@ -148,6 +161,10 @@
         <move>
             <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/comentario"/>
             <output path="determinarAdeudoResponse/response/comentario"/>
+        </move>
+        <move>
+            <input path="DeterminarAdeudoResponse/DecisionID"/>
+            <output path="determinarAdeudoResponse/response/DecisionID"/>
         </move>
     </mappingDeclaration>
 </mappingRoot>

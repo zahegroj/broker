@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
     <input path="/m2k/wmb/m2k_sumiq_c.xsd"/>
-    <output path="/infoCliente/GestionTramitesInfoCliente.xsd"/>
+    <output path="/infoCliente/GestionTramitesInfoCliente.xsd" var="out"/>
+    <output path="/variables.xsd" var="out1"/>
     <imports>
         <import kind="map" location="/SUMIQ_CResponse_Factura_1.map" namespace="default"/>
         <import kind="map" location="/SUMIQ_CResponse_Factura_2.map" namespace="default"/>
@@ -12,76 +13,80 @@
     </namespaces>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="SUMIQ_CResponse_ConsultarDatosClienteResponse">
-        <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="mb:msg(RespuestaOK,assembly,XMLNSC,Properties)"/>
-        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" path="mb:msg(consultarDatosClienteResponse,assembly,XMLNSC,Properties)"/>
+        <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="mb:msg(RespuestaOK,assembly,XMLNSC,LocalEnvironment,Properties)">
+            <cast path="LocalEnvironment/Variables/any" qualifier="region" var="any"/>
+            <cast path="LocalEnvironment/Variables/any" qualifier="plataforma" var="any1"/>
+        </input>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" path="$out/mb:msg(consultarDatosClienteResponse,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
+        <output path="$out1/mb:msg(region,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
         <move>
             <input path="Properties" var="Properties"/>
-            <output path="Properties"/>
+            <output path="$MessageAssembly/Properties"/>
         </move>
         <move>
             <input path="RespuestaOK/NombreCliente"/>
-            <output path="consultarDatosClienteResponse/response/nombreCliente"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/nombreCliente"/>
         </move>
         <move>
             <input path="RespuestaOK/Cuenta" var="Cuenta"/>
-            <output path="consultarDatosClienteResponse/response/cuenta"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/cuenta"/>
         </move>
         <submap ref="map:SUMIQ_CResponse_Factura_1">
             <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[1]"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/facturas/factura[1]"/>
         </submap>
         <submap ref="map:SUMIQ_CResponse_Factura_2">
             <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[2]"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/facturas/factura[2]"/>
         </submap>
         <submap ref="map:SUMIQ_CResponse_Factura_3">
             <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[3]"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/facturas/factura[3]"/>
         </submap>
         <submap ref="map:SUMIQ_CResponse_Factura_4">
             <input path="RespuestaOK"/>
-            <output path="consultarDatosClienteResponse/response/facturas/factura[4]"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/facturas/factura[4]"/>
         </submap>
         <function ref="fn:replace">
             <input path="RespuestaOK/Importe" var="Importe"/>
-            <output path="consultarDatosClienteResponse/response/importe"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/importe"/>
             <param name="input" value="$Importe"/>
             <param name="pattern" value="','"/>
             <param name="replacement" value="''"/>
         </function>
         <function ref="fn:replace">
             <input path="RespuestaOK/SaldoMes" var="SaldoMes"/>
-            <output path="consultarDatosClienteResponse/response/saldoMes"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoMes"/>
             <param name="input" value="$SaldoMes"/>
             <param name="pattern" value="','"/>
             <param name="replacement" value="''"/>
         </function>
         <function ref="fn:replace">
             <input path="RespuestaOK/SaldoEstimado" var="SaldoEstimado"/>
-            <output path="consultarDatosClienteResponse/response/saldoEstimado"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoEstimado"/>
             <param name="input" value="$SaldoEstimado"/>
             <param name="pattern" value="','"/>
             <param name="replacement" value="''"/>
         </function>
         <function ref="fn:replace">
             <input path="RespuestaOK/SaldoActual" var="SaldoActual"/>
-            <output path="consultarDatosClienteResponse/response/saldoActual"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoActual"/>
             <param name="input" value="$SaldoActual"/>
             <param name="pattern" value="','"/>
             <param name="replacement" value="''"/>
         </function>
         <move>
             <input path="RespuestaOK/EstatusCuenta"/>
-            <output path="consultarDatosClienteResponse/response/estatusCuenta"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/estatusCuenta"/>
         </move>
         <move>
             <input path="RespuestaOK/EstatusCobranza"/>
-            <output path="consultarDatosClienteResponse/response/estatusCobranza"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/estatusCobranza"/>
         </move>
         <join>
             <input path="RespuestaOK/Errores/Codigo" var="Codigo"/>
             <input path="RespuestaOK/Errores/Mensaje" var="Mensaje"/>
-            <output path="consultarDatosClienteResponse/response/mensajes/mensaje"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/mensajes/mensaje"/>
             <test lang="XPath">$Codigo-index = $Mensaje-index</test>
             <move>
                 <input path="$Codigo/."/>
@@ -92,5 +97,17 @@
                 <output path="descripcion"/>
             </move>
         </join>
+        <move>
+            <input path="LocalEnvironment"/>
+            <output path="$MessageAssembly/LocalEnvironment"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment/Variables/region"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/region"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment/Variables/plataforma"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/plataforma"/>
+        </move>
     </mappingDeclaration>
 </mappingRoot>

@@ -11,7 +11,7 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.in" location="20,20">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.in" bundleName="gen/getPerfilTelefono_SiantelService" pluginId="D16_InfoClienteApp"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="siantel/wmb/SiantelService.wsdl" selectedPortType="SiantelPort" selectedBinding="SiantelBinding" selectedOperation="getPerfilTelefono" selectedPort="Siantel" targetNamespace="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel/wmb" useHTTPTransport="true" webServiceURL="http://localhost:7801/di/sds/siantel/sistemasadministrativos/wmb/SiantelService" sslProtocol="TLS">
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="siantel/wmb/SiantelService.wsdl" selectedPortType="SiantelPort" selectedBinding="SiantelBinding" selectedOperation="getPerfilTelefono" selectedPort="Siantel" targetNamespace="http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel/wmb" useHTTPTransport="true" webServiceURL="http://10.191.80.46:7801/di/sds/siantel/sistemasadministrativos/wmb/SiantelService" sslProtocol="TLS">
         <translation xmi:type="utility:ConstantString" string="Request"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="320,80" envelopeDestination="$LocalEnvironment/SOAP/Envelope/OperResponse/SiantelBinding/getPerfilTelefono" labelPrefix="">

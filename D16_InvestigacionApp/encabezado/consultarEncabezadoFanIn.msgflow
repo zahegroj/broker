@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmAggregateReply.msgnode="ComIbmAggregateReply.msgnode" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:mbmonitor="http://www.ibm.com/wbi/2008/eflow_mbmonitor" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="encabezado/consultarEncabezadoFanIn.msgflow"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmAggregateReply.msgnode="ComIbmAggregateReply.msgnode" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="encabezado/consultarEncabezadoFanIn.msgflow"
     nsPrefix="encabezado_consultarEncabezadoFanIn.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
     <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
@@ -8,31 +8,11 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj16/consultarEncabezadoFanIn.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/consultarEncabezadoFanIn.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="28,69" queueName="RETUS_REQ_AGGR_IN" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="RETUS_REQ_AGGR_IN"/>
-        <monitorEvents eventSourceDescription="Inicio de la transacción" eventSourceName="RETUS_REQ_AGGR_IN.transaction.Start" eventIdentity="RETUS_REQ_AGGR_IN.TransactionStart">
-          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
-            <globalTransactionCorrelator/>
-            <parentTransactionCorrelator/>
-            <localTransactionCorrelator/>
-            <bitStreamData encoding="none" bitstreamContent="none"/>
-            <eventName literal="RETUS_REQ_AGGR_IN.TransactionStart"/>
-            <eventFilter dataLocation="true()" isXPath="true"/>
-          </eventXMLDoc>
-        </monitorEvents>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="28,69" queueName="QL.GT_ENC_RETUSC_AGGR.IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_RETUSC_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="24,181" queueName="RETC2_REQ_AGGR__IN" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="RETC2_REQ_AGGR__IN"/>
-        <monitorEvents eventSourceDescription="Inicio de la transacción" eventSourceName="RETC2_REQ_AGGR__IN.transaction.Start" eventIdentity="RETC2_REQ_AGGR__IN.TransactionStart">
-          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
-            <globalTransactionCorrelator/>
-            <parentTransactionCorrelator/>
-            <localTransactionCorrelator/>
-            <bitStreamData encoding="none" bitstreamContent="none"/>
-            <eventName literal="RETC2_REQ_AGGR__IN.TransactionStart"/>
-            <eventFilter dataLocation="true()" isXPath="true"/>
-          </eventXMLDoc>
-        </monitorEvents>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="24,181" queueName="QL.GT_ENC_RETC2C_AGGR.IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_RETC2C_AGGR.IN"/>
       </nodes>
       <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="239,177" aggregateName="AggregateEncabezado" unsolicitedTimeout="5">
         <translation xmi:type="utility:ConstantString" string="Aggregate Reply"/>
@@ -40,18 +20,8 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="394,178" computeExpression="esql://routine/#BuildConsultarEncabezadoResponse.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Map Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="23,296" queueName="IGTOC25_REQ_AGGR_IN" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC25_REQ_AGGR_IN"/>
-        <monitorEvents eventSourceDescription="Inicio de la transacción" eventSourceName="IGTOC25_REQ_AGGR_IN.transaction.Start" eventIdentity="IGTOC25_REQ_AGGR_IN.TransactionStart">
-          <eventXMLDoc xmi:type="mbmonitor:MonitorEvent">
-            <globalTransactionCorrelator/>
-            <parentTransactionCorrelator/>
-            <localTransactionCorrelator/>
-            <bitStreamData encoding="none" bitstreamContent="none"/>
-            <eventName literal="IGTOC25_REQ_AGGR_IN.TransactionStart"/>
-            <eventFilter dataLocation="true()" isXPath="true"/>
-          </eventXMLDoc>
-        </monitorEvents>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="34,293" queueName="QL.GT_ENC_IMEI_AGGR.IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_IMEI_AGGR.IN"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="537,179" validateMaster="contentAndValue">
         <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>

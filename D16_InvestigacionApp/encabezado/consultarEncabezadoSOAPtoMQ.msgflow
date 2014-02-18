@@ -20,11 +20,11 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="275,146" computeExpression="esql://routine/#Retc2cResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Retc2C Response Aggregation"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="490,67" queueName="RETUS_REQ_AGGR_IN">
-        <translation xmi:type="utility:ConstantString" string="RETUS_REQ_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="490,67" queueName="QL.GT_ENC_RETUSC_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_RETUSC_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="489,147" queueName="RETC2_REQ_AGGR__IN">
-        <translation xmi:type="utility:ConstantString" string="RETC2_REQ_AGGR__IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="489,147" queueName="QL.GT_ENC_RETC2C_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_RETC2C_AGGR.IN"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPAsyncResponse.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="47,244" asyncRequestCorrelator="ImeiAsync" populateLocalEnvWithWSAInfo="true">
         <translation xmi:type="utility:ConstantString" string="Imei Asynchronous Response"/>
@@ -32,8 +32,8 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="281,240" computeExpression="esql://routine/#ImeiResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Imei Response Aggregation"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="485,241" queueName="IGTOC25_REQ_AGGR_IN">
-        <translation xmi:type="utility:ConstantString" string="IGTOC25_REQ_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="502,242" queueName="QL.GT_ENC_IMEI_AGGR.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_IMEI_AGGR.IN"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>

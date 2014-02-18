@@ -37,10 +37,16 @@
 		<xsd:complexContent>
 			<xsd:extension base="m2k:ResponseBase">
 				<xsd:sequence>
-					<xsd:element name="Producto" type="xsd:string"/>
-					<xsd:element name="FechEfectiva" type="xsd:string"/>
+					<xsd:group maxOccurs="unbounded" ref="subgroup_output_igtoc48a"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+	
+	<xsd:group name="subgroup_output_igtoc48a">
+		<xsd:sequence>
+			<xsd:element name="Producto" type="xsd:string"/>
+			<xsd:element name="FechEfectiva" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:group>
 </xsd:schema>

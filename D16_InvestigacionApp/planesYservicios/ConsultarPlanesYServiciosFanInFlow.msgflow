@@ -8,11 +8,11 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj16/ConsultarPlanesYServiciosFanInFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/ConsultarPlanesYServiciosFanInFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="76,119" queueName="IGTOC41R_AGGR_IN" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC41R_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="76,119" queueName="QL.GT_PYS_IGTOC41R_AGGR.IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PYS_IGTOC41R_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="78,288" queueName="IGTOC44D_AGGR_IN" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC44D_AGGR_IN"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="78,288" queueName="QL.GT_PYS_IGTOC44D_AGGR.IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_PYS_IGTOC44D_AGGR.IN"/>
       </nodes>
       <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="280,189" aggregateName="AggregatePlanesYServicios" unsolicitedTimeout="5">
         <translation xmi:type="utility:ConstantString" string="Aggregate Reply"/>

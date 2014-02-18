@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="planesYservicios" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="planesYservicios">
     <input path="/m2k/wmb/m2k_igtoc50_c.xsd"/>
     <output path="/investigacion/GestionTramitesInvestigacion.xsd"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
     <generation availableEngines="xquery" engine="xquery"/>
     <mappingDeclaration name="Igtoc50CResponse_ConsultarDetalleProductoResponse">
         <input namespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc50/c" path="mb:msg(RespuestaOK,assembly,,LocalEnvironment,Properties)"/>
@@ -17,10 +20,11 @@
             <input path="RespuestaOK/DescProdto"/>
             <output path="consultarDetalleProductoResponse/response/detalleProducto/descripcionProducto"/>
         </move>
-        <move>
-            <input path="RespuestaOK/CostoProdto"/>
+        <function ref="fn:number">
+            <input path="RespuestaOK/CostoProdto" var="CostoProdto"/>
             <output path="consultarDetalleProductoResponse/response/detalleProducto/costoProducto"/>
-        </move>
+            <param name="arg" value="$CostoProdto"/>
+        </function>
         <move>
             <input path="RespuestaOK/Idgrp"/>
             <output path="consultarDetalleProductoResponse/response/detalleProducto/claveGrupo"/>

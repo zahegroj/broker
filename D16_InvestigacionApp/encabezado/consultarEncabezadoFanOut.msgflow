@@ -18,11 +18,11 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="279,177" computeExpression="esql://routine/#MapEncabezadoReq_Retc2cReq_FanOut.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Map Retc2C Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="429,60" queueName="RETUS_REQ_AGGR_OUT" transactionMode="yes">
-        <translation xmi:type="utility:ConstantString" string="RETUS_REQ_AGGR_OUT"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="429,60" queueName="QL.GT_ENC_RETUSC.OUT" transactionMode="yes">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_RETUSC.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="426,178" queueName="RETC2_REQ_AGGR__OUT" transactionMode="yes">
-        <translation xmi:type="utility:ConstantString" string="RETC2_REQ_AGGR__OUT"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="426,178" queueName="QL.GT_ENC_RETC2C.OUT" transactionMode="yes">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_RETC2C.OUT"/>
       </nodes>
       <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="630,64" folderName="AggregateRetuscReq">
         <translation xmi:type="utility:ConstantString" string="Aggregate Request"/>
@@ -33,8 +33,8 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="271,304" computeExpression="esql://routine/#MapEncabezadoReq_Igtoc25cReq_FanOut.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Map Igtoc25C Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="422,305" queueName="IGTOC25_REQ_AGGR_OUT" transactionMode="yes">
-        <translation xmi:type="utility:ConstantString" string="IGTOC25_REQ_AGGR_OUT"/>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="422,305" queueName="QL.GT_ENC_IGTOC25C.OUT" transactionMode="yes">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_IGTOC25C.OUT"/>
       </nodes>
       <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="625,309" folderName="AggregateImeiReq">
         <translation xmi:type="utility:ConstantString" string="Aggregate Request2"/>

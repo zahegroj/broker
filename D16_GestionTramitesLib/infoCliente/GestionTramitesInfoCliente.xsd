@@ -49,6 +49,8 @@
 				<xsd:sequence>
 					<xsd:element name="nombreCliente" type="xsd:string"/>
 					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="region" type="comun:numericoFormato"/>
+					<xsd:element name="plataforma" type="xsd:string"/>
 					<xsd:element name="estatusCobranza" type="xsd:string"/>
 					<xsd:element name="estatusCuenta" type="xsd:string"/>
 					<xsd:element name="saldoActual" type="comun:decimalFormato"/>

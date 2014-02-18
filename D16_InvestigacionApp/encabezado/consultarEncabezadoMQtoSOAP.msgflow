@@ -8,11 +8,11 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj16/consultarEncabezadoMQtoSOAP.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InvestigacionApp/icons/full/obj30/consultarEncabezadoMQtoSOAP.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="19,43" queueName="RETUS_REQ_AGGR_OUT" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="RETUS_REQ_AGGR_OUT"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="19,43" queueName="QL.GT_ENC_RETUSC.OUT" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_RETUSC.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="16,137" queueName="RETC2_REQ_AGGR__OUT" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="RETC2_REQ_AGGR__OUT"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="16,137" queueName="QL.GT_ENC_RETC2C.OUT" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_RETC2C.OUT"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="239,43" computeExpression="esql://routine/#RetuscReq_MQtoSOAP.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Context SOAP"/>
@@ -28,8 +28,8 @@
           sslProtocol="TLS">
         <translation xmi:type="utility:ConstantString" string="Retc2C Asynchronous Request"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="12,237" queueName="IGTOC25_REQ_AGGR_OUT" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="IGTOC25_REQ_AGGR_OUT"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="12,237" queueName="QL.GT_ENC_IGTOC25C.OUT" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_ENC_IGTOC25C.OUT"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="238,237" computeExpression="esql://routine/#Igtoc25cReq_MQtoSOAP.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Context SOAP"/>
