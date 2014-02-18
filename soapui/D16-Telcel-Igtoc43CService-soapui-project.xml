@@ -346,7 +346,7 @@
       <xsd:fractionDigits value="2"/>
     </xsd:restriction>
   </xsd:simpleType>
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/m2k/tasacion/wmb/Igtoc43CService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c/ejecutarServicio" name="ejecutarServicio" bindingOperationName="ejecutarServicio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="IGTOC43C Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/m2k/tasacion/wmb/Igtoc43CService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c="http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/m2k/tasacion/wmb/Igtoc43CService</con:endpoint><con:endpoint>http://10.191.80.46:7801/di/sds/m2k/tasacion/wmb/Igtoc43CService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c/ejecutarServicio" name="ejecutarServicio" bindingOperationName="ejecutarServicio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="IGTOC43C Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/m2k/tasacion/wmb/Igtoc43CService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:c="http://www.telcel.com.mx/di/sds/m2k/tasacion/igtoc43/c">
    <soapenv:Header/>
    <soapenv:Body>
       <c:Request>
@@ -356,18 +356,18 @@
          <action>C</action>
          <inputParameters>
             <servicio>
-               <p01telefono longitud="10">5527671654</p01telefono>
-               <p02cuenta longitud="09"></p02cuenta>
-               <p03fechaConexion longitud="08"></p03fechaConexion>
-               <p04horaConexion longitud="08"></p04horaConexion>
-               <p05refDtConnect longitud="07"></p05refDtConnect>
-               <p06refTmConnect longitud="06"></p06refTmConnect>
-               <p07ChargingId longitud="10"></p07ChargingId>
-               <p08refDataVolUp longitud="12"></p08refDataVolUp>
-               <p09refDataVolDown longitud="12"></p09refDataVolDown>
-               <p10refServiceClass longitud="12"></p10refServiceClass>
+			<p01telefono longitud="10">5527671654</p01telefono>
+			<p02cuenta longitud="09"></p02cuenta>
+			<p03fechaConexion longitud="08">12/10/13</p03fechaConexion>
+			<p04horaConexion longitud="08">10:16:59</p04horaConexion>
+			<p05refDtConnect longitud="07"></p05refDtConnect>
+			<p06refTmConnect longitud="06"></p06refTmConnect>
+			<p07ChargingId longitud="10"></p07ChargingId>
+			<p08refDataVolUp longitud="12"></p08refDataVolUp>
+			<p09refDataVolDown longitud="12"></p09refDataVolDown>
+			<p10refServiceClass longitud="04"></p10refServiceClass>
             </servicio>
          </inputParameters>
       </c:Request>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/m2k/tasacion/wmb/igtoc43/c/ejecutarServicio"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>

@@ -93,7 +93,7 @@
       <xsd:pattern value="|[0-9]{15}"/>
     </xsd:restriction>
   </xsd:simpleType>
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint><con:endpoint>http://localhost:7800/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/gms/sistemasadministrativos/wmb/imei/consultarImeiAC" name="consultarImeiAC" bindingOperationName="consultarImeiAC" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="IMEI Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:imei="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint><con:endpoint>http://localhost:7800/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint><con:endpoint>http://10.191.80.46:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/gms/sistemasadministrativos/wmb/imei/consultarImeiAC" name="consultarImeiAC" bindingOperationName="consultarImeiAC" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="IMEI Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:imei="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei">
    <soapenv:Header/>
    <soapenv:Body>
       <imei:request>
@@ -102,19 +102,20 @@
          <imei>013049009076409</imei>
       </imei:request>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/gms/sistemasadministrativos/wmb/imei/consultarImeiAC"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:imei="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/gms/sistemasadministrativos/wmb/imei/consultarImeiAC"/><con:wsrmConfig version="1.2"/></con:call><con:call name="IMEI Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:imei="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei">
    <soapenv:Header/>
    <soapenv:Body>
       <imei:request>
          <codigo>1</codigo>
          <region>R09</region>
-         <imei>013049009076409</imei>
-         <!--Optional:-->
+         <imei>356784052776688</imei>
+         <!--Optional:
          <datosIgtoc25c>
             <modelo>a</modelo>
             <numImei>b</numImei>
             <marca>c</marca>
          </datosIgtoc25c>
+-->
 
       </imei:request>
    </soapenv:Body>

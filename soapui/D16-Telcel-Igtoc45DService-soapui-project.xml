@@ -350,7 +350,7 @@
       <xsd:fractionDigits value="2"/>
     </xsd:restriction>
   </xsd:simpleType>
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/m2k/facturacion/wmb/Igtoc45DService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/m2k/facturacion/wmb/igtoc45/d/ejecutarServicio" name="ejecutarServicio" bindingOperationName="ejecutarServicio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="IGTOC45D Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:7801/di/sds/m2k/facturacion/wmb/Igtoc45DService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:d="http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/m2k/facturacion/wmb/Igtoc45DService</con:endpoint><con:endpoint>http://10.191.80.46:7801/di/sds/m2k/facturacion/wmb/Igtoc45DService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/m2k/facturacion/wmb/igtoc45/d/ejecutarServicio" name="ejecutarServicio" bindingOperationName="ejecutarServicio" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="IGTOC45D Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/m2k/facturacion/wmb/Igtoc45DService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:d="http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d">
    <soapenv:Header/>
    <soapenv:Body>
       <d:Request>
@@ -362,8 +362,8 @@
             <servicio>
                <p01telefono longitud="10">5527671654</p01telefono>
                <p02cuenta longitud="09">006385120</p02cuenta>
-               <p03fechaInicio longitud="08"></p03fechaInicio>
-               <p04fechaFin longitud="08"></p04fechaFin>
+               <p03fechaInicio longitud="08">28/10/13</p03fechaInicio>
+               <p04fechaFin longitud="08">13/11/13</p04fechaFin>
                <p05fechaPiv longitud="07"></p05fechaPiv>
                <p06horaPiv longitud="07"></p06horaPiv>
                <p07fuentePiv longitud="06"></p07fuentePiv>
