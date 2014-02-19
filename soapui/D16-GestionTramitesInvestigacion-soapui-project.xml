@@ -1132,15 +1132,15 @@
             <sch:fechaInicio>21/12/13</sch:fechaInicio>
             <sch:fechaFin>28/01/14</sch:fechaFin>
             <sch:esRegistrosFacturados>false</sch:esRegistrosFacturados>
-            <!--Optional:-
+            <!--Optional:-->
             <sch:referencia>
                <sch:fechaPiv>2140125</sch:fechaPiv>
                <sch:horaPiv>1215210</sch:horaPiv>
                <sch:fuentePiv>GSRAT9</sch:fuentePiv>
-               <!-Optional:->
-               <sch:secuenciaPiv>?</sch:secuenciaPiv
+               <!--Optional:
+               <sch:secuenciaPiv>?</sch:secuenciaPiv>-->
                <sch:telMarcadoPiv>5522327148</sch:telMarcadoPiv>
-            </sch:referencia>-->
+            </sch:referencia>
          </sch:request>
       </sch:consultarConsumosRequest>
    </soapenv:Body>
@@ -1382,17 +1382,17 @@
             <sch:cuenta>6385120</sch:cuenta>
             <sch:fechaInicio>28/10/13</sch:fechaInicio>
             <sch:fechaFin>13/11/13</sch:fechaFin>
-            <!--Optional:
+            <!--Optional:-->
             <sch:referenciaPlanesTarifarios>
                <sch:plan>M9871</sch:plan>
                <sch:fecha>1310213</sch:fecha>
-            </sch:referenciaPlanesTarifarios>-->
-            <!--Optional:TRAN1
+            </sch:referenciaPlanesTarifarios>
+            <!--Optional:TRAN1-->
             <sch:referenciaServiciosAdicionales>
                <sch:claveProd>IDL00</sch:claveProd>
                <sch:fechaProd>2180212</sch:fechaProd>
                <sch:estatusProd>ACTIVO</sch:estatusProd>
-            </sch:referenciaServiciosAdicionales>-->
+            </sch:referenciaServiciosAdicionales>
          </sch:request>
       </sch:consultarPlanesYServiciosRequest>
    </soapenv:Body>

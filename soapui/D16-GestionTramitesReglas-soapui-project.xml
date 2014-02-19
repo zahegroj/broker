@@ -540,13 +540,13 @@
          <sch:request>
             <sch:asesorCAC>
                <sch:perfil>
-                  <sch:perfilPac>?</sch:perfilPac>
+                  <sch:perfilPac>JFTGDSIC</sch:perfilPac>
                   <!--Optional:-->
-                  <sch:habilitado>false</sch:habilitado>
+                  <sch:habilitado>true</sch:habilitado>
                   <!--Optional:-->
                   <sch:regiones>
                      <!--1 or more repetitions:-->
-                     <sch:region>?</sch:region>
+                     <sch:region>9</sch:region>
                   </sch:regiones>
                   <!--Optional:-->
                   <sch:nivelAcceso>?</sch:nivelAcceso>

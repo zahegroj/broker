@@ -355,15 +355,13 @@
             <sch:cuenta>7071789</sch:cuenta>
             <sch:fechaInicio>28/10/13</sch:fechaInicio>
             <sch:fechaFin>28/02/14</sch:fechaFin>
-
-            <!--Optional:
+            <!--Optional: -->
             <sch:referencia>
-               <sch:tipoComentario>?</sch:tipoComentario>
-               <sch:fechaComentario>?</sch:fechaComentario>
-               <sch:horaAudit>?</sch:horaAudit>
-               <sch:sec>?</sch:sec>
+               <sch:tipoComentario></sch:tipoComentario>
+               <sch:fechaComentario>2140103</sch:fechaComentario>
+               <sch:horaAudit>1936020</sch:horaAudit>
+               <sch:sec>007</sch:sec>
             </sch:referencia>
--->
          </sch:request>
       </sch:consultarComentariosRequest>
    </soapenv:Body>
@@ -373,7 +371,7 @@
       <sch:enviarSMSRequest>
          <sch:request>
             <sch:telefono>5545305932</sch:telefono>
-            <sch:texto>hola mensaje de prueba telcel</sch:texto>
+            <sch:texto>mensaje de prueba telcel</sch:texto>
          </sch:request>
       </sch:enviarSMSRequest>
    </soapenv:Body>
