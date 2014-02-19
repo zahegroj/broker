@@ -27,10 +27,11 @@
             <input path="consultarConsumosRequest/request/telefono"/>
             <output path="Request/inputParameters/servicio/p01telefono/text()"/>
         </move>
-        <move>
-            <input path="consultarConsumosRequest/request/cuenta"/>
+        <expression>
+            <input path="consultarConsumosRequest/request/cuenta" var="cuenta"/>
             <output path="Request/inputParameters/servicio/p02cuenta/text()"/>
-        </move>
+            <code lang="xpath">fn:substring(fn:concat('000000000', $cuenta), fn:string-length(fn:concat('000000000', $cuenta))-8, fn:string-length(fn:concat('000000000', $cuenta)))</code>
+        </expression>
         <move>
             <input path="consultarConsumosRequest/request/fechaInicio"/>
             <output path="Request/inputParameters/servicio/p03fechaInicio/text()"/>
