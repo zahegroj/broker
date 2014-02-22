@@ -49,10 +49,6 @@
             <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/habilitado"/>
         </move>
         <move>
-            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/asesor/perfil/region"/>
-            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/regiones/region"/>
-        </move>
-        <move>
             <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/asesor/perfil/nivelAcceso"/>
             <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/nivelAcceso"/>
         </move>
@@ -166,5 +162,14 @@
             <input path="DeterminarAdeudoResponse/DecisionID"/>
             <output path="determinarAdeudoResponse/response/DecisionID"/>
         </move>
+        <if>
+            <input path="DeterminarAdeudoResponse/resultadoDeterminarAdeudos/resultadoDeterminarAdeudo/determinarAdeudo/tramite/asesor/perfil/region" var="region"/>
+            <output path="determinarAdeudoResponse/response/determinarAdeudo/tramite/asesor/perfil/regiones"/>
+            <test lang="XPath">fn:not(fn:empty($region))</test>
+            <move>
+                <input path="$region/."/>
+                <output path="region"/>
+            </move>
+        </if>
     </mappingDeclaration>
 </mappingRoot>
