@@ -11,24 +11,29 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Entrada" location="39,193">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="ConsultarComentariosFlow" pluginId="D16_ComentariosApp"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="684,206">
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Salida" location="719,206">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="ConsultarComentariosFlow" pluginId="D16_ComentariosApp"/>
       </nodes>
-      <nodes xmi:type="gen_ejecutarServicio_Igtoc46DService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="304,197">
+      <nodes xmi:type="gen_ejecutarServicio_Igtoc46DService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="303,197">
         <translation xmi:type="utility:ConstantString" string="ejecutarServicio_Igtoc46DService"/>
         <shortDescription xmi:type="utility:ConstantString" string="Invoca la operación WSDL y extrae la respuesta del mensaje SOAP."/>
         <longDescription xmi:type="utility:ConstantString" string="Este subflujo invoca la operación WSDL y extrae el cuerpo del mensaje de respuesta."/>
       </nodes>
-      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="123,193" mappingExpression="msl://{default}#ConsultarComentarioRequest_Igtoc46DRequest">
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="102,193" mappingExpression="msl://{default}#ConsultarComentarioRequest_Igtoc46DRequest">
         <translation xmi:type="utility:ConstantString" string="Mapping Igtoc46DRequest"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="517,205" computeExpression="esql://routine/#MapIgtoc46dResp_Response.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="575,205" computeExpression="esql://routine/#MapIgtoc46dResp_Response.Main">
         <translation xmi:type="utility:ConstantString" string="Map Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="591,110" computeExpression="esql://routine/#MapFault_Comentarios_ConsultarComentarios.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Fault"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="InTerminal.Entrada" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.RespuestaOK" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="OutTerminal.Salida" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="OutTerminal.Salida" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

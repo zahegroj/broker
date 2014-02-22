@@ -55,3 +55,19 @@ BEGIN
 		SET outputRootNode.XMLNSC.nsInvest:consultarPagosYAjustesResponse.nsInvest:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
 	END IF;
 END;
+
+CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarHistorialCuenta
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar historial de la cuenta.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarHistorialCuenta';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc49 (function: I*S9, action: C)',
+				EX_SOL_M2K_IGTOC49C);
+	END;
+END MODULE;

@@ -153,30 +153,68 @@ END MODULE;
 CREATE COMPUTE MODULE BuildConsultarDatosCobranzaResponse
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		DECLARE nsCpastc NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c';
 		DECLARE nsRetc2c NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';
 		DECLARE nsReactc NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';
 		DECLARE oldNamespace NAMESPACE '';
+		DECLARE existenErrores BOOLEAN FALSE;
 		
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.ComIbmAggregateReplyBody.*[<].MQMD.MsgId;
 		
-		DECLARE respuestaOKCpastc REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsCpastc:RespuestaOK;
-		DECLARE respuestaOKRetc2c REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetc2c:RespuestaOK;
-		DECLARE respuestaOKReactc REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsReactc:RespuestaOK;
-		
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDatosCobranzaResponse';
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDatosCobranzaResponse Domain('XMLNSC') NAME 'response';
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInfoCli);
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse, oldNamespace, nsInfoCli);
-		
-		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:limiteCredito = REPLACE(TRIM(respuestaOKRetc2c.LimiteCredito), ',', '');
-		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:accionCobranza = TRIM(respuestaOKCpastc.TablaCpast.AccionTomada[1]);
-		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:motivoCobranza = TRIM(respuestaOKCpastc.TablaCpast.Est[1]);
-		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:montoMinimoPagar = REPLACE(TRIM(respuestaOKReactc.ImportePagar), ',', '');
-		
-		SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC; 
+		IF  FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR 
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+			
+			SET existenErrores = TRUE; 
+		END IF;
+			
+		IF existenErrores THEN
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar los datos de cobranza del cliente.';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInfoClienteService';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDatosCobranza';
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Cpast (function: I*3B, action: C)',
+					EX_SOL_M2K_CPASTC);
+			END IF;
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Retc2 (function: I*1E, action: C)',
+					EX_SOL_M2K_RETC2C);
+			END IF;
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - React (function: I*I5, action: C)',
+					EX_SOL_M2K_REACTC);
+			END IF;
+		ELSE
+			DECLARE respuestaOKCpastc REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsCpastc:RespuestaOK;		
+			DECLARE respuestaOKRetc2c REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetc2c:RespuestaOK;
+			DECLARE respuestaOKReactc REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsReactc:RespuestaOK;
+			
+			CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDatosCobranzaResponse';
+			CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDatosCobranzaResponse Domain('XMLNSC') NAME 'response';
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInfoCli);
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse, oldNamespace, nsInfoCli);
+			
+			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:limiteCredito = REPLACE(TRIM(respuestaOKRetc2c.LimiteCredito), ',', '');
+			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:accionCobranza = TRIM(respuestaOKCpastc.TablaCpast.AccionTomada[1]);
+			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:motivoCobranza = TRIM(respuestaOKCpastc.TablaCpast.Est[1]);
+			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:montoMinimoPagar = REPLACE(TRIM(respuestaOKReactc.ImportePagar), ',', '');
+			
+			SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
+		END IF;
 		RETURN TRUE;
 	END;
 END MODULE;

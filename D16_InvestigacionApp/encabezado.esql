@@ -1,7 +1,6 @@
 CREATE COMPUTE MODULE MapEncabezadoReq_RetuscReq_FanOut
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retus/c';
 		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
@@ -23,7 +22,6 @@ END MODULE;
 CREATE COMPUTE MODULE MapEncabezadoReq_Retc2cReq_FanOut
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';
 		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
@@ -48,7 +46,6 @@ END MODULE;
 CREATE COMPUTE MODULE MapEncabezadoReq_Igtoc25cReq_FanOut
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc25/c';
 		
 		SET OutputLocalEnvironment   = InputLocalEnvironment;
@@ -98,7 +95,6 @@ END MODULE;
 CREATE COMPUTE MODULE Igtoc25cReq_MQtoSOAP
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc25/c';
 		
 		SET OutputRoot = InputRoot;
@@ -116,7 +112,6 @@ END MODULE;
 CREATE COMPUTE MODULE ImeiReq_MQtoSOAP
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei';
 		DECLARE ns25 NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc25/c';
 		--SET OutputRoot = InputRoot;
@@ -135,11 +130,23 @@ CREATE COMPUTE MODULE ImeiReq_MQtoSOAP
 	END;
 END MODULE;
 
+CREATE COMPUTE MODULE Igtoc25cFault_MQtoMQ
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Variables.MsgId;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = InputRoot.SOAP.Body;
+		RETURN TRUE;
+	END;
+END MODULE;
+
 CREATE COMPUTE MODULE RetuscResp_SOAPtoMQ
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.Properties.ReplyIdentifier = 
@@ -154,8 +161,6 @@ END MODULE;
 CREATE COMPUTE MODULE Retc2cResp_SOAPtoMQ
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.Properties.ReplyIdentifier = 
@@ -170,8 +175,20 @@ END MODULE;
 CREATE COMPUTE MODULE ImeiResp_SOAPtoMQ
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.SOAP.Response.UserContext;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = InputRoot.SOAP.Body;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Igtoc25CFault_SOAPtoMQ
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.Properties.ReplyIdentifier = 
@@ -192,29 +209,82 @@ CREATE COMPUTE MODULE BuildConsultarEncabezadoResponse
 		DECLARE nsRetusc NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retus/c';
 		DECLARE oldNamespace NAMESPACE '';
 		
+		DECLARE existenErrores BOOLEAN FALSE;
+		
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.ComIbmAggregateReplyBody.*[<].MQMD.MsgId;
 		
-		DECLARE respuestaOKRetus REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetusc:RespuestaOK;
-		DECLARE respuestaOKRetc2 REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetc2c:RespuestaOK;
-		DECLARE responseImei REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsImei:response;
+		IF  FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR 
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsImei:error) IS NOT NULL THEN
+			
+			SET existenErrores = TRUE; 
+		END IF;
 		
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarEncabezadoResponse';
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarEncabezadoResponse Domain('XMLNSC') NAME 'response';
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse, oldNamespace, nsInvest);
-		
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:formaPago = TRIM(respuestaOKRetc2.FormaPago);
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:planTarifario = TRIM(respuestaOKRetus.PlanTarifario);
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:modelo = responseImei.datosIgtoc25c.modelo;
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:imei = responseImei.datosIgtoc25c.numImei;
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:marca = responseImei.datosIgtoc25c.marca;
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:codigo = responseImei.codigo;
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:claveSap = responseImei.claveSap;
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:marca = responseImei.marca;
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:modelo = responseImei.modelo;
-		SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:grupoArticulo = responseImei.grupoArticulo;
-		
+		IF existenErrores THEN
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar la información de encabezado.';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarEncabezado';
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Retus (function: I*0F, action: C)',
+					EX_SOL_M2K_RETUSC);
+			END IF;
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Retc2 (function: I*1E, action: C)',
+					EX_SOL_M2K_RETC2C);
+			END IF;
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Igtoc25 (function: I*PB, action: C)',
+					EX_SOL_M2K_IGTOC25C);
+			END IF;
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsImei:error) IS NOT NULL THEN
+			
+				DECLARE indexError INTEGER CARDINALITY(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[]) + 1;
+						
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[indexError].nsComun:tipo = EX_TIPO_SIS;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[indexError].nsComun:codigo = EX_COD_IMEI;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[indexError].nsComun:descripcion = CAST(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsImei:error.codigo AS CHARACTER) 
+																																									|| ' - ' || InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsImei:error.descripcion;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[indexError].nsComun:solucion = EX_SOL_IMEI;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[indexError].nsComun:servicioOrigen = 'imei - ConsultaImeiAC';
+					
+			END IF;
+		ELSE
+			DECLARE respuestaOKRetus REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetusc:RespuestaOK;
+			DECLARE respuestaOKRetc2 REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetc2c:RespuestaOK;
+			DECLARE responseImei REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsImei:response;
+			
+			CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarEncabezadoResponse';
+			CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarEncabezadoResponse Domain('XMLNSC') NAME 'response';
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse, oldNamespace, nsInvest);
+			
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:formaPago = TRIM(respuestaOKRetc2.FormaPago);
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:planTarifario = TRIM(respuestaOKRetus.PlanTarifario);
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:modelo = responseImei.datosIgtoc25c.modelo;
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:imei = responseImei.datosIgtoc25c.numImei;
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:marca = responseImei.datosIgtoc25c.marca;
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:codigo = responseImei.codigo;
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:claveSap = responseImei.claveSap;
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:marca = responseImei.marca;
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:modelo = responseImei.modelo;
+			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:grupoArticulo = responseImei.grupoArticulo;
+		END IF;
 		RETURN TRUE;
 	END;
 END MODULE;

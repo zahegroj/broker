@@ -492,26 +492,55 @@ END MODULE;
 CREATE COMPUTE MODULE BuildConsultarPlanesYServiciosResponse
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		DECLARE nsIgtoc41r NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r';
 		DECLARE nsIgtoc44d NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc44/d';
 		DECLARE oldNamespace NAMESPACE '';
+		DECLARE existenErrores BOOLEAN FALSE;
 		
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.ComIbmAggregateReplyBody.*[<].MQMD.MsgId;
 		
-		DECLARE respuestaOK41r REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc41r:RespuestaOK;
-		DECLARE respuestaOK44d REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc44d:RespuestaOK;
+		IF  FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+			
+			SET existenErrores = TRUE; 
+		END IF;
 		
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarPlanesYServiciosResponse';
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarPlanesYServiciosResponse Domain('XMLNSC') NAME 'response';
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosResponse, oldNamespace, nsInvest);
-
-		CALL MapPlanesTarifarios(OutputRoot, respuestaOK41r);
-		CALL MapServiciosAdicionales(OutputRoot, respuestaOK44d);
+		IF existenErrores THEN
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar los datos de cobranza del cliente.';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarPlanesYServicios';
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Igtoc41 (function: I*S1, action: R)',
+					EX_SOL_M2K_IGTOC41R);
+			END IF;
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Igtoc44 (function: I*S4, action: D)',
+					EX_SOL_M2K_IGTOC44D);
+			END IF;
+		ELSE
+			DECLARE respuestaOK41r REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc41r:RespuestaOK;
+			DECLARE respuestaOK44d REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc44d:RespuestaOK;
+			
+			CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarPlanesYServiciosResponse';
+			CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarPlanesYServiciosResponse Domain('XMLNSC') NAME 'response';
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosResponse, oldNamespace, nsInvest);
+	
+			CALL MapPlanesTarifarios(OutputRoot, respuestaOK41r);
+			CALL MapServiciosAdicionales(OutputRoot, respuestaOK44d);
 		
-		SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
+			SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
+		END IF;
 		RETURN TRUE;
 	END;
 END MODULE;
@@ -731,5 +760,53 @@ CREATE COMPUTE MODULE MapPlanesYServiciosReq_Igtoc44dReq_FanOut_1
 		
 		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
 		RETURN FALSE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarDetallePlanTarifario
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar el detalle de plan tarifario.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDetallePlanTarifario';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc41 (function: I*S1, action: D)',
+				EX_SOL_M2K_IGTOC41D);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarDetalleProductoInfo
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar el detalle del producto.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDetalleProducto';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc50 (function: I*S1, action: C)',
+				EX_SOL_M2K_IGTOC50C);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarDetalleProductoList
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar el detalle del producto.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDetalleProducto';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc51 (function: I*SB, action: C)',
+				EX_SOL_M2K_IGTOC51C);
 	END;
 END MODULE;

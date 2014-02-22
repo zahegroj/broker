@@ -11,10 +11,10 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="46,272">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="promociones/ConsultarPromocionesFlow" pluginId="D16_InvestigacionApp"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="656,285">
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="706,285">
         <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="promociones/ConsultarPromocionesFlow" pluginId="D16_InvestigacionApp"/>
       </nodes>
-      <nodes xmi:type="gen_promociones_ejecutarServicio_Igtoc52CService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="286,276">
+      <nodes xmi:type="gen_promociones_ejecutarServicio_Igtoc52CService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="301,276">
         <translation xmi:type="utility:ConstantString" string="ejecutarServicio_Igtoc52CService"/>
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
@@ -22,13 +22,18 @@
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="135,272" mappingExpression="msl://{promociones}#ConsultarPromocionesReq_Igtoc52CReq">
         <translation xmi:type="utility:ConstantString" string="Mapping Igtoc52C Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="505,284" computeExpression="esql://routine/#MapIgtoc52cResp_Response.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="538,284" computeExpression="esql://routine/#MapIgtoc52cResp_Response.Main">
         <translation xmi:type="utility:ConstantString" string="Map Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="551,186" computeExpression="esql://routine/#MapFault_Investigacion_ConsultarPromociones.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Fault"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.RespuestaOK" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

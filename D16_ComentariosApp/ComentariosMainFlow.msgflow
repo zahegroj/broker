@@ -24,7 +24,7 @@
       <nodes xmi:type="ConsultarComentariosFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="448,168">
         <translation xmi:type="utility:ConstantString" string="ConsultarComentariosFlow"/>
       </nodes>
-      <nodes xmi:type="EnviarSMSFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="482,262">
+      <nodes xmi:type="EnviarSMSFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="490,271">
         <translation xmi:type="utility:ConstantString" string="EnviarSMSFlow"/>
       </nodes>
       <nodes xmi:type="GuardarComentarioFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="455,67">

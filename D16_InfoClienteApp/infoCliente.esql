@@ -20,39 +20,70 @@ CREATE FILTER MODULE PerfilTelefonoPlataforma_Filter
 	END;
 END MODULE;
 
-CREATE COMPUTE MODULE AsignarFaultNoTelcel
+CREATE COMPUTE MODULE AsignarErrorNoTelcel
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
 		
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.servicio = 'GestionTramitesInfoClienteService';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.operacion = InputRoot.LocalEnvironment.Destination.SOAP.Request.Operation;
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.tipo = 'NEGOCIO';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.codigo = '';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.descripcion = 'La línea no es Telcel';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.servicioOrigen = '';
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:tipo = EX_TIPO_NEG;
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:codigo = EX_COD_WMB;
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:descripcion = 'La línea no pertenece a Telcel';
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:solucion = 'Favor de verificar los datos';
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:servicioOrigen = 'siantel - getPerfilTelefono';
 		RETURN TRUE;
 	END;
 END MODULE;
 
-CREATE COMPUTE MODULE AsignarFaultNoPrepago
+CREATE COMPUTE MODULE AsignarErrorNoPrepago
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
 		
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.servicio = 'GestionTramitesInfoClienteService';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.operacion = 'X';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.tipo = 'NEGOCIO';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.codigo = '';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.descripcion = 'La línea no es Pospago';
-		SET OutputRoot.XMLNSC.ns:gestionTramitesWMBException.errores.error.servicioOrigen = '';
-		
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:tipo = EX_TIPO_NEG;
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:codigo = EX_COD_WMB;
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:descripcion = 'La línea no pertenece a la plataforma Pospago';
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:solucion = 'Favor de verificar los datos';
+		SET OutputRoot.XMLNSC.nsComun:error.nsComun:servicioOrigen = 'siantel - gestPerfilTelefono';
 		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_InfoCliente_ConsultarDatosCliente
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsSiantelFac NAMESPACE 'http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel';
+		DECLARE tipoError INTEGER 0;
+		DECLARE faultString CHARACTER '';
+		IF FIELDTYPE(InputRoot.XMLNSC.nsComun:error) IS NOT NULL THEN
+			SET faultString = 'Los datos del cliente no cumplieron con la validación';
+			SET tipoError = 1;
+		ELSEIF FIELDTYPE(InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+			SET faultString = 'Ocurrió un error al intentar consultar los datos del cliente, en la invocación a M2K';
+			SET tipoError = 2;
+		ELSEIF FIELDTYPE(InputRoot.SOAP.Body.soapenv:Fault.detail.nsSiantelFac:Error) IS NOT NULL THEN
+			SET faultString = 'Ocurrió un error al intentar consultar los datos del cliente, en la invocación a SIANTEL';
+			SET tipoError = 3;
+		END IF;
+		
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = faultString;
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInfoClienteService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDatosCliente';
+		
+		IF tipoError = 1 THEN
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1] = InputRoot.XMLNSC.nsComun:error;
+		ELSEIF tipoError = 2 THEN
+			CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Sumiq (function: I*7E, action: C)',
+					EX_SOL_M2K_SUMIQC);
+		ELSEIF tipoError = 3 THEN
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:tipo = EX_TIPO_SIS;
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:codigo = EX_COD_SIANTEL;
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:descripcion = InputRoot.SOAP.Body.soapenv:Fault.detail.nsSiantelFac:Error.codigo || ' - ' || InputRoot.SOAP.Body.soapenv:Fault.detail.nsSiantelFac:Error.descripcion;
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:solucion = EX_SOL_SIANTEL_PERF;
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:servicioOrigen = 'siantel - getPerfilTelefono';
+		END IF;
 	END;
 END MODULE;

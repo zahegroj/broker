@@ -325,53 +325,121 @@ END MODULE;
 CREATE COMPUTE MODULE BuildConsultarDetallePromocionResponse
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		DECLARE nsIgtoc48c NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/c';
 		DECLARE nsIgtoc48a NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/a';
 		DECLARE nsIgtoc48d NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/d';
 		DECLARE oldNamespace NAMESPACE '';
+		DECLARE existenErrores BOOLEAN FALSE;
 		
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.ComIbmAggregateReplyBody.*[<].MQMD.MsgId;
 		
-		DECLARE respuestaOK48c REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48c:RespuestaOK;
-		DECLARE respuestaOK48a REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48aReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48a:RespuestaOK;
-		DECLARE respuestaOK48d REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48dReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48d:RespuestaOK;
-		
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetallePromocionResponse';
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetallePromocionResponse Domain('XMLNSC') NAME 'response';
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse, oldNamespace, nsInvest);
-		
-		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveDescuento = TRIM(respuestaOK48c.CveDescuento);
-		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:periodoDescuento = TRIM(respuestaOK48c.Periodo) || ' ' || TRIM(respuestaOK48c.DescripcionPeriodo);
-		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveProducto = TRIM(respuestaOK48c.CveProducto[1]);
-		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:descripcionProducto = TRIM(respuestaOK48c.DescripProducto[1]);
-		SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveAjustePromocion = TRIM(respuestaOK48c.CveAjuste);
-		
-		CALL MapAplicacionProducto(OutputRoot, respuestaOK48a, nsIgtoc48a);
-		CALL MapDetallePromocion(OutputRoot, respuestaOK48d, nsIgtoc48d);
-		
-
-		
-		IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes) IS NOT NULL THEN
-			SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes;
-			SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion;
+		IF  FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48aReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
 			
-			IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto) IS NOT NULL THEN
-				SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto;
+			SET existenErrores = TRUE; 
+		END IF;
+		
+		IF existenErrores THEN
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar el detalle de promoción.';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDetallePromocion';
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Igtoc48 (function: I*S8, action: C)',
+					EX_SOL_M2K_IGTOC48C);
 			END IF;
 			
-			IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion) IS NOT NULL THEN
-				SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion;
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48aReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48aReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48aReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Igtoc48 (function: I*S8, action: A)',
+					EX_SOL_M2K_IGTOC48A);
 			END IF;
 			
-			IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion) IS NOT NULL THEN
-				SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion;
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+					'm2k - Igtoc48 (function: I*S8, action: D)',
+					EX_SOL_M2K_IGTOC48D);
 			END IF;
 		ELSE
-			SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC; 
+			DECLARE respuestaOK48c REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48c:RespuestaOK;
+			DECLARE respuestaOK48a REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48aReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48a:RespuestaOK;
+			DECLARE respuestaOK48d REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc48dReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc48d:RespuestaOK;
+			
+			CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDetallePromocionResponse';
+			CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDetallePromocionResponse Domain('XMLNSC') NAME 'response';
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInvest);
+			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse, oldNamespace, nsInvest);
+			
+			SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveDescuento = TRIM(respuestaOK48c.CveDescuento);
+			SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:periodoDescuento = TRIM(respuestaOK48c.Periodo) || ' ' || TRIM(respuestaOK48c.DescripcionPeriodo);
+			SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveProducto = TRIM(respuestaOK48c.CveProducto[1]);
+			SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:descripcionProducto = TRIM(respuestaOK48c.DescripProducto[1]);
+			SET OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion.nsInvest:claveAjustePromocion = TRIM(respuestaOK48c.CveAjuste);
+			
+			CALL MapAplicacionProducto(OutputRoot, respuestaOK48a, nsIgtoc48a);
+			CALL MapDetallePromocion(OutputRoot, respuestaOK48d, nsIgtoc48d);
+			
+			IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes) IS NOT NULL THEN
+				SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsComun:mensajes;
+				SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:descripcionPromocion;
+				
+				IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto) IS NOT NULL THEN
+					SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:aplicacionesProducto;
+				END IF;
+				
+				IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion) IS NOT NULL THEN
+					SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:detallesPromocion;
+				END IF;
+				
+				IF FIELDTYPE(OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion) IS NOT NULL THEN
+					SET OutputRoot.SOAP.Body.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion = OutputRoot.XMLNSC.nsInvest:consultarDetallePromocionResponse.nsInvest:response.nsInvest:referenciaDetallePromocion;
+				END IF;
+			ELSE
+				SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC; 
+			END IF;
 		END IF;
 		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarPromociones
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar las promociones.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarPromociones';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc52 (function: I*SC, action: C)',
+				EX_SOL_M2K_IGTOC52C);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarDetallePromocionList
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar el detalle de promoción.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDetallePromocion';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc48 (function: I*S8, action: D)',
+				EX_SOL_M2K_IGTOC48D);
 	END;
 END MODULE;

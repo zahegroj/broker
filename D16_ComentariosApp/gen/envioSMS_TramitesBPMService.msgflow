@@ -11,7 +11,7 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.in" location="20,20">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.in" bundleName="gen/envioSMS_TramitesBPMService" pluginId="D16_ComentariosApp"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="sms/TramitesBPMService.wsdl" selectedPortType="TramitesBPM" selectedBinding="TramitesBPMPortBinding" selectedOperation="envioSMS" selectedPort="TramitesBPMPort" targetNamespace="http://tramitesbpm.ws.dsie.gsa.sds.di.telcel.com/" useHTTPTransport="true" webServiceURL="http://intranet.telcel.com:8000/TramitesBPM/TramitesBPMService" sslProtocol="TLS">
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="sms/TramitesBPMService.wsdl" selectedPortType="TramitesBPM" selectedBinding="TramitesBPMPortBinding" selectedOperation="envioSMS" selectedPort="TramitesBPMPort" targetNamespace="http://tramitesbpm.ws.dsie.gsa.sds.di.telcel.com/" useHTTPTransport="true" webServiceURL="http://10.0.2.2:8088/TramitesBPM/TramitesBPMService" sslProtocol="TLS">
         <translation xmi:type="utility:ConstantString" string="Request"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="320,80" envelopeDestination="$LocalEnvironment/SOAP/Envelope/OperResponse/TramitesBPMPortBinding/envioSMS" labelPrefix="">
