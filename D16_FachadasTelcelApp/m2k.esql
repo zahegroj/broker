@@ -2,7 +2,6 @@
 
 DECLARE m2kNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k';
 DECLARE nsm2k NAMESPACE 'http://servicios.web.m2k.sds.telcel.com';
-DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';	
 
 
 CREATE COMPUTE MODULE ConstruirFaultM2K

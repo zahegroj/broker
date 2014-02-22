@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_m2k_Igtoc64CElegiroperacionFlow.msgflow="gen/m2k/Igtoc64CElegiroperacionFlow.msgflow" xmlns:gen_m2k_ejecutaServicio_ControlWebService.msgflow="gen/m2k/ejecutaServicio_ControlWebService.msgflow"
-    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="m2k/Igtoc64CFlow.msgflow"
-    nsPrefix="m2k_Igtoc64CFlow.msgflow">
+    xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="m2k/Igtoc64AFlow.msgflow"
+    nsPrefix="m2k_Igtoc64AFlow.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
     <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
-    <translation xmi:type="utility:TranslatableString" key="Igtoc64CFlow" bundleName="m2k/Igtoc64CFlow" pluginId="D16_FachadasTelcelApp"/>
-    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/Igtoc64CFlow.gif"/>
-    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/Igtoc64CFlow.gif"/>
+    <translation xmi:type="utility:TranslatableString" key="Igtoc64AFlow" bundleName="m2k/Igtoc64AFlow" pluginId="D16_FachadasTelcelApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/Igtoc64AFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/Igtoc64AFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="28,223" wsdlFileName="m2k/wmb/Igtoc64AService.wsdl" selectedPortType="Igtoc64CPort" selectedBinding="Igtoc64CBinding" selectedPort="Igtoc64C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Igtoc64CService" allowQueryWSDL="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="28,223" wsdlFileName="m2k/wmb/Igtoc64AService.wsdl" selectedPortType="Igtoc64CPort" selectedBinding="Igtoc64CBinding" selectedPort="Igtoc64C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Igtoc64AService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_m2k_Igtoc64CElegiroperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="125,219">
