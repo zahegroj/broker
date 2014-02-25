@@ -48,42 +48,6 @@ BEGIN
 	END IF;
 END;
 
-CREATE COMPUTE MODULE MapEnvioSMSResp_Response
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		DECLARE ns NAMESPACE 'http://tramitesbpm.ws.dsie.gsa.sds.di.telcel.com/';
-		DECLARE oldNamespace NAMESPACE '';
-		
-		DECLARE smsResponse REFERENCE TO InputRoot.XMLNSC.ns:envioSMSResponse;
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'enviarSMSResponse';
-		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.enviarSMSResponse Domain('XMLNSC') NAME 'response';
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsComent);
-		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsComent:enviarSMSResponse, oldNamespace, nsComent);
-		
-		IF smsResponse.return = 0 THEN
-			SET OutputRoot.XMLNSC.nsComent:enviarSMSResponse.nsComent:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
-			SET OutputRoot.XMLNSC.nsComent:enviarSMSResponse.nsComent:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'El sms ha sido enviado exitosamente';
-		ELSE
-			DECLARE descError CHARACTER '';
-			IF smsResponse.return = 1 THEN
-				SET descError = 'Error en el envío del SMS';
-			ELSEIF smsResponse.return = 5 THEN
-				SET descError = 'Error general en el WS';
-			END IF;
-			
-			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al intentar enviar el SMS de notificación, en la invocación a SMS';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesComentariosService';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'enviarSMS';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:tipo = EX_TIPO_SIS;
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:codigo = EX_COD_SMS;
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:descripcion = CAST(smsResponse.return AS CHARACTER) || ' - ' || descError;
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:solucion = EX_SOL_SMS;
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:servicioOrigen = 'TramitesBPMService - envioSMS';
-		END IF;		
-	END;
-END MODULE;
-
 CREATE COMPUTE MODULE MapIgtoc64aResp_Response
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN

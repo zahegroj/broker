@@ -4,15 +4,15 @@
     nsPrefix="EnviarSMSFlow.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
     <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
-    <translation xmi:type="utility:TranslatableString" key="EnviarSMSFlow" bundleName="EnviarSMSFlow" pluginId="D16_ComentariosApp"/>
-    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ComentariosApp/icons/full/obj16/EnviarSMSFlow.gif"/>
-    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ComentariosApp/icons/full/obj30/EnviarSMSFlow.gif"/>
+    <translation xmi:type="utility:TranslatableString" key="EnviarSMSFlow" bundleName="EnviarSMSFlow" pluginId="D16_NotificacionesApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_NotificacionesApp/icons/full/obj16/EnviarSMSFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_NotificacionesApp/icons/full/obj30/EnviarSMSFlow.gif"/>
     <composition>
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="98,244">
-        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="EnviarSMSFlow" pluginId="D16_ComentariosApp"/>
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="EnviarSMSFlow" pluginId="D16_NotificacionesApp"/>
       </nodes>
       <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="696,257">
-        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="EnviarSMSFlow" pluginId="D16_ComentariosApp"/>
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="EnviarSMSFlow" pluginId="D16_NotificacionesApp"/>
       </nodes>
       <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="178,244" mappingExpression="msl://{default}#EnviarSMSReq_EnvioSMSReq">
         <translation xmi:type="utility:ConstantString" string="Mapping EnvioSMS Req"/>
