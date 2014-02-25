@@ -1242,13 +1242,13 @@
             <sch:fechaFin>19/09/13</sch:fechaFin>
             <sch:producto>LINS7</sch:producto>
             <sch:planTarifario>S0913</sch:planTarifario>
-            <!-- Opcional 
+            <!-- Opcional
             <sch:referencia>
                <sch:tipoGrupo>XT</sch:tipoGrupo>
                <sch:idGrupo>0006824230</sch:idGrupo>
                <sch:telefono>5512949702</sch:telefono>
                <sch:effDate>2130218</sch:effDate>
-            </sch:referencia>-->
+            </sch:referencia> -->
          </sch:request>
       </sch:consultarDetalleProductoRequest>
    </soapenv:Body>
@@ -1257,7 +1257,7 @@
    <soapenv:Body>
       <sch:consultarDetallePromocionRequest>
          <sch:request>
-            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:usuarioM2K>SVBPM5</sch1:usuarioM2K>
             <sch1:region>9</sch1:region>
             <sch:telefono>5534880046</sch:telefono>
             <sch:cuenta>4114222</sch:cuenta>
@@ -1297,7 +1297,7 @@
    <soapenv:Body>
       <sch:consultarEncabezadoRequest>
          <sch:request>
-            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:usuarioM2K>SVBPM5</sch1:usuarioM2K>
             <sch1:region>9</sch1:region>
             <sch:telefono>5527671654</sch:telefono>
          </sch:request>

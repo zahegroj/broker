@@ -278,7 +278,7 @@
    <soapenv:Body>
       <sch:consultarDatosClienteRequest>
          <sch:request>
-            <sch:usuarioM2K>SVBPM51</sch:usuarioM2K>
+            <sch:usuarioM2K>SVBPM5</sch:usuarioM2K>
             <sch:telefono>5527671654</sch:telefono>
             <sch:sistemaSiantel>SISACT</sch:sistemaSiantel>
             <sch:regionCAC>9</sch:regionCAC>
@@ -290,7 +290,7 @@
    <soapenv:Body>
       <sch:consultarDatosCobranzaRequest>
          <sch:request>
-            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:usuarioM2K>SVBPM5</sch1:usuarioM2K>
             <sch1:region>9</sch1:region>
             <sch:telefono>5527671654</sch:telefono>
             <sch:cuenta>6385120</sch:cuenta>

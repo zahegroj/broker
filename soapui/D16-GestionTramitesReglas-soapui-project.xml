@@ -540,7 +540,7 @@
          <sch:request>
             <sch:asesorCAC>
                <sch:perfil>
-                  <sch:perfilPac>JFTGDSIC</sch:perfilPac>
+                  <sch:perfilPac>ANIGEAIC1</sch:perfilPac>
                   <!--Optional:-->
                   <sch:habilitado>true</sch:habilitado>
                   <!--Optional:-->
@@ -563,7 +563,7 @@
       <sch:reasignarTramiteRequest>
          <sch:request>
             <sch:tramite>
-               <sch:tipoTramite>?</sch:tipoTramite>
+               <sch:tipoTramit>?</sch:tipoTramit>
                <sch:estado>?</sch:estado>
                <!--Optional:-->
                <sch:cac>

@@ -234,7 +234,7 @@ Referencia separada
       <p01telefono longitud="10">5527671654</p01telefono>
       <p02cuenta longitud="09">6385120</p02cuenta>
       <p03fechaInicio longitud="08">28/10/13</p03fechaInicio>
-      <p04fechaFin longitud="08">13/11/13</p04fechaFin>
+      <p04fechaFin longitud="08">13/11/14</p04fechaFin>
       <p05tipoComentarioPiv longitud="05" />
       <p06fechaPiv longitud="07" />
       <p07horaPiv longitud="07" />

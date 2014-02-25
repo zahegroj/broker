@@ -62,7 +62,7 @@
    <soapenv:Header/>
    <soapenv:Body>
       <tram:envioSMSResponse>
-         <return>0</return>
+         <return>1</return>
       </tram:envioSMSResponse>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://tramitesbpm.ws.dsie.gsa.sds.di.telcel.com/TramitesBPM/envioSMSResponse"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>

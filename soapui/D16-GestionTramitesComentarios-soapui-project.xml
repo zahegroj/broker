@@ -25,12 +25,6 @@
   <message name="consultarComentariosMsgResponse">
     <part element="types:consultarComentariosResponse" name="parameters"/>
   </message>
-  <message name="enviarSMSMsg">
-    <part element="types:enviarSMSRequest" name="parameters"/>
-  </message>
-  <message name="enviarSMSMsgResponse">
-    <part element="types:enviarSMSResponse" name="parameters"/>
-  </message>
   <message name="gestionTramitesWMBExceptionMsg">
     <part element="comun:gestionTramitesWMBException" name="fault"/>
   </message>
@@ -43,11 +37,6 @@
     <operation name="consultarComentarios">
       <input message="this:consultarComentariosMsg"/>
       <output message="this:consultarComentariosMsgResponse"/>
-      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
-    </operation>
-    <operation name="enviarSMS">
-      <input message="this:enviarSMSMsg"/>
-      <output message="this:enviarSMSMsgResponse"/>
       <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
     </operation>
   </portType>
@@ -67,18 +56,6 @@
     </operation>
     <operation name="consultarComentarios">
       <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/consultarComentarios"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-      <fault name="GestionTramitesWMBException">
-        <soap:fault name="GestionTramitesWMBException" use="literal"/>
-      </fault>
-    </operation>
-    <operation name="enviarSMS">
-      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/enviarSMS"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -125,20 +102,6 @@
       </xsd:sequence>
     </xsd:complexType>
   </xsd:element>
-  <xsd:element ibmSchExtn:docRoot="true" name="enviarSMSRequest">
-    <xsd:complexType>
-      <xsd:sequence>
-        <xsd:element name="request" type="this:EnviarSMSRequestType"/>
-      </xsd:sequence>
-    </xsd:complexType>
-  </xsd:element>
-  <xsd:element ibmSchExtn:docRoot="true" name="enviarSMSResponse">
-    <xsd:complexType>
-      <xsd:sequence>
-        <xsd:element name="response" type="this:EnviarSMSResponseType"/>
-      </xsd:sequence>
-    </xsd:complexType>
-  </xsd:element>
   <xsd:complexType name="GuardarComentarioRequestType">
     <xsd:complexContent>
       <xsd:extension base="comun:RequestBase">
@@ -177,23 +140,12 @@
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
-  <xsd:complexType name="EnviarSMSRequestType">
-    <xsd:sequence>
-      <xsd:element name="telefono" type="comun:telefonoFormato"/>
-      <xsd:element name="texto" type="comun:smsFormato"/>
-    </xsd:sequence>
-  </xsd:complexType>
-  <xsd:complexType name="EnviarSMSResponseType">
-    <xsd:complexContent>
-      <xsd:extension base="comun:ResponseBase"/>
-    </xsd:complexContent>
-  </xsd:complexType>
   <!--consultar comentarios-->
   <xsd:complexType name="ComentarioType">
     <xsd:sequence>
       <xsd:element name="tipoComentario" type="xsd:string"/>
-      <xsd:element name="fechaEfectiva" type="xsd:string"/>
-      <xsd:element name="usuario" type="xsd:string"/>
+      <xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+      <xsd:element name="usuario" type="comun:alfanumericoFormato"/>
       <xsd:element name="comentario" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
@@ -204,18 +156,18 @@
   </xsd:complexType>
   <xsd:complexType name="ReferenciaComentariosType">
     <xsd:sequence>
-      <xsd:element name="tipoComentario" type="xsd:string"/>
-      <xsd:element name="fechaComentario" type="xsd:string"/>
-      <xsd:element name="horaAudit" type="xsd:string"/>
-      <xsd:element name="sec" type="xsd:string"/>
+      <xsd:element name="tipoComentario" type="comun:alfanumericoFormato"/>
+      <xsd:element name="fechaComentario" type="comun:fechaPivFormato"/>
+      <xsd:element name="horaAudit" type="comun:numericoFormato"/>
+      <xsd:element name="sec" type="comun:secFormato"/>
     </xsd:sequence>
   </xsd:complexType>
 </xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\comun\GestionTramitesComun.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" version="1.0" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <xsd:element name="gestionTramitesWMBException" type="this:GestionTramitesWMBException"/>
   <xsd:complexType name="RequestBase">
     <xsd:sequence>
-      <xsd:element name="usuarioM2K" type="xsd:string"/>
-      <xsd:element name="region" type="xsd:string"/>
+      <xsd:element name="usuarioM2K" type="this:alfanumericoFormato"/>
+      <xsd:element name="region" type="this:numericoFormato"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="ResponseBase">
@@ -243,6 +195,7 @@
       <xsd:element name="descripcion" type="xsd:string"/>
       <xsd:element name="solucion" type="xsd:string"/>
       <xsd:element name="servicioOrigen" type="xsd:string"/>
+      <xsd:element name="idPeticion" type="xsd:string" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
   <xsd:complexType name="ArrayOfMensaje">
@@ -280,7 +233,7 @@
   </xsd:simpleType>
   <xsd:simpleType name="imeiFormato">
     <xsd:restriction base="xsd:string">
-      <xsd:pattern value="|\d{18}"/>
+      <xsd:pattern value="|\d{15}"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="horaFormato">
@@ -290,7 +243,7 @@
   </xsd:simpleType>
   <xsd:simpleType name="alfanumericoFormato">
     <xsd:restriction base="xsd:string">
-      <xsd:pattern value="|[a-zA-Z0-9]+"/>
+      <xsd:pattern value="|[a-zA-Z0-9 ]+"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="productoFormato">
@@ -308,9 +261,24 @@
       <xsd:pattern value="|\d{7}"/>
     </xsd:restriction>
   </xsd:simpleType>
+  <xsd:simpleType name="horaPivFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{7}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
   <xsd:simpleType name="smsFormato">
     <xsd:restriction base="xsd:string">
       <xsd:maxLength value="150"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="secFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{3}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="numericoFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|[0-9]+"/>
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>
@@ -331,7 +299,7 @@
             <sch1:region>9</sch1:region>
             <sch:telefono>5527671654</sch:telefono>
             <sch:cuenta>6385120</sch:cuenta>
-            <sch:fechaInicio>28/10/14</sch:fechaInicio>
+            <sch:fechaInicio>28/10/13</sch:fechaInicio>
             <sch:fechaFin>13/11/14</sch:fechaFin>
             <!--Optional:
             <sch:referencia>
@@ -365,17 +333,28 @@
          </sch:request>
       </sch:consultarComentariosRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/consultarComentarios"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/enviarSMS" name="enviarSMS" bindingOperationName="enviarSMS" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/servicioaclientes/gestiontramites/wmb/ComentariosService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/consultarComentarios"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/servicioaclientes/gestiontramites/wmb/ComentariosService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
-      <sch:enviarSMSRequest>
+      <sch:consultarComentariosRequest>
          <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
             <sch:telefono>5545305932</sch:telefono>
-            <sch:texto>mensaje de prueba telcel</sch:texto>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaInicio>28/10/13</sch:fechaInicio>
+            <sch:fechaFin>13/11/14</sch:fechaFin>
+            <!--Optional: 
+            <sch:referencia>
+               <sch:tipoComentario></sch:tipoComentario>
+               <sch:fechaComentario></sch:fechaComentario>
+               <sch:horaAudit></sch:horaAudit>
+               <sch:sec></sch:sec>
+            </sch:referencia>-->
          </sch:request>
-      </sch:enviarSMSRequest>
+      </sch:consultarComentariosRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/enviarSMS"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/guardarComentario" name="guardarComentario" bindingOperationName="guardarComentario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/servicioaclientes/gestiontramites/wmb/ComentariosService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/consultarComentarios"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/guardarComentario" name="guardarComentario" bindingOperationName="guardarComentario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/servicioaclientes/gestiontramites/wmb/ComentariosService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
    <soapenv:Header/>
    <soapenv:Body>
       <sch:guardarComentarioRequest>
