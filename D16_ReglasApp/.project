@@ -5,6 +5,7 @@
 	<projects>
 		<project>D16_GestionTramitesLib</project>
 		<project>D16_ReglasLib</project>
+		<project>D16_TelcelLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

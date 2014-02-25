@@ -25,12 +25,6 @@
 	<message name="consultarComentariosMsgResponse">
 		<part element="types:consultarComentariosResponse" name="parameters"/>
 	</message>
-	<message name="enviarSMSMsg">
-		<part element="types:enviarSMSRequest" name="parameters"/>
-	</message>
-	<message name="enviarSMSMsgResponse">
-		<part element="types:enviarSMSResponse" name="parameters"/>
-	</message>
 	<message name="gestionTramitesWMBExceptionMsg">
 		<part element="comun:gestionTramitesWMBException" name="fault"/>
 	</message>
@@ -43,11 +37,6 @@
 		<operation name="consultarComentarios">
 			<input message="this:consultarComentariosMsg"/>
 			<output message="this:consultarComentariosMsgResponse"/>
-			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
-		</operation>
-		<operation name="enviarSMS">
-			<input message="this:enviarSMSMsg"/>
-			<output message="this:enviarSMSMsgResponse"/>
 			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
 		</operation>
 	</portType>
@@ -67,18 +56,6 @@
 		</operation>
 		<operation name="consultarComentarios">
 			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/consultarComentarios"/>
-			<input>
-				<soap:body use="literal"/>
-			</input>
-			<output>
-				<soap:body use="literal"/>
-			</output>
-			<fault name="GestionTramitesWMBException">
-				<soap:fault name="GestionTramitesWMBException" use="literal"/>
-			</fault>
-		</operation>
-		<operation name="enviarSMS">
-			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/enviarSMS"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>

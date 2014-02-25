@@ -1,6 +1,7 @@
 DECLARE nsInfoCli NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema';
 DECLARE nsInvest  NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema';
 DECLARE nsComent  NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema';
+DECLARE nsNotif   NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/notificaciones/schema';
 DECLARE nsComun   NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
 DECLARE soapenv   NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 
@@ -47,6 +48,8 @@ DECLARE EX_SOL_M2K_RETC2C   CONSTANT CHARACTER '';
 DECLARE EX_SOL_M2K_RETUSC   CONSTANT CHARACTER '';
 DECLARE EX_SOL_M2K_SUMIQC   CONSTANT CHARACTER '';
 
+DECLARE EX_SOL_WMB_VAL   CONSTANT CHARACTER '';
+DECLARE EX_SOL_WMB_SIS   CONSTANT CHARACTER '';
 CREATE FUNCTION ChangeNamespaceInOutputRoot(In rootNode REFERENCE, In oldNamespace CHARACTER, In newNamespace CHARACTER)
 BEGIN
 	IF newNamespace = '' THEN

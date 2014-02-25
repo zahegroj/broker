@@ -33,23 +33,6 @@
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
-
-	<xsd:element ibmSchExtn:docRoot="true" name="enviarSMSRequest">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="request" type="this:EnviarSMSRequestType"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element ibmSchExtn:docRoot="true" name="enviarSMSResponse">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="response" type="this:EnviarSMSResponseType"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
 	<xsd:complexType name="GuardarComentarioRequestType">
 		<xsd:complexContent>
 			<xsd:extension base="comun:RequestBase">
@@ -89,19 +72,6 @@
 					<xsd:element name="referencia" type="this:ReferenciaComentariosType" minOccurs="0"/>
 				</xsd:sequence>
 			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:complexType name="EnviarSMSRequestType">
-		<xsd:sequence>
-			<xsd:element name="telefono" type="comun:telefonoFormato"/>
-			<xsd:element name="texto" type="comun:smsFormato"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="EnviarSMSResponseType">
-		<xsd:complexContent>
-			<xsd:extension base="comun:ResponseBase"/>
 		</xsd:complexContent>
 	</xsd:complexType>
 
