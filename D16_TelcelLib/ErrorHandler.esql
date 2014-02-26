@@ -23,6 +23,13 @@ CREATE COMPUTE MODULE BuildFault
 	BEGIN
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
 		
+		DECLARE detalleExcepcion CHARACTER AddExceptionDetail();
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		IF CONTAINS(detalleExcepcion, 'XML Parsing Errors have occurred') THEN
+			SET tipoError = EX_TIPO_VAL;
+		END IF;
+		
 		--Se crea el body del error {http://schemas.xmlsoap.org/soap/envelope/}Fault
 		SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:NS1 = 'http://schemas.xmlsoap.org/soap/envelope/';
 		CREATE LASTCHILD OF OutputRoot.SOAP NAME 'Body';
@@ -31,9 +38,9 @@ CREATE COMPUTE MODULE BuildFault
 		--Se agrega el código de error
 		SET soapBody.soapenv:Fault.faultcode = 'NS1:Server';
 		
-		IF InputLocalEnvironment.Variables.tipoError = EX_TIPO_VAL THEN
-			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al validar el mensaje de entrada.';
-		ELSEIF InputLocalEnvironment.Variables.tipoError = EX_TIPO_SIS THEN
+		IF tipoError = EX_TIPO_VAL THEN
+			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al validar el mensaje de entrada';
+		ELSEIF tipoError = EX_TIPO_SIS THEN
 			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al ejecutar el servicio';
 		END IF;
 		
@@ -42,13 +49,13 @@ CREATE COMPUTE MODULE BuildFault
 		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = GetServiceName(InputRoot.HTTPInputHeader."X-Original-HTTP-Command");
 		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = InputLocalEnvironment.Destination.RouterList.DestinationData.labelName;
 		
-		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:tipo = InputLocalEnvironment.Variables.tipoError;
+		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:tipo = tipoError;
 		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:codigo = EX_COD_WMB;
-		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:descripcion = AddExceptionDetail();
+		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:descripcion = detalleExcepcion;
 		
-		IF InputLocalEnvironment.Variables.tipoError = EX_TIPO_VAL THEN
+		IF tipoError = EX_TIPO_VAL THEN
 			SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:solucion = EX_SOL_WMB_VAL;
-		ELSEIF InputLocalEnvironment.Variables.tipoError = EX_TIPO_SIS THEN
+		ELSEIF tipoError = EX_TIPO_SIS THEN
 			SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:solucion = EX_SOL_WMB_SIS;
 		END IF;
 		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:servicioOrigen = '';

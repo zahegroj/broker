@@ -1,0 +1,100 @@
+CREATE COMPUTE MODULE BuildFaultFachadasSiantel
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel';
+		
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		
+		DECLARE mensajeError CHARACTER AddExceptionDetail();
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		IF CONTAINS(mensajeError, 'XML Parsing Errors have occurred') THEN
+			SET tipoError = EX_TIPO_VAL;
+		END IF;
+		
+		--Se crea el body del error {http://schemas.xmlsoap.org/soap/envelope/}Fault
+		SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:NS1 = 'http://schemas.xmlsoap.org/soap/envelope/';
+		CREATE LASTCHILD OF OutputRoot.SOAP NAME 'Body';
+		DECLARE soapBody REFERENCE TO OutputRoot.SOAP.Body;
+		
+		--Se agrega el código de error
+		SET soapBody.soapenv:Fault.faultcode = 'NS1:Server';
+		
+		IF tipoError = EX_TIPO_VAL THEN
+			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al validar el mensaje de entrada.';
+		ELSEIF tipoError = EX_TIPO_SIS THEN
+			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al ejecutar el servicio';
+		END IF;
+		
+		CREATE LASTCHILD OF soapBody.soapenv:Fault NAME 'detail';
+		
+		SET soapBody.soapenv:Fault.detail.newNamespace:Error.codigo = EX_COD_WMB;
+		SET soapBody.soapenv:Fault.detail.newNamespace:Error.descripcion = mensajeError;
+		
+		RETURN TRUE;
+	END;
+	
+	CREATE FUNCTION AddExceptionDetail() RETURNS CHARACTER
+	BEGIN
+
+		DECLARE descripcionError CHARACTER '';
+
+   	    DECLARE ptrException REFERENCE TO InputExceptionList.*[1];
+		WHILE LASTMOVE(ptrException) AND CARDINALITY(ptrException.*[<].*[])>1 DO
+			DECLARE I INTEGER 1;
+			DECLARE J INTEGER CARDINALITY(ptrException.*[]);
+			IF CARDINALITY(ptrException.*[<].*[]) <= 1 THEN
+				SET J = J + 1;
+			END IF;
+			WHILE I <= J DO
+				DECLARE descTemp CHARACTER '';
+				SET descTemp = GetDescriptionMessage(ptrException.*[I], FALSE);
+				IF descTemp <> '' THEN
+					DECLARE index INTEGER 1;
+					WHILE CONTAINS(descTemp, '&') DO
+						DECLARE valor CHARACTER '';
+						
+						SET I = I + 1;
+						SET valor = GetDescriptionMessage(ptrException.*[I], TRUE);
+						SET descTemp = REPLACE(descTemp, '&'||CAST(index AS CHARACTER), valor);
+						SET index = index + 1;
+					END WHILE;
+					
+					IF descripcionError <> '' THEN
+						SET descripcionError = descripcionError || ' -- ' || descTemp;
+					ELSE 
+						SET descripcionError = descTemp;
+					END IF;
+				END IF;
+				SET I = I + 1;
+			END WHILE;
+			MOVE ptrException LASTCHILD;
+		END WHILE; 
+		
+		RETURN descripcionError;
+	END;
+
+	CREATE FUNCTION GetDescriptionMessage(IN oldElement REFERENCE, IN reemplazarValor BOOLEAN) RETURNS CHARACTER
+	BEGIN
+		DECLARE messageException CHARACTER '';
+		
+		CASE FIELDNAME(oldElement)
+		WHEN 'Insert' THEN
+			CASE oldElement.Type
+			WHEN 12 THEN --Text
+				SET messageException = 
+					CAST(oldElement.Text AS CHAR CCSID InputRoot.Properties.CodedCharSetId ENCODING InputRoot.Properties.Encoding);
+			ELSE
+				SET messageException = oldElement.Text;
+			END CASE;
+		WHEN 'Text' THEN
+			SET messageException = oldElement;
+		END CASE;
+		
+		IF NOT(CONTAINS(messageException, ' ')) AND NOT(CONTAINS(messageException, '.'))  AND NOT(CONTAINS(messageException, '/')) AND NOT(reemplazarValor) THEN
+			SET messageException = '';
+		END IF;
+		
+		RETURN messageException;
+	END;
+END MODULE;

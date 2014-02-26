@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_m2k_Igtoc41RElegirOperacionFlow.msgflow="gen/m2k/Igtoc41RElegirOperacionFlow.msgflow" xmlns:gen_m2k_ejecutaServicio_ControlWebService.msgflow="gen/m2k/ejecutaServicio_ControlWebService.msgflow"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:HandleErrorFachadasM2KFlow.msgflow="HandleErrorFachadasM2KFlow.msgflow" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_m2k_Igtoc41RElegirOperacionFlow.msgflow="gen/m2k/Igtoc41RElegirOperacionFlow.msgflow" xmlns:gen_m2k_ejecutaServicio_ControlWebService.msgflow="gen/m2k/ejecutaServicio_ControlWebService.msgflow"
     xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="m2k/Igtoc41RFlow.msgflow"
     nsPrefix="m2k_Igtoc41RFlow.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
@@ -9,38 +9,44 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/Igtoc41RFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/Igtoc41RFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="26,185" wsdlFileName="m2k/wmb/Igtoc41RService.wsdl" selectedPortType="Igtoc41RPort" selectedBinding="Igtoc41RBinding" selectedPort="Igtoc41R" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc41/r" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Igtoc41RService" allowQueryWSDL="true" usingWsAddressing="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="54,185" wsdlFileName="m2k/wmb/Igtoc41RService.wsdl" selectedPortType="Igtoc41RPort" selectedBinding="Igtoc41RBinding" selectedPort="Igtoc41R" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc41/r" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Igtoc41RService" allowQueryWSDL="true" usingWsAddressing="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
-      <nodes xmi:type="gen_m2k_Igtoc41RElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="131,181">
+      <nodes xmi:type="gen_m2k_Igtoc41RElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="206,181">
         <translation xmi:type="utility:ConstantString" string="ElegirOperacion"/>
         <shortDescription xmi:type="utility:ConstantString" string="Extrae el cuerpo del mensaje SOAP"/>
         <longDescription xmi:type="utility:ConstantString" string="Este subflujo extrae el cuerpo del mensaje SOAP y tiene un nodo de salida por operación. Se ha generado mediante una operación arrastrar y soltar de archivo WSDL."/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="735,195" validateMaster="contentAndValue">
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="810,195" validateMaster="contentAndValue">
         <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
       </nodes>
-      <nodes xmi:type="gen_m2k_ejecutaServicio_ControlWebService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="328,186">
+      <nodes xmi:type="gen_m2k_ejecutaServicio_ControlWebService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="403,186">
         <translation xmi:type="utility:ConstantString" string="ejecutaServicio_ControlWebService"/>
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="552,194" computeExpression="esql://routine/#Parse_Igtoc41R_StringRespToXML.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="627,194" computeExpression="esql://routine/#Parse_Igtoc41R_StringRespToXML.Main">
         <translation xmi:type="utility:ConstantString" string="toXML"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="263,185" computeExpression="esql://routine/#Parse_Igtoc41R_XMLToStringReq.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="338,185" computeExpression="esql://routine/#Parse_Igtoc41R_XMLToStringReq.Main">
         <translation xmi:type="utility:ConstantString" string="toString"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="650,276" computeExpression="esql://routine/#ConstruirFaultM2K.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="725,276" computeExpression="esql://routine/#ConstruirFaultM2K.Main">
         <translation xmi:type="utility:ConstantString" string="BuildFault"/>
       </nodes>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <nodes xmi:type="HandleErrorFachadasM2KFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_8" location="119,87">
+        <translation xmi:type="utility:ConstantString" string="HandleErrorFachadasM2KFlow"/>
+      </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.ejecutaServicioResponse" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.Request" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.timeout" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>
