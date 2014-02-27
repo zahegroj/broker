@@ -10,7 +10,7 @@
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InfoClienteApp/icons/full/obj30/InfoClienteMainFlow.gif"/>
     <composition>
       <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="93,193" wsdlFileName="infoCliente/GestionTramitesInfoCliente.wsdl" selectedPortType="GestionTramitesInfoClientePort" selectedBinding="GestionTramitesInfoClienteBinding" selectedPort="GestionTramitesInfoClienteHTTPSOAPPort" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente" useHTTPTransport="true" urlSelector="/di/sds/servicioaclientes/gestiontramites/wmb/InfoClienteService"
-          allowQueryWSDL="true">
+          allowQueryWSDL="true" transactionMode="yes">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_InfoClienteElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="250,189">

@@ -11,28 +11,28 @@
       <nodes xmi:type="ComIbmSOAPAsyncResponse.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="85,99" asyncRequestCorrelator="CpastC_Async" populateLocalEnvWithWSAInfo="true">
         <translation xmi:type="utility:ConstantString" string="CpastC Asynchronous Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPAsyncResponse.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="84,204" asyncRequestCorrelator="Retc2C_Async" populateLocalEnvWithWSAInfo="true">
+      <nodes xmi:type="ComIbmSOAPAsyncResponse.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="84,215" asyncRequestCorrelator="Retc2C_Async" populateLocalEnvWithWSAInfo="true">
         <translation xmi:type="utility:ConstantString" string="Retc2C Asynchronous Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPAsyncResponse.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="85,315" asyncRequestCorrelator="ReactC_Async" populateLocalEnvWithWSAInfo="true">
+      <nodes xmi:type="ComIbmSOAPAsyncResponse.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="85,344" asyncRequestCorrelator="ReactC_Async" populateLocalEnvWithWSAInfo="true">
         <translation xmi:type="utility:ConstantString" string="ReactC Asynchronous Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="511,96" queueName="QL.GT_COB_CPASTC_AGGR.IN">
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="567,96" queueName="QL.GT_COB_CPASTC_AGGR.IN">
         <translation xmi:type="utility:ConstantString" string="QL.GT_COB_CPASTC_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="507,201" queueName="QL.GT_COB_RETC2C_AGGR.IN">
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="563,212" queueName="QL.GT_COB_RETC2C_AGGR.IN">
         <translation xmi:type="utility:ConstantString" string="QL.GT_COB_RETC2C_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="507,312" queueName="QL.GT_COB_REACTC_AGGR.IN">
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="563,341" queueName="QL.GT_COB_REACTC_AGGR.IN">
         <translation xmi:type="utility:ConstantString" string="QL.GT_COB_REACTC_AGGR.IN"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="275,95" computeExpression="esql://routine/#CpastcResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="331,95" computeExpression="esql://routine/#CpastcResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="CpastC Response Aggregation"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="274,200" computeExpression="esql://routine/#Retc2cResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="330,211" computeExpression="esql://routine/#Retc2cResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Retc2C Response Aggregation"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="274,311" computeExpression="esql://routine/#ReactcResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="330,340" computeExpression="esql://routine/#ReactcResp_SOAPtoMQ.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="ReactC Response Aggregation"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
@@ -41,9 +41,9 @@
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_29" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_30" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_31" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

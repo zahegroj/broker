@@ -8,13 +8,13 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InfoClienteApp/icons/full/obj16/ConsultarDatosCobranzaFanInFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InfoClienteApp/icons/full/obj30/ConsultarDatosCobranzaFanInFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="250,189" aggregateName="AggregateDatosCobranza" unsolicitedTimeout="5">
+      <nodes xmi:type="ComIbmAggregateReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="250,189" aggregateName="AggregateDatosCobranza">
         <translation xmi:type="utility:ConstantString" string="Aggregate Reply"/>
       </nodes>
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="420,190" computeExpression="esql://routine/#BuildConsultarDatosCobranzaResponse.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Build Response"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="563,191" validateMaster="contentAndValue">
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="563,191" validateMaster="none">
         <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
       </nodes>
       <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="24,75" queueName="QL.GT_COB_CPASTC_AGGR.IN" messageDomainProperty="XMLNSC">

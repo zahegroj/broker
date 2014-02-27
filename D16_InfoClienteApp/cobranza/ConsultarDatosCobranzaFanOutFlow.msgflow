@@ -21,7 +21,7 @@
       <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="369,210" computeExpression="esql://routine/#MapDatosCobranzaReq_Retc2cReq_FanOut.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="Map Retc2C Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateControl.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="181,214" aggregateName="AggregateDatosCobranza" timeoutInterval="3">
+      <nodes xmi:type="ComIbmAggregateControl.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="181,214" aggregateName="AggregateDatosCobranza">
         <translation xmi:type="utility:ConstantString" string="Aggregate Control"/>
       </nodes>
       <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="662,215" folderName="AggregateRetc2cReq">

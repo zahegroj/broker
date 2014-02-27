@@ -2,7 +2,6 @@ CREATE COMPUTE MODULE MapDatosCobranzaReq_CpastcReq_FanOut
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c';
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
@@ -25,7 +24,6 @@ CREATE COMPUTE MODULE MapDatosCobranzaReq_Retc2cReq_FanOut
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
@@ -49,7 +47,6 @@ CREATE COMPUTE MODULE MapDatosCobranzaReq_ReactcReq_FanOut
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
@@ -76,6 +73,9 @@ CREATE COMPUTE MODULE CpastcReq_MQtoSOAP
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId; 
+		
+		SET OutputLocalEnvironment.Variables.CorrelId = InputRoot.MQMD.CorrelId;
+		SET OutputLocalEnvironment.Variables.MsgId = InputRoot.MQMD.MsgId;
 		RETURN TRUE;
 	END;
 END MODULE;
@@ -87,6 +87,9 @@ CREATE COMPUTE MODULE Retc2cReq_MQtoSOAP
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId; 
+		
+		SET OutputLocalEnvironment.Variables.CorrelId = InputRoot.MQMD.CorrelId;
+		SET OutputLocalEnvironment.Variables.MsgId = InputRoot.MQMD.MsgId;
 		RETURN TRUE;
 	END;
 END MODULE;
@@ -98,6 +101,9 @@ CREATE COMPUTE MODULE ReactcReq_MQtoSOAP
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId; 
+		
+		SET OutputLocalEnvironment.Variables.CorrelId = InputRoot.MQMD.CorrelId;
+		SET OutputLocalEnvironment.Variables.MsgId = InputRoot.MQMD.MsgId;
 		RETURN TRUE;
 	END;
 END MODULE;
@@ -105,8 +111,6 @@ END MODULE;
 CREATE COMPUTE MODULE CpastcResp_SOAPtoMQ
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.Properties.ReplyIdentifier = 
@@ -121,8 +125,6 @@ END MODULE;
 CREATE COMPUTE MODULE Retc2cResp_SOAPtoMQ
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.Properties.ReplyIdentifier = 
@@ -137,8 +139,6 @@ END MODULE;
 CREATE COMPUTE MODULE ReactcResp_SOAPtoMQ
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.Properties.ReplyIdentifier = 
@@ -158,6 +158,7 @@ CREATE COMPUTE MODULE BuildConsultarDatosCobranzaResponse
 		DECLARE nsReactc NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';
 		DECLARE oldNamespace NAMESPACE '';
 		DECLARE existenErrores BOOLEAN FALSE;
+		DECLARE existenErroresGT BOOLEAN FALSE;
 		
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.ComIbmAggregateReplyBody.*[<].MQMD.MsgId;
@@ -167,6 +168,11 @@ CREATE COMPUTE MODULE BuildConsultarDatosCobranzaResponse
 			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
 			
 			SET existenErrores = TRUE; 
+		ELSEIF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
+			
+			SET existenErroresGT = TRUE;
 		END IF;
 			
 		IF existenErrores THEN
@@ -198,6 +204,29 @@ CREATE COMPUTE MODULE BuildConsultarDatosCobranzaResponse
 					'm2k - React (function: I*I5, action: C)',
 					EX_SOL_M2K_REACTC);
 			END IF;
+		ELSEIF existenErroresGT THEN
+			DECLARE index INTEGER 0;
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar los datos de cobranza del cliente.';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInfoClienteService';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDatosCobranza';
+			
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
+				SET index = index + 1;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
+						InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1]; 
+			END IF;
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
+				SET index = index + 1;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
+						InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1];
+			END IF;
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
+				SET index = index + 1;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
+						InputRoot.ComIbmAggregateReplyBody.AggregateReactcReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1];
+			END IF;
 		ELSE
 			DECLARE respuestaOKCpastc REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateCpastcReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsCpastc:RespuestaOK;		
 			DECLARE respuestaOKRetc2c REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetc2c:RespuestaOK;
@@ -216,5 +245,66 @@ CREATE COMPUTE MODULE BuildConsultarDatosCobranzaResponse
 			SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
 		END IF;
 		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildCpastCGestionTramitesFaultResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Variables.MsgId;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
+		
+		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = '';
+		DECLARE soapBody REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body;
+		
+		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, 'InfoClienteService');
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildRetc2CGestionTramitesFaultResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Variables.MsgId;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
+		
+		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = '';
+		DECLARE soapBody REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body;
+		
+		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, 'InfoClienteService');
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildReactCGestionTramitesFaultResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Variables.MsgId;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
+		
+		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = '';
+		DECLARE soapBody REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body;
+		
+		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, 'InfoClienteService');
 	END;
 END MODULE;

@@ -77,6 +77,9 @@ CREATE COMPUTE MODULE RetuscReq_MQtoSOAP
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId;
+		
+		SET OutputLocalEnvironment.Variables.CorrelId = InputRoot.MQMD.CorrelId;
+		SET OutputLocalEnvironment.Variables.MsgId = InputRoot.MQMD.MsgId;
 		RETURN TRUE;
 	END;
 END MODULE;
@@ -88,6 +91,9 @@ CREATE COMPUTE MODULE Retc2cReq_MQtoSOAP
 		SET OutputLocalEnvironment = InputLocalEnvironment;
 		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId;
+		
+		SET OutputLocalEnvironment.Variables.CorrelId = InputRoot.MQMD.CorrelId;
+		SET OutputLocalEnvironment.Variables.MsgId = InputRoot.MQMD.MsgId;
 		RETURN TRUE;
 	END;
 END MODULE;
@@ -210,6 +216,7 @@ CREATE COMPUTE MODULE BuildConsultarEncabezadoResponse
 		DECLARE oldNamespace NAMESPACE '';
 		
 		DECLARE existenErrores BOOLEAN FALSE;
+		DECLARE existenErroresGT BOOLEAN FALSE;
 		
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.ComIbmAggregateReplyBody.*[<].MQMD.MsgId;
@@ -219,7 +226,12 @@ CREATE COMPUTE MODULE BuildConsultarEncabezadoResponse
 			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR 
 			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsImei:error) IS NOT NULL THEN
 			
-			SET existenErrores = TRUE; 
+			SET existenErrores = TRUE;
+		ELSEIF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
+			
+			SET existenErroresGT = TRUE;
 		END IF;
 		
 		IF existenErrores THEN
@@ -264,6 +276,31 @@ CREATE COMPUTE MODULE BuildConsultarEncabezadoResponse
 				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[indexError].nsComun:servicioOrigen = 'imei - ConsultaImeiAC';
 					
 			END IF;
+		ELSEIF existenErroresGT THEN
+			DECLARE index INTEGER 0;
+			
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar la información de encabezado.';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarEncabezado';
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
+				SET index = index + 1;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
+						InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1];
+			END IF;
+	
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
+				SET index = index + 1;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
+						InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1];
+			END IF;
+			
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
+				SET index = index + 1;
+				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
+						InputRoot.ComIbmAggregateReplyBody.AggregateImeiReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1];
+			END IF;
 		ELSE
 			DECLARE respuestaOKRetus REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetuscReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetusc:RespuestaOK;
 			DECLARE respuestaOKRetc2 REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateRetc2cReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsRetc2c:RespuestaOK;
@@ -286,5 +323,65 @@ CREATE COMPUTE MODULE BuildConsultarEncabezadoResponse
 			SET OutputRoot.XMLNSC.nsInvest:consultarEncabezadoResponse.nsInvest:response.nsInvest:infoImei.nsInvest:grupoArticulo = responseImei.grupoArticulo;
 		END IF;
 		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildEncRetusCGestionTramitesFaultResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Variables.MsgId;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
+		
+		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = '';
+		DECLARE soapBody REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body;
+		
+		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, 'InvestigacionService');
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildEncRetc2CGestionTramitesFaultResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Variables.MsgId;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
+		
+		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = '';
+		DECLARE soapBody REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body;
+		
+		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, 'InvestigacionService');
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildEncImeiGestionTramitesFaultResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.Properties.ReplyIdentifier = 
+			InputLocalEnvironment.Variables.MsgId;
+		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
+		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
+		
+		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = '';
+		DECLARE soapBody REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body;
+		
+		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, 'InvestigacionService');
 	END;
 END MODULE;
