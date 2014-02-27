@@ -23,7 +23,7 @@ CREATE COMPUTE MODULE BuildFault
 	BEGIN
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
 		
-		DECLARE detalleExcepcion CHARACTER AddExceptionDetail();
+		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
 		DECLARE tipoError CHARACTER EX_TIPO_SIS;
 		
 		IF CONTAINS(detalleExcepcion, 'XML Parsing Errors have occurred') THEN
@@ -34,98 +34,107 @@ CREATE COMPUTE MODULE BuildFault
 		SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:NS1 = 'http://schemas.xmlsoap.org/soap/envelope/';
 		CREATE LASTCHILD OF OutputRoot.SOAP NAME 'Body';
 		DECLARE soapBody REFERENCE TO OutputRoot.SOAP.Body;
-		
-		--Se agrega el código de error
-		SET soapBody.soapenv:Fault.faultcode = 'NS1:Server';
-		
-		IF tipoError = EX_TIPO_VAL THEN
-			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al validar el mensaje de entrada';
-		ELSEIF tipoError = EX_TIPO_SIS THEN
-			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al ejecutar el servicio';
-		END IF;
-		
-		CREATE LASTCHILD OF soapBody.soapenv:Fault NAME 'detail';
-		
-		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = GetServiceName(InputRoot.HTTPInputHeader."X-Original-HTTP-Command");
-		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = InputLocalEnvironment.Destination.RouterList.DestinationData.labelName;
-		
-		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:tipo = tipoError;
-		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:codigo = EX_COD_WMB;
-		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:descripcion = detalleExcepcion;
-		
-		IF tipoError = EX_TIPO_VAL THEN
-			SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:solucion = EX_SOL_WMB_VAL;
-		ELSEIF tipoError = EX_TIPO_SIS THEN
-			SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:solucion = EX_SOL_WMB_SIS;
-		END IF;
-		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:servicioOrigen = '';
+		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, InputRoot.HTTPInputHeader."X-Original-HTTP-Command");
+
 		RETURN TRUE;
 	END;
-	
-	CREATE FUNCTION AddExceptionDetail() RETURNS CHARACTER
-	BEGIN
-
-		DECLARE descripcionError CHARACTER '';
-
-   	    DECLARE ptrException REFERENCE TO InputExceptionList.*[1];
-		WHILE LASTMOVE(ptrException) AND CARDINALITY(ptrException.*[<].*[])>1 DO
-			DECLARE I INTEGER 1;
-			DECLARE J INTEGER CARDINALITY(ptrException.*[]);
-			IF CARDINALITY(ptrException.*[<].*[]) <= 1 THEN
-				SET J = J + 1;
-			END IF;
-			WHILE I <= J DO
-				DECLARE descTemp CHARACTER '';
-				SET descTemp = GetDescriptionMessage(ptrException.*[I], FALSE);
-				IF descTemp <> '' THEN
-					DECLARE index INTEGER 1;
-					WHILE CONTAINS(descTemp, '&') DO
-						DECLARE valor CHARACTER '';
-						
-						SET I = I + 1;
-						SET valor = GetDescriptionMessage(ptrException.*[I], TRUE);
-						SET descTemp = REPLACE(descTemp, '&'||CAST(index AS CHARACTER), valor);
-						SET index = index + 1;
-					END WHILE;
-					
-					IF descripcionError <> '' THEN
-						SET descripcionError = descripcionError || ' -- ' || descTemp;
-					ELSE 
-						SET descripcionError = descTemp;
-					END IF;
-				END IF;
-				SET I = I + 1;
-			END WHILE;
-			MOVE ptrException LASTCHILD;
-		END WHILE; 
-		
-		RETURN descripcionError;
-	END;
-
-	CREATE FUNCTION GetDescriptionMessage(IN oldElement REFERENCE, IN reemplazarValor BOOLEAN) RETURNS CHARACTER
-	BEGIN
-		DECLARE messageException CHARACTER '';
-		
-		CASE FIELDNAME(oldElement)
-		WHEN 'Insert' THEN
-			CASE oldElement.Type
-			WHEN 12 THEN --Text
-				SET messageException = 
-					CAST(oldElement.Text AS CHAR CCSID InputRoot.Properties.CodedCharSetId ENCODING InputRoot.Properties.Encoding);
-			ELSE
-				SET messageException = oldElement.Text;
-			END CASE;
-		WHEN 'Text' THEN
-			SET messageException = oldElement;
-		END CASE;
-		
-		IF NOT(CONTAINS(messageException, ' ')) AND NOT(CONTAINS(messageException, '.'))  AND NOT(CONTAINS(messageException, '/')) AND NOT(reemplazarValor) THEN
-			SET messageException = '';
-		END IF;
-		
-		RETURN messageException;
-	END;
 END MODULE;
+
+CREATE FUNCTION BuildException(IN tipoError CHARACTER, IN soapBody REFERENCE, IN detalleExcepcion CHARACTER, IN inputLocalEnvironment REFERENCE, IN nombreServicioEndpoint CHARACTER)
+BEGIN
+	--Se agrega el código de error
+	SET soapBody.soapenv:Fault.faultcode = 'NS1:Server';
+	
+	IF tipoError = EX_TIPO_VAL THEN
+		SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al validar el mensaje de entrada';
+	ELSEIF tipoError = EX_TIPO_SIS THEN
+		SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al ejecutar el servicio';
+	END IF;
+	
+	CREATE LASTCHILD OF soapBody.soapenv:Fault NAME 'detail';
+	
+	SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = GetServiceName(nombreServicioEndpoint);
+	DECLARE operacion CHARACTER '';
+	IF FIELDTYPE(inputLocalEnvironment.Destination.RouterList.DestinationData.labelName) IS NOT NULL THEN
+		SET operacion = inputLocalEnvironment.Destination.RouterList.DestinationData.labelName;
+	END IF;
+	SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = operacion;
+	
+	SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:tipo = tipoError;
+	SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:codigo = EX_COD_WMB;
+	SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:descripcion = detalleExcepcion;
+	
+	IF tipoError = EX_TIPO_VAL THEN
+		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:solucion = EX_SOL_WMB_VAL;
+	ELSEIF tipoError = EX_TIPO_SIS THEN
+		SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:solucion = EX_SOL_WMB_SIS;
+	END IF;
+	SET soapBody.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error.nsComun:servicioOrigen = '';
+END;
+
+CREATE FUNCTION AddExceptionDetail(IN inputExceptionList REFERENCE, IN properties REFERENCE) RETURNS CHARACTER
+BEGIN
+
+	DECLARE descripcionError CHARACTER '';
+
+    DECLARE ptrException REFERENCE TO inputExceptionList.*[1];
+	WHILE LASTMOVE(ptrException) AND CARDINALITY(ptrException.*[<].*[])>1 DO
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER CARDINALITY(ptrException.*[]);
+		IF CARDINALITY(ptrException.*[<].*[]) <= 1 THEN
+			SET J = J + 1;
+		END IF;
+		WHILE I <= J DO
+			DECLARE descTemp CHARACTER '';
+			SET descTemp = GetMessageDescription(ptrException.*[I], FALSE, properties);
+			IF descTemp <> '' THEN
+				DECLARE index INTEGER 1;
+				WHILE CONTAINS(descTemp, '&') DO
+					DECLARE valor CHARACTER '';
+					
+					SET I = I + 1;
+					SET valor = GetMessageDescription(ptrException.*[I], TRUE, properties);
+					SET descTemp = REPLACE(descTemp, '&'||CAST(index AS CHARACTER), valor);
+					SET index = index + 1;
+				END WHILE;
+				
+				IF descripcionError <> '' THEN
+					SET descripcionError = descripcionError || ' -- ' || descTemp;
+				ELSE 
+					SET descripcionError = descTemp;
+				END IF;
+			END IF;
+			SET I = I + 1;
+		END WHILE;
+		MOVE ptrException LASTCHILD;
+	END WHILE; 
+	
+	RETURN descripcionError;
+END;
+
+CREATE FUNCTION GetMessageDescription(IN oldElement REFERENCE, IN reemplazarValor BOOLEAN, IN properties REFERENCE) RETURNS CHARACTER
+BEGIN
+	DECLARE messageException CHARACTER '';
+	
+	CASE FIELDNAME(oldElement)
+	WHEN 'Insert' THEN
+		CASE oldElement.Type
+		WHEN 12 THEN --Text
+			SET messageException = 
+				CAST(oldElement.Text AS CHAR CCSID properties.CodedCharSetId ENCODING properties.Encoding);
+		ELSE
+			SET messageException = oldElement.Text;
+		END CASE;
+	WHEN 'Text' THEN
+		SET messageException = oldElement;
+	END CASE;
+	
+	IF NOT(CONTAINS(messageException, ' ')) AND NOT(CONTAINS(messageException, '.'))  AND NOT(CONTAINS(messageException, '/')) AND NOT(reemplazarValor) THEN
+		SET messageException = '';
+	END IF;
+	
+	RETURN messageException;
+END;
 
 CREATE FUNCTION GetServiceName(IN endpoint CHARACTER) RETURNS CHARACTER
 BEGIN
