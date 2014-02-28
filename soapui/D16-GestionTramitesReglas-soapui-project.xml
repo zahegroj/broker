@@ -540,18 +540,7 @@
          <sch:request>
             <sch:asesorCAC>
                <sch:perfil>
-                  <sch:perfilPac>ANIGEAIC1</sch:perfilPac>
-                  <!--Optional:-->
-                  <sch:habilitado>true</sch:habilitado>
-                  <!--Optional:-->
-                  <sch:regiones>
-                     <!--1 or more repetitions:-->
-                     <sch:region>9</sch:region>
-                  </sch:regiones>
-                  <!--Optional:-->
-                  <sch:nivelAcceso>?</sch:nivelAcceso>
-                  <!--Optional:-->
-                  <sch:flujoNegocio>?</sch:flujoNegocio>
+                  <sch:perfilPac>ANIGEAIC</sch:perfilPac>
                </sch:perfil>
             </sch:asesorCAC>
          </sch:request>
@@ -563,7 +552,7 @@
       <sch:reasignarTramiteRequest>
          <sch:request>
             <sch:tramite>
-               <sch:tipoTramit>?</sch:tipoTramit>
+               <sch:tipoTramite>?</sch:tipoTramite>
                <sch:estado>?</sch:estado>
                <!--Optional:-->
                <sch:cac>
