@@ -7,11 +7,11 @@ CREATE COMPUTE MODULE MapDatosCobranzaReq_CpastcReq_FanOut
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:usuarioM2K;		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:usuarioM2K);		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:region);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*3B';
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'C';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01cuenta = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:cuenta);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02maxRegistros = 1;
 
@@ -29,13 +29,13 @@ CREATE COMPUTE MODULE MapDatosCobranzaReq_Retc2cReq_FanOut
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:usuarioM2K;		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:usuarioM2K);		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:region);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*1E';
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'C';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:telefono);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:cuenta);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
 
 		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
@@ -52,13 +52,13 @@ CREATE COMPUTE MODULE MapDatosCobranzaReq_ReactcReq_FanOut
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:usuarioM2K;		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:usuarioM2K);		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:region);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*I5';
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'C';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:telefono);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:cuenta);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
 
 		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;

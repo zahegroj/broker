@@ -61,13 +61,13 @@ CREATE COMPUTE MODULE GuardarVariablesDetalleProducto
 	BEGIN
 		CALL CopyEntireMessage(InputRoot, OutputRoot);
 		
-		DECLARE usuarioM2K CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsComun:usuarioM2K;
-		DECLARE region CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsComun:region;
-		DECLARE telefono CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:telefono;
-		DECLARE cuenta CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:cuenta;
-		DECLARE fechaInicio CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:fechaInicio;
-		DECLARE fechaFin CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:fechaFin;
-		DECLARE producto CHARACTER InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:producto;
+		DECLARE usuarioM2K CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsComun:usuarioM2K);
+		DECLARE region CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsComun:region);
+		DECLARE telefono CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:telefono);
+		DECLARE cuenta CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:cuenta);
+		DECLARE fechaInicio CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:fechaInicio);
+		DECLARE fechaFin CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:fechaFin);
+		DECLARE producto CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:producto);
 		
 		SET OutputLocalEnvironment.Variables.request[] = 
 						LIST{ROW(telefono AS telefono,
@@ -85,7 +85,7 @@ CREATE COMPUTE MODULE GuardarVariablesDetalleProductoTipoGrupo
 	BEGIN
 		CALL CopyEntireMessage(InputRoot, OutputRoot);
 		
-		SET OutputLocalEnvironment.variables.tipoGrupo = InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:referencia.nsInvest:tipoGrupo;	
+		SET OutputLocalEnvironment.variables.tipoGrupo = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarDetalleProductoRequest.nsInvest:request.nsInvest:referencia.nsInvest:tipoGrupo);	
 	END;
 END MODULE;
 
@@ -361,25 +361,25 @@ CREATE COMPUTE MODULE MapPlanesYServiciosReq_Igtoc41rReq_FanOut
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K);
 		
 		--DECLARE outMsg REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request;
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S1';
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'R';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
 		
 		IF FIELDTYPE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios) IS NOT NULL THEN
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:plan;
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:fecha;
+			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:plan);
+			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:fecha);
 		ELSE
 			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv = '';
 			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv = '';
@@ -402,26 +402,26 @@ CREATE COMPUTE MODULE MapPlanesYServiciosReq_Igtoc44dReq_FanOut
 		SET OutputRoot.Properties = InputRoot.Properties;
 		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K);
 		
 		--DECLARE outMsg REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request;
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S4';
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'D';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin);
 		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
 		
 		IF FIELDTYPE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales) IS NOT NULL THEN
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:claveProd;
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:fechaProd;
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07estatusProdPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:estatusProd;
+			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:claveProd);
+			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:fechaProd);
+			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07estatusProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:estatusProd);
 		ELSE
 			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv = '';
 			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv = '';
