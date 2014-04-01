@@ -12,13 +12,26 @@
             <input path="FechaFactura3"/>
             <output path="fechaFactura"/>
         </move>
-        <function ref="fn:replace">
-            <input path="ImporteFactura3" var="ImporteFactura3"/>
-            <output path="importeFactura"/>
-            <param name="input" value="$ImporteFactura3"/>
-            <param name="pattern" value="','"/>
-            <param name="replacement" value="''"/>
-        </function>
+        <condition>
+            <if>
+                <input path="ImporteFactura3" var="ImporteFactura3"/>
+                <output path="importeFactura"/>
+                <test lang="XPath">fn:string-length($ImporteFactura3)&gt;0</test>
+                <function ref="fn:replace">
+                    <input path="$ImporteFactura3/." var="ImporteFactura3"/>
+                    <output path="."/>
+                    <param name="input" value="$ImporteFactura3"/>
+                    <param name="pattern" value="','"/>
+                    <param name="replacement" value="''"/>
+                </function>
+            </if>
+            <else>
+                <output path="importeFactura"/>
+                <assign value="0.0">
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
         <move>
             <input path="UltimaFechaFactura3"/>
             <output path="ultimaFechaFactura"/>

@@ -9,16 +9,29 @@
         <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="RespuestaOK"/>
         <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" path="type('FacturaType')"/>
         <move>
-            <input path="FechaFactura1"/>
+            <input path="FechaFactura1" var="FechaFactura1"/>
             <output path="fechaFactura"/>
         </move>
-        <function ref="fn:replace">
-            <input path="ImporteFactura1" var="ImporteFactura1"/>
-            <output path="importeFactura"/>
-            <param name="input" value="$ImporteFactura1"/>
-            <param name="pattern" value="','"/>
-            <param name="replacement" value="''"/>
-        </function>
+        <condition>
+            <if>
+                <input path="ImporteFactura1" var="ImporteFactura1"/>
+                <output path="importeFactura"/>
+                <test lang="XPath">fn:string-length($ImporteFactura1)&gt;0</test>
+                <function ref="fn:replace">
+                    <input path="$ImporteFactura1/." var="ImporteFactura1"/>
+                    <output path="."/>
+                    <param name="input" value="$ImporteFactura1"/>
+                    <param name="pattern" value="','"/>
+                    <param name="replacement" value="''"/>
+                </function>
+            </if>
+            <else>
+                <output path="importeFactura"/>
+                <assign value="0.0">
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
         <move>
             <input path="UltimaFechaFactura1"/>
             <output path="ultimaFechaFactura"/>
