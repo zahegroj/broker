@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/Igtoc64AFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/Igtoc64AFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="93,221" wsdlFileName="m2k/wmb/Igtoc64AService.wsdl" selectedPortType="Igtoc64CPort" selectedBinding="Igtoc64CBinding" selectedPort="Igtoc64C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Igtoc64AService" allowQueryWSDL="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="93,221" wsdlFileName="m2k/wmb/Igtoc64AService.wsdl" selectedPortType="Igtoc64APort" selectedBinding="Igtoc64ABinding" selectedPort="Igtoc64A" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" useHTTPTransport="true" urlSelector="/di/sds/m2k/activaciones/wmb/Igtoc64AService" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_m2k_Igtoc64CElegiroperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="232,217">
