@@ -358,8 +358,8 @@
             <servicio>
 			<p01telefono longitud="10">5527671654</p01telefono>
 			<p02cuenta longitud="09"></p02cuenta>
-			<p03fechaConexion longitud="08">12/10/13</p03fechaConexion>
-			<p04horaConexion longitud="08">10:16:59</p04horaConexion>
+			<p03fechaConexion longitud="08">27/02/14</p03fechaConexion>
+			<p04horaConexion longitud="08">15:10:45</p04horaConexion>
 			<p05refDtConnect longitud="07"></p05refDtConnect>
 			<p06refTmConnect longitud="06"></p06refTmConnect>
 			<p07ChargingId longitud="10"></p07ChargingId>

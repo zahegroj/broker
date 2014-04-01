@@ -389,8 +389,8 @@
          <action>C</action>
          <inputParameters>
             <servicio>
-               <p01telefono longitud="10">5527671654</p01telefono>
-               <p02cuenta longitud="09"></p02cuenta>
+               <p01telefono longitud="10">5521994533</p01telefono>
+               <p02cuenta longitud="09">7042565</p02cuenta>
             </servicio>
          </inputParameters>
       </c:Request>
