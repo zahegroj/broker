@@ -12,7 +12,7 @@
         <translation xmi:type="utility:TranslatableString" key="InTerminal.in" bundleName="gen/DeterminarAdeudoInvokeFlow" pluginId="D16_ReglasApp"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="DeterminarAdeudo.wsdl" selectedPortType="DeterminarAdeudoDecisionService" selectedBinding="D16_GestorTramitesRuleAPPDeterminarAdeudoBinding" selectedOperation="DeterminarAdeudo" selectedPort="D16_GestorTramitesRuleAPPDeterminarAdeudoPort" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" useHTTPTransport="true" webServiceURL="http://10.191.80.41:9081/DecisionService/ws/D16_GestorTramitesRuleAPP/1.0/DeterminarAdeudo/1.0/v75"
-          sslProtocol="TLS">
+          sslProtocol="TLS" parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
         <translation xmi:type="utility:ConstantString" string="Request"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="320,80" envelopeDestination="$LocalEnvironment/SOAP/Envelope/OperResponse/D16_GestorTramitesRuleAPPDeterminarAdeudoBinding/DeterminarAdeudo" labelPrefix="">
@@ -33,8 +33,9 @@
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="OutTerminal.failure" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="OutTerminal.failure" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="OutTerminal.fault" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="OutTerminal.DeterminarAdeudoResponse" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="OutTerminal.failure" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="OutTerminal.fault" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>
