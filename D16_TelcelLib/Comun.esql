@@ -47,6 +47,7 @@ DECLARE EX_SOL_M2K_REACTC   CONSTANT CHARACTER '';
 DECLARE EX_SOL_M2K_RETC2C   CONSTANT CHARACTER '';
 DECLARE EX_SOL_M2K_RETUSC   CONSTANT CHARACTER '';
 DECLARE EX_SOL_M2K_SUMIQC   CONSTANT CHARACTER '';
+DECLARE EX_SOL_ODM 			CONSTANT CHARACTER 'MENSAJE SOLUCION REGLAS';
 
 DECLARE EX_SOL_WMB_VAL   CONSTANT CHARACTER '';
 DECLARE EX_SOL_WMB_SIS   CONSTANT CHARACTER '';
@@ -138,7 +139,7 @@ BEGIN
 	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:tipo = EX_TIPO_SIS;
 	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:codigo = EX_COD_M2K;
 	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:descripcion = respuestaError.MENSAJE;
-	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:solucion = '';
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:solucion = msgSolucion;
 	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:servicioOrigen = servOrigen;
 	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:idPeticion = idPeticion;
 END;
@@ -164,4 +165,28 @@ BEGIN
 	SET gtWMBException.nsComun:errores.nsComun:error[i].solucion = msgSolucion;
 	SET gtWMBException.nsComun:errores.nsComun:error[i].servicioOrigen = servOrigen;
 	SET gtWMBException.nsComun:errores.nsComun:error[i].idPeticion = FIELDVALUE(respuestaError.ESTATUS.(XML.Attribute)IDPETICION);
+END;
+
+CREATE PROCEDURE ODMErrorToGTWMBException(IN gtWMBException REFERENCE, 
+	IN mensajeExcepcion CHARACTER,
+	IN idPeticion CHARACTER,
+	IN odmServicioInvocado CHARACTER,
+	IN msgSolucion CHARACTER)
+BEGIN
+	DECLARE i INTEGER 1;
+	IF FIELDTYPE(gtWMBException.nsComun:errores) IS NOT NULL THEN
+		SET i = CARDINALITY(gtWMBException.nsComun:errores.nsComun:error[]) + 1;
+	END IF;
+	
+	DECLARE servOrigen CHARACTER odmServicioInvocado;
+	--IF FIELDTYPE(respuestaError.PROGRAMA) IS NOT NULL THEN
+	--	SET servOrigen = respuestaError.PROGRAMA;
+	--END IF;
+	
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:tipo = EX_TIPO_SIS;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:codigo = EX_COD_REGLAS;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:descripcion = mensajeExcepcion;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:solucion = msgSolucion;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:servicioOrigen = servOrigen;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:idPeticion = idPeticion;
 END;
