@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><definitions name="Igtoc64C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/a" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?><definitions name="Igtoc64A" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/a" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<documentation>
 		<appinfo source="WMQI_APPINFO">
 			<MRWSDLAppInfo imported="true">
-				<binding hasEncoding="false" imported="true" name="Igtoc64CBinding" originalBindingStyle="document"/>
+				<binding hasEncoding="false" imported="true" name="Igtoc64ABinding" originalBindingStyle="document"/>
 			</MRWSDLAppInfo>
 		</appinfo>
 	</documentation>
@@ -24,7 +24,7 @@
 		<part element="comun:RespuestaError" name="parameters"/>
 	</message>
 	
-	<portType name="Igtoc64CPort">
+	<portType name="Igtoc64APort">
 		<operation name="ejecutarServicio">
 			<input message="this:ejecutarServicioMsg"/>
 			<output message="this:ejecutarServicioMsgResponse"/>
@@ -32,10 +32,10 @@
 		</operation>
 	</portType>
 	
-	<binding name="Igtoc64CBinding" type="this:Igtoc64CPort">
+	<binding name="Igtoc64ABinding" type="this:Igtoc64APort">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<operation name="ejecutarServicio">
-			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/c/ejecutarServicio"/>
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc64/a/ejecutarServicio"/>
 			<input>
 				<soap:body use="literal"/>
 			</input>
@@ -48,9 +48,9 @@
 		</operation>
 	</binding>
 	
-	<service name="Igtoc64CService">
-		<port binding="this:Igtoc64CBinding" name="Igtoc64C">
-			<soap:address location="http://localhost:7800/di/sds/m2k/activaciones/wmb/Igtoc64CService"/>
+	<service name="Igtoc64AService">
+		<port binding="this:Igtoc64ABinding" name="Igtoc64A">
+			<soap:address location="http://localhost:7800/di/sds/m2k/activaciones/wmb/Igtoc64AService"/>
 		</port>
 	</service>
 </definitions>

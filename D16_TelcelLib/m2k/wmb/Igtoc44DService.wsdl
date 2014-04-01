@@ -48,7 +48,7 @@
 		</operation>
 	</binding>
 	
-	<service name="Igtoc44CService">
+	<service name="Igtoc44DService">
 		<port binding="this:Igtoc44DBinding" name="Igtoc44D">
 			<soap:address location="http://localhost:7800/di/sds/m2k/activaciones/wmb/Igtoc44DService"/>
 		</port>
