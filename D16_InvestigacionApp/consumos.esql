@@ -29,10 +29,14 @@ BEGIN
 			TRIM(respuestaOK.LargaDistancia[i]) <> '' OR
 			TRIM(respuestaOK.Total[i]) <> '' THEN
 			
+			DECLARE telMarcado CHARACTER '';
+			IF LENGTH(TRIM(respuestaOK.TelMarcado[i])) = 10 THEN
+				SET telMarcado = TRIM(respuestaOK.TelMarcado[i]);
+			END IF;
 			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:fecha = TRIM(respuestaOK.Fecha[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:hora = TRIM(respuestaOK.Hora[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:ciudadOrigen = TRIM(respuestaOK.CiudadOrigen[i]);
-			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:telMarcado = TRIM(respuestaOK.TelMarcado[i]);
+			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:telMarcado = telMarcado;
 			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:ciudadDestino = TRIM(respuestaOK.CiudadDestino[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:sv = TRIM(respuestaOK.Sv[i]);
 			SET outputRootNode.XMLNSC.nsInvest:consultarConsumosResponse.nsInvest:response.nsInvest:consumos.nsInvest:consumo[j].nsInvest:cl = TRIM(respuestaOK.Cl[i]);
