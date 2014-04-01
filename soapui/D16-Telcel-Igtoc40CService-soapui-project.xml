@@ -359,10 +359,10 @@
          <action>C</action>
          <inputParameters>
             <servicio>
-               <p01telefono longitud="10">5522700538</p01telefono>
-               <p02cuenta longitud="09">001862574</p02cuenta>
-               <p03fechaInicio longitud="08">21/11/13</p03fechaInicio>
-               <p04fechaFin longitud="08">21/12/13</p04fechaFin>
+               <p01telefono longitud="10">5527671654</p01telefono>
+               <p02cuenta longitud="09">006385120</p02cuenta>
+               <p03fechaInicio longitud="08">28/03/14</p03fechaInicio>
+               <p04fechaFin longitud="08">28/03/14</p04fechaFin>
                <p05fechaPiv longitud="07"></p05fechaPiv>
                <p06horaPiv longitud="07"></p06horaPiv>
                <p07fuentePiv longitud="06"></p07fuentePiv>
