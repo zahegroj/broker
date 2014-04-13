@@ -54,7 +54,7 @@
 	
 	<xsd:complexType name="TablaCpastType">
 		<xsd:sequence>
-			<xsd:group ref="subgroup_output_tablacpast" maxOccurs="unbounded"/>
+			<xsd:group ref="subgroup_output_tablacpast" maxOccurs="unbounded" minOccurs="0"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	

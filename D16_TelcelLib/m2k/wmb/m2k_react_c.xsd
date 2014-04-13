@@ -32,22 +32,24 @@
 	<xsd:complexType name="RespuestaOKType">
 		<xsd:complexContent>
 			<xsd:extension base="m2k:ResponseBase">
-				<xsd:sequence>
-					<xsd:element minOccurs="0" name="Errores" type="m2k:ErroresInfoType"/>
+				<xsd:sequence>					
 					<xsd:element name="EstatusTelefono" type="xsd:string"/>
 					<xsd:element name="MotivoInfo" type="xsd:string"/>
 					<xsd:element name="EstatusDeCobranza" type="xsd:string"/>
 					<xsd:element name="ResponsabilidadPago" type="xsd:string"/>
 					<xsd:element name="ChequeDevuelto" type="xsd:string"/>
+					<xsd:element name="EstatusCuenta" type="xsd:string"/>
 					<xsd:element name="Consolid" type="xsd:string"/>
 					<xsd:element name="PoolCorporativo" type="xsd:string"/>
 					<xsd:element name="CuentaPadre" type="xsd:string"/>
 					<xsd:element name="EstCob" type="xsd:string"/>
+					<xsd:element name="SaldoActual" type="xsd:string"/>
 					<xsd:element name="SaldoVencido" type="xsd:string"/>
+					<xsd:element name="SaldoEstimado" type="xsd:string"/>
+					<xsd:element name="SaldoTelReact" type="xsd:string"/>
 					<xsd:element name="LimiteCredito" type="xsd:string"/>
 					<xsd:element name="PorcientoRestauracion" type="xsd:string"/>
-					<xsd:element name="ImportePagar" type="xsd:string"/>
-					<xsd:element name="SaldoEstimado" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="Errores" type="m2k:ErroresInfoType"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

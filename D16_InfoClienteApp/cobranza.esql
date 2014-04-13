@@ -238,13 +238,25 @@ CREATE COMPUTE MODULE BuildConsultarDatosCobranzaResponse
 			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse, oldNamespace, nsInfoCli);
 			
 			DECLARE limiteCredito CHARACTER REPLACE(TRIM(respuestaOKRetc2c.LimiteCredito), ',', '');
+			DECLARE accionCobranza CHARACTER '';
+			DECLARE motivoCobranza CHARACTER '';
+			
 			IF limiteCredito = '' THEN
 				SET limiteCredito = '0';
 			END IF;
+			
+			IF FIELDTYPE(respuestaOKCpastc.TablaCpast.AccionTomada[1]) IS NOT NULL THEN
+				SET accionCobranza = TRIM(respuestaOKCpastc.TablaCpast.AccionTomada[1]);
+			END IF;
+			
+			IF FIELDTYPE(respuestaOKCpastc.TablaCpast.Est[1]) IS NOT NULL THEN
+				SET motivoCobranza = TRIM(respuestaOKCpastc.TablaCpast.Est[1]);
+			END IF;
+			
 			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:limiteCredito = limiteCredito;
-			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:accionCobranza = TRIM(respuestaOKCpastc.TablaCpast.AccionTomada[1]);
-			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:motivoCobranza = TRIM(respuestaOKCpastc.TablaCpast.Est[1]);
-			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:montoMinimoPagar = REPLACE(TRIM(respuestaOKReactc.ImportePagar), ',', '');
+			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:accionCobranza = accionCobranza;
+			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:motivoCobranza = motivoCobranza;
+			SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:montoMinimoPagar = REPLACE(TRIM(respuestaOKReactc.SaldoActual), ',', '');
 			
 			SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
 		END IF;
