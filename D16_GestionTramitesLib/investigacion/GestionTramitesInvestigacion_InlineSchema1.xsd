@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" xmlns:types="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" schemaLocation="GestionTramitesInvestigacion.xsd"/>
-<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="GestionTramitesComun.xsd"/>
-</xsd:schema>

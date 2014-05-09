@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc46/d" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc46/d" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc46/d" schemaLocation="m2k_igtoc46_d.xsd"/>
-<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
-</xsd:schema>
