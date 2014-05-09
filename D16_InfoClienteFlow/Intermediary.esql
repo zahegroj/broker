@@ -1,0 +1,61 @@
+CREATE DATABASE MODULE SynchRR_Initialise
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET Environment.PatternVariables.StatusCode = 0;
+		DECLARE EVRef REFERENCE TO Environment.PatternVariables;
+		SET EVRef.RRMode = 'Request';
+		-- Set the broker queue manager here to save a compute node later
+		SET EVRef.BrokerQueueManager = SQL.QueueManagerName;
+		SET EVRef.SOAPReplyIdentifier = 
+			LocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE STRIP
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+/*********************************************************
+*  Remove HTTP header and SOAP envelope                  *
+**********************************************************/
+
+	SET OutputRoot.Properties = InputRoot.Properties;
+	SET OutputRoot.XMLNSC = InputRoot.*:SOAP.*:Body[1];
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE SynchRR_BuildStoreMsg
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- Use same MQMD as for main message 
+		-- REPLYTO will be ignored
+		Set OutputRoot.MQMD = InputRoot.MQMD; 
+		SET OutputRoot.BLOB.BLOB = 	Environment.PatternVariables.SOAPReplyIdentifier;
+		-- SET CorrelId to Message ID of message sent to provider
+		-- This will be required by the MQGet node, which gets a message using the correlation ID.
+		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.WrittenDestination.MQ.DestinationData.msgId;
+		SET OutputRoot.MQMD.Expiry = MQEI_UNLIMITED; 	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE SynchRR_SetResponseMode
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET Environment.PatternVariables.RRMode = 'Response';
+		RETURN TRUE;
+		END;
+END MODULE;
+
+CREATE COMPUTE MODULE SynchRR_RestoreReplyId
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputLocalEnvironment.BLOB.BLOB;
+		SET OutputRoot.Properties.CodedCharSetId = 1208;
+		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse;
+		RETURN TRUE;
+		END;
+END MODULE;
