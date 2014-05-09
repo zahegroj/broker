@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/CpastCFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/CpastCFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="127,183" wsdlFileName="m2k/wmb/CpastCService.wsdl" selectedPortType="CpastCPort" selectedBinding="CpastCBinding" selectedPort="CpastC" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/wmb/cpast/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/cobranza/wmb/CpastCService" allowQueryWSDL="true" usingWsAddressing="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="127,183" wsdlFileName="m2k/wmb/CpastCService.wsdl" selectedPortType="CpastCPort" selectedBinding="CpastCBinding" selectedPort="CpastC" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/wmb/cpast/c" useHTTPTransport="true" urlSelector="/di/sds/m2k/cobranza/wmb/CpastCService" maxClientWaitTime="100" allowQueryWSDL="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_m2k_CpastCElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="270,179">
@@ -44,9 +44,9 @@
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.timeout" targetTerminalName="InTerminal.Input"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

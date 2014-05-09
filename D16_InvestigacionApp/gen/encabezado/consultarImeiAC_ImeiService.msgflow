@@ -11,7 +11,7 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.in" location="20,20">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.in" bundleName="gen/encabezado/consultarImeiAC_ImeiService" pluginId="D16_InvestigacionApp"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="imei/wmb/ImeiService.wsdl" selectedPortType="ImeiPort" selectedBinding="ImeiBinding" selectedOperation="consultarImeiAC" selectedPort="Imei" targetNamespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" useHTTPTransport="true" webServiceURL="http://localhost:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService" sslProtocol="TLS">
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="imei/wmb/ImeiService.wsdl" selectedPortType="ImeiPort" selectedBinding="ImeiBinding" selectedOperation="consultarImeiAC" selectedPort="Imei" targetNamespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" useHTTPTransport="true" webServiceURL="http://localhost:7801/di/sds/gsm/sistemasadministrativos/wmb/ImeiService" requestTimeout="110" sslProtocol="TLS">
         <translation xmi:type="utility:ConstantString" string="Request"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="320,80" envelopeDestination="$LocalEnvironment/SOAP/Envelope/OperResponse/ImeiBinding/consultarImeiAC" labelPrefix="">

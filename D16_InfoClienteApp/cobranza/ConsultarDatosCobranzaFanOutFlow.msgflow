@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmAggregateControl.msgnode="ComIbmAggregateControl.msgnode" xmlns:ComIbmAggregateRequest.msgnode="ComIbmAggregateRequest.msgnode" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="cobranza/ConsultarDatosCobranzaFanOutFlow.msgflow"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmAggregateControl.msgnode="ComIbmAggregateControl.msgnode" xmlns:ComIbmAggregateRequest.msgnode="ComIbmAggregateRequest.msgnode" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="cobranza/ConsultarDatosCobranzaFanOutFlow.msgflow"
     nsPrefix="cobranza_ConsultarDatosCobranzaFanOutFlow.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
     <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
@@ -9,49 +9,49 @@
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InfoClienteApp/icons/full/obj30/ConsultarDatosCobranzaFanOutFlow.gif"/>
     <version xmi:type="utility:ConstantString" string="AggregateDatosCobranza"/>
     <composition>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="487,211" queueName="QL.GT_COB_RETC2C.OUT" transactionMode="yes" validateMaster="none">
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="505,211" queueName="QL.GT_COB_RETC2C.OUT" request="true" replyToQ="QL.GT_COB_RETC2C_AGGR.IN" validateMaster="none">
         <translation xmi:type="utility:ConstantString" string="QL.GT_COB_RETC2C.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="667,94" folderName="AggregateCpastcReq">
-        <translation xmi:type="utility:ConstantString" string="Aggregate Request"/>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="709,94" folderName="AggregateCpastcReq">
+        <translation xmi:type="utility:ConstantString" string="Aggregate Request CpastC"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="372,331" computeExpression="esql://routine/#MapDatosCobranzaReq_ReactcReq_FanOut.Main" computeMode="destinationAndMessage">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="372,331" computeExpression="esql://routine/#MapDatosCobranzaReq_ReactcReq_FanOut.Main">
         <translation xmi:type="utility:ConstantString" string="Map ReactC Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="369,210" computeExpression="esql://routine/#MapDatosCobranzaReq_Retc2cReq_FanOut.Main" computeMode="destinationAndMessage">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="369,210" computeExpression="esql://routine/#MapDatosCobranzaReq_Retc2cReq_FanOut.Main">
         <translation xmi:type="utility:ConstantString" string="Map Retc2C Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateControl.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="181,214" aggregateName="AggregateDatosCobranza">
+      <nodes xmi:type="ComIbmAggregateControl.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="181,214" aggregateName="AggregateDatosCobranza" timeoutInterval="115">
         <translation xmi:type="utility:ConstantString" string="Aggregate Control"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="662,215" folderName="AggregateRetc2cReq">
-        <translation xmi:type="utility:ConstantString" string="Aggregate Request1"/>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="704,215" folderName="AggregateRetc2cReq">
+        <translation xmi:type="utility:ConstantString" string="Aggregate Request Retc2C"/>
       </nodes>
-      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="99,214">
-        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="cobranza/ConsultarDatosCobranzaFanOutFlow" pluginId="D16_InfoClienteApp"/>
-      </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="484,332" queueName="QL.GT_COB_REACTC.OUT" transactionMode="yes" validateMaster="none">
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="502,332" queueName="QL.GT_COB_REACTC.OUT" request="true" replyToQ="QL.GT_COB_REACTC_AGGR.IN" validateMaster="none">
         <translation xmi:type="utility:ConstantString" string="QL.GT_COB_REACTC.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="487,90" queueName="QL.GT_COB_CPASTC.OUT" transactionMode="yes" validateMaster="none">
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="505,90" queueName="QL.GT_COB_CPASTC.OUT" request="true" replyToQ="QL.GT_COB_CPASTC_AGGR.IN" validateMaster="none">
         <translation xmi:type="utility:ConstantString" string="QL.GT_COB_CPASTC.OUT"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="373,89" computeExpression="esql://routine/#MapDatosCobranzaReq_CpastcReq_FanOut.Main" computeMode="destinationAndMessage">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="373,89" computeExpression="esql://routine/#MapDatosCobranzaReq_CpastcReq_FanOut.Main">
         <translation xmi:type="utility:ConstantString" string="Map CpastC Req"/>
       </nodes>
-      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="660,336" folderName="AggregateReactcReq">
-        <translation xmi:type="utility:ConstantString" string="Aggregate Request2"/>
+      <nodes xmi:type="ComIbmAggregateRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="711,336" folderName="AggregateReactcReq">
+        <translation xmi:type="utility:ConstantString" string="Aggregate Request ReactC"/>
       </nodes>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_5" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="13,214" queueName="QL.GT_COB_REQ.OUT" messageDomainProperty="XMLNSC" transactionMode="automatic">
+        <translation xmi:type="utility:ConstantString" string="QL.GT_COB_REQ.OUT"/>
+      </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

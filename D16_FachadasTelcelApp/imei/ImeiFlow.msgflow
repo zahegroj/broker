@@ -9,7 +9,7 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj16/ImeiFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_FachadasTelcelApp/icons/full/obj30/ImeiFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="37,212" wsdlFileName="imei/wmb/ImeiService.wsdl" selectedPortType="ImeiPort" selectedBinding="ImeiBinding" selectedPort="Imei" targetNamespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" useHTTPTransport="true" urlSelector="/di/sds/gsm/sistemasadministrativos/wmb/ImeiService" allowQueryWSDL="true" usingWsAddressing="true">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="37,212" wsdlFileName="imei/wmb/ImeiService.wsdl" selectedPortType="ImeiPort" selectedBinding="ImeiBinding" selectedPort="Imei" targetNamespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" useHTTPTransport="true" urlSelector="/di/sds/gsm/sistemasadministrativos/wmb/ImeiService" maxClientWaitTime="100" allowQueryWSDL="true" usingWsAddressing="true">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="931,234" validateMaster="contentAndValue">

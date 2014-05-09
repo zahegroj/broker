@@ -26,7 +26,6 @@ BEGIN
 		SET outputRootNode.XMLNSC.nsInvest:consultarDetallePlanTarifarioResponse.nsInvest:response.nsInvest:detallePlanTarifario.nsInvest:costoPlan = REPLACE(TRIM(respuestaOK.CosPl), ',', '');
 	END IF;
 	
-	
 	DECLARE countArr INT CARDINALITY(respuestaOK.Producto[]);	
 
 	DECLARE i INTEGER 1;
@@ -271,124 +270,39 @@ CREATE COMPUTE MODULE MapIgtoc51cResp_Response
 	END;
 END MODULE;
 
-CREATE COMPUTE MODULE ConsultarPlanesYServiciosFanOut
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		DECLARE ns41r NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r';
-		DECLARE ns44d NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc44/d';
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
-		-- CREAR REQUEST IGTOC41R
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
-
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns41r:Request.user = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K;
-		
-		DECLARE outMsg REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns41r:Request;
-		
-		SET outMsg.region = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region;
-		SET outMsg.function = 'I*S1';
-		SET outMsg.action = 'R';
-		SET outMsg.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono;
-		SET outMsg.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET outMsg.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta;
-		SET outMsg.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
-		SET outMsg.inputParameters.servicio.p03fechaInicio = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio;
-		SET outMsg.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
-		SET outMsg.inputParameters.servicio.p04fechaFin = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin;
-		SET outMsg.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
-		
-		IF FIELDTYPE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios) IS NOT NULL THEN
-			SET outMsg.inputParameters.servicio.p05planPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:plan;
-			SET outMsg.inputParameters.servicio.p06fechaPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:fecha;
-		ELSE
-			SET outMsg.inputParameters.servicio.p05planPiv = '';
-			SET outMsg.inputParameters.servicio.p06fechaPiv = '';
-		END IF;
-		SET outMsg.inputParameters.servicio.p05planPiv.(XMLNSC.Attribute)longitud VALUE = '05';
-		SET outMsg.inputParameters.servicio.p06fechaPiv.(XMLNSC.Attribute)longitud VALUE = '07';
-		
-		PROPAGATE TO TERMINAL 'out1';
-		
-		-- CREAR REQUEST IGTOC44D
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns44d:Request.user = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K;
-		
-		DECLARE outMsg1 REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns44d:Request;
-		
-		SET outMsg1.region = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region;
-		SET outMsg1.function = 'I*S4';
-		SET outMsg1.action = 'D';
-		SET outMsg1.inputParameters.servicio.p01telefono = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono;
-		SET outMsg1.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET outMsg1.inputParameters.servicio.p02cuenta = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta;
-		SET outMsg1.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
-		SET outMsg1.inputParameters.servicio.p03fechaInicio = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio;
-		SET outMsg1.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
-		SET outMsg1.inputParameters.servicio.p04fechaFin = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin;
-		SET outMsg1.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
-		
-		IF FIELDTYPE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales) IS NOT NULL THEN
-			SET outMsg1.inputParameters.servicio.p05claveProdPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:claveProd;
-			SET outMsg1.inputParameters.servicio.p06fechaProdPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:fechaProd;
-			SET outMsg1.inputParameters.servicio.p07estatusProdPiv = InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:estatusProd;
-		ELSE
-			SET outMsg1.inputParameters.servicio.p05claveProdPiv = '';
-			SET outMsg1.inputParameters.servicio.p06fechaProdPiv = '';
-			SET outMsg1.inputParameters.servicio.p07estatusProdPiv = '';
-		END IF;
-		SET outMsg1.inputParameters.servicio.p05claveProdPiv.(XMLNSC.Attribute)longitud VALUE = '05';
-		SET outMsg1.inputParameters.servicio.p06fechaProdPiv.(XMLNSC.Attribute)longitud VALUE = '07';
-		SET outMsg1.inputParameters.servicio.p07estatusProdPiv.(XMLNSC.Attribute)longitud VALUE = '01';
-		
-		PROPAGATE TO TERMINAL 'out2';
-		
-		RETURN TRUE;
-	END;
-END MODULE;
-
 CREATE COMPUTE MODULE MapPlanesYServiciosReq_Igtoc41rReq_FanOut
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r';
 		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K);
-		
-		--DECLARE outMsg REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S1';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'R';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K);		
+		SET OutputRoot.XMLNSC.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region);
+		SET OutputRoot.XMLNSC.ns:Request.function = 'I*S1';
+		SET OutputRoot.XMLNSC.ns:Request.action = 'R';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p01telefono = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p03fechaInicio = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p04fechaFin = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
 		
 		IF FIELDTYPE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios) IS NOT NULL THEN
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:plan);
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:fecha);
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p05planPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:plan);
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p06fechaPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:fecha);
 		ELSE
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv = '';
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv = '';
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p05planPiv = '';
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p06fechaPiv = '';
 		END IF;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv.(XMLNSC.Attribute)longitud VALUE = '05';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv.(XMLNSC.Attribute)longitud VALUE = '07';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p05planPiv.(XMLNSC.Attribute)longitud VALUE = '05';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p06fechaPiv.(XMLNSC.Attribute)longitud VALUE = '07';
 		
-		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
-		RETURN FALSE;
+		SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+		RETURN TRUE;
 	END;
 END MODULE;
 
@@ -398,96 +312,35 @@ CREATE COMPUTE MODULE MapPlanesYServiciosReq_Igtoc44dReq_FanOut
 		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc44/d';
 		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
 		
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
 		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K);
-		
-		--DECLARE outMsg REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S4';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'D';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin);
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.ns:Request.user = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K);		
+		SET OutputRoot.XMLNSC.ns:Request.region = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region);
+		SET OutputRoot.XMLNSC.ns:Request.function = 'I*S4';
+		SET OutputRoot.XMLNSC.ns:Request.action = 'D';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p01telefono = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p03fechaInicio = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p04fechaFin = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin);
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
 		
 		IF FIELDTYPE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales) IS NOT NULL THEN
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:claveProd);
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:fechaProd);
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07estatusProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:estatusProd);
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p05claveProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:claveProd);
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p06fechaProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:fechaProd);
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p07estatusProdPiv = FIELDVALUE(InputRoot.XMLNSC.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:estatusProd);
 		ELSE
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv = '';
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv = '';
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07estatusProdPiv = '';
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p05claveProdPiv = '';
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p06fechaProdPiv = '';
+			SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p07estatusProdPiv = '';
 		END IF;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv.(XMLNSC.Attribute)longitud VALUE = '05';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv.(XMLNSC.Attribute)longitud VALUE = '07';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07estatusProdPiv.(XMLNSC.Attribute)longitud VALUE = '01';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p05claveProdPiv.(XMLNSC.Attribute)longitud VALUE = '05';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p06fechaProdPiv.(XMLNSC.Attribute)longitud VALUE = '07';
+		SET OutputRoot.XMLNSC.ns:Request.inputParameters.servicio.p07estatusProdPiv.(XMLNSC.Attribute)longitud VALUE = '01';
 		
-		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
-		RETURN FALSE;
-	END;
-END MODULE;
-
-CREATE COMPUTE MODULE Igtoc41rReq_MQtoSOAP
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		CALL CopyEntireMessage(InputRoot, OutputRoot);
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
-		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId; 
-		
-		SET OutputLocalEnvironment.Variables.CorrelId = InputRoot.MQMD.CorrelId;
-		SET OutputLocalEnvironment.Variables.MsgId = InputRoot.MQMD.MsgId;
-		RETURN TRUE;
-	END;
-END MODULE;
-
-CREATE COMPUTE MODULE Igtoc44dReq_MQtoSOAP
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		CALL CopyEntireMessage(InputRoot, OutputRoot);
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputLocalEnvironment.Destination.SOAP.Request.UserContext = InputRoot.MQMD.CorrelId;
-		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.MQMD.MsgId; 
-		
-		SET OutputLocalEnvironment.Variables.CorrelId = InputRoot.MQMD.CorrelId;
-		SET OutputLocalEnvironment.Variables.MsgId = InputRoot.MQMD.MsgId;
-		RETURN TRUE;
-	END;
-END MODULE;
-
-CREATE COMPUTE MODULE Igtoc41rResp_SOAPtoMQ
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.Properties.ReplyIdentifier = 
-			InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
-		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
-		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.SOAP.Response.UserContext;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = InputRoot.SOAP.Body;
-		RETURN TRUE;
-	END;
-END MODULE;
-
-CREATE COMPUTE MODULE Igtoc44dResp_SOAPtoMQ
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.Properties.ReplyIdentifier = 
-			InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
-		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
-		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.SOAP.Response.UserContext;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = InputRoot.SOAP.Body;
+		SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
 		RETURN TRUE;
 	END;
 END MODULE;
@@ -501,11 +354,13 @@ CREATE COMPUTE MODULE BuildConsultarPlanesYServiciosResponse
 		DECLARE existenErrores BOOLEAN FALSE;
 		DECLARE existenErroresGT BOOLEAN FALSE;
 		
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputRoot.ComIbmAggregateReplyBody.*[<].MQMD.MsgId;
+		SET OutputRoot.Properties = InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.Properties;
+		SET OutputRoot.MQMD = InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.MQMD;
+	    SET OutputRoot.MQMD.CorrelId = OutputRoot.MQMD.MsgId;
+		SET OutputRoot.Properties.ReplyIdentifier = OutputRoot.MQMD.MsgId;
 		
-		IF  FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR
-			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+		IF  FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL OR
+			FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
 			
 			SET existenErrores = TRUE;
 		ELSEIF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL OR
@@ -515,48 +370,48 @@ CREATE COMPUTE MODULE BuildConsultarPlanesYServiciosResponse
 		END IF;
 		
 		IF existenErrores THEN
-			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar planes y servicios.';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarPlanesYServicios';
+			SET OutputRoot.XMLNSC.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.XMLNSC.soapenv:Fault.faultstring = 'Ocurrió un error al consultar planes y servicios.';
+			SET OutputRoot.XMLNSC.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+			SET OutputRoot.XMLNSC.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarPlanesYServicios';
 			
-			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
-				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
-					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
-					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.XMLNSC.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
 					'm2k - Igtoc41 (function: I*S1, action: R)',
 					EX_SOL_M2K_IGTOC41R);
 			END IF;
 			
-			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
-				CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
-					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
-					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Fault.detail.nsM2KFac:RespuestaError) IS NOT NULL THEN
+				CALL M2KErrorToGTWMBException(OutputRoot.XMLNSC.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+					InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
 					'm2k - Igtoc44 (function: I*S4, action: D)',
 					EX_SOL_M2K_IGTOC44D);
 			END IF;
 		ELSEIF existenErroresGT THEN
 			DECLARE index INTEGER 0;
 			
-			SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar planes y servicios.';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
-			SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarPlanesYServicios';
+			SET OutputRoot.XMLNSC.soapenv:Fault.faultcode = 'NS1:Server';
+			SET OutputRoot.XMLNSC.soapenv:Fault.faultstring = 'Ocurrió un error al consultar planes y servicios.';
+			SET OutputRoot.XMLNSC.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+			SET OutputRoot.XMLNSC.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarPlanesYServicios';
 			
 			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
 				SET index = index + 1;
-				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
+				SET OutputRoot.XMLNSC.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
 						InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1];
 			END IF;
 	
 			IF FIELDTYPE(InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException) IS NOT NULL THEN
 				SET index = index + 1;
-				SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
+				SET OutputRoot.XMLNSC.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[index] =
 						InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:errores.nsComun:error[1];
 			END IF;		
 		ELSE
-			DECLARE respuestaOK41r REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc41r:RespuestaOK;
-			DECLARE respuestaOK44d REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.soapenv:Envelope.soapenv:Body.nsIgtoc44d:RespuestaOK;
+			DECLARE respuestaOK41r REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc41rReq.XMLNSC.nsIgtoc41r:RespuestaOK;
+			DECLARE respuestaOK44d REFERENCE TO InputRoot.ComIbmAggregateReplyBody.AggregateIgtoc44dReq.XMLNSC.nsIgtoc44d:RespuestaOK;
 			
 			CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarPlanesYServiciosResponse';
 			CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarPlanesYServiciosResponse Domain('XMLNSC') NAME 'response';
@@ -565,8 +420,6 @@ CREATE COMPUTE MODULE BuildConsultarPlanesYServiciosResponse
 	
 			CALL MapPlanesTarifarios(OutputRoot, respuestaOK41r);
 			CALL MapServiciosAdicionales(OutputRoot, respuestaOK44d);
-		
-			SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
 		END IF;
 		RETURN TRUE;
 	END;
@@ -705,91 +558,6 @@ BEGIN
 	END IF;
 END;
 
-CREATE COMPUTE MODULE MapPlanesYServiciosReq_Igtoc41rReq_FanOut_1
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc41/r';
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K;
-		
-		--DECLARE outMsg REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S1';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'R';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
-		
-		IF FIELDTYPE(InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios) IS NOT NULL THEN
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:plan;
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaPlanesTarifarios.nsInvest:fecha;
-		ELSE
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv = '';
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv = '';
-		END IF;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05planPiv.(XMLNSC.Attribute)longitud VALUE = '05';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaPiv.(XMLNSC.Attribute)longitud VALUE = '07';
-		
-		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
-		RETURN FALSE;
-	END;
-END MODULE;
-
-CREATE COMPUTE MODULE MapPlanesYServiciosReq_Igtoc44dReq_FanOut_1
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc44/d';
-		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
-		
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:usuarioM2K;
-		
-		--DECLARE outMsg REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsComun:region;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*S4';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'D';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:telefono;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:cuenta;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaInicio;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p03fechaInicio.(XMLNSC.Attribute)longitud VALUE = '08';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:fechaFin;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p04fechaFin.(XMLNSC.Attribute)longitud VALUE = '08';
-		
-		IF FIELDTYPE(InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales) IS NOT NULL THEN
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:claveProd;
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:fechaProd;
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07estatusProdPiv = InputRoot.SOAP.Body.nsInvest:consultarPlanesYServiciosRequest.nsInvest:request.nsInvest:referenciaServiciosAdicionales.nsInvest:estatusProd;
-		ELSE
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv = '';
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv = '';
-			SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07estatusProdPiv = '';
-		END IF;
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p05claveProdPiv.(XMLNSC.Attribute)longitud VALUE = '05';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p06fechaProdPiv.(XMLNSC.Attribute)longitud VALUE = '07';
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p07estatusProdPiv.(XMLNSC.Attribute)longitud VALUE = '01';
-		
-		PROPAGATE TO TERMINAL 1 FINALIZE NONE DELETE NONE;
-		RETURN FALSE;
-	END;
-END MODULE;
-
 CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarDetallePlanTarifario
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
@@ -822,6 +590,38 @@ CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarDetalleProductoInfo
 	END;
 END MODULE;
 
+CREATE COMPUTE MODULE MapFault_Investigacion_Igtoc41R
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar planes tarifarios.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarPlanesYServicios';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc41 (function: I*S1, action: R)',
+				EX_SOL_M2K_IGTOC41R);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_Investigacion_Igtoc44D
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar servicios adicionales.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInvestigacionService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarPlanesYServicios';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc44 (function: I*S4, action: D)',
+				EX_SOL_M2K_IGTOC44D);
+	END;
+END MODULE;
+
 CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarDetalleProductoList
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
@@ -835,45 +635,5 @@ CREATE COMPUTE MODULE MapFault_Investigacion_ConsultarDetalleProductoList
 				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
 				'm2k - Igtoc51 (function: I*SB, action: C)',
 				EX_SOL_M2K_IGTOC51C);
-	END;
-END MODULE;
-
-CREATE COMPUTE MODULE BuildIgtoc41RGestionTramitesFaultResponse
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.Properties.ReplyIdentifier = 
-			InputLocalEnvironment.Variables.MsgId;
-		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
-		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
-		
-		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
-		DECLARE tipoError CHARACTER EX_TIPO_SIS;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = '';
-		DECLARE soapBody REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body;
-		
-		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, 'InvestigacionService');
-	END;
-END MODULE;
-
-CREATE COMPUTE MODULE BuildIgtoc44DGestionTramitesFaultResponse
-	CREATE FUNCTION Main() RETURNS BOOLEAN
-	BEGIN
-		SET OutputLocalEnvironment = InputLocalEnvironment;
-		SET OutputRoot.Properties = InputRoot.Properties;
-		SET OutputRoot.Properties.ReplyIdentifier = 
-			InputLocalEnvironment.Variables.MsgId;
-		SET OutputRoot.MQMD.MsgType = MQMT_REPLY;
-		SET OutputRoot.MQMD.MsgId = InputLocalEnvironment.Variables.CorrelId;
-		
-		DECLARE detalleExcepcion CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
-		DECLARE tipoError CHARACTER EX_TIPO_SIS;
-		
-		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body = '';
-		DECLARE soapBody REFERENCE TO OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body;
-		
-		CALL BuildException(tipoError, soapBody, detalleExcepcion, InputLocalEnvironment, 'InvestigacionService');
 	END;
 END MODULE;

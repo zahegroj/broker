@@ -21,7 +21,7 @@ CREATE COMPUTE MODULE STRIP
 **********************************************************/
 
 	SET OutputRoot.Properties = InputRoot.Properties;
-	SET OutputRoot.XMLNSC = InputRoot.*:SOAP.*:Body[1];
+	SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
 
 		RETURN TRUE;
 	END;
@@ -55,7 +55,8 @@ CREATE COMPUTE MODULE SynchRR_RestoreReplyId
 	BEGIN
 		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputLocalEnvironment.BLOB.BLOB;
 		SET OutputRoot.Properties.CodedCharSetId = 1208;
-		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse;
+		--SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse = InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse;
+		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
 		RETURN TRUE;
-		END;
+	END;
 END MODULE;

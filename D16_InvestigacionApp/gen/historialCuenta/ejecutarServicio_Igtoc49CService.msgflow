@@ -11,7 +11,7 @@
       <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.in" location="20,20">
         <translation xmi:type="utility:TranslatableString" key="InTerminal.in" bundleName="gen/historialCuenta/ejecutarServicio_Igtoc49CService" pluginId="D16_InvestigacionApp"/>
       </nodes>
-      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="m2k/wmb/Igtoc49CService.wsdl" selectedPortType="Igtoc49CPort" selectedBinding="Igtoc49CBinding" selectedOperation="ejecutarServicio" selectedPort="Igtoc49C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc49/c" useHTTPTransport="true" webServiceURL="http://localhost:7801/di/sds/m2k/activaciones/wmb/Igtoc49CService" sslProtocol="TLS">
+      <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="m2k/wmb/Igtoc49CService.wsdl" selectedPortType="Igtoc49CPort" selectedBinding="Igtoc49CBinding" selectedOperation="ejecutarServicio" selectedPort="Igtoc49C" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/wmb/igtoc49/c" useHTTPTransport="true" webServiceURL="http://localhost:7801/di/sds/m2k/activaciones/wmb/Igtoc49CService" requestTimeout="110" sslProtocol="TLS">
         <translation xmi:type="utility:ConstantString" string="Request"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="320,80" envelopeDestination="$LocalEnvironment/SOAP/Envelope/OperResponse/Igtoc49CBinding/ejecutarServicio" labelPrefix="">

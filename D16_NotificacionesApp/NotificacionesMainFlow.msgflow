@@ -8,7 +8,8 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_NotificacionesApp/icons/full/obj16/NotificacionesMainFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_NotificacionesApp/icons/full/obj30/NotificacionesMainFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="148,220" wsdlFileName="notificaciones/GestionTramitesNotificaciones.wsdl" selectedPortType="GestionTramitesNotificacionesPort" selectedBinding="GestionTramitesNotificacionesBinding" selectedPort="GestionTramitesNotificacionesHTTPSOAPPort" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/notificaciones" useHTTPTransport="true" urlSelector="/di/sds/servicioaclientes/gestiontramites/wmb/NotificacionesService">
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="148,220" wsdlFileName="notificaciones/GestionTramitesNotificaciones.wsdl" selectedPortType="GestionTramitesNotificacionesPort" selectedBinding="GestionTramitesNotificacionesBinding" selectedPort="GestionTramitesNotificacionesHTTPSOAPPort" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/notificaciones" useHTTPTransport="true" urlSelector="/di/sds/servicioaclientes/gestiontramites/wmb/NotificacionesService"
+          maxClientWaitTime="120">
         <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
       </nodes>
       <nodes xmi:type="gen_NotificacionesElegirOperacionFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="272,216">

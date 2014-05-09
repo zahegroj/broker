@@ -12,7 +12,7 @@
         <translation xmi:type="utility:TranslatableString" key="InTerminal.in" bundleName="gen/DeterminarPrevalidacionInvokeFlow" pluginId="D16_ReglasApp"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPRequest.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="170,20" wsdlFileName="DeterminarPrevalidacion.wsdl" selectedPortType="PrevalidacionClienteDecisionService" selectedBinding="D16_GestorTramitesRuleAPPPrevalidacionClienteBinding" selectedOperation="PrevalidacionCliente" selectedPort="D16_GestorTramitesRuleAPPPrevalidacionClientePort" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/PrevalidacionCliente" useHTTPTransport="true"
-          webServiceURL="http://10.191.80.41:9081/DecisionService/ws/D16_GestorTramitesRuleAPP/1.0/PrevalidacionCliente/1.0/v75" sslProtocol="TLS" parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
+          webServiceURL="http://10.191.80.41:9081/DecisionService/ws/D16_GestorTramitesRuleAPP/1.0/PrevalidacionCliente/1.0/v75" requestTimeout="90" sslProtocol="TLS" parserXmlnscBuildTreeUsingXMLSchema="false" validateMaster="none">
         <translation xmi:type="utility:ConstantString" string="Request"/>
       </nodes>
       <nodes xmi:type="ComIbmSOAPExtract.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="320,80" envelopeDestination="$LocalEnvironment/SOAP/Envelope/OperResponse/D16_GestorTramitesRuleAPPPrevalidacionClienteBinding/PrevalidacionCliente" labelPrefix="">

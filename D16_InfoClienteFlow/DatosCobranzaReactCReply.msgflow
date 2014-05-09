@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmMQReply.msgnode="ComIbmMQReply.msgnode" xmlns:ComIbmRoute.msgnode="ComIbmRoute.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_ejecutaServicio_ControlWebService.msgflow="gen/ejecutaServicio_ControlWebService.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="DatosCobranzaReactCReply.msgflow"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQReply.msgnode="ComIbmMQReply.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_ejecutarServicio_ReactCService.msgflow="gen/ejecutarServicio_ReactCService.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="DatosCobranzaReactCReply.msgflow"
     nsPrefix="DatosCobranzaReactCReply.msgflow">
   <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
     <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
@@ -9,43 +9,35 @@
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_InfoClienteFlow/icons/full/obj30/DatosCobranzaReactCReply.gif"/>
     <composition>
       <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="32,138" queueName="AGGR_REACTC_REQ" messageDomainProperty="XMLNSC">
-        <translation xmi:type="utility:ConstantString" string="AGGR_RECT2C_REQ"/>
+        <translation xmi:type="utility:ConstantString" string="AGGR_REACTC_REQ"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="566,156">
+      <nodes xmi:type="ComIbmMQReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="437,148">
         <translation xmi:type="utility:ConstantString" string="MQ Reply"/>
       </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="151,138" computeExpression="esql://routine/#Parse_ReactC_XMLToStringReq.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="151,138" computeExpression="esql://routine/#Parse_ReactC_XMLToStringReq1.Main" computeMode="destinationAndMessage">
         <translation xmi:type="utility:ConstantString" string="toString"/>
       </nodes>
-      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="769,161" queueName="COBRANZA_STORE1" newMsgId="true" messageContext="passIdentity" validateMaster="none">
-        <translation xmi:type="utility:ConstantString" string="Save CorrelId to MQ"/>
-      </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="644,160" computeExpression="esql://routine/#AggregateReply_ComputeStoreMessage.Main" computeMode="destinationAndMessage">
-        <translation xmi:type="utility:ConstantString" string="Builder Storage Msg"/>
-      </nodes>
-      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="335,147" computeExpression="esql://routine/#Parse_ReactC_StringRespToXML.Main">
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="335,147" computeExpression="esql://routine/#Parse_ReactC_StringRespToXML1.Main">
         <translation xmi:type="utility:ConstantString" string="toXml"/>
       </nodes>
-      <nodes xmi:type="ComIbmRoute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="421,148">
-        <outTerminals terminalNodeID="Match" dynamic="true" label="Match"/>
-        <translation xmi:type="utility:ConstantString" string="RespuestaOK"/>
-        <filterTable filterPattern="count(/Res2:RespuestaOK)>0" routingOutputTerminal="Match"/>
-        <nsMappingTable nsPrefix="Res" namespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c"/>
-        <nsMappingTable nsPrefix="Res1" namespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c"/>
-        <nsMappingTable nsPrefix="Res2" namespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c"/>
-      </nodes>
-      <nodes xmi:type="gen_ejecutaServicio_ControlWebService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_8" location="238,139">
-        <translation xmi:type="utility:ConstantString" string="invoke M2K"/>
+      <nodes xmi:type="gen_ejecutarServicio_ReactCService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_7" location="163,203">
+        <translation xmi:type="utility:ConstantString" string="ejecutarServicio_ReactCService"/>
         <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
         <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
       </nodes>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_7" sourceTerminalName="Match" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.ejecutaServicioResponse" targetTerminalName="InTerminal.in"/>
-      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="92,249" destination="file" filePath="c:\infoclienteflow\06_2reactcreplyentry.log" pattern="${Root}">
+        <translation xmi:type="utility:ConstantString" string="Trace"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="527,228" filePath="c:\infoclienteflow\07_2reactcaftermqreply.log" pattern="Root:&#xD;&#xA;${Root}&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}">
+        <translation xmi:type="utility:ConstantString" string="Trace1"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.RespuestaOK" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
     </composition>
     <propertyOrganizer/>
     <stickyBoard/>

@@ -1,109 +1,119 @@
 DECLARE m2kNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k';
 DECLARE nsm2k NAMESPACE 'http://servicios.web.m2k.sds.telcel.com';
 		
-CREATE COMPUTE MODULE Parse_CpastC_XMLToStringReq
+CREATE COMPUTE MODULE Parse_CpastC_XMLToStringReq1
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
-		
-		CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
+		SET OutputLocalEnvironment.Variables.MQMD = InputRoot.MQMD;
+		--CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
-		SET mensajeString = ParseXMLToString(InputRoot);
-		SET OutputRoot.SOAP.Body.nsm2k:ejecutaServicio.xml = mensajeString;
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		--SET mensajeString = ParseXMLToString(InputRoot);
+		--SET OutputRoot.SOAP.Body.nsm2k:ejecutaServicio.xml = mensajeString;
 		RETURN TRUE;
 	END;
 END MODULE;
 
-CREATE COMPUTE MODULE Parse_CpastC_StringRespToXML
+CREATE COMPUTE MODULE Parse_CpastC_StringRespToXML1
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
-		CALL CopyMessageHeaders(InputRoot, OutputRoot);
-		CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nsm2k:ejecutaServicioResponse.ejecutaServicioReturn);
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputLocalEnvironment.Variables.MQMD;
+		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
+		--CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nsm2k:ejecutaServicioResponse.ejecutaServicioReturn);
 		
-		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK) IS NOT NULL THEN
-			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);
-		END IF;
+		--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK) IS NOT NULL THEN
+		--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);
+		--END IF;
 		
-		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
-			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
-		END IF;
+		--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
+		--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
+		--END IF;
 		
 		RETURN TRUE;
 	END;
 END MODULE;
 
-CREATE COMPUTE MODULE Parse_Retc2C_XMLToStringReq
+CREATE COMPUTE MODULE Parse_Retc2C_XMLToStringReq1
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
-		
-		CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
+		SET OutputLocalEnvironment.Variables.MQMD = InputRoot.MQMD;
+		--CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
-		SET mensajeString = ParseXMLToString(InputRoot);
-		SET OutputRoot.SOAP.Body.nsm2k:ejecutaServicio.xml = mensajeString;
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		--SET mensajeString = ParseXMLToString(InputRoot);
+		--SET OutputRoot.SOAP.Body.nsm2k:ejecutaServicio.xml = mensajeString;
 		RETURN TRUE;
 	END;
 END MODULE;
 
-CREATE COMPUTE MODULE Parse_Retc2C_StringRespToXML
+CREATE COMPUTE MODULE Parse_Retc2C_StringRespToXML1
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
-		CALL CopyMessageHeaders(InputRoot, OutputRoot);
-		CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nsm2k:ejecutaServicioResponse.ejecutaServicioReturn);
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputLocalEnvironment.Variables.MQMD;
+		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
+		--CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nsm2k:ejecutaServicioResponse.ejecutaServicioReturn);
 		
-		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK) IS NOT NULL THEN
-			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);
-		END IF;
+		--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK) IS NOT NULL THEN
+		--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);
+		--END IF;
 		
-		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
-			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
-		END IF;
+		--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
+		--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
+		--END IF;
 		
 		RETURN TRUE;
 	END;
 END MODULE;
 
-CREATE COMPUTE MODULE Parse_ReactC_XMLToStringReq
+CREATE COMPUTE MODULE Parse_ReactC_XMLToStringReq1
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE oldNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';
 		DECLARE newNamespace NAMESPACE '';
 		DECLARE mensajeString CHARACTER;
-		
-		CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
+		SET OutputLocalEnvironment.Variables.MQMD = InputRoot.MQMD;
+		--CALL ChangeNamespaceInOutputRoot(InputRoot.XMLNSC, oldNamespace, newNamespace);
 		CALL CopyMessageHeaders(InputRoot, OutputRoot);
-		SET mensajeString = ParseXMLToString(InputRoot);
-		SET OutputRoot.SOAP.Body.nsm2k:ejecutaServicio.xml = mensajeString;
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		--SET mensajeString = ParseXMLToString(InputRoot);
+		--SET OutputRoot.SOAP.Body.nsm2k:ejecutaServicio.xml = mensajeString;
 		RETURN TRUE;
 	END;
 END MODULE;
 
-CREATE COMPUTE MODULE Parse_ReactC_StringRespToXML
+CREATE COMPUTE MODULE Parse_ReactC_StringRespToXML1
 	CREATE FUNCTION Main() RETURNS BOOLEAN
 	BEGIN
 		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';				
 		DECLARE oldNamespace NAMESPACE '';
 		
-		CALL CopyMessageHeaders(InputRoot, OutputRoot);
-		CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nsm2k:ejecutaServicioResponse.ejecutaServicioReturn);
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD = InputLocalEnvironment.Variables.MQMD;
+		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
 		
-		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK) IS NOT NULL THEN
-			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);
-		END IF;
+		--CALL ParseStringToXML(InputRoot, OutputRoot, InputRoot.XMLNSC.nsm2k:ejecutaServicioResponse.ejecutaServicioReturn);
 		
-		IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
-			CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
-		END IF;
+		--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaOK) IS NOT NULL THEN
+			--CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, newNamespace);
+		--END IF;
+		
+		--IF FIELDTYPE (OutputRoot.XMLNSC.RespuestaError) IS NOT NULL THEN
+		--	CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, m2kNamespace);
+		--END IF;
 		
 		RETURN TRUE;
 	END;
