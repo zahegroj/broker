@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/m2k/wmb/m2k_sumiq_c.xsd"/>
+    <output path="/infoCliente/GestionTramitesInfoCliente.xsd" var="out"/>
+    <output path="/variables.xsd" var="out1"/>
+    <imports>
+        <import kind="map" location="/SUMIQ_CResponse_Factura_1.map" namespace="default"/>
+        <import kind="map" location="/SUMIQ_CResponse_Factura_2.map" namespace="default"/>
+        <import kind="map" location="/SUMIQ_CResponse_Factura_3.map" namespace="default"/>
+        <import kind="map" location="/SUMIQ_CResponse_Factura_4.map" namespace="default"/>
+    </imports>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="SUMIQ_CResponse_ConsultarDatosClienteResponse">
+        <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="mb:msg(RespuestaOK,assembly,XMLNSC,LocalEnvironment,Properties)">
+            <cast path="LocalEnvironment/Variables/any" qualifier="region" var="any"/>
+            <cast path="LocalEnvironment/Variables/any" qualifier="plataforma" var="any1"/>
+        </input>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" path="$out/mb:msg(consultarDatosClienteResponse,assembly,XMLNSC,LocalEnvironment,Properties)" var="MessageAssembly"/>
+        <output path="$out1/mb:msg(region,assembly,XMLNSC,Properties)" var="MessageAssembly1"/>
+        <move>
+            <input path="Properties" var="Properties"/>
+            <output path="$MessageAssembly/Properties"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/NombreCliente"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/nombreCliente"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/Cuenta" var="Cuenta"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/cuenta"/>
+        </move>
+        <submap ref="map:SUMIQ_CResponse_Factura_1">
+            <input path="RespuestaOK" var="RespuestaOK"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/facturas/factura[1]"/>
+        </submap>
+        <submap ref="map:SUMIQ_CResponse_Factura_2">
+            <input path="RespuestaOK"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/facturas/factura[2]"/>
+        </submap>
+        <submap ref="map:SUMIQ_CResponse_Factura_3">
+            <input path="RespuestaOK"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/facturas/factura[3]"/>
+        </submap>
+        <submap ref="map:SUMIQ_CResponse_Factura_4">
+            <input path="RespuestaOK"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/facturas/factura[4]"/>
+        </submap>
+        <condition>
+            <if>
+                <input path="RespuestaOK/Importe" var="Importe"/>
+                <output path="$MessageAssembly/consultarDatosClienteResponse/response/importe"/>
+                <test lang="XPath">fn:string-length($Importe)&gt;0</test>
+                <function ref="fn:replace">
+                    <input path="$Importe/." var="Importe"/>
+                    <output path="."/>
+                    <param name="input" value="$Importe"/>
+                    <param name="pattern" value="','"/>
+                    <param name="replacement" value="''"/>
+                </function>
+            </if>
+            <else>
+                <output path="$MessageAssembly/consultarDatosClienteResponse/response/importe"/>
+                <assign value="0.0">
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
+        <condition>
+            <if>
+                <input path="RespuestaOK/SaldoMes" var="SaldoMes"/>
+                <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoMes"/>
+                <test lang="XPath">fn:string-length($SaldoMes)&gt;0</test>
+                <function ref="fn:replace">
+                    <input path="$SaldoMes/." var="SaldoMes"/>
+                    <output path="."/>
+                    <param name="input" value="$SaldoMes"/>
+                    <param name="pattern" value="','"/>
+                    <param name="replacement" value="''"/>
+                </function>
+            </if>
+            <else>
+                <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoMes"/>
+                <assign value="0.0">
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
+        <condition>
+            <if>
+                <input path="RespuestaOK/SaldoEstimado" var="SaldoEstimado"/>
+                <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoEstimado"/>
+                <test lang="XPath">fn:string-length($SaldoEstimado)&gt;0</test>
+                <function ref="fn:replace">
+                    <input path="$SaldoEstimado/." var="SaldoEstimado"/>
+                    <output path="."/>
+                    <param name="input" value="$SaldoEstimado"/>
+                    <param name="pattern" value="','"/>
+                    <param name="replacement" value="''"/>
+                </function>
+            </if>
+            <else>
+                <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoEstimado"/>
+                <assign value="0.0">
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
+        <condition>
+            <if>
+                <input path="RespuestaOK/SaldoActual" var="SaldoActual"/>
+                <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoActual"/>
+                <test lang="XPath">fn:string-length($SaldoActual)&gt;0</test>
+                <function ref="fn:replace">
+                    <input path="$SaldoActual/." var="SaldoActual"/>
+                    <output path="."/>
+                    <param name="input" value="$SaldoActual"/>
+                    <param name="pattern" value="','"/>
+                    <param name="replacement" value="''"/>
+                </function>
+            </if>
+            <else>
+                <output path="$MessageAssembly/consultarDatosClienteResponse/response/saldoActual"/>
+                <assign value="0.0">
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
+        <move>
+            <input path="RespuestaOK/EstatusCuenta"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/estatusCuenta"/>
+        </move>
+        <move>
+            <input path="RespuestaOK/EstatusCobranza"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/estatusCobranza"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment"/>
+            <output path="$MessageAssembly/LocalEnvironment"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment/Variables/region"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/region"/>
+        </move>
+        <move>
+            <input path="LocalEnvironment/Variables/plataforma"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/plataforma"/>
+        </move>
+        <if>
+            <input path="RespuestaOK/Errores" var="Errores"/>
+            <output path="$MessageAssembly/consultarDatosClienteResponse/response/mensajes"/>
+            <test lang="XPath">fn:not(fn:empty($Errores/Codigo))</test>
+            <join>
+                <input path="$Errores/Codigo" var="Codigo3"/>
+                <input path="$Errores/Mensaje" var="Mensaje2"/>
+                <output path="mensaje"/>
+                <test lang="XPath">$Codigo3-index = $Mensaje2-index</test>
+                <move>
+                    <input path="$Codigo3/."/>
+                    <output path="codigo"/>
+                </move>
+                <move>
+                    <input path="$Mensaje2/."/>
+                    <output path="descripcion"/>
+                </move>
+            </join>
+        </if>
+    </mappingDeclaration>
+</mappingRoot>

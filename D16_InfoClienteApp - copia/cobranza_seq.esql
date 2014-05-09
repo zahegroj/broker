@@ -1,0 +1,175 @@
+CREATE COMPUTE MODULE GuardarVariablesInput
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyEntireMessage(InputRoot, OutputRoot);
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		DECLARE usuarioM2K CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:usuarioM2K);
+		DECLARE region CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsComun:region);
+		DECLARE telefono CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:telefono);
+		DECLARE cuenta CHARACTER FIELDVALUE(InputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaRequest.nsInfoCli:request.nsInfoCli:cuenta);
+			
+		SET OutputLocalEnvironment.Variables.request[] = 
+						LIST{ROW(telefono AS telefono,
+								cuenta AS cuenta,
+								usuarioM2K AS usuarioM2K,
+								region AS region)};
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapDatosCobranzaReq_CpastcReq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputLocalEnvironment.Variables.request[1].usuarioM2K;		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputLocalEnvironment.Variables.request[1].region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*3B';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'C';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01cuenta = InputLocalEnvironment.Variables.request[1].cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02maxRegistros = 1;
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapDatosCobranzaReq_Retc2cReq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';
+		DECLARE ns1 NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/cpast/c';
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		SET OutputLocalEnvironment.Variables.cpastc_resp = InputRoot.XMLNSC.ns1:RespuestaOK;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputLocalEnvironment.Variables.request[1].usuarioM2K;		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputLocalEnvironment.Variables.request[1].region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*1E';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'C';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputLocalEnvironment.Variables.request[1].telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = FIELDVALUE(InputLocalEnvironment.Variables.request[1].cuenta);
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapDatosCobranzaReq_ReactcReq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';
+		DECLARE ns1 NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/retc2/c';
+		
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		SET OutputLocalEnvironment.Variables.retc2c_resp = InputRoot.XMLNSC.ns1:RespuestaOK;
+		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.user = InputLocalEnvironment.Variables.request[1].usuarioM2K;		
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.region = InputLocalEnvironment.Variables.request[1].region;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.function = 'I*I5';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.action = 'C';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono = InputLocalEnvironment.Variables.request[1].telefono;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud VALUE = '10';
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta = InputLocalEnvironment.Variables.request[1].cuenta;
+		SET OutputRoot.XMLNSC.soapenv:Envelope.soapenv:Body.ns:Request.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud VALUE = '09';
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildResponse_ConsultarDatosCobranza
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns1 NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOKCpastc REFERENCE TO InputLocalEnvironment.Variables.cpastc_resp;		
+		DECLARE respuestaOKRetc2c REFERENCE TO InputLocalEnvironment.Variables.retc2c_resp;
+		DECLARE respuestaOKReactc REFERENCE TO InputRoot.XMLNSC.ns1:RespuestaOK;
+		
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarDatosCobranzaResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarDatosCobranzaResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsInfoCli);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse, oldNamespace, nsInfoCli);
+		
+		DECLARE limiteCredito CHARACTER REPLACE(TRIM(respuestaOKRetc2c.LimiteCredito), ',', '');
+		DECLARE accionCobranza CHARACTER '';
+		DECLARE motivoCobranza CHARACTER '';
+		
+		IF limiteCredito = '' THEN
+			SET limiteCredito = '0';
+		END IF;
+		
+		IF FIELDTYPE(respuestaOKCpastc.TablaCpast.AccionTomada[1]) IS NOT NULL THEN
+			SET accionCobranza = TRIM(respuestaOKCpastc.TablaCpast.AccionTomada[1]);
+		END IF;
+		
+		IF FIELDTYPE(respuestaOKCpastc.TablaCpast.Est[1]) IS NOT NULL THEN
+			SET motivoCobranza = TRIM(respuestaOKCpastc.TablaCpast.Est[1]);
+		END IF;
+		
+		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:limiteCredito = limiteCredito;
+		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:accionCobranza = accionCobranza;
+		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:motivoCobranza = motivoCobranza;
+		SET OutputRoot.XMLNSC.nsInfoCli:consultarDatosCobranzaResponse.nsInfoCli:response.nsInfoCli:montoMinimoPagar = REPLACE(TRIM(respuestaOKReactc.SaldoActual), ',', '');
+		
+		SET OutputRoot.SOAP.Body = OutputRoot.XMLNSC;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_InfoCliente_ConsultarDatosCobranza_CpastC
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar datos de cobranza.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInfoClienteService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDatosCobranza';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Cpast (function: I*3B, action: C)',
+				EX_SOL_M2K_CPASTC);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_InfoCliente_ConsultarDatosCobranza_Retc2C
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar datos de cobranza.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInfoClienteService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDatosCobranza';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Retc2 (function: I*1E, action: C)',
+				EX_SOL_M2K_RETC2C);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_InfoCliente_ConsultarDatosCobranza_ReactC
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar datos de cobranza.';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesInfoClienteService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarDatosCobranza';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - React (function: I*I5, action: C)',
+				EX_SOL_M2K_REACTC);
+	END;
+END MODULE;
