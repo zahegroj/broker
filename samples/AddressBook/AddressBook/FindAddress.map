@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="AddressBook" version="8.0.3.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="AddressBook">
+    <documentation description="Placeholder - a following scenario will demonstrate how to read data from a database table"/>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/SOAPDomainMsg.xsd" var="var"/>
+    <input path="/AddressBook_InlineSchema1.xsd" var="var1"/>
+    <input path="/IBMdefined/org/xmlsoap/schemas/soap/envelope/soapenv11.xsd" var="var2"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/SOAPDomainMsg.xsd"/>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="FindAddress">
+        <input path="$var/mb:msg(SOAP_Domain_Msg,assembly,SOAP,Properties)">
+            <cast path="SOAP_Domain_Msg/Body/any" qualifier="{http://AddressBook}FindAddress"/>
+        </input>
+        <output path="mb:msg(SOAP_Domain_Msg,assembly,SOAP,Properties)">
+            <cast path="SOAP_Domain_Msg/Body/Fault/detail/any" qualifier="{http://AddressBook}FindAddressFault1"/>
+            <cast path="SOAP_Domain_Msg/Body/any" qualifier="{http://schemas.xmlsoap.org/soap/envelope/}Fault"/>
+            <cast path="SOAP_Domain_Msg/Body/Fault/detail/any" qualifier="{http://AddressBook}FindAddressFault1"/>
+        </output>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <task type="todo">
+            <documentation description="Placeholder - a following scenario will demonstrate how to read data from a database table"/>
+            <input path="SOAP_Domain_Msg"/>
+        </task>
+        <assign value="in:notImplemented">
+            <output path="SOAP_Domain_Msg/Body/Fault/faultcode"/>
+        </assign>
+        <assign value="Placeholder - not implemented in this scenario">
+            <output path="SOAP_Domain_Msg/Body/Fault/faultstring/text()"/>
+        </assign>
+        <assign value="http://AddressService">
+            <output path="SOAP_Domain_Msg/Body/Fault/faultactor"/>
+        </assign>
+        <move>
+            <input path="SOAP_Domain_Msg/Body/FindAddress/FindAddress/Name"/>
+            <output path="SOAP_Domain_Msg/Body/Fault/detail/FindAddressFault1/Name"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

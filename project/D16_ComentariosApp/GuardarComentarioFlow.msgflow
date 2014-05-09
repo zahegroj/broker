@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_ejecutarServicio_Igtoc64AService.msgflow="gen/ejecutarServicio_Igtoc64AService.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="GuardarComentarioFlow.msgflow"
+    nsPrefix="GuardarComentarioFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="GuardarComentarioFlow" bundleName="GuardarComentarioFlow" pluginId="D16_ComentariosApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ComentariosApp/icons/full/obj16/GuardarComentarioFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ComentariosApp/icons/full/obj30/GuardarComentarioFlow.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="74,229">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="GuardarComentarioFlow" pluginId="D16_ComentariosApp"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="769,242">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="GuardarComentarioFlow" pluginId="D16_ComentariosApp"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="161,229" mappingExpression="msl://{default}#GuardarComentarioReq_Igtoc64AReq">
+        <translation xmi:type="utility:ConstantString" string="Mapping Igtoc64A Req"/>
+      </nodes>
+      <nodes xmi:type="gen_ejecutarServicio_Igtoc64AService.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="331,233">
+        <translation xmi:type="utility:ConstantString" string="ejecutarServicio_Igtoc64AService"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="580,241" computeExpression="esql://routine/#MapIgtoc64aResp_Response.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="595,145" computeExpression="esql://routine/#MapFault_Comentarios_GuardarComentario.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Fault"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.RespuestaOK" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

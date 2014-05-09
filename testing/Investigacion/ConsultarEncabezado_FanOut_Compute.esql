@@ -1,0 +1,52 @@
+DECLARE soap NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+DECLARE ns NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/investigacion/schema';
+DECLARE ns_retus NAMESPACE 'http://www.telcel.com.mx/m2k/retus/c';
+DECLARE ns_retc2 NAMESPACE 'http://www.telcel.com.mx/m2k/retc2/c';
+
+CREATE COMPUTE MODULE ConsultarEncabezado_FanOut_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		
+		DECLARE inMsg REFERENCE TO InputRoot.SOAP.Body.ns:consultarEncabezadoRequest.request;
+		
+		DECLARE outMsg_Retus REFERENCE TO OutputRoot.XMLNSC.ns_retus:Request;		
+		SET outMsg_Retus.user = inMsg.usuarioM2K;
+		SET outMsg_Retus.region = inMsg.region;
+		SET outMsg_Retus.function = 'I*0F';
+		SET outMsg_Retus.action = 'C';
+		SET outMsg_Retus.inputParameters.servicio.p01telefono = inMsg.telefono;
+		SET outMsg_Retus.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud = '10';
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		DECLARE outMsg_Retc2 REFERENCE TO OutputRoot.XMLNSC.ns_retc2:Request;
+		SET outMsg_Retus.user = inMsg.usuarioM2K;
+		SET outMsg_Retus.region = inMsg.region;
+		SET outMsg_Retus.function = 'I*1E';
+		SET outMsg_Retus.action = 'C';
+		SET outMsg_Retus.inputParameters.servicio.p01telefono = inMsg.telefono;
+		SET outMsg_Retus.inputParameters.servicio.p01telefono.(XMLNSC.Attribute)longitud = '10';
+		SET outMsg_Retus.inputParameters.servicio.p02cuenta = '';
+		SET outMsg_Retus.inputParameters.servicio.p02cuenta.(XMLNSC.Attribute)longitud = '09';
+		
+		PROPAGATE TO TERMINAL 'out2';
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;

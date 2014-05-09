@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.telcel.com.mx/m2k/retc2/c" xmlns="http://www.telcel.com.mx/m2k/retc2/c" xmlns:m2k="http://www.telcel.com.mx/m2k">
+	
+	<xsd:import namespace="http://www.telcel.com.mx/m2k" schemaLocation="m2k.xsd"/>
+	
+	<xsd:element name="Request" type="RequestType"/>
+	
+	<xsd:element name="RespuestaOK" type="RespuestaOKType"/>
+	
+	<xsd:complexType name="RequestType">
+		<xsd:complexContent>
+			<xsd:extension base="m2k:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="inputParameters" type="InputParametersType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InputParametersType">
+		<xsd:sequence>
+			<xsd:element name="servicio" type="ServicioType"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ServicioType">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="p01telefono" type="m2k:TelefonoType"/>
+			<xsd:element name="p02cuenta" type="m2k:ElementoBase"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RespuestaOKType">
+		<xsd:complexContent>
+			<xsd:extension base="m2k:ResponseBase">
+				<xsd:sequence>
+					<xsd:element type="xsd:string" name="AnalistaCredito"/>
+					<xsd:element type="xsd:string" name="ApartadoPostal"/>
+					<xsd:element type="xsd:string" name="AperturaCredito"/>
+					<xsd:element type="xsd:string" name="Banco"/>
+					<xsd:element type="xsd:string" name="BancoDomicializado"/>
+					<xsd:element type="xsd:string" name="BancoPropietario"/>
+					<xsd:element type="xsd:string" name="Calle"/>
+					<xsd:element type="xsd:string" name="CancelacionPagosAtras"/>
+					<xsd:element type="xsd:string" name="CancelacionSaldo"/>
+					<xsd:element type="xsd:string" name="ClaseCredito"/>
+					<xsd:element type="xsd:string" name="ClaveExento"/>
+					<xsd:element type="xsd:string" name="Colonia"/>
+					<xsd:element type="xsd:string" name="ContactoA"/>
+					<xsd:element type="xsd:string" name="ContactoB"/>
+					<xsd:element type="xsd:string" name="Cp"/>
+					<xsd:element type="xsd:string" name="CuentaConsolidada"/>
+					<xsd:element type="xsd:string" name="Delegacion"/>
+					<xsd:element type="xsd:float" name="EstAcctBal"/>
+					<xsd:element type="xsd:string" name="Estado"/>
+					<xsd:element type="xsd:string" name="EstadoCortesia"/>
+					<xsd:element type="xsd:string" name="EstatusCuenta"/>
+					<xsd:element type="xsd:string" name="ExentoImpuestoEstado"/>
+					<xsd:element type="xsd:string" name="ExentoImpuestoFederal"/>
+					<xsd:element type="xsd:string" name="ExentoImpuestoLocal"/>
+					<xsd:element type="xsd:string" name="FecClaseCred"/>
+					<xsd:element type="xsd:string" name="FormaPago"/>
+					<xsd:element type="xsd:string" name="Interior"/>
+					<xsd:element type="xsd:string" name="Limite"/>
+					<xsd:element type="xsd:string" name="LimiteCredito"/>
+					<xsd:element type="xsd:string" name="LimiteUso"/>
+					<xsd:element type="xsd:string" name="Nombre"/>
+					<xsd:element type="xsd:string" name="Numero"/>
+					<xsd:element type="xsd:string" name="NumeroCredito"/>
+					<xsd:element type="xsd:long" name="NumeroCuenta"/>
+					<xsd:element type="xsd:string" name="NumeroExencionEstado"/>
+					<xsd:element type="xsd:string" name="NumeroExencionFederal"/>
+					<xsd:element type="xsd:string" name="OrdenDeCompra"/>
+					<xsd:element type="xsd:string" name="Pais"/>
+					<xsd:element type="xsd:string" name="RelacionDepartamental"/>
+					<xsd:element type="xsd:string" name="ReservaNumero"/>
+					<xsd:element type="xsd:string" name="ResponsabilidadFactura"/>
+					<xsd:element type="xsd:string" name="ResponsabilidadNegociacion"/>
+					<xsd:element type="xsd:string" name="ResponsabilidadPago"/>
+					<xsd:element type="xsd:string" name="Rfc"/>
+					<xsd:element type="xsd:string" name="TcAnterior"/>
+					<xsd:element type="xsd:string" name="Tcc"/>
+					<xsd:element type="xsd:string" name="Telefono"/>
+					<xsd:element type="xsd:string" name="TipoConsolidada"/>
+					<xsd:element type="xsd:string" name="TipoCuenta"/>
+					<xsd:element type="xsd:string" name="VenceImpuestoEstado"/>
+					<xsd:element type="xsd:string" name="VenceImpuestoFederal"/>
+					<xsd:element type="xsd:string" name="VencimientoCredito"/>
+					<xsd:element type="xsd:string" name="TipoAnterior"/>
+					<xsd:element name="Errores" type="m2k:ErroresInfoType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

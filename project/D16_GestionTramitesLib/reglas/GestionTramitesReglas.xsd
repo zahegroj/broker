@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+
+	<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="determinarPrevalidacionRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:DeterminarPrevalidacionRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="determinarPrevalidacionResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:DeterminarPrevalidacionResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="determinarAdeudoRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:DeterminarAdeudoRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="determinarAdeudoResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:DeterminarAdeudoResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="determinarRegionPerfilRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:DeterminarRegionPerfilRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="determinarRegionPerfilResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:DeterminarRegionPerfilResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="reasignarTramiteRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ReasignarTramiteRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="reasignarTramiteResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ReasignarTramiteResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:complexType name="DeterminarPrevalidacionRequestType">
+		<xsd:sequence>
+			<xsd:element name="tramite" type="this:Tramite"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeterminarPrevalidacionResponseType">
+		<xsd:sequence>
+			<xsd:element name="requierePrevalidacion" type="xsd:boolean"/>
+			<xsd:element name="comentario" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeterminarAdeudoRequestType">
+		<xsd:sequence>
+			<xsd:element form="qualified" maxOccurs="1" minOccurs="0" name="DecisionID" type="xsd:string"/>
+			<xsd:element name="determinarAdeudo" type="this:DeterminarAdeudo"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeterminarAdeudoResponseType">
+		<xsd:sequence>
+			<xsd:element form="qualified" name="DecisionID" type="xsd:string"/>
+			<xsd:element name="determinarAdeudo" type="this:DeterminarAdeudo"/>
+			<xsd:element name="requirePagar" type="xsd:boolean"/>
+			<xsd:element name="requiereAutorizacion" type="xsd:boolean"/>
+			<xsd:element name="comentario" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeterminarRegionPerfilRequestType">
+		<xsd:sequence>
+			<xsd:element name="asesorCAC" type="this:AsesorCAC"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="DeterminarRegionPerfilResponseType">
+		<xsd:sequence>
+			<xsd:element name="asesorCAC" type="this:AsesorCAC"/>
+			<xsd:element name="comentario" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ReasignarTramiteRequestType">
+		<xsd:sequence>
+			<xsd:element name="tramite" type="this:Tramite"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ReasignarTramiteResponseType">
+		<xsd:sequence>
+			<xsd:element name="puedeReasignarTramite" type="xsd:boolean"/>
+			<xsd:element name="comentario" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Tipos para DeterminarRegionPerfil -->
+	<xsd:complexType name="AsesorCAC">
+		<xsd:sequence>
+			<xsd:element name="perfil" type="this:Perfil"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Perfil">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="perfilPac" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="habilitado" type="xsd:boolean"/>
+			<xsd:element minOccurs="0" name="regiones" type="this:ArrayOfRegiones"/>
+			<xsd:element minOccurs="0" name="nivelAcceso" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="flujoNegocio" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ArrayOfRegiones">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="region" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Tipos para DeterminarRegionPerfil -->
+
+	<!-- Tipos para Reasignar Tramite -->
+	<xsd:complexType name="Tramite">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="tipoTramite" type="xsd:string"/>
+			<xsd:element minOccurs="1" name="estado" type="xsd:string"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="cac" type="this:CAC"/>
+			<xsd:element maxOccurs="1" minOccurs="0" name="aclaracionSaldos" type="this:AclaracionSaldos"/>
+			<xsd:element minOccurs="0" name="asesor" type="this:AsesorCAC"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CAC">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="identificador" type="xsd:string"/>
+			<xsd:element minOccurs="1" name="region" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="AclaracionSaldos">
+		<xsd:sequence>
+			<xsd:element name="tipoTramite" type="xsd:string"/>
+			<xsd:element name="estado" type="xsd:string"/>
+			<xsd:element name="escenario" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Tipos para Reasignar Tramite -->
+
+	<!-- Tipos para Determinar Adeudo -->
+	<xsd:complexType name="DeterminarAdeudo">
+		<xsd:sequence>
+			<xsd:element name="tramite" type="this:Tramite"/>
+			<xsd:element name="cobranza" type="this:Cobranza"/>
+			<xsd:element name="cuenta" type="this:Cuenta"/>
+			<xsd:element name="factura" type="this:Factura"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Cobranza">
+		<xsd:sequence>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="accion" type="xsd:string"/>
+			<xsd:element name="motivo" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Cuenta">
+		<xsd:sequence>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="telefono" type="this:Telefono"/>
+			<xsd:element name="limiteCredito" type="comun:decimalFormato"/>
+			<xsd:element name="tipoSaldoExistente" type="xsd:string"/>
+			<xsd:element name="porcentajeCredito" type="comun:decimalFormato"/>
+			<xsd:element name="cargoPendienteFacturar" type="comun:decimalFormato"/>
+			<xsd:element name="saldoMes" type="comun:decimalFormato"/>
+			<xsd:element name="saldoActual" type="comun:decimalFormato"/>
+			<xsd:element name="saldoEstimado" type="comun:decimalFormato"/>
+			<xsd:element name="saldoPendienteFacturar" type="comun:decimalFormato"/>
+			<xsd:element name="saldoFacturadoNoVencido" type="comun:decimalFormato"/>
+			<xsd:element name="saldoFacturadoVencido" type="comun:decimalFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Factura">
+		<xsd:sequence>
+			<xsd:element name="montoMinimoPagar" type="comun:decimalFormato"/>
+			<xsd:element name="fechaLimitePago" type="xsd:date"/>
+			<xsd:element name="variableFechaLimitePago" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Telefono">
+		<xsd:sequence>
+			<xsd:element name="numero" type="xsd:string"/>
+			<xsd:element name="region" type="xsd:string"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Tipos para Determinar Adeudo -->
+</xsd:schema>

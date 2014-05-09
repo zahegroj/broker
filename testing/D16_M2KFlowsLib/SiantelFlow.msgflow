@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmTrace.msgnode="ComIbmTrace.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_SiantelGetPerfilTelefonoInvokeFlow.msgflow="gen/SiantelGetPerfilTelefonoInvokeFlow.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="SiantelFlow.msgflow"
+    nsPrefix="SiantelFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="SiantelFlow" bundleName="SiantelFlow" pluginId="D16_M2KFlowsLib"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_M2KFlowsLib/icons/full/obj16/SiantelFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_M2KFlowsLib/icons/full/obj30/SiantelFlow.gif"/>
+    <composition>
+      <nodes xmi:type="gen_SiantelGetPerfilTelefonoInvokeFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="324,261">
+        <translation xmi:type="utility:ConstantString" string="SiantelGetPerfilTelefonoInvokeFlow"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="66,260">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="SiantelFlow" pluginId="D16_M2KFlowsLib"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="743,270">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="SiantelFlow" pluginId="D16_M2KFlowsLib"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="351,181" destination="file" filePath="c:\logcompute.txt" pattern="PARSE TO STRING&#xD;&#xA;SiantelFlow:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}">
+        <translation xmi:type="utility:ConstantString" string="Trace"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="195,260" computeExpression="esql://routine/#Siantel_CreateStringRequest.Main">
+        <translation xmi:type="utility:ConstantString" string="Parse XML to String"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="187,174" destination="file" filePath="c:\loginput.txt" pattern="INPUT&#xD;&#xA;SiantelFlow:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}">
+        <translation xmi:type="utility:ConstantString" string="Trace1"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="526,186" destination="file" filePath="c:\logresponseString.txt" pattern="RESPONSE STRING&#xD;&#xA;SiantelFlow:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}">
+        <translation xmi:type="utility:ConstantString" string="Trace2"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="567,269" computeExpression="esql://routine/#Siantel_CreateResponse.Main">
+        <translation xmi:type="utility:ConstantString" string="Parse String to XML"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="720,193" destination="file" filePath="c:\logresponsexmlnsc.txt" pattern="RESPONSE XML&#xD;&#xA;SiantelFlow:&#xD;&#xA;${Body}&#xD;&#xA;&#xD;&#xA;ExceptionList:&#xD;&#xA;${ExceptionList}&#xD;&#xA;&#xD;&#xA;LocalEnvironment:&#xD;&#xA;${LocalEnvironment}">
+        <translation xmi:type="utility:ConstantString" string="Trace3"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_4" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.getPerfilTelefonoResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.getPerfilTelefonoResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

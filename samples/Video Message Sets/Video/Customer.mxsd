@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:addr="http://www.ibm.com/AddressDetails" xmlns:brw="http://www.ibm.com/BorrowedDetails" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.ibm.com/AddressDetails" schemaLocation="com/ibm/www/addressdetails/Address.mxsd"/>
+    <xsd:import namespace="http://www.ibm.com/BorrowedDetails" schemaLocation="com/ibm/www/borroweddetails/Borrowed.mxsd"/>
+    <xsd:complexType mixed="true" name="NameType">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <MRComplexType composition="orderedSet" content="open"/>
+        <tdsStructRep dataElementSeparation="TaggedDelimited" delimiter="*" groupIndicator="[" groupTerminator="]" messageSetDefaultRep="TDS1" tagDataSeparator=":"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element ref="Title">
+                <xsd:annotation>
+                    <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF1">
+              <cwfSimpleRep encodingNull="NullLogicalValue" encodingNullValue="" paddingCharacter="NUL" typeName="MRCWFStringRep" width="3"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element ref="FirstName">
+                <xsd:annotation>
+                    <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF1">
+              <cwfSimpleRep encodingNull="NullLogicalValue" encodingNullValue="" paddingCharacter="NUL" typeName="MRCWFStringRep" width="20"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+        <xsd:attribute name="LastName" type="xsd:string">
+            <xsd:annotation>
+                <xsd:appinfo source="WMQI_APPINFO">
+          <tdsAttrRep justification="leftJustify" messageSetDefaultRep="TDS1" precision="-1" tag="LastName"/>
+          <cwfInclRep messageSetDefaultRep="CWF1">
+            <cwfSimpleRep encodingNull="NullLogicalValue" encodingNullValue="" paddingCharacter="NUL" typeName="MRCWFStringRep" width="20"/>
+          </cwfInclRep>
+        </xsd:appinfo>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>
+    <xsd:complexType name="CustomerType">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <MRComplexType content="open"/>
+        <tdsStructRep dataElementSeparation="TaggedDelimited" delimiter="&amp;" groupIndicator="{" groupTerminator="}" messageSetDefaultRep="TDS1" tagDataSeparator=":"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element ref="Name"/>
+            <xsd:element ref="addr:Address"/>
+            <xsd:element ref="ID">
+                <xsd:annotation>
+                    <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF1">
+              <cwfSimpleRep encodingNull="NullLogicalValue" encodingNullValue="" mrLengthEncoding="fixedLength" paddingCharacter="NUL" typeName="MRCWFStringRep" width="1"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:group ref="IdGroup"/>
+            <xsd:element maxOccurs="3" minOccurs="0" ref="brw:Borrowed">
+                <xsd:annotation>
+                    <xsd:appinfo source="WMQI_APPINFO">
+            <tdsInclRep messageSetDefaultRep="TDS1" repeatingElementDelimiter=""/>
+          </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" ref="Magazine">
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:group name="IdGroup">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsStructRep dataElementSeparation="TaggedDelimited" delimiter="&amp;" messageSetDefaultRep="TDS1" tagDataSeparator=":"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element minOccurs="0" ref="PassportNo">
+                <xsd:annotation>
+                    <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF1">
+              <cwfSimpleRep encodingNull="NullLogicalValue" encodingNullValue="" mrLengthEncoding="fixedLength" paddingCharacter="NUL" typeName="MRCWFStringRep" width="19"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="DrivingLicenseNo">
+                <xsd:annotation>
+                    <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF1">
+              <cwfSimpleRep encodingNull="NullLogicalValue" encodingNullValue="" mrLengthEncoding="fixedLength" paddingCharacter="NUL" typeName="MRCWFStringRep" width="19"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="0" ref="CreditCardNo">
+                <xsd:annotation>
+                    <xsd:appinfo source="WMQI_APPINFO">
+            <cwfInclRep messageSetDefaultRep="CWF1">
+              <cwfSimpleRep encodingNull="NullLogicalValue" encodingNullValue="" mrLengthEncoding="fixedLength" paddingCharacter="NUL" typeName="MRCWFStringRep" width="19"/>
+            </cwfInclRep>
+          </xsd:appinfo>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:choice>
+    </xsd:group>
+    <xsd:element name="Magazine" type="xsd:boolean">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsElemRep messageSetDefaultRep="TDS1" precision="-1" tag="Magazine"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="FirstName" type="xsd:string">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsElemRep justification="leftJustify" messageSetDefaultRep="TDS1" precision="-1" tag="FirstName"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="Title" type="xsd:string">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsElemRep justification="leftJustify" messageSetDefaultRep="TDS1" precision="-1" tag="Title"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="CreditCardNo" type="xsd:string">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsElemRep justification="leftJustify" messageSetDefaultRep="TDS1" precision="-1" tag="CreditCardNo"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="DrivingLicenseNo" type="xsd:string">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsElemRep justification="leftJustify" messageSetDefaultRep="TDS1" precision="-1" tag="DrivingLicenseNo"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="PassportNo" type="xsd:string">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsElemRep justification="leftJustify" messageSetDefaultRep="TDS1" precision="-1" tag="PassportNo"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="Name" type="NameType">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsElemRep messageSetDefaultRep="TDS1" precision="-1" tag="Name"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="Customer" type="CustomerType">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/Customer;XSDElementDeclaration=7$MRObject"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="ID" type="xsd:string">
+        <xsd:annotation>
+            <xsd:appinfo source="WMQI_APPINFO">
+        <tdsElemRep justification="leftJustify" messageSetDefaultRep="TDS1" precision="-1" tag="ID"/>
+      </xsd:appinfo>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="CustomerOut">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <tdsStructRep dataElementSeparation="TaggedDelimited" delimiter="&amp;" groupIndicator="{" groupTerminator="}" messageSetDefaultRep="TDS1" tagDataSeparator=":"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:sequence>
+      <xsd:element ref="Name"/>
+      <xsd:element ref="addr:Address"/>
+      <xsd:element maxOccurs="3" minOccurs="0" ref="brw:Borrowed"/>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:element name="CustomerOut" type="CustomerOut">
+    <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/CustomerOut;XSDElementDeclaration=9$MRObject"/>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+</xsd:schema>

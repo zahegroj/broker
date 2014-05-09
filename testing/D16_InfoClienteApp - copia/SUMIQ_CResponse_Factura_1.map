@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="false" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/m2k/wmb/m2k_sumiq_c.xsd"/>
+    <output path="/infoCliente/GestionTramitesInfoCliente.xsd"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="SUMIQ_CResponse_Factura_1">
+        <input namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/sumiq/c" path="RespuestaOK"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema" path="type('FacturaType')"/>
+        <move>
+            <input path="FechaFactura1" var="FechaFactura1"/>
+            <output path="fechaFactura"/>
+        </move>
+        <condition>
+            <if>
+                <input path="ImporteFactura1" var="ImporteFactura1"/>
+                <output path="importeFactura"/>
+                <test lang="XPath">fn:string-length($ImporteFactura1)&gt;0</test>
+                <function ref="fn:replace">
+                    <input path="$ImporteFactura1/." var="ImporteFactura1"/>
+                    <output path="."/>
+                    <param name="input" value="$ImporteFactura1"/>
+                    <param name="pattern" value="','"/>
+                    <param name="replacement" value="''"/>
+                </function>
+            </if>
+            <else>
+                <output path="importeFactura"/>
+                <assign value="0.0">
+                    <output path="."/>
+                </assign>
+            </else>
+        </condition>
+        <move>
+            <input path="UltimaFechaFactura1"/>
+            <output path="ultimaFechaFactura"/>
+        </move>
+        <assign value="1">
+            <output path="@indice"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

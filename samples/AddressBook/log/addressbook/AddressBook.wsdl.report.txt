@@ -1,0 +1,16 @@
+
+
+Importing file: C:\wsp\IBM\wmbt80\wsp3\AddressBook\AddressBook.wsdl
+
+Copying source WSDL AddressBook.wsdl to AddressBook.wsdl.
+The WSDL import will proceed with bindings AddressBookHttpBinding.
+Creating wsdl schema document for platform:/resource/AddressBook/AddressBook.wsdl.
+Parsing wsdl binding {http://AddressBook}AddressBookHttpBinding.
+Parsing wsdl binding input SaveAddress.
+Parsing wsdl binding output SaveAddress.
+Parsing wsdl binding input FindAddress.
+Parsing wsdl binding output FindAddress.
+Parsing wsdl binding fault FindAddressFault1.
+Processing doc style for operation SaveAddress.
+Processing doc style for operation FindAddress.
+Populating WSDL schema platform:/resource/AddressBook/AddressBook.wsdl.

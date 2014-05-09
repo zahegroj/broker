@@ -1,0 +1,142 @@
+CREATE FUNCTION ChangeNamespaceInOutputRoot(In rootNode REFERENCE, In oldNamespace CHARACTER, In newNamespace CHARACTER)
+BEGIN
+	--
+	-- Need to remove schemalocation and namespace declarations
+	--
+	IF newNamespace = '' THEN
+		SET rootNode.(XMLNSC.Element)*[1].*:schemaLocation = NULL;
+		DECLARE I1 INTEGER CARDINALITY(rootNode.(XMLNSC.Element)*[1].(XMLNSC.NamespaceDecl)*[]);
+		DECLARE I2 INTEGER 1;
+		WHILE I2 <= I1 DO
+			SET rootNode.(XMLNSC.Element)*[1].(XMLNSC.NamespaceDecl)*[1] = NULL;
+			SET I2 = I2 + 1;
+		END WHILE;	 
+	ELSE
+	--
+	-- Need to modify the schema locations and the namespace declarations
+	--
+	-- The target schemalocations can be identified within the source message's
+	-- MQRFH2 header, <usr> folder, tag <TargetSchemaLocation>
+	--
+		IF rootNode.(XMLNSC.Element)*[1].*:schemaLocation IS NOT NULL THEN
+			SET rootNode.(XMLNSC.Element)*[1].*:schemaLocation = newNamespace;
+		END IF;	
+	END IF;	
+	--		
+	-- CHECKSIBLING is a flag which, when set to TRUE, ensures that the WHILE loop does an
+	-- unconditional MOVE ... NEXTSIBLING (rather than MOVE ... FIRSTCHILD)
+	-- We need this when we go up a level in the tree... otherwise we go back where we have
+	-- just come from
+	--
+	DECLARE CHECKSIBLING BOOLEAN FALSE;
+	--
+	-- DEPTH determines when to finish.  
+	-- Every time we MOVE FIRSTCHILD we add 1 to DEPTH
+	-- Every time we MOVE PARENT we subtract 1 from DEPTH
+	-- MOVE NEXTSIBLING does not change DEPTH
+	-- Initial value is 1, so we are finished when DEPTH = 0
+	--
+	DECLARE DEPTH INTEGER 1;
+	--
+	-- Walk the tree top to bottom, left to right
+	--
+	WHILE DEPTH <> 0 DO 
+		IF CHECKSIBLING = FALSE THEN 
+			MOVE rootNode FirstChild;
+		 	IF LASTMOVE(rootNode) = TRUE THEN
+				SET DEPTH = DEPTH + 1;
+				CALL ChangeNamespace(rootNode, oldNamespace, newNamespace);
+		 	ELSE
+		 		MOVE rootNode NEXTSIBLING;
+			 	IF LASTMOVE(rootNode) = TRUE THEN
+					CALL ChangeNamespace(rootNode, oldNamespace, newNamespace);
+					SET CHECKSIBLING = FALSE;
+			 	ELSE
+					SET DEPTH = DEPTH - 1;
+					Move rootNode PARENT;		 		
+					SET CHECKSIBLING = TRUE;
+				END IF;
+		 	END IF;	
+		ELSE
+			MOVE rootNode NEXTSIBLING;
+		 	IF LASTMOVE(rootNode) = TRUE THEN
+				CALL ChangeNamespace(rootNode, oldNamespace, newNamespace);
+				SET CHECKSIBLING = FALSE;
+		 	ELSE
+				SET DEPTH = DEPTH - 1;
+				Move rootNode PARENT;		 		
+				SET CHECKSIBLING = TRUE;
+			END IF;
+		END IF;
+	END WHILE;
+END;
+
+CREATE FUNCTION ChangeNamespace(IN rootNode REFERENCE, In oldNamespace CHARACTER, In newNamespace CHARACTER)
+BEGIN
+	--
+	-- Check for elements/attributes with the source namespace		
+	--
+    IF (FIELDTYPE(rootNode) = Name) OR (FIELDTYPE(rootNode) = NameValue) THEN
+		IF FIELDNAMESPACE(rootNode) IN (oldNamespace) THEN 
+			--
+			-- Set the new target namespace
+			--
+			SET rootNode NAMESPACE = newNamespace;
+			--
+			-- Get rid of any inline namespace definitions
+			--
+			SET rootNode.(XMLNSC.NamespaceDecl)* = NULL;
+		END IF;
+    END IF;
+END;
+
+CREATE COMPUTE MODULE M2K_StringResponseToXML
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://servicios.web.m2k.sds.telcel.com';
+		
+		CALL CopyMessageHeaders();
+		CREATE LASTCHILD OF OutputRoot DOMAIN('XMLNSC') PARSE(InputRoot.XMLNSC.ns:ejecutaServicioResponse.ejecutaServicioReturn,
+																InputRoot.Properties.Encoding,
+																InputRoot.Properties.CodedCharSetId);
+		RETURN TRUE;
+	END;
+	
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+	
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+CREATE FILTER MODULE RespuestaOK_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF FIELDTYPE (Root.XMLNSC.RespuestaOK) IS NULL THEN
+			RETURN FALSE;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE AsignarFault
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/gestiontramites/wmb/comun/schema';
+		DECLARE soapenv NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Server Error';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.ns:gestionTramitesWMBException = InputRoot.XMLNSC.ns:gestionTramitesWMBException;
+	
+		RETURN TRUE;
+	END;
+END MODULE;

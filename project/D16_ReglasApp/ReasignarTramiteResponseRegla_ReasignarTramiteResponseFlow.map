@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/ReasignarTramite_InlineSchema16.xsd"/>
+    <output path="/reglas/GestionTramitesReglas.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ReasignarTramiteResponseRegla_ReasignarTramiteResponseFlow">
+        <input namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/ReasignarTramite" path="mb:msg(ReasignarTramiteResponse,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" path="mb:msg(reasignarTramiteResponse,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="ReasignarTramiteResponse/resultadoReasignar/resultadoReasignarTramite/puedeReasignarTramite"/>
+            <output path="reasignarTramiteResponse/response/puedeReasignarTramite"/>
+        </move>
+        <move>
+            <input path="ReasignarTramiteResponse/resultadoReasignar/resultadoReasignarTramite/comentario"/>
+            <output path="reasignarTramiteResponse/response/comentario"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

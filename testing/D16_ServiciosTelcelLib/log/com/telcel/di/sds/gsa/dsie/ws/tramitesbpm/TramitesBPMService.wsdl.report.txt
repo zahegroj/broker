@@ -1,0 +1,23 @@
+
+
+Importing file: E:\Users\jzapatah\Dropbox\wmb\wsdl\sms\TramitesBPMService.wsdl
+
+Copying source WSDL TramitesBPMService.wsdl to TramitesBPMService.wsdl.
+The WSDL import will proceed with bindings TramitesBPMPortBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Dropbox/wmb/wsdl/sms/TramitesBPMService.wsdl.
+Parsing wsdl binding {http://tramitesbpm.ws.dsie.gsa.sds.di.telcel.com/}TramitesBPMPortBinding.
+Parsing wsdl binding input envioSMS.
+Parsing wsdl binding output envioSMS.
+Processing doc style for operation envioSMS.
+Populating WSDL schema sms/TramitesBPMService.xsd.
+Creating file sms/TramitesBPMService.xsd in the workspace.
+Creating file sms/TramitesBPMService_InlineSchema1.xsd in the workspace.
+Creating file /D16_ServiciosTelcelLib/TramitesBPMService.xsd in the workspace.
+
+Elapsed time processing this message definition file: 1.222 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

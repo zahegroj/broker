@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="consumos" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="consumos">
+    <input path="/investigacion/GestionTramitesInvestigacion.xsd"/>
+    <output path="/m2k/wmb/m2k_igtoc45_d.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ConsultarConsumosReq_Igtoc45DReq">
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" path="mb:msg(consultarConsumosRequest,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/m2k/facturacion/igtoc45/d" path="mb:msg(Request,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="consultarConsumosRequest/request/usuarioM2K"/>
+            <output path="Request/user"/>
+        </move>
+        <convert defaultValue="0">
+            <input path="consultarConsumosRequest/request/region"/>
+            <output path="Request/region"/>
+        </convert>
+        <assign value="I*S5">
+            <output path="Request/function"/>
+        </assign>
+        <assign value="D">
+            <output path="Request/action"/>
+        </assign>
+        <move>
+            <input path="consultarConsumosRequest/request/telefono"/>
+            <output path="Request/inputParameters/servicio/p01telefono/text()"/>
+        </move>
+        <expression>
+            <input path="consultarConsumosRequest/request/cuenta" var="cuenta"/>
+            <output path="Request/inputParameters/servicio/p02cuenta/text()"/>
+            <code lang="xpath">fn:substring(fn:concat('000000000', $cuenta), fn:string-length(fn:concat('000000000', $cuenta))-8, fn:string-length(fn:concat('000000000', $cuenta)))</code>
+        </expression>
+        <move>
+            <input path="consultarConsumosRequest/request/fechaInicio"/>
+            <output path="Request/inputParameters/servicio/p03fechaInicio/text()"/>
+        </move>
+        <move>
+            <input path="consultarConsumosRequest/request/fechaFin"/>
+            <output path="Request/inputParameters/servicio/p04fechaFin/text()"/>
+        </move>
+        <move>
+            <input path="consultarConsumosRequest/request/referencia/fechaPiv"/>
+            <output path="Request/inputParameters/servicio/p05fechaPiv/text()"/>
+        </move>
+        <move>
+            <input path="consultarConsumosRequest/request/referencia/horaPiv"/>
+            <output path="Request/inputParameters/servicio/p06horaPiv/text()"/>
+        </move>
+        <move>
+            <input path="consultarConsumosRequest/request/referencia/fuentePiv"/>
+            <output path="Request/inputParameters/servicio/p07fuentePiv/text()"/>
+        </move>
+        <move>
+            <input path="consultarConsumosRequest/request/referencia/secuenciaPiv"/>
+            <output path="Request/inputParameters/servicio/p08secuenciaPiv/text()"/>
+        </move>
+        <move>
+            <input path="consultarConsumosRequest/request/referencia/telMarcadoPiv"/>
+            <output path="Request/inputParameters/servicio/p09telMarcadoPiv/text()"/>
+        </move>
+        <assign value="10">
+            <output path="Request/inputParameters/servicio/p01telefono/@longitud"/>
+        </assign>
+        <assign value="09">
+            <output path="Request/inputParameters/servicio/p02cuenta/@longitud"/>
+        </assign>
+        <assign value="08">
+            <output path="Request/inputParameters/servicio/p03fechaInicio/@longitud"/>
+        </assign>
+        <assign value="08">
+            <output path="Request/inputParameters/servicio/p04fechaFin/@longitud"/>
+        </assign>
+        <assign value="07">
+            <output path="Request/inputParameters/servicio/p05fechaPiv/@longitud"/>
+        </assign>
+        <assign value="07">
+            <output path="Request/inputParameters/servicio/p06horaPiv/@longitud"/>
+        </assign>
+        <assign value="06">
+            <output path="Request/inputParameters/servicio/p07fuentePiv/@longitud"/>
+        </assign>
+        <assign value="07">
+            <output path="Request/inputParameters/servicio/p08secuenciaPiv/@longitud"/>
+        </assign>
+        <assign value="10">
+            <output path="Request/inputParameters/servicio/p09telMarcadoPiv/@longitud"/>
+        </assign>
+    </mappingDeclaration>
+</mappingRoot>

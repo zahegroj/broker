@@ -1,0 +1,25 @@
+
+
+Importing file: E:\Users\jzapatah\Documents\GitHub\broker\D16_M2KLib\Igtoc48CService.wsdl
+
+Copying source WSDL Igtoc48CService.wsdl to Igtoc48CService.wsdl.
+The WSDL import will proceed with bindings Igtoc48CBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Documents/GitHub/broker/D16_M2KLib/Igtoc48CService.wsdl.
+Parsing wsdl binding {http://www.telcel.com.mx/m2k/wmb/igtoc48/c}Igtoc48CBinding.
+Parsing wsdl binding input ejecutarServicio.
+Parsing wsdl binding output ejecutarServicio.
+Parsing wsdl binding fault RespuestaError.
+Processing doc style for operation ejecutarServicio.
+Populating WSDL schema Igtoc48CService.xsd.
+Creating file Igtoc48CService.xsd in the workspace.
+Creating file Igtoc48CService_InlineSchema1.xsd in the workspace.
+Creating file /D16_M2KLib/m2k_igtoc48_c.xsd in the workspace.
+Creating file /D16_M2KLib/D16_M2KLib/m2k.xsd in the workspace.
+
+Elapsed time processing this message definition file: 3.886 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

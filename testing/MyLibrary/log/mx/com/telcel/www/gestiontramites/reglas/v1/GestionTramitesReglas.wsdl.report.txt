@@ -1,0 +1,37 @@
+
+
+Importing file: E:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesReglas.wsdl
+
+Copying source WSDL GestionTramitesReglas.wsdl to GestionTramitesReglas.wsdl.
+The WSDL import will proceed with bindings GestionTramitesReglasBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Dropbox/wmb/wsdl/GestionTramitesReglas.wsdl.
+Parsing wsdl binding {http://www.telcel.com.mx/gestiontramites/reglas/v1}GestionTramitesReglasBinding.
+Parsing wsdl binding input determinarPrevalidacion.
+Parsing wsdl binding output determinarPrevalidacion.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input determinarAdeudo.
+Parsing wsdl binding output determinarAdeudo.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input determinarRegionPerfil.
+Parsing wsdl binding output determinarRegionPerfil.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input reasignarTramite.
+Parsing wsdl binding output reasignarTramite.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Processing doc style for operation determinarPrevalidacion.
+Processing doc style for operation determinarAdeudo.
+Processing doc style for operation determinarRegionPerfil.
+Processing doc style for operation reasignarTramite.
+Populating WSDL schema GestionTramitesReglas.xsd.
+Creating file GestionTramitesReglas.xsd in the workspace.
+Creating file GestionTramitesReglas_InlineSchema1.xsd in the workspace.
+Creating file /MyLibrary/GestionTramitesReglas.xsd in the workspace.
+Creating file /MyLibrary/GestionTramitesComun.xsd in the workspace.
+
+Elapsed time processing this message definition file: 2.062 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

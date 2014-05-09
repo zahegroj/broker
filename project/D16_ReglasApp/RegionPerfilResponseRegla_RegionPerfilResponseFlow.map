@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/DeterminarRegionPerfil_InlineSchema17.xsd"/>
+    <output path="/reglas/GestionTramitesReglas.xsd"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="RegionPerfilResponseRegla_RegionPerfilResponseFlow">
+        <input namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarRegionPerfil" path="mb:msg(DeterminarRegionPerfilResponse,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" path="mb:msg(determinarRegionPerfilResponse,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties" var="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="DeterminarRegionPerfilResponse/resultadoDeterminarRegion/resultadoDeterminarRegion/asesorCAC/perfil/perfilPac"/>
+            <output path="determinarRegionPerfilResponse/response/asesorCAC/perfil/perfilPac"/>
+        </move>
+        <move>
+            <input path="DeterminarRegionPerfilResponse/resultadoDeterminarRegion/resultadoDeterminarRegion/asesorCAC/perfil/habilitado"/>
+            <output path="determinarRegionPerfilResponse/response/asesorCAC/perfil/habilitado"/>
+        </move>
+        <move>
+            <input path="DeterminarRegionPerfilResponse/resultadoDeterminarRegion/resultadoDeterminarRegion/asesorCAC/perfil/nivelAcceso"/>
+            <output path="determinarRegionPerfilResponse/response/asesorCAC/perfil/nivelAcceso"/>
+        </move>
+        <move>
+            <input path="DeterminarRegionPerfilResponse/resultadoDeterminarRegion/resultadoDeterminarRegion/asesorCAC/perfil/flujoNegocio"/>
+            <output path="determinarRegionPerfilResponse/response/asesorCAC/perfil/flujoNegocio"/>
+        </move>
+        <move>
+            <input path="DeterminarRegionPerfilResponse/resultadoDeterminarRegion/resultadoDeterminarRegion/comentario"/>
+            <output path="determinarRegionPerfilResponse/response/comentario"/>
+        </move>
+        <if>
+            <input path="DeterminarRegionPerfilResponse/resultadoDeterminarRegion/resultadoDeterminarRegion/asesorCAC/perfil/region" var="region8"/>
+            <output path="determinarRegionPerfilResponse/response/asesorCAC/perfil/regiones" var="regiones"/>
+            <test lang="XPath">fn:not(fn:empty( $region8))</test>
+            <move>
+                <input path="$region8/."/>
+                <output path="$regiones/region"/>
+            </move>
+        </if>
+    </mappingDeclaration>
+</mappingRoot>

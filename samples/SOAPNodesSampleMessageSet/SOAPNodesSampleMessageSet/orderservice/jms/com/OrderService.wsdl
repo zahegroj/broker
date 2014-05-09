@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="Order" targetNamespace="http://com.jms.orderservice" xmlns:jms="http://schemas.xmlsoap.org/soap/jms" xmlns:mrm="http://com.http.orderservice" xmlns:oldtns1="http://www.acmeOrders.com/OrderService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://com.jms.orderservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="..\..\..\com\acmeorders\www\orderservice\OrderService_InlineSchema1.mxsd"/>
+        <binding hasEncoding="false" imported="true" name="SOAPNodesSampleMessageSetSOAP_JMS_Binding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.acmeOrders.com/OrderService" xmlns:mrm="http://com.jms.orderservice">
+      <xsd:include schemaLocation="../../../com/acmeorders/www/orderservice/OrderService_InlineSchema1.mxsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="submitPO_in">
+    <wsdl:part element="oldtns1:submitPORequest" name="submitPORequest"/>
+  </wsdl:message>
+  <wsdl:message name="submitPO_out">
+    <wsdl:part element="oldtns1:submitPOResponse" name="submitPOResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="SOAPNodesSampleMessageSetPortType">
+    <wsdl:operation name="submitPO">
+      <wsdl:input message="tns:submitPO_in" name="submitPO_Input"/>
+      <wsdl:output message="tns:submitPO_out" name="submitPO_Output"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SOAPNodesSampleMessageSetSOAP_JMS_Binding" type="tns:SOAPNodesSampleMessageSetPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/jms"/>
+    <wsdl:operation name="submitPO">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="submitPO_Input">
+        <soap:body parts="submitPORequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="submitPO_Output">
+        <soap:body parts="submitPOResponse" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SOAPNodesSample_JMS_Service">
+    <wsdl:port binding="tns:SOAPNodesSampleMessageSetSOAP_JMS_Binding" name="JMSSOAPPort">
+      <soap:address location="jms:jndi:JMSREQUESTQ?jndiConnectionFactoryName=JMSQCF&amp;jndiInitialContextFactory=com.sun.jndi.fscontext.RefFSContextFactory&amp;jndiURL=file%3A%2FC%3A%2FSOAPJNDIBindings&amp;replyToName=JMSREPLYQ&amp;targetService=SOAPNodesSample_JMS_Service"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

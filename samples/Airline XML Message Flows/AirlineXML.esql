@@ -1,0 +1,391 @@
+/*
+Sample program for use with IBM WebSphere Message Broker
+© Copyright International Business Machines Corporation 2003, 2010 
+Licensed Materials - Property of IBM
+*/
+
+-- ************************************************
+-- * ESQL for the XML_Reservation message flow
+-- ************************************************
+
+CREATE DATABASE MODULE UpdateFlightTable
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- populate the environment with flight info from the database		
+		SET Environment.Variables =
+			THE (SELECT T.* FROM Database.XMLFLIGHTTB AS T
+				WHERE T.FLIGHTDATE = Root.XMLNSC.Reservation.FlightDetails.FlightDate
+				AND T.FLIGHTNO = Root.XMLNSC.Reservation.FlightDetails.FlightNumber);
+		DECLARE ref REFERENCE TO Root.XMLNSC.Reservation.ListOfPassengers.PassengerDetails[1];
+		-- track the remaining number of seats
+		SET Environment.Variables.EconomyClassRemain = CAST(Environment.Variables.TOTALECONOMIC AS INTEGER);
+		SET Environment.Variables.FirstClassRemain = CAST(Environment.Variables.TOTALFIRST AS INTEGER);
+
+		-- loop through the request, counting the passengers and checking capacity
+		SET Environment.Variables.NoPassengers = 0;
+		WHILE LASTMOVE(ref) DO -- check that the REFERENCE is still valid
+			IF ref.Class = 'F' THEN
+				IF Environment.Variables.FirstClassRemain >= 1 THEN
+					SET Environment.Variables.FirstClassRemain = Environment.Variables.FirstClassRemain - 1;
+					SET Environment.Variables.FIRSTCLASS = Environment.Variables.FIRSTCLASS + 1;
+					SET Environment.Variables.NoPassengers = Environment.Variables.NoPassengers + 1;
+				ELSE
+					THROW USER EXCEPTION MESSAGE 2949 VALUES('Number of passengers exceeds capacity');
+				END IF;
+			END IF;
+			IF ref.Class = 'Y' THEN
+				IF Environment.Variables.EconomyClassRemain >= 1 THEN
+					SET Environment.Variables.EconomyClassRemain = Environment.Variables.EconomyClassRemain - 1;
+					SET Environment.Variables.ECONOMICCLASS = Environment.Variables.ECONOMICCLASS + 1;
+					SET Environment.Variables.NoPassengers = Environment.Variables.NoPassengers + 1;
+				ELSE
+					THROW USER EXCEPTION MESSAGE 2949 VALUES('Number of passengers exceeds capacity');
+				END IF;
+			END IF;
+			MOVE ref NEXTSIBLING REPEAT NAME; -- increment the loop condition
+		END WHILE;
+		
+		-- update the database with the decreased seat availability for the flight
+		UPDATE Database.XMLFLIGHTTB AS T
+			SET ECONOMICCLASS = Environment.Variables.ECONOMICCLASS,
+				TOTALECONOMIC = Environment.Variables.EconomyClassRemain,
+				FIRSTCLASS = Environment.Variables.FIRSTCLASS,
+				TOTALFIRST = Environment.Variables.FirstClassRemain
+				WHERE T.FLIGHTDATE = Root.XMLNSC.Reservation.FlightDetails.FlightDate
+				AND T.FLIGHTNO = Root.XMLNSC.Reservation.FlightDetails.FlightNumber;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE UpdatePassengerTable
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		SET OutputRoot = InputRoot;		
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER Environment.Variables.NoPassengers;
+		DECLARE resno CHARACTER;
+		WHILE I <= J DO -- loop through the passengers
+			SET Environment.Variables.RESERVATIONSEQNO = Environment.Variables.RESERVATIONSEQNO + 1;
+			-- generate the reservation number (unique)
+			SET resno = (InputRoot.XMLNSC.Reservation.FlightDetails.FlightNumber ||
+						 InputRoot.XMLNSC.Reservation.FlightDetails.FlightDate ||
+						 CAST (Environment.Variables.RESERVATIONSEQNO AS CHAR));
+			-- insert a row into the database to track this reservation
+			INSERT INTO Database.XMLPASSENGERTB (LASTNAME, FIRSTNAME, FLIGHTNO, FLIGHTDATE, CLASSTYPE, RESERVATIONNO)
+				VALUES(InputRoot.XMLNSC.Reservation.ListOfPassengers.PassengerDetails[I].LastName,
+					   InputRoot.XMLNSC.Reservation.ListOfPassengers.PassengerDetails[I].FirstName,
+					   InputRoot.XMLNSC.Reservation.FlightDetails.FlightNumber,
+					   InputRoot.XMLNSC.Reservation.FlightDetails.FlightDate,
+					   InputRoot.XMLNSC.Reservation.ListOfPassengers.PassengerDetails[I].Class,
+					   resno);
+			-- report the reservation number in the output message
+			SET OutputRoot.XMLNSC.Reservation.ListOfPassengers.PassengerDetails[I].ReservationNumber = resno;
+			SET I = I + 1;
+		END WHILE;
+
+		-- update the sequence number in the database
+		UPDATE Database.XMLFLIGHTTB AS T
+			SET RESERVATIONSEQNO = Environment.Variables.RESERVATIONSEQNO; 
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FILTER MODULE MultipleOrSingleMessage
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF Root.XMLNSC.Reservation.Request = 'M' THEN
+			RETURN TRUE;
+		END IF;
+		IF Root.XMLNSC.Reservation.Request = 'S' THEN
+			RETURN FALSE;
+		END IF;
+		RETURN UNKNOWN;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildSingleMessage
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		SET OutputRoot.XMLNSC.Reservation = NULL;
+		SET OutputRoot.XMLNSC.PassengerReservationResponse.ListOfConfirmations.ClassF.Confirmation[] =
+			(SELECT X.FirstName, X.LastName AS Surname, X.ReservationNumber
+				FROM InputRoot.XMLNSC.Reservation.ListOfPassengers.PassengerDetails[] AS X
+				WHERE UPPER(X.Class) = 'F');
+		SET OutputRoot.XMLNSC.PassengerReservationResponse.ListOfConfirmations.ClassY.Confirmation[] =
+			(SELECT X.FirstName, X.LastName AS Surname, X.ReservationNumber
+				FROM InputRoot.XMLNSC.Reservation.ListOfPassengers.PassengerDetails[] AS X
+				WHERE UPPER(X.Class) = 'Y');
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE PropagateMultipleMessages
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER Environment.Variables.NoPassengers;
+		WHILE I <= J DO
+			SET OutputRoot = InputRoot;
+			SET OutputRoot.XMLNSC.Reservation = NULL;
+			SET OutputRoot.XMLNSC.PassengerReservationResponse.ListOfConfirmations.Confirmation = 
+				InputRoot.XMLNSC.Reservation.ListOfPassengers.PassengerDetails[I];
+			PROPAGATE;
+			SET I = I + 1;
+		END WHILE;
+		RETURN FALSE; -- returning false stops automatic propagation
+	END;
+END MODULE;
+
+-- ************************************************
+-- * ESQL for the XML_PassengerQuery message flow
+-- ************************************************
+
+CREATE COMPUTE MODULE DecideOnQuery
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		IF InputRoot.XMLNSC.PassengerQuery.ReservationNumber <> '' THEN
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData[1].labelname = 'SinglePassenger';
+		ELSE
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData[1].labelname = 'AllReservations';
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE GetPassengerInformation
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		SET OutputRoot.XMLNSC.PassengerQuery = NULL;
+		-- populate the environment with passenger info from the database
+		SET Environment.Variables =
+			THE (SELECT T.* FROM Database.XMLPASSENGERTB AS T
+				WHERE T.RESERVATIONNO = InputRoot.XMLNSC.PassengerQuery.ReservationNumber);
+
+		-- populate the output message with info from the database query
+		CREATE FIELD OutputRoot.XMLNSC.PassengerInfoResponse.PassengerInfo;
+		DECLARE outpass REFERENCE TO OutputRoot.XMLNSC.PassengerInfoResponse.PassengerInfo;
+		SET outpass.ReservationNumber = Environment.Variables.RESERVATIONNO;
+		SET outpass.FirstName = Environment.Variables.FIRSTNAME;
+		SET outpass.LastName = Environment.Variables.LASTNAME;
+		SET outpass.FlightNumber = Environment.Variables.FLIGHTNO;
+		SET outpass.Date = Environment.Variables.FLIGHTDATE;
+		SET outpass.Class = Environment.Variables.CLASSTYPE;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE GetReservationsInformation
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		SET OutputRoot.XMLNSC.PassengerQuery = NULL;
+		-- populate the environment with reservations info from the database
+		SET Environment.Variables.Reservation[] =
+			(SELECT T.* FROM Database.XMLPASSENGERTB AS T
+				WHERE T.FIRSTNAME = InputRoot.XMLNSC.PassengerQuery.FirstName 
+				AND T.LASTNAME = InputRoot.XMLNSC.PassengerQuery.LastName);
+
+		-- populate the output message with info from the database query
+		CREATE FIELD OutputRoot.XMLNSC.PassengerInfoResponse.ListOfReservations;
+		DECLARE outres REFERENCE TO OutputRoot.XMLNSC.PassengerInfoResponse.ListOfReservations;
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER CARDINALITY(Environment.Variables.*[]);
+		WHILE I <= J DO
+			SET outres.Reservation[I].FlightNumber = Environment.Variables.Reservation[I].FLIGHTNO;
+			SET outres.Reservation[I].Date = Environment.Variables.Reservation[I].FLIGHTDATE;
+			SET outres.Reservation[I].Class = Environment.Variables.Reservation[I].CLASSTYPE;
+			SET I = I + 1;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+-- ************************************************
+-- * ESQL for the XML_FlightQuery message flows
+-- ************************************************
+
+CREATE COMPUTE MODULE GetFlightDetails
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		SET OutputRoot.XMLNSC.FlightQuery = NULL;
+		CREATE FIELD OutputRoot.XMLNSC.Flight;
+		DECLARE outflight REFERENCE TO OutputRoot.XMLNSC.Flight;
+		DECLARE query REFERENCE TO InputRoot.XMLNSC.FlightQuery;		
+		-- populate the output message with flight info from the database
+		SET OutputRoot.XMLNSC.Flight[] =
+			(SELECT T.* FROM Database.XMLFLIGHTTB AS T
+				WHERE T.FLIGHTNO = query.FlightNumber
+				AND T.FLIGHTDATE = query.FlightDate);
+		SET outflight.STARTPOINT = TRIM(outflight.STARTPOINT);
+		SET outflight.ENDPOINT = TRIM(outflight.ENDPOINT);
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE GetPassengerDetails
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		SET OutputRoot.XMLNSC.FlightQuery = NULL;		
+		CREATE FIELD OutputRoot.XMLNSC.ListOfPassengers;
+		DECLARE outpass REFERENCE TO OutputRoot.XMLNSC.ListOfPassengers;
+		DECLARE query REFERENCE TO InputRoot.XMLNSC.FlightQuery;
+		-- populate the output message with passenger info from the database
+		SET outpass.PassengerDetails[] =
+			(SELECT T.* FROM Database.XMLPASSENGERTB AS T
+				WHERE T.FLIGHTNO = query.FlightNumber
+				AND T.FLIGHTDATE = query.FlightDate);
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER CARDINALITY(outpass.*[]);
+		WHILE I <= J DO
+			SET outpass.PassengerDetails[I].LASTNAME = TRIM(outpass.PassengerDetails[I].LASTNAME);
+			SET outpass.PassengerDetails[I].FIRSTNAME = TRIM(outpass.PassengerDetails[I].FIRSTNAME);
+			SET I = I + 1;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildOutputMessage
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- fix the aggregate reply message for output to a queue
+		SET OutputRoot.Properties = InputRoot.Properties;
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		SET OutputRoot.MQMD.StrucId = MQMD_STRUC_ID;
+		SET OutputRoot.MQMD.Version = MQMD_CURRENT_VERSION;
+
+		DECLARE inflight REFERENCE TO InputRoot.ComIbmAggregateReplyBody.FlightDetails.XMLNSC.Flight;
+		DECLARE inpass REFERENCE TO InputRoot.ComIbmAggregateReplyBody.PassengerDetails.XMLNSC.ListOfPassengers;
+		CREATE FIELD OutputRoot.XMLNSC.FlightDetailsInfoResponse;
+		DECLARE outresp REFERENCE TO OutputRoot.XMLNSC.FlightDetailsInfoResponse;
+
+		-- populate the output message with flight info from the aggregate reply
+--		CREATE FIRSTCHILD OF outresp.Flight TYPE NameValue NAME 'number' VALUE inflight.FLIGHTNO;
+		SET outresp.Flight.(XMLNSC.Attribute)number VALUE = inflight.FLIGHTNO;
+		SET outresp.Flight.(XMLNSC.Attribute)Flightdate VALUE = inflight.FLIGHTDATE;
+		SET outresp.Flight.FirstClass.Capacity = inflight.TOTALFIRST;
+		SET outresp.Flight.FirstClass.Used = inflight.FIRSTCLASS;
+		SET outresp.Flight.FirstClass.Price = inflight.FIRSTPRICE;
+		SET outresp.Flight.EconomyClass.Capacity = inflight.TOTALECONOMIC;
+		SET outresp.Flight.EconomyClass.Used = inflight.ECONOMICCLASS;
+		SET outresp.Flight.EconomyClass.Price = inflight.ECONOMICPRICE;
+		SET outresp.Flight.Origin = inflight.STARTPOINT;
+		SET outresp.Flight.Destination = inflight.ENDPOINT;
+
+		-- populate the output message with passenger info from the aggregate reply		
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER CARDINALITY(inpass.*[]);
+		WHILE I <= J DO
+			SET outresp.ListOfPassengers.Passenger[I].ReservationNumber = inpass.PassengerDetails[I].RESERVATIONNO;
+			SET outresp.ListOfPassengers.Passenger[I].FirstName = inpass.PassengerDetails[I].FIRSTNAME;
+			SET outresp.ListOfPassengers.Passenger[I].LastName = inpass.PassengerDetails[I].LASTNAME;
+			SET outresp.ListOfPassengers.Passenger[I].Class = inpass.PassengerDetails[I].CLASSTYPE;
+			SET I = I + 1;
+		END WHILE;
+	RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ProcessTimeout
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		CREATE NEXTSIBLING OF OutputRoot.Properties DOMAIN 'MQMD';
+		SET OutputRoot.MQMD.StrucId = MQMD_STRUC_ID;
+		SET OutputRoot.MQMD.Version = MQMD_CURRENT_VERSION;
+		CREATE FIELD OutputRoot.XMLNSC.ComIbmAggregateReplyBody;
+		DECLARE timedout REFERENCE TO OutputRoot.XMLNSC.ComIbmAggregateReplyBody;
+		DECLARE reps REFERENCE TO InputRoot.ComIbmAggregateReplyBody;
+		MOVE reps FIRSTCHILD;
+		IF LASTMOVE(reps) THEN -- there will either be one reply, or none
+			SET timedout.TimedOut = reps.XMLNSC;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+-- ************************************************
+-- * ESQL for the XML_CancelReservation message flow
+-- ************************************************
+
+CREATE COMPUTE MODULE DeleteReservation
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE SQLState1 CHARACTER;
+		DECLARE SQLErrorText1 CHARACTER;
+		DECLARE SQLCode1 INTEGER;
+		DECLARE SQLNativeError1 INTEGER;
+
+		SET OutputRoot = InputRoot;
+		DECLARE cancel REFERENCE TO InputRoot.XMLNSC.CancelReservation.ListOfReservations;
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER CARDINALITY(cancel.ReservationNumber[]);
+		WHILE I <= J DO -- loop through the reservations to be cancelled
+			-- check that the requested reservation exists
+			SET Environment.ListOfReservations.Info[I] = 
+				THE(SELECT T.CLASSTYPE, T.FLIGHTNO, T.FLIGHTDATE 
+					FROM Database.XMLPASSENGERTB AS T 
+					WHERE T.RESERVATIONNO = cancel.ReservationNumber[I]);
+			IF (SELECT COUNT(*) FROM Environment.ListOfReservations.Info[I].*[] AS I1) IS NULL THEN
+				THROW USER EXCEPTION CATALOG 'MyCatalog' MESSAGE 1234 VALUES('No record to delete');
+			END IF;
+
+			-- delete the record from the database
+			DELETE FROM Database.XMLPASSENGERTB AS T WHERE T.RESERVATIONNO = cancel.ReservationNumber[I];
+			SET I = I + 1;
+
+			SET SQLCode1 = SQLCODE;
+			IF SQLCode1 <> 0 THEN
+				SET SQLState1 = SQLSTATE;
+				SET SQLErrorText1 = SQLERRORTEXT;
+				SET SQLNativeError1 = SQLNATIVEERROR;
+				THROW USER EXCEPTION MESSAGE 2950 VALUES('The SQL State' , SQLState1 , SQLCode1 , SQLNativeError1 , SQLErrorText1);
+			END IF;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE IncrementSeat
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE SQLState1 CHARACTER;
+		DECLARE SQLErrorText1 CHARACTER;
+		DECLARE SQLCode1 INTEGER;
+		DECLARE SQLNativeError1 INTEGER;
+
+		SET OutputRoot = InputRoot;
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER CARDINALITY(Environment.ListOfReservations.*[]);
+		-- loop through the cancellations, updating the seat availability
+		WHILE I <= J DO
+			IF Environment.ListOfReservations.Info[I].CLASSTYPE = 'Y' THEN
+				UPDATE Database.XMLFLIGHTTB AS T 
+					SET ECONOMICCLASS = T.ECONOMICCLASS-1, TOTALECONOMIC = T.TOTALECONOMIC+1
+					WHERE T.FLIGHTNO = Environment.ListOfReservations.Info[I].FLIGHTNO
+					AND T.FLIGHTDATE = Environment.ListOfReservations.Info[I].FLIGHTDATE;
+			END IF;
+			IF Environment.ListOfReservations.Info[I].CLASSTYPE = 'F' THEN
+				UPDATE Database.XMLFLIGHTTB AS T 
+					SET FIRSTCLASS = T.FIRSTCLASS-1, TOTALFIRST= T.TOTALFIRST+1
+					WHERE T.FLIGHTNO = Environment.ListOfReservations.Info[I].FLIGHTNO
+					AND T.FLIGHTDATE = Environment.ListOfReservations.Info[I].FLIGHTDATE;
+			END IF;
+			SET I = I + 1;
+
+			SET SQLCode1 = SQLCODE;
+			IF SQLCode1 <> 0 THEN
+				SET SQLState1 = SQLSTATE;
+				SET SQLErrorText1 = SQLERRORTEXT;
+				SET SQLNativeError1 = SQLNATIVEERROR;
+				THROW USER EXCEPTION MESSAGE 2950 VALUES('The SQL State' , SQLState1 , SQLCode1 , SQLNativeError1 , SQLErrorText1);
+			END IF;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;

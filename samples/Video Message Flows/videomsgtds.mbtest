@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.ibm.etools.mft.unittest.core.models.client="http:///com/ibm/etools/mft/unittest/core/models/client.ecore" xmlns:com.ibm.wbit.comptest.common.models.event="http:///com/ibm/etools/mft/unittest/common/models/event.ecore" xmlns:jms="http:///com/ibm//etools/mft/unittest/common/model2/jms" xmlns:model2="http:///com/ibm//etools/mft/unittest/common/model2" xmlns:mq="http:///com/ibm//etools/mft/unittest/common/model2/mq">
+  <com.ibm.etools.mft.unittest.core.models.client:EclipseClient iD="1181720968734-441" eventTrace="/1" clientID="1181720968734-441">
+    <scopes xsi:type="model2:FlowTestScope" iD="1181720968734-444">
+      <testModules xsi:type="model2:TestMsgFlow" iD="1181720968734-447"/>
+      <settings xsi:type="model2:FlowSettings"/>
+      <settings xsi:type="model2:DeploymentSettings"/>
+      <settings xsi:type="mq:MQSettings"/>
+      <settings xsi:type="jms:JMSSettings"/>
+      <settings xsi:type="mq:MQMessageHeaders"/>
+      <settings xsi:type="jms:JMSMessageHeaders"/>
+      <messageHeaders xsi:type="mq:MQHeader" iD="1181720968734-445" headerName="Header from .enqueue"/>
+    </scopes>
+  </com.ibm.etools.mft.unittest.core.models.client:EclipseClient>
+  <com.ibm.wbit.comptest.common.models.event:ExecutionEventTrace iD="1181720968734-442" children="/2 /3"/>
+  <mq:InteractiveMQEnqueueEvent iD="1181720968734-443" timestamp="1181720968734" host="localhost" port="0" queueManager="MB8QMGR" queue="VIDEO_TDS_IN" mqmdId="1181720968734-445">
+    <request xsi:type="model2:TestMessage" iD="1181720968734-446" header="/0/@scopes.0/@messageHeaders.0">
+      <properties name="messageSource" stringValue="sourceView"/>
+      <properties name="plainText" stringValue="{Name:[Title:Mr*FirstName:Fred*LastName:Bloggs]&amp;Address:[HouseNo:12*Street:Willow Avenue*Town:Salisbury]&amp;ID:P&amp;PassportNo:J123456TT&amp;Borrowed:[Fast Cars+2003-05-23+3.00]&amp;Borrowed:[Cut To The Chase+2003-05-23+3.75]&amp;Magazine:1}"/>
+    </request>
+  </mq:InteractiveMQEnqueueEvent>
+  <mq:InteractiveMQDequeueEvent iD="1187789482140-711" timestamp="1187789482140" host="localhost" port="0" queueManager="MB8QMGR" queue="VIDEO_OUT">
+    <request xsi:type="model2:TestMessage" iD="1187789482140-712"/>
+  </mq:InteractiveMQDequeueEvent>
+</xmi:XMI>

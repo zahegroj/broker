@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.ibm.com/AddressDetails"
+    xmlns="http://www.w3.org/2001/XMLSchema" xmlns:addr="http://www.ibm.com/AddressDetails">
+    <element name="Address">
+        <annotation>
+            <appinfo source="WMQI_APPINFO">
+                <tdsElemRep messageSetDefaultRep="TDS1" precision="-1" tag="Address"/>
+            </appinfo>
+        </annotation>
+        <complexType>
+            <annotation>
+                <appinfo source="WMQI_APPINFO">
+                    <MRComplexType composition="orderedSet"/>
+                    <tdsStructRep
+                        dataElementSeparation="TaggedDelimited"
+                        delimiter="*" groupIndicator="["
+                        groupTerminator="]" messageSetDefaultRep="TDS1" tagDataSeparator=":"/>
+                </appinfo>
+            </annotation>
+            <sequence>
+                <element name="HouseNo" type="int">
+                    <annotation>
+                        <appinfo source="WMQI_APPINFO">
+                            <tdsElemRep justification="rightJustify"
+                                messageSetDefaultRep="TDS1"
+                                precision="-1" tag="HouseNo"/>
+                            <cwfInclRep messageSetDefaultRep="CWF1">
+                                <cwfSimpleRep
+                                    encodingNull="NullLogicalValue"
+                                    encodingNullValue="0"
+                                    lengthUnits="Bytes"
+                                    paddingCharacter="SPACE"
+                                    signed="false"
+                                    stringJustification="leftJustify"
+                                    typeName="MRCWFExternalDecimalRep" width="4"/>
+                            </cwfInclRep>
+                        </appinfo>
+                    </annotation>
+                </element>
+                <element name="Street" type="string">
+                    <annotation>
+                        <appinfo source="WMQI_APPINFO">
+                            <tdsElemRep justification="leftJustify"
+                                messageSetDefaultRep="TDS1"
+                                precision="-1" tag="Street"/>
+                            <cwfInclRep messageSetDefaultRep="CWF1">
+                                <cwfSimpleRep
+                                    encodingNull="NullLogicalValue"
+                                    encodingNullValue=""
+                                    lengthEncoding="fixedLength"
+                                    lengthUnits="Bytes"
+                                    paddingCharacter="NUL"
+                                    stringJustification="leftJustify"
+                                    typeName="MRCWFStringRep" width="20"/>
+                            </cwfInclRep>
+                        </appinfo>
+                    </annotation>
+                </element>
+                <element name="Town" type="string">
+                    <annotation>
+                        <appinfo source="WMQI_APPINFO">
+                            <tdsElemRep justification="leftJustify"
+                                messageSetDefaultRep="TDS1"
+                                precision="-1" tag="Town"/>
+                            <cwfInclRep messageSetDefaultRep="CWF1">
+                                <cwfSimpleRep
+                                    encodingNull="NullLogicalValue"
+                                    encodingNullValue=""
+                                    lengthEncoding="fixedLength"
+                                    lengthUnits="Bytes"
+                                    paddingCharacter="NUL"
+                                    stringJustification="leftJustify"
+                                    typeName="MRCWFStringRep" width="20"/>
+                            </cwfInclRep>
+                        </appinfo>
+                    </annotation>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+</schema>

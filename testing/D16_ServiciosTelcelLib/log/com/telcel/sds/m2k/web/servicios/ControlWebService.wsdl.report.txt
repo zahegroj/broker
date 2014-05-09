@@ -1,0 +1,22 @@
+
+
+Importing file: E:\Users\jzapatah\Dropbox\wmb\wsdl\m2k\ControlWebService.wsdl
+
+Copying source WSDL ControlWebService.wsdl to ControlWebService.wsdl.
+The WSDL import will proceed with bindings ControlWebServiceSoapBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Dropbox/wmb/wsdl/m2k/ControlWebService.wsdl.
+Parsing wsdl binding {http://servicios.web.m2k.sds.telcel.com}ControlWebServiceSoapBinding.
+Parsing wsdl binding input ejecutaServicio.
+Parsing wsdl binding output ejecutaServicio.
+Processing doc style for operation ejecutaServicio.
+Populating WSDL schema m2k/ControlWebService.xsd.
+Creating file m2k/ControlWebService.xsd in the workspace.
+Creating file m2k/ControlWebService_InlineSchema1.xsd in the workspace.
+
+Elapsed time processing this message definition file: 1.001 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

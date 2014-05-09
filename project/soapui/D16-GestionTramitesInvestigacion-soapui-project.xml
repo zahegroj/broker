@@ -1,0 +1,1821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="D16_GestionTramitesInvestigacion" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="GestionTramitesInvestigacionBinding" type="wsdl" bindingName="{http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion}GestionTramitesInvestigacionBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/investigacion/GestionTramitesInvestigacion.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/investigacion/GestionTramitesInvestigacion.wsdl"><con:part><con:url>file:/C:/Users/jzapatah/Documents/GitHub/broker/D16_GestionTramitesLib/investigacion/GestionTramitesInvestigacion.wsdl</con:url><con:content><![CDATA[<definitions name="GestionTramitesInvestigacion" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion" xmlns:types="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="GestionTramitesInvestigacionBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" schemaLocation="GestionTramitesInvestigacion.xsd"/>
+      <xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="consultarEncabezadoMsg">
+    <part element="types:consultarEncabezadoRequest" name="parameters"/>
+  </message>
+  <message name="consultarEncabezadoMsgResponse">
+    <part element="types:consultarEncabezadoResponse" name="parameters"/>
+  </message>
+  <message name="consultarConsumosMsg">
+    <part element="types:consultarConsumosRequest" name="parameters"/>
+  </message>
+  <message name="consultarConsumosMsgResponse">
+    <part element="types:consultarConsumosResponse" name="parameters"/>
+  </message>
+  <message name="consultarDetalleConexionesMsg">
+    <part element="types:consultarDetalleConexionesRequest" name="parameters"/>
+  </message>
+  <message name="consultarDetalleConexionesMsgResponse">
+    <part element="types:consultarDetalleConexionesResponse" name="parameters"/>
+  </message>
+  <message name="consultarPlanesYServiciosMsg">
+    <part element="types:consultarPlanesYServiciosRequest" name="parameters"/>
+  </message>
+  <message name="consultarPlanesYServiciosMsgResponse">
+    <part element="types:consultarPlanesYServiciosResponse" name="parameters"/>
+  </message>
+  <message name="consultarDetallePlanTarifarioMsg">
+    <part element="types:consultarDetallePlanTarifarioRequest" name="parameters"/>
+  </message>
+  <message name="consultarDetallePlanTarifarioMsgResponse">
+    <part element="types:consultarDetallePlanTarifarioResponse" name="parameters"/>
+  </message>
+  <message name="consultarDetalleProductoMsg">
+    <part element="types:consultarDetalleProductoRequest" name="parameters"/>
+  </message>
+  <message name="consultarDetalleProductoMsgResponse">
+    <part element="types:consultarDetalleProductoResponse" name="parameters"/>
+  </message>
+  <message name="consultarPagosYAjustesMsg">
+    <part element="types:consultarPagosYAjustesRequest" name="parameters"/>
+  </message>
+  <message name="consultarPagosYAjustesMsgResponse">
+    <part element="types:consultarPagosYAjustesResponse" name="parameters"/>
+  </message>
+  <message name="consultarDetalleReversionMsg">
+    <part element="types:consultarDetalleReversionRequest" name="parameters"/>
+  </message>
+  <message name="consultarDetalleReversionMsgResponse">
+    <part element="types:consultarDetalleReversionResponse" name="parameters"/>
+  </message>
+  <message name="consultarPromocionesMsg">
+    <part element="types:consultarPromocionesRequest" name="parameters"/>
+  </message>
+  <message name="consultarPromocionesMsgResponse">
+    <part element="types:consultarPromocionesResponse" name="parameters"/>
+  </message>
+  <message name="consultarDetallePromocionMsg">
+    <part element="types:consultarDetallePromocionRequest" name="parameters"/>
+  </message>
+  <message name="consultarDetallePromocionMsgResponse">
+    <part element="types:consultarDetallePromocionResponse" name="parameters"/>
+  </message>
+  <message name="consultarHistorialCuentaMsg">
+    <part element="types:consultarHistorialCuentaRequest" name="parameters"/>
+  </message>
+  <message name="consultarHistorialCuentaMsgResponse">
+    <part element="types:consultarHistorialCuentaResponse" name="parameters"/>
+  </message>
+  <message name="gestionTramitesWMBExceptionMsg">
+    <part element="comun:gestionTramitesWMBException" name="fault"/>
+  </message>
+  <portType name="GestionTramitesInvestigacionPort">
+    <operation name="consultarEncabezado">
+      <input message="this:consultarEncabezadoMsg"/>
+      <output message="this:consultarEncabezadoMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarConsumos">
+      <input message="this:consultarConsumosMsg"/>
+      <output message="this:consultarConsumosMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetalleConexiones">
+      <input message="this:consultarDetalleConexionesMsg"/>
+      <output message="this:consultarDetalleConexionesMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarPlanesYServicios">
+      <input message="this:consultarPlanesYServiciosMsg"/>
+      <output message="this:consultarPlanesYServiciosMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetallePlanTarifario">
+      <input message="this:consultarDetallePlanTarifarioMsg"/>
+      <output message="this:consultarDetallePlanTarifarioMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetalleProducto">
+      <input message="this:consultarDetalleProductoMsg"/>
+      <output message="this:consultarDetalleProductoMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarPagosYAjustes">
+      <input message="this:consultarPagosYAjustesMsg"/>
+      <output message="this:consultarPagosYAjustesMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetalleReversion">
+      <input message="this:consultarDetalleReversionMsg"/>
+      <output message="this:consultarDetalleReversionMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarPromociones">
+      <input message="this:consultarPromocionesMsg"/>
+      <output message="this:consultarPromocionesMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarDetallePromocion">
+      <input message="this:consultarDetallePromocionMsg"/>
+      <output message="this:consultarDetallePromocionMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+    <operation name="consultarHistorialCuenta">
+      <input message="this:consultarHistorialCuentaMsg"/>
+      <output message="this:consultarHistorialCuentaMsgResponse"/>
+      <fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+    </operation>
+  </portType>
+  <binding name="GestionTramitesInvestigacionBinding" type="this:GestionTramitesInvestigacionPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="consultarEncabezado">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarConsumos">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetalleConexiones">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarPlanesYServicios">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetallePlanTarifario">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetalleProducto">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleProducto"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarPagosYAjustes">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetalleReversion">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarPromociones">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarDetallePromocion">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePromocion"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="consultarHistorialCuenta">
+      <soap:operation soapAction="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="GestionTramitesWMBException">
+        <soap:fault name="GestionTramitesWMBException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="GestionTramitesInvestigacionService">
+    <port binding="this:GestionTramitesInvestigacionBinding" name="GestionTramitesInvestigacionHTTPSOAPPort">
+      <soap:address location="http://localhost:7800/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\investigacion\GestionTramitesInvestigacion.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+  <xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarEncabezadoRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarEncabezadoRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarEncabezadoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarEncabezadoResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarConsumosRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarConsumosRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarConsumosResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarConsumosResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleConexionesRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetalleConexionesRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleConexionesResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetalleConexionesResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarPlanesYServiciosRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarPlanesYServiciosRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarPlanesYServiciosResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarPlanesYServiciosResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePlanTarifarioRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetallePlanTarifarioRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePlanTarifarioResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetallePlanTarifarioResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleProductoRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetalleProductoRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleProductoResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetalleProductoResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarPagosYAjustesRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarPagosYAjustesRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarPagosYAjustesResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarPagosYAjustesResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleReversionRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetalleReversionRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleReversionResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetalleReversionResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarPromocionesRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarPromocionesRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarPromocionesResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarPromocionesResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePromocionRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarDetallePromocionRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePromocionResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarDetallePromocionResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarHistorialCuentaRequest">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="request" type="this:ConsultarHistorialCuentaRequestType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element ibmSchExtn:docRoot="true" name="consultarHistorialCuentaResponse">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="response" type="this:ConsultarHistorialCuentaResponseType"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <!--types-->
+  <xsd:complexType name="ConsultarEncabezadoRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarEncabezadoResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="formaPago" type="xsd:string"/>
+          <xsd:element name="planTarifario" type="xsd:string"/>
+          <xsd:element name="modelo" type="xsd:string"/>
+          <xsd:element name="imei" type="comun:imeiFormato"/>
+          <xsd:element name="marca" type="xsd:string"/>
+          <xsd:element name="infoImei" type="this:InfoImeiType"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarConsumosRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+          <xsd:element name="cuenta" type="comun:cuentaFormato"/>
+          <xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+          <xsd:element name="fechaFin" type="comun:fechaFormato"/>
+          <xsd:element name="esRegistrosFacturados" type="xsd:boolean"/>
+          <xsd:element name="referencia" type="this:ReferenciaConsumosType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarConsumosResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="consumos" type="this:ArrayOfConsumo" minOccurs="0"/>
+          <xsd:element name="referencia" type="this:ReferenciaConsumosType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleConexionesRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+          <xsd:element name="cuenta" type="comun:cuentaFormato"/>
+          <xsd:element name="fechaConexion" type="comun:fechaFormato"/>
+          <xsd:element name="horaConexion" type="comun:horaFormato"/>
+          <xsd:element name="referencia" type="this:ReferenciaDetalleConexionType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleConexionesResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="detallesConexion" type="this:ArrayOfDetalleConexion" minOccurs="0"/>
+          <xsd:element name="referencia" type="this:ReferenciaDetalleConexionType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPlanesYServiciosRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+          <xsd:element name="cuenta" type="comun:cuentaFormato"/>
+          <xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+          <xsd:element name="fechaFin" type="comun:fechaFormato"/>
+          <xsd:element name="referenciaPlanesTarifarios" type="this:ReferenciaPlanTarifario" minOccurs="0"/>
+          <xsd:element name="referenciaServiciosAdicionales" type="this:ReferenciaServicioAdicional" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPlanesYServiciosResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="planesTarifarios" type="this:ArrayOfPlanTarifario" minOccurs="0"/>
+          <xsd:element name="referenciaPlanesTarifarios" type="this:ReferenciaPlanTarifario" minOccurs="0"/>
+          <xsd:element name="serviciosAdicionales" type="this:ArrayOfServicioAdicional" minOccurs="0"/>
+          <xsd:element name="referenciaServiciosAdicionales" type="this:ReferenciaServicioAdicional" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetallePlanTarifarioRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="planTarifario" type="comun:alfanumericoFormato"/>
+          <xsd:element name="referencia" type="comun:alfanumericoFormato" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetallePlanTarifarioResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="detallePlanTarifario" type="this:DetallePlanTariafioType" minOccurs="0"/>
+          <xsd:element name="productosDePlan" type="this:ArrayOfProductoDePlan" minOccurs="0"/>
+          <xsd:element name="referencia" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleProductoRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+          <xsd:element name="cuenta" type="comun:cuentaFormato"/>
+          <xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+          <xsd:element name="fechaFin" type="comun:fechaFormato"/>
+          <xsd:element name="producto" type="comun:productoFormato"/>
+          <xsd:element name="planTarifario" type="comun:planTarifarioFormato"/>
+          <xsd:element name="referencia" type="this:ReferenciaGrupoLlamadas" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleProductoResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="detalleProducto" type="this:DetalleProductoType" minOccurs="0"/>
+          <xsd:element name="grupoLlamadas" type="this:ArrayOfLlamada" minOccurs="0"/>
+          <xsd:element name="referencia" type="this:ReferenciaGrupoLlamadas" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPagosYAjustesRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+          <xsd:element name="cuenta" type="comun:cuentaFormato"/>
+          <xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+          <xsd:element name="fechaFin" type="comun:fechaFormato"/>
+          <xsd:element name="referencia" type="this:ReferenciaPagoYAjusteType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPagosYAjustesResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="pagosYAjustes" type="this:ArrayOfPagoYAjuste" minOccurs="0"/>
+          <xsd:element name="referencia" type="this:ReferenciaPagoYAjusteType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleReversionRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="fechaPago" type="comun:fechaPivFormato"/>
+          <xsd:element name="numPago" type="xsd:string"/>
+          <xsd:element name="tipoPago" type="xsd:string"/>
+          <xsd:element name="secPago" type="xsd:string"/>
+          <xsd:element name="referencia" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetalleReversionResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="reversiones" type="this:ArrayOfReversion" minOccurs="0"/>
+          <xsd:element name="referencia" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPromocionesRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+          <xsd:element name="cuenta" type="comun:cuentaFormato"/>
+          <xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+          <xsd:element name="fechaFin" type="comun:fechaFormato"/>
+          <xsd:element name="referencia" type="this:ReferenciaPromocionType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarPromocionesResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="promociones" type="this:ArrayOfPromocion" minOccurs="0"/>
+          <xsd:element name="referencia" type="this:ReferenciaPromocionType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetallePromocionRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+          <xsd:element name="cuenta" type="comun:cuentaFormato"/>
+          <xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+          <xsd:element name="fechaFin" type="comun:fechaFormato"/>
+          <xsd:element name="planDescuento" type="comun:planTarifarioFormato"/>
+          <xsd:element name="fechaEfectiva" type="xsd:string"/>
+          <xsd:element name="referencia" type="this:ReferenciaDetallePromocionType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarDetallePromocionResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="descripcionPromocion" type="this:DescPromocionType" minOccurs="0"/>
+          <xsd:element name="aplicacionesProducto" type="this:ArrayOfAplicacionProducto" minOccurs="0"/>
+          <xsd:element name="detallesPromocion" type="this:ArrayOfDetallePromocion" minOccurs="0"/>
+          <xsd:element name="referenciaDetallePromocion" type="this:ReferenciaDetallePromocionType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarHistorialCuentaRequestType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="telefono" type="comun:telefonoFormato"/>
+          <xsd:element name="cuenta" type="comun:cuentaFormato"/>
+          <xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+          <xsd:element name="fechaFin" type="comun:fechaFormato"/>
+          <xsd:element name="referencia" type="this:ReferenciaHistorialCuenta" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ConsultarHistorialCuentaResponseType">
+    <xsd:complexContent>
+      <xsd:extension base="comun:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="registros" type="this:ArrayOfHistorialCuenta" minOccurs="0"/>
+          <xsd:element name="referencia" type="this:ReferenciaHistorialCuenta" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!--encabezado-->
+  <xsd:complexType name="InfoImeiType">
+    <xsd:sequence>
+      <xsd:element name="codigo" type="xsd:string"/>
+      <xsd:element name="claveSap" type="xsd:string"/>
+      <xsd:element name="marca" type="xsd:string"/>
+      <xsd:element name="modelo" type="xsd:string"/>
+      <xsd:element name="grupoArticulo" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--consumos-->
+  <xsd:complexType name="ConsumoType">
+    <xsd:sequence>
+      <xsd:element name="fecha" type="xsd:string"/>
+      <xsd:element name="hora" type="xsd:string"/>
+      <xsd:element name="ciudadOrigen" type="xsd:string"/>
+      <xsd:element name="telMarcado" type="xsd:string"/>
+      <xsd:element name="ciudadDestino" type="xsd:string"/>
+      <xsd:element name="sv" type="xsd:string"/>
+      <xsd:element name="cl" type="xsd:string"/>
+      <xsd:element name="tipoLlamada" type="xsd:string"/>
+      <xsd:element name="minutosTAire" type="xsd:string"/>
+      <xsd:element name="minutosLibre" type="xsd:string"/>
+      <xsd:element name="largaDistancia" type="xsd:string"/>
+      <xsd:element name="total" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfConsumo">
+    <xsd:sequence>
+      <xsd:element name="consumo" type="this:ConsumoType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaConsumosType">
+    <xsd:sequence>
+      <xsd:element name="fechaPiv" type="xsd:string"/>
+      <xsd:element name="horaPiv" type="xsd:string"/>
+      <xsd:element name="fuentePiv" type="xsd:string"/>
+      <xsd:element name="secuenciaPiv" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="telMarcadoPiv" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--detalle conexiones-->
+  <xsd:complexType name="DetalleConexionType">
+    <xsd:sequence>
+      <xsd:element name="fechaConexion" type="xsd:string"/>
+      <xsd:element name="horaConexion" type="xsd:string"/>
+      <xsd:element name="bytesCargados" type="xsd:string"/>
+      <xsd:element name="bytesDescargados" type="xsd:string"/>
+      <xsd:element name="apn" type="xsd:string"/>
+      <xsd:element name="imei" type="xsd:string"/>
+      <xsd:element name="imsi" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfDetalleConexion">
+    <xsd:sequence>
+      <xsd:element name="detalleConexion" type="this:DetalleConexionType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaDetalleConexionType">
+    <xsd:sequence>
+      <xsd:element name="dtConnect" type="xsd:string"/>
+      <xsd:element name="tmConnect" type="xsd:string"/>
+      <xsd:element name="chargingId" type="xsd:string"/>
+      <xsd:element name="dataVolUp" type="xsd:string"/>
+      <xsd:element name="dataVolDown" type="xsd:string"/>
+      <xsd:element name="serviceClass" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--pagos y ajustes-->
+  <xsd:complexType name="PagoYAjusteType">
+    <xsd:sequence>
+      <xsd:element name="fecha" type="xsd:string"/>
+      <xsd:element name="nombreAjuste" type="xsd:string"/>
+      <xsd:element name="cheque" type="xsd:string"/>
+      <xsd:element name="origenPago" type="xsd:string"/>
+      <xsd:element name="formaPago" type="xsd:string"/>
+      <xsd:element name="importe" type="xsd:string"/>
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="asesor" type="xsd:string"/>
+      <xsd:element name="detallePago" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfPagoYAjuste">
+    <xsd:sequence>
+      <xsd:element name="pagoYAjuste" type="this:PagoYAjusteType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaPagoYAjusteType">
+    <xsd:sequence>
+      <xsd:element name="fechaPago" type="xsd:string"/>
+      <xsd:element name="lotePago" type="xsd:string"/>
+      <xsd:element name="tipoPago" type="xsd:string"/>
+      <xsd:element name="secPago" type="xsd:string"/>
+      <xsd:element name="fechaAjuste" type="xsd:string"/>
+      <xsd:element name="codAjuste" type="xsd:string"/>
+      <xsd:element name="secUsuarioAjuste" type="xsd:string"/>
+      <xsd:element name="secAjuste" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--reversiones-->
+  <xsd:complexType name="ReversionType">
+    <xsd:sequence>
+      <xsd:element name="fechaPago" type="xsd:string"/>
+      <xsd:element name="fechaAplicacion" type="xsd:string"/>
+      <xsd:element name="fechaReversion" type="xsd:string"/>
+      <xsd:element name="importeAplicado" type="xsd:string"/>
+      <xsd:element name="fechaFactura" type="xsd:string"/>
+      <xsd:element name="formaPago" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfReversion">
+    <xsd:sequence>
+      <xsd:element name="reversion" type="this:ReversionType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--promociones-->
+  <xsd:complexType name="PromocionType">
+    <xsd:sequence>
+      <xsd:element name="planDescuento" type="xsd:string"/>
+      <xsd:element name="descripcion" type="xsd:string"/>
+      <xsd:element name="periodicidad" type="xsd:string"/>
+      <xsd:element name="fechaEfectiva" type="xsd:string"/>
+      <xsd:element name="fechaExpiracion" type="xsd:string"/>
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="usuario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfPromocion">
+    <xsd:sequence>
+      <xsd:element name="promocion" type="this:PromocionType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaPromocionType">
+    <xsd:sequence>
+      <xsd:element name="cveDesc" type="xsd:string"/>
+      <xsd:element name="effDt" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--detalle promociones-->
+  <xsd:complexType name="DescPromocionType">
+    <xsd:sequence>
+      <!--igtoc48c-->
+      <xsd:element name="claveDescuento" type="xsd:string"/>
+      <xsd:element name="periodoDescuento" type="xsd:string"/>
+      <xsd:element name="claveProducto" type="xsd:string"/>
+      <xsd:element name="descripcionProducto" type="xsd:string"/>
+      <xsd:element name="claveAjustePromocion" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DetallePromocionType">
+    <xsd:sequence>
+      <!--igtoc48d-->
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="periodo" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfDetallePromocion">
+    <xsd:sequence>
+      <xsd:element name="detallePromocion" type="this:DetallePromocionType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaDetallePromocionType">
+    <xsd:sequence>
+      <xsd:element name="valCdInd" type="xsd:string"/>
+      <xsd:element name="valTransInd" type="xsd:string"/>
+      <xsd:element name="ultFecDes" type="xsd:string"/>
+      <xsd:element name="priFecDes" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AplicacionProductoType">
+    <xsd:sequence>
+      <!--igtoc48a-->
+      <xsd:element name="producto" type="xsd:string"/>
+      <xsd:element name="fechaEfectiva" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfAplicacionProducto">
+    <xsd:sequence>
+      <xsd:element name="descPromocion" type="this:AplicacionProductoType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--historial de la cuenta-->
+  <xsd:complexType name="HistorialCuentaType">
+    <xsd:sequence>
+      <xsd:element name="telefono" type="xsd:string"/>
+      <xsd:element name="fechaEfectiva" type="xsd:string"/>
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="motivo" type="xsd:string"/>
+      <xsd:element name="tecnologia" type="xsd:string"/>
+      <xsd:element name="imei" type="xsd:string"/>
+      <xsd:element name="iccid" type="xsd:string"/>
+      <xsd:element name="imsi" type="xsd:string"/>
+      <xsd:element name="usuario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfHistorialCuenta">
+    <xsd:sequence>
+      <xsd:element name="registro" type="this:HistorialCuentaType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaHistorialCuenta">
+    <xsd:sequence>
+      <xsd:element name="telefono" type="xsd:string"/>
+      <xsd:element name="effDate" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--detalle de producto-->
+  <xsd:complexType name="DetalleProductoType">
+    <xsd:sequence>
+      <xsd:element name="claveProducto" type="xsd:string"/>
+      <xsd:element name="descripcionProducto" type="xsd:string"/>
+      <xsd:element name="costoProducto" type="xsd:string"/>
+      <xsd:element name="caracteristicasProducto" type="xsd:string"/>
+      <xsd:element name="minutosIncluidos" type="xsd:string"/>
+      <xsd:element name="smsIncluidos" type="xsd:string"/>
+      <xsd:element name="datosIncluidos" type="xsd:string"/>
+      <xsd:element name="unidad" type="xsd:string"/>
+      <xsd:element name="claveGrupo" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="LlamadaType">
+    <xsd:sequence>
+      <xsd:element name="telefono" type="xsd:string"/>
+      <xsd:element name="tipoServicio" type="xsd:string"/>
+      <xsd:element name="tipoDestino" type="xsd:string"/>
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="fechaEfectiva" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfLlamada">
+    <xsd:sequence>
+      <xsd:element name="llamada" type="this:LlamadaType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaGrupoLlamadas">
+    <xsd:sequence>
+      <xsd:element name="tipoGrupo" type="xsd:string"/>
+      <xsd:element name="idGrupo" type="xsd:string"/>
+      <xsd:element name="telefono" type="xsd:string"/>
+      <xsd:element name="effDate" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--detalle plan tarifario-->
+  <xsd:complexType name="DetallePlanTariafioType">
+    <xsd:sequence>
+      <xsd:element name="descripcionPlan" type="xsd:string"/>
+      <xsd:element name="plazoForzoso" type="xsd:string"/>
+      <xsd:element name="tipoPlan" type="xsd:string"/>
+      <xsd:element name="descripcionTipoPlan" type="xsd:string"/>
+      <xsd:element name="minutosIncluidos" type="xsd:string"/>
+      <xsd:element name="smsIncluidos" type="xsd:string"/>
+      <xsd:element name="datosIncluidos" type="xsd:string"/>
+      <xsd:element name="costoPlan" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ProductoDePlanType">
+    <xsd:sequence>
+      <xsd:element name="producto" type="xsd:string"/>
+      <xsd:element name="descripcion" type="xsd:string"/>
+      <xsd:element name="costo" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfProductoDePlan">
+    <xsd:sequence>
+      <xsd:element name="producto" type="this:ProductoDePlanType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!--planes y servicios-->
+  <xsd:complexType name="PlanTarifarioType">
+    <xsd:sequence>
+      <!--41R-->
+      <xsd:element name="descripcion" type="xsd:string"/>
+      <xsd:element name="fechaEfectiva" type="xsd:string"/>
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="usuario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfPlanTarifario">
+    <xsd:sequence>
+      <xsd:element name="planTarifario" type="this:PlanTarifarioType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaPlanTarifario">
+    <xsd:sequence>
+      <xsd:element name="plan" type="xsd:string"/>
+      <xsd:element name="fecha" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ServicioAdicionalType">
+    <xsd:sequence>
+      <!--44D-->
+      <xsd:element name="producto" type="xsd:string"/>
+      <xsd:element name="incluidoEnPlan" type="xsd:string"/>
+      <xsd:element name="fechaEfectiva" type="xsd:string"/>
+      <xsd:element name="estatus" type="xsd:string"/>
+      <xsd:element name="usuario" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfServicioAdicional">
+    <xsd:sequence>
+      <xsd:element name="servicioAdicional" type="this:ServicioAdicionalType" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReferenciaServicioAdicional">
+    <xsd:sequence>
+      <xsd:element name="claveProd" type="xsd:string"/>
+      <xsd:element name="fechaProd" type="xsd:string"/>
+      <xsd:element name="estatusProd" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:\C:\Users\jzapatah\Documents\GitHub\broker\D16_GestionTramitesLib\comun\GestionTramitesComun.xsd</con:url><con:content><![CDATA[<xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" version="1.0" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:element name="gestionTramitesWMBException" type="this:GestionTramitesWMBException"/>
+  <xsd:complexType name="RequestBase">
+    <xsd:sequence>
+      <xsd:element name="usuarioM2K" type="xsd:string"/>
+      <xsd:element name="region" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ResponseBase">
+    <xsd:sequence>
+      <xsd:element name="mensajes" type="this:ArrayOfMensaje" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="GestionTramitesWMBException">
+    <xsd:sequence>
+      <xsd:element name="servicio" type="xsd:string"/>
+      <xsd:element name="operacion" type="xsd:string"/>
+      <!--Para m2k FUNCTION_ACTION-->
+      <xsd:element name="errores" type="this:ArrayOfError" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfError">
+    <xsd:sequence>
+      <xsd:element name="error" type="this:Error" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Error">
+    <xsd:sequence>
+      <xsd:element name="tipo" type="xsd:string"/>
+      <xsd:element name="codigo" type="xsd:string"/>
+      <xsd:element name="descripcion" type="xsd:string"/>
+      <xsd:element name="solucion" type="xsd:string"/>
+      <xsd:element name="servicioOrigen" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ArrayOfMensaje">
+    <xsd:sequence>
+      <xsd:element name="mensaje" type="this:Mensaje" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Mensaje">
+    <xsd:sequence>
+      <xsd:element name="codigo" type="xsd:string"/>
+      <xsd:element name="descripcion" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="decimalFormato">
+    <xsd:restriction base="xsd:decimal">
+      <xsd:fractionDigits value="2"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="telefonoFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{10}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="fechaFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|(((0[1-9])|([1-2][0-9])|(3[0-1]))/((01)|(03)|(05)|(07)|(08)|(10)|(12))/[0-9]{2})"/>
+      <xsd:pattern value="|(((0[1-9])|([1-2][0-9])|(30))/((04)|(06)|(09)|(11))/[0-9]{2})"/>
+      <xsd:pattern value="|(((0[1-9])|([1-2][0-9]))/((02))/[0-9]{2})"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="cuentaFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{1,9}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="imeiFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{18}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="horaFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|(([0-1][0-9])|(2[0-3])):(([0-5][0-9])):(([0-5][0-9]))"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="alfanumericoFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|[a-zA-Z0-9]+"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="productoFormato">
+    <xsd:restriction base="this:alfanumericoFormato">
+      <xsd:maxLength value="5"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="planTarifarioFormato">
+    <xsd:restriction base="this:alfanumericoFormato">
+      <xsd:maxLength value="5"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="fechaPivFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|\d{7}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="smsFormato">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="150"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>
+<!--catalogo de servicios-->
+<!--1. M2K-->
+<!--2. SIANTEL-->
+<!--3. SMS-->
+<!--4. IMEI-->
+<!--5. RN Determinar Adeudo-->
+<!--6. RN Determinar Region Perfil-->
+<!--7. RN Determinar Prevalidacion-->
+<!--8. RN Reasignar Tramite-->]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:endpoint>http://10.191.80.46:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:endpoint>http://localhost:7800/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:endpoint>http://MEX-FDKG5S1:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:endpoint>http://localhost:7802/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos" name="consultarConsumos" bindingOperationName="consultarConsumos" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarConsumosRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5522700538</sch:telefono>
+            <sch:cuenta>1862574</sch:cuenta>
+            <sch:fechaInicio>21/12/13</sch:fechaInicio>
+            <sch:fechaFin>28/01/14</sch:fechaFin>
+            <sch:esRegistrosFacturados>false</sch:esRegistrosFacturados>
+            <!--Optional:-->
+            <sch:referencia>
+               <sch:fechaPiv>2140125</sch:fechaPiv>
+               <sch:horaPiv>1215210</sch:horaPiv>
+               <sch:fuentePiv>GSRAT9</sch:fuentePiv>
+               <!--Optional:
+               <sch:secuenciaPiv>?</sch:secuenciaPiv>-->
+               <sch:telMarcadoPiv>5522327148</sch:telMarcadoPiv>
+            </sch:referencia>
+         </sch:request>
+      </sch:consultarConsumosRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarConsumosRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaInicio>28/03/14</sch:fechaInicio>
+            <sch:fechaFin>08/04/14</sch:fechaFin>
+            <sch:esRegistrosFacturados>false</sch:esRegistrosFacturados>
+            <sch:referencia>
+               <sch:fechaPiv>2140404</sch:fechaPiv>
+               <sch:horaPiv>2229520</sch:horaPiv>
+               <sch:fuentePiv>GSRAT9</sch:fuentePiv>
+               <sch:telMarcadoPiv>5553591010</sch:telMarcadoPiv>
+            </sch:referencia>
+         </sch:request>
+      </sch:consultarConsumosRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones" name="consultarDetalleConexiones" bindingOperationName="consultarDetalleConexiones" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleConexionesRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5522700538</sch:telefono>
+            <sch:cuenta>1862574</sch:cuenta>
+            <sch:fechaConexion>27/01/14</sch:fechaConexion>
+            <sch:horaConexion>17:41:41</sch:horaConexion>
+            <!--Optional:
+            <sch:referencia>
+               <sch:dtConnect>?</sch:dtConnect>
+               <sch:tmConnect>?</sch:tmConnect>
+               <sch:chargingId>?</sch:chargingId>
+               <sch:dataVolUp>?</sch:dataVolUp>
+               <sch:dataVolDown>?</sch:dataVolDown>
+               <sch:serviceClass>?</sch:serviceClass>
+            </sch:referencia>
+-->
+         </sch:request>
+      </sch:consultarDetalleConexionesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleConexionesRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaConexion>04/04/14</sch:fechaConexion>
+            <sch:horaConexion>15:10:46</sch:horaConexion>
+            <!--Optional:
+            <sch:referencia>
+               <sch:dtConnect>?</sch:dtConnect>
+               <sch:tmConnect>?</sch:tmConnect>
+               <sch:chargingId>?</sch:chargingId>
+               <sch:dataVolUp>?</sch:dataVolUp>
+               <sch:dataVolDown>?</sch:dataVolDown>
+               <sch:serviceClass>?</sch:serviceClass>
+            </sch:referencia>
+-->
+         </sch:request>
+      </sch:consultarDetalleConexionesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario" name="consultarDetallePlanTarifario" bindingOperationName="consultarDetallePlanTarifario" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetallePlanTarifarioRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:planTarifario>M9871</sch:planTarifario>
+            <!--Optional:
+            <sch:referencia>?</sch:referencia>-->
+         </sch:request>
+      </sch:consultarDetallePlanTarifarioRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleProducto" name="consultarDetalleProducto" bindingOperationName="consultarDetalleProducto" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleProductoRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaInicio>28/03/14</sch:fechaInicio>
+            <sch:fechaFin>08/04/14</sch:fechaFin>
+            <sch:producto>BUZ I</sch:producto>
+            <sch:planTarifario>M9871</sch:planTarifario>
+            <!-- Opcional
+            <sch:referencia>
+               <sch:tipoGrupo>XT</sch:tipoGrupo>
+               <sch:idGrupo>0006824230</sch:idGrupo>
+               <sch:telefono>5512949702</sch:telefono>
+               <sch:effDate>2130218</sch:effDate>
+            </sch:referencia> -->
+         </sch:request>
+      </sch:consultarDetalleProductoRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleProducto"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePromocion" name="consultarDetallePromocion" bindingOperationName="consultarDetallePromocion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetallePromocionRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5534880046</sch:telefono>
+            <sch:cuenta>4114222</sch:cuenta>
+            <sch:fechaInicio>04/05/13</sch:fechaInicio>
+            <sch:fechaFin>03/06/13</sch:fechaFin>
+            <sch:planDescuento>PD1ME</sch:planDescuento>
+            <sch:fechaEfectiva>08/05/13</sch:fechaEfectiva>
+         </sch:request>
+      </sch:consultarDetallePromocionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePromocion"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion" name="consultarDetalleReversion" bindingOperationName="consultarDetalleReversion" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleReversionRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:fechaPago>2140331</sch:fechaPago>
+            <sch:numPago>01809</sch:numPago>
+            <sch:tipoPago>TC</sch:tipoPago>
+            <sch:secPago>01230</sch:secPago>
+            <!--Optional:
+            <sch:referencia>?</sch:referencia>-->
+         </sch:request>
+      </sch:consultarDetalleReversionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado" name="consultarEncabezado" bindingOperationName="consultarEncabezado" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarEncabezadoRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+         </sch:request>
+      </sch:consultarEncabezadoRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarEncabezadoRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5534880046</sch:telefono>
+         </sch:request>
+      </sch:consultarEncabezadoRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7801/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarEncabezadoRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5545305932</sch:telefono>
+         </sch:request>
+      </sch:consultarEncabezadoRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta" name="consultarHistorialCuenta" bindingOperationName="consultarHistorialCuenta" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarHistorialCuentaRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaInicio>28/03/14</sch:fechaInicio>
+            <sch:fechaFin>08/04/14</sch:fechaFin>
+            <!--Optional:
+            <sch:referencia>
+               <sch:telefono>?</sch:telefono>
+               <sch:effDate>?</sch:effDate>
+            </sch:referencia>-->
+         </sch:request>
+      </sch:consultarHistorialCuentaRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes" name="consultarPagosYAjustes" bindingOperationName="consultarPagosYAjustes" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarPagosYAjustesRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaInicio>28/03/14</sch:fechaInicio>
+            <sch:fechaFin>08/04/14</sch:fechaFin>
+            <!--Optional:
+            <sch:referencia>
+               <sch:fechaPago>?</sch:fechaPago>
+               <sch:lotePago>?</sch:lotePago>
+               <sch:tipoPago>?</sch:tipoPago>
+               <sch:secPago>?</sch:secPago>
+               <sch:fechaAjuste>?</sch:fechaAjuste>
+               <sch:codAjuste>?</sch:codAjuste>
+               <sch:secUsuarioAjuste>?</sch:secUsuarioAjuste>
+               <sch:secAjuste>?</sch:secAjuste>
+            </sch:referencia>
+-->
+
+         </sch:request>
+      </sch:consultarPagosYAjustesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios" name="consultarPlanesYServicios" bindingOperationName="consultarPlanesYServicios" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarPlanesYServiciosRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaInicio>28/03/14</sch:fechaInicio>
+            <sch:fechaFin>08/04/14</sch:fechaFin>
+          
+         </sch:request>
+      </sch:consultarPlanesYServiciosRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones" name="consultarPromociones" bindingOperationName="consultarPromociones" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.46:7803/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarPromocionesRequest>
+         <sch:request>
+            <sch1:usuarioM2K>SVBPM51</sch1:usuarioM2K>
+            <sch1:region>9</sch1:region>
+            <sch:telefono>5527671654</sch:telefono>
+            <sch:cuenta>6385120</sch:cuenta>
+            <sch:fechaInicio>28/03/14</sch:fechaInicio>
+            <sch:fechaFin>28/04/14</sch:fechaFin>
+            <!--Optional:
+            <sch:referencia>
+               <sch:cveDesc>?</sch:cveDesc>
+               <sch:effDt>?</sch:effDt>
+            </sch:referencia>-->
+         </sch:request>
+      </sch:consultarPromocionesRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:mockService port="7801" path="/di/sds/servicioaclientes/gestiontramites/wmb/InvestigacionService" host="MEX-FDKG5S1" name="GestionTramitesInvestigacionBinding MockService"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="consultarConsumos" interface="GestionTramitesInvestigacionBinding" operation="consultarConsumos"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarConsumosResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:consumos>
+               <!--1 or more repetitions:-->
+               <sch:consumo>
+                  <sch:fecha>?</sch:fecha>
+                  <sch:hora>?</sch:hora>
+                  <sch:ciudadOrigen>?</sch:ciudadOrigen>
+                  <sch:telMarcado>?</sch:telMarcado>
+                  <sch:ciudadDestino>?</sch:ciudadDestino>
+                  <sch:sv>?</sch:sv>
+                  <sch:cl>?</sch:cl>
+                  <sch:tipoLlamada>?</sch:tipoLlamada>
+                  <sch:minutosTAire>?</sch:minutosTAire>
+                  <sch:minutosLibre>?</sch:minutosLibre>
+                  <sch:largaDistancia>?</sch:largaDistancia>
+                  <sch:total>?</sch:total>
+               </sch:consumo>
+            </sch:consumos>
+            <!--Optional:-->
+            <sch:referencia>
+               <sch:fechaPiv>?</sch:fechaPiv>
+               <sch:horaPiv>?</sch:horaPiv>
+               <sch:fuentePiv>?</sch:fuentePiv>
+               <!--Optional:-->
+               <sch:secuenciaPiv>?</sch:secuenciaPiv>
+               <sch:telMarcadoPiv>?</sch:telMarcadoPiv>
+            </sch:referencia>
+         </sch:response>
+      </sch:consultarConsumosResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarConsumos"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarDetalleConexiones" interface="GestionTramitesInvestigacionBinding" operation="consultarDetalleConexiones"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleConexionesResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:detallesConexion>
+               <!--1 or more repetitions:-->
+               <sch:detalleConexion>
+                  <sch:fechaConexion>?</sch:fechaConexion>
+                  <sch:horaConexion>?</sch:horaConexion>
+                  <sch:bytesCargados>?</sch:bytesCargados>
+                  <sch:bytesDescargados>?</sch:bytesDescargados>
+                  <sch:apn>?</sch:apn>
+                  <sch:imei>?</sch:imei>
+                  <sch:imsi>?</sch:imsi>
+               </sch:detalleConexion>
+            </sch:detallesConexion>
+            <!--Optional:-->
+            <sch:referencia>
+               <sch:dtConnect>?</sch:dtConnect>
+               <sch:tmConnect>?</sch:tmConnect>
+               <sch:chargingId>?</sch:chargingId>
+               <sch:dataVolUp>?</sch:dataVolUp>
+               <sch:dataVolDown>?</sch:dataVolDown>
+               <sch:serviceClass>?</sch:serviceClass>
+            </sch:referencia>
+         </sch:response>
+      </sch:consultarDetalleConexionesResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleConexiones"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarDetallePlanTarifario" interface="GestionTramitesInvestigacionBinding" operation="consultarDetallePlanTarifario"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetallePlanTarifarioResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:detallePlanTarifario>
+               <sch:descripcionPlan>?</sch:descripcionPlan>
+               <sch:plazoForzoso>?</sch:plazoForzoso>
+               <sch:tipoPlan>?</sch:tipoPlan>
+               <sch:descripcionTipoPlan>?</sch:descripcionTipoPlan>
+               <sch:minutosIncluidos>?</sch:minutosIncluidos>
+               <sch:smsIncluidos>?</sch:smsIncluidos>
+               <sch:datosIncluidos>?</sch:datosIncluidos>
+               <sch:costoPlan>?</sch:costoPlan>
+            </sch:detallePlanTarifario>
+            <!--Optional:-->
+            <sch:productosDePlan>
+               <!--1 or more repetitions:-->
+               <sch:producto>
+                  <sch:producto>?</sch:producto>
+                  <sch:descripcion>?</sch:descripcion>
+                  <sch:costo>?</sch:costo>
+               </sch:producto>
+            </sch:productosDePlan>
+            <!--Optional:-->
+            <sch:referencia>?</sch:referencia>
+         </sch:response>
+      </sch:consultarDetallePlanTarifarioResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePlanTarifario"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarDetalleProducto" interface="GestionTramitesInvestigacionBinding" operation="consultarDetalleProducto"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleProductoResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:detalleProducto>
+               <sch:claveProducto>?</sch:claveProducto>
+               <sch:descripcionProducto>?</sch:descripcionProducto>
+               <sch:costoProducto>?</sch:costoProducto>
+               <sch:caracteristicasProducto>?</sch:caracteristicasProducto>
+               <sch:minutosIncluidos>?</sch:minutosIncluidos>
+               <sch:smsIncluidos>?</sch:smsIncluidos>
+               <sch:datosIncluidos>?</sch:datosIncluidos>
+               <sch:unidad>?</sch:unidad>
+               <sch:claveGrupo>?</sch:claveGrupo>
+            </sch:detalleProducto>
+            <!--Optional:-->
+            <sch:grupoLlamadas>
+               <!--1 or more repetitions:-->
+               <sch:llamada>
+                  <sch:telefono>?</sch:telefono>
+                  <sch:tipoServicio>?</sch:tipoServicio>
+                  <sch:tipoDestino>?</sch:tipoDestino>
+                  <sch:estatus>?</sch:estatus>
+                  <sch:fechaEfectiva>?</sch:fechaEfectiva>
+               </sch:llamada>
+            </sch:grupoLlamadas>
+            <!--Optional:-->
+            <sch:referencia>
+               <sch:tipoGrupo>?</sch:tipoGrupo>
+               <sch:idGrupo>?</sch:idGrupo>
+               <sch:telefono>?</sch:telefono>
+               <sch:effDate>?</sch:effDate>
+            </sch:referencia>
+         </sch:response>
+      </sch:consultarDetalleProductoResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleProducto"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarDetallePromocion" interface="GestionTramitesInvestigacionBinding" operation="consultarDetallePromocion"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetallePromocionResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:descripcionPromocion>
+               <sch:claveDescuento>?</sch:claveDescuento>
+               <sch:periodoDescuento>?</sch:periodoDescuento>
+               <sch:claveProducto>?</sch:claveProducto>
+               <sch:descripcionProducto>?</sch:descripcionProducto>
+               <sch:claveAjustePromocion>?</sch:claveAjustePromocion>
+            </sch:descripcionPromocion>
+            <!--Optional:-->
+            <sch:aplicacionesProducto>
+               <!--1 or more repetitions:-->
+               <sch:descPromocion>
+                  <sch:producto>?</sch:producto>
+                  <sch:fechaEfectiva>?</sch:fechaEfectiva>
+               </sch:descPromocion>
+            </sch:aplicacionesProducto>
+            <!--Optional:-->
+            <sch:detallesPromocion>
+               <!--1 or more repetitions:-->
+               <sch:detallePromocion>
+                  <sch:estatus>?</sch:estatus>
+                  <sch:periodo>?</sch:periodo>
+               </sch:detallePromocion>
+            </sch:detallesPromocion>
+            <!--Optional:-->
+            <sch:referenciaDetallePromocion>
+               <sch:valCdInd>?</sch:valCdInd>
+               <sch:valTransInd>?</sch:valTransInd>
+               <sch:ultFecDes>?</sch:ultFecDes>
+               <sch:priFecDes>?</sch:priFecDes>
+            </sch:referenciaDetallePromocion>
+         </sch:response>
+      </sch:consultarDetallePromocionResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetallePromocion"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarDetalleReversion" interface="GestionTramitesInvestigacionBinding" operation="consultarDetalleReversion"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarDetalleReversionResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:reversiones>
+               <!--1 or more repetitions:-->
+               <sch:reversion>
+                  <sch:fechaPago>?</sch:fechaPago>
+                  <sch:fechaAplicacion>?</sch:fechaAplicacion>
+                  <sch:fechaReversion>?</sch:fechaReversion>
+                  <sch:importeAplicado>?</sch:importeAplicado>
+                  <sch:fechaFactura>?</sch:fechaFactura>
+                  <sch:formaPago>?</sch:formaPago>
+               </sch:reversion>
+            </sch:reversiones>
+            <!--Optional:-->
+            <sch:referencia>?</sch:referencia>
+         </sch:response>
+      </sch:consultarDetalleReversionResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarDetalleReversion"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarEncabezado" interface="GestionTramitesInvestigacionBinding" operation="consultarEncabezado"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+	<soapenv:Body>
+		<NS1:consultarEncabezadoResponse xmlns:NS1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema">
+			<NS1:response>
+				<NS1:formaPago>TC</NS1:formaPago>
+				<NS1:planTarifario>M9871</NS1:planTarifario>
+				<NS1:modelo>C6906</NS1:modelo>
+				<NS1:imei>358092050536825</NS1:imei>
+				<NS1:marca>SONY</NS1:marca>
+				<NS1:infoImei>
+					<NS1:codigo>1</NS1:codigo>
+					<NS1:claveSap>70006144</NS1:claveSap>
+					<NS1:marca>SONY LTE C6906 XPERIA Z1 NEGRO</NS1:marca>
+					<NS1:modelo/>
+					<NS1:grupoArticulo>M_EQLT_TN</NS1:grupoArticulo>
+				</NS1:infoImei>
+			</NS1:response>
+		</NS1:consultarEncabezadoResponse>
+	</soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarEncabezado"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarHistorialCuenta" interface="GestionTramitesInvestigacionBinding" operation="consultarHistorialCuenta"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarHistorialCuentaResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:registros>
+               <!--1 or more repetitions:-->
+               <sch:registro>
+                  <sch:telefono>?</sch:telefono>
+                  <sch:fechaEfectiva>?</sch:fechaEfectiva>
+                  <sch:estatus>?</sch:estatus>
+                  <sch:motivo>?</sch:motivo>
+                  <sch:tecnologia>?</sch:tecnologia>
+                  <sch:imei>?</sch:imei>
+                  <sch:iccid>?</sch:iccid>
+                  <sch:imsi>?</sch:imsi>
+                  <sch:usuario>?</sch:usuario>
+               </sch:registro>
+            </sch:registros>
+            <!--Optional:-->
+            <sch:referencia>
+               <sch:telefono>?</sch:telefono>
+               <sch:effDate>?</sch:effDate>
+            </sch:referencia>
+         </sch:response>
+      </sch:consultarHistorialCuentaResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarHistorialCuenta"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarPagosYAjustes" interface="GestionTramitesInvestigacionBinding" operation="consultarPagosYAjustes"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarPagosYAjustesResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:pagosYAjustes>
+               <!--1 or more repetitions:-->
+               <sch:pagoYAjuste>
+                  <sch:fecha>?</sch:fecha>
+                  <sch:nombreAjuste>?</sch:nombreAjuste>
+                  <sch:cheque>?</sch:cheque>
+                  <sch:origenPago>?</sch:origenPago>
+                  <sch:formaPago>?</sch:formaPago>
+                  <sch:importe>?</sch:importe>
+                  <sch:estatus>?</sch:estatus>
+                  <sch:asesor>?</sch:asesor>
+                  <sch:detallePago>?</sch:detallePago>
+               </sch:pagoYAjuste>
+            </sch:pagosYAjustes>
+            <!--Optional:-->
+            <sch:referencia>
+               <sch:fechaPago>?</sch:fechaPago>
+               <sch:lotePago>?</sch:lotePago>
+               <sch:tipoPago>?</sch:tipoPago>
+               <sch:secPago>?</sch:secPago>
+               <sch:fechaAjuste>?</sch:fechaAjuste>
+               <sch:codAjuste>?</sch:codAjuste>
+               <sch:secUsuarioAjuste>?</sch:secUsuarioAjuste>
+               <sch:secAjuste>?</sch:secAjuste>
+            </sch:referencia>
+         </sch:response>
+      </sch:consultarPagosYAjustesResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPagosYAjustes"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarPlanesYServicios" interface="GestionTramitesInvestigacionBinding" operation="consultarPlanesYServicios"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<NS1:Envelope xmlns:NS1="http://schemas.xmlsoap.org/soap/envelope/">
+	<NS1:Body>
+		<NS2:consultarPlanesYServiciosResponse xmlns:NS2="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema">
+			<NS2:response>
+				<NS3:mensajes xmlns:NS3="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+					<NS3:mensaje>
+						<NS3:codigo>000000</NS3:codigo>
+						<NS3:descripcion>No se encontraron planes tarifarios</NS3:descripcion>
+					</NS3:mensaje>
+				</NS3:mensajes>
+				<NS2:serviciosAdicionales>
+					<NS2:servicioAdicional>
+						<NS2:producto>IDL00</NS2:producto>
+						<NS2:incluidoEnPlan>S</NS2:incluidoEnPlan>
+						<NS2:fechaEfectiva>18/02/12</NS2:fechaEfectiva>
+						<NS2:estatus>ACTIVO</NS2:estatus>
+						<NS2:usuario>XO14FFF</NS2:usuario>
+					</NS2:servicioAdicional>
+					<NS2:servicioAdicional>
+						<NS2:producto>IFV09</NS2:producto>
+						<NS2:incluidoEnPlan>S</NS2:incluidoEnPlan>
+						<NS2:fechaEfectiva>19/01/13</NS2:fechaEfectiva>
+						<NS2:estatus>ACTIVO</NS2:estatus>
+						<NS2:usuario>VEAECAC</NS2:usuario>
+					</NS2:servicioAdicional>
+					<NS2:servicioAdicional>
+						<NS2:producto>LINQG</NS2:producto>
+						<NS2:incluidoEnPlan>N</NS2:incluidoEnPlan>
+						<NS2:fechaEfectiva>19/01/13</NS2:fechaEfectiva>
+						<NS2:estatus>ACTIVO</NS2:estatus>
+						<NS2:usuario>XOB9EBB</NS2:usuario>
+					</NS2:servicioAdicional>
+					<NS2:servicioAdicional>
+						<NS2:producto>LLES1</NS2:producto>
+						<NS2:incluidoEnPlan>S</NS2:incluidoEnPlan>
+						<NS2:fechaEfectiva>18/02/12</NS2:fechaEfectiva>
+						<NS2:estatus>ACTIVO</NS2:estatus>
+						<NS2:usuario>XO14FFF</NS2:usuario>
+					</NS2:servicioAdicional>
+					<NS2:servicioAdicional>
+						<NS2:producto>TRAN0</NS2:producto>
+						<NS2:incluidoEnPlan>S</NS2:incluidoEnPlan>
+						<NS2:fechaEfectiva>18/02/12</NS2:fechaEfectiva>
+						<NS2:estatus>ACTIVO</NS2:estatus>
+						<NS2:usuario>XO14FFF</NS2:usuario>
+					</NS2:servicioAdicional>
+				</NS2:serviciosAdicionales>
+			</NS2:response>
+		</NS2:consultarPlanesYServiciosResponse>
+	</NS1:Body>
+</NS1:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPlanesYServicios"/></con:response><con:dispatchConfig/></con:mockOperation><con:mockOperation name="consultarPromociones" interface="GestionTramitesInvestigacionBinding" operation="consultarPromociones"><con:settings/><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:defaultResponse>Response 1</con:defaultResponse><con:response name="Response 1" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:sch1="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <sch:consultarPromocionesResponse>
+         <sch:response>
+            <!--Optional:-->
+            <sch1:mensajes>
+               <!--1 or more repetitions:-->
+               <sch1:mensaje>
+                  <sch1:codigo>?</sch1:codigo>
+                  <sch1:descripcion>?</sch1:descripcion>
+               </sch1:mensaje>
+            </sch1:mensajes>
+            <!--Optional:-->
+            <sch:promociones>
+               <!--1 or more repetitions:-->
+               <sch:promocion>
+                  <sch:planDescuento>?</sch:planDescuento>
+                  <sch:descripcion>?</sch:descripcion>
+                  <sch:periodicidad>?</sch:periodicidad>
+                  <sch:fechaEfectiva>?</sch:fechaEfectiva>
+                  <sch:fechaExpiracion>?</sch:fechaExpiracion>
+                  <sch:estatus>?</sch:estatus>
+                  <sch:usuario>?</sch:usuario>
+               </sch:promocion>
+            </sch:promociones>
+            <!--Optional:-->
+            <sch:referencia>
+               <sch:cveDesc>?</sch:cveDesc>
+               <sch:effDt>?</sch:effDt>
+            </sch:referencia>
+         </sch:response>
+      </sch:consultarPromocionesResponse>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/consultarPromociones"/></con:response><con:dispatchConfig/></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions name="Imei" targetNamespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/wmb/imei" xmlns:types="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<documentation>
+		<appinfo source="WMQI_APPINFO">
+			<MRWSDLAppInfo imported="true">
+				<binding hasEncoding="false" imported="true" name="ImeiBinding" originalBindingStyle="document"/>
+			</MRWSDLAppInfo>
+		</appinfo>
+	</documentation>
+	
+	<types>
+		<xsd:schema>
+			<xsd:import schemaLocation="imei.xsd" namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" />
+		</xsd:schema>
+	</types>
+	
+	<message name="consultarImeiACMsg">
+		<part element="types:request" name="parameters"/>
+	</message>
+	<message name="consultarImeiACMsgResponse">
+		<part element="types:response" name="parameters"/>
+	</message>
+	<message name="consultarImeiACFault">
+		<part element="types:error" name="parameters"/>
+	</message>
+	
+	<portType name="ImeiPort">
+		<operation name="consultarImeiAC">
+			<input message="this:consultarImeiACMsg"/>
+			<output message="this:consultarImeiACMsgResponse"/>
+			<fault message="this:consultarImeiACFault" name="fault"/>
+		</operation>
+	</portType>
+	
+	<binding name="ImeiBinding" type="this:ImeiPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="consultarImeiAC">
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/gms/sistemasadministrativos/wmb/imei/consultarImeiAC"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+	
+	<service name="ImeiService">
+		<port binding="this:ImeiBinding" name="Imei">
+			<soap:address location="http://localhost:7800/di/sds/gsm/sistemasadministrativos/wmb/ImeiService"/>
+		</port>
+	</service>
+</definitions>

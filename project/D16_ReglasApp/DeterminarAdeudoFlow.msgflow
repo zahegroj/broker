@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMSLMapping.msgnode="ComIbmMSLMapping.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_DeterminarAdeudoInvokeFlow.msgflow="gen/DeterminarAdeudoInvokeFlow.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="DeterminarAdeudoFlow.msgflow"
+    nsPrefix="DeterminarAdeudoFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="DeterminarAdeudoFlow" bundleName="DeterminarAdeudoFlow" pluginId="D16_ReglasApp"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ReglasApp/icons/full/obj16/DeterminarAdeudoFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/D16_ReglasApp/icons/full/obj30/DeterminarAdeudoFlow.gif"/>
+    <composition>
+      <nodes xmi:type="gen_DeterminarAdeudoInvokeFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="295,276">
+        <translation xmi:type="utility:ConstantString" string="DeterminarAdeudoInvokeRegla"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="95,207">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="DeterminarAdeudoFlow" pluginId="D16_ReglasApp"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="619,216">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="DeterminarAdeudoFlow" pluginId="D16_ReglasApp"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="191,207" mappingExpression="msl://{default}#DeterminarAdeudoRequestFlow_DeterminarAdeudoRequestRegla">
+        <translation xmi:type="utility:ConstantString" string="Mapping Request"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMSLMapping.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="455,212" mappingExpression="msl://{default}#DeterminarAdeudoResponseRegla_DeterminarAdeudoResponseFlow">
+        <translation xmi:type="utility:ConstantString" string="Mapping Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="485,132" computeExpression="esql://routine/#MapFault_Regla_DeterminarAdeudo.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Fault"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_2" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.DeterminarAdeudoResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

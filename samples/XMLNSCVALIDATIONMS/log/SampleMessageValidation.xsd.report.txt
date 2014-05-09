@@ -1,0 +1,12 @@
+
+
+Importing file: C:\Documents and Settings\pedwards\IBM\wmbt61\workspacev61beta\XMLNSCVALIDATIONMS\SampleMessageValidation.xsd
+
+
+Elapsed time processing this message definition file: 0.359 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

@@ -1,0 +1,100 @@
+CREATE COMPUTE MODULE MapIgtoc46dResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc46/d';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'consultarComentariosResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.consultarComentariosResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsComent);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsComent:consultarComentariosResponse, oldNamespace, nsComent);
+		CALL MapComentariosResponse(OutputRoot, respuestaOK, ns);
+	END;
+END MODULE;
+
+CREATE FUNCTION MapComentariosResponse(IN outputRootNode REFERENCE, IN respuestaOK REFERENCE, IN pNamespace CHARACTER)
+BEGIN
+	DECLARE countArr INT CARDINALITY(respuestaOK.TipoComentario[]);	
+
+	DECLARE i INTEGER 1;
+	DECLARE j INTEGER 1;
+	
+	X : WHILE i <= countArr DO			
+		IF  TRIM(respuestaOK.TipoComentario[i]) <> '' OR 
+			TRIM(respuestaOK.FechaEfectiva[i]) <> '' OR
+			TRIM(respuestaOK.CveUsuario[i]) <> '' OR
+			TRIM(respuestaOK.Comentarios[i]) <> '' THEN
+			
+			SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:comentarios.nsComent:comentario[j].nsComent:tipoComentario = TRIM(respuestaOK.TipoComentario[i]);
+			SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:comentarios.nsComent:comentario[j].nsComent:fechaEfectiva = TRIM(respuestaOK.FechaEfectiva[i]);
+			SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:comentarios.nsComent:comentario[j].nsComent:usuario = TRIM(respuestaOK.CveUsuario[i]);
+			SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:comentarios.nsComent:comentario[j].nsComent:comentario = TRIM(respuestaOK.Comentarios[i]);
+			SET j = j + 1;
+		END IF;
+		SET i = i + 1;
+	END WHILE X;
+	
+	IF TRIM(respuestaOK.Referencia) <> '' THEN
+		SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:referencia.nsComent:tipoComentario = SUBSTRING(respuestaOK.Referencia FROM 1 FOR 5);
+		SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:referencia.nsComent:fechaComentario = SUBSTRING(respuestaOK.Referencia FROM 6 FOR 7);
+		SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:referencia.nsComent:horaAudit = SUBSTRING(respuestaOK.Referencia FROM 13 FOR 7);
+		SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:referencia.nsComent:sec = SUBSTRING(respuestaOK.Referencia FROM 20 FOR 3);
+	END IF;
+
+	IF FIELDTYPE (outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComent:comentarios) IS NULL THEN
+		SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+		SET outputRootNode.XMLNSC.nsComent:consultarComentariosResponse.nsComent:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'No se encontraron registros';
+	END IF;
+END;
+
+CREATE COMPUTE MODULE MapIgtoc64aResp_Response
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc64/a';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		DECLARE respuestaOK REFERENCE TO InputRoot.XMLNSC.ns:RespuestaOK;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'guardarComentarioResponse';
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC.guardarComentarioResponse Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsComent);
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC.nsComent:guardarComentarioResponse, oldNamespace, nsComent);
+		
+		IF UPPER(respuestaOK.ESTATUS) = 'EXITO' THEN
+			SET OutputRoot.XMLNSC.nsComent:guardarComentarioResponse.nsComent:response.nsComun:mensajes.nsComun:mensaje.nsComun:codigo = '000000';
+			SET OutputRoot.XMLNSC.nsComent:guardarComentarioResponse.nsComent:response.nsComun:mensajes.nsComun:mensaje.nsComun:descripcion = 'El comentario ha sido guardado exitosamente';
+		END IF;	
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_Comentarios_ConsultarComentarios
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al consultar los comentarios, en la invocación a M2K';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesComentariosService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'consultarComentarios';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException, 
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc46 (function: I*S6, action: D)',
+				EX_SOL_M2K_IGTOC46D);
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapFault_Comentarios_GuardarComentario
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error al intentar guardar el comentario, en la invocación a M2K';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:servicio = 'GestionTramitesComentariosService';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException.nsComun:operacion = 'guardarComentario';
+		
+		CALL M2KErrorToGTWMBException(OutputRoot.SOAP.Body.soapenv:Fault.detail.nsComun:gestionTramitesWMBException,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError,
+				InputRoot.SOAP.Body.soapenv:Fault.detail.nsM2KFac:RespuestaError.ESTATUS.IDPETICION,
+				'm2k - Igtoc64 (function: I*TB, action: A)',
+				EX_SOL_M2K_IGTOC64A);
+	END;
+END MODULE;

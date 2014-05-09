@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/reglas/GestionTramitesReglas.xsd"/>
+    <output path="/ReasignarTramite_InlineSchema16.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ReasignarTramiteRequestFlow_ReasignarTramiteRequestRegla">
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/reglas/schema" path="mb:msg(reasignarTramiteRequest,assembly,,Properties)"/>
+        <output namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/ReasignarTramite" path="mb:msg(ReasignarTramiteRequest,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/tipoTramite"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/tipoTramite"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/estado"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/estado"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/cac/identificador"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/cac/identificador"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/cac/region"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/cac/region"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/aclaracionSaldos/tipoTramite"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/aclaracionSaldos/tipoTramite"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/aclaracionSaldos/estado"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/aclaracionSaldos/estado"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/aclaracionSaldos/escenario"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/aclaracionSaldos/escenario"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/asesor/perfil/perfilPac"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/asesor/perfil/perfilPac"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/asesor/perfil/habilitado"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/asesor/perfil/habilitado"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/asesor/perfil/regiones/region"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/asesor/perfil/region"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/asesor/perfil/nivelAcceso"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/asesor/perfil/nivelAcceso"/>
+        </move>
+        <move>
+            <input path="reasignarTramiteRequest/request/tramite/asesor/perfil/flujoNegocio"/>
+            <output path="ReasignarTramiteRequest/peticionReasignar/peticionReasignarTramite/tramite/asesor/perfil/flujoNegocio"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

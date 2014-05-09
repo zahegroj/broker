@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="Order" targetNamespace="http://com.http.orderservice" xmlns:mrm="http://www.acmeOrders.com/OrderService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://com.http.orderservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="..\..\..\com\acmeorders\www\orderservice\OrderService_InlineSchema1.mxsd"/>
+        <binding hasEncoding="false" imported="true" name="SOAPNodesSampleMessageSetSOAP_HTTP_Binding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.acmeOrders.com/OrderService" xmlns:mrm="http://com.http.orderservice">
+      <xsd:include schemaLocation="../../../com/acmeorders/www/orderservice/OrderService_InlineSchema1.mxsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="submitPO_in">
+    <wsdl:part element="mrm:submitPORequest" name="submitPORequest"/>
+  </wsdl:message>
+  <wsdl:message name="submitPO_out">
+    <wsdl:part element="mrm:submitPOResponse" name="submitPOResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="SOAPNodesSampleMessageSetPortType">
+    <wsdl:operation name="submitPO">
+      <wsdl:input message="tns:submitPO_in" name="submitPO_Input"/>
+      <wsdl:output message="tns:submitPO_out" name="submitPO_Output"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SOAPNodesSampleMessageSetSOAP_HTTP_Binding" type="tns:SOAPNodesSampleMessageSetPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="submitPO">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="submitPO_Input">
+        <soap:body parts="submitPORequest" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="submitPO_Output">
+        <soap:body parts="submitPOResponse" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SOAPNodesSample_HTTP_Service">
+    <wsdl:port binding="tns:SOAPNodesSampleMessageSetSOAP_HTTP_Binding" name="SOAP_HTTP_Port">
+      <soap:address location="http://localhost:7800/acmeOrders/WADDR/ProcessOrders"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

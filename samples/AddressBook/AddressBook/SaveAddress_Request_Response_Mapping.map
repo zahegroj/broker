@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="AddressBook" version="8.0.3.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="AddressBook">
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/SOAPDomainMsg.xsd" var="var"/>
+    <input path="/AddressBook_InlineSchema1.xsd" var="var1"/>
+    <input path="/LEVariablesFolderStructure.xsd" var="var2"/>
+    <output path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/SOAPDomainMsg.xsd"/>
+    <namespaces>
+        <namespace kind="extension" prefix="fn" uri="http://www.w3.org/2005/xpath-functions"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="SaveAddress_Request_Response_Mapping">
+        <input path="$var/mb:msg(SOAP_Domain_Msg,assembly,SOAP,LocalEnvironment,Properties)">
+            <cast path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/type('Address')" qualifier="{http://addressbook.com}CanadianAddress"/>
+            <cast path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/type('Address')" qualifier="{http://addressbook.com}UKAddress"/>
+            <cast path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/type('Address')" qualifier="{http://addressbook.com}USAddress"/>
+            <cast path="SOAP_Domain_Msg/Body/any" qualifier="{http://AddressBook}SaveAddress"/>
+            <cast path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/type('Address')" qualifier="{http://addressbook.com}CanadianAddress"/>
+            <cast path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/type('Address')" qualifier="{http://addressbook.com}UKAddress"/>
+            <cast path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/type('Address')" qualifier="{http://addressbook.com}USAddress"/>
+        </input>
+        <output path="mb:msg(SOAP_Domain_Msg,assembly,SOAP,LocalEnvironment,Properties)">
+            <cast path="SOAP_Domain_Msg/Body/any" qualifier="{http://AddressBook}SaveAddress"/>
+            <cast path="LocalEnvironment/Variables/any" qualifier="Country"/>
+            <cast path="LocalEnvironment/Variables/any" qualifier="CountryCode"/>
+        </output>
+        <condition>
+            <if>
+                <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/Country" var="Country4"/>
+                <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/spath('Address',2)" var="Address"/>
+                <output path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address"/>
+                <test lang="xpath">$Country4 = 'Canada'</test>
+                <move>
+                    <input path="$Address/Type" var="Type1"/>
+                    <output path="Type"/>
+                </move>
+                <move>
+                    <input path="$Address/Number" var="Number1"/>
+                    <output path="Number"/>
+                </move>
+                <move>
+                    <input path="$Address/Street" var="Street1"/>
+                    <output path="Street"/>
+                </move>
+                <move>
+                    <input path="$Address/postcode" var="postcode1"/>
+                    <output path="Postcode"/>
+                </move>
+                <move>
+                    <input path="$Address/City" var="City1"/>
+                    <output path="City"/>
+                </move>
+                <move>
+                    <input path="$Address/Country" var="Country7"/>
+                    <output path="Country"/>
+                </move>
+                <move>
+                    <input path="$Address/province" var="province1"/>
+                    <output path="AdditionalInfo"/>
+                </move>
+            </if>
+            <elseif>
+                <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/Country" var="Country5"/>
+                <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/spath('Address',3)" var="Address2"/>
+                <output path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address"/>
+                <test lang="xpath">$Country5 = 'UK'</test>
+                <move>
+                    <input path="$Address2/Type"/>
+                    <output path="Type"/>
+                </move>
+                <move>
+                    <input path="$Address2/Number"/>
+                    <output path="Number"/>
+                </move>
+                <move>
+                    <input path="$Address2/Street"/>
+                    <output path="Street"/>
+                </move>
+                <move>
+                    <input path="$Address2/Postcode" var="Postcode"/>
+                    <output path="Postcode"/>
+                </move>
+                <move>
+                    <input path="$Address2/City"/>
+                    <output path="City"/>
+                </move>
+                <move>
+                    <input path="$Address2/county"/>
+                    <output path="AdditionalInfo"/>
+                </move>
+                <move>
+                    <input path="$Country5/."/>
+                    <output path="Country"/>
+                </move>
+            </elseif>
+            <else>
+                <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/Country" var="Country6"/>
+                <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/spath('Address',4)" var="Address3"/>
+                <output path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address"/>
+                <move>
+                    <input path="$Address3/Type"/>
+                    <output path="Type"/>
+                </move>
+                <move>
+                    <input path="$Address3/Number"/>
+                    <output path="Number"/>
+                </move>
+                <move>
+                    <input path="$Address3/Street"/>
+                    <output path="Street"/>
+                </move>
+                <move>
+                    <input path="$Address3/Postcode"/>
+                    <output path="Postcode"/>
+                </move>
+                <move>
+                    <input path="$Address3/City"/>
+                    <output path="City"/>
+                </move>
+                <move>
+                    <input path="$Country6/."/>
+                    <output path="Country"/>
+                </move>
+                <move>
+                    <input path="$Address3/zip"/>
+                    <output path="AdditionalInfo"/>
+                </move>
+            </else>
+        </condition>
+        <move>
+            <input path="SOAP_Domain_Msg/Header" var="Header"/>
+            <output path="SOAP_Domain_Msg/Header"/>
+        </move>
+        <move>
+            <input path="SOAP_Domain_Msg/Body/@anyAttribute"/>
+            <output path="SOAP_Domain_Msg/Body/@anyAttribute"/>
+        </move>
+        <move>
+            <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/Name" var="Name"/>
+            <output path="SOAP_Domain_Msg/Body/SaveAddress/Person/Name"/>
+        </move>
+        <move>
+            <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/PhoneNumber" var="PhoneNumber"/>
+            <output path="SOAP_Domain_Msg/Body/SaveAddress/Person/PhoneNumber"/>
+        </move>
+        <move>
+            <input path="SOAP_Domain_Msg/Attachment" var="Attachment"/>
+            <output path="SOAP_Domain_Msg/Attachment"/>
+        </move>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+            <override>
+                <assign value="1208">
+                    <output path="Properties/CodedCharSetId"/>
+                </assign>
+            </override>
+        </move>
+        <move>
+            <input path="LocalEnvironment"/>
+            <output path="LocalEnvironment"/>
+            <override>
+                <move>
+                    <input path="SOAP_Domain_Msg/Body/SaveAddress/Person/Address/Country"/>
+                    <output path="LocalEnvironment/Variables/Country"/>
+                </move>
+            </override>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

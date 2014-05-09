@@ -1,0 +1,25 @@
+
+
+Importing file: E:\Users\jzapatah\Documents\GitHub\broker\D16_M2KLib\CpastCService.wsdl
+
+Copying source WSDL CpastCService.wsdl to CpastCService.wsdl.
+The WSDL import will proceed with bindings CpastCBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Documents/GitHub/broker/D16_M2KLib/CpastCService.wsdl.
+Parsing wsdl binding {http://www.telcel.com.mx/m2k/wmb/cpast/c}CpastCBinding.
+Parsing wsdl binding input ejecutarServicio.
+Parsing wsdl binding output ejecutarServicio.
+Parsing wsdl binding fault RespuestaError.
+Processing doc style for operation ejecutarServicio.
+Populating WSDL schema CpastCService.xsd.
+Creating file CpastCService.xsd in the workspace.
+Creating file CpastCService_InlineSchema1.xsd in the workspace.
+Creating file /D16_M2KLib/m2k_cpast_c.xsd in the workspace.
+Creating file /D16_M2KLib/D16_M2KLib/m2k.xsd in the workspace.
+
+Elapsed time processing this message definition file: 8.392 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

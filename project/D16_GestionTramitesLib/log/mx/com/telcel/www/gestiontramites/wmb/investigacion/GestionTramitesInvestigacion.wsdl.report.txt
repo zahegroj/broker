@@ -1,0 +1,65 @@
+
+
+Importing file: E:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesInvestigacion.wsdl
+
+Copying source WSDL GestionTramitesInvestigacion.wsdl to GestionTramitesInvestigacion.wsdl.
+The WSDL import will proceed with bindings GestionTramitesInvestigacionBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Dropbox/wmb/wsdl/GestionTramitesInvestigacion.wsdl.
+Parsing wsdl binding {http://www.telcel.com.mx/gestiontramites/wmb/investigacion}GestionTramitesInvestigacionBinding.
+Parsing wsdl binding input consultarEncabezado.
+Parsing wsdl binding output consultarEncabezado.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarConsumos.
+Parsing wsdl binding output consultarConsumos.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarDetalleConexiones.
+Parsing wsdl binding output consultarDetalleConexiones.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarPlanesYServicios.
+Parsing wsdl binding output consultarPlanesYServicios.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarDetallePlanTarifario.
+Parsing wsdl binding output consultarDetallePlanTarifario.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarDetalleProducto.
+Parsing wsdl binding output consultarDetalleProducto.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarPagosYAjustes.
+Parsing wsdl binding output consultarPagosYAjustes.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarDetalleReversion.
+Parsing wsdl binding output consultarDetalleReversion.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarPromociones.
+Parsing wsdl binding output consultarPromociones.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarDetallePromocion.
+Parsing wsdl binding output consultarDetallePromocion.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarHistorialCuenta.
+Parsing wsdl binding output consultarHistorialCuenta.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Processing doc style for operation consultarEncabezado.
+Processing doc style for operation consultarConsumos.
+Processing doc style for operation consultarDetalleConexiones.
+Processing doc style for operation consultarPlanesYServicios.
+Processing doc style for operation consultarDetallePlanTarifario.
+Processing doc style for operation consultarDetalleProducto.
+Processing doc style for operation consultarPagosYAjustes.
+Processing doc style for operation consultarDetalleReversion.
+Processing doc style for operation consultarPromociones.
+Processing doc style for operation consultarDetallePromocion.
+Processing doc style for operation consultarHistorialCuenta.
+Populating WSDL schema investigacion/GestionTramitesInvestigacion.xsd.
+Creating file investigacion/GestionTramitesInvestigacion.xsd in the workspace.
+Creating file investigacion/GestionTramitesInvestigacion_InlineSchema1.xsd in the workspace.
+Creating file /D16_GestionTramitesLib/GestionTramitesInvestigacion.xsd in the workspace.
+Creating file /D16_GestionTramitesLib/GestionTramitesComun.xsd in the workspace.
+
+Elapsed time processing this message definition file: 2.944 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

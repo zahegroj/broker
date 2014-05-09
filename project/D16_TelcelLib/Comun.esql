@@ -1,0 +1,194 @@
+DECLARE nsInfoCli NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/infoCliente/schema';
+DECLARE nsInvest  NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema';
+DECLARE nsComent  NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comentarios/schema';
+DECLARE nsNotif   NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/notificaciones/schema';
+DECLARE nsComun   NAMESPACE 'http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema';
+DECLARE soapenv   NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+
+DECLARE nsM2KFac  NAMESPACE 'http://www.telcel.com.mx/di/sds/m2k';
+
+--TIPO DE ERROR
+DECLARE EX_TIPO_NEG CONSTANT CHARACTER 'NEGOCIO';
+DECLARE EX_TIPO_VAL CONSTANT CHARACTER 'VALIDACION';
+DECLARE EX_TIPO_SIS CONSTANT CHARACTER 'SISTEMA';
+
+--CODIGO DE ERROR
+DECLARE EX_COD_WMB     CONSTANT CHARACTER '000-WMB';
+DECLARE EX_COD_M2K     CONSTANT CHARACTER '001-M2K';
+DECLARE EX_COD_SIANTEL CONSTANT CHARACTER '002-SIANTEL';
+DECLARE EX_COD_IMEI    CONSTANT CHARACTER '003-IMEI';
+DECLARE EX_COD_SMS     CONSTANT CHARACTER '004-SMS';
+DECLARE EX_COD_REGLAS  CONSTANT CHARACTER '005-REGLAS';
+
+--SOLUCIONES
+DECLARE EX_SOL_GENERICO		CONSTANT CHARACTER 'Reporte este evento vía Help Desk bajo el contexto de “funcionalidad dentro de Formato Único”; indique claramente que el incidente se presentó en el “Gestor de Trámites y Aclaración de Saldos”; ofrezca todo el nivel de detalle posible.';
+DECLARE EX_SOL_IMEI         CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_SMS          CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_SIANTEL_PERF CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC25C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC40C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC41D CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC41R CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC42D CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC43C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC44D CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC45D CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC46D CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC47C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC48A CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC48C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC48D CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC49C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC50C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC51C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC52C CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_IGTOC64A CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_CPASTC   CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_REACTC   CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_RETC2C   CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_RETUSC   CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_M2K_SUMIQC   CONSTANT CHARACTER EX_SOL_GENERICO;
+DECLARE EX_SOL_ODM 			CONSTANT CHARACTER EX_SOL_GENERICO;
+
+DECLARE EX_SOL_WMB_VAL   CONSTANT CHARACTER 'Favor de corregir los datos e intentar nuevamente';
+DECLARE EX_SOL_WMB_SIS   CONSTANT CHARACTER EX_SOL_GENERICO;
+
+CREATE FUNCTION ChangeNamespaceInOutputRoot(In rootNode REFERENCE, In oldNamespace CHARACTER, In newNamespace CHARACTER)
+BEGIN
+	IF newNamespace = '' THEN
+		SET rootNode.(XMLNSC.Element)*[1].*:schemaLocation = NULL;
+		DECLARE I1 INTEGER CARDINALITY(rootNode.(XMLNSC.Element)*[1].(XMLNSC.NamespaceDecl)*[]);
+		DECLARE I2 INTEGER 1;
+		WHILE I2 <= I1 DO
+			SET rootNode.(XMLNSC.Element)*[1].(XMLNSC.NamespaceDecl)*[1] = NULL;
+			SET I2 = I2 + 1;
+		END WHILE;	 
+	ELSE
+		IF rootNode.(XMLNSC.Element)*[1].*:schemaLocation IS NOT NULL THEN
+			SET rootNode.(XMLNSC.Element)*[1].*:schemaLocation = newNamespace;
+		END IF;	
+	END IF;	
+
+	DECLARE CHECKSIBLING BOOLEAN FALSE;
+
+	DECLARE DEPTH INTEGER 1;
+
+	MOVE rootNode FirstChild;
+	MOVE rootNode NEXTSIBLING;
+	CALL ChangeNamespace(rootNode, oldNamespace, newNamespace);
+END;
+
+CREATE FUNCTION ChangeNamespace(IN rootNode REFERENCE, In oldNamespace CHARACTER, In newNamespace CHARACTER)
+BEGIN
+    IF (FIELDTYPE(rootNode) = Name) OR (FIELDTYPE(rootNode) = NameValue) THEN
+		IF FIELDNAMESPACE(rootNode) IN (oldNamespace) THEN 
+			SET rootNode NAMESPACE = newNamespace;
+
+			SET rootNode.(XMLNSC.NamespaceDecl)* = NULL;
+		END IF;
+    END IF;
+END;
+
+CREATE FUNCTION ParseStringToXML(IN inputRootNode REFERENCE, IN outputRootNode REFERENCE, IN xmlString CHARACTER)
+BEGIN
+		CREATE LASTCHILD OF outputRootNode DOMAIN('XMLNSC') PARSE(xmlString,
+																inputRootNode.Properties.Encoding,
+																inputRootNode.Properties.CodedCharSetId);
+END;
+
+CREATE FUNCTION ParseXMLToString(IN inputRootNode REFERENCE) RETURNS CHARACTER
+BEGIN
+	DECLARE rootNode REFERENCE TO inputRootNode.XMLNSC;
+	DECLARE mensajeBlob BLOB
+	   ASBITSTREAM(rootNode,
+	               inputRootNode.Properties.Encoding,
+	               inputRootNode.Properties.CodedCharSetId );
+	DECLARE mensajeString CHAR CAST(mensajeBlob AS CHAR CCSID inputRootNode.Properties.CodedCharSetId);
+	
+	return mensajeString;
+END;
+
+CREATE PROCEDURE CopyMessageHeaders(IN inputRootNode REFERENCE, IN outputRootNode REFERENCE) BEGIN
+	DECLARE I INTEGER 1;
+	DECLARE J INTEGER;
+	SET J = CARDINALITY(inputRootNode.*[]);
+	WHILE I < J DO
+		SET outputRootNode.*[I] = inputRootNode.*[I];
+		SET I = I + 1;
+	END WHILE;
+END;
+
+CREATE PROCEDURE CopyEntireMessage(IN inputRootNode REFERENCE, IN outputRootNode REFERENCE) BEGIN
+	SET outputRootNode = inputRootNode;
+END;
+
+CREATE PROCEDURE M2KErrorToGTWMBException(IN gtWMBException REFERENCE, 
+	IN respuestaError REFERENCE,
+	IN idPeticion CHARACTER,
+	IN m2kServicioInvocado CHARACTER,
+	IN msgSolucion CHARACTER)
+BEGIN
+	DECLARE i INTEGER 1;
+	IF FIELDTYPE(gtWMBException.nsComun:errores) IS NOT NULL THEN
+		SET i = CARDINALITY(gtWMBException.nsComun:errores.nsComun:error[]) + 1;
+	END IF;
+	
+	DECLARE servOrigen CHARACTER m2kServicioInvocado;
+	--IF FIELDTYPE(respuestaError.PROGRAMA) IS NOT NULL THEN
+	--	SET servOrigen = respuestaError.PROGRAMA;
+	--END IF;
+	
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:tipo = EX_TIPO_SIS;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:codigo = EX_COD_M2K;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:descripcion = respuestaError.MENSAJE;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:solucion = msgSolucion;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:servicioOrigen = servOrigen;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:idPeticion = idPeticion;
+END;
+
+CREATE PROCEDURE SIANTELErrorToGTWMBException(IN gtWMBException REFERENCE, 
+	IN respuestaError REFERENCE,
+	IN m2kServicioInvocado CHARACTER,
+	IN msgSolucion CHARACTER)
+BEGIN
+	DECLARE i INTEGER 1;
+	IF FIELDTYPE(gtWMBException.nsComun:errores) IS NOT NULL THEN
+		SET i = CARDINALITY(gtWMBException.nsComun:errores.nsComun:error[]) + 1;
+	END IF;
+	
+	DECLARE servOrigen CHARACTER m2kServicioInvocado;
+	--IF FIELDTYPE(respuestaError.PROGRAMA) IS NOT NULL THEN
+	--	SET servOrigen = respuestaError.PROGRAMA;
+	--END IF;
+	
+	SET gtWMBException.nsComun:errores.nsComun:error[i].tipo = EX_TIPO_SIS;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].codigo = EX_COD_M2K;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].descripcion = respuestaError.MENSAJE;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].solucion = msgSolucion;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].servicioOrigen = servOrigen;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].idPeticion = FIELDVALUE(respuestaError.ESTATUS.(XML.Attribute)IDPETICION);
+END;
+
+CREATE PROCEDURE ODMErrorToGTWMBException(IN gtWMBException REFERENCE, 
+	IN mensajeExcepcion CHARACTER,
+	IN idPeticion CHARACTER,
+	IN odmServicioInvocado CHARACTER,
+	IN msgSolucion CHARACTER)
+BEGIN
+	DECLARE i INTEGER 1;
+	IF FIELDTYPE(gtWMBException.nsComun:errores) IS NOT NULL THEN
+		SET i = CARDINALITY(gtWMBException.nsComun:errores.nsComun:error[]) + 1;
+	END IF;
+	
+	DECLARE servOrigen CHARACTER odmServicioInvocado;
+	--IF FIELDTYPE(respuestaError.PROGRAMA) IS NOT NULL THEN
+	--	SET servOrigen = respuestaError.PROGRAMA;
+	--END IF;
+	
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:tipo = EX_TIPO_SIS;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:codigo = EX_COD_REGLAS;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:descripcion = mensajeExcepcion;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:solucion = msgSolucion;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:servicioOrigen = servOrigen;
+	SET gtWMBException.nsComun:errores.nsComun:error[i].nsComun:idPeticion = idPeticion;
+END;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xom1="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param">
+	<xsd:import namespace="http://www.telcel.com.mx/CAC/GestorTramites/DeterminarAdeudo" schemaLocation="Reglas_InlineSchema_DeterminarAdeudo.xsd"/>
+	<xsd:element name="peticionDeterminarAdeudos">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="xom1:peticionDeterminarAdeudo"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="resultadoDeterminarAdeudos">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="xom1:resultadoDeterminarAdeudo"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

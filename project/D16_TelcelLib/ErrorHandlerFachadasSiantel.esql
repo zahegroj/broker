@@ -1,0 +1,36 @@
+CREATE COMPUTE MODULE BuildFaultFachadasSiantel
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE newNamespace NAMESPACE 'http://www.telcel.com.mx/di/sds/siantel/sistemasadministrativos/siantel';
+		
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		
+		DECLARE mensajeError CHARACTER AddExceptionDetail(InputExceptionList, InputRoot.Properties);
+		DECLARE tipoError CHARACTER EX_TIPO_SIS;
+		
+		IF CONTAINS(mensajeError, 'XML Parsing Errors have occurred') THEN
+			SET tipoError = EX_TIPO_VAL;
+		END IF;
+		
+		--Se crea el body del error {http://schemas.xmlsoap.org/soap/envelope/}Fault
+		SET OutputRoot.SOAP.Context.Namespace.(SOAP.NamespaceDecl)xmlns:NS1 = 'http://schemas.xmlsoap.org/soap/envelope/';
+		CREATE LASTCHILD OF OutputRoot.SOAP NAME 'Body';
+		DECLARE soapBody REFERENCE TO OutputRoot.SOAP.Body;
+		
+		--Se agrega el código de error
+		SET soapBody.soapenv:Fault.faultcode = 'NS1:Server';
+		
+		IF tipoError = EX_TIPO_VAL THEN
+			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al validar el mensaje de entrada.';
+		ELSEIF tipoError = EX_TIPO_SIS THEN
+			SET soapBody.soapenv:Fault.faultstring = 'Ocurrió un error al ejecutar el servicio';
+		END IF;
+		
+		CREATE LASTCHILD OF soapBody.soapenv:Fault NAME 'detail';
+		
+		SET soapBody.soapenv:Fault.detail.newNamespace:Error.codigo = EX_COD_WMB;
+		SET soapBody.soapenv:Fault.detail.newNamespace:Error.descripcion = mensajeError;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="KickTheBPD" resourceRoot="" soapui-version="4.5.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="KickTheBPDSoapSoapBinding" type="wsdl" bindingName="{http://APTEST/KickTheBPD.tws}KickTheBPDSoapSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://10.191.80.36:9080/teamworks/webservices/APTEST/KickTheBPD.tws?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://10.191.80.36:9080/teamworks/webservices/APTEST/KickTheBPD.tws?WSDL"><con:part><con:url>http://10.191.80.36:9080/teamworks/webservices/APTEST/KickTheBPD.tws?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://APTEST/KickTheBPD.tws" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://APTEST/KickTheBPD.tws" xmlns:intf="http://APTEST/KickTheBPD.tws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!--WSDL created by Apache Axis version: 1.3
+Built on Oct 05, 2005 (05:23:37 EDT)-->
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://APTEST/KickTheBPD.tws" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="doKick">
+        <complexType>
+          <sequence>
+            <element name="name" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="doKickResponse">
+        <complexType/>
+      </element>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="doKickResponse">
+    <wsdl:part element="impl:doKickResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doKickRequest">
+    <wsdl:part element="impl:doKick" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="KickTheBPDPortType">
+    <wsdl:operation name="doKick">
+      <wsdl:input message="impl:doKickRequest" name="doKickRequest"></wsdl:input>
+      <wsdl:output message="impl:doKickResponse" name="doKickResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="KickTheBPDSoapSoapBinding" type="impl:KickTheBPDPortType">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="doKick">
+      <wsdlsoap:operation soapAction="http://APTEST/KickTheBPD.tws/doKick"/>
+      <wsdl:input name="doKickRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="doKickResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="KickTheBPD">
+    <wsdl:port binding="impl:KickTheBPDSoapSoapBinding" name="KickTheBPDSoap">
+      <wsdl:documentation>SOAP Port</wsdl:documentation>
+      <wsdlsoap:address location="http://uxwasix203:9080/teamworks/webservices/APTEST/KickTheBPD.tws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://10.191.80.36:9080/teamworks/webservices/APTEST/KickTheBPD.tws</con:endpoint><con:endpoint>http://10.191.80.36:9080/teamworks/webservices/APTEST/[snapshot_name]/KickTheBPD.tws</con:endpoint><con:endpoint>http://10.191.80.36:9080/teamworks/webservices/APTEST/TLC APP PRUEBA 1.2/KickTheBPD.tws</con:endpoint><con:endpoint>http://10.191.80.36:9080/teamworks/webservices/APTEST/TLC APP PRUEBA 1.1/KickTheBPD.tws</con:endpoint><con:endpoint>http://10.191.80.36:9080/teamworks/webservices/APTEST/TLC APP PRUEBA 1.3/KickTheBPD.tws</con:endpoint><con:endpoint>http://10.191.80.36:9080/teamworks/webservices/APTEST/TLC APP PRUEBA 1.4/KickTheBPD.tws</con:endpoint><con:endpoint>http://10.191.80.36:9080/teamworks/webservices/APTEST/TLC APP PRUEBA 1.6/KickTheBPD.tws</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://APTEST/KickTheBPD.tws/doKick" name="doKick" bindingOperationName="doKick" type="Request-Response" outputName="doKickResponse" inputName="doKickRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://10.191.80.36:9080/teamworks/webservices/APTEST/TLC APP PRUEBA 1.6/KickTheBPD.tws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:kic="http://APTEST/KickTheBPD.tws">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <kic:doKick>
+         <kic:name>Prueba Soapui</kic:name>
+      </kic:doKick>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://APTEST/KickTheBPD.tws/doKick"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

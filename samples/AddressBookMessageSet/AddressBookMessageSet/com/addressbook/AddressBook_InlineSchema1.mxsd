@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema targetNamespace="http://addressbook.com/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:mrm="http://addressbook.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://addressbook.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="Address" nillable="true" type="mrm:AddressType">
+    <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/Address;XSDElementDeclaration$MRObject" schemaObject="/0/Address;XSDElementDeclaration">
+          <xmlMsgRep messageSetDefaultRep="XML1" outputPolicyForXsiTypeAttribute="Never"/>
+        </MRMessage>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+      <xsd:element name="FindAddressFault" nillable="true" type="mrm:FindAddressFaultType">
+    <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/FindAddressFault;XSDElementDeclaration=1$MRObject" schemaObject="/0/FindAddressFault;XSDElementDeclaration=1">
+          <xmlMsgRep messageSetDefaultRep="XML1" outputPolicyForXsiTypeAttribute="Never"/>
+        </MRMessage>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+      <xsd:element name="Name" nillable="true">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/Name;XSDElementDeclaration=2$MRObject" schemaObject="/0/Name;XSDElementDeclaration=2">
+          <xmlMsgRep messageSetDefaultRep="XML1" outputPolicyForXsiTypeAttribute="Never"/>
+        </MRMessage>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string"/>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="Person" nillable="true" type="mrm:PersonType">
+    <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/Person;XSDElementDeclaration=3$MRObject" schemaObject="/0/Person;XSDElementDeclaration=3">
+          <xmlMsgRep messageSetDefaultRep="XML1" outputPolicyForXsiTypeAttribute="Never"/>
+        </MRMessage>
+      </xsd:appinfo>
+    </xsd:annotation>
+  </xsd:element>
+      <xsd:element name="SaveAddressResponse">
+        <xsd:annotation>
+      <xsd:appinfo source="WMQI_APPINFO">
+        <MRMessage messageDefinition="/0/SaveAddressResponse;XSDElementDeclaration=4$MRObject" schemaObject="/0/SaveAddressResponse;XSDElementDeclaration=4">
+          <xmlMsgRep messageSetDefaultRep="XML1" outputPolicyForXsiTypeAttribute="Never"/>
+        </MRMessage>
+      </xsd:appinfo>
+    </xsd:annotation>
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:boolean"/>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="PersonType">
+        <xsd:sequence>
+          <xsd:element form="qualified" name="Name" type="xsd:string"/>
+          <xsd:element form="qualified" name="Address" type="mrm:AddressType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AddressType">
+        <xsd:sequence>
+          <xsd:element form="qualified" name="City" type="xsd:string"/>
+          <xsd:element form="qualified" name="Street" type="xsd:string"/>
+          <xsd:element form="qualified" name="Province" type="xsd:string"/>
+          <xsd:element form="qualified" name="PostalCode" type="xsd:string"/>
+          <xsd:element form="qualified" name="PhoneNumber" type="mrm:PhoneNumberType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PhoneNumberType">
+        <xsd:sequence>
+          <xsd:element form="qualified" name="Area" type="xsd:int"/>
+          <xsd:element form="qualified" name="Prefix" type="xsd:int"/>
+          <xsd:element form="qualified" name="Local" type="xsd:int"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FindAddressFaultType">
+        <xsd:sequence>
+          <xsd:element form="qualified" name="Comment" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>

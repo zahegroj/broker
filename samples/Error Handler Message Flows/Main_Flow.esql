@@ -1,0 +1,27 @@
+/*
+Sample program for use with IBM WebSphere Message Broker
+© Copyright International Business Machines Corporation 2003, 2010 
+Licensed Materials - Property of IBM
+*/
+
+CREATE FILTER MODULE Main_Flow_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+		BEGIN
+	If Body.Staff.StaffNumber<='10' THEN
+		RETURN TRUE;
+		ELSE
+		RETURN FALSE;
+		END IF;
+	END;
+END MODULE;
+
+CREATE DATABASE MODULE Main_Flow_Database
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	INSERT INTO Database.STAFF(STAFFNUM, LASTCHANGE, FIRSTNAME, LASTNAME)
+	VALUES(Body.Staff.StaffNumber, CURRENT_TIMESTAMP, 
+	Body.Staff.NameInfo.FirstName, Body.Staff.NameInfo.LastName); 
+	RETURN TRUE;
+	END;
+END MODULE;
+

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="promociones" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="promociones">
+    <input path="/investigacion/GestionTramitesInvestigacion.xsd"/>
+    <output path="/m2k/wmb/m2k_igtoc48_d.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ConsultarDetallePromocionReq_Igtoc48DReq">
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" path="mb:msg(consultarDetallePromocionRequest,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/m2k/activaciones/igtoc48/d" path="mb:msg(Request,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/usuarioM2K"/>
+            <output path="Request/user"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/region"/>
+            <output path="Request/region"/>
+        </move>
+        <assign value="I*S8">
+            <output path="Request/function"/>
+        </assign>
+        <assign value="D">
+            <output path="Request/action"/>
+        </assign>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/telefono"/>
+            <output path="Request/inputParameters/servicio/p01telefono/text()"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/cuenta"/>
+            <output path="Request/inputParameters/servicio/p02cuenta/text()"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/fechaInicio"/>
+            <output path="Request/inputParameters/servicio/p03fechaInicio/text()"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/fechaFin"/>
+            <output path="Request/inputParameters/servicio/p04fechaFin/text()"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/referencia/valCdInd"/>
+            <output path="Request/inputParameters/servicio/p07ValCdInd/text()"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/referencia/valTransInd"/>
+            <output path="Request/inputParameters/servicio/p08ValTransInd/text()"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/referencia/ultFecDes"/>
+            <output path="Request/inputParameters/servicio/p09UltFecDes/text()"/>
+        </move>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/referencia/priFecDes"/>
+            <output path="Request/inputParameters/servicio/p10PriFecDes/text()"/>
+        </move>
+        <assign value="10">
+            <output path="Request/inputParameters/servicio/p01telefono/@longitud"/>
+        </assign>
+        <assign value="09">
+            <output path="Request/inputParameters/servicio/p02cuenta/@longitud"/>
+        </assign>
+        <assign value="08">
+            <output path="Request/inputParameters/servicio/p03fechaInicio/@longitud"/>
+        </assign>
+        <assign value="08">
+            <output path="Request/inputParameters/servicio/p04fechaFin/@longitud"/>
+        </assign>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/fechaEfectiva"/>
+            <output path="Request/inputParameters/servicio/p06EffDate/text()"/>
+        </move>
+        <assign value="05">
+            <output path="Request/inputParameters/servicio/p05planDesc/@longitud"/>
+        </assign>
+        <assign value="08">
+            <output path="Request/inputParameters/servicio/p06EffDate/@longitud"/>
+        </assign>
+        <assign value="40">
+            <output path="Request/inputParameters/servicio/p07ValCdInd/@longitud"/>
+        </assign>
+        <assign value="40">
+            <output path="Request/inputParameters/servicio/p08ValTransInd/@longitud"/>
+        </assign>
+        <assign value="07">
+            <output path="Request/inputParameters/servicio/p09UltFecDes/@longitud"/>
+        </assign>
+        <assign value="07">
+            <output path="Request/inputParameters/servicio/p10PriFecDes/@longitud"/>
+        </assign>
+        <move>
+            <input path="consultarDetallePromocionRequest/request/planDescuento"/>
+            <output path="Request/inputParameters/servicio/p05planDesc/text()"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

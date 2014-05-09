@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmMQInput.msgnode="ComIbmMQInput.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_submitPO_OrderService_SOAPNodesSampleConsumerFlow.msgflow="gen/submitPO_OrderService_SOAPNodesSampleConsumerFlow.msgflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="SOAPNodesSampleConsumerFlow.msgflow"
+    nsPrefix="SOAPNodesSampleConsumerFlow.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="SOAPNodesSampleConsumerFlow" bundleName="SOAPNodesSampleConsumerFlow" pluginId="unzipped"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/unzipped/icons/full/obj16/SOAPNodesSampleConsumerFlow.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/unzipped/icons/full/obj30/SOAPNodesSampleConsumerFlow.gif"/>
+    <longDescription xmi:type="utility:ConstantString" string="Sample program for use with IBM WebSphere Message Broker&#xD;&#xA;© Copyright International Business Machines Corporation 2007, 2010&#xD;&#xA;Licensed Materials - Property of IBM"/>
+    <composition>
+      <nodes xmi:type="ComIbmMQInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="64,165" queueName="SOAPSAMPLE_IN" messageDomainProperty="XMLNSC">
+        <translation xmi:type="utility:ConstantString" string="SOAPSample_IN"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="540,201" queueName="SOAPSAMPLE_OUT">
+        <translation xmi:type="utility:ConstantString" string="SOAPSample_OUT"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="171,165" computeExpression="esql://routine/#SOAPNodesSampleConsumerFlow_Compute_Request.Main">
+        <translation xmi:type="utility:ConstantString" string="Compute Request"/>
+      </nodes>
+      <nodes xmi:type="gen_submitPO_OrderService_SOAPNodesSampleConsumerFlow.msgflow:FCMComposite_1" xmi:id="FCMComposite_1_12" location="291,166">
+        <translation xmi:type="utility:ConstantString" string="Invoke_submitPO"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="409,200" computeExpression="esql://routine/#SOAPNodesSampleConsumerFlow_Compute_Response.Main">
+        <translation xmi:type="utility:ConstantString" string="Compute Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="409,125" queueName="SOAPSAMPLE_FAULT">
+        <translation xmi:type="utility:ConstantString" string="SOAPSample_FAULT"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.submitPOResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

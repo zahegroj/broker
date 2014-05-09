@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmFileInput.msgnode="ComIbmFileInput.msgnode" xmlns:ComIbmFileOutput.msgnode="ComIbmFileOutput.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="FileBatchProcessingSample_HOffice.msgflow"
+    nsPrefix="FileBatchProcessingSample_HOffice.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="FileBatchProcessingSample_HOffice" bundleName="FileBatchProcessingSample_HOffice" pluginId="com.ibm.etools.mft.samples.BatchProcessing.res"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/com.ibm.etools.mft.samples.BatchProcessing.res/icons/full/obj16/FileBatchProcessingSample_HOffice.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/com.ibm.etools.mft.samples.BatchProcessing.res/icons/full/obj30/FileBatchProcessingSample_HOffice.gif"/>
+    <longDescription xmi:type="utility:ConstantString" string="Sample program for use with IBM WebSphere Message Broker&#xD;&#xA;© Copyright International Business Machines Corporation 2007, 2010 &#xD;&#xA;Licensed Materials - Property of IBM&#xD;&#xA;"/>
+    <composition>
+      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="179,159" inputDirectory="hoffice_in" filenamePattern="hoffice_in.txt" processedFileAction="moveToArchiveWithTimestamp" messageDomainProperty="BLOB">
+        <translation xmi:type="utility:ConstantString" string="FILE_HOFFICE_IN"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFileOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="378,159" outputDirectory="hoffice_out" outputFilename="hoffice_out.txt">
+        <translation xmi:type="utility:ConstantString" string="FILE_HOFFICE_OUT"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

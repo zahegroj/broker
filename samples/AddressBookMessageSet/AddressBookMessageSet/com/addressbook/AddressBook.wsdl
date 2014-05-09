@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions name="AddressBookService" targetNamespace="http://addressbook.com/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://addressbook.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="AddressBook_InlineSchema1.mxsd"/>
+        <binding hasEncoding="false" imported="true" name="AddressBookJMSBinding" originalBindingStyle="document"/>
+        <binding hasEncoding="false" imported="true" name="AddressBookPortBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
+  
+  <types>
+    <xsd:schema targetNamespace="http://addressbook.com/" xmlns:mrm="http://addressbook.com/">
+      <xsd:include schemaLocation="AddressBook_InlineSchema1.mxsd"/>
+    </xsd:schema>
+  </types>
+  <message name="SaveAddress">
+    <part element="tns:Person" name="Person"/>
+  </message>
+  <message name="SaveAddressResponse">
+    <part element="tns:SaveAddressResponse" name="SaveAddressResponse"/>
+  </message>
+  <message name="FindAddress">
+    <part element="tns:Name" name="Name"/>
+  </message>
+  <message name="FindAddressResponse">
+    <part element="tns:Address" name="Address"/>
+  </message>
+  <message name="FindAddressFault">
+    <part element="tns:FindAddressFault" name="fault"/>
+  </message>
+  <portType name="AddressBook">
+    <operation name="SaveAddress">
+      <input message="tns:SaveAddress"/>
+      <output message="tns:SaveAddressResponse"/>
+    </operation>
+    <operation name="FindAddress">
+      <input message="tns:FindAddress"/>
+      <output message="tns:FindAddressResponse"/>
+      <fault message="tns:FindAddressFault" name="FindAddressFault"/>
+    </operation>
+  </portType>
+  <binding name="AddressBookPortBinding" type="tns:AddressBook">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="SaveAddress">
+      <soap:operation soapAction="http://addressbook.com/SaveAddress"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="FindAddress">
+      <soap:operation soapAction="http://addressbook.com/FindAddress"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="FindAddressFault">
+        <soap:fault name="FindAddressFault" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+
+  <binding name="AddressBookJMSBinding" type="tns:AddressBook">
+  	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/jms"/>
+  	<operation name="SaveAddress">
+  		<soap:operation soapAction="http://addressbook.com/SaveAddress"/>
+  		<input>
+  			<soap:body use="literal"/>
+  		</input>
+  		<output>
+  			<soap:body use="literal"/>
+  		</output>
+  	</operation>
+  	<operation name="FindAddress">
+  		<soap:operation soapAction="http://addressbook.com/FindAddress"/>
+  		<input>
+  			<soap:body use="literal"/>
+  		</input>
+  		<output>
+  			<soap:body use="literal"/>
+  		</output>
+  		<fault name="FindAddressFault">
+  			<soap:fault name="FindAddressFault" use="literal"/>
+  		</fault>
+  	</operation>
+  </binding>
+  <service name="AddressBookService">
+    <port binding="tns:AddressBookPortBinding" name="HTTPSOAPPort">
+      <soap:address location="http://localhost:7800/jwsAddressBook/AddressBookService"/>
+    </port>
+
+    <port binding="tns:AddressBookJMSBinding" name="JMSSOAPPort">
+      <soap:address location="jms:jndi:JMSREQUESTQ?jndiConnectionFactoryName=JMSQCF&amp;jndiInitialContextFactory=com.sun.jndi.fscontext.RefFSContextFactory&amp;jndiURL=file%3A%2FC%3A%2FSOAPJNDIBindings&amp;replyToName=JMSREPLYQ&amp;targetService=AddressBook"/>
+    </port>
+  </service>
+</definitions>

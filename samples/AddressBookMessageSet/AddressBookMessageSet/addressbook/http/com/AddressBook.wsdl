@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="AddressBook" targetNamespace="http://com.http.addressbook" xmlns:mrm="http://addressbook.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://com.http.addressbook" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="..\..\..\com\addressbook\AddressBookService_InlineSchema1.mxsd"/>
+        <binding hasEncoding="false" imported="true" name="AddressBookMessageSetSOAP_HTTP_Binding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://addressbook.com/" xmlns:Q1="http://addressbook.com/" xmlns:mrm="http://com.http.addressbook">
+      <xsd:include schemaLocation="../../../com/addressbook/AddressBook_InlineSchema1.mxsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="FindAddress_in">
+    <wsdl:part element="mrm:Name" name="Name"/>
+  </wsdl:message>
+  <wsdl:message name="FindAddress_out">
+    <wsdl:part element="mrm:Address" name="Address"/>
+  </wsdl:message>
+  <wsdl:message name="FindAddress_fault1">
+    <wsdl:part element="mrm:FindAddressFault" name="FindAddressFault"/>
+  </wsdl:message>
+  <wsdl:message name="SaveAddress_in">
+    <wsdl:part element="mrm:Person" name="Person"/>
+  </wsdl:message>
+  <wsdl:message name="SaveAddress_out">
+    <wsdl:part element="mrm:SaveAddressResponse" name="SaveAddressResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="AddressBookMessageSetPortType">
+    <wsdl:operation name="FindAddress">
+      <wsdl:input message="tns:FindAddress_in" name="FindAddress_Input"/>
+      <wsdl:output message="tns:FindAddress_out" name="FindAddress_Output"/>
+      <wsdl:fault message="tns:FindAddress_fault1" name="FindAddress_Fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="SaveAddress">
+      <wsdl:input message="tns:SaveAddress_in" name="SaveAddress_Input"/>
+      <wsdl:output message="tns:SaveAddress_out" name="SaveAddress_Output"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AddressBookMessageSetSOAP_HTTP_Binding" type="tns:AddressBookMessageSetPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="FindAddress">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="FindAddress_Input">
+        <soap:body parts="Name" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="FindAddress_Output">
+        <soap:body parts="Address" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="FindAddress_Fault">
+        <soap:fault name="FindAddress_Fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SaveAddress">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="SaveAddress_Input">
+        <soap:body parts="Person" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SaveAddress_Output">
+        <soap:body parts="SaveAddressResponse" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AddressBook_HTTP_Service">
+    <wsdl:port binding="tns:AddressBookMessageSetSOAP_HTTP_Binding" name="SOAP_HTTP_Port">
+      <soap:address location="http://localhost:7800/jwsAddressBook/AddressBookService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

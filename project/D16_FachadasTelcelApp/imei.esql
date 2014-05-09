@@ -1,0 +1,98 @@
+CREATE COMPUTE MODULE ConstruirFaultImei
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL CopyMessageHeaders(InputRoot, OutputRoot);
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.faultstring = 'Ocurrió un error en la ejecución del servicio IMEI';
+		SET OutputRoot.SOAP.Body.soapenv:Fault.detail = InputRoot.XMLNSC;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FILTER MODULE ValidarCodigoError
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsimei NAMESPACE 'http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei';
+		
+		IF Root.XMLNSC.nsimei:response.codigo<>'1' THEN
+			RETURN FALSE;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapImeiRequest
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsInput NAMESPACE 'http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei';
+		DECLARE nsOutput NAMESPACE 'http://ws.imeisac.dsaf.gsa.telcel.com';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'ConsultaImeiAC';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsOutput);
+		
+		SET OutputRoot.XMLNSC.nsOutput:ConsultaImeiAC.consImei = '|' || InputRoot.XMLNSC.nsInput:request.codigo || 
+																 '|' || InputRoot.XMLNSC.nsInput:request.region || 
+																 '|' || InputRoot.XMLNSC.nsInput:request.imei || '|';
+	
+		IF FIELDTYPE(InputRoot.XMLNSC.nsInput:request.datosIgtoc25c) IS NOT NULL THEN
+			SET OutputLocalEnvironment.Variables.datosIgtoc25 = InputRoot.XMLNSC.nsInput:request.datosIgtoc25c;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapImeiResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsInput NAMESPACE 'http://ws.imeisac.dsaf.gsa.telcel.com';
+		DECLARE nsOutput NAMESPACE 'http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei';
+		DECLARE oldNamespace NAMESPACE '';
+		
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'response';
+		CALL ChangeNamespaceInOutputRoot(OutputRoot.XMLNSC, oldNamespace, nsOutput);
+		
+		DECLARE responseString CHARACTER InputRoot.XMLNSC.nsInput:ConsultaImeiACResponse.ConsultaImeiACReturn;
+		
+		CALL Split(responseString, OutputLocalEnvironment, '|');
+		
+		SET OutputRoot.XMLNSC.nsOutput:response.codigo = OutputLocalEnvironment.Split.Array[2];
+		SET OutputRoot.XMLNSC.nsOutput:response.claveSap = OutputLocalEnvironment.Split.Array[3];
+		SET OutputRoot.XMLNSC.nsOutput:response.marca = OutputLocalEnvironment.Split.Array[4];
+		SET OutputRoot.XMLNSC.nsOutput:response.modelo = OutputLocalEnvironment.Split.Array[5];
+		SET OutputRoot.XMLNSC.nsOutput:response.grupoArticulo = OutputLocalEnvironment.Split.Array[6];
+	
+		IF FIELDTYPE(InputLocalEnvironment.Variables.datosIgtoc25) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsOutput:response.datosIgtoc25c = InputLocalEnvironment.Variables.datosIgtoc25;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+
+CREATE PROCEDURE Split (IN S CHARACTER, IN Env REFERENCE, IN Delim CHARACTER) 
+BEGIN 
+   DECLARE P INTEGER; 
+   DECLARE Idx INTEGER 1; 
+
+   SET Env.Split = NULL; 
+    
+   REPEAT 
+      SET P = POSITION(Delim IN S); 
+      IF P = 0 THEN 
+         SET Env.Split.Array[Idx] = S; 
+      ELSE 
+         SET Env.Split.Array[Idx] = LEFT(S, P - 1); 
+         SET S = SUBSTRING(S FROM P + LENGTH(Delim)); 
+         SET Idx = Idx + 1; 
+      END IF; 
+   UNTIL P = 0 
+       
+   END REPEAT;    
+
+END; 

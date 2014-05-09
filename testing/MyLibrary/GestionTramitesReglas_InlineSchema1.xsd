@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/comun/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/reglas/v1" xmlns:types="http://www.telcel.com.mx/gestiontramites/reglas/types/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/reglas/types/v1" schemaLocation="GestionTramitesReglas.xsd"/>
+<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/comun/types" schemaLocation="GestionTramitesComun.xsd"/>
+</xsd:schema>

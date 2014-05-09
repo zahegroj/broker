@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema elementFormDefault="qualified" targetNamespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:this="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/investigacion/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:comun="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema">
+
+	<xsd:import namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/comun/schema" schemaLocation="../comun/GestionTramitesComun.xsd" />
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarEncabezadoRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarEncabezadoRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarEncabezadoResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarEncabezadoResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarConsumosRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarConsumosRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarConsumosResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarConsumosResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleConexionesRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetalleConexionesRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleConexionesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetalleConexionesResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPlanesYServiciosRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarPlanesYServiciosRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPlanesYServiciosResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarPlanesYServiciosResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePlanTarifarioRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetallePlanTarifarioRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePlanTarifarioResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetallePlanTarifarioResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleProductoRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetalleProductoRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleProductoResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetalleProductoResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPagosYAjustesRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarPagosYAjustesRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPagosYAjustesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarPagosYAjustesResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleReversionRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetalleReversionRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetalleReversionResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetalleReversionResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPromocionesRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarPromocionesRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarPromocionesResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarPromocionesResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePromocionRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarDetallePromocionRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarDetallePromocionResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarDetallePromocionResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarHistorialCuentaRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="request" type="this:ConsultarHistorialCuentaRequestType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarHistorialCuentaResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="response" type="this:ConsultarHistorialCuentaResponseType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<!-- types -->
+	<xsd:complexType name="ConsultarEncabezadoRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarEncabezadoResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="formaPago" type="comun:alfanumericoFormato"/>
+					<xsd:element name="planTarifario" type="comun:planTarifarioFormato"/>
+					<xsd:element name="modelo" type="xsd:string"/>
+					<xsd:element name="imei" type="comun:imeiFormato"/>
+					<xsd:element name="marca" type="xsd:string"/>
+					<xsd:element name="infoImei" type="this:InfoImeiType"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarConsumosRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+					<xsd:element name="esRegistrosFacturados" type="xsd:boolean"/>
+					<xsd:element name="referencia" type="this:ReferenciaConsumosType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarConsumosResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="consumos" type="this:ArrayOfConsumo" minOccurs="0"/>
+					<xsd:element name="referencia" type="this:ReferenciaConsumosType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleConexionesRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="fechaConexion" type="comun:fechaFormato"/>
+					<xsd:element name="horaConexion" type="comun:horaFormato"/>
+					<xsd:element name="referencia" type="this:ReferenciaDetalleConexionType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleConexionesResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="detallesConexion" type="this:ArrayOfDetalleConexion" minOccurs="0"/>
+					<xsd:element name="referencia" type="this:ReferenciaDetalleConexionType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPlanesYServiciosRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+					<xsd:element name="referenciaPlanesTarifarios" type="this:ReferenciaPlanTarifario" minOccurs="0"/>
+					<xsd:element name="referenciaServiciosAdicionales" type="this:ReferenciaServicioAdicional" minOccurs="0"/>					
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPlanesYServiciosResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="planesTarifarios" type="this:ArrayOfPlanTarifario" minOccurs="0"/>
+					<xsd:element name="referenciaPlanesTarifarios" type="this:ReferenciaPlanTarifario" minOccurs="0"/>
+					<xsd:element name="serviciosAdicionales" type="this:ArrayOfServicioAdicional" minOccurs="0"/>
+					<xsd:element name="referenciaServiciosAdicionales" type="this:ReferenciaServicioAdicional" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetallePlanTarifarioRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="planTarifario" type="comun:alfanumericoFormato"/>
+					<xsd:element name="referencia" type="comun:alfanumericoFormato" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetallePlanTarifarioResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="detallePlanTarifario" type="this:DetallePlanTariafioType" minOccurs="0"/>
+					<xsd:element name="productosDePlan" type="this:ArrayOfProductoDePlan" minOccurs="0"/>
+					<xsd:element name="referencia" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleProductoRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+					<xsd:element name="producto" type="comun:productoFormato"/>
+					<xsd:element name="planTarifario" type="comun:planTarifarioFormato"/>
+					<xsd:element name="referencia" type="this:ReferenciaGrupoLlamadas" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleProductoResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="detalleProducto" type="this:DetalleProductoType" minOccurs="0"/>
+					<xsd:element name="grupoLlamadas" type="this:ArrayOfLlamada" minOccurs="0"/>
+					<xsd:element name="referencia" type="this:ReferenciaGrupoLlamadas" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>		
+	</xsd:complexType>
+	
+	<xsd:complexType name="ConsultarPagosYAjustesRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+					<xsd:element name="referencia" type="this:ReferenciaPagoYAjusteType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPagosYAjustesResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="pagosYAjustes" type="this:ArrayOfPagoYAjuste" minOccurs="0"/>
+					<xsd:element name="referencia" type="this:ReferenciaPagoYAjusteType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleReversionRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="fechaPago" type="comun:fechaPivFormato"/>
+					<xsd:element name="numPago" type="xsd:string"/>
+					<xsd:element name="tipoPago" type="xsd:string"/>
+					<xsd:element name="secPago" type="xsd:string"/>
+					<xsd:element name="referencia" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetalleReversionResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="reversiones" type="this:ArrayOfReversion" minOccurs="0"/>
+					<xsd:element name="referencia" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPromocionesRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+					<xsd:element name="referencia" type="this:ReferenciaPromocionType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarPromocionesResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="promociones" type="this:ArrayOfPromocion" minOccurs="0"/>
+					<xsd:element name="referencia" type="this:ReferenciaPromocionType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetallePromocionRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+					<xsd:element name="planDescuento" type="comun:planTarifarioFormato"/>
+					<xsd:element name="fechaEfectiva" type="xsd:string"/>
+					<xsd:element name="referencia" type="this:ReferenciaDetallePromocionType" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarDetallePromocionResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="descripcionPromocion" type="this:DescPromocionType" minOccurs="0"/>
+					<xsd:element name="aplicacionesProducto" type="this:ArrayOfAplicacionProducto" minOccurs="0"/>
+					<xsd:element name="detallesPromocion" type="this:ArrayOfDetallePromocion" minOccurs="0"/>
+					<xsd:element name="referenciaDetallePromocion" type="this:ReferenciaDetallePromocionType" minOccurs="0"/>					
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarHistorialCuentaRequestType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:RequestBase">
+				<xsd:sequence>
+					<xsd:element name="telefono" type="comun:telefonoFormato"/>
+					<xsd:element name="cuenta" type="comun:cuentaFormato"/>
+					<xsd:element name="fechaInicio" type="comun:fechaFormato"/>
+					<xsd:element name="fechaFin" type="comun:fechaFormato"/>
+					<xsd:element name="referencia" type="this:ReferenciaHistorialCuenta" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConsultarHistorialCuentaResponseType">
+		<xsd:complexContent>
+			<xsd:extension base="comun:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="registros" type="this:ArrayOfHistorialCuenta" minOccurs="0"/>
+					<xsd:element name="referencia" type="this:ReferenciaHistorialCuenta" minOccurs="0"/>
+				</xsd:sequence>			
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<!-- encabezado -->
+	<xsd:complexType name="InfoImeiType">
+		<xsd:sequence>
+			<xsd:element name="codigo" type="comun:numericoFormato"/>
+			<xsd:element name="claveSap" type="xsd:string"/>
+			<xsd:element name="marca" type="xsd:string"/>
+			<xsd:element name="modelo" type="xsd:string"/>
+			<xsd:element name="grupoArticulo" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  consumos -->
+	<xsd:complexType name="ConsumoType">
+		<xsd:sequence>
+			<xsd:element name="fecha" type="comun:fechaFormato"/>
+			<xsd:element name="hora" type="comun:horaFormato"/>
+			<xsd:element name="ciudadOrigen" type="xsd:string"/>
+			<xsd:element name="telMarcado" type="comun:telefonoFormato"/>
+			<xsd:element name="ciudadDestino" type="xsd:string"/>
+			<xsd:element name="sv" type="xsd:string"/>
+			<xsd:element name="cl" type="xsd:string"/>
+			<xsd:element name="tipoLlamada" type="xsd:string"/>
+			<xsd:element name="minutosTAire" type="xsd:string"/>
+			<xsd:element name="minutosLibre" type="xsd:string"/>
+			<xsd:element name="largaDistancia" type="xsd:string"/>
+			<xsd:element name="total" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfConsumo">
+		<xsd:sequence>
+			<xsd:element name="consumo" type="this:ConsumoType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaConsumosType">
+		<xsd:sequence>
+			<xsd:element name="fechaPiv" type="comun:fechaPivFormato"/>
+			<xsd:element name="horaPiv" type="comun:horaPivFormato"/>
+			<xsd:element name="fuentePiv" type="comun:alfanumericoFormato"/>
+			<xsd:element name="secuenciaPiv" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="telMarcadoPiv" type="comun:telefonoFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  detalle conexiones -->
+	<xsd:complexType name="DetalleConexionType">
+		<xsd:sequence>
+			<xsd:element name="fechaConexion" type="comun:fechaFormato"/>
+			<xsd:element name="horaConexion" type="comun:horaFormato"/>
+			<xsd:element name="bytesCargados" type="comun:numericoFormato"/>
+			<xsd:element name="bytesDescargados" type="comun:numericoFormato"/>
+			<xsd:element name="apn" type="xsd:string"/>
+			<xsd:element name="imei" type="comun:imeiFormato"/>
+			<xsd:element name="imsi" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfDetalleConexion">
+		<xsd:sequence>
+			<xsd:element name="detalleConexion" type="this:DetalleConexionType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaDetalleConexionType">
+		<xsd:sequence>
+			<xsd:element name="dtConnect" type="xsd:string"/>
+			<xsd:element name="tmConnect" type="xsd:string"/>
+			<xsd:element name="chargingId" type="xsd:string"/>
+			<xsd:element name="dataVolUp" type="xsd:string"/>
+			<xsd:element name="dataVolDown" type="xsd:string"/>
+			<xsd:element name="serviceClass" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  pagos y ajustes -->
+	<xsd:complexType name="PagoYAjusteType">
+		<xsd:sequence>
+			<xsd:element name="fecha" type="comun:fechaFormato"/>
+			<xsd:element name="nombreAjuste" type="xsd:string"/>
+			<xsd:element name="cheque" type="xsd:string"/>
+			<xsd:element name="origenPago" type="xsd:string"/>
+			<xsd:element name="formaPago" type="xsd:string"/>
+			<xsd:element name="importe" type="comun:decimalFormato"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="asesor" type="comun:alfanumericoFormato"/>
+			<xsd:element name="detallePago" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfPagoYAjuste">
+		<xsd:sequence>
+			<xsd:element name="pagoYAjuste" type="this:PagoYAjusteType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaPagoYAjusteType">
+		<xsd:sequence>
+			<xsd:element name="fechaPago" type="comun:fechaPivFormato"/>
+			<xsd:element name="lotePago" type="xsd:string"/>
+			<xsd:element name="tipoPago" type="xsd:string"/>
+			<xsd:element name="secPago" type="xsd:string"/>
+			<xsd:element name="fechaAjuste" type="comun:fechaPivFormato"/>
+			<xsd:element name="codAjuste" type="xsd:string"/>
+			<xsd:element name="secUsuarioAjuste" type="xsd:string"/>
+			<xsd:element name="secAjuste" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!--  reversiones -->
+	<xsd:complexType name="ReversionType">
+		<xsd:sequence>
+			<xsd:element name="fechaPago" type="comun:fechaFormato"/>
+			<xsd:element name="fechaAplicacion" type="comun:fechaFormato"/>
+			<xsd:element name="fechaReversion" type="comun:fechaFormato"/>
+			<xsd:element name="importeAplicado" type="comun:decimalFormato"/>
+			<xsd:element name="fechaFactura" type="comun:fechaFormato"/>
+			<xsd:element name="formaPago" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfReversion">
+		<xsd:sequence>
+			<xsd:element name="reversion" type="this:ReversionType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- promociones -->
+	
+	<xsd:complexType name="PromocionType">
+		<xsd:sequence>
+			<xsd:element name="planDescuento" type="comun:alfanumericoFormato"/>
+			<xsd:element name="descripcion" type="xsd:string"/>
+			<xsd:element name="periodicidad" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+			<xsd:element name="fechaExpiracion" type="comun:fechaFormato"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfPromocion">
+		<xsd:sequence>
+			<xsd:element name="promocion" type="this:PromocionType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaPromocionType">
+		<xsd:sequence>
+			<xsd:element name="cveDesc" type="comun:alfanumericoFormato"/>
+			<xsd:element name="effDt" type="comun:fechaPivFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- detalle promociones -->
+	<xsd:complexType name="DescPromocionType">
+		<xsd:sequence> <!-- igtoc48c -->
+			<xsd:element name="claveDescuento" type="comun:alfanumericoFormato"/>
+			<xsd:element name="periodoDescuento" type="xsd:string"/>
+			<xsd:element name="claveProducto" type="comun:productoFormato"/>
+			<xsd:element name="descripcionProducto" type="xsd:string"/>
+			<xsd:element name="claveAjustePromocion" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="DetallePromocionType">
+		<xsd:sequence> <!-- igtoc48d -->
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="periodo" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfDetallePromocion">
+		<xsd:sequence>
+			<xsd:element name="detallePromocion" type="this:DetallePromocionType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaDetallePromocionType">
+		<xsd:sequence>
+			<xsd:element name="valCdInd" type="xsd:string"/>
+			<xsd:element name="valTransInd" type="xsd:string"/>
+			<xsd:element name="ultFecDes" type="xsd:string"/>
+			<xsd:element name="priFecDes" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="AplicacionProductoType">
+		<xsd:sequence>  <!-- igtoc48a -->
+			<xsd:element name="producto" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfAplicacionProducto">
+		<xsd:sequence>
+			<xsd:element name="aplicProducto" type="this:AplicacionProductoType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- historial de la cuenta -->
+	<xsd:complexType name="HistorialCuentaType">
+		<xsd:sequence>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="motivo" type="xsd:string"/>
+			<xsd:element name="tecnologia" type="xsd:string"/>
+			<xsd:element name="imei" type="comun:imeiFormato"/>
+			<xsd:element name="iccid" type="comun:numericoFormato"/>
+			<xsd:element name="imsi" type="comun:numericoFormato"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfHistorialCuenta">
+		<xsd:sequence>
+			<xsd:element name="registro" type="this:HistorialCuentaType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaHistorialCuenta">
+		<xsd:sequence>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="effDate" type="comun:fechaPivFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- detalle de producto -->
+	<xsd:complexType name="DetalleProductoType">
+		<xsd:sequence>
+			<xsd:element name="claveProducto" type="comun:productoFormato"/>
+			<xsd:element name="descripcionProducto" type="xsd:string"/>
+			<xsd:element name="costoProducto" type="comun:decimalFormato"/>
+			<xsd:element name="caracteristicasProducto" type="xsd:string"/>
+			<xsd:element name="minutosIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="smsIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="datosIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="unidad" type="comun:alfanumericoFormato"/>
+			<xsd:element name="claveGrupo" type="comun:alfanumericoFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="LlamadaType">
+		<xsd:sequence>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="tipoServicio" type="xsd:string"/>
+			<xsd:element name="tipoDestino" type="xsd:string"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfLlamada">
+		<xsd:sequence>
+			<xsd:element name="llamada" type="this:LlamadaType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaGrupoLlamadas">
+		<xsd:sequence>
+			<xsd:element name="tipoGrupo" type="comun:alfanumericoFormato"/>
+			<xsd:element name="idGrupo" type="comun:numericoFormato"/>
+			<xsd:element name="telefono" type="comun:telefonoFormato"/>
+			<xsd:element name="effDate" type="comun:fechaPivFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- detalle plan tarifario -->
+	<xsd:complexType name="DetallePlanTariafioType">
+		<xsd:sequence>
+			<xsd:element name="descripcionPlan" type="xsd:string"/>
+			<xsd:element name="plazoForzoso" type="comun:alfanumericoFormato"/>
+			<xsd:element name="tipoPlan" type="xsd:string"/>
+			<xsd:element name="descripcionTipoPlan" type="xsd:string"/>
+			<xsd:element name="minutosIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="smsIncluidos" type="comun:numericoFormato"/>
+			<xsd:element name="datosIncluidos" type="xsd:string"/>
+			<xsd:element name="costoPlan" type="comun:decimalFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ProductoDePlanType">
+		<xsd:sequence>
+			<xsd:element name="producto" type="comun:productoFormato"/>
+			<xsd:element name="descripcion" type="xsd:string"/>
+			<xsd:element name="costo" type="comun:decimalFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfProductoDePlan">
+		<xsd:sequence>
+			<xsd:element name="producto" type="this:ProductoDePlanType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<!-- planes y servicios -->
+	<xsd:complexType name="PlanTarifarioType">
+		<xsd:sequence> <!-- 41R -->
+			<xsd:element name="descripcion" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfPlanTarifario">
+		<xsd:sequence>
+			<xsd:element name="planTarifario" type="this:PlanTarifarioType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaPlanTarifario">
+		<xsd:sequence>
+			<xsd:element name="plan" type="comun:planTarifarioFormato"/>
+			<xsd:element name="fecha" type="comun:fechaPivFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ServicioAdicionalType">
+		<xsd:sequence> <!-- 44D -->
+			<xsd:element name="producto" type="comun:productoFormato"/>
+			<xsd:element name="incluidoEnPlan" type="xsd:string"/>
+			<xsd:element name="fechaEfectiva" type="comun:fechaFormato"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="usuario" type="comun:alfanumericoFormato"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ArrayOfServicioAdicional">
+		<xsd:sequence>
+			<xsd:element name="servicioAdicional" type="this:ServicioAdicionalType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ReferenciaServicioAdicional">
+		<xsd:sequence>
+			<xsd:element name="claveProd" type="comun:productoFormato"/>
+			<xsd:element name="fechaProd" type="comun:fechaPivFormato"/>
+			<xsd:element name="estatusProd" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

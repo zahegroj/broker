@@ -1,0 +1,24 @@
+
+
+Importing file: E:\Users\jzapatah\Documents\GitHub\broker\D16_M2KLib\siantel\wmb\SiantelService.wsdl
+
+Copying source WSDL SiantelService.wsdl to SiantelService.wsdl.
+The WSDL import will proceed with bindings SiantelBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Documents/GitHub/broker/D16_M2KLib/siantel/wmb/SiantelService.wsdl.
+Parsing wsdl binding {http://www.telcel.com.mx/siantel/wmb}SiantelBinding.
+Parsing wsdl binding input getPerfilTelefono.
+Parsing wsdl binding output getPerfilTelefono.
+Processing doc style for operation getPerfilTelefono.
+Populating WSDL schema siantel/wmb/SiantelService.xsd.
+Creating file siantel/wmb/SiantelService.xsd in the workspace.
+Creating file siantel/wmb/SiantelService_InlineSchema1.xsd in the workspace.
+Creating file /D16_M2KLib/D16_M2KLib/siantel/wmb/siantel.xsd in the workspace.
+
+Elapsed time processing this message definition file: 6.439 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+
+

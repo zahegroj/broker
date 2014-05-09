@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="imei" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="imei">
+    <input path="/imei/wmb/imei.xsd"/>
+    <output path="/imei/wmb/imei.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="Response_Error">
+        <input namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" path="mb:msg(response,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" path="mb:msg(error,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="response/codigo"/>
+            <output path="error/codigo"/>
+        </move>
+        <move>
+            <input path="response/claveSap"/>
+            <output path="error/descripcion"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

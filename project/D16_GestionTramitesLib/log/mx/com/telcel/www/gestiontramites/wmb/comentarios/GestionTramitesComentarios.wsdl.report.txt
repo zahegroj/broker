@@ -1,0 +1,33 @@
+
+
+Importing file: E:\Users\jzapatah\Dropbox\wmb\wsdl\GestionTramitesComentarios.wsdl
+
+Copying source WSDL GestionTramitesComentarios.wsdl to GestionTramitesComentarios.wsdl.
+The WSDL import will proceed with bindings GestionTramitesComentariosBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Dropbox/wmb/wsdl/GestionTramitesComentarios.wsdl.
+Parsing wsdl binding {http://www.telcel.com.mx/gestiontramites/wmb/comentarios}GestionTramitesComentariosBinding.
+Parsing wsdl binding input guardarComentario.
+Parsing wsdl binding output guardarComentario.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input consultarComentarios.
+Parsing wsdl binding output consultarComentarios.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Parsing wsdl binding input enviarSMS.
+Parsing wsdl binding output enviarSMS.
+Parsing wsdl binding fault GestionTramitesWMBException.
+Processing doc style for operation guardarComentario.
+Processing doc style for operation consultarComentarios.
+Processing doc style for operation enviarSMS.
+Populating WSDL schema comentarios/GestionTramitesComentarios.xsd.
+Creating file comentarios/GestionTramitesComentarios.xsd in the workspace.
+Creating file comentarios/GestionTramitesComentarios_InlineSchema1.xsd in the workspace.
+Creating file /D16_GestionTramitesLib/GestionTramitesComentarios.xsd in the workspace.
+Creating file /D16_GestionTramitesLib/GestionTramitesComun.xsd in the workspace.
+
+Elapsed time processing this message definition file: 2.193 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

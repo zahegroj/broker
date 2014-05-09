@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-workspace name="gestionTramitesWMB" soapui-version="4.5.2" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  <con:project name="D16_GestionTramitesComentarios">C:/Users/jjimened/Documents/broker/broker/soapui/D16-GestionTramitesComentarios-soapui-project.xml</con:project>
+  <con:project name="D16_GestionTramitesInfoCliente">C:/Users/jjimened/Documents/broker/broker/soapui/D16-GestionTramitesInfoCliente-soapui-project.xml</con:project>
+  <con:project name="D16_GestionTramitesInvestigacion">C:/Users/jjimened/Documents/broker/broker/soapui/D16-GestionTramitesInvestigacion-soapui-project.xml</con:project>
+  <con:project name="D16_GestionTramitesReglas">C:/Users/jjimened/Documents/broker/broker/soapui/D16-GestionTramitesReglas-soapui-project.xml</con:project>
+  <con:project name="ODM_DeterminarAdeudo">C:/Users/jjimened/Documents/broker/broker/soapui/ODM-DeterminarAdeudo-soapui-project.xml</con:project>
+  <con:project name="ODM_DeterminarPrevalidacion">C:/Users/jjimened/Documents/broker/broker/soapui/ODM-DeterminarPrevalidacion-soapui-project.xml</con:project>
+  <con:project name="ODM_DeterminarRegionPerfil">C:/Users/jjimened/Documents/broker/broker/soapui/ODM-DeterminarRegionPerfil-soapui-project.xml</con:project>
+  <con:project name="ODM_ReasignarTramite">C:/Users/jjimened/Documents/broker/broker/soapui/ODM-ReasignarTramite-soapui-project.xml</con:project>
+  <con:project name="Telcel_IMEI">C:/Users/jjimened/Documents/broker/broker/soapui/Telcel-IMEI-soapui-project.xml</con:project>
+  <con:project name="Telcel_M2K">C:/Users/jjimened/Documents/broker/broker/soapui/Telcel-M2K-soapui-project.xml</con:project>
+  <con:project name="Telcel_Siantel">C:/Users/jjimened/Documents/broker/broker/soapui/Telcel-Siantel-soapui-project.xml</con:project>
+  <con:project name="Telcel_SMS">C:/Users/jjimened/Documents/broker/broker/soapui/Telcel-SMS-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc25CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc25CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc40CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc40CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc41DService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc41DService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc41RService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc41RService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc42DService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc42DService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc43CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc43CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc45DService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc45DService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc46DService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc46DService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc50CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc50CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc51CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc51CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Retc2CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Retc2CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_SumiqCService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-SumiqCService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc47CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc47CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc52CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc52CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc48CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc48CService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc48Dservice">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc48Dservice-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc48AService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc48AService-soapui-project.xml</con:project>
+  <con:project name="D16_Telcel_Igtoc49CService">C:/Users/jjimened/Documents/broker/broker/soapui/D16-Telcel-Igtoc49CService-soapui-project.xml</con:project>
+</con:soapui-workspace>

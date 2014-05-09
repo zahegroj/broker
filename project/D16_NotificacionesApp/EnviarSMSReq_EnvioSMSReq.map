@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/notificaciones/GestionTramitesNotificaciones.xsd"/>
+    <output path="/sms/TramitesBPMService.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="EnviarSMSReq_EnvioSMSReq">
+        <input namespace="http://www.telcel.com.mx/di/sds/servicioaclientes/gestiontramites/wmb/notificaciones/schema" path="mb:msg(enviarSMSRequest,assembly,,Properties)"/>
+        <output namespace="http://tramitesbpm.ws.dsie.gsa.sds.di.telcel.com/" path="mb:msg(envioSMS,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <move>
+            <input path="enviarSMSRequest/request/telefono"/>
+            <output path="envioSMS/arg0"/>
+        </move>
+        <move>
+            <input path="enviarSMSRequest/request/texto"/>
+            <output path="envioSMS/arg1"/>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>

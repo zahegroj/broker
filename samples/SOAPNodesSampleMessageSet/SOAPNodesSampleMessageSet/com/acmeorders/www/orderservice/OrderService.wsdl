@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions name="OrderService" targetNamespace="http://www.acmeOrders.com/OrderService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.acmeOrders.com/OrderService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedMXSD location="OrderService_InlineSchema1.mxsd"/>
+        <binding hasEncoding="false" imported="true" name="OrderServiceJMSBinding" originalBindingStyle="document"/>
+        <binding hasEncoding="false" imported="true" name="OrderServiceSOAP" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  
+  
+	<wsdl:types>
+    <xsd:schema targetNamespace="http://www.acmeOrders.com/OrderService" xmlns:mrm="http://www.acmeOrders.com/OrderService">
+      <xsd:include schemaLocation="OrderService_InlineSchema1.mxsd"/>
+    </xsd:schema>
+  </wsdl:types>
+	<wsdl:message name="submitPOResponse">
+		<wsdl:part element="tns:submitPOResponse" name="submitPOResponse"/>
+	</wsdl:message>
+	<wsdl:message name="submitPORequest">
+		<wsdl:part element="tns:submitPORequest" name="submitPORequest"/>
+	</wsdl:message>
+	<wsdl:portType name="OrderService">
+		<wsdl:operation name="submitPO">
+			<wsdl:input message="tns:submitPORequest"/>
+			<wsdl:output message="tns:submitPOResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OrderServiceSOAP" type="tns:OrderService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="submitPO">
+			<soap:operation soapAction="http://www.acmeOrders.com/OrderService"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="OrderServiceJMSBinding" type="tns:OrderService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/jms"/>
+		<wsdl:operation name="submitPO">
+			<soap:operation soapAction="http://www.acmeOrders.com/OrderService/submitPO"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OrderService">
+		<wsdl:port binding="tns:OrderServiceSOAP" name="OrderServiceHTTPSOAP">
+			<soap:address location="http://localhost:7800/acmeOrders/WADDR/ProcessOrders"/>
+		</wsdl:port>
+		<wsdl:port binding="tns:OrderServiceJMSBinding" name="OrderServiceJMSSOAP">
+			<soap:address location="jms:jndi:JMSREQUESTQ?jndiConnectionFactoryName=JMSQCF&amp;jndiInitialContextFactory=com.sun.jndi.fscontext.RefFSContextFactory&amp;jndiURL=file%3A%2FC%3A%2FSOAPJNDIBindings&amp;replyToName=JMSREPLYQ&amp;targetService=OrderService_JMS_Service"/>
+    </wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

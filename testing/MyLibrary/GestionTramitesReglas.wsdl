@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions name="GestionTramitesReglas" targetNamespace="http://www.telcel.com.mx/gestiontramites/reglas/v1" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/gestiontramites/comun/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/gestiontramites/reglas/v1" xmlns:types="http://www.telcel.com.mx/gestiontramites/reglas/types/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="GestionTramitesReglasBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
+	<types>
+		<xsd:schema>
+<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/reglas/types/v1" schemaLocation="GestionTramitesReglas.xsd"/>
+<xsd:import namespace="http://www.telcel.com.mx/gestiontramites/comun/types" schemaLocation="GestionTramitesComun.xsd"/>
+</xsd:schema>
+	</types>
+
+	<message name="determinarPrevalidacionMsg">
+		<part element="types:determinarPrevalidacionRequest" name="parameters"/>
+	</message>
+	<message name="determinarPrevalidacionMsgResponse">
+		<part element="types:determinarPrevalidacionResponse" name="parameters"/>
+	</message>
+	<message name="determinarAdeudoMsg">
+		<part element="types:determinarAdeudoRequest" name="parameters"/>
+	</message>
+	<message name="determinarAdeudoMsgResponse">
+		<part element="types:determinarAdeudoResponse" name="parameters"/>
+	</message>
+	<message name="determinarRegionPerfilMsg">
+		<part element="types:determinarRegionPerfilRequest" name="parameters"/>
+	</message>
+	<message name="determinarRegionPerfilMsgResponse">
+		<part element="types:determinarRegionPerfilResponse" name="parameters"/>
+	</message>
+	<message name="reasignarTramiteMsg">
+		<part element="types:reasignarTramiteRequest" name="parameters"/>
+	</message>
+	<message name="reasignarTramiteMsgResponse">
+		<part element="types:reasignarTramiteResponse" name="parameters"/>
+	</message>
+
+	<message name="gestionTramitesWMBExceptionMsg">
+		<part element="comun:gestionTramitesWMBException" name="fault"/>
+	</message>
+
+	<portType name="GestionTramitesReglasPort">
+		<operation name="determinarPrevalidacion">
+			<input message="this:determinarPrevalidacionMsg"/>
+			<output message="this:determinarPrevalidacionMsgResponse"/>
+			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+		</operation>
+		<operation name="determinarAdeudo">
+			<input message="this:determinarAdeudoMsg"/>
+			<output message="this:determinarAdeudoMsgResponse"/>
+			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+		</operation>
+		<operation name="determinarRegionPerfil">
+			<input message="this:determinarRegionPerfilMsg"/>
+			<output message="this:determinarRegionPerfilMsgResponse"/>
+			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+		</operation>
+		<operation name="reasignarTramite">
+			<input message="this:reasignarTramiteMsg"/>
+			<output message="this:reasignarTramiteMsgResponse"/>
+			<fault message="this:gestionTramitesWMBExceptionMsg" name="GestionTramitesWMBException"/>
+		</operation>
+	</portType>
+
+	<binding name="GestionTramitesReglasBinding" type="this:GestionTramitesReglasPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="determinarPrevalidacion">
+			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/reglas/determinarPrevalidacion"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="GestionTramitesWMBException">
+				<soap:fault name="GestionTramitesWMBException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="determinarAdeudo">
+			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/reglas/determinarAdeudo"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="GestionTramitesWMBException">
+				<soap:fault name="GestionTramitesWMBException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="determinarRegionPerfil">
+			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/reglas/determinarRegionPerfil"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="GestionTramitesWMBException">
+				<soap:fault name="GestionTramitesWMBException" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="reasignarTramite">
+			<soap:operation soapAction="http://www.telcel.com.mx/gestiontramites/reglas/reasignarTramite"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="GestionTramitesWMBException">
+				<soap:fault name="GestionTramitesWMBException" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+
+	<service name="GestionTramitesReglasService">
+		<port binding="this:GestionTramitesReglasBinding" name="GestionTramitesReglasHTTPSOAPPort">
+			<soap:address location="http://localhost:7800/gestiontramites/reglas/GestionTramitesReglasService"/>
+		</port>
+	</service>
+</definitions>

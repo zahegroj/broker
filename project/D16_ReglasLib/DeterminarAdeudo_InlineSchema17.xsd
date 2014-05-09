@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:dstns="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:param="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo">
+	<xsd:import namespace="http://www.ibm.com/rules/decisionservice/D16_GestorTramitesRuleAPP/DeterminarAdeudo/param" schemaLocation="DeterminarAdeudo_InlineSchema16.xsd"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="DeterminarAdeudoRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element form="qualified" maxOccurs="1" minOccurs="0" name="DecisionID" type="xsd:string"/>
+				<xsd:element ref="param:peticionDeterminarAdeudos"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element ibmSchExtn:docRoot="true" name="DeterminarAdeudoResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element form="qualified" name="DecisionID" type="xsd:string"/>
+				<xsd:element ref="param:resultadoDeterminarAdeudos"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element ibmSchExtn:docRoot="true" name="DeterminarAdeudoException">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="1" minOccurs="1" name="exception" nillable="false" type="xsd:string"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,22 @@
+
+
+Importing file: E:\Users\jzapatah\Dropbox\wmb\wsdl\imei\ImeisACWS.wsdl
+
+Copying source WSDL ImeisACWS.wsdl to ImeisACWS.wsdl.
+The WSDL import will proceed with bindings ImeisACWSSoapBinding.
+Creating wsdl schema document for file:///E:/Users/jzapatah/Dropbox/wmb/wsdl/imei/ImeisACWS.wsdl.
+Parsing wsdl binding {http://ws.imeisac.dsaf.gsa.telcel.com}ImeisACWSSoapBinding.
+Parsing wsdl binding input ConsultaImeiAC.
+Parsing wsdl binding output ConsultaImeiAC.
+Processing doc style for operation ConsultaImeiAC.
+Populating WSDL schema imei/ImeisACWS.xsd.
+Creating file imei/ImeisACWS.xsd in the workspace.
+Creating file imei/ImeisACWS_InlineSchema1.xsd in the workspace.
+
+Elapsed time processing this message definition file: 2.294 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

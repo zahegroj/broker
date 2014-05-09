@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="imei" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="imei">
+    <input path="/imei/wmb/imei.xsd"/>
+    <output path="/imei/ImeisACWS_InlineSchema1.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ImeiRequest_ConsultaImeiAC">
+        <input namespace="http://www.telcel.com.mx/di/sds/gsm/sistemasadministrativos/imei" path="mb:msg(request,assembly,,Properties)"/>
+        <output namespace="http://ws.imeisac.dsaf.gsa.telcel.com" path="mb:msg(ConsultaImeiAC,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <function ref="concat">
+            <input path="request/codigo" var="codigo"/>
+            <input path="request/region" var="region"/>
+            <input path="request/imei" var="imei"/>
+            <output path="ConsultaImeiAC/consImei"/>
+            <property key="prefix" value="|"/>
+            <property key="defaultDelimiter" value="|"/>
+        </function>
+    </mappingDeclaration>
+</mappingRoot>

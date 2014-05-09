@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions name="ReactC" targetNamespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/wmb/react/c" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:comun="http://www.telcel.com.mx/di/sds/m2k" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:this="http://www.telcel.com.mx/di/sds/m2k/cobranza/wmb/react/c" xmlns:types="http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="ReactCBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
+	<types>
+		<xsd:schema>
+<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k/cobranza/react/c" schemaLocation="m2k_react_c.xsd"/>
+<xsd:import namespace="http://www.telcel.com.mx/di/sds/m2k" schemaLocation="m2k.xsd"/>
+</xsd:schema>
+	</types>
+	
+	<message name="ejecutarServicioMsg">
+		<part element="types:Request" name="parameters"/>
+	</message>
+	<message name="ejecutarServicioMsgResponse">
+		<part element="types:RespuestaOK" name="parameters"/>
+	</message>
+	<message name="respuestaErrorFault">
+		<part element="comun:RespuestaError" name="parameters"/>
+	</message>
+	
+	<portType name="ReactCPort">
+		<operation name="ejecutarServicio">
+			<input message="this:ejecutarServicioMsg"/>
+			<output message="this:ejecutarServicioMsgResponse"/>
+			<fault message="this:respuestaErrorFault" name="fault"/>
+		</operation>
+	</portType>
+	
+	<binding name="ReactCBinding" type="this:ReactCPort">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="ejecutarServicio">
+			<soap:operation soapAction="http://www.telcel.com.mx/di/sds/m2k/cobranza/wmb/react/c/ejecutarServicio"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+	
+	<service name="ReactCService">
+		<port binding="this:ReactCBinding" name="ReactC">
+			<soap:address location="http://localhost:7800/di/sds/m2k/cobranza/wmb/ReactCService"/>
+		</port>
+	</service>
+</definitions>

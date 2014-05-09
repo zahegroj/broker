@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="7.5.0" xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default">
+    <input path="/imei/ImeisACWS_InlineSchema1.xsd"/>
+    <output path="/imei.xsd"/>
+    <generation availableEngines="xquery" engine="xquery"/>
+    <mappingDeclaration name="ConsultaImeiACResponse_ImeiResponse">
+        <input namespace="http://ws.imeisac.dsaf.gsa.telcel.com" path="mb:msg(ConsultaImeiACResponse,assembly,,Properties)"/>
+        <output namespace="http://www.telcel.com.mx/imei" path="mb:msg(response,assembly,XMLNSC,Properties)"/>
+        <move>
+            <input path="Properties"/>
+            <output path="Properties"/>
+        </move>
+        <expression>
+            <input path="ConsultaImeiACResponse/ConsultaImeiACReturn" var="ConsultaImeiACReturn"/>
+            <output path="response/codigo"/>
+            <code lang="xpath">fn:tokenize($ConsultaImeiACReturn , '\|')[2]</code>
+        </expression>
+        <expression>
+            <input path="ConsultaImeiACResponse/ConsultaImeiACReturn" var="ConsultaImeiACReturn5"/>
+            <output path="response/claveSap"/>
+            <code lang="xpath">fn:tokenize($ConsultaImeiACReturn5 , '\|')[3]</code>
+        </expression>
+        <expression>
+            <input path="ConsultaImeiACResponse/ConsultaImeiACReturn" var="ConsultaImeiACReturn6"/>
+            <output path="response/marca"/>
+            <code lang="xpath">fn:tokenize($ConsultaImeiACReturn6 , '\|')[4]</code>
+        </expression>
+        <expression>
+            <input path="ConsultaImeiACResponse/ConsultaImeiACReturn" var="ConsultaImeiACReturn7"/>
+            <output path="response/modelo"/>
+            <code lang="xpath">fn:tokenize($ConsultaImeiACReturn7 , '\|')[5]</code>
+        </expression>
+        <expression>
+            <input path="ConsultaImeiACResponse/ConsultaImeiACReturn" var="ConsultaImeiACReturn8"/>
+            <output path="response/grupoArticulo"/>
+            <code lang="xpath">fn:tokenize($ConsultaImeiACReturn8 , '\|')[6]</code>
+        </expression>
+    </mappingDeclaration>
+</mappingRoot>
