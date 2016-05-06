@@ -1,0 +1,93 @@
+
+
+CREATE COMPUTE MODULE testFlow_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE ns NAMESPACE 'http://www.example.org/TestService/';
+		
+		SET OutputLocalEnvironment.Variables.nombres[] = 
+										LIST{ROW('01' AS ID, 'JORGE' AS NAME),
+											ROW('02' AS ID, 'TANIA' AS NAME),
+											ROW('03' AS ID, 'JULIETA' AS NAME),
+											ROW('04' AS ID, 'BENITO' AS NAME),
+											ROW('05' AS ID, 'NESTOR' AS NAME),
+											ROW('06' AS ID, 'GYMBO' AS NAME),
+											ROW('07' AS ID, 'BASILIO' AS NAME)
+										};
+										
+		
+		SET OutputLocalEnvironment.Variables.result[] = SELECT n.ID, n.NAME 
+					FROM OutputLocalEnvironment.Variables.nombres[] AS n
+					WHERE n.ID = InputRoot.XMLNSC.ns:sayHello.id; 
+		
+		SET OutputRoot.XMLNSC.ns:sayHelloResponse.name = OutputLocalEnvironment.Variables.result[1].NAME; 
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+
+
+
+
+CREATE COMPUTE MODULE testFlow_Compute2
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		DECLARE ns NAMESPACE 'http://www.example.org/TestService/';
+		
+		SET OutputLocalEnvironment.Variables.nombres[] = 
+										LIST{ROW('01' AS ID, 'JORGE' AS NAME),
+											ROW('02' AS ID, 'TANIA' AS NAME),
+											ROW('03' AS ID, 'JULIETA' AS NAME),
+											ROW('04' AS ID, 'BENITO' AS NAME),
+											ROW('05' AS ID, 'NESTOR' AS NAME),
+											ROW('06' AS ID, 'GYMBO' AS NAME),
+											ROW('07' AS ID, 'BASILIO' AS NAME)
+										};
+		
+		SET OutputLocalEnvironment.Variables.parametro[] = InputRoot.XMLNSC.ns:sayHello.parametros.parametro[];
+		
+		
+		
+		SET OutputLocalEnvironment.Variables.result[] = SELECT n.id, n.valor 
+					FROM OutputLocalEnvironment.Variables.parametro[] AS n
+					WHERE n.id = InputRoot.XMLNSC.ns:sayHello.id; 
+		
+		SET OutputRoot.XMLNSC.ns:sayHelloResponse.name = OutputLocalEnvironment.Variables.result[1].valor;
+		SET OutputRoot.XMLNSC.ns:sayHelloResponse.parametro = OutputLocalEnvironment.Variables.result[1]; 
+		
+		RETURN TRUE;
+	END;
+
+	CREATE PROCEDURE CopyMessageHeaders() BEGIN
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.*[]);
+		WHILE I < J DO
+			SET OutputRoot.*[I] = InputRoot.*[I];
+			SET I = I + 1;
+		END WHILE;
+	END;
+
+	CREATE PROCEDURE CopyEntireMessage() BEGIN
+		SET OutputRoot = InputRoot;
+	END;
+END MODULE;
+

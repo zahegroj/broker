@@ -1,0 +1,22 @@
+
+
+Importing file: /home/jorge/IBM/IIBT10/workspace/testApp/TestService.wsdl
+
+The WSDL import will proceed with bindings TestServiceSOAP.
+Creating wsdl schema document for file:///home/jorge/IBM/IIBT10/workspace/testApp/TestService.wsdl.
+Parsing wsdl binding {http://www.example.org/TestService/}TestServiceSOAP.
+Parsing wsdl binding input sayHello.
+Parsing wsdl binding output sayHello.
+Processing doc style for operation sayHello.
+Populating WSDL schema TestService.xsd.
+Creating file TestService.xsd in the workspace.
+Creating file TestService_InlineSchema1.xsd in the workspace.
+Copying source WSDL TestService.wsdl to TestService.wsdl.
+
+Elapsed time processing this message definition file: 0.242 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+
