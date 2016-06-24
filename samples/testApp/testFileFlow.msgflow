@@ -6,13 +6,13 @@
     <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/testApp/icons/full/obj16/testFileFlow.gif"/>
     <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/testApp/icons/full/obj30/testFileFlow.gif"/>
     <composition>
-      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="119,64" inputDirectory="/home/jorge/Documents/testFile" processedFileAction="moveToArchiveWithTimestamp" messageDomainProperty="BLOB" recordDetection="delimited">
+      <nodes xmi:type="ComIbmFileInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="119,64" inputDirectory="/home/jorge/Documents/testFile" processedFileAction="moveToArchiveWithTimestamp" messageDomainProperty="MRM" recordDetection="delimited" fileFtp="true" remoteTransferType="SFTP" fileFtpServer="localhost" fileFtpUser="sftpSecId" fileFtpDirectory="/home/jorge/prueba">
         <translation xmi:type="utility:ConstantString" string="File Input"/>
       </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="269,60">
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="269,60" destination="file" filePath="/home/jorge/Documents/testFile/logs/lineaPorLinea.log" pattern="Leyendo linea">
         <translation xmi:type="utility:ConstantString" string="Trace"/>
       </nodes>
-      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="272,146">
+      <nodes xmi:type="ComIbmTrace.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="272,146" destination="file" filePath="/home/jorge/Documents/testFile/logs/finArchivo.log" pattern="finalizo archivo">
         <translation xmi:type="utility:ConstantString" string="Trace1"/>
       </nodes>
       <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
