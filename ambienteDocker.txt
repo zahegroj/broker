@@ -1,0 +1,44 @@
+crtmqm QMDEV
+
+strmqm QMDEV
+
+runmqsc -- para crear queues
+
+mqsicreatebroker QMDEV_BRK
+
+mqsichangebroker QMDEV_BRK -q QMDEV
+
+mqsichangeproperties QMDEV_BRK -b webadmin -o HTTPConnector -n port -v 4414
+
+mqsistart QMDEV_BRK
+
+mqsilist
+
+http://d6ce3ec6d325:4414
+
+mqsicreateexecutiongroup QMDEV_BRK -e default -w 90
+
+mqsistop QMDEV_BRK
+
+mqsideletebroker QMDEV_BRK
+
+Subir el ojdbc6.jar a /home/jars
+
+mqsicreateconfigurableservice QMDEV_BRK -c JDBCProviders -o DS_CIERREN_ETL -n connectionUrlFormat,connectionUrlFormatAttr1,description,jarsURL,portNumber,serverName,type4DatasourceClassName,type4DriverClassName -v "jdbc:oracle:thin:[user]/[password]@[serverName]:[portNumber]/[connectionUrlFormatAttr1],ncipd,MITStaging,/root/jars,1531,oranci.profuturo.mx,oracle.jdbc.xa.client.OracleXADataSource,oracle.jdbc.OracleDriver"
+
+mqsireportproperties QMDEV_BRK -o DS_CIERREN_ETL -c JDBCProviders -r
+
+mqsisetdbparms QMDEV_BRK -n jdbc::cierrenEtlAppSecurIdent -u hr -p hr
+
+mqsichangeproperties QMDEV_BRK -c JDBCProviders -o DS_CIERREN_ETL -n securityIdentity -v cierrenEtlAppSecurIdent
+
+docker cp /home/jorge/Software/sqldeveloper/jdbc/lib/ojdbc6.jar b4dcdc97b4f2:/root/jars/
+
+mkdir /brokerlogs
+
+--everis
+10.211.8.66	oranci.profuturo.mx
+10.211.8.65	wasnci.profuturo.mx --tomcat
+10.211.8.66	mitora.profuturo.mx
+
+mqsisetdbparms QMDEV_BRK -n jdbc::cierrenEtlAppSecurIdent -u CIERREN_ETL_APP -p 12345
