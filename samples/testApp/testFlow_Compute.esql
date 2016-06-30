@@ -68,10 +68,20 @@ CREATE COMPUTE MODULE testFlow_Compute2
 		
 		SET OutputLocalEnvironment.Variables.result[] = SELECT n.id, n.valor 
 					FROM OutputLocalEnvironment.Variables.parametro[] AS n
-					WHERE n.id = InputRoot.XMLNSC.ns:sayHello.id; 
+					WHERE n.id = InputRoot.XMLNSC.ns:sayHello.id;
 		
 		SET OutputRoot.XMLNSC.ns:sayHelloResponse.name = OutputLocalEnvironment.Variables.result[1].valor;
 		SET OutputRoot.XMLNSC.ns:sayHelloResponse.parametro = OutputLocalEnvironment.Variables.result[1]; 
+					
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:sayHello.mensaje) IS NOT NULL THEN
+			DECLARE encoded CHARACTER BASE64ENCODE(InputRoot.XMLNSC.ns:sayHello.mensaje);
+			--DECLARE decoded2 CHARACTER CAST(decoded AS CHARACTER CCSID 1208);
+			
+			DECLARE decoded BLOB BASE64DECODE(encoded);
+			DECLARE decoded2 CHARACTER CAST(decoded AS CHARACTER CCSID 819);
+			
+			SET OutputRoot.XMLNSC.ns:sayHelloResponse.mensaje = decoded2;
+		END IF;
 		
 		RETURN TRUE;
 	END;

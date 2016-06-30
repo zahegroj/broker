@@ -4,6 +4,7 @@
           <xsd:sequence>
             <xsd:element name="id" type="xsd:int"/>
             <xsd:element name="parametros" type="tns:ListaParametros" minOccurs="0"/>
+            <xsd:element name="mensaje" type="xsd:base64Binary" minOccurs="0"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -12,6 +13,7 @@
           <xsd:sequence>
             <xsd:element name="name" type="xsd:string"/>
             <xsd:element name="parametro" type="tns:Parametro" minOccurs="0"/>
+            <xsd:element name="mensaje" type="xsd:string" minOccurs="0"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
