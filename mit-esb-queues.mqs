@@ -1,0 +1,6 @@
+def ql(QL.BITACORA.IN) replace
+def ql(QL.FOLIO_REQID.IN) replace
+def ql(QL.FOLIO.IN) replace
+def ql(QL.FOLIO.OUT) replace
+def ql(QL.SUBETAPA_INI.IN) replace
+def ql(QL.SUBETAPA_INF.IN) replace
