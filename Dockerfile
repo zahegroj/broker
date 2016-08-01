@@ -13,6 +13,7 @@ RUN cd /tmp/mq \
   && usermod -G mqm root \
   && yum install redhat-lsb -y \
   && yum install openssh-server -y \
+  && yum install telnet -y \
   && echo "fs.file-max = 524288" > /etc/sysctl.conf
 
 RUN cd /tmp/mq \
@@ -33,3 +34,4 @@ EXPOSE 1414
 EXPOSE 4414
 EXPOSE 7800
 EXPOSE 9991
+EXPOSE 22
