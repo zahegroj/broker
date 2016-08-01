@@ -7,3 +7,7 @@ ffmpeg \
 -acodec libmp3lame -ar 44100 -q:a 1 \
 -pix_fmt yuv420p \
 /home/jorge/Videos/FilterComplexAmix.mkv
+
+ 1887  pactl list sources > PACTLSOURCES
+ 1888  vim PACTLSOURCES
+
