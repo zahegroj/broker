@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IConfiguracionSoapWS" targetNamespace="http://configuracion.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://configuracion.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="IConfiguracionSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://configuracion.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://configuracion.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="IConfiguracionSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consultaMatrizConvivenciaResponse">
+    <wsdl:part element="ns1:consultaMatrizConvivenciaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaMatrizConvivencia">
+    <wsdl:part element="ns1:consultaMatrizConvivencia" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaPermisoInformacionClienteResponse">
+    <wsdl:part element="ns1:consultaPermisoInformacionClienteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaPermisoIndicador">
+    <wsdl:part element="ns1:consultaPermisoIndicador" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaPermisoIndicadorResponse">
+    <wsdl:part element="ns1:consultaPermisoIndicadorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaPermisoInformacionCliente">
+    <wsdl:part element="ns1:consultaPermisoInformacionCliente" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IConfiguracionSoapWS">
+    <wsdl:operation name="consultaMatrizConvivencia">
+      <wsdl:input message="ns1:consultaMatrizConvivencia" name="consultaMatrizConvivencia">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaMatrizConvivenciaResponse" name="consultaMatrizConvivenciaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaPermisoIndicador">
+      <wsdl:input message="ns1:consultaPermisoIndicador" name="consultaPermisoIndicador">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaPermisoIndicadorResponse" name="consultaPermisoIndicadorResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaPermisoInformacionCliente">
+      <wsdl:input message="ns1:consultaPermisoInformacionCliente" name="consultaPermisoInformacionCliente">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaPermisoInformacionClienteResponse" name="consultaPermisoInformacionClienteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

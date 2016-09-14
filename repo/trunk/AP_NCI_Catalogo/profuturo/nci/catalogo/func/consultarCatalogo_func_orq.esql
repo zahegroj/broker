@@ -1,0 +1,54 @@
+BROKER SCHEMA profuturo.nci.catalogo.func
+
+CREATE COMPUTE MODULE consultarCatalogo_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Administracion/CatalogoService/v1/types';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:consultarCatalogoRequest.id) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idCatalogo = InputRoot.XMLNSC.ns:consultarCatalogoRequest.id;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:consultarCatalogoRequest.idPadre) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idCatalogoPadre = InputRoot.XMLNSC.ns:consultarCatalogoRequest.idPadre;
+		END IF;
+
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = InputRoot.XMLNSC.ns:consultarCatalogoRequest.idLineaNegocio;
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = InputRoot.XMLNSC.ns:consultarCatalogoRequest.idTipoCatalogo;
+
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.consultarCatalogo.success = true THEN
+			DECLARE countArr INT CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+			DECLARE i INTEGER 1;
+	
+			X : WHILE i <= countArr DO			
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].id = Environment.nci.consultarCatalogo.response[i].idCatCatalogo;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].valor = Environment.nci.consultarCatalogo.response[i].valor;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].idPadre = Environment.nci.consultarCatalogo.response[i].idCatPadre;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].idTipoCatalogo = Environment.nci.consultarCatalogo.response[i].idTipoCat;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].descripcion = Environment.nci.consultarCatalogo.response[i].desc;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].usuarioCreacion = Environment.nci.consultarCatalogo.response[i].usuCre;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].usuarioActualizacion = Environment.nci.consultarCatalogo.response[i].usuAct;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].fechaCreacion = Environment.nci.consultarCatalogo.response[i].fehCre;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].fechaActualizacion = Environment.nci.consultarCatalogo.response[i].fehCre;
+				SET OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos.catalogo[i].vigencia = Environment.nci.consultarCatalogo.response[i].vigencia;				
+				SET i = i + 1;
+			END WHILE X;
+	
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarCatalogoResponse.catalogos) IS NULL THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarCatalogoResponse NAME 'mensajes';
+		        CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarCatalogoResponse.mensajes);
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCatalogo.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCatalogo.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCatalogo.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

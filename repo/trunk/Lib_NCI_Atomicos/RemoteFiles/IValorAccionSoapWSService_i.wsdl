@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IValorAccionSoapWS" targetNamespace="http://valorAccion.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://valorAccion.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="IValorAccionSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://valorAccion.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://valorAccion.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="IValorAccionSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consultarDiaHabilMesSigResponse">
+    <wsdl:part element="ns1:consultarDiaHabilMesSigResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarDiaHabilMesSig">
+    <wsdl:part element="ns1:consultarDiaHabilMesSig" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarResponse">
+    <wsdl:part element="ns1:consultarResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultar">
+    <wsdl:part element="ns1:consultar" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IValorAccionSoapWS">
+    <wsdl:operation name="consultarDiaHabilMesSig">
+      <wsdl:input message="ns1:consultarDiaHabilMesSig" name="consultarDiaHabilMesSig">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultarDiaHabilMesSigResponse" name="consultarDiaHabilMesSigResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultar">
+      <wsdl:input message="ns1:consultar" name="consultar">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultarResponse" name="consultarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

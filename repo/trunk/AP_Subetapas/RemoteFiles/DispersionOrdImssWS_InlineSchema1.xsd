@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:impl="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:impl1="http://TKPRFPC" xmlns:intf="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdlsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://TKPRFPC" schemaLocation="DispersionOrdImssWS_InlineSchema2.xsd"/>
+  <element ibmSchExtn:docRoot="true" name="iniciarDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="usuario" type="string"/>
+        <element name="archivo" type="impl1:ArchivoBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="iniciarDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="validarArchivoDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="validarArchivoDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="identificarClientesDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="identificarClientesDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="marcarCuentasDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="marcarCuentasDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="generarMovimientosDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="generarMovimientosDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="acreditarMovimientosDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="acreditarMovimientosDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="desmarcarCuentasDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="desmarcarCuentasDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="rechazarMovimientosDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="rechazarMovimientosDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="borrarStagingDispersionOrdIMSS">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="borrarStagingDispersionOrdIMSSResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="informaSubetapaUCAWebService">
+    <complexType>
+      <sequence>
+        <element name="folio" type="string"/>
+        <element name="estatusProceso" type="string"/>
+        <element name="idInstancia" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element ibmSchExtn:docRoot="true" name="informaSubetapaUCAWebServiceResponse">
+    <complexType>
+      <sequence>
+        <element name="respuesta" type="string"/>
+        <element name="error" type="impl1:ErrorBpmBO"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

@@ -1,0 +1,62 @@
+BROKER SCHEMA profuturo.general.subetapas.bitacora
+
+CREATE COMPUTE MODULE Map_BitacoraRequest
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types';
+		DECLARE nsSub NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		DECLARE paramUsuario CHARACTER '';
+		DECLARE paramEtapa INTEGER '';
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		
+		IF FIELDTYPE(Environment.iniciar.wrapper.iniciarSubetapaRequest) IS NOT NULL THEN
+			DECLARE iniciarSubetapaReq REFERENCE TO Environment.iniciar.wrapper.iniciarSubetapaRequest;
+			
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.folio = iniciarSubetapaReq.folio;
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idEstatus = 32; -- EN EJECUCION
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idSubproceso = iniciarSubetapaReq.idSubproceso;
+			
+			SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM iniciarSubetapaReq.parametros.parametro[] as T WHERE T.nombre = 'ID_ETAPA';
+			SET paramEtapa = CAST(Environment.Variables.valorParametro[1].valor AS INTEGER);
+			
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idEtapa = paramEtapa;
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idSubetapa = iniciarSubetapaReq.idSubetapa;
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idResultado = 0;
+			
+			SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM iniciarSubetapaReq.parametros.parametro[] as T WHERE T.nombre = 'USUARIO';
+			SET paramUsuario = Environment.Variables.valorParametro[1].valor;
+			
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.usuario = paramUsuario;	
+		END IF;
+		
+		IF FIELDTYPE(Environment.informar.informarSubetapaRequest) IS NOT NULL THEN
+			DECLARE informarSubetapaReq REFERENCE TO Environment.informar.informarSubetapaRequest; 
+			
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.folio = informarSubetapaReq.folio;
+			CASE informarSubetapaReq.resultado
+			WHEN 'EXCEPCION' THEN
+				SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idEstatus = 35; -- CANCELADO
+			WHEN 'SIN HALLAZGOS' THEN
+				SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idEstatus = 33; -- FINALIZADO
+			WHEN 'CON HALLAZGOS' THEN
+				SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idEstatus = 34; -- RECHAZADO
+			END CASE;
+			
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idSubproceso = informarSubetapaReq.idSubproceso;
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idEtapa = informarSubetapaReq.idEtapa;
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idSubetapa = informarSubetapaReq.idSubetapa;
+			
+			CASE informarSubetapaReq.resultado
+			WHEN 'EXCEPCION' THEN
+				SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idResultado = 0; -- SIN RESULTADO
+			WHEN 'SIN HALLAZGOS' THEN	
+				SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idResultado = 29; -- 29 SIN HALLAZGOS
+			WHEN 'CON HALLAZGOS' THEN
+				SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.idResultado = 28; -- 28 CON HALLAZGOS
+			END CASE;
+			
+			SET OutputRoot.XMLNSC.ns:guardarBitacoraRequest.usuario = 'datastage';			
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

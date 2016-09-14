@@ -1,0 +1,37 @@
+BROKER SCHEMA profuturo.general.subetapas.depurar
+
+CREATE COMPUTE MODULE RutearDepurarSubproceso
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		DECLARE req REFERENCE TO InputRoot.XMLNSC.ns:depurarProcesamientoRequest;
+		
+		DECLARE subetapa CHARACTER '';
+		DECLARE subproceso CHARACTER;
+		SET subproceso = CAST(req.idProceso  AS CHARACTER) || CAST(req.idSubproceso AS CHARACTER);
+		
+		DECLARE parametrosEntrada REFERENCE TO InputRoot.XMLNSC.ns:depurarProcesamientoRequest.parametros;
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:depurarProcesamientoRequest.parametros) IS NOT NULL THEN
+			SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM InputRoot.XMLNSC.ns:depurarProcesamientoRequest.parametros.parametro[] as T WHERE T.nombre = 'ID_SUBETAPA';
+			SET subetapa = Environment.Variables.valorParametro[1].valor;
+			SET subetapa = subproceso || subetapa;
+		END IF;
+		
+		CASE subetapa
+		WHEN '78273' THEN --273 MOVIMIENTOS
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'dep_mov_doimss';
+		ELSE
+			CASE subproceso
+				
+			WHEN '78' THEN -- 7 RECAUDACION, 8 DOIMSS
+				SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'dep_doimss';
+			WHEN '79' THEN -- 7 RECAUDACION, 9 SUBSECUENTES
+				SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'dep_doimss';
+			ELSE
+				SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'no_subproceso';			
+			END CASE;
+		END CASE;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

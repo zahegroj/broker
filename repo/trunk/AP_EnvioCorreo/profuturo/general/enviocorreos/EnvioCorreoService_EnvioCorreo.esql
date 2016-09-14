@@ -1,0 +1,52 @@
+BROKER SCHEMA profuturo.general.enviocorreos
+
+CREATE COMPUTE MODULE EnvioCorreoService_EnvioCorreo
+	
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Notificaciones/EnvioCorreoService/v1/types';		
+		DECLARE correoRow ROW InputRoot.XMLNSC.ns:enviarCorreoRequest;		
+		DECLARE banderaEnvioCorreo BOOLEAN TRUE;
+		
+		IF EXISTS(correoRow.datosMensaje[]) THEN
+	        SET OutputRoot.XMLNSC.notificacion = correoRow.datosMensaje;
+	        PROPAGATE TO TERMINAL 'out1';
+	        IF Environment.nci.plantilla.res.success = true THEN	        	
+	        	IF Environment.nci.plantilla.res.response.id IS NOT NULL THEN	        		
+					SET correoRow.datosCorreo.asunto = Environment.nci.plantilla.res.response.asunto;
+					SET correoRow.datosCorreo.mensaje = Environment.nci.plantilla.res.response.body;				
+	        	ELSE	        		
+	        		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:enviarCorreoResponse NAME 'mensajes';
+			        CALL profuturo.util.CodigosMensajesCASE('noIdNotif', OutputRoot.XMLNSC.ns:enviarCorreoResponse.mensajes);
+					SET banderaEnvioCorreo = FALSE;
+	        	END IF;
+			ELSE
+				SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.plantilla.res.errorCode;
+				SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.plantilla.res.errorMessage;
+				SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.plantilla.res.errorTrace;			
+				PROPAGATE TO TERMINAL 'out2';
+				RETURN FALSE;
+			END IF; 
+        END IF;
+		
+		IF banderaEnvioCorreo = TRUE THEN		
+			CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+			SET OutputRoot.XMLNSC.correo = correoRow;
+			PROPAGATE TO TERMINAL 'out3';
+			IF Environment.nci.enviocorreo.res.success = true THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:enviarCorreoResponse NAME 'mensajes';			  		
+		        CALL profuturo.util.CodigosMensajesCASE('envExito',OutputRoot.XMLNSC.ns:enviarCorreoResponse.mensajes);
+			ELSE
+				SET OutputRoot.XMLNSC.error.errorCode = '0000';
+				SET OutputRoot.XMLNSC.error.errorMessage = 'Falla en envio correo';
+				SET OutputRoot.XMLNSC.error.errorTrace = '';			
+				PROPAGATE TO TERMINAL 'out2';
+				RETURN FALSE;
+			END IF;		
+		END IF;
+
+		RETURN TRUE;
+	END;
+END MODULE;

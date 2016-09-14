@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.profuturo/iib/afo/SubetapaService/v1/types" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mod="http://mx.profuturo/nci/modelo" xmlns:tns="http://mx.profuturo/iib/afo/SubetapaService/v1/types">
+	
+	<xsd:import namespace="http://mx.profuturo/nci/modelo" schemaLocation="../modelo/ModeloNCI.xsd"/>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="iniciarSubetapaRequest" type="tns:iniciarSubetapaReq"/>	
+	<xsd:element ibmSchExtn:docRoot="true" name="iniciarSubetapaResponse" type="tns:iniciarSubetapaResp"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="informarSubetapaRequest" type="tns:informarSubetapaReq"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="informarSubetapaResponse" type="tns:informarSubetapaResp"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="depurarProcesamientoRequest" type="tns:depurarProcesamientoReq"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="depurarProcesamientoResponse" type="tns:depurarProcesamientoResp"/>
+
+	<xsd:complexType name="iniciarSubetapaReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+			<xsd:element name="idProceso" type="xsd:int"/>
+			<xsd:element name="idSubproceso" type="xsd:int"/>
+			<xsd:element name="idSubetapa" type="xsd:int"/>
+			<xsd:element name="idSnapshot" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="parametros" type="tns:listaParametros"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="iniciarSubetapaResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="respuesta" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="informarSubetapaReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+			<xsd:element name="idProceso" type="xsd:int"/>
+			<xsd:element name="idSubproceso" type="xsd:int"/>
+			<xsd:element name="idEtapa" type="xsd:int"/>
+			<xsd:element name="idSubetapa" type="xsd:int"/>
+			<xsd:element name="resultado" type="xsd:string"/>
+			<xsd:element name="idSnapshot" type="xsd:string"/>
+			<xsd:element name="idInstancia" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="informarSubetapaResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="respuesta" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="depurarProcesamientoReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+			<xsd:element name="idProceso" type="xsd:int"/>
+			<xsd:element name="idSubproceso" type="xsd:int"/>
+			<xsd:element name="idSnapshot" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="parametros" type="tns:listaParametros"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="depurarProcesamientoResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="respuesta" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="parametro">
+		<xsd:sequence>
+			<xsd:element name="nombre" type="xsd:string"/>
+			<xsd:element name="valores" type="tns:listaValores"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listaParametros">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="parametro" type="tns:parametro"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listaValores">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="valor" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

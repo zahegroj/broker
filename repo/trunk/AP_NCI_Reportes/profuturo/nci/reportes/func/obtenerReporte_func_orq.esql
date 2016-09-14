@@ -1,0 +1,356 @@
+BROKER SCHEMA profuturo.nci.reportes.func
+
+CREATE COMPUTE MODULE obtenerCifras_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE LIB_ORD INTEGER 268;
+		DECLARE LIB_ACL INTEGER 269;
+		DECLARE continuar BOOLEAN FALSE;
+		
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Reportes/ReporteService/v1/types';
+		DECLARE nsCifras NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		
+		DECLARE parametrosFaltantes CHARACTER '';
+		DECLARE parametrosEntrada REFERENCE TO InputRoot.XMLNSC.ns:obtenerReporteRequest.parametros;
+		
+		SET Environment.Variables.reportes.nombresParametros.parametro[] = LIST{
+        													ROW('ID_ARCHIVO' as nombre, '' as status),
+        													ROW('NOMBRE_ARCHIVO' as nombre, '' as status),
+        													ROW('FECHA_LIQUIDACION' as nombre, '' as status),
+        													ROW('NOMBRE_PROCESO' as nombre, '' as status),
+        													ROW('NOMBRE_SUBPROCESO' as nombre, '' as status)
+        												};
+        							
+		CALL validarParametros(parametrosEntrada,
+								Environment.Variables.reportes.nombresParametros,
+								OutputLocalEnvironment,
+								parametrosFaltantes);
+		
+		SET OutputRoot.XMLNSC.nsCifras:consultarCifrasSumarizadasRequest.folio = InputRoot.XMLNSC.ns:obtenerReporteRequest.folio;
+		
+		SET Environment.Variables.reportes.valorParametro[] = SELECT T.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'ID_ARCHIVO';
+		SET OutputRoot.XMLNSC.nsCifras:consultarCifrasSumarizadasRequest.idArchivo = Environment.Variables.reportes.valorParametro[1].valor;
+		SET OutputRoot.XMLNSC.nsCifras:consultarCifrasSumarizadasRequest.idsLiberacion.idLiberacion[1] = LIB_ORD;
+		SET OutputRoot.XMLNSC.nsCifras:consultarCifrasSumarizadasRequest.idsLiberacion.idLiberacion[2] = LIB_ACL;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF FIELDTYPE(Environment.nci.reportes.cifrasSumarizadas.res) IS NOT NULL THEN
+			SET continuar = TRUE;
+		END IF;
+		IF FIELDTYPE(Environment.nci.reportes.cifrasSumarizadas.fault) IS NOT NULL THEN
+			--ERROR
+			SET OutputRoot.XMLNSC.nsFault:Fault = Environment.nci.reportes.cifrasSumarizadas.fault;
+		END IF;
+		
+		IF continuar THEN
+			SET continuar = FALSE;
+			
+			SET OutputRoot.XMLNSC.nsCifras:consultarCifrasViviendaRequest.folio = InputRoot.XMLNSC.ns:obtenerReporteRequest.folio;
+			
+			SET Environment.Variables.reportes.valorParametro[] = SELECT T.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'ID_ARCHIVO';
+			SET OutputRoot.XMLNSC.nsCifras:consultarCifrasViviendaRequest.idArchivo = Environment.Variables.reportes.valorParametro[1].valor;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			
+			IF FIELDTYPE(Environment.nci.reportes.cifrasVivienda.res) IS NOT NULL THEN
+				SET continuar = TRUE;
+			END IF;
+			IF FIELDTYPE(Environment.nci.reportes.cifrasVivienda.fault) IS NOT NULL THEN
+				--ERROR
+				SET OutputRoot.XMLNSC.nsFault:Fault = Environment.nci.reportes.cifrasVivienda.fault;
+			END IF;
+		END IF;
+		
+		IF continuar THEN
+			CALL profuturo.util.CopyEntireMessage(InputRoot, OutputRoot);
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE obtenerReporte_cifraSum_map_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		DECLARE nsCifras NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		DECLARE ns NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.nsCifras:consultarCifrasSumarizadasResponse) IS NOT NULL THEN
+			SET Environment.nci.reportes.cifrasSumarizadas.res = InputRoot.XMLNSC.nsCifras:consultarCifrasSumarizadasResponse;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:Fault) IS NOT NULL THEN
+			SET Environment.nci.reportes.cifrasSumarizadas.fault = InputRoot.XMLNSC.ns:Fault; 
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE obtenerReporte_cifraViv_map_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsCifras NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		DECLARE ns NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.nsCifras:consultarCifrasViviendaResponse) IS NOT NULL THEN
+			SET Environment.nci.reportes.cifrasVivienda.res = InputRoot.XMLNSC.nsCifras:consultarCifrasViviendaResponse;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:Fault) IS NOT NULL THEN
+			SET Environment.nci.reportes.cifrasVivienda.fault = InputRoot.XMLNSC.ns:Fault; 
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE obtenerReporte_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://reporte.webservice.ws.nci.profuturo.mx/';
+		DECLARE nsIn NAMESPACE 'http://mx.profuturo/iib/nci/Reportes/ReporteService/v1/types';
+		DECLARE formatoImporte CHARACTER 'PESOS';
+		DECLARE formatoAcciones CHARACTER 'AIVS';
+		DECLARE nombreProceso CHARACTER '';
+		DECLARE nombreSubproceso CHARACTER '';
+		
+		DECLARE parametrosEntrada REFERENCE TO InputRoot.XMLNSC.nsIn:obtenerReporteRequest.parametros;
+		
+		--CATALOGO
+		SET Environment.Variables.reportes.valorParametro[] = SELECT T.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'NOMBRE_PROCESO';
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idCatalogo = Environment.Variables.reportes.valorParametro[1].valor;
+		
+		PROPAGATE TO TERMINAL 'out2';
+		
+		DECLARE countTipoVal INTEGER CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+		DECLARE a INTEGER 1;
+	
+		X : WHILE a <= countTipoVal DO
+			SET nombreProceso = Environment.nci.consultarCatalogo.response[a].valor;
+			SET a = a + 1;
+		END WHILE X;
+		
+		SET Environment.Variables.reportes.valorParametro[] = SELECT T.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'NOMBRE_SUBPROCESO';
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idCatalogo = Environment.Variables.reportes.valorParametro[1].valor;
+		
+		PROPAGATE TO TERMINAL 'out2';
+		
+		SET countTipoVal = CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+		SET a = 1;
+	
+		X : WHILE a <= countTipoVal DO
+			SET nombreSubproceso = Environment.nci.consultarCatalogo.response[a].valor;
+			SET a = a + 1;
+		END WHILE X;
+		
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:cifrasControl.request name 'criterios';
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:cifrasControl.request name 'registros';
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:cifrasControl.request name 'totalCreditoVivienda';
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:cifrasControl.request name 'listaImporteOrdinaria';  
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:cifrasControl.request name 'listaImporteAclaracion'; 
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:cifrasControl.request name 'listaImporteVivienda';	
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:cifrasControl.request name 'listaAccionesVivienda';	
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:cifrasControl.request name 'listaImporteTotal';
+		--CRITERIOS
+		DECLARE refCriterios REFERENCE TO OutputRoot.XMLNSC.ns:cifrasControl.request.criterios;
+		SET Environment.Variables.reportes.valorParametro[] = SELECT T.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'NOMBRE_ARCHIVO';
+		SET refCriterios.archivo = Environment.Variables.reportes.valorParametro[1].valor;
+		SET Environment.Variables.reportes.valorParametro[] = SELECT T.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'FECHA_LIQUIDACION';
+		SET refCriterios.fechaLiquidacion = CAST(Environment.Variables.reportes.valorParametro[1].valor AS DATE FORMAT 'dd/MM/yyyy');
+		
+		SET refCriterios.folio = InputRoot.XMLNSC.nsIn:obtenerReporteRequest.folio;
+		
+		SET Environment.Variables.reportes.valorParametro[] = SELECT T.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'NOMBRE_PROCESO';		
+		SET refCriterios.proceso = nombreProceso;
+		SET Environment.Variables.reportes.valorParametro[] = SELECT T.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'NOMBRE_SUBPROCESO';
+		SET refCriterios.subproceso = nombreSubproceso;
+		
+		--REGISTROS
+		DECLARE refRegistros REFERENCE TO OutputRoot.XMLNSC.ns:cifrasControl.request.registros;
+		DECLARE refTotalRegistros REFERENCE TO Environment.nci.reportes.cifrasSumarizadas.res.totalesAportacion.totalesLiberacionAportacion;
+		DECLARE refTotalRegSiefore REFERENCE TO refTotalRegistros.totalAportacionSiefore[>];
+		SET refRegistros.aceptados = refTotalRegistros.numeroRegistros;
+		WHILE LASTMOVE (refTotalRegSiefore) DO					
+			CASE refTotalRegSiefore.siefore.id
+				WHEN 74 THEN 
+					SET refRegistros.profB0 = profuturo.util.func.getNumero(refTotalRegSiefore.numeroRegistros);
+				WHEN 75 THEN
+					SET refRegistros.profB1 = profuturo.util.func.getNumero(refTotalRegSiefore.numeroRegistros);
+				WHEN 76 THEN
+					SET refRegistros.profB2 = profuturo.util.func.getNumero(refTotalRegSiefore.numeroRegistros);
+				WHEN 77 THEN
+					SET refRegistros.profB3 = profuturo.util.func.getNumero(refTotalRegSiefore.numeroRegistros);
+				WHEN 78 THEN
+					SET refRegistros.profB4 = profuturo.util.func.getNumero(refTotalRegSiefore.numeroRegistros);
+				WHEN 79 THEN
+					SET refRegistros.profB5 = profuturo.util.func.getNumero(refTotalRegSiefore.numeroRegistros);
+				WHEN 82 THEN
+					SET refRegistros.profCp = profuturo.util.func.getNumero(refTotalRegSiefore.numeroRegistros);
+				WHEN 83 THEN
+					SET refRegistros.profLp = profuturo.util.func.getNumero(refTotalRegSiefore.numeroRegistros);
+			END CASE;	
+			MOVE refTotalRegSiefore NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;
+		
+		--ListaImporteOrdinaria y ListaImporteAclaracion
+		DECLARE refLiberacionAport REFERENCE TO Environment.nci.reportes.cifrasSumarizadas.res.liberacionesAportacion.liberacionAportacion[>];
+		WHILE LASTMOVE (refLiberacionAport) DO
+			DECLARE refImportes REFERENCE TO OutputRoot.XMLNSC.ns:cifrasControl.request;
+						
+			CASE refLiberacionAport.idLiberacion
+			WHEN 268 THEN
+				MOVE refImportes FIRSTCHILD NAME 'listaImporteOrdinaria';
+			WHEN 269 THEN
+				MOVE refImportes FIRSTCHILD NAME 'listaImporteAclaracion';
+			END CASE;
+			
+			DECLARE refCifraSumarizada REFERENCE TO refLiberacionAport.cifrasSumarizadas.cifraSumarizada[>];		
+			WHILE LASTMOVE (refCifraSumarizada) DO
+				CREATE LASTCHILD OF refImportes NAME 'importe';
+				SET refImportes.importe[<].concepto = refCifraSumarizada.conceptoImporte.descripcion;
+				
+				DECLARE refImporteSiefore REFERENCE TO refCifraSumarizada.importesSiefore.importeSiefore[>];
+				WHILE LASTMOVE (refImporteSiefore) DO
+					CASE refImporteSiefore.siefore.id
+					WHEN 74 THEN 
+						SET refImportes.importe[<].profB0 = profuturo.util.func.getDecimal(refImporteSiefore.importeAceptado, formatoImporte);
+					WHEN 75 THEN
+						SET refImportes.importe[<].profB1 = profuturo.util.func.getDecimal(refImporteSiefore.importeAceptado, formatoImporte);
+					WHEN 76 THEN
+						SET refImportes.importe[<].profB2 = profuturo.util.func.getDecimal(refImporteSiefore.importeAceptado, formatoImporte);
+					WHEN 77 THEN
+						SET refImportes.importe[<].profB3 = profuturo.util.func.getDecimal(refImporteSiefore.importeAceptado, formatoImporte);
+					WHEN 78 THEN
+						SET refImportes.importe[<].profB4 = profuturo.util.func.getDecimal(refImporteSiefore.importeAceptado, formatoImporte);
+					WHEN 79 THEN
+						SET refImportes.importe[<].profB5 = profuturo.util.func.getDecimal(refImporteSiefore.importeAceptado, formatoImporte);
+					WHEN 82 THEN
+						SET refImportes.importe[<].profCp = profuturo.util.func.getDecimal(refImporteSiefore.importeAceptado, formatoImporte);
+					WHEN 83 THEN
+						SET refImportes.importe[<].profLp = profuturo.util.func.getDecimal(refImporteSiefore.importeAceptado, formatoImporte);
+					END CASE;					
+					MOVE refImporteSiefore NEXTSIBLING REPEAT TYPE NAME;
+					
+				END WHILE;
+				SET refImportes.importe[<].totalAceptado = profuturo.util.func.getDecimal(refCifraSumarizada.importeAceptado, formatoImporte);
+				SET refImportes.importe[<].totalGeneral = profuturo.util.func.getDecimal(refCifraSumarizada.importeTotal, formatoImporte);
+				SET refImportes.importe[<].totalRechazado = profuturo.util.func.getDecimal(refCifraSumarizada.importeRechazado, formatoImporte);
+				MOVE refCifraSumarizada NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+			
+			--listaImporteTotal
+			DECLARE refTotales REFERENCE TO OutputRoot.XMLNSC.ns:cifrasControl.request.listaImporteTotal;			
+			CREATE LASTCHILD OF refTotales NAME 'importe';			
+			DECLARE refCifraTotal REFERENCE TO refLiberacionAport.cifrasTotales.importesSiefore.importeSiefore[>];
+			
+			SET refTotales.importe[<].concepto = refLiberacionAport.descripcion;
+			WHILE LASTMOVE (refCifraTotal) DO				
+				CASE refCifraTotal.siefore.id
+					WHEN 74 THEN 
+						SET refTotales.importe[<].profB0 = profuturo.util.func.getDecimal(refCifraTotal.importeAceptado, formatoImporte);
+					WHEN 75 THEN
+						SET refTotales.importe[<].profB1 = profuturo.util.func.getDecimal(refCifraTotal.importeAceptado, formatoImporte);
+					WHEN 76 THEN
+						SET refTotales.importe[<].profB2 = profuturo.util.func.getDecimal(refCifraTotal.importeAceptado, formatoImporte);
+					WHEN 77 THEN
+						SET refTotales.importe[<].profB3 = profuturo.util.func.getDecimal(refCifraTotal.importeAceptado, formatoImporte);
+					WHEN 78 THEN
+						SET refTotales.importe[<].profB4 = profuturo.util.func.getDecimal(refCifraTotal.importeAceptado, formatoImporte);
+					WHEN 79 THEN
+						SET refTotales.importe[<].profB5 = profuturo.util.func.getDecimal(refCifraTotal.importeAceptado, formatoImporte);
+					WHEN 82 THEN
+						SET refTotales.importe[<].profCp = profuturo.util.func.getDecimal(refCifraTotal.importeAceptado, formatoImporte);
+					WHEN 83 THEN
+						SET refTotales.importe[<].profLp = profuturo.util.func.getDecimal(refCifraTotal.importeAceptado, formatoImporte);
+				END CASE;
+				MOVE refCifraTotal NEXTSIBLING REPEAT TYPE NAME;
+											
+			END WHILE;
+			SET refTotales.importe[<].totalAceptado = profuturo.util.func.getDecimal(refLiberacionAport.cifrasTotales.importeAceptado, formatoImporte);
+			SET refTotales.importe[<].totalGeneral = profuturo.util.func.getDecimal(refLiberacionAport.cifrasTotales.importeTotal, formatoImporte);
+			SET refTotales.importe[<].totalRechazado = profuturo.util.func.getDecimal(refLiberacionAport.cifrasTotales.importeRechazado, formatoImporte);
+			
+			MOVE refLiberacionAport NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;
+		
+		--Lista ImporteVivienda y AccionesVivienda		
+		DECLARE refCifraViv REFERENCE TO Environment.nci.reportes.cifrasVivienda.res.cifrasVivienda.cifraVivienda[>];
+		DECLARE refImportesViv REFERENCE TO OutputRoot.XMLNSC.ns:cifrasControl.request.listaImporteVivienda;
+		DECLARE refAccionesViv REFERENCE TO OutputRoot.XMLNSC.ns:cifrasControl.request.listaAccionesVivienda;
+		
+		WHILE LASTMOVE (refCifraViv) DO
+			IF CONTAINS(refCifraViv.conceptoImporte.descripcion,'AIVS') THEN
+				CREATE LASTCHILD OF refAccionesViv NAME 'accionesVivienda';				
+				SET refAccionesViv.accionesVivienda[<].concepto = refCifraViv.conceptoImporte.descripcion;
+				SET refAccionesViv.accionesVivienda[<].aceptadoAclaracion = profuturo.util.func.getDecimal(refCifraViv.importeAceptadoAclar, formatoAcciones);
+				SET refAccionesViv.accionesVivienda[<].aceptadoOrdinaria = profuturo.util.func.getDecimal(refCifraViv.importeAceptadoOrd, formatoAcciones);
+				SET refAccionesViv.accionesVivienda[<].totalAceptado = profuturo.util.func.getDecimal(refCifraViv.importeAceptadoTotal, formatoAcciones);
+				SET refAccionesViv.accionesVivienda[<].totalGeneral = profuturo.util.func.getDecimal(refCifraViv.importeTotal, formatoAcciones);
+				SET refAccionesViv.accionesVivienda[<].totalRechazado = profuturo.util.func.getDecimal(refCifraViv.importeRechazado, formatoAcciones);
+				SET refAccionesViv.accionesVivienda[<].creditoDeVivienda = refCifraViv.creditoVivienda;
+			ELSE
+				CREATE LASTCHILD OF refImportesViv NAME 'importeVivienda';
+				SET refImportesViv.importeVivienda[<].concepto = refCifraViv.conceptoImporte.descripcion;
+				SET refImportesViv.importeVivienda[<].aceptadoAclaracion = profuturo.util.func.getDecimal(refCifraViv.importeAceptadoAclar, formatoImporte);
+				SET refImportesViv.importeVivienda[<].aceptadoOrdinaria = profuturo.util.func.getDecimal(refCifraViv.importeAceptadoOrd, formatoImporte);
+				SET refImportesViv.importeVivienda[<].totalAceptado = profuturo.util.func.getDecimal(refCifraViv.importeAceptadoTotal, formatoImporte);
+				SET refImportesViv.importeVivienda[<].totalGeneral = profuturo.util.func.getDecimal(refCifraViv.importeTotal, formatoImporte);
+				SET refImportesViv.importeVivienda[<].totalRechazado = profuturo.util.func.getDecimal(refCifraViv.importeRechazado, formatoImporte);
+				SET refImportesViv.importeVivienda[<].creditoDeVivienda = refCifraViv.creditoVivienda;
+			END IF;		
+		
+			MOVE refCifraViv NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;
+		
+		SET OutputRoot.XMLNSC.ns:cifrasControl.request.totalCreditoVivienda.conCredito = Environment.nci.reportes.cifrasVivienda.res.totalRegistrosConCredito;
+		SET OutputRoot.XMLNSC.ns:cifrasControl.request.totalCreditoVivienda.sinCredito = Environment.nci.reportes.cifrasVivienda.res.totalRegistrosSinCredito;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.obtenerReporteCifrasControl.success THEN
+			SET OutputRoot.XMLNSC.nsIn:obtenerReporteResponse.nombre = Environment.nci.obtenerReporteCifrasControl.response.reporte.nombre;
+			
+			DECLARE encoded CHARACTER BASE64ENCODE(Environment.nci.obtenerReporteCifrasControl.response.reporte.archivo);
+			SET OutputRoot.XMLNSC.nsIn:obtenerReporteResponse.archivo = encoded;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.obtenerReporteCifrasControl.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.obtenerReporteCifrasControl.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.obtenerReporteCifrasControl.errorTrace;
+			PROPAGATE TO LABEL 'FaultReporte';
+			RETURN FALSE;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE PROCEDURE validarParametros (IN parametros REFERENCE,
+        IN nombresParametros REFERENCE,
+        IN localEnvironment REFERENCE,
+        INOUT parametrosFaltantes CHARACTER)
+BEGIN
+	DECLARE labelEnvio CHARACTER 'no_enviar';
+	DECLARE numParam INTEGER 0;
+	SET numParam = CARDINALITY(nombresParametros.parametro[]);
+	DECLARE i INTEGER 1;
+	
+	x : WHILE i <= numParam DO
+		SET localEnvironment.Variables.result[] = SELECT T FROM parametros.parametro[] as T WHERE T.nombre = nombresParametros.parametro[i].nombre;
+		DECLARE regResp INTEGER 0;
+		SET regResp = CARDINALITY(localEnvironment.Variables.result[]);
+		
+		IF regResp > 0 AND localEnvironment.Variables.result[1].valor[1] <> '' THEN
+			SET nombresParametros.parametro[i].status = 1;
+		ELSE
+			SET nombresParametros.parametro[i].status = 0;
+			IF labelEnvio = 'no_enviar' THEN
+				SET parametrosFaltantes = parametrosFaltantes || ', ';
+			END IF;
+			SET parametrosFaltantes = parametrosFaltantes || nombresParametros.parametro[i].nombre;
+			SET labelEnvio = 'no_enviar';
+		END IF;
+		
+		SET i = i + 1;
+	END WHILE x;
+END;

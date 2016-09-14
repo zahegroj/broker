@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ValorAccionService"
+	targetNamespace="http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1"
+	xmlns:tns="http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:sch="http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1/types"
+	xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException">
+
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import
+				namespace="http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1/types"
+				schemaLocation="ValorAccionService.xsd">
+			</xsd:import>
+			<xsd:import
+				namespace="http://mx.profuturo/iib/iibException/IIBException"
+				schemaLocation="../frameworkiib/iibException/IIBException.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="consultarValorAccionRequest">
+		<wsdl:part element="sch:consultarValorAccionRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarValorAccionResponse">
+		<wsdl:part element="sch:consultarValorAccionResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="faultMsg">
+    	<wsdl:part element="iibe:iibException" name="parameters"/>
+  	</wsdl:message>
+
+  	<wsdl:message name="consultarDiaHabilMesSigRequest">
+  		<wsdl:part element="sch:consultarDiaHabilMesSigRequest" name="parameters">
+  		</wsdl:part>
+  	</wsdl:message>
+  	<wsdl:message name="consultarDiaHabilMesSigResponse">
+  		<wsdl:part element="sch:consultarDiaHabilMesSigResponse" name="parameters">
+  		</wsdl:part>
+  	</wsdl:message>
+	
+	<wsdl:portType name="ValorAccionPortType">
+		<wsdl:operation name="consultarValorAccion">
+			<wsdl:input message="tns:consultarValorAccionRequest"/>
+			<wsdl:output message="tns:consultarValorAccionResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="consultarDiaHabilMesSig">
+			<wsdl:input message="tns:consultarDiaHabilMesSigRequest"/>
+			<wsdl:output message="tns:consultarDiaHabilMesSigResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<wsdl:binding name="ValorAccionBinding" type="tns:ValorAccionPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="consultarValorAccion">
+			<soap:operation soapAction="urn:consultarValoresAccion" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="consultarDiaHabilMesSig">
+			<soap:operation soapAction="urn:consultarDiaHabilMesSig" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+
+	<wsdl:service name="ValorAccionService">
+		<wsdl:port binding="tns:ValorAccionBinding" name="ValorAccionPort">
+			<soap:address location="http://localhost/iib/nci/Administracion/ValorAccionService/v1" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

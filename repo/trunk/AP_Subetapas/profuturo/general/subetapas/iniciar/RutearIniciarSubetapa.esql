@@ -1,0 +1,48 @@
+BROKER SCHEMA profuturo.general.subetapas.iniciar
+
+CREATE COMPUTE MODULE RutearIniciarSubetapa
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		DECLARE req REFERENCE TO InputRoot.XMLNSC.ns:iniciarSubetapaRequest;
+		
+		DECLARE subetapa CHARACTER;
+		SET subetapa = CAST(req.idProceso  AS CHARACTER) || CAST(req.idSubproceso AS CHARACTER) || CAST(req.idSubetapa AS CHARACTER);
+		
+		CASE subetapa
+			
+		WHEN '7823' THEN -- 7 RECAUDACION, 8 DOIMSS, 23 VALIDARARCHIVO
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_validarArchivo';
+		WHEN '7824' THEN -- 7 RECAUDACION, 8 DOIMSS, 24 IDC
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_identificarCliente';
+		WHEN '7825' THEN -- 7 RECAUDACION, 8 DOIMSS, 25 MATRIZCONVIVENCIA
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_matrizConvivencia';
+		WHEN '7826' THEN -- 7 RECAUDACION, 8 DOIMSS, 26 CIFRASCONTROL
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_cifrasControl';
+		WHEN '78273' THEN -- 7 RECAUDACION, 8 DOIMSS, 273 GENERARMOVSPREVIOS
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_generarmovs';
+		WHEN '7827' THEN -- 7 RECAUDACION, 8 DOIMSS, 27 APLICARMOVSESTATUS
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_aplicarmovs';	
+		WHEN '78284' THEN -- 7 RECAUDACION, 8 DOIMSS, 284 DESMARCARCUENTA																
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_desmarcarCuenta';					
+		WHEN '276277285' THEN -- 276 Proceso Virtual, 277 Subsecuente Virtual, 285 MATRIZCONVIVENCIA 
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_matrizConvivencia';
+		WHEN '276277284' THEN -- 276 Proceso Virtual, 277 Subsecuente Virtual, 284 DESMARCARCUENTA																
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_desmarcarCuenta';
+		WHEN '7925' THEN -- 7 RECAUDACION, 9 Subsecuente, 25 MATRIZCONVIVENCIA 
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_subsec_matrizConvivencia';
+		WHEN '79273' THEN -- 7 RECAUDACION, 9 Subsecuente, 273 GENERARMOVSPREVIOS 
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_subsec_generarMovs';
+		WHEN '7927' THEN -- 7 RECAUDACION, 9 Subsecuente, 27 APLICARMOVSESTATUS 
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_aplicarmovs';
+		WHEN '79284' THEN -- 7 RECAUDACION, 9 Subsecuente, 284 DESMARCARCUENTA																
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_desmarcarCuenta';
+		WHEN '7926' THEN -- 7 RECAUDACION, 9 Subsecuente, 26 CIFRASCONTROL
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'ini_doimss_cifrasControl';	
+		ELSE
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'no_subetapa';			
+		END CASE;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

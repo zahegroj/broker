@@ -1,0 +1,93 @@
+BROKER SCHEMA profuturo.nci.movimientos.func
+
+
+CREATE COMPUTE MODULE consultarMovPreviosRelacionados_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Movimientos/MovimientosService/v1/types';
+		DECLARE foliosEncontrados BOOLEAN FALSE;
+		
+		SET OutputRoot.XMLNSC.consultarFoliosRelacionados.folio = InputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosRequest.folio;
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.consultarFoliosRelacionados.success THEN	
+			DECLARE refFoliosRel REFERENCE TO Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[>];
+		
+			WHILE LASTMOVE(refFoliosRel) DO
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse.movimientosRelacionados NAME 'movimientoRelacionado';
+				DECLARE refMovRel REFERENCE TO OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse.movimientosRelacionados.movimientoRelacionado[<];
+				
+				SET refMovRel.folio.folio = refFoliosRel.folio;
+				SET refMovRel.folio.fechaCreacion = refFoliosRel.fehCre;
+				SET refMovRel.folio.usuarioCreacion = refFoliosRel.usuCre;
+				SET refMovRel.folio.fechaActalizacion = refFoliosRel.fehAct;
+				SET refMovRel.folio.usuarioActualizacion = refFoliosRel.usuAct;
+				SET refMovRel.folio.canal.idCanal = refFoliosRel.canal.idcanal;
+				SET refMovRel.folio.canal.nombreCanal = refFoliosRel.canal.descCanal;
+				SET refMovRel.folio.proceso.idProceso = refFoliosRel.proceso.idProceso;
+				SET refMovRel.folio.proceso.nombreProceso = refFoliosRel.proceso.descProceso;
+				SET refMovRel.folio.subproceso.idSubproceso = refFoliosRel.subproceso.idSubproceso;
+				SET refMovRel.folio.subproceso.nombreSubproceso = refFoliosRel.subproceso.descSubproceso;				
+				SET refMovRel.folio.estatusProceso.idEstatus = refFoliosRel.estatusProceso.idEstatusProceso;
+				SET refMovRel.folio.estatusProceso.decripcionEstatus = refFoliosRel.estatusProceso.descEstatusProceso;
+				SET refMovRel.folio.instanciaBPM.idInstancia = refFoliosRel.instanciaBpm;
+				SET refMovRel.folio.instanciaBPM.idSnapshot = refFoliosRel.idSnapshot;
+				
+				MOVE refFoliosRel NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+			
+			IF FIELDTYPE(OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse.movimientosRelacionados) IS NULL THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse NAME 'mensajes';
+		        CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse.mensajes);
+			ELSE
+				SET Environment.nci.consultarMovPreviosRelacionadosResponse = OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse;
+				SET foliosEncontrados = TRUE;
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarFoliosRelacionados.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarFoliosRelacionados.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarFoliosRelacionados.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out3';
+			RETURN FALSE;	
+		END IF;
+		
+		IF foliosEncontrados THEN
+			SET OutputRoot.XMLNSC.consultarMovPreviosRelacionados.folio = InputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosRequest.folio;
+			PROPAGATE TO TERMINAL 'out2';
+			
+			--IF FIELDTYPE(Environment.nci.consultarMovPreviosRelacionados.movPreviosRelacionados) IS NOT NULL THEN
+				SET OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse = Environment.nci.consultarMovPreviosRelacionadosResponse;
+				DECLARE refMovRel REFERENCE TO OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse.movimientosRelacionados.movimientoRelacionado[>];
+				DECLARE totalMontoPesos DECIMAL 0.0;
+				DECLARE totalMontoAcciones DECIMAL 0.0;
+				
+				WHILE LASTMOVE(refMovRel) DO
+					SET OutputLocalEnvironment.resp.movPrev[] = SELECT T
+						FROM Environment.nci.consultarMovPreviosRelacionados.movPreviosRelacionados[] AS T
+						WHERE T.folioRel = refMovRel.folio.folio;
+					
+					IF FIELDTYPE(OutputLocalEnvironment.resp.movPrev) IS NOT NULL THEN
+						SET refMovRel.importePesos = profuturo.util.func.setFormatoImporte(OutputLocalEnvironment.resp.movPrev[1].montoPesos, 'PESOS');
+						SET refMovRel.totalAcciones = profuturo.util.func.setFormatoImporte(OutputLocalEnvironment.resp.movPrev[1].montoAcciones, 'AIVS');
+						SET refMovRel.numeroRegistros = profuturo.util.func.setFormatoNumero(OutputLocalEnvironment.resp.movPrev[1].numeroRegistros);
+						
+						SET totalMontoPesos = totalMontoPesos + OutputLocalEnvironment.resp.movPrev[1].montoPesos;
+						SET totalMontoAcciones = totalMontoAcciones + OutputLocalEnvironment.resp.movPrev[1].montoAcciones;
+					ELSE
+						SET refMovRel.importePesos = profuturo.util.func.setFormatoImporte(0.00, 'PESOS');
+						SET refMovRel.totalAcciones = profuturo.util.func.setFormatoImporte(0.000000, 'AIVS');
+						SET refMovRel.numeroRegistros = profuturo.util.func.setFormatoNumero(0);
+					END IF;
+					
+					MOVE refMovRel NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+				
+				SET OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse.totalImportePesos = profuturo.util.func.setFormatoImporte(totalMontoPesos, 'PESOS');
+				SET OutputRoot.XMLNSC.ns:consultarMovPreviosRelacionadosResponse.totalAcciones = profuturo.util.func.setFormatoImporte(totalMontoAcciones, 'AIVS');
+			--END IF;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

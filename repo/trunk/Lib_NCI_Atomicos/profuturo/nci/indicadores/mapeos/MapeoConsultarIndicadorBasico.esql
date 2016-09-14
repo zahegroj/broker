@@ -1,0 +1,27 @@
+BROKER SCHEMA profuturo.nci.indicadores.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarIndicadorBasico_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		DECLARE ns NAMESPACE 'http://indicadores.webservice.ws.nci.profuturo.mx/';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'IIndicadoresSoapWSService', 'consultaBasica');
+		
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNSC.ns:consultaBasica.req.listaIDsIndicadores = InputRoot.XMLNSC.listaIndicadores;--idIndicador
+		SET OutputRoot.XMLNSC.ns:consultaBasica.req.listaNumerosCuenta = InputRoot.XMLNSC.listaNumerosCuenta;--numCuenta
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarIndicadorBasico_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://indicadores.webservice.ws.nci.profuturo.mx/';
+		SET Environment.nci.consultaIndicadorBasico = InputRoot.XMLNSC.ns:consultaBasicaResponse.ConsultaBasicaResponse;
+
+		IF InputRoot.XMLNSC.ns:consultaBasicaResponse.ConsultaBasicaResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

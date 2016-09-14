@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://mx.profuturo/iib/nci/Notificaciones/EnvioCorreoService/v1/types"
+	xmlns:tns="http://mx.profuturo/iib/nci/Notificaciones/EnvioCorreoService/v1/types"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:mod="http://mx.profuturo/nci/modelo"
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+	version="1.0">
+
+	<xsd:import schemaLocation="../modelo/ModeloNCI.xsd"
+		namespace="http://mx.profuturo/nci/modelo"></xsd:import>
+
+	<xsd:element name="enviarCorreoRequest" type="tns:enviarCorreoRequest" />
+	<xsd:element name="enviarCorreoResponse" type="tns:enviarCorreoResponse" />
+
+	<xsd:complexType name="datosCorreo">
+		<xsd:sequence>
+			<xsd:element name="para" type="tns:listaCorreos" />
+			<xsd:element name="cc" type="tns:listaCorreos" minOccurs="0" />
+			<xsd:element name="de" type="tns:listaCorreos" minOccurs="0" />
+			<xsd:element name="asunto" type="xsd:string" />
+			<xsd:element name="mensaje" type="xsd:string" />
+			<xsd:element name="adjunto" type="xsd:base64Binary" minOccurs="0" xmime:expectedContentTypes="image/jpeg, image/png, application/pdf, application/xml, application/txt"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="datosMensaje">
+		<xsd:sequence>
+			<xsd:element name="idNotificacion" type="xsd:short"
+				minOccurs="1" />
+			<xsd:element name="parametros" type="tns:listaParametroCorreo"
+				minOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="listaCorreos">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="email" nillable="true"
+				type="tns:emailAddress" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="enviarCorreoRequest">
+		<xsd:sequence>
+			<xsd:element name="datosCorreo" type="tns:datosCorreo"
+				minOccurs="1" />
+			<xsd:element name="datosMensaje" type="tns:datosMensaje"
+				minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="enviarCorreoResponse">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:simpleType name="emailAddress">
+		<xsd:restriction base="xsd:string">
+			<!--<xsd:pattern value="|\d{10}"/> -->
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="ParametroCorreo">
+		<xsd:sequence>
+			<xsd:element name="clave" type="xsd:string"/>
+			<xsd:element name="valor" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="cifrasControl" type="mod:ListaCifraControl" minOccurs="0"/>
+			<xsd:element name="tablaValores" type="xsd:anyType" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="listaParametroCorreo">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" maxOccurs="unbounded" name="parametro" type="tns:ParametroCorreo" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

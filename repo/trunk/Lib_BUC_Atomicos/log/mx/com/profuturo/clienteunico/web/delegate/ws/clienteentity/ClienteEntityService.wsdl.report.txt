@@ -1,0 +1,43 @@
+
+
+Importing file: \buc\ws\ClienteEntityService.wsdl
+
+The WSDL import will proceed with bindings ClienteEntityPortBinding.
+Creating wsdl schema document for RemoteFiles/ClienteEntityService.xsd.
+Parsing wsdl binding {http://ws.delegate.web.clienteUnico.profuturo.com.mx/ClienteEntity}ClienteEntityPortBinding.
+Parsing wsdl binding input addContratoCliente.
+Parsing wsdl binding output addContratoCliente.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input addContratoClientePersona.
+Parsing wsdl binding output addContratoClientePersona.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getContratoCliente.
+Parsing wsdl binding output getContratoCliente.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getContratoClientePersona.
+Parsing wsdl binding output getContratoClientePersona.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getContratosCliente.
+Parsing wsdl binding output getContratosCliente.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input updateContratoCliente.
+Parsing wsdl binding output updateContratoCliente.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Processing doc style for operation addContratoCliente.
+Processing doc style for operation addContratoClientePersona.
+Processing doc style for operation getContratoCliente.
+Processing doc style for operation getContratoClientePersona.
+Processing doc style for operation getContratosCliente.
+Processing doc style for operation updateContratoCliente.
+Populating WSDL schema RemoteFiles/ClienteEntityService_wsdl.xsd.
+Creating file RemoteFiles/ClienteEntityService_wsdl.xsd in the workspace.
+Creating file /Lib_BUC_Atomicos/ClienteEntityService.xsd in the workspace.
+Copying source WSDL ClienteEntityService?wsdl to ClienteEntityService.wsdl.
+
+Elapsed time processing this message definition file: 0.232 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

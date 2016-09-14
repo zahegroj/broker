@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/" xmlns:tns="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="ActualizarMovEstatus" type="tns:ActualizarMovEstatus"/>
+
+  <xs:element name="ActualizarMovEstatusResponse" type="tns:ActualizarMovEstatusResponse"/>
+
+  <xs:element name="cargarArchivo" type="tns:cargarArchivo"/>
+
+  <xs:element name="cargarArchivoResponse" type="tns:cargarArchivoResponse"/>
+
+  <xs:element name="depuraTablas" type="tns:depuraTablas"/>
+
+  <xs:element name="depuraTablasResponse" type="tns:depuraTablasResponse"/>
+
+  <xs:element name="desmarcarCuenta" type="tns:desmarcarCuenta"/>
+
+  <xs:element name="desmarcarCuentaResponse" type="tns:desmarcarCuentaResponse"/>
+
+  <xs:element name="genMovPrevios" type="tns:genMovPrevios"/>
+
+  <xs:element name="genMovPreviosResponse" type="tns:genMovPreviosResponse"/>
+
+  <xs:element name="generarCifrasControl" type="tns:generarCifrasControl"/>
+
+  <xs:element name="generarCifrasControlResponse" type="tns:generarCifrasControlResponse"/>
+
+  <xs:element name="identificarCliente" type="tns:identificarCliente"/>
+
+  <xs:element name="identificarClienteReproc" type="tns:identificarClienteReproc"/>
+
+  <xs:element name="identificarClienteReprocResponse" type="tns:identificarClienteReprocResponse"/>
+
+  <xs:element name="identificarClienteResponse" type="tns:identificarClienteResponse"/>
+
+  <xs:element name="matrizConvivencia" type="tns:matrizConvivencia"/>
+
+  <xs:element name="matrizConvivenciaReproc" type="tns:matrizConvivenciaReproc"/>
+
+  <xs:element name="matrizConvivenciaReprocResponse" type="tns:matrizConvivenciaReprocResponse"/>
+
+  <xs:element name="matrizConvivenciaResponse" type="tns:matrizConvivenciaResponse"/>
+
+  <xs:element name="recalcMovPrevios" type="tns:recalcMovPrevios"/>
+
+  <xs:element name="recalcMovPreviosResponse" type="tns:recalcMovPreviosResponse"/>
+
+  <xs:complexType name="identificarClienteReproc">
+    <xs:sequence>
+      <xs:element name="idc_folio" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="identificarClienteReprocResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="recalcMovPrevios">
+    <xs:sequence>
+      <xs:element name="p_FOLIO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_PROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBPROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_FECHA_ACCION" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_FOLIO_REL" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV1" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="recalcMovPreviosResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="genMovPrevios">
+    <xs:sequence>
+      <xs:element name="p_FOLIO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_PROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBPROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_FECHA_ACCION" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_FOLIO_REL" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV1" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="genMovPreviosResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="identificarCliente">
+    <xs:sequence>
+      <xs:element name="idc_folio" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="identificarClienteResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="cargarArchivo">
+    <xs:sequence>
+      <xs:element name="mitafore_folio" type="xs:string" minOccurs="0"/>
+      <xs:element name="mitafore_archivo" type="xs:string" minOccurs="0"/>
+      <xs:element name="mitafore_id_archivo" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cargarArchivoResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="depuraTablas">
+    <xs:sequence>
+      <xs:element name="p_FOLIO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_PROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBPROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_ETAPA" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBETAPA" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_FECHA" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV1" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="depuraTablasResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="matrizConvivencia">
+    <xs:sequence>
+      <xs:element name="p_FOLIO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_FOLIO_REL" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_PROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBPROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV1" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV2" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBETAPA" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_FECHA_ACCION" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="matrizConvivenciaResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="ActualizarMovEstatus">
+    <xs:sequence>
+      <xs:element name="mov_folio" type="xs:string" minOccurs="0"/>
+      <xs:element name="mov_proceso" type="xs:string" minOccurs="0"/>
+      <xs:element name="mov_subproceso" type="xs:string" minOccurs="0"/>
+      <xs:element name="mov_estatusmov" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_tra" type="xs:string" minOccurs="0"/>
+      <xs:element name="seclot" type="xs:string" minOccurs="0"/>
+      <xs:element name="fecha_accion" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ActualizarMovEstatusResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="desmarcarCuenta">
+    <xs:sequence>
+      <xs:element name="mov_folio" type="xs:string" minOccurs="0"/>
+      <xs:element name="mov_proceso" type="xs:string" minOccurs="0"/>
+      <xs:element name="mov_subproceso" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipo_mov_1" type="xs:string" minOccurs="0"/>
+      <xs:element name="tipo_mov_2" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="desmarcarCuentaResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="matrizConvivenciaReproc">
+    <xs:sequence>
+      <xs:element name="p_FOLIO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_PROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBPROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV1" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_TIPOMOV2" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBETAPA" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_FECHA_ACCION" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="matrizConvivenciaReprocResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="generarCifrasControl">
+    <xs:sequence>
+      <xs:element name="p_FOLIO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_PROCESO" type="xs:string" minOccurs="0"/>
+      <xs:element name="p_SUBPROCESO" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="generarCifrasControlResponse">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+

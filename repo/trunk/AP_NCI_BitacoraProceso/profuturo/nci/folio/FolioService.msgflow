@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmDatabase.msgnode="ComIbmDatabase.msgnode" xmlns:ComIbmFlowOrder.msgnode="ComIbmFlowOrder.msgnode" xmlns:ComIbmLabel.msgnode="ComIbmLabel.msgnode" xmlns:ComIbmMQHeader.msgnode="ComIbmMQHeader.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmSOAPInput.msgnode="ComIbmSOAPInput.msgnode" xmlns:ComIbmSOAPReply.msgnode="ComIbmSOAPReply.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_profuturo_nci_folio_FolioService_FolioService.subflow="gen/profuturo/nci/folio/FolioService_FolioService.subflow" xmlns:profuturo_nci_folio_func_actualizarFolio_Func.subflow="profuturo/nci/folio/func/actualizarFolio_Func.subflow" xmlns:profuturo_nci_folio_func_consultarFolioARelacionar_Func.subflow="profuturo/nci/folio/func/consultarFolioARelacionar_Func.subflow" xmlns:profuturo_nci_folio_func_consultarFoliosRelacionados_Func.subflow="profuturo/nci/folio/func/consultarFoliosRelacionados_Func.subflow"
+    xmlns:profuturo_nci_folio_func_guardarFolio_Func.subflow="profuturo/nci/folio/func/guardarFolio_Func.subflow" xmlns:profuturo_util_error_HandleError.subflow="profuturo/util/error/HandleError.subflow" xmlns:profuturo_util_validacionparametro_sf_validarParametros.subflow="profuturo/util/validacionparametro/sf/validarParametros.subflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="profuturo/nci/folio/FolioService.msgflow" nsPrefix="profuturo_nci_folio_FolioService.msgflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="FolioService" bundleName="profuturo/nci/folio/FolioService" pluginId="AP_NCI_BitacoraProceso"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/AP_NCI_BitacoraProceso/icons/full/obj16/FolioService.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/AP_NCI_BitacoraProceso/icons/full/obj30/FolioService.gif"/>
+    <composition>
+      <nodes xmi:type="ComIbmDatabase.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="636,43" statement="esql://routine/profuturo.nci.folio.func#SynchRR_genFolio_Initialise.Main">
+        <translation xmi:type="utility:ConstantString" string="init"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFlowOrder.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="723,44">
+        <translation xmi:type="utility:ConstantString" string="Flow Order"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="800,44" computeExpression="esql://routine/profuturo.nci.folio.func#genFolio_STRIP.Main">
+        <translation xmi:type="utility:ConstantString" string="Extraer SOAP Body"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQHeader.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="933,45" mqmdAAAOptions="Add header" mqmdCodedCharSetId="MQCCSI_UNICODE_1208" mqmdFormat="MQFMT_NONE" mqmdVersion="MQMD_VERSION_1" mqmdMsgType="MQMT_REQUEST" mqmdExpiry="MQEI_UNLIMITED" mqmdFeedback="MQFB_NONE" mqmdPriority="MQPRI_PRIORITY_AS_Q_DEF" mqmdPersistence="MQPER_PERSISTENCE_AS_Q_DEF" mqmdMsgId="MQMI_NONE" mqmdCorrelId="MQCI_NONE" mqmdReplyToQ="QL.FOLIO.OUT">
+        <translation xmi:type="utility:ConstantString" string="Add MQ Header"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="1047,49" queueName="QL.FOLIO.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.FOLIO.IN"/>
+      </nodes>
+      <nodes xmi:type="profuturo_nci_folio_func_actualizarFolio_Func.subflow:FCMComposite_1" xmi:id="FCMComposite_1_9" location="384,225">
+        <translation xmi:type="utility:ConstantString" string="actualizarFolio_Func"/>
+      </nodes>
+      <nodes xmi:type="profuturo_nci_folio_func_guardarFolio_Func.subflow:FCMComposite_1" xmi:id="FCMComposite_1_10" location="390,128">
+        <translation xmi:type="utility:ConstantString" string="guardarFolio_Func"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="1140,53" computeExpression="esql://routine/profuturo.nci.folio.func#SynchRR_genFolio_BuildStoreMsg.Main">
+        <translation xmi:type="utility:ConstantString" string="Build Store ID"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="1234,54" queueName="QL.FOLIO_REQID.IN">
+        <translation xmi:type="utility:ConstantString" string="QL.FOLIO_REQID.IN"/>
+      </nodes>
+      <nodes xmi:type="gen_profuturo_nci_folio_FolioService_FolioService.subflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="271,225">
+        <translation xmi:type="utility:ConstantString" string="FolioService"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Extracts message body from the SOAP message"/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow extracts the body out of the SOAP message, has one output node per operation. This was generated by a WSDL file drag and drop operation."/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPInput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="20,228" wsdlFileName="FolioService.wsdl" selectedPortType="FolioPortType" selectedBinding="FolioBinding" selectedPort="FolioPort" targetNamespace="http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1" useHTTPTransport="true" urlSelector="/iib/nci/BitacoraProcesos/FolioService/v1" allowQueryWSDL="true" messageSetProperty="{Lib_NCI_MM}">
+        <translation xmi:type="utility:ConstantString" string="SOAP Input"/>
+      </nodes>
+      <nodes xmi:type="ComIbmSOAPReply.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_15" location="691,225">
+        <translation xmi:type="utility:ConstantString" string="SOAP Reply"/>
+      </nodes>
+      <nodes xmi:type="profuturo_nci_folio_func_consultarFolioARelacionar_Func.subflow:FCMComposite_1" xmi:id="FCMComposite_1_19" location="350,308">
+        <translation xmi:type="utility:ConstantString" string="consultarFolioARelacionar_Func"/>
+      </nodes>
+      <nodes xmi:type="profuturo_nci_folio_func_consultarFoliosRelacionados_Func.subflow:FCMComposite_1" xmi:id="FCMComposite_1_20" location="343,388">
+        <translation xmi:type="utility:ConstantString" string="consultarFoliosRelacionados_Func"/>
+      </nodes>
+      <nodes xmi:type="profuturo_util_error_HandleError.subflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="130,138">
+        <translation xmi:type="utility:ConstantString" string="HandleError"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="110,224" computeExpression="esql://routine/profuturo.util.soap#extraerDatosServicio.Main" computeMode="destination">
+        <translation xmi:type="utility:ConstantString" string="extraer Datos Servicio"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="396,46" computeExpression="esql://routine/profuturo.nci.folio.func#MapeoParametros_generarFolio.Main" computeMode="destination">
+        <translation xmi:type="utility:ConstantString" string="Map Parametros"/>
+      </nodes>
+      <nodes xmi:type="profuturo_util_validacionparametro_sf_validarParametros.subflow:FCMComposite_1" xmi:id="FCMComposite_1_21" location="504,47">
+        <translation xmi:type="utility:ConstantString" string="validarParametros"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_22" location="571,121" computeExpression="esql://routine/profuturo.nci.folio.func#generarFolio_parametros_invalidos.Main">
+        <translation xmi:type="utility:ConstantString" string="Parametros Invalidos"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="580,333" labelName="FaultParametros">
+        <translation xmi:type="utility:ConstantString" string="FaultParametros"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.first" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_11" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.guardarFolioRequest" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_9" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.actualizarFolioRequest" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_21" targetNode="FCMComposite_1_19" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarFolioARelacionarRequest" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_22" targetNode="FCMComposite_1_20" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.consultarFoliosRelacionadosRequest" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_23" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_24" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_25" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_26" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_20" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.failure" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.timeout" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_28" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.generarFolioRequest" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_29" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_21" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_30" targetNode="FCMComposite_1_21" sourceNode="FCMComposite_1_18" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_31" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_22" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_32" targetNode="FCMComposite_1_22" sourceNode="FCMComposite_1_21" sourceTerminalName="OutTerminal.Output1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_15" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

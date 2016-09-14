@@ -1,0 +1,63 @@
+
+
+Importing file: \buc\ws\PersonaEntityService.wsdl
+
+The WSDL import will proceed with bindings PersonaEntityPortBinding.
+Creating wsdl schema document for RemoteFiles/PersonaEntityService.xsd.
+Parsing wsdl binding {http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity}PersonaEntityPortBinding.
+Parsing wsdl binding input getContactoPersonaContrato.
+Parsing wsdl binding output getContactoPersonaContrato.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getDatosOrigenPersona.
+Parsing wsdl binding output getDatosOrigenPersona.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getIdentificadoresByIdPersons.
+Parsing wsdl binding output getIdentificadoresByIdPersons.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getPersonaEntityByGenerales.
+Parsing wsdl binding output getPersonaEntityByGenerales.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getPersonaEntityByIdentificador.
+Parsing wsdl binding output getPersonaEntityByIdentificador.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getPersonaEntityByIdentificadorNegocioRol.
+Parsing wsdl binding output getPersonaEntityByIdentificadorNegocioRol.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getPersonaFisica.
+Parsing wsdl binding output getPersonaFisica.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getPersonaFisicaIdentificadores.
+Parsing wsdl binding output getPersonaFisicaIdentificadores.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getPersonaMoral.
+Parsing wsdl binding output getPersonaMoral.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getPersonaMoralIdentificadores.
+Parsing wsdl binding output getPersonaMoralIdentificadores.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input inactivaIdentificador.
+Parsing wsdl binding output inactivaIdentificador.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Processing doc style for operation getContactoPersonaContrato.
+Processing doc style for operation getDatosOrigenPersona.
+Processing doc style for operation getIdentificadoresByIdPersons.
+Processing doc style for operation getPersonaEntityByGenerales.
+Processing doc style for operation getPersonaEntityByIdentificador.
+Processing doc style for operation getPersonaEntityByIdentificadorNegocioRol.
+Processing doc style for operation getPersonaFisica.
+Processing doc style for operation getPersonaFisicaIdentificadores.
+Processing doc style for operation getPersonaMoral.
+Processing doc style for operation getPersonaMoralIdentificadores.
+Processing doc style for operation inactivaIdentificador.
+Populating WSDL schema RemoteFiles/PersonaEntityService_wsdl.xsd.
+Creating file RemoteFiles/PersonaEntityService_wsdl.xsd in the workspace.
+Creating file /Lib_BUC_Atomicos/PersonaEntityService.xsd in the workspace.
+Copying source WSDL PersonaEntityService?wsdl to PersonaEntityService.wsdl.
+
+Elapsed time processing this message definition file: 1.62 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

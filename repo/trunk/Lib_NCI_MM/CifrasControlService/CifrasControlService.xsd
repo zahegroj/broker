@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mod="http://mx.profuturo/nci/modelo" xmlns:tns="http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types">
+	
+	<xsd:import namespace="http://mx.profuturo/nci/modelo" schemaLocation="../modelo/ModeloNCI.xsd"/>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarCifrasControlRequest" type="tns:consultarCifrasControlReq"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarCifrasControlResponse" type="tns:consultarCifrasControlResp"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarCifrasSumarizadasRequest" type="tns:consultarCifrasSumarizadasReq"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarCifrasSumarizadasResponse" type="tns:consultarCifrasSumarizadasResp"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarCifrasViviendaRequest" type="tns:consultarCifrasViviendaReq"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarCifrasViviendaResponse" type="tns:consultarCifrasViviendaResp"/>
+	
+	<xsd:complexType name="consultarCifrasControlReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="folioRel" type="xsd:string"/>
+			<xsd:element name="idSubetapa" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarCifrasControlResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="cifrasControl" type="mod:ListaCifraControl"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="consultarCifrasSumarizadasReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+			<xsd:element name="idArchivo" type="xsd:int"/>
+			<xsd:element name="idsLiberacion" type="tns:ListaIdLiberacion"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarCifrasSumarizadasResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="liberacionesAportacion" type="tns:ListaLiberacionAportacion"/>
+					<xsd:element minOccurs="0" name="totalesAportacion" type="tns:TotalesAportacion"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="consultarCifrasViviendaReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+			<xsd:element name="idArchivo" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarCifrasViviendaResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="cifrasVivienda" type="tns:ListaCifraVivienda"/>
+					<xsd:element minOccurs="0" name="totalRegistrosConCredito" type="xsd:string"/>
+					<xsd:element minOccurs="0" name="totalRegistrosSinCredito" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="LiberacionAportacion">
+		<xsd:sequence>
+			<xsd:element name="idLiberacion" type="xsd:int"/>
+			<xsd:element name="descripcion" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="cifrasSumarizadas" type="tns:ListaCifraSumarizada"/>
+			<xsd:element minOccurs="0" name="cifrasTotales" type="tns:CifraSumarizada"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CifraSumarizada">
+		<xsd:sequence>
+			<xsd:element name="conceptoImporte" type="tns:ConceptoImporte"/>
+			<xsd:element minOccurs="0" name="importesSiefore" type="tns:ListaImporteSiefore"/>
+			<xsd:element name="importeAceptado" type="mod:importe"/>
+			<xsd:element name="importeRechazado" type="mod:importe"/>
+			<xsd:element name="importeTotal" type="mod:importe"/>
+			<xsd:element minOccurs="0" name="numeroRegistros" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConceptoImporte">
+		<xsd:sequence>
+			<xsd:element name="id" type="xsd:int"/>
+			<xsd:element name="descripcion" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ImporteSiefore">
+		<xsd:sequence>
+			<xsd:element name="siefore" type="mod:Siefore"/>
+			<xsd:element minOccurs="0" name="creditoVivienda" type="xsd:string"/>
+			<xsd:element name="importeAceptado" type="mod:importe"/>
+			<xsd:element name="importeRechazado" type="mod:importe"/>
+			<xsd:element name="numeroRegistros" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaImporteSiefore">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="importeSiefore" type="tns:ImporteSiefore"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaLiberacionAportacion">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="liberacionAportacion" type="tns:LiberacionAportacion"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaCifraSumarizada">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="cifraSumarizada" type="tns:CifraSumarizada"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CifraVivienda">
+		<xsd:sequence>
+			<xsd:element name="conceptoImporte" type="tns:ConceptoImporte"/>
+			<xsd:element minOccurs="0" name="creditoVivienda" type="xsd:string"/>
+			<xsd:element name="importeAceptadoOrd" type="mod:importe"/>
+			<xsd:element name="importeAceptadoAclar" type="mod:importe"/>
+			<xsd:element name="importeRechazado" type="mod:importe"/>
+			<xsd:element name="importeAceptadoTotal" type="mod:importe"/>
+			<xsd:element name="importeTotal" type="mod:importe"/>
+			<xsd:element name="numeroRegistros" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaCifraVivienda">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="cifraVivienda" type="tns:CifraVivienda"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaIdLiberacion">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="idLiberacion" type="xsd:int"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="TotalAportacionesSiefore">
+		<xsd:sequence>
+			<xsd:element name="siefore" type="mod:Siefore"/>
+			<xsd:element name="importeTotal" type="mod:importe"/>
+			<xsd:element name="numeroRegistros" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ListaTotalesAportaciones">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="totalAportacionSiefore" type="tns:TotalAportacionesSiefore"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="TotalesAportacion">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="totalesLiberacionAportacion" type="tns:ListaTotalesAportaciones"/>
+			<xsd:element name="importeAceptado" type="mod:importe"/>
+			<xsd:element name="importeRechazado" type="mod:importe"/>
+			<xsd:element name="importeTotal" type="mod:importe"/>
+			<xsd:element name="numeroRegistros" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

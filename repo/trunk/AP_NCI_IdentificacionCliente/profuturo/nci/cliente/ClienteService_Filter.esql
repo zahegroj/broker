@@ -1,0 +1,13 @@
+BROKER SCHEMA profuturo.nci.cliente
+
+
+CREATE FILTER MODULE ClienteService_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		IF FIELDTYPE(Environment.nci.clienteAv) IS NULL OR FIELDTYPE(Root.XMLNSC.nsFault:Fault) IS NOT NULL THEN
+			RETURN FALSE;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

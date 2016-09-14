@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IArchivoSoapWS" targetNamespace="http://archivo.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://archivo.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="IArchivoSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://archivo.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://archivo.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="IArchivoSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consultarArchivoResponse">
+    <wsdl:part element="ns1:consultarArchivoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarArchivo">
+    <wsdl:part element="ns1:consultarArchivo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarArchivo">
+    <wsdl:part element="ns1:actualizarArchivo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardarArchivo">
+    <wsdl:part element="ns1:guardarArchivo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardarArchivoResponse">
+    <wsdl:part element="ns1:guardarArchivoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarArchivoResponse">
+    <wsdl:part element="ns1:actualizarArchivoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IArchivoSoapWS">
+    <wsdl:operation name="guardarArchivo">
+      <wsdl:input message="ns1:guardarArchivo" name="guardarArchivo">
+    </wsdl:input>
+      <wsdl:output message="ns1:guardarArchivoResponse" name="guardarArchivoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarArchivo">
+      <wsdl:input message="ns1:consultarArchivo" name="consultarArchivo">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultarArchivoResponse" name="consultarArchivoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarArchivo">
+      <wsdl:input message="ns1:actualizarArchivo" name="actualizarArchivo">
+    </wsdl:input>
+      <wsdl:output message="ns1:actualizarArchivoResponse" name="actualizarArchivoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

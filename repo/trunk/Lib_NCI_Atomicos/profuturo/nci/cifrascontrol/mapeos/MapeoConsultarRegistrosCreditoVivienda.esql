@@ -1,0 +1,33 @@
+BROKER SCHEMA profuturo.nci.cifrascontrol.mapeos
+
+
+CREATE COMPUTE MODULE MapeoConsultarRegistrosCreditoVivienda_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot, OutputRoot);
+		CALL profuturo.util.CopyEntireMessage(InputRoot, OutputRoot);
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarRegistrosCreditoVivienda_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CREATE FIRSTCHILD OF Environment.nci NAME 'consultarRegistrosCreditoVivienda';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.registrosCreditoViviendaResponse.registroCreditoVivienda) IS NOT NULL THEN
+			DECLARE refCredViv REFERENCE TO InputRoot.XMLNSC.registrosCreditoViviendaResponse.registroCreditoVivienda[>];
+			
+			WHILE LASTMOVE(refCredViv) DO
+				CREATE LASTCHILD OF Environment.nci.consultarRegistrosCreditoVivienda NAME 'registroCreditoVivienda';
+				DECLARE refCredVivResp REFERENCE TO Environment.nci.consultarRegistrosCreditoVivienda.[<];
+				
+				SET refCredVivResp.creditoVivienda = refCredViv.creditoVivienda;
+				SET refCredVivResp.numeroRegistros = refCredViv.numeroRegistros;
+				
+				MOVE refCredViv NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

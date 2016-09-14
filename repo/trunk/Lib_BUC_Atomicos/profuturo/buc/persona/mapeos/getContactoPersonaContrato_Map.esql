@@ -1,0 +1,38 @@
+BROKER SCHEMA profuturo.buc.persona.mapeos
+
+
+CREATE COMPUTE MODULE mapeoGetContactoPersonaContrato_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsPer NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity';
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'BUC', 'PersonaEntityService', 'getContactoPersonaContrato');
+		
+		SET OutputRoot.XMLNSC.nsPer:getContactoPersonaContrato.arg0.idContrato = InputRoot.XMLNSC.contactoPersonaContrato.idContrato;
+		SET OutputRoot.XMLNSC.nsPer:getContactoPersonaContrato.arg1.idPersona = InputRoot.XMLNSC.contactoPersonaContrato.idPersona;
+		SET OutputRoot.XMLNSC.nsPer:getContactoPersonaContrato.arg2.indicadorLineaNegocio = InputRoot.XMLNSC.contactoPersonaContrato.lineaNegocio;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapeoGetContactoPersonaContrato_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsPer NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity';
+		
+		SET Environment.buc.getContactoPersonaContrato = InputRoot.XMLNSC.nsPer:getContactoPersonaContratoResponse;
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapeoGetContactoPersonaContrato_Fault
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET Environment.buc.getContactoPersonaContrato.error = InputRoot.XMLNSC.nsFault:Fault.detail.*[1];
+		RETURN TRUE;
+	END;
+END MODULE;

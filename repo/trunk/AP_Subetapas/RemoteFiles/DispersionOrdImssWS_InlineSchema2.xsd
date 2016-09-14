@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://TKPRFPC" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:impl1="http://TKPRFPC" xmlns:intf="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdlsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" schemaLocation="DispersionOrdImssWS_InlineSchema1.xsd">
+    <!--Add URI of the schema document for the imported namespace using 'schemaLocation' attribute.-->
+  </import>
+  <complexType name="ErrorBpmBO">
+    <sequence>
+      <element maxOccurs="1" minOccurs="0" name="codigo" nillable="false" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="componente" nillable="false" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="descripcion" nillable="false" type="string"/>
+    </sequence>
+  </complexType>
+  <complexType name="ArchivoBO">
+    <sequence>
+      <element maxOccurs="1" minOccurs="0" name="identificador" nillable="false" type="int"/>
+      <element maxOccurs="1" minOccurs="0" name="folio" nillable="false" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="nombre" nillable="false" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="estatus" nillable="false" type="impl1:CatalogoBO"/>
+      <element maxOccurs="1" minOccurs="0" name="tamanio" nillable="false" type="int"/>
+      <element maxOccurs="1" minOccurs="0" name="proceso" nillable="false" type="impl1:CatalogoBO"/>
+      <element maxOccurs="1" minOccurs="0" name="subproceso" nillable="false" type="impl1:CatalogoBO"/>
+      <element maxOccurs="1" minOccurs="0" name="fechaRecepcion" nillable="false" type="dateTime"/>
+      <element maxOccurs="1" minOccurs="0" name="fechaUltimoEstatus" nillable="false" type="dateTime"/>
+      <element maxOccurs="1" minOccurs="0" name="fechaEnvio" nillable="false" type="dateTime"/>
+    </sequence>
+  </complexType>
+  <complexType name="CatalogoBO">
+    <sequence>
+      <element maxOccurs="1" minOccurs="0" name="identificador" nillable="false" type="int"/>
+      <element maxOccurs="1" minOccurs="0" name="valor" nillable="false" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="descripcion" nillable="false" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="tipoCatalogo" nillable="false" type="int"/>
+    </sequence>
+  </complexType>
+</schema>

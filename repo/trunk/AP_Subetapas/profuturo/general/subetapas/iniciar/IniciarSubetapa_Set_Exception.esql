@@ -1,0 +1,9 @@
+BROKER SCHEMA profuturo.general.subetapas.iniciar
+
+CREATE COMPUTE MODULE IniciarSubetapa_Set_Exception
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.resultado = 'EXCEPCION';
+		RETURN TRUE;
+	END;
+END MODULE;

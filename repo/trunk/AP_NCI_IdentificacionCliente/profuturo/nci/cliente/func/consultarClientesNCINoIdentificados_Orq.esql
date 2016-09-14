@@ -1,0 +1,115 @@
+BROKER SCHEMA profuturo.nci.cliente.func
+
+CREATE COMPUTE MODULE consultarClientesNCINoIdentificados_Orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1/types';		
+		
+		SET Environment.Variables.tipoCatalogo[] = LIST{	ROW( '3' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG),--SUBPROCESOS   [1]
+        													ROW('19' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG),--VALIDACION    [2]
+        													ROW('20' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG) --ERROR         [3]
+        												};
+        
+        DECLARE arrSize INTEGER CARDINALITY(Environment.Variables.tipoCatalogo[]);
+        DECLARE i INTEGER 1;
+        
+		X : WHILE i <= arrSize DO
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = Environment.Variables.tipoCatalogo[i].ID_LINEA_NEG;
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = Environment.Variables.tipoCatalogo[i].ID_TIPO_CATALOGO;
+			
+			PROPAGATE TO TERMINAL 'out1';
+			
+			--recibir la respuesta y ponerla en una lista
+			IF Environment.nci.consultarCatalogo.success = true THEN
+				DECLARE countArr INT CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+				DECLARE j INTEGER 1;
+		
+				Y : WHILE j <= countArr DO			
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].id = Environment.nci.consultarCatalogo.response[j].idCatCatalogo;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].valor = Environment.nci.consultarCatalogo.response[j].valor;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].idPadre = Environment.nci.consultarCatalogo.response[j].idCatPadre;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].idTipoCatalogo = Environment.nci.consultarCatalogo.response[j].idTipoCat;
+					
+					SET j = j + 1;
+				END WHILE Y;
+		
+			ELSE
+				SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCatalogo.errorCode;
+				SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCatalogo.errorMessage;
+				SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCatalogo.errorTrace;
+			
+				PROPAGATE TO TERMINAL 'out3';
+				RETURN FALSE;
+			END IF;
+					
+			SET i = i + 1;
+		END WHILE X;
+		
+		SET OutputRoot.XMLNSC.folio = InputRoot.XMLNSC.ns:consultarClientesNoIdentificadosRequest.folio;
+		SET OutputRoot.XMLNSC.idarchivo = InputRoot.XMLNSC.ns:consultarClientesNoIdentificadosRequest.idArchivo;
+		
+		PROPAGATE TO TERMINAL 'out2';
+		
+		DECLARE refCatSuprocesos REFERENCE TO Environment.Variables.catalogos.catalogo[1];
+		DECLARE refCatValidacion REFERENCE TO Environment.Variables.catalogos.catalogo[2];
+		DECLARE refCatErrores    REFERENCE TO Environment.Variables.catalogos.catalogo[3];
+
+		--response
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(Environment.nci.consultarclientesni.res.consultaClientesNI[]);
+		
+		WHILE I <= J DO
+			DECLARE refClienteNI REFERENCE TO Environment.nci.consultarclientesni.res.consultaClientesNI[I];
+			
+			SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].nss = refClienteNI.nss;
+			SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].nombreTrabajador = refClienteNI.nombre;
+			SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].curp = refClienteNI.curp;
+			SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].estatus = refClienteNI.estatus;
+			SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].areaAtencion = refClienteNI.claveEntRecep;
+			SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].diagnostico = getTipoValidacion_Error(Environment.Variables.catalogos, 'error', refClienteNI.idDiagnostico);
+			
+			IF refClienteNI.idDiagnostico = 254 THEN -- NO VIGENTE
+				SET Environment.Variables.catResp[] = SELECT T FROM refCatSuprocesos.cat[] as T WHERE T.id = refClienteNI.idSubprocesoNoIdent;
+				SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].procesoNoVigente.idProceso = refClienteNI.idSubprocesoNoIdent;
+				SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].procesoNoVigente.nombreProceso = Environment.Variables.catResp[1].valor;
+				
+				SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].fechaCertificacion = refClienteNI.fechaCertificacion;
+				SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].fechaCertificacionFormato = CAST(refClienteNI.fechaCertificacion AS CHARACTER FORMAT 'yyyy-MM-dd');
+			END IF;
+			
+			SET OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados.clienteNoIdentificado[I].numeroCuenta = refClienteNI.numeroCuenta;
+			
+			SET I = I + 1;
+		END WHILE;
+		
+		IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.clientesNoIdentificados) IS NULL THEN
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse NAME 'mensajes';
+		    CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarClientesNoIdentificadosResponse.mensajes);
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FUNCTION getTipoValidacion_Error(IN refCatalogos REFERENCE, IN campo CHARACTER, IN idError CHARACTER) RETURNS CHARACTER
+BEGIN
+    DECLARE descripcion CHARACTER '';
+    DECLARE refCatValidacion REFERENCE TO refCatalogos.catalogo[2];
+	DECLARE refCatErrores    REFERENCE TO refCatalogos.catalogo[3];
+	
+    DECLARE errorRow ROW;
+    CASE campo
+    WHEN 'error' THEN
+    	SET errorRow.resultQry[] = SELECT T FROM refCatErrores.cat[] AS T WHERE T.id = idError;
+    	SET descripcion = errorRow.resultQry[1].valor;
+    WHEN 'validacion' THEN
+    	DECLARE validacionRow ROW;
+    	SET errorRow.resultQry[] = SELECT T FROM refCatErrores.cat[] AS T WHERE T.id = idError;
+    	
+    	SET validacionRow.resultQry[] = SELECT T FROM refCatValidacion.cat[] AS T WHERE T.id = errorRow.resultQry[1].idPadre;
+    	SET descripcion = validacionRow.resultQry[1].valor;
+    END CASE;
+    
+    RETURN descripcion;
+END;

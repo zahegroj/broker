@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://archivo.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://archivo.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://archivo.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="actualizarArchivo" type="ns1:actualizarArchivo"/>
+<xs:element ibmSchExtn:docRoot="true" name="actualizarArchivoResponse" type="ns1:actualizarArchivoResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarArchivo" type="ns1:consultarArchivo"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarArchivoResponse" type="ns1:consultarArchivoResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="guardarArchivo" type="ns1:guardarArchivo"/>
+<xs:element ibmSchExtn:docRoot="true" name="guardarArchivoResponse" type="ns1:guardarArchivoResponse"/>
+<xs:complexType name="guardarArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="archivoBeanRequest" type="ns1:archivoBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="archivoBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fehGen" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehRecepcionProf" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idEstatusArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="idFilenet" type="xs:long"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+      <xs:element minOccurs="0" name="tamArchivo" type="xs:long"/>
+      <xs:element minOccurs="0" name="usuario" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="guardarArchivoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GuardarArchivoResponse" type="ns1:iArchivoSoapWSGuardarArchivoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iArchivoSoapWSGuardarArchivoResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="xs:short"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idEstatusArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="fechaArchivoDesde" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fechaArchivoHasta" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="consecutivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+      <xs:element minOccurs="0" name="idArchivo" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarArchivoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarArchivoResponse" type="ns1:iArchivoSoapWSConsultarArchivoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iArchivoSoapWSConsultarArchivoResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="response" nillable="true" type="ns1:archivoVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="archivoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="estatusArchivo" type="ns1:estatusArchivoVO"/>
+      <xs:element minOccurs="0" name="fehAct" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehArchivo" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehCre" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehGen" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehRecepcionNci" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehRecepcionProf" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="folioArchivo" type="xs:string"/>
+      <xs:element minOccurs="0" name="idArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="idFilenet" type="xs:long"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+      <xs:element minOccurs="0" name="proceso" type="ns1:procesoVO"/>
+      <xs:element minOccurs="0" name="subproceso" type="ns1:subprocesoVO"/>
+      <xs:element minOccurs="0" name="tamArchivo" type="xs:long"/>
+      <xs:element minOccurs="0" name="usuAct" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="estatusArchivoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descEstatusArchivo" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEstatusArchivo" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="procesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descProceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subprocesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSubproceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="actualizarArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="idEstatusArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="actualizarArchivoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActualizarArchivoResponse" type="ns1:iArchivoSoapWSActualizarArchivoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iArchivoSoapWSActualizarArchivoResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

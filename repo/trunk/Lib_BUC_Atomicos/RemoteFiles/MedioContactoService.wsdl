@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://ws.delegate.web.clienteUnico.profuturo.com.mx/MedioContacto" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns0="http://ws.delegate.web.clienteUnico.profuturo.com.mx/MedioContacto" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="MedioContactoPortBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://ws.delegate.web.clienteUnico.profuturo.com.mx/MedioContacto" schemaLocation="MedioContactoService.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getEmailByIdResponse">
+    <wsdl:part element="ns0:getEmailByIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addTelefono">
+    <wsdl:part element="ns0:addTelefono" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateTelefonoResponse">
+    <wsdl:part element="ns0:updateTelefonoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="inactivaRedSocial">
+    <wsdl:part element="ns0:inactivaRedSocial" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTelefonoPersonaResponse">
+    <wsdl:part element="ns0:getTelefonoPersonaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCorreoResponse">
+    <wsdl:part element="ns0:updateCorreoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ClienteUnicoProfGNPSOAException">
+    <wsdl:part element="ns0:ClienteUnicoProfGNPSOAException" name="fault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRedSocial">
+    <wsdl:part element="ns0:getRedSocial" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmailPersona">
+    <wsdl:part element="ns0:getEmailPersona" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTelefonoPersonaByContrato">
+    <wsdl:part element="ns0:getTelefonoPersonaByContrato" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="inactivaEmailResponse">
+    <wsdl:part element="ns0:inactivaEmailResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="inactivaRedSocialResponse">
+    <wsdl:part element="ns0:inactivaRedSocialResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTelefonoById">
+    <wsdl:part element="ns0:getTelefonoById" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addTelefonoResponse">
+    <wsdl:part element="ns0:addTelefonoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTelefonoPersonaByContratoResponse">
+    <wsdl:part element="ns0:getTelefonoPersonaByContratoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmailPersonaByContratoResponse">
+    <wsdl:part element="ns0:getEmailPersonaByContratoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRedesSocialesPersona">
+    <wsdl:part element="ns0:getRedesSocialesPersona" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addRedSocial">
+    <wsdl:part element="ns0:addRedSocial" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addEmailResponse">
+    <wsdl:part element="ns0:addEmailResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmailPersonaByContrato">
+    <wsdl:part element="ns0:getEmailPersonaByContrato" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTelefonoByIdResponse">
+    <wsdl:part element="ns0:getTelefonoByIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTelefonoPersona">
+    <wsdl:part element="ns0:getTelefonoPersona" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRedesSocialesPersonaResponse">
+    <wsdl:part element="ns0:getRedesSocialesPersonaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="inactivaEmail">
+    <wsdl:part element="ns0:inactivaEmail" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRedSocialResponse">
+    <wsdl:part element="ns0:getRedSocialResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmailById">
+    <wsdl:part element="ns0:getEmailById" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRedesSocialesContrato">
+    <wsdl:part element="ns0:getRedesSocialesContrato" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRedesSocialesContratoResponse">
+    <wsdl:part element="ns0:getRedesSocialesContratoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRedSocial">
+    <wsdl:part element="ns0:updateRedSocial" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="inactivaTelefono">
+    <wsdl:part element="ns0:inactivaTelefono" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRedSocialResponse">
+    <wsdl:part element="ns0:updateRedSocialResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addEmail">
+    <wsdl:part element="ns0:addEmail" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCorreo">
+    <wsdl:part element="ns0:updateCorreo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getEmailPersonaResponse">
+    <wsdl:part element="ns0:getEmailPersonaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateTelefono">
+    <wsdl:part element="ns0:updateTelefono" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addRedSocialResponse">
+    <wsdl:part element="ns0:addRedSocialResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="inactivaTelefonoResponse">
+    <wsdl:part element="ns0:inactivaTelefonoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MedioContactoServiceDelegateImpl">
+    <wsdl:operation name="addEmail">
+      <wsdl:input message="ns0:addEmail" name="addEmailRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:addEmailResponse" name="addEmailResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addRedSocial">
+      <wsdl:input message="ns0:addRedSocial" name="addRedSocialRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:addRedSocialResponse" name="addRedSocialResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addTelefono">
+      <wsdl:input message="ns0:addTelefono" name="addTelefonoRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:addTelefonoResponse" name="addTelefonoResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEmailById">
+      <wsdl:input message="ns0:getEmailById" name="getEmailByIdRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getEmailByIdResponse" name="getEmailByIdResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEmailPersona">
+      <wsdl:input message="ns0:getEmailPersona" name="getEmailPersonaRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getEmailPersonaResponse" name="getEmailPersonaResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEmailPersonaByContrato">
+      <wsdl:input message="ns0:getEmailPersonaByContrato" name="getEmailPersonaByContratoRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getEmailPersonaByContratoResponse" name="getEmailPersonaByContratoResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRedesSocialesContrato">
+      <wsdl:input message="ns0:getRedesSocialesContrato" name="getRedesSocialesContratoRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getRedesSocialesContratoResponse" name="getRedesSocialesContratoResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRedesSocialesPersona">
+      <wsdl:input message="ns0:getRedesSocialesPersona" name="getRedesSocialesPersonaRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getRedesSocialesPersonaResponse" name="getRedesSocialesPersonaResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRedSocial">
+      <wsdl:input message="ns0:getRedSocial" name="getRedSocialRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getRedSocialResponse" name="getRedSocialResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTelefonoById">
+      <wsdl:input message="ns0:getTelefonoById" name="getTelefonoByIdRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getTelefonoByIdResponse" name="getTelefonoByIdResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTelefonoPersona">
+      <wsdl:input message="ns0:getTelefonoPersona" name="getTelefonoPersonaRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getTelefonoPersonaResponse" name="getTelefonoPersonaResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTelefonoPersonaByContrato">
+      <wsdl:input message="ns0:getTelefonoPersonaByContrato" name="getTelefonoPersonaByContratoRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getTelefonoPersonaByContratoResponse" name="getTelefonoPersonaByContratoResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="inactivaEmail">
+      <wsdl:input message="ns0:inactivaEmail" name="inactivaEmailRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:inactivaEmailResponse" name="inactivaEmailResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="inactivaRedSocial">
+      <wsdl:input message="ns0:inactivaRedSocial" name="inactivaRedSocialRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:inactivaRedSocialResponse" name="inactivaRedSocialResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="inactivaTelefono">
+      <wsdl:input message="ns0:inactivaTelefono" name="inactivaTelefonoRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:inactivaTelefonoResponse" name="inactivaTelefonoResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateCorreo">
+      <wsdl:input message="ns0:updateCorreo" name="updateCorreoRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:updateCorreoResponse" name="updateCorreoResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateRedSocial">
+      <wsdl:input message="ns0:updateRedSocial" name="updateRedSocialRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:updateRedSocialResponse" name="updateRedSocialResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateTelefono">
+      <wsdl:input message="ns0:updateTelefono" name="updateTelefonoRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:updateTelefonoResponse" name="updateTelefonoResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MedioContactoPortBinding" type="ns0:MedioContactoServiceDelegateImpl">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addEmail">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="addEmailRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addEmailResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addRedSocial">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="addRedSocialRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addRedSocialResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addTelefono">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="addTelefonoRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addTelefonoResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEmailById">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getEmailByIdRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEmailByIdResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEmailPersona">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getEmailPersonaRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEmailPersonaResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEmailPersonaByContrato">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getEmailPersonaByContratoRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getEmailPersonaByContratoResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRedesSocialesContrato">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getRedesSocialesContratoRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRedesSocialesContratoResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRedesSocialesPersona">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getRedesSocialesPersonaRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRedesSocialesPersonaResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRedSocial">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getRedSocialRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRedSocialResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTelefonoById">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getTelefonoByIdRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTelefonoByIdResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTelefonoPersona">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getTelefonoPersonaRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTelefonoPersonaResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTelefonoPersonaByContrato">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getTelefonoPersonaByContratoRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTelefonoPersonaByContratoResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="inactivaEmail">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="inactivaEmailRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="inactivaEmailResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="inactivaRedSocial">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="inactivaRedSocialRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="inactivaRedSocialResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="inactivaTelefono">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="inactivaTelefonoRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="inactivaTelefonoResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateCorreo">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="updateCorreoRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateCorreoResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateRedSocial">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="updateRedSocialRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateRedSocialResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateTelefono">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="updateTelefonoRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateTelefonoResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MedioContactoService">
+    <wsdl:port binding="ns0:MedioContactoPortBinding" name="MedioContactoPort.0">
+      <soap11:address location="http://GPCOP02PRESTA2:3040/buc/ws/MedioContactoService"/>
+    </wsdl:port>
+    <wsdl:port binding="ns0:MedioContactoPortBinding" name="MedioContactoPort">
+      <soap11:address location="http://GPCOP02PRESTA2:3040/buc/ws/MedioContactoService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

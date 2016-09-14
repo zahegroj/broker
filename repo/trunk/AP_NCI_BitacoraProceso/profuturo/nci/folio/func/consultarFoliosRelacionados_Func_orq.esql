@@ -1,0 +1,63 @@
+BROKER SCHEMA profuturo.nci.folio.func
+
+CREATE COMPUTE MODULE consultarFoliosRelacionados_Func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET OutputRoot.XMLNSC.consultarFoliosRelacionados.folio = InputRoot.XMLNSC.ns:consultarFoliosRelacionadosRequest.folio;
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.consultarFoliosRelacionados.success = TRUE THEN	
+			DECLARE tam int CARDINALITY(Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[]);
+			DECLARE X int 1;
+			WHILE X<=tam DO
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].folio = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].folio;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].fechaCreacion = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].fehCre;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].usuarioCreacion = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].usuCre;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].fechaActalizacion = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].feAct;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].usuarioActualizacion = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].usuAct;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].canal.idCanal = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].canal.idcanal;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].canal.nombreCanal = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].canal.descCanal;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].proceso.idProceso = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].proceso.idProceso;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].proceso.nombreProceso = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].proceso.descProceso;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].subproceso.idSubproceso = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].subproceso.idSubproceso;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].subproceso.nombreSubproceso = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].subproceso.descSubproceso;			
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].estatusProceso.idEstatus = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].estatusProceso.idEstatusProceso;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].estatusProceso.decripcionEstatus = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].estatusProceso.descEstatusProceso;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].instanciaBPM.idInstancia = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].instanciaBpm;
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios.folioProceso[X].instanciaBPM.idSnapshot = Environment.nci.consultarFoliosRelacionados.response.foliosRelacionados[X].idSnapshot;
+				SET X=X+1;
+			END WHILE;
+			
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.folios) IS NULL THEN
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.mensajes.mensaje.codigo = '1002';
+				SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.mensajes.mensaje.descripcion = 'No se encontraron registros';
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarValorAccion.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarValorAccion.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarValorAccion.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF;
+			
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_consultarFoliosRelacionados
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET Environment.valReq.folio = InputRoot.XMLNSC.ns:consultarFoliosRelacionadosRequest.folio;	
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarFoliosRelacionados_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

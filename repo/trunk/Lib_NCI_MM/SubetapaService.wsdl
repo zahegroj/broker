@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="SubetapaService" targetNamespace="http://mx.profuturo/iib/afo/SubetapaService/v1" xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException" xmlns:sch="http://mx.profuturo/iib/afo/SubetapaService/v1/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://mx.profuturo/iib/afo/SubetapaService/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="SubetapaBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+
+	<wsdl:types>
+		<xsd:schema>
+<xsd:import namespace="http://mx.profuturo/iib/afo/SubetapaService/v1/types" schemaLocation="SubetapaService/SubetapaService.xsd"/>
+<xsd:import namespace="http://mx.profuturo/iib/iibException/IIBException" schemaLocation="frameworkiib/iibException/IIBException.xsd"/>
+</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="iniciarSubetapaRequest">
+		<wsdl:part element="sch:iniciarSubetapaRequest" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="iniciarSubetapaResponse">
+		<wsdl:part element="sch:iniciarSubetapaResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="informarSubetapaRequest">
+		<wsdl:part element="sch:informarSubetapaRequest" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="informarSubetapaResponse">
+		<wsdl:part element="sch:informarSubetapaResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="depurarProcesamientoRequest">
+		<wsdl:part element="sch:depurarProcesamientoRequest" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="depurarProcesamientoResponse">
+		<wsdl:part element="sch:depurarProcesamientoResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="faultMsg">
+    	<wsdl:part element="iibe:iibException" name="parameters"/>
+    </wsdl:message>
+	
+	<wsdl:portType name="SubetapaPortType">
+		<wsdl:operation name="iniciarSubetapa">
+			<wsdl:input message="tns:iniciarSubetapaRequest"/>
+			<wsdl:output message="tns:iniciarSubetapaResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="depurarProcesamiento">
+			<wsdl:input message="tns:depurarProcesamientoRequest"/>
+			<wsdl:output message="tns:depurarProcesamientoResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="SubetapaBinding" type="tns:SubetapaPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="iniciarSubetapa">
+			<soap:operation soapAction="urn:iniciarSubetapa" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="depurarProcesamiento">
+			<soap:operation soapAction="urn:depurarProcesamiento" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="SubetapaService">
+		<wsdl:port binding="tns:SubetapaBinding" name="SubetapaPort">
+			<soap:address location="http://localhost/iib/afo/SubetapaService/v1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

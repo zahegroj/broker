@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://notificacion.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://notificacion.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://notificacion.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xs:element ibmSchExtn:docRoot="true" name="getNotificacion" type="ns1:getNotificacion"/>
+			<xs:element ibmSchExtn:docRoot="true" name="getNotificacionResponse" type="ns1:getNotificacionResponse"/>
+			<xs:complexType name="getNotificacion">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="request" type="ns1:notificacionCorreoRequest"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="notificacionCorreoRequest">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="idNotificacion" type="xs:short"/>
+					<xs:element minOccurs="0" name="parametros">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0" name="parametro" type="ns1:parametroBean"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="parametroBean">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="name" type="xs:string"/>
+					<xs:element minOccurs="0" name="value" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getNotificacionResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="GetNotificacionResponse" type="ns1:iNotificacionCorreoSoapWSGetNotificacionResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="iNotificacionCorreoSoapWSGetNotificacionResponse">
+				<xs:complexContent>
+					<xs:extension base="ns1:abstractWebServiceResponse">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="response" type="ns1:notificacionCorreoResponse"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType abstract="true" name="abstractWebServiceResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+					<xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+					<xs:element name="success" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="notificacionCorreoResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="asunto" type="xs:string"/>
+					<xs:element minOccurs="0" name="body" type="xs:base64Binary"/>
+					<xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+					<xs:element minOccurs="0" name="estatus" type="ns1:estatusNotificacionVO"/>
+					<xs:element minOccurs="0" name="id" type="xs:short"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="parametros" nillable="true" type="ns1:parametroBean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="estatusNotificacionVO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+					<xs:element minOccurs="0" name="idNotificacion" type="xs:short"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>

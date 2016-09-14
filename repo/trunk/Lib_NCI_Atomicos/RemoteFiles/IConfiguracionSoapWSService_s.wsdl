@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IConfiguracionSoapWSService" targetNamespace="http://impl.configuracion.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://configuracion.webservice.ws.nci.profuturo.mx/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.configuracion.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="IConfiguracionSoapWSServiceSoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:import location="IConfiguracionSoapWSService_i.wsdl" namespace="http://configuracion.webservice.ws.nci.profuturo.mx/">
+    </wsdl:import>
+  <wsdl:binding name="IConfiguracionSoapWSServiceSoapBinding" type="ns1:IConfiguracionSoapWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="consultaMatrizConvivencia">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaMatrizConvivencia">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaMatrizConvivenciaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaPermisoIndicador">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaPermisoIndicador">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaPermisoIndicadorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaPermisoInformacionCliente">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaPermisoInformacionCliente">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaPermisoInformacionClienteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IConfiguracionSoapWSService">
+    <wsdl:port binding="tns:IConfiguracionSoapWSServiceSoapBinding" name="IConfiguracionSoapWSPort">
+      <soap:address location="http://wasnci.profuturo.mx:8000/mit-ws/services/IConfiguracionSoapWSService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

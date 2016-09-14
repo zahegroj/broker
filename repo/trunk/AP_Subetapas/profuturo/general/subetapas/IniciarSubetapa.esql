@@ -1,0 +1,23 @@
+BROKER SCHEMA profuturo.general.subetapas
+
+CREATE COMPUTE MODULE IniciarSubetapa
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:iniciarSubetapaResponse NAME 'mensajes';
+		CALL profuturo.util.CodigosMensajesCASE('iniSubetapa',OutputRoot.XMLNSC.ns:iniciarSubetapaResponse.mensajes);
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE DepurarProcesamiento
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:depurarProcesamientoResponse NAME 'mensajes';
+		CALL profuturo.util.CodigosMensajesCASE('iniDepura',OutputRoot.XMLNSC.ns:depurarProcesamientoResponse.mensajes);
+		
+		RETURN TRUE;
+	END;
+END MODULE;

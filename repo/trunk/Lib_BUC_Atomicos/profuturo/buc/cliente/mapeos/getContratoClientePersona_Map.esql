@@ -1,0 +1,36 @@
+BROKER SCHEMA profuturo.buc.cliente.mapeos
+
+CREATE COMPUTE MODULE getContratoClientePersona_Map_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsCli NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/ClienteEntity';
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'BUC', 'ClienteEntityService', 'getContratoClientePersona');
+		
+		SET OutputRoot.XMLNSC.nsCli:getContratoClientePersona.arg0.idPersona = InputRoot.XMLNSC.contratoClientePersona.idPersona;
+		SET OutputRoot.XMLNSC.nsCli:getContratoClientePersona.arg1.indicadorLineaNegocio = InputRoot.XMLNSC.contratoClientePersona.lineaNegocio;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE getContratoClientePersona_Map_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsCli NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/ClienteEntity';
+		
+		SET Environment.buc.getContratoClientePersona = InputRoot.XMLNSC.nsCli:getContratoClientePersonaResponse;
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		RETURN TRUE;	
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE getContratoClientePersona_Map_Fault
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET Environment.buc.getContratoClientePersona.error = InputRoot.XMLNSC.nsFault:Fault.detail.*[1];
+	END;
+END MODULE;

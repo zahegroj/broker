@@ -1,0 +1,91 @@
+
+
+Importing file: \buc\ws\MedioContactoService.wsdl
+
+The WSDL import will proceed with bindings MedioContactoPortBinding.
+Creating wsdl schema document for RemoteFiles/MedioContactoService.xsd.
+Parsing wsdl binding {http://ws.delegate.web.clienteUnico.profuturo.com.mx/MedioContacto}MedioContactoPortBinding.
+Parsing wsdl binding input addEmail.
+Parsing wsdl binding output addEmail.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input addRedSocial.
+Parsing wsdl binding output addRedSocial.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input addTelefono.
+Parsing wsdl binding output addTelefono.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getEmailById.
+Parsing wsdl binding output getEmailById.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getEmailPersona.
+Parsing wsdl binding output getEmailPersona.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getEmailPersonaByContrato.
+Parsing wsdl binding output getEmailPersonaByContrato.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getRedesSocialesContrato.
+Parsing wsdl binding output getRedesSocialesContrato.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getRedesSocialesPersona.
+Parsing wsdl binding output getRedesSocialesPersona.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getRedSocial.
+Parsing wsdl binding output getRedSocial.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getTelefonoById.
+Parsing wsdl binding output getTelefonoById.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getTelefonoPersona.
+Parsing wsdl binding output getTelefonoPersona.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input getTelefonoPersonaByContrato.
+Parsing wsdl binding output getTelefonoPersonaByContrato.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input inactivaEmail.
+Parsing wsdl binding output inactivaEmail.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input inactivaRedSocial.
+Parsing wsdl binding output inactivaRedSocial.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input inactivaTelefono.
+Parsing wsdl binding output inactivaTelefono.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input updateCorreo.
+Parsing wsdl binding output updateCorreo.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input updateRedSocial.
+Parsing wsdl binding output updateRedSocial.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Parsing wsdl binding input updateTelefono.
+Parsing wsdl binding output updateTelefono.
+Parsing wsdl binding fault ClienteUnicoProfGNPSOAException.
+Processing doc style for operation addEmail.
+Processing doc style for operation addRedSocial.
+Processing doc style for operation addTelefono.
+Processing doc style for operation getEmailById.
+Processing doc style for operation getEmailPersona.
+Processing doc style for operation getEmailPersonaByContrato.
+Processing doc style for operation getRedesSocialesContrato.
+Processing doc style for operation getRedesSocialesPersona.
+Processing doc style for operation getRedSocial.
+Processing doc style for operation getTelefonoById.
+Processing doc style for operation getTelefonoPersona.
+Processing doc style for operation getTelefonoPersonaByContrato.
+Processing doc style for operation inactivaEmail.
+Processing doc style for operation inactivaRedSocial.
+Processing doc style for operation inactivaTelefono.
+Processing doc style for operation updateCorreo.
+Processing doc style for operation updateRedSocial.
+Processing doc style for operation updateTelefono.
+Populating WSDL schema RemoteFiles/MedioContactoService_wsdl.xsd.
+Creating file RemoteFiles/MedioContactoService_wsdl.xsd in the workspace.
+Creating file /Lib_BUC_Atomicos/MedioContactoService.xsd in the workspace.
+Copying source WSDL MedioContactoService?wsdl to MedioContactoService.wsdl.
+
+Elapsed time processing this message definition file: 10.697 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

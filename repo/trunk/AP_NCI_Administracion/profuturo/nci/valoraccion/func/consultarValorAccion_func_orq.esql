@@ -1,0 +1,68 @@
+BROKER SCHEMA profuturo.nci.valoraccion.func
+
+CREATE COMPUTE MODULE consultarValorAccion_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1/types';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:consultarValorAccionRequest.fechaValorAccion) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.valorAccionBeanRequest.fechaValorAccion = InputRoot.XMLNSC.ns:consultarValorAccionRequest.fechaValorAccion;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:consultarValorAccionRequest.idSiefore) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.valorAccionBeanRequest.idSiefore = InputRoot.XMLNSC.ns:consultarValorAccionRequest.idSiefore;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:consultarValorAccionRequest.idValorAccion) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.valorAccionBeanRequest.idValorAccion = InputRoot.XMLNSC.ns:consultarValorAccionRequest.idValorAccion;
+		END IF;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.consultarValorAccion.success = TRUE THEN	
+			DECLARE tam int CARDINALITY(Environment.nci.consultarValorAccion.response.listaValorAccion.valorAccion[]);
+			DECLARE X int 1;
+			WHILE X<=tam DO
+					SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.valoresAccion.valorAccion[X].id = Environment.nci.consultarValorAccion.response.listaValorAccion.valorAccion[X].idValorAccion;
+					SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.valoresAccion.valorAccion[X].valorAccion = Environment.nci.consultarValorAccion.response.listaValorAccion.valorAccion[X].valorAccion;
+					SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.valoresAccion.valorAccion[X].fecha = Environment.nci.consultarValorAccion.response.listaValorAccion.valorAccion[X].fechaAccion;			
+					SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.valoresAccion.valorAccion[X].siefore.id = Environment.nci.consultarValorAccion.response.listaValorAccion.valorAccion[X].siefore.idSiefore;
+					SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.valoresAccion.valorAccion[X].siefore.descripcion = Environment.nci.consultarValorAccion.response.listaValorAccion.valorAccion[X].siefore.descSiefore;
+					SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.valoresAccion.valorAccion[X].regimen.id = Environment.nci.consultarValorAccion.response.listaValorAccion.valorAccion[X].regimen.id;
+					SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.valoresAccion.valorAccion[X].regimen.descripcion = Environment.nci.consultarValorAccion.response.listaValorAccion.valorAccion[X].regimen.descripcion;		
+				SET X=X+1;
+			END WHILE;
+			
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarValorAccionResponse.valoresAccion) IS NULL THEN
+				SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.mensajes.mensaje.codigo = '1002';
+				SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.mensajes.mensaje.descripcion = 'No se encontraron registros';
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarValorAccion.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarValorAccion.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarValorAccion.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarValorAccion_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1/types';
+		SET OutputRoot.XMLNSC.ns:consultarValorAccionResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_consultarValorAccion
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1/types';
+		
+		SET Environment.valReq.idSiefore = InputRoot.XMLNSC.ns:consultarValorAccionRequest.idSiefore;	
+	END;
+END MODULE;

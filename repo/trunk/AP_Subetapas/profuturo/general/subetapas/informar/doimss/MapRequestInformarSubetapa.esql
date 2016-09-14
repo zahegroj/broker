@@ -1,0 +1,55 @@
+BROKER SCHEMA profuturo.general.subetapas.informar.doimss
+
+CREATE COMPUTE MODULE MapRequestInformarSubetapa
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		DECLARE parametrosEntrada REFERENCE TO Environment.iniciar.wrapper.iniciarSubetapaRequest.parametros;
+		DECLARE resultado CHARACTER '';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.resultado) IS NOT NULL THEN
+			SET resultado =  InputRoot.XMLNSC.resultado;		
+		END IF;
+
+		SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.folio = Environment.iniciar.wrapper.iniciarSubetapaRequest.folio;
+		SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.idProceso = Environment.iniciar.wrapper.iniciarSubetapaRequest.idProceso;
+		SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.idSubproceso = Environment.iniciar.wrapper.iniciarSubetapaRequest.idSubproceso;
+		
+		SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'ID_ETAPA';		
+		SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.idEtapa = Environment.Variables.valorParametro[1].valor;
+		
+		IF FIELDTYPE(Environment.iniciar.wrapper.iniciarSubetapaRequest.idSubetapa) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.idSubetapa = Environment.iniciar.wrapper.iniciarSubetapaRequest.idSubetapa;
+			
+			IF resultado = '' THEN
+				CASE Environment.iniciar.wrapper.iniciarSubetapaRequest.idSubetapa
+				WHEN '26' THEN --cifras control (sumario)
+					SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.resultado = 'SIN HALLAZGOS';
+				WHEN '273' THEN --generar movs previos
+					SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.resultado = 'SIN HALLAZGOS';
+				WHEN '27' THEN --aplicar movs estatus (acreditados/cancelados)
+					SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.resultado = 'SIN HALLAZGOS';
+				WHEN '284' THEN --desmarcar cuenta																		--Se agrega desmarcar cuentas
+					SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.resultado = 'SIN HALLAZGOS';	
+				END CASE;
+			ELSE
+				SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.resultado = resultado;
+			END IF;
+		ELSE 
+			SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.idSubetapa = 0;
+			IF FIELDTYPE(InputRoot.XMLNSC.resultado) IS NOT NULL THEN
+				SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.resultado = resultado;
+			ELSE
+				SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.resultado = 'BORRADO';
+			END IF;
+		END IF;
+		
+		SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.idSnapshot = Environment.iniciar.wrapper.iniciarSubetapaRequest.idSnapshot;
+		
+		SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'ID_INSTANCIA';		
+		SET OutputRoot.XMLNSC.ns:informarSubetapaRequest.idInstancia = Environment.Variables.valorParametro[1].valor;		
+		
+		SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'informar';
+		RETURN TRUE;
+	END;
+END MODULE;

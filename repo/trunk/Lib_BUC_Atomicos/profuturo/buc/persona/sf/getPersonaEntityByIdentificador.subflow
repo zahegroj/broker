@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_profuturo_buc_persona_sf_personaEntityService_getPersonaEntityByIdentificador.subflow="gen/profuturo/buc/persona/sf/personaEntityService_getPersonaEntityByIdentificador.subflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="profuturo/buc/persona/sf/getPersonaEntityByIdentificador.subflow" nsPrefix="profuturo_buc_persona_sf_getPersonaEntityByIdentificador.subflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" useDefaults="true" udpSupport="true">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="getPersonaEntityByIdentificador" bundleName="profuturo/buc/persona/sf/getPersonaEntityByIdentificador" pluginId="Lib_BUC_Atomicos"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Lib_BUC_Atomicos/icons/full/obj16/getPersonaEntityByIdentificador.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Lib_BUC_Atomicos/icons/full/obj30/getPersonaEntityByIdentificador.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="99,164">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="profuturo/buc/persona/sf/getPersonaEntityByIdentificador" pluginId="Lib_BUC_Atomicos"/>
+      </nodes>
+      <nodes xmi:type="gen_profuturo_buc_persona_sf_personaEntityService_getPersonaEntityByIdentificador.subflow:FCMComposite_1" xmi:id="FCMComposite_1_1" location="297,165">
+        <translation xmi:type="utility:ConstantString" string="getPersonaEntityByIdentificador"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="212,164" computeExpression="esql://routine/profuturo.buc.persona.mapeos#getPersonaEntityByIdentificador_Map_IN.Main">
+        <translation xmi:type="utility:ConstantString" string="Map IN"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="531,173" computeExpression="esql://routine/profuturo.buc.persona.mapeos#getPersonaEntityByIdentificador_Map_OUT.Main">
+        <translation xmi:type="utility:ConstantString" string="Map OUT"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="529,97" computeExpression="esql://routine/profuturo.buc.persona.mapeos#getPersonaEntityByIdentificador_Map_Fault.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Fault"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_2" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_1" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.getPersonaEntityByIdentificadorResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

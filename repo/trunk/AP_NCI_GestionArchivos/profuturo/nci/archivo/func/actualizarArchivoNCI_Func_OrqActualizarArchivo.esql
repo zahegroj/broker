@@ -1,0 +1,43 @@
+BROKER SCHEMA profuturo.nci.archivo.func
+
+CREATE COMPUTE MODULE actualizarArchivoNCI_Func_OrqActualizarArchivo
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types';
+		SET OutputRoot.XMLNSC.actualizarArchivo = InputRoot.XMLNSC.ns:actualizarArchivoRequest;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.actualizararchivo.res.success = true THEN
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:actualizarArchivoResponse NAME 'mensajes';
+	        CALL profuturo.util.CodigosMensajesCASE('opExito',OutputRoot.XMLNSC.ns:actualizarArchivoResponse.mensajes);
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.actualizararchivo.res.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.actualizararchivo.res.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.actualizararchivo.res.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF; 	
+
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_actualizarArchivo
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types';
+		
+		SET Environment.valReq.idEstatusArchivo = InputRoot.XMLNSC.ns:actualizarArchivoRequest.idEstatusArchivo;
+		SET Environment.valReq.folio = InputRoot.XMLNSC.ns:actualizarArchivoRequest.folio;	
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE actualizarArchivo_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types';
+		SET OutputRoot.XMLNSC.ns:actualizarArchivoResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

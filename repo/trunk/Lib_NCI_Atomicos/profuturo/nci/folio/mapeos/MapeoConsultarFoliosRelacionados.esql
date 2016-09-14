@@ -1,0 +1,24 @@
+BROKER SCHEMA profuturo.nci.folio.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarFoliosRelacionados_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://folio.webservice.ws.nci.profuturo.mx/';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'IFolioSoapWSService', 'consultarFoliosRelacionados');
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNSC.ns:consultarFoliosRelacionados.request.folio = InputRoot.XMLNSC.consultarFoliosRelacionados.folio;		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarFoliosRelacionados_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://folio.webservice.ws.nci.profuturo.mx/';		
+		SET Environment.nci.consultarFoliosRelacionados = InputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.ConsultarFoliosRelacionadosResponse;		
+		IF InputRoot.XMLNSC.ns:consultarFoliosRelacionadosResponse.ConsultarFoliosRelacionadosResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

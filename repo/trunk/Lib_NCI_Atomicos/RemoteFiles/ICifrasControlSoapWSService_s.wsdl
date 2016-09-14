@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ICifrasControlSoapWSService" targetNamespace="http://impl.cifras.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://cifras.webservice.ws.nci.profuturo.mx/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.cifras.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="ICifrasControlSoapWSServiceSoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:import location="ICifrasControlSoapWSService_i.wsdl" namespace="http://cifras.webservice.ws.nci.profuturo.mx/">
+    </wsdl:import>
+  <wsdl:binding name="ICifrasControlSoapWSServiceSoapBinding" type="ns1:ICifrasControlSoapWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="consulta">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consulta">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaSumarizado">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaSumarizado">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaSumarizadoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaSumarizadoVivienda">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaSumarizadoVivienda">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaSumarizadoViviendaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaSumarizadoTotal">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaSumarizadoTotal">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaSumarizadoTotalResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ICifrasControlSoapWSService">
+    <wsdl:port binding="tns:ICifrasControlSoapWSServiceSoapBinding" name="ICifrasControlSoapWSPort">
+      <soap:address location="http://192.168.45.111:8080/mit-ws/services/ICifrasControlSoapWSService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

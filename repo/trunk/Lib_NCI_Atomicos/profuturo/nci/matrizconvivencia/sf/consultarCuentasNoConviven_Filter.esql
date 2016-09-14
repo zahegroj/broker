@@ -1,0 +1,14 @@
+BROKER SCHEMA profuturo.nci.matrizconvivencia.sf
+
+
+CREATE FILTER MODULE consultarCuentasNoConviven_Filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		IF FIELDTYPE(Root.XMLNSC.consultarCuentasNoConviven.folioRel) IS NOT NULL THEN
+			RETURN TRUE;
+		END IF;
+		
+		RETURN FALSE;
+	END;
+
+END MODULE;

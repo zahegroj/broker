@@ -1,0 +1,34 @@
+BROKER SCHEMA profuturo.nci.notificacion.mapeos
+
+CREATE COMPUTE MODULE MapeoObtenerPlantilla_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'INotificacionCorreoSoapWSService', 'getNotificacion');
+		SET OutputRoot.Properties = InputRoot.Properties;
+		DECLARE ns NAMESPACE 'http://notificacion.webservice.ws.nci.profuturo.mx/';		
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNSC.ns:getNotificacion.request.idNotificacion = InputRoot.XMLNSC.notificacion.idNotificacion;		
+		DECLARE I INTEGER 1;
+		DECLARE J INTEGER;
+		SET J = CARDINALITY(InputRoot.XMLNSC.notificacion.parametros.parametro[]);
+		WHILE I <= J DO
+			SET OutputRoot.XMLNSC.ns:getNotificacion.request.parametros.parametro[I].name = InputRoot.XMLNSC.notificacion.parametros.parametro[I].clave;
+			SET OutputRoot.XMLNSC.ns:getNotificacion.request.parametros.parametro[I].value = profuturo.util.func.remplazarCaracteresPorHTML(InputRoot.XMLNSC.notificacion.parametros.parametro[I].valor);
+			SET I = I + 1;
+		END WHILE;			
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoObtenerPlantilla_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://notificacion.webservice.ws.nci.profuturo.mx/';	
+		SET Environment.nci.plantilla.res = InputRoot.XMLNSC.ns:getNotificacionResponse.GetNotificacionResponse;		
+		IF InputRoot.XMLNSC.ns:getNotificacionResponse.GetNotificacionResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

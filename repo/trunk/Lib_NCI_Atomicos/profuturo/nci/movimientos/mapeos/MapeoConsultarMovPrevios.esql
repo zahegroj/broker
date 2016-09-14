@@ -1,0 +1,53 @@
+BROKER SCHEMA profuturo.nci.movimientos.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarMovPrevios_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		CALL profuturo.util.CopyEntireMessage(InputRoot,OutputRoot);				
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarMovPrevios_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE response REFERENCE TO InputRoot.XMLNSC.movimientosPreviosResponse;
+		DECLARE arrCount INTEGER CARDINALITY(InputRoot.XMLNSC.movimientosPreviosResponse.movimientosPrevios[]);
+		DECLARE i INTEGER 1;				
+		X : WHILE i <= arrCount DO
+			SET OutputRoot.XMLNSC.movimientosPreviosResponse.movimientosPrevios[i] = response.movimientosPrevios[i];			
+			SET Environment.qry.resp[] = SELECT T FROM response.movimientosPreviosTotal[] AS T WHERE T.idSiefore = response.movimientosPrevios[i].idSiefore;									     
+			SET OutputRoot.XMLNSC.movimientosPreviosResponse.movimientosPrevios[i].total.montoPesos = Environment.qry.resp[1].montoPesos;
+			SET OutputRoot.XMLNSC.movimientosPreviosResponse.movimientosPrevios[i].total.montoAcciones = Environment.qry.resp[1].montoAcciones;
+			SET OutputRoot.XMLNSC.movimientosPreviosResponse.movimientosPrevios[i].total.numeroRegistros = Environment.qry.resp[1].numeroRegistros;			
+			SET i = i + 1;
+		END WHILE X; 		
+		SET Environment.Variables.consultarMovimientosPrevios = OutputRoot.XMLNSC.movimientosPreviosResponse;		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarMovPreviosTot_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE arrCount INTEGER CARDINALITY(InputRoot.XMLNSC.movimientosPreviosTotalResponse.movimientosPrevios[]);
+		DECLARE	i INTEGER 1;		
+		X : WHILE i <= arrCount DO
+			DECLARE movSubcuenta REFERENCE TO InputRoot.XMLNSC.movimientosPreviosTotalResponse.movimientosPrevios[i];
+			SET Environment.Variables.consultarMovimientosPrevios.movimientosTotal.subcuentas[i].idTipoSubcuenta = movSubcuenta.idTipoSubcuenta;
+			SET Environment.Variables.consultarMovimientosPrevios.movimientosTotal.subcuentas[i].idTipoMovimiento = movSubcuenta.idTipoMovimiento;
+			SET Environment.Variables.consultarMovimientosPrevios.movimientosTotal.subcuentas[i].montoPesos = movSubcuenta.montoPesos;
+			SET Environment.Variables.consultarMovimientosPrevios.movimientosTotal.subcuentas[i].montoAcciones = movSubcuenta.montoAcciones;
+			SET Environment.Variables.consultarMovimientosPrevios.movimientosTotal.subcuentas[i].numeroRegistros = movSubcuenta.numeroRegistros;			
+			SET i = i + 1;
+		END WHILE X;		
+		DECLARE totales REFERENCE TO InputRoot.XMLNSC.movimientosPreviosTotalResponse.movimientosPreviosTotal;
+		SET Environment.Variables.consultarMovimientosPrevios.movimientosTotal.total.montoPesos = totales.montoPesos;
+		SET Environment.Variables.consultarMovimientosPrevios.movimientosTotal.total.montoAcciones = totales.montoAcciones;
+		SET Environment.Variables.consultarMovimientosPrevios.movimientosTotal.total.numeroRegistros = totales.numeroRegistros;		
+		SET Environment.nci.consultarMovimientosPrevios = Environment.Variables.consultarMovimientosPrevios; 		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');		
+		RETURN TRUE;
+	END;
+END MODULE;

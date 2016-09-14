@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ws.delegate.web.clienteUnico.profuturo.com.mx/ClienteEntity" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://ws.delegate.web.clienteUnico.profuturo.com.mx/ClienteEntity">
+  <xsd:element ibmSchExtn:docRoot="true" name="ClienteUnicoProfGNPSOAException" type="tns:ClienteUnicoProfGNPSOAException"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="addContratoCliente" type="tns:addContratoCliente"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="addContratoClientePersona" type="tns:addContratoClientePersona"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="addContratoClientePersonaResponse" type="tns:addContratoClientePersonaResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="addContratoClienteResponse" type="tns:addContratoClienteResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getContratoCliente" type="tns:getContratoCliente"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getContratoClientePersona" type="tns:getContratoClientePersona"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getContratoClientePersonaResponse" type="tns:getContratoClientePersonaResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getContratoClienteResponse" type="tns:getContratoClienteResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getContratosCliente" type="tns:getContratosCliente"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getContratosClienteResponse" type="tns:getContratosClienteResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="updateContratoCliente" type="tns:updateContratoCliente"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="updateContratoClienteResponse" type="tns:updateContratoClienteResponse"/>
+  <xsd:complexType name="getContratoCliente">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:idContrato"/>
+      <xsd:element minOccurs="0" name="arg2" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="idPersona">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idPersona" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="idContrato">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idContrato" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="lineaNegocioIn">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="indicadorLineaNegocio" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getContratoClienteResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:contratoClienteOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="contratoClienteOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:contratoClienteView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="response">
+    <xsd:sequence>
+      <xsd:element maxOccurs="100" minOccurs="0" name="messages" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="contratoClienteView">
+    <xsd:sequence>
+      <xsd:element name="activo" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="apellidoMaterno" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="apellidoPaterno" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="consecutivounico" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="edad" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="empresaRFC" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="entidadNacimiento" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="escolaridad" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="estadoCivil" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="estatusCasa" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="estatusCliente" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="estatusContrato" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="fechaNacimiento" type="xsd:dateTime"/>
+      <xsd:element minOccurs="0" name="fechaingreso" type="xsd:dateTime"/>
+      <xsd:element minOccurs="0" name="giroNegocio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="idContrato" type="xsd:long"/>
+      <xsd:element name="idpersona" type="xsd:long"/>
+      <xsd:element name="idpersonaunica" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="indicadorVivo" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="nacionalidad" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="nivelIngreso" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="nivelSocioEconomico" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="nombre" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="nombreEmpresa" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="numeroContrato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ocupacion" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="paisNacimiento" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="religion" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="seudonimo" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sexo" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="tipoContrato" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="tipoRegimen" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="titulo" type="tns:elemento"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="elemento">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="clave" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="descripcion" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ClienteUnicoProfGNPSOAException">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="cveAplicacion" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="cveCategoria" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="cveExceptionSistema" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fechaExcepcionSistema" type="xsd:dateTime"/>
+      <xsd:element minOccurs="0" name="idCategoria" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="idSeveridad" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mensajeExceptionAplicacion" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mensajeExceptionSistema" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="nombreServicio" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getContratosCliente">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getContratosClienteResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:contratosClienteOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="contratosClienteOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:contratosClienteView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="contratosClienteView">
+    <xsd:sequence>
+      <xsd:element maxOccurs="100" minOccurs="0" name="contratos" nillable="true" type="tns:contratoView"/>
+      <xsd:element name="idpersona" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="contratoView">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="estatusContrato" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="fechaIngreso" type="xsd:dateTime"/>
+      <xsd:element minOccurs="0" name="idContrato" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="numeroContrato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tipoContrato" type="tns:elemento"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="addContratoCliente">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:datosContrato"/>
+      <xsd:element minOccurs="0" name="arg2" type="tns:datosCliente"/>
+      <xsd:element minOccurs="0" name="arg3" type="tns:usuarioModifica"/>
+      <xsd:element minOccurs="0" name="arg4" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="datosContrato">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="activo" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="estatusContrato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fechaIngreso" type="xsd:dateTime"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="numeroContrato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tipoContrato" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="datosCliente">
+    <xsd:complexContent>
+      <xsd:extension base="tns:mapeoCatalogosIn">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="empresaRFC" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="escolaridad" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="estatusCasa" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="estatusCliente" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="giroNegocio" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="nivelIngreso" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="nivelSocioEconomico" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="nombreEmpresa" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="ocupacion" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="religion" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="tipoRegimen" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="mapeoCatalogosIn">
+    <xsd:sequence/>
+  </xsd:complexType>
+  <xsd:complexType name="usuarioModifica">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="usuarioModifica" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="addContratoClienteResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:updateContratoClienteOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="updateContratoClienteOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:updateContratoClienteView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="updateContratoClienteView">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idContrato" type="xsd:long"/>
+      <xsd:element name="idpersona" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="addContratoClientePersona">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:datosPersonaFisica"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:datosContrato"/>
+      <xsd:element minOccurs="0" name="arg2" type="tns:datosCliente"/>
+      <xsd:element minOccurs="0" name="arg3" type="tns:usuarioModifica"/>
+      <xsd:element minOccurs="0" name="arg4" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="datosPersonaFisica">
+    <xsd:complexContent>
+      <xsd:extension base="tns:mapeoCatalogosIn">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="apellidoMaterno" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="apellidoPaterno" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="entidadNacimiento" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="estadoCivil" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="fechaNacimiento" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="indicadorVivo" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="nacionalidad" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="nombre" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="paisNacimiento" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="seudonimo" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="sexo" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="titulo" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="addContratoClientePersonaResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:updateContratoClienteOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getContratoClientePersona">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getContratoClientePersonaResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:contratoClienteOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="updateContratoCliente">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:updateContratoClienteById"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="updateContratoClienteById">
+    <xsd:complexContent>
+      <xsd:extension base="tns:mapeoCatalogosIn">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="activo" type="xsd:int"/>
+          <xsd:element minOccurs="0" name="empresaRFC" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="escolaridad" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="estatusCasa" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="estatusCliente" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="estatusContrato" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="fechaIngreso" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="giroNegocio" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="idcontrato" type="xsd:long"/>
+          <xsd:element minOccurs="0" name="idpersona" type="xsd:long"/>
+          <xsd:element minOccurs="0" name="nivelIngreso" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="nivelSocioEconomico" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="nombreEmpresa" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="ocupacion" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="religion" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="tipoContrato" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="tipoRegimen" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="usuarioModifica" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="updateContratoClienteResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:updateContratoClienteOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

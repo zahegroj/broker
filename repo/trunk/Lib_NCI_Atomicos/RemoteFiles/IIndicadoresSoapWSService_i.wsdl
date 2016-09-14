@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IIndicadoresSoapWS" targetNamespace="http://indicadores.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://indicadores.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="IIndicadoresSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://indicadores.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://indicadores.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="IIndicadoresSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consultaBasicaResponse">
+    <wsdl:part element="ns1:consultaBasicaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaBasica">
+    <wsdl:part element="ns1:consultaBasica" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IIndicadoresSoapWS">
+    <wsdl:operation name="consultaBasica">
+      <wsdl:input message="ns1:consultaBasica" name="consultaBasica">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaBasicaResponse" name="consultaBasicaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

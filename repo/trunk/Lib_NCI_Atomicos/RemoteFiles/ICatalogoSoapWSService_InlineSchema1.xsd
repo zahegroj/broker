@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://catalogo.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://catalogo.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://catalogo.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="consultarCatalogo" type="ns1:consultarCatalogo"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarCatalogoResponse" type="ns1:consultarCatalogoResponse"/>
+<xs:complexType name="consultarCatalogo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="catalogoBeanRequest" type="ns1:catalogoBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="catalogoBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idCatalogo" type="xs:int"/>
+      <xs:element minOccurs="0" name="idCatalogoPadre" type="xs:int"/>
+      <xs:element minOccurs="0" name="idLineaNegocio" type="xs:int"/>
+      <xs:element minOccurs="0" name="idTipoCatalogo" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarCatalogoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarCatalogoResponse" type="ns1:iCatalogoSoapWSConsultarCatalogoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iCatalogoSoapWSConsultarCatalogoResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="response" nillable="true" type="ns1:catalogoVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="catalogoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="desc" type="xs:string"/>
+      <xs:element minOccurs="0" name="fehAct" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehCre" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idCatCatalogo" type="xs:short"/>
+      <xs:element minOccurs="0" name="idCatPadre" type="xs:int"/>
+      <xs:element minOccurs="0" name="idTipoCat" type="xs:short"/>
+      <xs:element minOccurs="0" name="usuAct" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+      <xs:element minOccurs="0" name="valor" type="xs:string"/>
+      <xs:element minOccurs="0" name="vigencia" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

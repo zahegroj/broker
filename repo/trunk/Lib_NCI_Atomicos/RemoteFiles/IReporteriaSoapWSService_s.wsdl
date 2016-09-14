@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IReporteriaSoapWSService" targetNamespace="http://impl.reporte.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://reporte.webservice.ws.nci.profuturo.mx/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.reporte.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="IReporteriaSoapWSServiceSoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:import location="IReporteriaSoapWSService_i.wsdl" namespace="http://reporte.webservice.ws.nci.profuturo.mx/">
+    </wsdl:import>
+  <wsdl:binding name="IReporteriaSoapWSServiceSoapBinding" type="ns1:IReporteriaSoapWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="cifrasControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="cifrasControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cifrasControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IReporteriaSoapWSService">
+    <wsdl:port binding="tns:IReporteriaSoapWSServiceSoapBinding" name="IReporteriaSoapWSPort">
+      <soap:address location="http://192.168.45.111:8080/mit-ws/services/IReporteriaSoapWSService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

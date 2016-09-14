@@ -1,0 +1,55 @@
+BROKER SCHEMA profuturo.nci.bitacora.func
+
+CREATE COMPUTE MODULE guardarBitacora_Func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types';
+		
+		SET OutputRoot.XMLNSC.bitacoraBean.folio = InputRoot.XMLNSC.ns:guardarBitacoraRequest.folio;
+		SET OutputRoot.XMLNSC.bitacoraBean.idEstatus = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idEstatus;
+		SET OutputRoot.XMLNSC.bitacoraBean.idEtapa = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idEtapa;
+		SET OutputRoot.XMLNSC.bitacoraBean.idResultado = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idResultado;
+		SET OutputRoot.XMLNSC.bitacoraBean.idSubetapa = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idSubetapa;
+		SET OutputRoot.XMLNSC.bitacoraBean.idSubproceso = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idSubproceso;
+		SET OutputRoot.XMLNSC.bitacoraBean.usuario = InputRoot.XMLNSC.ns:guardarBitacoraRequest.usuario;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.guardarBitacora.success = true THEN
+			
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:guardarBitacoraResponse NAME 'mensajes';
+	        CALL profuturo.util.CodigosMensajesCASE('opExito',OutputRoot.XMLNSC.ns:guardarBitacoraResponse.mensajes);
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.guardarBitacora.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.guardarBitacora.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.guardarBitacora.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF; 
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_guardarBitacora
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types';
+		
+		SET Environment.valReq.folio = InputRoot.XMLNSC.ns:guardarBitacoraRequest.folio;
+		SET Environment.valReq.idEstatusSubetapa = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idEstatus;
+		SET Environment.valReq.idSubproceso = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idSubproceso;
+		SET Environment.valReq.idEtapa = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idEtapa;
+		SET Environment.valReq.idSubetapa = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idSubetapa;
+		SET Environment.valReq.idResultado = InputRoot.XMLNSC.ns:guardarBitacoraRequest.idResultado;					
+					
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE guardarBitacora_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types';
+		SET OutputRoot.XMLNSC.ns:guardarBitacoraResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

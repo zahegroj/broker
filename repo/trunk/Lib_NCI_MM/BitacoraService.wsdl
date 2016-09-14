@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="BitacoraService" targetNamespace="http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1" xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException" xmlns:sch="http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="BitacoraBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+
+	<wsdl:types>
+		<xsd:schema>
+<xsd:import namespace="http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types" schemaLocation="BitacoraService/BitacoraService.xsd"/>
+<xsd:import namespace="http://mx.profuturo/iib/iibException/IIBException" schemaLocation="frameworkiib/iibException/IIBException.xsd"/>
+</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="guardarBitacoraRequest">
+		<wsdl:part element="sch:guardarBitacoraRequest" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="guardarBitacoraResponse">
+		<wsdl:part element="sch:guardarBitacoraResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="faultMsg">
+    	<wsdl:part element="iibe:iibException" name="parameters"/>
+    </wsdl:message>
+	
+	<wsdl:portType name="BitacoraPortType">
+		<wsdl:operation name="guardarBitacora">
+			<wsdl:input message="tns:guardarBitacoraRequest"/>
+			<wsdl:output message="tns:guardarBitacoraResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="BitacoraBinding" type="tns:BitacoraPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>		
+		<wsdl:operation name="guardarBitacora">
+			<soap:operation soapAction="urn:guardarBitacora" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="BitacoraService">
+		<wsdl:port binding="tns:BitacoraBinding" name="BitacoraPort">
+			<soap:address location="http://localhost/iib/nci/BitacoraProcesos/BitacoraService/v1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

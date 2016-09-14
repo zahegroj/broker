@@ -1,0 +1,8 @@
+BROKER SCHEMA profuturo.nci.folio.func
+
+CREATE COMPUTE MODULE consultarFolio_Func_ConsultarFolio_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		RETURN TRUE;
+	END;
+END MODULE;

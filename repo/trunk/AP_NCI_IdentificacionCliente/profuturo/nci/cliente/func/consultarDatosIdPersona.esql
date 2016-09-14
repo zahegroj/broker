@@ -1,0 +1,278 @@
+BROKER SCHEMA profuturo.nci.cliente.func
+
+CREATE COMPUTE MODULE consultarDatosIdPersona
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1/types';		
+		DECLARE numCliente INTEGER 1;
+		DECLARE ocurrioExcepcion BOOLEAN FALSE;
+		DECLARE tipoConsulta CHARACTER InputRoot.XMLNSC.buc.consulta;
+		DECLARE refPersona REFERENCE TO InputRoot.XMLNSC.buc.personas.persona[>];
+		WHILE LASTMOVE(refPersona) AND ocurrioExcepcion = FALSE DO
+			DECLARE personaRow ROW NULL;
+			DECLARE clienteRow ROW NULL;
+			DECLARE domiciliosRow ROW NULL;
+			DECLARE telefonosRow ROW NULL;
+			DECLARE correosRow ROW NULL;
+			
+			SET OutputRoot.XMLNSC.personaFisicaIdentificadores.idPersona = refPersona.idPersona;
+			SET OutputRoot.XMLNSC.personaFisicaIdentificadores.lineaNegocio = 0;
+			
+			PROPAGATE TO TERMINAL 'out1';
+			
+			IF FIELDTYPE(Environment.buc.getPersonaFisicaIdentificadores.return) IS NOT NULL THEN
+				DECLARE perFisica REFERENCE TO Environment.buc.getPersonaFisicaIdentificadores.return.response;
+				
+				SET clienteRow.nss = getIdentificador(perFisica, 'NSS', OutputLocalEnvironment);
+				SET clienteRow.rfc = getIdentificador(perFisica, 'RFC', OutputLocalEnvironment);
+				SET clienteRow.curp = getIdentificador(perFisica, 'CURP', OutputLocalEnvironment);
+				SET clienteRow.numeroCuenta = getIdentificador(perFisica, 'NUMERO DE CUENTA', OutputLocalEnvironment);
+				
+				SET personaRow.idPersona = perFisica.idPersona;
+				SET personaRow.nombre = perFisica.nombre;
+				SET personaRow.apellidoMaterno = perFisica.apellidoMaterno;
+				SET personaRow.apellidoPaterno = perFisica.apellidoPaterno;
+				SET personaRow.fechaNacimiento = perFisica.fechaNacimiento;
+				SET personaRow.edad = perFisica.edad;
+				SET personaRow.sexo = perFisica.sexo.descripcion;
+				SET personaRow.estadoCivil = perFisica.estadoCivil.descripcion;
+				SET personaRow.nacionalidad = perFisica.nacionalidad.descripcion;
+				SET personaRow.paisNacimiento = perFisica.paisNacimiento.descripcion;
+				SET personaRow.entidadNacimiento = perFisica.entidadNacimiento.descripcion;
+			ELSEIF FIELDTYPE(Environment.buc.getPersonaFisicaIdentificadores.error) IS NOT NULL THEN
+				CALL profuturo.buc.error.map_BUCException(OutputRoot, Environment.buc.getPersonaFisicaIdentificadores.error);
+				
+				PROPAGATE TO LABEL 'bucError';
+				RETURN FALSE;
+			END IF; 
+			
+			IF tipoConsulta = 'AVANZADA' THEN
+				--validar si hay beneficiarios
+				DECLARE refBenefIdPersona REFERENCE TO refPersona.beneficiarios.idPersona[>];
+				WHILE LASTMOVE(refBenefIdPersona) DO
+					SET OutputRoot.XMLNSC.personaFisicaIdentificadores.idPersona = refBenefIdPersona;
+					SET OutputRoot.XMLNSC.personaFisicaIdentificadores.lineaNegocio = 0;
+					
+					PROPAGATE TO TERMINAL 'out1';
+					
+					MOVE refBenefIdPersona NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+				
+				--validar si hay referencias
+				DECLARE refReferIdPersona REFERENCE TO refPersona.referencias.idPersona[>];
+				WHILE LASTMOVE(refReferIdPersona) DO
+					SET OutputRoot.XMLNSC.personaFisicaIdentificadores.idPersona = refReferIdPersona;
+					SET OutputRoot.XMLNSC.personaFisicaIdentificadores.lineaNegocio = 0;
+					
+					PROPAGATE TO TERMINAL 'out1';
+					
+					MOVE refReferIdPersona NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+			END IF;
+			
+			SET OutputRoot.XMLNSC.contratoClientePersona.idPersona = refPersona.idPersona;
+			SET OutputRoot.XMLNSC.contratoClientePersona.lineaNegocio = 0;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			
+			IF FIELDTYPE(Environment.buc.getContratoClientePersona.return) IS NOT NULL THEN
+				DECLARE clientePer REFERENCE TO Environment.buc.getContratoClientePersona.return.response;
+				
+				SET clienteRow.regimenAfiliacion = clientePer.tipoRegimen.descripcion;
+				SET clienteRow.estatus = clientePer.estatusCliente.descripcion;
+				SET clienteRow.ocupacion = clientePer.ocupacion.descripcion;
+				SET clienteRow.giroEmpresarial = clientePer.giroNegocio.descripcion;
+				SET clienteRow.tipoCliente = clientePer.tipoContrato.descripcion;
+				
+				SET personaRow.escolaridad = clientePer.escolaridad.descripcion;
+			ELSEIF FIELDTYPE(Environment.buc.getContratoClientePersona.error) IS NOT NULL THEN
+				CALL profuturo.buc.error.map_BUCException(OutputRoot, Environment.buc.getContratoClientePersona.error);
+				
+				PROPAGATE TO LABEL 'bucError';
+				RETURN FALSE;
+			END IF;
+			
+			SET OutputRoot.XMLNSC.contactoPersonaContrato.idContrato = Environment.buc.getContratoClientePersona.return.response.idContrato; -- REVISAR
+			SET OutputRoot.XMLNSC.contactoPersonaContrato.idPersona = refPersona.idPersona;
+			SET OutputRoot.XMLNSC.contactoPersonaContrato.lineaNegocio = 0;
+			
+			PROPAGATE TO TERMINAL 'out3';
+			
+			IF FIELDTYPE(Environment.buc.getContactoPersonaContrato.return) IS NOT NULL THEN
+				DECLARE contactoPer REFERENCE TO Environment.buc.getContactoPersonaContrato.return.response;
+				DECLARE idx INTEGER 1;
+				DECLARE domicilio REFERENCE TO contactoPer.domicilios[1];
+				WHILE LASTMOVE(domicilio) DO
+					SET domiciliosRow.domicilio[idx].idDireccion = domicilio.direccion.idDireccion;
+					SET domiciliosRow.domicilio[idx].calle = domicilio.direccion.calle;
+					SET domiciliosRow.domicilio[idx].asentamiento = domicilio.direccion.asentamiento.descripcion;
+					SET domiciliosRow.domicilio[idx].tipoDomicilio = domicilio.tipoDomicilio.descripcion;
+					SET domiciliosRow.domicilio[idx].codigoPostal = domicilio.direccion.codigoPostal.descripcion;
+					SET domiciliosRow.domicilio[idx].municipio = domicilio.direccion.municipio.descripcion;
+					SET domiciliosRow.domicilio[idx].colonia = domicilio.direccion.asentamiento.descripcion;
+					SET domiciliosRow.domicilio[idx].entidadFederativa = domicilio.direccion.estado.descripcion;
+					SET domiciliosRow.domicilio[idx].ciudad = domicilio.direccion.ciudad.descripcion;
+					SET domiciliosRow.domicilio[idx].pais = domicilio.direccion.pais.descripcion;
+					SET idx = idx + 1;
+					MOVE domicilio NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+				
+				SET idx = 1;
+				DECLARE telefono REFERENCE TO contactoPer.telefonos[1];
+				WHILE LASTMOVE(telefono) DO
+					SET telefonosRow.telefono[idx].lada = telefono.claveNacional;
+					SET telefonosRow.telefono[idx].numero = telefono.numero;
+					SET telefonosRow.telefono[idx].extension = telefono.extension;
+					
+					SET idx = idx + 1;
+					MOVE telefono NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+			ELSEIF FIELDTYPE(Environment.buc.getContactoPersonaContrato.error) IS NOT NULL THEN
+				CALL profuturo.buc.error.map_BUCException(OutputRoot, Environment.buc.getContactoPersonaContrato.error);
+				
+				PROPAGATE TO LABEL 'bucError';
+				RETURN FALSE;
+			END IF;
+			
+			IF tipoConsulta = 'AVANZADA' THEN
+				--validar si hay beneficiarios
+				DECLARE refBenefIdPersona REFERENCE TO refPersona.beneficiarios.idPersona[>];
+				WHILE LASTMOVE(refBenefIdPersona) DO
+					SET OutputRoot.XMLNSC.contactoPersonaContrato.idContrato = Environment.buc.getContratoClientePersona.return.response.idContrato; -- REVISAR
+					SET OutputRoot.XMLNSC.contactoPersonaContrato.idPersona = refBenefIdPersona;
+					SET OutputRoot.XMLNSC.contactoPersonaContrato.lineaNegocio = 0;
+					
+					PROPAGATE TO TERMINAL 'out3';
+					
+					MOVE refBenefIdPersona NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+				
+				--validar si hay referencias
+				DECLARE refReferIdPersona REFERENCE TO refPersona.referencias.idPersona[>];
+				WHILE LASTMOVE(refReferIdPersona) DO
+					SET OutputRoot.XMLNSC.contactoPersonaContrato.idContrato = Environment.buc.getContratoClientePersona.return.response.idContrato; -- REVISAR
+					SET OutputRoot.XMLNSC.contactoPersonaContrato.idPersona = refReferIdPersona;
+					SET OutputRoot.XMLNSC.contactoPersonaContrato.lineaNegocio = 0;
+					
+					PROPAGATE TO TERMINAL 'out3';
+					
+					MOVE refReferIdPersona NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+			END IF;
+			/*SET OutputRoot.XMLNSC.emailPersona.idPersona = refIdPersona;
+			
+			PROPAGATE TO TERMINAL 'out4';
+			
+			IF FIELDTYPE(Environment.buc.getEmailPersona.return) IS NOT NULL THEN
+				DECLARE email REFERENCE TO Environment.buc.getEmailPersona.return.response;
+				
+				DECLARE idx INTEGER 1;
+				DECLARE emailPersona REFERENCE TO email.emailPersona[1];
+				WHILE LASTMOVE(emailPersona) DO
+					SET correosRow.correo[idx].email = emailPersona.email;
+					SET correosRow.correo[idx].tipoMail = emailPersona.tipoMail;
+					
+					SET idx = idx + 1;
+					MOVE emailPersona NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+			ELSEIF FIELDTYPE(Environment.buc.getEmailPersona.error) IS NOT NULL THEN
+				CALL profuturo.buc.error.map_BUCException(OutputRoot, Environment.buc.getEmailPersona.error);
+				
+				PROPAGATE TO LABEL 'bucError';
+				RETURN FALSE;
+			END IF;*/
+			
+			IF FIELDTYPE(clienteRow) IS NOT NULL THEN
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.nss = clienteRow.nss;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.rfc = clienteRow.rfc;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.curp = clienteRow.curp;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.numeroCuenta = clienteRow.numeroCuenta;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.estatus = clienteRow.estatus;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.regimenAfiliacion = clienteRow.regimenAfiliacion;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.ocupacion = clienteRow.ocupacion;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.giroEmpresarial = clienteRow.giroEmpresarial;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.cliente.tipoCliente = clienteRow.tipoCliente;
+			END IF;
+			
+			IF FIELDTYPE(personaRow) IS NOT NULL THEN
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.idPersona = personaRow.idPersona;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.nombre = personaRow.nombre;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.apellidoMaterno = personaRow.apellidoMaterno;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.apellidoPaterno = personaRow.apellidoPaterno;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.fechaNacimiento  = personaRow.fechaNacimiento;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.edad = personaRow.edad;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.sexo = personaRow.sexo;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.estadoCivil = personaRow.estadoCivil;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.nacionalidad = personaRow.nacionalidad;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.paisNacimiento = personaRow.paisNacimiento;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.entidadNacimiento = personaRow.entidadNacimiento;
+				SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionBasica.persona.escolaridad = personaRow.escolaridad;
+			END IF;
+			
+			IF FIELDTYPE(domiciliosRow) IS NOT NULL THEN
+				DECLARE refDomicilio REFERENCE TO domiciliosRow.domicilio[1];
+				DECLARE idx INTEGER 1;
+				WHILE LASTMOVE(refDomicilio) DO
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].idDireccion = refDomicilio.idDireccion;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].calle = refDomicilio.calle;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].asentamiento = refDomicilio.asentamiento;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].tipoDomicilio = refDomicilio.tipoDomicilio;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].codigoPostal = refDomicilio.codigoPostal;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].municipio = refDomicilio.municipio;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].colonia = refDomicilio.colonia;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].entidadFederativa = refDomicilio.entidadFederativa;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].ciudad = refDomicilio.ciudad;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.domicilios.domicilio[idx].pais = refDomicilio.pais;
+					
+					SET idx = idx + 1;
+					MOVE refDomicilio NEXTSIBLING;
+				END WHILE;
+			END IF;
+			
+			IF FIELDTYPE(telefonosRow) IS NOT NULL THEN
+				DECLARE refTelefono REFERENCE TO telefonosRow.telefono[1];
+				DECLARE idx INTEGER 1;
+				WHILE LASTMOVE(refTelefono) DO
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.telefonos.telefono[idx].lada = refTelefono.lada;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.telefonos.telefono[idx].numero = refTelefono.numero;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.telefonos.telefono[idx].extension = refTelefono.extension;
+					
+					SET idx = idx + 1;
+					MOVE refTelefono NEXTSIBLING;
+				END WHILE;
+			END IF;
+			
+			IF FIELDTYPE(correosRow) IS NOT NULL THEN
+				DECLARE refCorreo REFERENCE TO correosRow.correo[1];
+				DECLARE idx INTEGER 1;
+				WHILE LASTMOVE(refCorreo) DO
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.correos.correo[idx].email = refCorreo.email;
+					SET Environment.Variables.consultarClienteBasico.clientes.informacionCliente[numCliente].informacionDemografica.correos.correo[idx].tipoMail = refCorreo.tipoMail.descripcion;
+					
+					SET idx = idx + 1;
+					MOVE refCorreo NEXTSIBLING;
+				END WHILE;
+			END IF;
+			
+			SET numCliente = numCliente + 1;
+			MOVE refPersona NEXTSIBLING;
+		END WHILE;
+		
+		IF FIELDTYPE(Environment.Variables.consultarClienteBasico.clientes) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.ns:consultarClienteBasicoResponse.clientes = Environment.Variables.consultarClienteBasico.clientes; 
+		ELSE
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarClienteBasicoResponse NAME 'mensajes';
+	        CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarClienteBasicoResponse.mensajes);
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FUNCTION getIdentificador(IN perFisica REFERENCE, IN identificador CHARACTER, IN Env REFERENCE) RETURNS CHARACTER
+BEGIN
+	DECLARE valor CHARACTER '';
+	SET Env.Variables.consultas.identificador[] = SELECT T FROM perFisica.identificadores[] as T WHERE T.tipoIdentificador.nombre = identificador;
+	SET valor = Env.Variables.consultas.identificador[1].valor;
+	RETURN valor;
+END;

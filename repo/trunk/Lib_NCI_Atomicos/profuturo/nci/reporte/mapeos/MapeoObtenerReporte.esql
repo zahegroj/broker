@@ -1,0 +1,26 @@
+BROKER SCHEMA profuturo.nci.reporte.mapeos
+
+
+CREATE COMPUTE MODULE MapeoObtenerReporte_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://reporte.webservice.ws.nci.profuturo.mx/';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'IReporteriaSoapWSService', 'cifrasControl');
+		
+		CALL profuturo.util.CopyEntireMessage(InputRoot, OutputRoot);
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoObtenerReporte_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://reporte.webservice.ws.nci.profuturo.mx/';
+		SET Environment.nci.obtenerReporteCifrasControl = InputRoot.XMLNSC.ns:cifrasControlResponse.CifrasControlResponse;		
+		IF InputRoot.XMLNSC.ns:cifrasControlResponse.CifrasControlResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

@@ -1,0 +1,24 @@
+BROKER SCHEMA profuturo.nci.tiposubcuenta.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarTipoSubcuenta_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'ITipoSubcuentaSoapWSService', 'consulta');
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNSC.ns:consulta.request = InputRoot.XMLNSC.tipoSubcuentaRequest;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarTipoSubcuenta_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/';		
+		SET Environment.nci.consultarTipoSubcuenta = InputRoot.XMLNSC.ns:consultaResponse.ConsultaResponse;		
+		IF InputRoot.XMLNSC.ns:consultaResponse.ConsultaResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

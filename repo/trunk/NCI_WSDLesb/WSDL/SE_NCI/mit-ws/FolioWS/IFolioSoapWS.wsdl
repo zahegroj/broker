@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://folio.webservice.ws.nci.profuturo.mx/"
+	name="IFolioSoapWS" targetNamespace="http://folio.webservice.ws.nci.profuturo.mx/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://folio.webservice.ws.nci.profuturo.mx/"
+			elementFormDefault="unqualified" targetNamespace="http://folio.webservice.ws.nci.profuturo.mx/"
+			version="1.0">
+			<xs:element name="actualizarFolio" type="tns:actualizarFolio" />
+			<xs:element name="actualizarFolioResponse" type="tns:actualizarFolioResponse" />
+			<xs:element name="generarFolio" type="tns:generarFolio" />
+			<xs:element name="generarFolioResponse" type="tns:generarFolioResponse" />
+			<xs:element name="guardarFolio" type="tns:guardarFolio" />
+			<xs:element name="guardarFolioResponse" type="tns:guardarFolioResponse" />
+			<xs:complexType name="generarFolio">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="idProceso" type="xs:int" />
+					<xs:element minOccurs="0" name="idSubproceso" type="xs:int" />
+					<xs:element minOccurs="0" name="idCanal" type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="generarFolioResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="GenerarFolioResponse"
+						type="tns:iFolioSoapWSGenerarFolioResponse" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="iFolioSoapWSGenerarFolioResponse">
+				<xs:complexContent>
+					<xs:extension base="tns:abstractWebServiceResponse">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="response" type="xs:string" />
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType abstract="true" name="abstractWebServiceResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="errorCode" type="xs:string" />
+					<xs:element minOccurs="0" name="errorMessage" type="xs:string" />
+					<xs:element minOccurs="0" name="errorTrace" type="xs:string" />
+					<xs:element name="success" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="guardarFolio">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="folioBeanRequest" type="tns:folioBeanRequest" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="folioBeanRequest">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="folio" type="xs:string" />
+					<xs:element minOccurs="0" name="idCanal" type="xs:short" />
+					<xs:element minOccurs="0" name="idEstatusProceso" type="xs:short" />
+					<xs:element minOccurs="0" name="idProceso" type="xs:short" />
+					<xs:element minOccurs="0" name="idSnapshot" type="xs:string" />
+					<xs:element minOccurs="0" name="idSubproceso" type="xs:short" />
+					<xs:element minOccurs="0" name="instanciaBpm" type="xs:string" />
+					<xs:element minOccurs="0" name="usuCre" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="guardarFolioResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="GuardarFolioResponse"
+						type="tns:iFolioSoapWSGuardarFolioResponse" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="iFolioSoapWSGuardarFolioResponse">
+				<xs:complexContent>
+					<xs:extension base="tns:abstractWebServiceResponse">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="response" type="xs:string" />
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="actualizarFolio">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="folio" type="xs:string" />
+					<xs:element minOccurs="0" name="idEstatusProceso" type="xs:short" />
+					<xs:element minOccurs="0" name="usuAct" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="actualizarFolioResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ActualizarFolioResponse"
+						type="tns:iFolioSoapWSActualizarFolioResponse" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="iFolioSoapWSActualizarFolioResponse">
+				<xs:complexContent>
+					<xs:extension base="tns:abstractWebServiceResponse">
+						<xs:sequence />
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="generarFolio">
+		<wsdl:part element="ns1:generarFolio" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="guardarFolioResponse">
+		<wsdl:part element="ns1:guardarFolioResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="guardarFolio">
+		<wsdl:part element="ns1:guardarFolio" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="actualizarFolio">
+		<wsdl:part element="ns1:actualizarFolio" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="generarFolioResponse">
+		<wsdl:part element="ns1:generarFolioResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="actualizarFolioResponse">
+		<wsdl:part element="ns1:actualizarFolioResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="IFolioSoapWS">
+		<wsdl:operation name="generarFolio">
+			<wsdl:input message="ns1:generarFolio" name="generarFolio">
+			</wsdl:input>
+			<wsdl:output message="ns1:generarFolioResponse" name="generarFolioResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="guardarFolio">
+			<wsdl:input message="ns1:guardarFolio" name="guardarFolio">
+			</wsdl:input>
+			<wsdl:output message="ns1:guardarFolioResponse" name="guardarFolioResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="actualizarFolio">
+			<wsdl:input message="ns1:actualizarFolio" name="actualizarFolio">
+			</wsdl:input>
+			<wsdl:output message="ns1:actualizarFolioResponse" name="actualizarFolioResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+</wsdl:definitions>

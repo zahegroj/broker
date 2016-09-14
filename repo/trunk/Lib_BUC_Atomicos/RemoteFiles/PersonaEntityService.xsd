@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity">
+  <xsd:element ibmSchExtn:docRoot="true" name="ClienteUnicoProfGNPSOAException" type="tns:ClienteUnicoProfGNPSOAException"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getContactoPersonaContrato" type="tns:getContactoPersonaContrato"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getContactoPersonaContratoResponse" type="tns:getContactoPersonaContratoResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getDatosOrigenPersona" type="tns:getDatosOrigenPersona"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getDatosOrigenPersonaResponse" type="tns:getDatosOrigenPersonaResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getIdentificadoresByIdPersons" type="tns:getIdentificadoresByIdPersons"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getIdentificadoresByIdPersonsResponse" type="tns:getIdentificadoresByIdPersonsResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaEntityByGenerales" type="tns:getPersonaEntityByGenerales"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaEntityByGeneralesResponse" type="tns:getPersonaEntityByGeneralesResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaEntityByIdentificador" type="tns:getPersonaEntityByIdentificador"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaEntityByIdentificadorNegocioRol" type="tns:getPersonaEntityByIdentificadorNegocioRol"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaEntityByIdentificadorNegocioRolResponse" type="tns:getPersonaEntityByIdentificadorNegocioRolResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaEntityByIdentificadorResponse" type="tns:getPersonaEntityByIdentificadorResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaFisica" type="tns:getPersonaFisica"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaFisicaIdentificadores" type="tns:getPersonaFisicaIdentificadores"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaFisicaIdentificadoresResponse" type="tns:getPersonaFisicaIdentificadoresResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaFisicaResponse" type="tns:getPersonaFisicaResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaMoral" type="tns:getPersonaMoral"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaMoralIdentificadores" type="tns:getPersonaMoralIdentificadores"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaMoralIdentificadoresResponse" type="tns:getPersonaMoralIdentificadoresResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="getPersonaMoralResponse" type="tns:getPersonaMoralResponse"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="inactivaIdentificador" type="tns:inactivaIdentificador"/>
+  <xsd:element ibmSchExtn:docRoot="true" name="inactivaIdentificadorResponse" type="tns:inactivaIdentificadorResponse"/>
+  <xsd:complexType name="getPersonaEntityByGenerales">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:generalesPersona"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="generalesPersona">
+    <xsd:complexContent>
+      <xsd:extension base="tns:mapeoCatalogosIn">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="apellidoMaterno" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="apellidoPaterno" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="entidadNacimiento" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="estadoCivil" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="fechaNacimiento" type="xsd:dateTime"/>
+          <xsd:element minOccurs="0" name="lineaNegocio" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="nacionalidad" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="nombre" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="paisNacimiento" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="rol" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="sexo" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="mapeoCatalogosIn">
+    <xsd:sequence/>
+  </xsd:complexType>
+  <xsd:complexType name="lineaNegocioIn">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="indicadorLineaNegocio" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaEntityByGeneralesResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:personasEntityView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="response">
+    <xsd:sequence>
+      <xsd:element maxOccurs="100" minOccurs="0" name="messages" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personasEntityView">
+    <xsd:sequence>
+      <xsd:element maxOccurs="100" minOccurs="0" name="persona" nillable="true" type="tns:personaEntityView"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityView">
+    <xsd:sequence>
+      <xsd:element name="consecutivoUnico" type="xsd:long"/>
+      <xsd:element name="idPersona" type="xsd:long"/>
+      <xsd:element name="idPersonaUnica" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="tipo" type="tns:elemento"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="elemento">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="clave" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="descripcion" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ClienteUnicoProfGNPSOAException">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="cveAplicacion" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="cveCategoria" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="cveExceptionSistema" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fechaExcepcionSistema" type="xsd:dateTime"/>
+      <xsd:element minOccurs="0" name="idCategoria" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="idSeveridad" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mensajeExceptionAplicacion" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mensajeExceptionSistema" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="nombreServicio" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaMoralIdentificadores">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="idPersona">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idPersona" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaMoralIdentificadoresResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityMoralIdentificadoresOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityMoralIdentificadoresOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:personaEntityMoralIdentificadoresView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityMoralIdentificadoresView">
+    <xsd:sequence>
+      <xsd:element name="consecutivoUnico" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="giro" type="tns:elemento"/>
+      <xsd:element name="idPersona" type="xsd:long"/>
+      <xsd:element name="idPersonaUnica" type="xsd:long"/>
+      <xsd:element maxOccurs="100" minOccurs="0" name="identificadores" nillable="true" type="tns:identificador"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element name="numEmpleados" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="rasonSocial" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="sector" type="tns:elemento"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="identificador">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idIdentificador" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="tipoIdentificador" type="tns:tipoIdentificador"/>
+      <xsd:element minOccurs="0" name="valido" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="valor" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tipoIdentificador">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="formato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="idTipoIdentificador" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="longitud" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="nombre" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="requerido" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="inactivaIdentificador">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:tipoIdentificadorPersona"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tipoIdentificadorPersona">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idPersona" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="tipoIdentificador" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="usuarioModifica" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="inactivaIdentificadorResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:identificadorUpdateOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="identificadorUpdateOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:updateIdentificadorView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="updateIdentificadorView">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idIdentificador" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getIdentificadoresByIdPersons">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getIdentificadoresByIdPersonsResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityIdentificadorOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityIdentificadorOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:identificadoresResumenView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="identificadoresResumenView">
+    <xsd:sequence>
+      <xsd:element maxOccurs="100" minOccurs="0" name="identificador" nillable="true" type="tns:identificadorResumenView"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="identificadorResumenView">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="tipoIdentificador" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="valor" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaMoral">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaMoralResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityMoralOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityMoralOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:personaEntityMoralView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityMoralView">
+    <xsd:sequence>
+      <xsd:element name="consecutivoUnico" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="giro" type="tns:elemento"/>
+      <xsd:element name="idPersona" type="xsd:long"/>
+      <xsd:element name="idPersonaUnica" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element name="numEmpleados" type="xsd:int"/>
+      <xsd:element minOccurs="0" name="rasonSocial" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="sector" type="tns:elemento"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaEntityByIdentificadorNegocioRol">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:tipoIdentificadorNegocioRol"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tipoIdentificadorNegocioRol">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="rol" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tipoIdentificador" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="valor" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaEntityByIdentificadorNegocioRolResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getContactoPersonaContrato">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idContrato"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:idPersona"/>
+      <xsd:element minOccurs="0" name="arg2" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="idContrato">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idContrato" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getContactoPersonaContratoResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:mediosContactoCompletosOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="mediosContactoCompletosOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:mediosContactoCompletoView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="mediosContactoCompletoView">
+    <xsd:sequence>
+      <xsd:element name="consecutivoUnico" type="xsd:long"/>
+      <xsd:element maxOccurs="100" minOccurs="0" name="correos" nillable="true" type="tns:emailPersona"/>
+      <xsd:element maxOccurs="100" minOccurs="0" name="domicilios" nillable="true" type="tns:domicilio"/>
+      <xsd:element name="idContrato" type="xsd:long"/>
+      <xsd:element name="idPersona" type="xsd:long"/>
+      <xsd:element name="idPersonaUnica" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element maxOccurs="100" minOccurs="0" name="redesSociales" nillable="true" type="tns:redSocialPersona"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element maxOccurs="100" minOccurs="0" name="telefonos" nillable="true" type="tns:telefonoPersona"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="emailPersona">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="email" type="xsd:string"/>
+      <xsd:element name="idContrato" type="xsd:long"/>
+      <xsd:element name="idMedioContacto" type="xsd:long"/>
+      <xsd:element name="idPersona" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="preferente" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="tipoMail" type="tns:elemento"/>
+      <xsd:element name="valido" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="domicilio">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="direccion" type="tns:direccion"/>
+      <xsd:element name="idContrato" type="xsd:long"/>
+      <xsd:element name="idPersona" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element name="preferente" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="tipoDomicilio" type="tns:elemento"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="direccion">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="asentamiento" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="calle" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="ciudad" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="codigoPostal" type="tns:elemento"/>
+      <xsd:element name="direccionSugerida" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="edificio" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="estado" type="tns:elemento"/>
+      <xsd:element name="idDireccion" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="manzanaLote" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="municipio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="numeroExterior" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="numeroInterior" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="pais" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="referencia" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tipoAsentamiento" type="tns:elemento"/>
+      <xsd:element name="valido" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="redSocialPersona">
+    <xsd:sequence>
+      <xsd:element name="idMedioContacto" type="xsd:long"/>
+      <xsd:element name="idcontrato" type="xsd:long"/>
+      <xsd:element name="idpersona" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element name="preferente" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="tipoRedSocial" type="tns:elemento"/>
+      <xsd:element name="valido" type="xsd:boolean"/>
+      <xsd:element minOccurs="0" name="valor" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="telefonoPersona">
+    <xsd:complexContent>
+      <xsd:extension base="tns:mapeoCatalogosOut">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="claveNacional" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="extension" type="xsd:string"/>
+          <xsd:element name="idContrato" type="xsd:long"/>
+          <xsd:element name="idMedioContacto" type="xsd:long"/>
+          <xsd:element name="idPersona" type="xsd:long"/>
+          <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+          <xsd:element minOccurs="0" name="numero" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="preferente" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+          <xsd:element minOccurs="0" name="sms" type="xsd:boolean"/>
+          <xsd:element minOccurs="0" name="tipoTelefono" type="tns:elemento"/>
+          <xsd:element name="valido" type="xsd:boolean"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="mapeoCatalogosOut">
+    <xsd:sequence/>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaFisicaIdentificadores">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaFisicaIdentificadoresResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityFisicaIdentificadoresOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityFisicaIdentificadoresOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:personaEntityFisicaIdentificadoresView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityFisicaIdentificadoresView">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="apellidoMaterno" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="apellidoPaterno" type="xsd:string"/>
+      <xsd:element name="consecutivoUnico" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="edad" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="entidadNacimiento" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="estadoCivil" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="fechaNacimiento" type="xsd:dateTime"/>
+      <xsd:element name="idPersona" type="xsd:long"/>
+      <xsd:element name="idPersonaUnica" type="xsd:long"/>
+      <xsd:element maxOccurs="100" minOccurs="0" name="identificadores" nillable="true" type="tns:identificador"/>
+      <xsd:element minOccurs="0" name="indicadorVivo" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="nacionalidad" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="nombre" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="paisNacimiento" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="seudonimo" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sexo" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="tipo" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="titulo" type="tns:elemento"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getDatosOrigenPersona">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getDatosOrigenPersonaResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityDoPersonaOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityDoPersonaOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:personaEntityDoPersonaCompView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityDoPersonaCompView">
+    <xsd:sequence>
+      <xsd:element maxOccurs="100" minOccurs="0" name="personaDo" nillable="true" type="tns:personaEntityDoPersonaView"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityDoPersonaView">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="apellidoMaterno" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="apellidoPaterno" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="correos" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="entidadNacimiento" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="estadoCivil" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fechaIngreso" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fechaNacimiento" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="idPersona" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="identificadores" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="llaveOrigen" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="nacionalidad" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="nombre" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="paisNacimiento" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="sexo" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="status" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="statusContrato" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="telefonos" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaFisica">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:idPersona"/>
+      <xsd:element minOccurs="0" name="arg1" type="tns:lineaNegocioIn"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaFisicaResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityFisicaOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityFisicaOut">
+    <xsd:complexContent>
+      <xsd:extension base="tns:response">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="response" type="tns:personaEntityFisicaView"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="personaEntityFisicaView">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="apellidoMaterno" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="apellidoPaterno" type="xsd:string"/>
+      <xsd:element name="consecutivoUnico" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="edad" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="entidadNacimiento" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="estadoCivil" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="fechaNacimiento" type="xsd:dateTime"/>
+      <xsd:element name="idPersona" type="xsd:long"/>
+      <xsd:element name="idPersonaUnica" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="indicadorVivo" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="lineaNegocio" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="nacionalidad" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="nombre" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="paisNacimiento" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="rol" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="seudonimo" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="sexo" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="tipo" type="tns:elemento"/>
+      <xsd:element minOccurs="0" name="titulo" type="tns:elemento"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaEntityByIdentificador">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="arg0" type="tns:tipoIdentificadorValor"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="tipoIdentificadorValor">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="tipoIdentificador" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="valor" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="getPersonaEntityByIdentificadorResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="tns:personaEntityOut"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

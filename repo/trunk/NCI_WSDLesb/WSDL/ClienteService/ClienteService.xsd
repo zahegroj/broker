@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1/types" version="1.0" 
+	xmlns:tns="http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1/types"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:mod="http://mx.profuturo/nci/modelo">
+	
+	<xsd:import schemaLocation="../modelo/ModeloNCI.xsd" namespace="http://mx.profuturo/nci/modelo"></xsd:import>
+
+	<xsd:element name="consultarClientesNoIdentificadosRequest" type="tns:consultarClientesNoIdentificadosReq"></xsd:element>	
+	<xsd:element name="consultarClientesNoIdentificadosResponse" type="tns:consultarClientesNoIdentificadosResp"></xsd:element>
+	<xsd:element name="consultarClienteBasicoRequest" type="tns:consultarClienteBasicoReq"></xsd:element>	
+	<xsd:element name="consultarClienteBasicoResponse" type="tns:consultarClienteBasicoResp"></xsd:element>
+	<xsd:element name="consultarClienteRequest" type="tns:consultarClienteReq"></xsd:element>	
+	<xsd:element name="consultarClienteResponse" type="tns:consultarClienteResp"></xsd:element>
+	
+	<xsd:complexType name="consultarClientesNoIdentificadosReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="idArchivo" type="xsd:int" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarClientesNoIdentificadosResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="clientesNoIdentificados" type="tns:listaClienteNoIdentificados" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarClienteBasicoReq">
+		<xsd:sequence>
+			<xsd:element name="identificadores" type="tns:Identificadores"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="consultarClienteBasicoResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="clientes" type="tns:ListaInformacionCliente" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="consultarClienteReq">
+		<xsd:sequence>
+			<xsd:element name="idProceso" type="xsd:int" />
+			<xsd:element name="idSubproceso" type="xsd:int" />
+			<xsd:element name="identificadores" type="tns:Identificadores"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="consultarClienteResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="clientes" type="tns:ListaInformacionCliente" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="listaClienteNoIdentificados">
+		<xsd:sequence>
+			<xsd:element name="clienteNoIdentificado" type="tns:ClienteNoIdentificado" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ClienteNoIdentificado">
+		<xsd:sequence>			
+			<xsd:element name="nss" type="mod:nss"/>
+			<xsd:element name="nombreTrabajador" type="xsd:string"/>
+			<xsd:element name="curp" type="xsd:string"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="areaAtencion" type="xsd:string"/>
+			<xsd:element name="diagnostico" type="xsd:string"/>
+			<xsd:element name="procesoNoVigente" type="mod:Proceso" minOccurs="0"/>
+			<xsd:element name="fechaCertificacion" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="fechaCertificacionFormato" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="numeroCuenta" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="identificadores" type="tns:Identificadores"/>
+
+	<xsd:complexType name="Identificadores">
+		<xsd:choice minOccurs="1" maxOccurs="4">
+			<xsd:element name="nss" type="mod:nss"/>
+			<xsd:element name="rfc" type="mod:rfcPersonaFisica"/>
+			<xsd:element name="curp" type="mod:curp"/>
+			<xsd:element name="numeroCuenta" type="mod:numeroCuenta"/>
+			<!-- <xsd:element name="nombre" type="tns:NombrePersona"/> -->
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="NombrePersona">
+		<xsd:sequence>
+			<xsd:element name="nombre" type="xsd:string" minOccurs="0" />
+			<xsd:element name="apPaterno" type="xsd:string" minOccurs="0" />
+			<xsd:element name="apMaterno" type="xsd:string" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaInformacionCliente">
+		<xsd:sequence>
+			<xsd:element name="informacionCliente" type="tns:InformacionCliente" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InformacionCliente">
+		<xsd:sequence>
+			<xsd:element name="informacionBasica" type="tns:InformacionBasica" minOccurs="0"/>
+			<xsd:element name="informacionDemografica" type="tns:InformacionDemografica" minOccurs="0"/>
+			<xsd:element name="informacionFinanciera" type="tns:InformacionFinanciera" minOccurs="0"/>
+			<xsd:element name="informacionComplementaria" type="tns:InformacionComplementaria" minOccurs="0"/>
+			<xsd:element name="informacionBeneficiarios" type="tns:InformacionBeneficiarios" minOccurs="0"/>
+			<!-- <xsd:element name="informacionIndicadores" type="tns:InformacionIndicadores" minOccurs="0"/> -->
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InformacionBasica">
+		<xsd:sequence>
+			<xsd:element name="cliente" type="tns:Cliente" minOccurs="0"/>
+			<xsd:element name="persona" type="tns:Persona" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InformacionDemografica">
+		<xsd:sequence>
+			<xsd:element name="domicilios" type="tns:ListaDomicilios" minOccurs="0"/>
+			<xsd:element name="telefonos" type="tns:ListaTelefonos" minOccurs="0"/>
+			<xsd:element name="correos" type="tns:ListaCorreos" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InformacionFinanciera">
+		<xsd:sequence>
+			<xsd:element name="cuentaBancaria" type="tns:CuentaBancaria" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InformacionComplementaria">
+		<xsd:sequence>
+			<xsd:element name="complementaria" type="tns:Complementaria" minOccurs="0"/>
+			<xsd:element name="referencias" type="tns:ListaReferencias" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InformacionBeneficiarios">
+		<xsd:sequence>
+			<xsd:element name="informacionBasica" type="tns:InformacionBasica" minOccurs="0"/>
+			<xsd:element name="informacionDemografica" type="tns:InformacionDemografica" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InformacionOperativa">
+		<xsd:sequence>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="InformacionIndicadores">
+		<xsd:sequence>
+			<xsd:element name="indicadores" type="tns:Indicadores" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Cliente">
+		<xsd:sequence>
+			<xsd:element name="nss" type="mod:nss"/>
+			<xsd:element name="rfc" type="mod:rfcPersonaFisica"/>
+			<xsd:element name="curp" type="mod:curp"/>
+			<xsd:element name="numeroCuenta" type="mod:numeroCuenta"/>
+			<xsd:element name="estatus" type="xsd:string"/>
+			<xsd:element name="regimenAfiliacion" type="xsd:string"/>
+			<xsd:element name="ocupacion" type="xsd:string"/>
+			<xsd:element name="giroEmpresarial" type="xsd:string"/>
+			<xsd:element name="tipoCliente" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Persona">
+		<xsd:sequence>
+			<xsd:element name="idPersona" type="xsd:long"/>
+			<xsd:element name="nombre" type="xsd:string"/>
+			<xsd:element name="apellidoMaterno" type="xsd:string"/>
+			<xsd:element name="apellidoPaterno" type="xsd:string"/>
+			<xsd:element name="fechaNacimiento" type="xsd:dateTime"/>
+			<xsd:element name="edad" type="xsd:integer"/>
+			<xsd:element name="sexo" type="xsd:string"/>
+			<xsd:element name="estadoCivil" type="xsd:string"/>
+			<xsd:element name="nacionalidad" type="xsd:string"/>
+			<xsd:element name="paisNacimiento" type="xsd:string"/>
+			<xsd:element name="entidadNacimiento" type="xsd:string"/>
+			<xsd:element name="escolaridad" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Domicilio">
+		<xsd:sequence>
+			<xsd:element name="idDireccion" type="xsd:long"/>
+			<xsd:element name="calle" type="xsd:string"/>
+			<xsd:element name="asentamiento" type="xsd:string"/>
+			<xsd:element name="tipoDomicilio" type="xsd:string"/>
+			<xsd:element name="codigoPostal" type="xsd:string"/>
+			<xsd:element name="municipio" type="xsd:string"/>
+			<xsd:element name="colonia" type="xsd:string"/>
+			<xsd:element name="entidadFederativa" type="xsd:string"/>
+			<xsd:element name="ciudad" type="xsd:string"/>
+			<xsd:element name="pais" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Telefono">
+		<xsd:sequence>
+			<xsd:element name="lada" type="xsd:long"/>
+			<xsd:element name="numero" type="xsd:string"/>
+			<xsd:element name="extension" type="xsd:string" minOccurs="0"/>			
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Correo">
+		<xsd:sequence>
+			<xsd:element name="email" type="xsd:string"/>
+			<xsd:element name="tipoMail" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaDomicilios">
+		<xsd:sequence>
+			<xsd:element name="domicilio" type="tns:Domicilio" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaTelefonos">
+		<xsd:sequence>
+			<xsd:element name="telefono" type="tns:Telefono" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaCorreos">
+		<xsd:sequence>
+			<xsd:element name="correo" type="tns:Correo" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CuentaBancaria">
+		<xsd:sequence>
+			<xsd:element name="idCtaBancoCliente" type="xsd:string" minOccurs="0" />
+			<xsd:element name="idCliente" type="xsd:string" minOccurs="0" />
+			<xsd:element name="idBanco" type="xsd:string" minOccurs="0" />
+			<xsd:element name="idTipoCtaBancaria" type="xsd:string" minOccurs="0" />
+			<xsd:element name="idEstatusCtaBancaria" type="xsd:string" minOccurs="0" />
+			<xsd:element name="numeroCuenta" type="xsd:string" minOccurs="0" />
+			<xsd:element name="numeroCuentaCLABE" type="xsd:string" minOccurs="0" />
+			<xsd:element name="idParentesco" type="xsd:string" minOccurs="0" />
+			<xsd:element name="apPaterno" type="xsd:string" minOccurs="0" />
+			<xsd:element name="apMaterno" type="xsd:string" minOccurs="0" />
+			<xsd:element name="nombre" type="xsd:string" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Complementaria">
+		<xsd:sequence>
+			<xsd:element name="idPatron" type="xsd:string" minOccurs="0" />
+			<xsd:element name="fechaAutorizacion" type="xsd:string" minOccurs="0" />
+			<xsd:element name="fechaCertificacion" type="xsd:string" minOccurs="0" />
+			<xsd:element name="fechaAltaSistema" type="xsd:string" minOccurs="0" />
+			<xsd:element name="origenAfiliacion" type="xsd:string" minOccurs="0" />
+			<xsd:element name="estatusCuenta" type="xsd:string" minOccurs="0" />
+			<xsd:element name="cuentaVigente" type="xsd:string" minOccurs="0" />
+			<xsd:element name="procesoTerminal" type="xsd:string" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Referencia">
+		<xsd:sequence>
+			<xsd:element name="idReferencia" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="idCliente" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="nombre" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="apPaterno" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="apMaterno" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="curp" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="telefono" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Indicadores">
+		<xsd:sequence>
+			<xsd:element name="tipoCuenta" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="regimen" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="tipoCliente" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="cuentaVigente" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="procesoTerminal" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="expedienteIdentificacion" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="creditoInfonavit" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="fecUltimoRetiroDesempleoIMSS" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="fecUltimoRetiroDesempleoISSSTE" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="ListaReferencias">
+		<xsd:sequence>
+			<xsd:element name="referencia" type="tns:Referencia" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

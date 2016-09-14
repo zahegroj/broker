@@ -1,0 +1,19 @@
+BROKER SCHEMA profuturo.buc.error
+
+CREATE PROCEDURE map_BUCException (IN outputRootNode REFERENCE, IN error REFERENCE) BEGIN
+	SET outputRootNode.XMLNSC.bucError.cveAplicacion = error.cveAplicacion;
+	SET outputRootNode.XMLNSC.bucError.cveCategoria = error.cveCategoria;
+	SET outputRootNode.XMLNSC.bucError.idSeveridad = error.idSeveridad;
+	SET outputRootNode.XMLNSC.bucError.mensajeExceptionAplicacion = error.mensajeExceptionAplicacion;
+	SET outputRootNode.XMLNSC.bucError.message = error.message;
+	SET outputRootNode.XMLNSC.bucError.nombreServicio = error.nombreServicio;
+END;
+
+CREATE PROCEDURE fill_BUCException_Empty (IN error REFERENCE) BEGIN
+	SET error.mensajeExceptionAplicacion = '';
+	SET error.message = '';
+	SET error.cveAplicacion = '';
+	SET error.cveCategoria = '';
+	SET error.idSeveridad = '';
+	SET error.nombreServicio = '';
+END;

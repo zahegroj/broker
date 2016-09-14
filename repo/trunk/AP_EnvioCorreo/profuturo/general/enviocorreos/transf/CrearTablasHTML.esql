@@ -1,0 +1,189 @@
+BROKER SCHEMA profuturo.general.enviocorreos.transf
+
+
+CREATE COMPUTE MODULE Cifra_To_Not01Tab01
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		DECLARE i INTEGER 1;
+		DECLARE orden INTEGER 1;
+		DECLARE countArr INTEGER;
+		SET countArr = CARDINALITY(InputRoot.XMLNSC.cifrasControl.cifraControl[]);
+		
+		SET OutputRoot.XMLNSC.table.tr[1].th[1] = 'No.';
+		SET OutputRoot.XMLNSC.table.tr[1].th[2] = 'INCONSISTENCIAS DE ESTRUCTURA';
+		
+		WHILE i <= countArr DO		
+			IF (InputRoot.XMLNSC.cifrasControl.cifraControl[i].tipoValidacion='ESTRUCTURA' AND
+					InputRoot.XMLNSC.cifrasControl.cifraControl[i].registrosNoCumplieron > 0) THEN
+					
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[1] = orden;
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[2] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].error;
+				SET orden = orden + 1;
+			END IF;
+		
+			SET i = i + 1;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Cifra_To_Not02Tab01
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		DECLARE i INTEGER 1;
+		DECLARE orden INTEGER 1;
+		DECLARE countArr INTEGER;
+		SET countArr = CARDINALITY(InputRoot.XMLNSC.cifrasControl.cifraControl[]);
+		
+		SET OutputRoot.XMLNSC.table.tr[1].th[1] = 'DETALLE';
+		SET OutputRoot.XMLNSC.table.tr[1].th[2] = 'TOTAL DE REGISTROS';
+		
+		WHILE i <= countArr DO		
+			IF (InputRoot.XMLNSC.cifrasControl.cifraControl[i].tipoValidacion='ESTRUCTURA') THEN
+					
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[1] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].detalle;
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[2] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].totalRegistros;
+				SET orden = orden + 1;
+			END IF;
+		
+			SET i = i + 1;
+		END WHILE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Cifra_To_Not02Tab02
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		DECLARE i INTEGER 1;
+		DECLARE orden INTEGER 1;
+		DECLARE countArr INTEGER;
+		SET countArr = CARDINALITY(InputRoot.XMLNSC.cifrasControl.cifraControl[]);
+		
+		SET OutputRoot.XMLNSC.table.tr[1].th[1] = 'DETALLE';
+		SET OutputRoot.XMLNSC.table.tr[1].th[2] = 'LINEAS CON ERROR';
+		SET OutputRoot.XMLNSC.table.tr[1].th[3] = 'TOTAL DE ERRORES';
+		
+		WHILE i <= countArr DO		
+			IF (InputRoot.XMLNSC.cifrasControl.cifraControl[i].tipoValidacion='CONTENIDO') THEN
+					
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[1] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].detalle;
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[2] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].registrosNoCumplieron;
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[3] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].totalErrores;
+				SET orden = orden + 1;
+			END IF;
+		
+			SET i = i + 1;
+		END WHILE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Cifra_To_Not04Tab01
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		DECLARE i INTEGER 1;
+		DECLARE orden INTEGER 1;
+		DECLARE countArr INTEGER;
+		SET countArr = CARDINALITY(InputRoot.XMLNSC.cifrasControl.cifraControl[]);
+		
+		SET OutputRoot.XMLNSC.table.tr[1].th[1] = 'Total de Clientes por Archivo';
+		SET OutputRoot.XMLNSC.table.tr[1].th[2] = 'Clientes Identificados';
+		SET OutputRoot.XMLNSC.table.tr[1].th[3] = 'Clientes No Identificados';
+		SET OutputRoot.XMLNSC.table.tr[1].th[4] = 'Fecha de Identificación de Cliente';
+		
+		WHILE i <= countArr DO
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[1] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].totalRegistros;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[2] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].registrosCumplieron;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[3] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].registrosNoCumplieron;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[4] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].fechaRegistroFormato;
+
+			SET orden = orden + 1;
+
+			SET i = i + 1;
+		END WHILE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Cifra_To_Not05Tab01
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		DECLARE i INTEGER 1;
+		DECLARE orden INTEGER 1;
+		DECLARE countArr INTEGER;
+		SET countArr = CARDINALITY(InputRoot.XMLNSC.cifrasControl.cifraControl[]);
+		
+		SET OutputRoot.XMLNSC.table.tr[1].th[1] = 'No. REGISTROS DE ARCHIVO';
+		SET OutputRoot.XMLNSC.table.tr[1].th[2] = 'No. REGISTROS CONVIVEN';
+		SET OutputRoot.XMLNSC.table.tr[1].th[3] = 'No. REGISTROS NO CONVIVEN';
+		SET OutputRoot.XMLNSC.table.tr[1].th[4] = 'FECHA DE REGISTRO';
+		
+		WHILE i <= countArr DO
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[1] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].totalRegistros;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[2] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].registrosCumplieron;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[3] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].registrosNoCumplieron;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[4] = InputRoot.XMLNSC.cifrasControl.cifraControl[i].fechaRegistroFormato;
+			SET orden = orden + 1;
+
+			SET i = i + 1;
+		END WHILE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MovsRel_To_Not08Tab01
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE i INTEGER 1;
+		DECLARE orden INTEGER 1;
+		DECLARE countArr INTEGER;
+		SET countArr = CARDINALITY(InputRoot.XMLNSC.tablaValores.anyType[]);
+		
+		SET OutputRoot.XMLNSC.table.tr[1].th[1] = 'Folio';
+		SET OutputRoot.XMLNSC.table.tr[1].th[2] = 'Importe Pesos';
+		SET OutputRoot.XMLNSC.table.tr[1].th[3] = 'Importe AIVS';
+		SET OutputRoot.XMLNSC.table.tr[1].th[4] = 'Número Registros';
+		SET OutputRoot.XMLNSC.table.tr[1].th[5] = 'Fecha Creación';
+		SET OutputRoot.XMLNSC.table.tr[1].th[6] = 'Usuario Creación';
+		SET OutputRoot.XMLNSC.table.tr[1].th[7] = 'Fecha Acreditación';
+		SET OutputRoot.XMLNSC.table.tr[1].th[8] = 'Usuario Acreditación';
+		
+		WHILE i <= countArr DO
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[1] = InputRoot.XMLNSC.tablaValores.anyType[i].folio.folio;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[2] = InputRoot.XMLNSC.tablaValores.anyType[i].importePesos;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[3] = InputRoot.XMLNSC.tablaValores.anyType[i].totalAcciones;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[4] = InputRoot.XMLNSC.tablaValores.anyType[i].numeroRegistros;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[5] = '';
+			DECLARE fechaCreacion TIMESTAMP CAST(REPLACE(InputRoot.XMLNSC.tablaValores.anyType[i].folio.fechaCreacion, 'T', ' ') AS TIMESTAMP FORMAT 'yyyy-MM-dd HH:mm:ssZZZ');
+			IF fechaCreacion IS NOT NULL THEN
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[5] = CAST(fechaCreacion AS CHARACTER FORMAT 'yyyy-MM-dd HH:mm:ss');
+			END IF;
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[6] = InputRoot.XMLNSC.tablaValores.anyType[i].folio.usuarioCreacion;
+			
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[7] = '';
+			IF FIELDTYPE(InputRoot.XMLNSC.tablaValores.anyType[i].folio.fechaActualizacion) IS NOT NULL THEN
+				DECLARE fechaActualizacion TIMESTAMP CAST(REPLACE(InputRoot.XMLNSC.tablaValores.anyType[i].folio.fechaActualizacion, 'T', ' ') AS TIMESTAMP FORMAT 'yyyy-MM-ddTHH:mm:ssZZZ');
+				IF fechaActualizacion IS NOT NULL THEN
+					SET OutputRoot.XMLNSC.table.tr[orden+1].td[7] = CAST(fechaActualizacion AS CHARACTER FORMAT 'yyyy-MM-dd HH:mm:ss');
+				END IF;
+			END IF;
+			
+			SET OutputRoot.XMLNSC.table.tr[orden+1].td[8] = '';
+			IF FIELDTYPE(InputRoot.XMLNSC.tablaValores.anyType[i].folio.usuarioActualizacion) IS NOT NULL THEN
+				SET OutputRoot.XMLNSC.table.tr[orden+1].td[8] = InputRoot.XMLNSC.tablaValores.anyType[i].folio.usuarioActualizacion;
+			END IF;
+			
+			SET orden = orden + 1;
+			
+			SET i = i + 1;
+		END WHILE;			
+	END;
+END MODULE;

@@ -1,0 +1,171 @@
+BROKER SCHEMA profuturo.nci.folio.func
+
+CREATE DATABASE MODULE SynchRR_genFolio_Initialise
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET Environment.PatternVariables.StatusCode = 0;
+		DECLARE EVRef REFERENCE TO Environment.PatternVariables;
+		SET EVRef.RRMode = 'Request';
+		-- Set the broker queue manager here to save a compute node later
+		SET EVRef.BrokerQueueManager = SQL.QueueManagerName;
+		SET EVRef.SOAPReplyIdentifier = LocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE SynchRR_genFolio_BuildStoreMsg
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		Set OutputRoot.MQMD = InputRoot.MQMD; 
+		SET OutputRoot.BLOB.BLOB = 	Environment.PatternVariables.SOAPReplyIdentifier;
+		SET OutputRoot.MQMD.CorrelId = InputLocalEnvironment.WrittenDestination.MQ.DestinationData.msgId;
+		SET OutputRoot.MQMD.Expiry = MQEI_UNLIMITED; 	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE SynchRR_genFolio_SetResponseMode
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET Environment.PatternVariables.RRMode = 'Response';
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE SynchRR_genFolio_RestoreReplyId
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputLocalEnvironment.Destination.SOAP.Reply.ReplyIdentifier = InputLocalEnvironment.BLOB.BLOB;
+		SET OutputRoot.Properties.CodedCharSetId = 1208;
+		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ValidarCorrelID
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot = InputRoot;
+		IF InputRoot.MQMD.CorrelId = '000000000000000000000000000000000000000000000000' THEN
+			DECLARE msgId CHARACTER InputRoot.MQMD.MsgId;
+			SET OutputRoot.MQMD = NULL;
+			SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE genFolio_STRIP
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.XMLNSC = InputRoot.XMLNSC;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE generarFolio_Func_Orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns1 NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';		
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types';
+		DECLARE REGISTRADO INTEGER 1;
+		DECLARE EJECUCION INTEGER 3;
+		DECLARE folio CHARACTER '';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns1:generarFolioRequest.idArchivo) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.consultarArchivo.idArchivo = InputRoot.XMLNSC.ns1:generarFolioRequest.idArchivo;
+			
+			PROPAGATE TO TERMINAL 'out1';
+			
+			IF Environment.nci.consultararchivo.res.success THEN
+				IF FIELDTYPE(Environment.nci.consultararchivo.res.response) IS NOT NULL THEN					
+					IF Environment.nci.consultararchivo.res.response.estatusArchivo.idEstatusArchivo = REGISTRADO THEN
+						
+						DECLARE req REFERENCE TO InputRoot.XMLNSC.ns1:generarFolioRequest;
+						
+						SET OutputRoot.XMLNSC.generarFolio.idProceso = 0;
+						SET OutputRoot.XMLNSC.generarFolio.idSubproceso = 0;
+						SET OutputRoot.XMLNSC.generarFolio.idCanal = 0;
+								
+						PROPAGATE TO TERMINAL 'out3';
+						
+						IF Environment.nci.generarFolio.response.success THEN
+							
+							SET folio = Environment.nci.generarFolio.response.response;
+							--SET OutputRoot.XMLNSC.actualizarArchivo.folio = folio;
+							SET OutputRoot.XMLNSC.actualizarArchivo.idArchivo = CAST(InputRoot.XMLNSC.ns1:generarFolioRequest.idArchivo AS INT);
+							SET OutputRoot.XMLNSC.actualizarArchivo.idEstatusArchivo = EJECUCION;
+						
+							PROPAGATE TO TERMINAL 'out2';
+							
+							IF Environment.nci.actualizararchivo.res.success THEN
+								SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+							ELSE							
+								SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+								--SET OutputRoot.Properties = InputRoot.Properties;
+								SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.actualizararchivo.res.errorCode;
+								SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.actualizararchivo.res.errorMessage;
+								SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.actualizararchivo.res.errorTrace;
+								PROPAGATE TO TERMINAL 'out4';
+								RETURN FALSE;
+							END IF;
+							
+						ELSE
+							SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+							--SET OutputRoot.Properties = InputRoot.Properties;
+							SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.generarFolio.response.errorCode;
+							SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.generarFolio.response.errorMessage;
+							SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.generarFolio.response.errorTrace;
+							PROPAGATE TO TERMINAL 'out4';
+							RETURN FALSE;
+						END IF;
+					ELSE
+						SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+						CREATE LASTCHILD OF OutputRoot.XMLNSC.ns1:generarFolioResponse NAME 'mensajes';
+						CALL profuturo.util.CodigosMensajesCASE('noRegistr',OutputRoot.XMLNSC.ns1:generarFolioResponse.mensajes);						
+					END IF;
+				ELSE
+					SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+					CREATE LASTCHILD OF OutputRoot.XMLNSC.ns1:generarFolioResponse NAME 'mensajes';
+					CALL profuturo.util.CodigosMensajesCASE('noArchivo',OutputRoot.XMLNSC.ns:actualizarFolioResponse.mensajes);				
+				END IF;
+				
+			ELSE
+				SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+				SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultararchivo.res.errorCode;
+				SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultararchivo.res.errorMessage;
+				SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultararchivo.res.errorTrace;
+				PROPAGATE TO TERMINAL 'out4';
+				RETURN FALSE;
+			END IF;
+			
+		ELSE 
+			
+			DECLARE req REFERENCE TO InputRoot.XMLNSC.ns1:generarFolioRequest;
+			SET OutputRoot.XMLNSC.generarFolio.idProceso = 0;
+			SET OutputRoot.XMLNSC.generarFolio.idSubproceso = 0;
+			SET OutputRoot.XMLNSC.generarFolio.idCanal = 0;
+					
+			PROPAGATE TO TERMINAL 'out3';
+			
+			IF Environment.nci.generarFolio.response.success THEN
+				SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+				SET folio = Environment.nci.generarFolio.response.response;
+			ELSE
+				SET OutputRoot.MQMD.CorrelId = InputRoot.MQMD.MsgId;
+				SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.generarFolio.response.errorCode;
+				SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.generarFolio.response.errorMessage;
+				SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.generarFolio.response.errorTrace;
+				PROPAGATE TO TERMINAL 'out4';
+				RETURN FALSE;
+			END IF;
+			
+		END IF;
+		
+		-- Asignar la respuesta
+		SET OutputRoot.XMLNSC.ns1:generarFolioResponse.folio = folio;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

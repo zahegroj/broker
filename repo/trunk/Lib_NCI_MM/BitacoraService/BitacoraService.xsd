@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mod="http://mx.profuturo/nci/modelo" xmlns:tns="http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types">
+	
+	<xsd:import namespace="http://mx.profuturo/nci/modelo" schemaLocation="../modelo/ModeloNCI.xsd"/>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="guardarBitacoraRequest" type="tns:guardarBitacoraReq"/>	
+	<xsd:element ibmSchExtn:docRoot="true" name="guardarBitacoraResponse" type="tns:guardarBitacoraResp"/>
+	
+	<xsd:complexType name="guardarBitacoraReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+			<xsd:element name="idEstatus" type="xsd:int"/>
+			<xsd:element name="idSubproceso" type="xsd:int"/>
+			<xsd:element name="idEtapa" type="xsd:int"/>
+			<xsd:element name="idSubetapa" type="xsd:int"/>
+			<xsd:element name="idResultado" type="xsd:int"/>
+			<xsd:element name="usuario" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="guardarBitacoraResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

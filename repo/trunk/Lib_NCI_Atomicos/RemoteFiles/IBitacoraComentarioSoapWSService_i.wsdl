@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IBitacoraComentarioSoapWS" targetNamespace="http://comentarios.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://comentarios.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="IBitacoraComentarioSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://comentarios.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://comentarios.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="IBitacoraComentarioSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consultaComentariosResponse">
+    <wsdl:part element="ns1:consultaComentariosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardaComentario">
+    <wsdl:part element="ns1:guardaComentario" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaComentarios">
+    <wsdl:part element="ns1:consultaComentarios" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardaComentarioResponse">
+    <wsdl:part element="ns1:guardaComentarioResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IBitacoraComentarioSoapWS">
+    <wsdl:operation name="guardaComentario">
+      <wsdl:input message="ns1:guardaComentario" name="guardaComentario">
+    </wsdl:input>
+      <wsdl:output message="ns1:guardaComentarioResponse" name="guardaComentarioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaComentarios">
+      <wsdl:input message="ns1:consultaComentarios" name="consultaComentarios">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaComentariosResponse" name="consultaComentariosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ArchivoService"
+	targetNamespace="http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1"
+	xmlns:tns="http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd2="http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types"
+	xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException">
+
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import
+				namespace="http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types"
+				schemaLocation="ArchivoService.xsd">
+			</xsd:import>
+			<xsd:import
+				namespace="http://mx.profuturo/iib/iibException/IIBException"
+				schemaLocation="../frameworkiib/iibException/IIBException.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="consultarArchivosRequest">
+		<wsdl:part element="xsd2:consultarArchivosRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarArchivosResponse">
+		<wsdl:part element="xsd2:consultarArchivosResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="actualizarArchivoRequest">
+		<wsdl:part element="xsd2:actualizarArchivoRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="actualizarArchivoResponse">
+		<wsdl:part element="xsd2:actualizarArchivoResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="faultMsg">
+    <wsdl:part element="iibe:iibException" name="parameters"/>
+  </wsdl:message>
+	
+	<wsdl:portType name="ArchivoPortType">
+		<wsdl:operation name="consultarArchivos">
+			<wsdl:input message="tns:consultarArchivosRequest"/>
+			<wsdl:output message="tns:consultarArchivosResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+			<wsdl:operation name="actualizarArchivo">
+			<wsdl:input message="tns:actualizarArchivoRequest"/>
+			<wsdl:output message="tns:actualizarArchivoResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="ArchivoBinding" type="tns:ArchivoPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="consultarArchivos">
+			<soap:operation soapAction="urn:consultarArchivos" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="actualizarArchivo">
+			<soap:operation soapAction="urn:actualizarArchivo" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="ArchivoService">
+		<wsdl:port binding="tns:ArchivoBinding" name="ArchivoPort">
+			<soap:address location="http://localhost/iib/nci/GestionArchivos/ArchivoService/v1" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,113 @@
+BROKER SCHEMA profuturo.nci.cifrascontrol.func
+
+CREATE COMPUTE MODULE consultarCifrasVivienda_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		
+		DECLARE ID_CAT_PADRE_AIVS    INT 216;
+		DECLARE ID_LINEA_NEGOCIO_AFO INT 1;
+		DECLARE ID_TIPO_CAT_CONCEPTO INT 31;
+		
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idCatalogoPadre = ID_CAT_PADRE_AIVS;
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = ID_LINEA_NEGOCIO_AFO;
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = ID_TIPO_CAT_CONCEPTO;
+		
+		SET OutputRoot.XMLNSC.consultaSumarizadoVivienda.folio = InputRoot.XMLNSC.ns:consultarCifrasViviendaRequest.folio;
+		SET OutputRoot.XMLNSC.consultaSumarizadoVivienda.idArchivo = InputRoot.XMLNSC.ns:consultarCifrasViviendaRequest.idArchivo;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		--SET OutputRoot.XMLNSC.registrosCreditoViviendaRequest.folio = InputRoot.XMLNSC.ns:consultarCifrasViviendaRequest.folio; 
+		--SET OutputRoot.XMLNSC.registrosCreditoViviendaRequest.idArchivo = InputRoot.XMLNSC.ns:consultarCifrasViviendaRequest.idArchivo;
+		
+		--PROPAGATE TO TERMINAL 'out3';
+		
+		DECLARE numRegConCredVivienda INTEGER 0;
+		DECLARE numRegSinCredVivienda INTEGER 0;
+		
+		IF FIELDTYPE(Environment.nci.consultarRegistrosCreditoVivienda.registroCreditoVivienda) IS NOT NULL THEN
+			SET OutputLocalEnvironment.viv.creditoViv[] = SELECT T
+				FROM Environment.nci.consultarRegistrosCreditoVivienda.registroCreditoVivienda[] AS T
+				WHERE T.creditoVivienda = 1;
+				
+			IF FIELDTYPE(OutputLocalEnvironment.viv.creditoViv) IS NOT NULL THEN
+				SET numRegConCredVivienda = OutputLocalEnvironment.viv.creditoViv[1].numeroRegistros;
+			END IF;
+			
+			SET OutputLocalEnvironment.viv.creditoViv[] = SELECT T
+				FROM Environment.nci.consultarRegistrosCreditoVivienda.registroCreditoVivienda[] AS T
+				WHERE T.creditoVivienda = 0;
+			
+			IF FIELDTYPE(OutputLocalEnvironment.viv.creditoViv) IS NOT NULL THEN
+				SET numRegSinCredVivienda = OutputLocalEnvironment.viv.creditoViv[1].numeroRegistros;
+			END IF;
+		END IF;
+			
+		IF Environment.nci.consultarCifrasVivienda.success THEN
+			DECLARE cifrasVivienda REFERENCE TO Environment.nci.consultarCifrasVivienda.response.cifrasVivienda;
+			DECLARE countArr INT CARDINALITY(cifrasVivienda.cifraVivienda[]);
+			DECLARE i INTEGER 1;
+			
+			X : WHILE i <= countArr DO
+				
+				DECLARE formatoImporte CHARACTER 'PESOS';
+				DECLARE conceptoId INT cifrasVivienda.cifraVivienda[i].conceptoImporte.id;
+				
+				SET Environment.Variables.result[] = SELECT T.* FROM Environment.nci.consultarCatalogo.response[] as T WHERE T.idCatCatalogo = conceptoId;
+				
+				IF FIELDTYPE(Environment.Variables.result) IS NOT NULL THEN
+					SET formatoImporte = 'AIVS';
+				END IF;
+				
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].conceptoImporte.id = conceptoId;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].conceptoImporte.descripcion = cifrasVivienda.cifraVivienda[i].conceptoImporte.descripcion;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].creditoVivienda = cifrasVivienda.cifraVivienda[i].credito;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].importeAceptadoOrd = profuturo.util.func.setFormatoImporte(cifrasVivienda.cifraVivienda[i].importeAceptadoOrd, formatoImporte);
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].importeAceptadoAclar = profuturo.util.func.setFormatoImporte(cifrasVivienda.cifraVivienda[i].importeAceptadoAclar, formatoImporte);
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].importeRechazado = profuturo.util.func.setFormatoImporte(cifrasVivienda.cifraVivienda[i].importeRechazado, formatoImporte);
+				DECLARE importeAceptadoTotal DECIMAL cifrasVivienda.cifraVivienda[i].importeAceptadoAclar + cifrasVivienda.cifraVivienda[i].importeAceptadoOrd;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].importeAceptadoTotal = profuturo.util.func.setFormatoImporte(importeAceptadoTotal, formatoImporte);
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].importeTotal = profuturo.util.func.setFormatoImporte(cifrasVivienda.cifraVivienda[i].importeTotal, formatoImporte);
+				
+				IF OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].creditoVivienda = 1 THEN
+					
+					SET numRegConCredVivienda = cifrasVivienda.cifraVivienda[i].numeroRegistros;
+					SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].numeroRegistros = profuturo.util.func.setFormatoNumero(CAST(CAST(cifrasVivienda.cifraVivienda[i].numeroRegistros AS CHARACTER) AS INTEGER));
+					
+				ELSEIF OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].creditoVivienda = 0 THEN
+					
+					SET numRegSinCredVivienda = cifrasVivienda.cifraVivienda[i].numeroRegistros;
+					SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].numeroRegistros = profuturo.util.func.setFormatoNumero(CAST(CAST(cifrasVivienda.cifraVivienda[i].numeroRegistros AS CHARACTER) AS INTEGER));
+					
+				ELSEIF FIELDTYPE(cifrasVivienda.cifraVivienda[i].credito) IS NULL THEN
+	
+					SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda.cifraVivienda[i].numeroRegistros = profuturo.util.func.setFormatoNumero(CAST(CAST(cifrasVivienda.cifraVivienda[i].numeroRegistros AS CHARACTER) AS INTEGER));
+	
+				END IF;
+				
+				SET i = i + 1;
+			END WHILE X;
+			
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.cifrasVivienda) IS NULL THEN
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.mensajes.mensaje.codigo = '1002';
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.mensajes.mensaje.descripcion = 'No se encontraron registros';
+			ELSE 
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.totalRegistrosConCredito = profuturo.util.func.setFormatoNumero(numRegConCredVivienda);
+				SET OutputRoot.XMLNSC.ns:consultarCifrasViviendaResponse.totalRegistrosSinCredito = profuturo.util.func.setFormatoNumero(numRegSinCredVivienda);
+			END IF;
+			
+		ELSE
+			--EXCEPTION
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCifrasVivienda.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCifrasVivienda.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCifrasVivienda.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

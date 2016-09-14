@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IArchivoSoapWSService" targetNamespace="http://impl.archivo.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://archivo.webservice.ws.nci.profuturo.mx/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.archivo.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="IArchivoSoapWSServiceSoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:import location="IArchivoSoapWSService_i.wsdl" namespace="http://archivo.webservice.ws.nci.profuturo.mx/">
+    </wsdl:import>
+  <wsdl:binding name="IArchivoSoapWSServiceSoapBinding" type="ns1:IArchivoSoapWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="guardarArchivo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="guardarArchivo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="guardarArchivoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarArchivo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultarArchivo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarArchivoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarArchivo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="actualizarArchivo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="actualizarArchivoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IArchivoSoapWSService">
+    <wsdl:port binding="tns:IArchivoSoapWSServiceSoapBinding" name="IArchivoSoapWSPort">
+      <soap:address location="http://wasnci.profuturo.mx:8000/mit-ws/services/IArchivoSoapWSService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

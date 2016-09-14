@@ -1,0 +1,25 @@
+BROKER SCHEMA profuturo.nci.cifrascontrol.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarCifrasVivienda_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://cifras.webservice.ws.nci.profuturo.mx/';		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'ICifrasControlSoapWSService', 'consultaSumarizadoVivienda');		
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNS.ns:consultaSumarizadoVivienda.request.folio = InputRoot.XMLNSC.consultaSumarizadoVivienda.folio;
+		SET OutputRoot.XMLNS.ns:consultaSumarizadoVivienda.request.idArchivo = InputRoot.XMLNSC.consultaSumarizadoVivienda.idArchivo;		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarCifrasVivienda_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://cifras.webservice.ws.nci.profuturo.mx/';		
+		SET Environment.nci.consultarCifrasVivienda = InputRoot.XMLNSC.ns:consultaSumarizadoViviendaResponse.ConsultaSumarizadoViviendaResponse;		
+		IF InputRoot.XMLNSC.ns:consultaSumarizadoViviendaResponse.ConsultaSumarizadoViviendaResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

@@ -1,0 +1,50 @@
+BROKER SCHEMA profuturo.nci.comentarios.func
+
+CREATE COMPUTE MODULE guardarComentario_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types';
+		SET OutputRoot.XMLNSC.guardarComentarioBeanRequest.folio = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.folio;
+		SET OutputRoot.XMLNSC.guardarComentarioBeanRequest.etapa.idEtapa = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.etapa.id;
+		SET OutputRoot.XMLNSC.guardarComentarioBeanRequest.etapa.desc = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.etapa.descripcion;
+		SET OutputRoot.XMLNSC.guardarComentarioBeanRequest.subetapa.idSubetapa = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.subetapa.id;
+		SET OutputRoot.XMLNSC.guardarComentarioBeanRequest.subetapa.desc = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.subetapa.descripcion;
+		SET OutputRoot.XMLNSC.guardarComentarioBeanRequest.fecha = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.fecha;
+		SET OutputRoot.XMLNSC.guardarComentarioBeanRequest.usuario = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.usuario;
+		SET OutputRoot.XMLNSC.guardarComentarioBeanRequest.comentario = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.comentario;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		IF Environment.nci.guardarComentario.success = true THEN
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:guardarComentarioResponse NAME 'mensajes';
+	        CALL profuturo.util.CodigosMensajesCASE('opExito',OutputRoot.XMLNSC.ns:guardarComentarioResponse.mensajes);
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.guardarComentario.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.guardarComentario.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.guardarComentario.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+		END IF;
+		
+		RETURN TRUE;
+	END;
+
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_guardarComentario
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types';
+		
+		SET Environment.valReq.folio = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.folio;
+		SET Environment.valReq.idEtapa = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.etapa.id;
+		SET Environment.valReq.idSubetapa = InputRoot.XMLNSC.ns:guardarComentarioRequest.comentario.subetapa.id;	
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE guardarComentario_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types';
+		SET OutputRoot.XMLNSC.ns:guardarComentarioResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

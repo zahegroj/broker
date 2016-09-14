@@ -1,0 +1,151 @@
+BROKER SCHEMA profuturo.buc.cliente.func
+
+CREATE COMPUTE MODULE getPersona_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1/types';		
+		DECLARE input REFERENCE TO InputRoot.XMLNSC;
+		DECLARE req REFERENCE TO InputRoot.XMLNSC;
+		DECLARE identificadoresReq REFERENCE TO InputRoot.XMLNSC;
+		DECLARE tipoConsulta CHARACTER '';
+		
+		--cliente avanzado
+		IF FIELDTYPE(input.ns:consultarClienteRequest) IS NOT NULL THEN
+			SET req = input.ns:consultarClienteRequest;
+			SET tipoConsulta = 'AVANZADA';
+		END IF;
+		--cliente basico
+		IF FIELDTYPE(input.ns:consultarClienteBasicoRequest) IS NOT NULL THEN
+			SET req = input.ns:consultarClienteBasicoRequest;
+			SET tipoConsulta = 'BASICA';
+		END IF;
+		
+		CREATE LASTCHILD OF Environment.Variables NAME 'identificadores';
+		IF FIELDTYPE(req.identificadores.nss) IS NOT NULL THEN
+			CALL agregarIdentificador(Environment.Variables.identificadores, req.identificadores.nss, 'NSS');
+		END IF;
+		
+		IF FIELDTYPE(req.identificadores.rfc) IS NOT NULL THEN
+			CALL agregarIdentificador(Environment.Variables.identificadores, req.identificadores.rfc, 'RFC');
+		END IF;
+		
+		IF FIELDTYPE(req.identificadores.curp) IS NOT NULL THEN
+			CALL agregarIdentificador(Environment.Variables.identificadores, req.identificadores.curp, 'CURP');
+		END IF;
+		
+		IF FIELDTYPE(req.identificadores.numeroCuenta) IS NOT NULL THEN
+			CALL agregarIdentificador(Environment.Variables.identificadores, req.identificadores.numeroCuenta, 'NUMERO DE CUENTA');
+		END IF;
+		
+		CALL depurarIdentificadores(Environment.Variables.identificadores);
+		
+		--DECLARE numIdentif INTEGER CARDINALITY(Environment.Variables.identificadores.identificador[]);
+		DECLARE refIdentificadores REFERENCE TO Environment.Variables.identificadores.identificador[1];
+		
+		WHILE LASTMOVE(refIdentificadores) DO
+			CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+			SET OutputRoot.XMLNSC.personaEntityByIdentificador.tipo = refIdentificadores.tipo;
+			SET OutputRoot.XMLNSC.personaEntityByIdentificador.valor = refIdentificadores.valor;
+			
+			PROPAGATE TO TERMINAL 'out1';
+			
+			IF FIELDTYPE(Environment.buc.getPersonaByIdentificador.response) IS NOT NULL THEN
+				DECLARE idPersonaExiste BOOLEAN FALSE;
+				
+				SET Environment.buc.qry.persona[] = SELECT T
+					FROM Environment.buc.getPersonaByIdentificador.response.persona[] AS T 
+					WHERE T.lineaNegocio.clave = 1 --AFORE 
+					AND T.rol.clave = 1; --CLIENTE
+				
+				DECLARE refPersonasResp REFERENCE TO Environment.buc.qry.persona[1];
+				WHILE LASTMOVE( refPersonasResp ) DO
+					IF FIELDTYPE(Environment.buc.personas) IS NOT NULL THEN
+					 	
+					 	DECLARE refPersona REFERENCE TO Environment.buc.personas.persona[1];
+					 	
+					 	WHILE LASTMOVE(refPersona) DO
+					 		IF idPersonaExiste = FALSE THEN
+					 			
+						 		IF refPersona.idPersona = refPersonasResp.idPersona THEN
+						 			SET idPersonaExiste = TRUE;
+						 		END IF;
+					 		END IF;
+					 		
+					 		MOVE refPersona NEXTSIBLING;
+					 	END WHILE;				 	
+					END IF;
+					 
+					IF idPersonaExiste = FALSE THEN 
+						CREATE LASTCHILD OF Environment.buc.personas NAME 'persona';
+						SET Environment.buc.personas.persona[<].idPersona = refPersonasResp.idPersona;
+						--obtener ref y ben
+						SET Environment.buc.personas.persona[<].beneficiarios.idPersona[] = SELECT T.idPersona
+							FROM Environment.buc.getPersonaByIdentificador.response.persona[] AS T 
+							WHERE T.lineaNegocio.clave = 1 --AFORE 
+							AND T.rol.clave = 2; --BENEFICIARIOS
+							
+						SET Environment.buc.personas.persona[<].referencias.idPersona[] = SELECT T.idPersona
+							FROM Environment.buc.getPersonaByIdentificador.response.persona[] AS T 
+							WHERE T.lineaNegocio.clave = 1 --AFORE 
+							AND T.rol.clave = 4; --REFERENCIAS
+					END IF;
+					
+					MOVE refPersonasResp NEXTSIBLING REPEAT TYPE NAME;
+				END WHILE;
+				
+			ELSEIF FIELDTYPE(Environment.buc.getPersonaByIdentificador.error) IS NOT NULL THEN
+				
+				CALL profuturo.buc.error.map_BUCException(OutputRoot, Environment.buc.getPersonaByIdentificador.error);
+			
+				PROPAGATE TO LABEL 'bucError';
+				RETURN FALSE;
+			END IF;
+			
+			MOVE refIdentificadores NEXTSIBLING;
+		END WHILE;
+		
+		SET OutputRoot.XMLNSC.buc.consulta = tipoConsulta;
+		SET OutputRoot.XMLNSC.buc.personas = Environment.buc.personas;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE PROCEDURE agregarIdentificador ( IN refIdentificadores REFERENCE, IN valorIndentificador REFERENCE, IN nombreIdentificador CHARACTER ) 
+BEGIN
+	DECLARE refIdentificador REFERENCE TO refIdentificadores;
+	CREATE LASTCHILD OF refIdentificadores NAME 'identificador';
+	MOVE refIdentificador LASTCHILD NAME 'identificador';
+	SET refIdentificador.tipo = nombreIdentificador;
+	SET refIdentificador.valor = valorIndentificador;	
+END;
+
+CREATE PROCEDURE depurarIdentificadores (IN refIdentificadores REFERENCE)
+BEGIN
+	DECLARE borrarIdentificadores BOOLEAN FALSE;
+	DECLARE refIdentificador REFERENCE TO refIdentificadores;
+	MOVE refIdentificador FIRSTCHILD NAME 'identificador';
+	
+	WHILE LASTMOVE(refIdentificador) DO
+		IF refIdentificador.tipo = 'NUMERO DE CUENTA' THEN
+			SET borrarIdentificadores = TRUE;
+			SET refIdentificador.borrar = FALSE;
+		ELSE
+			SET refIdentificador.borrar = TRUE;
+		END IF; 
+
+		MOVE refIdentificador NEXTSIBLING; 
+	END WHILE;
+
+	IF borrarIdentificadores THEN
+		DECLARE numIdentificadores INTEGER CARDINALITY(refIdentificadores.identificador[]);
+		DECLARE i INTEGER numIdentificadores;
+
+		WHILE i > 0 DO
+			IF refIdentificadores.identificador[i].borrar THEN
+				SET refIdentificadores.identificador[i] = NULL;
+			END IF;
+			SET i = i - 1;
+		END WHILE;
+	END IF;
+END;

@@ -1,0 +1,26 @@
+BROKER SCHEMA profuturo.nci.cifrascontrol.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarCifrasSumarizadas_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://cifras.webservice.ws.nci.profuturo.mx/';		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'ICifrasControlSoapWSService', 'consultaSumarizado');		
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNS.ns:consultaSumarizado.request.folio = InputRoot.XMLNSC.consultaSumarizado.folio;
+		SET OutputRoot.XMLNS.ns:consultaSumarizado.request.idArchivo = InputRoot.XMLNSC.consultaSumarizado.idArchivo;
+		SET OutputRoot.XMLNS.ns:consultaSumarizado.request.idLibAportacion = InputRoot.XMLNSC.consultaSumarizado.idLibAportacion;		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarCifrasSumarizadas_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://cifras.webservice.ws.nci.profuturo.mx/';		
+		SET Environment.nci.consultarCifrasSumarizadas = InputRoot.XMLNSC.ns:consultaSumarizadoResponse.ConsultaSumarizadoResponse;		
+		IF InputRoot.XMLNSC.ns:consultaSumarizadoResponse.ConsultaSumarizadoResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

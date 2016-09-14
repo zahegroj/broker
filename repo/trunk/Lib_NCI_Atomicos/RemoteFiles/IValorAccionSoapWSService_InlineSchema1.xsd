@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://valorAccion.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://valorAccion.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://valorAccion.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="consultar" type="ns1:consultar"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarDiaHabilMesSig" type="ns1:consultarDiaHabilMesSig"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarDiaHabilMesSigResponse" type="ns1:consultarDiaHabilMesSigResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarResponse" type="ns1:consultarResponse"/>
+<xs:complexType name="consultarDiaHabilMesSig">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:valorAccionDiaHabilBeanReq"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="valorAccionDiaHabilBeanReq">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaLiquidacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idRegimen" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSiefore" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarDiaHabilMesSigResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarDiaHabilMesSigResponse" type="ns1:iValorAccionSoapWSConsultarDiaHabilMesSigResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iValorAccionSoapWSConsultarDiaHabilMesSigResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:valorAccionDiaHabilBeanResp"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="valorAccionDiaHabilBeanResp">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="valorAccion" type="ns1:valorAccionVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="valorAccionVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaAccion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fechaActualizacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idValorAccion" type="xs:short"/>
+      <xs:element minOccurs="0" name="regimen" type="ns1:regimenVO"/>
+      <xs:element minOccurs="0" name="siefore" type="ns1:sieforeVO"/>
+      <xs:element minOccurs="0" name="usuarioActualizacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="valorAccion" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="regimenVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="sieforeVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSiefore" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSiefore" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType abstract="true" name="number">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="consultar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:valorAccionBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="valorAccionBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaValorAccion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idSiefore" type="xs:short"/>
+      <xs:element minOccurs="0" name="idValorAccion" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarResponse" type="ns1:iValorAccionSoapWSConsultarResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iValorAccionSoapWSConsultarResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:valorAccionBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="valorAccionBeanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listaValorAccion">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="valorAccion" type="ns1:valorAccionVO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,164 @@
+BROKER SCHEMA profuturo.general.subetapas.iniciar
+
+CREATE COMPUTE MODULE RutearEjecutarIniciarSubetapa
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		SET Environment.iniciar.wrapper = InputRoot.XMLNSC.iniciarSubetapaWrapper;
+		
+		--DOIMSS_DEPURAR
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:depuraTablas) IS NOT NULL THEN
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'doimss_depurar';
+		END IF;
+		
+		--DOIMSS_CARGARARCHIVO
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:cargarArchivo) IS NOT NULL THEN
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'doimss_cargarArchivo';
+		END IF;
+		
+		--DOIMSS_IDENTIFICARCLIENTE
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:identificarCliente) IS NOT NULL OR 
+			FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:identificarClienteReproc) IS NOT NULL THEN
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'doimss_identificarCliente';
+		END IF;
+		
+		--DOIMSS_MATRIZCONVIVENCIA
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:matrizConvivencia) IS NOT NULL OR 
+			FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:matrizConvivenciaReproc) IS NOT NULL THEN
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'doimss_matrizConvivencia';
+		END IF;
+		
+		--DOIMSS_SUMARIOARCHIVO
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:generarCifrasControl) IS NOT NULL THEN
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'doimss_sumarioArchivo';
+		END IF;
+		
+		--DOIMSS_GENERARMOVSPREVIOS
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:genMovPrevios) IS NOT NULL OR
+			FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:recalcMovPrevios) IS NOT NULL THEN
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'doimss_generarMovimientos';
+		END IF;
+		
+		--DOIMSS_APLICARMOVSESTATUS
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:ActualizarMovEstatus) IS NOT NULL THEN
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'doimss_aplicarMovimientos';
+		END IF;
+		
+		--DOIMSS_DESMARCARCUENTA
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:desmarcarCuenta) IS NOT NULL THEN						--Se agrega la subetapa Desmarcar Cuentas
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'doimss_desmarcarCuenta';			--Se agrega la subetapa Desmarcar Cuentas
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapRequest_IniciarSubetapa_doimss_cargarArchivo
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		SET OutputRoot.XMLNSC.nsdoimss:cargarArchivo = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:cargarArchivo;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapRequest_IniciarSubetapa_doimss_identificarCliente
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:identificarCliente) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:identificarCliente = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:identificarCliente;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:identificarClienteReproc) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:identificarClienteReproc = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:identificarClienteReproc;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapRequest_IniciarSubetapa_doimss_depurar
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		SET OutputRoot.XMLNSC.nsdoimss:depuraTablas = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:depuraTablas;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapRequest_IniciarSubetapa_doimss_matrizConvivencia
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:matrizConvivencia) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:matrizConvivencia = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:matrizConvivencia;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:matrizConvivenciaReproc) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:matrizConvivenciaReproc = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:matrizConvivenciaReproc;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapRequest_IniciarSubetapa_doimss_sumarioArchivo
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:generarCifrasControl) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:generarCifrasControl = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:generarCifrasControl;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapRequest_IniciarSubetapa_doimss_generarMovs
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:genMovPrevios) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:genMovPrevios = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:genMovPrevios;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:recalcMovPrevios) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:recalcMovPrevios = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:recalcMovPrevios;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapRequest_IniciarSubetapa_doimss_aplicarMovs
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:ActualizarMovEstatus) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:ActualizarMovEstatus = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:ActualizarMovEstatus;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE mapRequest_IniciarSubetapa_doimss_desmarcarCuenta
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:desmarcarCuenta) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.nsdoimss:desmarcarCuenta = InputRoot.XMLNSC.iniciarSubetapaWrapper.nsdoimss:desmarcarCuenta;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

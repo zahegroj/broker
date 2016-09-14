@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmLabel.msgnode="ComIbmLabel.msgnode" xmlns:ComIbmMQOutput.msgnode="ComIbmMQOutput.msgnode" xmlns:ComIbmRouteToLabel.msgnode="ComIbmRouteToLabel.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="profuturo/general/subetapas/iniciar/iniciarSubetapa.subflow" nsPrefix="profuturo_general_subetapas_iniciar_iniciarSubetapa.subflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" useDefaults="true" udpSupport="true">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="iniciarSubetapa" bundleName="profuturo/general/subetapas/iniciar/iniciarSubetapa" pluginId="AP_Subetapas"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/AP_Subetapas/icons/full/obj16/iniciarSubetapa.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/AP_Subetapas/icons/full/obj30/iniciarSubetapa.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="24,71">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="profuturo/general/subetapas/iniciar/iniciarSubetapa" pluginId="AP_Subetapas"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="1251,73">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="profuturo/general/subetapas/iniciar/iniciarSubetapa" pluginId="AP_Subetapas"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="109,71" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#RutearIniciarSubetapa.Main" computeMode="destination">
+        <translation xmi:type="utility:ConstantString" string="Set Label Subetapa"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="233,72">
+        <translation xmi:type="utility:ConstantString" string="Route To Subetapa"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="436,7" labelName="no_subetapa">
+        <translation xmi:type="utility:ConstantString" string="no_subetapa"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="395,82" labelName="ini_doimss_validarArchivo">
+        <translation xmi:type="utility:ConstantString" string="ini_doimss_validarArchivo"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="930,68" labelName="enviar">
+        <translation xmi:type="utility:ConstantString" string="enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="608,7" computeExpression="esql://routine/profuturo.general.subetapas#BuildExcepcionNoSubetapa.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build Fault"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_7" location="757,8">
+        <translation xmi:type="utility:ConstantString" string="Route To no_enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmMQOutput.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_8" location="1003,68" queueName="QL.SUBETAPA_INI.IN" transactionMode="no" persistenceMode="no">
+        <translation xmi:type="utility:ConstantString" string="QL.SUBETAPA_INI.IN"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_9" location="1162,162" labelName="no_enviar">
+        <translation xmi:type="utility:ConstantString" string="no_enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_10" location="580,82" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#DOIMSSRutearEnvio_validarArchivo.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build validarArchivo"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_11" location="719,83">
+        <translation xmi:type="utility:ConstantString" string="Route DOIMSS valArch To enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_12" location="1146,72" computeExpression="esql://routine/profuturo.general.subetapas#IniciarSubetapa.Main">
+        <translation xmi:type="utility:ConstantString" string="Set Response"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_13" location="386,160" labelName="ini_doimss_identificarCliente">
+        <translation xmi:type="utility:ConstantString" string="ini_doimss_identificarCliente"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_14" location="571,160" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#DOIMSSRutearEnvio_idc.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build identificarCliente"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_16" location="731,161">
+        <translation xmi:type="utility:ConstantString" string="Route DOIMSS IdC To enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_15" location="381,233" labelName="ini_doimss_matrizConvivencia">
+        <translation xmi:type="utility:ConstantString" string="ini_doimss_matrizConvivencia"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_17" location="568,233" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#DOIMSSRutearEnvio_matrizConvivencia.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build matrizConvivencia"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_18" location="714,234">
+        <translation xmi:type="utility:ConstantString" string="Route DOIMSS MatConv To enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_19" location="395,300" labelName="ini_doimss_cifrasControl">
+        <translation xmi:type="utility:ConstantString" string="ini_doimss_cifrasControl"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_20" location="583,300" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#DOIMSSRutearEnvio_cifrasControl.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build cifrasControl"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_21" location="721,301">
+        <translation xmi:type="utility:ConstantString" string="Route DOIMSS CifCtrl To enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_22" location="396,372" labelName="ini_doimss_generarmovs">
+        <translation xmi:type="utility:ConstantString" string="ini_doimss_generarmovs"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_23" location="397,434" labelName="ini_doimss_aplicarmovs">
+        <translation xmi:type="utility:ConstantString" string="ini_doimss_aplicarmovs"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_24" location="715,373">
+        <translation xmi:type="utility:ConstantString" string="Route DOIMSS GenMov To enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_25" location="710,435">
+        <translation xmi:type="utility:ConstantString" string="Route DOIMSS AplicMovs To enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_26" location="593,372" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#DOIMSSRutearEnvio_generarMovimientos.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build genMovs"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_27" location="590,434" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#DOIMSSRutearEnvio_aplicarMovimientos.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build aplicMovs"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_28" location="378,502" labelName="ini_doimss_desmarcarCuenta">
+        <translation xmi:type="utility:ConstantString" string="ini_doimss_desmarcarCuenta"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_30" location="703,503">
+        <translation xmi:type="utility:ConstantString" string="Route DOIMSS DesmCuents To enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_31" location="567,502" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#DOIMSSRutearEnvio_desmarcarCuenta.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build desmarcarCuenta"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_29" location="379,568" labelName="ini_subsec_matrizConvivencia">
+        <translation xmi:type="utility:ConstantString" string="ini_subsec_matrizConvivencia"/>
+      </nodes>
+      <nodes xmi:type="ComIbmLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_32" location="393,631" labelName="ini_subsec_generarMovs">
+        <translation xmi:type="utility:ConstantString" string="ini_subsec_generarMovs"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_35" location="571,568" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#SUBSECRutearEnvio_matrizConvivencia.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build subsecMatConv"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_36" location="571,631" computeExpression="esql://routine/profuturo.general.subetapas.iniciar#SUBSECRutearEnvio_generarMovimientos.Main" computeMode="destinationAndMessage">
+        <translation xmi:type="utility:ConstantString" string="Build subsecGenMovs"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_37" location="713,569">
+        <translation xmi:type="utility:ConstantString" string="Route SUBSEC MatConv To enviar"/>
+      </nodes>
+      <nodes xmi:type="ComIbmRouteToLabel.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_38" location="713,632">
+        <translation xmi:type="utility:ConstantString" string="Route SUBSEC GenMovs To enviar"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="FCMComposite_1_8" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_10" sourceNode="FCMComposite_1_4" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_11" sourceNode="FCMComposite_1_10" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_12" sourceNode="FCMComposite_1_8" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_12" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_12" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_13" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_9" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_14" sourceNode="FCMComposite_1_13" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_16" sourceNode="FCMComposite_1_14" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_17" sourceNode="FCMComposite_1_15" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_14" targetNode="FCMComposite_1_18" sourceNode="FCMComposite_1_17" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_15" targetNode="FCMComposite_1_20" sourceNode="FCMComposite_1_19" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_16" targetNode="FCMComposite_1_21" sourceNode="FCMComposite_1_20" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_17" targetNode="FCMComposite_1_26" sourceNode="FCMComposite_1_22" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_18" targetNode="FCMComposite_1_24" sourceNode="FCMComposite_1_26" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_19" targetNode="FCMComposite_1_27" sourceNode="FCMComposite_1_23" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_20" targetNode="FCMComposite_1_25" sourceNode="FCMComposite_1_27" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_23" targetNode="FCMComposite_1_31" sourceNode="FCMComposite_1_28" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_24" targetNode="FCMComposite_1_30" sourceNode="FCMComposite_1_31" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_21" targetNode="FCMComposite_1_35" sourceNode="FCMComposite_1_29" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_22" targetNode="FCMComposite_1_36" sourceNode="FCMComposite_1_32" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_25" targetNode="FCMComposite_1_37" sourceNode="FCMComposite_1_35" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_26" targetNode="FCMComposite_1_38" sourceNode="FCMComposite_1_36" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

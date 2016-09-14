@@ -1,0 +1,17 @@
+BROKER SCHEMA profuturo.general.subetapas.iniciar
+
+CREATE COMPUTE MODULE RutearRespuestaAInformarOK
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'informarOK';		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE RutearRespuestaAInformarExcep
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'informarExcep';		
+		RETURN TRUE;
+	END;
+END MODULE;

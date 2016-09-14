@@ -1,0 +1,64 @@
+BROKER SCHEMA profuturo.general.enviocorreos.mapeos
+
+
+CREATE COMPUTE MODULE MapeoEnvioCorreo_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Notificaciones/EnvioCorreoService/v1/types';
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'SMTP', 'SMTP', 'EnvioCorreo');
+		
+		DECLARE countArr INTEGER;
+		DECLARE mailPara CHARACTER '';
+		DECLARE mailCC CHARACTER '';
+		
+		DECLARE i INTEGER 1;
+		SET countArr = CARDINALITY(InputRoot.XMLNSC.correo.datosCorreo.para.email[]);
+		WHILE i <= countArr DO
+			IF (i > 1) THEN
+				SET mailPara = mailPara || ',';
+			END IF;
+			SET mailPara = 	mailPara || InputRoot.XMLNSC.correo.datosCorreo.para.email[i];
+			
+			SET i = i + 1;
+		END WHILE;
+		
+		SET i = 1;
+		SET countArr = CARDINALITY(InputRoot.XMLNSC.correo.datosCorreo.cc.email[]);
+		WHILE i <= countArr DO
+			IF (i > 1) THEN
+				SET mailCC = mailCC || ',';
+			END IF;
+			SET mailCC = mailCC || InputRoot.XMLNSC.correo.datosCorreo.cc.email[i];
+			
+			SET i = i + 1;
+		END WHILE;
+		
+		SET OutputRoot.EmailOutputHeader.To = mailPara;
+		SET OutputRoot.EmailOutputHeader.Cc = mailCC;
+		SET OutputRoot.EmailOutputHeader.From = InputRoot.XMLNSC.correo.datosCorreo.de.email[1];
+		DECLARE asunto CHARACTER CAST(InputRoot.XMLNSC.correo.datosCorreo.asunto AS CHARACTER CCSID 819);
+		SET OutputRoot.EmailOutputHeader.Subject = asunto;
+		DECLARE encoded CHARACTER BASE64ENCODE(InputRoot.XMLNSC.correo.datosCorreo.mensaje);
+		DECLARE decoded BLOB BASE64DECODE(encoded);
+		DECLARE decoded2 BLOB CAST(decoded AS BLOB CCSID 819);
+		SET OutputRoot.BLOB.BLOB = decoded2;
+		
+		IF EXISTS(InputRoot.XMLNSC.correo.datosCorreo.adjunto[]) THEN
+			SET OutputLocalEnvironment.Destination.Email.Attachment.Content = InputRoot.XMLNSC.correo.datosCorreo.adjunto;
+			SET OutputLocalEnvironment.Destination.Email.Attachment.ContentType = 'text/plain';
+			SET OutputLocalEnvironment.Destination.Email.Attachment.ContentName = 'adjunto.txt';			
+		END IF;	
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoEnvioCorreo_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET Environment.nci.enviocorreo.res.success = true;
+		RETURN TRUE;
+	END;
+END MODULE;

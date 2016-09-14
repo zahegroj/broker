@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IBitacoraComentarioSoapWSService" targetNamespace="http://impl.comentarios.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://comentarios.webservice.ws.nci.profuturo.mx/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.comentarios.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="IBitacoraComentarioSoapWSServiceSoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:import location="IBitacoraComentarioSoapWSService_i.wsdl" namespace="http://comentarios.webservice.ws.nci.profuturo.mx/">
+    </wsdl:import>
+  <wsdl:binding name="IBitacoraComentarioSoapWSServiceSoapBinding" type="ns1:IBitacoraComentarioSoapWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="consultaComentarios">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultaComentarios">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultaComentariosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardaComentario">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="guardaComentario">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="guardaComentarioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IBitacoraComentarioSoapWSService">
+    <wsdl:port binding="tns:IBitacoraComentarioSoapWSServiceSoapBinding" name="IBitacoraComentarioSoapWSPort">
+      <soap:address location="http://172.16.60.65:8000/mit-ws/services/IBitacoraComentarioSoapWSService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

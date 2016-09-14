@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://ws.delegate.web.clienteUnico.profuturo.com.mx/ClienteEntity" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns0="http://ws.delegate.web.clienteUnico.profuturo.com.mx/ClienteEntity" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="ClienteEntityPortBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://ws.delegate.web.clienteUnico.profuturo.com.mx/ClienteEntity" schemaLocation="ClienteEntityService.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="addContratoClientePersonaResponse">
+    <wsdl:part element="ns0:addContratoClientePersonaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContratoClientePersonaResponse">
+    <wsdl:part element="ns0:getContratoClientePersonaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addContratoCliente">
+    <wsdl:part element="ns0:addContratoCliente" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContratoCliente">
+    <wsdl:part element="ns0:getContratoCliente" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContratoClienteResponse">
+    <wsdl:part element="ns0:getContratoClienteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addContratoClientePersona">
+    <wsdl:part element="ns0:addContratoClientePersona" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContratosCliente">
+    <wsdl:part element="ns0:getContratosCliente" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ClienteUnicoProfGNPSOAException">
+    <wsdl:part element="ns0:ClienteUnicoProfGNPSOAException" name="fault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateContratoCliente">
+    <wsdl:part element="ns0:updateContratoCliente" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContratosClienteResponse">
+    <wsdl:part element="ns0:getContratosClienteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateContratoClienteResponse">
+    <wsdl:part element="ns0:updateContratoClienteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addContratoClienteResponse">
+    <wsdl:part element="ns0:addContratoClienteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContratoClientePersona">
+    <wsdl:part element="ns0:getContratoClientePersona" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ClienteEntityServiceDelegateImpl">
+    <wsdl:operation name="addContratoCliente">
+      <wsdl:input message="ns0:addContratoCliente" name="addContratoClienteRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:addContratoClienteResponse" name="addContratoClienteResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addContratoClientePersona">
+      <wsdl:input message="ns0:addContratoClientePersona" name="addContratoClientePersonaRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:addContratoClientePersonaResponse" name="addContratoClientePersonaResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getContratoCliente">
+      <wsdl:input message="ns0:getContratoCliente" name="getContratoClienteRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getContratoClienteResponse" name="getContratoClienteResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getContratoClientePersona">
+      <wsdl:input message="ns0:getContratoClientePersona" name="getContratoClientePersonaRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getContratoClientePersonaResponse" name="getContratoClientePersonaResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getContratosCliente">
+      <wsdl:input message="ns0:getContratosCliente" name="getContratosClienteRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getContratosClienteResponse" name="getContratosClienteResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateContratoCliente">
+      <wsdl:input message="ns0:updateContratoCliente" name="updateContratoClienteRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:updateContratoClienteResponse" name="updateContratoClienteResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClienteEntityPortBinding" type="ns0:ClienteEntityServiceDelegateImpl">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addContratoCliente">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="addContratoClienteRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addContratoClienteResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addContratoClientePersona">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="addContratoClientePersonaRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addContratoClientePersonaResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getContratoCliente">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getContratoClienteRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContratoClienteResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getContratoClientePersona">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getContratoClientePersonaRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContratoClientePersonaResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getContratosCliente">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getContratosClienteRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContratosClienteResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateContratoCliente">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="updateContratoClienteRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateContratoClienteResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClienteEntityService">
+    <wsdl:port binding="ns0:ClienteEntityPortBinding" name="ClienteEntityPort">
+      <soap11:address location="http://GPCOP02PRESTA2:3040/buc/ws/ClienteEntityService"/>
+    </wsdl:port>
+    <wsdl:port binding="ns0:ClienteEntityPortBinding" name="ClienteEntityPort.0">
+      <soap11:address location="http://GPCOP02PRESTA2:3040/buc/ws/ClienteEntityService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

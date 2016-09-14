@@ -1,0 +1,18 @@
+BROKER SCHEMA profuturo.nci.matrizconvivencia.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarCuentasNoConviven_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		CALL profuturo.util.CopyEntireMessage(InputRoot,OutputRoot);		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarCuentasNoConviven_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET Environment.nci.cuentasNoConviven.res = InputRoot.XMLNSC.res;		
+		RETURN TRUE;
+	END;
+END MODULE;

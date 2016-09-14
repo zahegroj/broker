@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="consulta" type="ns1:consulta"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaResponse" type="ns1:consultaResponse"/>
+<xs:complexType name="consulta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:tipoSubcuentaRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="tipoSubcuentaRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idTipoSubcuenta" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaResponse" type="ns1:iTipoSubcuentaSoapWSConsultaResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iTipoSubcuentaSoapWSConsultaResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:tipoSubcuentaResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="tipoSubcuentaResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="tipoSubcuenta" nillable="true" type="ns1:tipoSubcuentaVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="tipoSubcuentaVO">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractAuditoriaVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="familia" type="ns1:familiaVO"/>
+          <xs:element minOccurs="0" name="grupo" type="ns1:grupoVO"/>
+          <xs:element minOccurs="0" name="idTipoSubcuenta" type="xs:short"/>
+          <xs:element minOccurs="0" name="regimen" type="ns1:regimenVO"/>
+          <xs:element minOccurs="0" name="subcuenta" type="ns1:subcuentaVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="abstractAuditoriaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaActualizacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="usuarioActualizacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="familiaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="grupoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="regimenVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subcuentaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

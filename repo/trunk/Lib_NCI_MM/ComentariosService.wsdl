@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ComentariosService" targetNamespace="http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1" xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException" xmlns:sch="http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="ComentariosBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+
+	<wsdl:types>
+		<xsd:schema>
+<xsd:import namespace="http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types" schemaLocation="ComentariosService/ComentariosService.xsd">
+			</xsd:import>
+<xsd:import namespace="http://mx.profuturo/iib/iibException/IIBException" schemaLocation="frameworkiib/iibException/IIBException.xsd">
+			</xsd:import>
+</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="faultMsg">
+    	<wsdl:part element="iibe:iibException" name="parameters"/>
+  	</wsdl:message>
+
+  		<wsdl:message name="guardarComentarioRequest">
+		<wsdl:part element="sch:guardarComentarioRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="guardarComentarioResponse">
+		<wsdl:part element="sch:guardarComentarioResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+
+  	<wsdl:message name="consultarComentariosRequest">
+  		<wsdl:part element="sch:consultarComentariosRequest" name="parameters">
+  		</wsdl:part>
+  	</wsdl:message>
+
+  	<wsdl:message name="consultarComentariosResponse">
+  		<wsdl:part element="sch:consultarComentariosResponse" name="parameters">
+  		</wsdl:part>
+  	</wsdl:message>
+
+	<wsdl:portType name="ComentariosPortType">
+		<wsdl:operation name="guardarComentario">
+			<wsdl:input message="tns:guardarComentarioRequest"/>
+			<wsdl:output message="tns:guardarComentarioResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+
+		<wsdl:operation name="consultarComentarios">
+			<wsdl:input message="tns:consultarComentariosRequest"/>
+			<wsdl:output message="tns:consultarComentariosResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="ComentariosBinding" type="tns:ComentariosPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="guardarComentario">
+			<soap:operation soapAction="urn:guardarComentario" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+
+		<wsdl:operation name="consultarComentarios">
+			<soap:operation soapAction="urn:consultarComentarios" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>		
+	</wsdl:binding>
+
+	<wsdl:service name="ComentariosService">
+		<wsdl:port binding="tns:ComentariosBinding" name="ComentariosPort">
+			<soap:address location="http://localhost/iib/nci/BitacoraProcesos/ComentariosService/v1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

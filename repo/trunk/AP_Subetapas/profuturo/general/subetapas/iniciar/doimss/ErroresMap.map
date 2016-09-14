@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="profuturo.general.subetapas.iniciar.doimss" version="8.0.5.0" xmlns:map="profuturo.general.subetapas.iniciar.doimss">
+    <input path="/ErroresDOIMSSCargarArchivo.xsd"/>
+    <output path="/ErroresDOIMSSCargarArchivo.xsd"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="io" uri="http://mx.profuturo/dst/mit/doimss"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="ErroresMap">
+        <input namespace="http://mx.profuturo/dst/mit/doimss" path="mb:msg(erroresCargarArchivo,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_erroresCargarArchivo"/>
+        <output namespace="http://mx.profuturo/dst/mit/doimss" path="mb:msg(erroresCargarArchivoList,assembly,XMLNSC,Properties)" var="ComIbmMessageAssembly_erroresCargarArchivoList"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_erroresCargarArchivo/Properties"/>
+            <output path="$ComIbmMessageAssembly_erroresCargarArchivoList/Properties"/>
+        </move>
+        <join>
+            <input path="$ComIbmMessageAssembly_erroresCargarArchivo/erroresCargarArchivo/idArchivo" var="idArchivo"/>
+            <input path="$ComIbmMessageAssembly_erroresCargarArchivo/erroresCargarArchivo/regla" var="regla"/>
+            <input path="$ComIbmMessageAssembly_erroresCargarArchivo/erroresCargarArchivo/errores" var="errores"/>
+            <input path="$ComIbmMessageAssembly_erroresCargarArchivo/erroresCargarArchivo/correctos" var="correctos"/>
+            <output path="$ComIbmMessageAssembly_erroresCargarArchivoList/erroresCargarArchivoList/error" var="error"/>
+            <move>
+                <input path="$idArchivo/."/>
+                <output path="$error/idArchivo"/>
+            </move>
+            <move>
+                <input path="$regla/."/>
+                <output path="$error/regla"/>
+            </move>
+            <move>
+                <input path="$errores/."/>
+                <output path="$error/errores"/>
+            </move>
+            <move>
+                <input path="$correctos/."/>
+                <output path="$error/correctos"/>
+            </move>
+        </join>
+    </mappingDeclaration>
+</mappingRoot>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ClienteService"
+	targetNamespace="http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1"
+	xmlns:tns="http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:sch="http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types"
+	xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException">
+
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import
+				namespace="http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types"
+				schemaLocation="CifrasControlService.xsd">
+			</xsd:import>
+			<xsd:import
+				namespace="http://mx.profuturo/iib/iibException/IIBException"
+				schemaLocation="../frameworkiib/iibException/IIBException.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="consultarCifrasControlRequest">
+		<wsdl:part element="sch:consultarCifrasControlRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarCifrasControlResponse">
+		<wsdl:part element="sch:consultarCifrasControlResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarCifrasSumarizadasRequest">
+		<wsdl:part element="sch:consultarCifrasSumarizadasRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarCifrasSumarizadasResponse">
+		<wsdl:part element="sch:consultarCifrasSumarizadasResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarCifrasViviendaRequest">
+		<wsdl:part element="sch:consultarCifrasViviendaRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="consultarCifrasViviendaResponse">
+		<wsdl:part element="sch:consultarCifrasViviendaResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="faultMsg">
+    	<wsdl:part element="iibe:iibException" name="parameters"/>
+  	</wsdl:message>
+	
+	<wsdl:portType name="CifrasControlPortType">
+		<wsdl:operation name="consultarCifrasControl">
+			<wsdl:input message="tns:consultarCifrasControlRequest"/>
+			<wsdl:output message="tns:consultarCifrasControlResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="consultarCifrasSumarizadas">
+			<wsdl:input message="tns:consultarCifrasSumarizadasRequest"/>
+			<wsdl:output message="tns:consultarCifrasSumarizadasResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="consultarCifrasVivienda">
+			<wsdl:input message="tns:consultarCifrasViviendaRequest"/>
+			<wsdl:output message="tns:consultarCifrasViviendaResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="CifrasControlBinding" type="tns:CifrasControlPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="consultarCifrasControl">
+			<soap:operation soapAction="urn:consultarCifrasControl" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarCifrasSumarizadas">
+			<soap:operation soapAction="urn:consultarCifrasControl" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="consultarCifrasVivienda">
+			<soap:operation soapAction="urn:consultarCifrasControl" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="CifrasControlService">
+		<wsdl:port binding="tns:CifrasControlBinding" name="CifrasControlPort">
+			<soap:address location="http://localhost/iib/nci/CifrasControl/CifrasControlService/v1" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

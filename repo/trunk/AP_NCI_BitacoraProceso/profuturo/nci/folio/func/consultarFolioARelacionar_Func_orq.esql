@@ -1,0 +1,46 @@
+BROKER SCHEMA profuturo.nci.folio.func
+
+CREATE COMPUTE MODULE consultarFolioARelacionar_Func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET OutputRoot.XMLNSC.consultarFolioARelacionar.fechaValorAccion = InputRoot.XMLNSC.ns:consultarFolioARelacionarRequest.fechaValorAccion;
+		SET OutputRoot.XMLNSC.consultarFolioARelacionar.idProceso = InputRoot.XMLNSC.ns:consultarFolioARelacionarRequest.idProceso;
+		SET OutputRoot.XMLNSC.consultarFolioARelacionar.idSubproceso = InputRoot.XMLNSC.ns:consultarFolioARelacionarRequest.idSubproceso;
+				
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.consultarFolioARelacionar.success = true THEN		
+			SET OutputRoot.XMLNSC.ns:consultarFolioARelacionarResponse.folio = Environment.nci.consultarFolioARelacionar.response.folios;			
+						 
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarFolioARelacionarResponse.folio) IS NULL THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarFolioARelacionarResponse NAME 'mensajes';
+		        CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarFolioARelacionarResponse.mensajes);
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarFolioARelacionar.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarFolioARelacionar.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarFolioARelacionar.errorTrace;		
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF; 		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_consultarFolioARelacionar
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET Environment.valReq.idProceso = InputRoot.XMLNSC.ns:consultarFolioARelacionarRequest.idProceso;
+		SET Environment.valReq.idSubproceso = InputRoot.XMLNSC.ns:consultarFolioARelacionarRequest.idSubproceso;	
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarFolioARelacionar_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET OutputRoot.XMLNSC.ns:consultarFolioARelacionarResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

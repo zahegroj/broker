@@ -1,0 +1,185 @@
+BROKER SCHEMA profuturo.general.enviocorreos.transf
+
+
+CREATE COMPUTE MODULE RutearTransformacion
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		SET Environment.variables.notificacion = InputRoot.XMLNSC.notificacion;
+		
+		CASE InputRoot.XMLNSC.notificacion.idNotificacion 
+		WHEN 1 THEN -- NOTIFICACION 1
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(InputRoot.XMLNSC.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (InputRoot.XMLNSC.notificacion.parametros.parametro[i].clave = 'Vartablaestructura') THEN
+					SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'not01tab01';
+					SET OutputRoot.XMLNSC.cifrasControl = InputRoot.XMLNSC.notificacion.parametros.parametro[i].cifrasControl;
+					PROPAGATE TO TERMINAL 'out1';
+				END IF;
+				SET i = i + 1;
+			END WHILE;
+			
+		WHEN 2 THEN -- NOTIFICACION 2
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(InputRoot.XMLNSC.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (InputRoot.XMLNSC.notificacion.parametros.parametro[i].clave = 'Vartablaestructura') THEN
+					CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+					SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'not02tab01';
+					SET OutputRoot.XMLNSC.cifrasControl = InputRoot.XMLNSC.notificacion.parametros.parametro[i].cifrasControl;
+					PROPAGATE TO TERMINAL 'out1';
+				END IF;
+				IF (InputRoot.XMLNSC.notificacion.parametros.parametro[i].clave = 'Vartabladetalle') THEN
+					CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+					SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'not02tab02';
+					SET OutputRoot.XMLNSC.cifrasControl = InputRoot.XMLNSC.notificacion.parametros.parametro[i].cifrasControl;
+					PROPAGATE TO TERMINAL 'out1';
+				END IF;
+				SET i = i + 1;
+			END WHILE;
+
+		WHEN 4 THEN -- NOTIFICACION 4
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(InputRoot.XMLNSC.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (InputRoot.XMLNSC.notificacion.parametros.parametro[i].clave = 'Vartablanoident') THEN
+					CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+					SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'not04tab01';
+					SET OutputRoot.XMLNSC.cifrasControl = InputRoot.XMLNSC.notificacion.parametros.parametro[i].cifrasControl;
+					PROPAGATE TO TERMINAL 'out1';
+				END IF;
+				SET i = i + 1;
+			END WHILE;
+			
+		WHEN 5 THEN -- NOTIFICACION 5
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(InputRoot.XMLNSC.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (InputRoot.XMLNSC.notificacion.parametros.parametro[i].clave = 'Vartablanoconviven') THEN
+					CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+					SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'not05tab01';
+					SET OutputRoot.XMLNSC.cifrasControl = InputRoot.XMLNSC.notificacion.parametros.parametro[i].cifrasControl;
+					PROPAGATE TO TERMINAL 'out1';
+				END IF;
+				SET i = i + 1;
+			END WHILE;
+			
+		WHEN 8 THEN --NOTIFICACION 8
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(InputRoot.XMLNSC.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (InputRoot.XMLNSC.notificacion.parametros.parametro[i].clave = 'Vartabladetallefolios') THEN 
+					CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+					SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'not08tab01';
+					SET OutputRoot.XMLNSC.tablaValores = InputRoot.XMLNSC.notificacion.parametros.parametro[i].tablaValores;
+					PROPAGATE TO TERMINAL 'out1';
+				END IF;
+				SET i = i+1;
+			END WHILE;		
+			
+		END CASE;
+		
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		SET OutputRoot.Properties = InputRoot.Properties;
+		SET OutputRoot.XMLNSC.notificacion = Environment.variables.notificacion;	
+		RETURN TRUE;
+	END;
+END MODULE;
+
+
+CREATE COMPUTE MODULE SetTablaValor
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		CASE Environment.variables.notificacion.idNotificacion 
+		WHEN 1 THEN -- NOTIFICACION 1
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(Environment.variables.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (Environment.variables.notificacion.parametros.parametro[i].clave = 'Vartablaestructura') THEN
+					SET Environment.variables.notificacion.parametros.parametro[i].valor = ParseXMLToString(InputRoot);					
+				END IF;
+				
+				SET i = i + 1;
+			END WHILE;
+			
+		WHEN 2 THEN -- NOTIFICACION 2
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(Environment.variables.notificacion.parametros.parametro[]);
+			X : WHILE i <= countArr DO
+				IF (Environment.variables.notificacion.parametros.parametro[i].clave = 'Vartablaestructura') THEN
+					IF (Environment.variables.notificacion.parametros.parametro[i].valor = '') THEN
+						SET Environment.variables.notificacion.parametros.parametro[i].valor = ParseXMLToString(InputRoot);
+						LEAVE X;
+					END IF;
+				END IF;
+				IF (Environment.variables.notificacion.parametros.parametro[i].clave = 'Vartabladetalle') THEN
+					IF (Environment.variables.notificacion.parametros.parametro[i].valor = '') THEN
+						SET Environment.variables.notificacion.parametros.parametro[i].valor = ParseXMLToString(InputRoot);
+						LEAVE X;
+					END IF;
+				END IF;
+				
+				SET i = i + 1;
+			END WHILE X;
+		
+		WHEN 4 THEN -- NOTIFICACION 4
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(Environment.variables.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (Environment.variables.notificacion.parametros.parametro[i].clave = 'Vartablanoident') THEN
+					SET Environment.variables.notificacion.parametros.parametro[i].valor = ParseXMLToString(InputRoot);					
+				END IF;
+				
+				SET i = i + 1;
+			END WHILE;
+			
+		WHEN 5 THEN -- NOTIFICACION 5
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(Environment.variables.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (Environment.variables.notificacion.parametros.parametro[i].clave = 'Vartablanoconviven') THEN
+					SET Environment.variables.notificacion.parametros.parametro[i].valor = ParseXMLToString(InputRoot);					
+				END IF;
+				
+				SET i = i + 1;
+			END WHILE;
+			
+		WHEN 8 THEN --NOTIFICACION 8
+			DECLARE i INTEGER 1;
+			DECLARE countArr INTEGER;
+			SET countArr = CARDINALITY(Environment.variables.notificacion.parametros.parametro[]);
+			WHILE i <= countArr DO
+				IF (Environment.variables.notificacion.parametros.parametro[i].clave = 'Vartabladetallefolios') THEN
+					SET Environment.variables.notificacion.parametros.parametro[i].valor = ParseXMLToString(InputRoot);
+				END IF;
+				
+				SET i = i + 1;
+			END WHILE;
+		
+		END CASE;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FUNCTION ParseXMLToString(IN inputRootNode REFERENCE) RETURNS CHARACTER
+BEGIN
+        DECLARE rootNode REFERENCE TO inputRootNode.XMLNSC;
+        DECLARE mensajeBlob BLOB
+           ASBITSTREAM(rootNode,
+                       inputRootNode.Properties.Encoding,
+                       inputRootNode.Properties.CodedCharSetId );
+        DECLARE mensajeString CHAR CAST(mensajeBlob AS CHAR CCSID inputRootNode.Properties.CodedCharSetId);
+
+        return mensajeString;
+END;

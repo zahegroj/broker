@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.profuturo/iib/nci/MatrizConvivencia/MatrizConvivenciaService/v1/types" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mod="http://mx.profuturo/nci/modelo" xmlns:tns="http://mx.profuturo/iib/nci/MatrizConvivencia/MatrizConvivenciaService/v1/types">
+	
+	<xsd:import namespace="http://mx.profuturo/nci/modelo" schemaLocation="../modelo/ModeloNCI.xsd"/>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarCuentasNoConvivenRequest" type="tns:consultarCuentasNoConvivenReq"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarCuentasNoConvivenResponse" type="tns:consultarCuentasNoConvivenResp"/>
+	
+	<xsd:complexType name="consultarCuentasNoConvivenReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="folioRel" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarCuentasNoConvivenResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="cuentasNoConviven" type="tns:ListaCuentasNoConviven"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="CuentaNoConvive">
+		<xsd:sequence>
+			<xsd:element name="numeroCuenta" type="xsd:string"/>
+			<xsd:element name="nss" type="xsd:string"/>
+			<xsd:element name="curp" type="xsd:string"/>
+			<xsd:element name="nombreTrabajador" type="xsd:string"/>
+			<xsd:element name="estatusConvivencia" type="xsd:string"/>
+			<xsd:element name="validacion" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="errorValidacion" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="procesoNoConvive" type="mod:Proceso"/>
+			<xsd:element name="fechaOcurrencia" type="xsd:dateTime"/>
+			<xsd:element name="subcuenta" type="mod:Subcuenta"/>
+		</xsd:sequence>
+	</xsd:complexType>
+        
+	<xsd:complexType name="ListaCuentasNoConviven">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" name="cuentaNoConvive" type="tns:CuentaNoConvive"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

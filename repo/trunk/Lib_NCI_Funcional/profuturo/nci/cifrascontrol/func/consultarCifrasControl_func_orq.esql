@@ -1,0 +1,177 @@
+BROKER SCHEMA profuturo.nci.cifrascontrol.func
+
+CREATE COMPUTE MODULE consultarCifrasControl_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		--DECLARAR CATALOGO ERRORES, DEBE CAMBIARSE POR LA INVOCACION AL FLUJO ATOMICO
+		/*SET Environment.Variables.tipoValidacion[] = LIST{	ROW('84' as ID_TIPO_VALIDACION, 'ESTRUCTURA' as TIPO_VALIDACION),
+        													ROW('85' as ID_TIPO_VALIDACION, 'CONTENIDO' as TIPO_VALIDACION),
+        													ROW('92' as ID_TIPO_VALIDACION, 'IDENTIFICACION DE CLIENTES' as TIPO_VALIDACION)
+        												};
+        											
+        SET Environment.Variables.valorError[] = 	LIST{	ROW('86' as ID_VALOR_ERROR, 'ERROR DE LONGITUD DIFERENTE A 450' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('87' as ID_VALOR_ERROR, 'ERROR LINEA COMPLETAMENTE VACIA' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('88' as ID_VALOR_ERROR, 'ERROR PRIMERA LINEA NO CORRESPONDE A ENCABEZADO' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('89' as ID_VALOR_ERROR, 'ERROR ULTIMA LINEA NO CORRESPONDE A SUMARIO' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('90' as ID_VALOR_ERROR, 'ERROR EN LA SEGUNDA LINEA NO CORRESPONDE A DETALLE INDIVIDUAL' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('91' as ID_VALOR_ERROR, 'ERROR EN CONTENIDO' as VALOR_ERROR, '85' as ID_TIPO_VALIDACION),
+        													ROW('93' as ID_VALOR_ERROR, 'ERROR EN IDENTIFICACION DE CLIENTES' as VALOR_ERROR, '92' as ID_TIPO_VALIDACION),
+        													ROW('94' as ID_VALOR_ERROR, 'ERROR EN ESTRUCTURA' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION)
+        												};
+		*/
+		DECLARE ID_TIPO_VALIDACION INT 19;
+		DECLARE ID_ERRORES_VALIDACION INT 20;
+		
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = 1;
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = ID_TIPO_VALIDACION;
+			
+		PROPAGATE TO TERMINAL 'out1';
+		
+		DECLARE countTipoVal INT CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+		DECLARE a INTEGER 1;
+	
+		X : WHILE a <= countTipoVal DO
+			SET Environment.Variables.tipoValidacion[a].ID_TIPO_VALIDACION = Environment.nci.consultarCatalogo.response[a].idCatCatalogo;
+			SET Environment.Variables.tipoValidacion[a].TIPO_VALIDACION = Environment.nci.consultarCatalogo.response[a].valor;
+			
+			SET a = a + 1;
+		END WHILE X;
+
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = 1;
+		SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = ID_ERRORES_VALIDACION;
+			
+		PROPAGATE TO TERMINAL 'out1';
+		
+		SET countTipoVal = CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+		SET a = 1;
+	
+		X : WHILE a <= countTipoVal DO
+			SET Environment.Variables.valorError[a].ID_VALOR_ERROR = Environment.nci.consultarCatalogo.response[a].idCatCatalogo;
+			SET Environment.Variables.valorError[a].VALOR_ERROR = Environment.nci.consultarCatalogo.response[a].valor;
+			SET Environment.Variables.valorError[a].ID_TIPO_VALIDACION = Environment.nci.consultarCatalogo.response[a].idCatPadre;
+			
+			SET a = a + 1;
+		END WHILE X;		
+		
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		
+		SET OutputRoot.XMLNSC.consultarCifrasControl.folio = InputRoot.XMLNSC.ns:consultarCifrasControlRequest.folio;
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:consultarCifrasControlRequest.folioRel) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.consultarCifrasControl.folioRel = InputRoot.XMLNSC.ns:consultarCifrasControlRequest.folioRel; 
+		END IF;
+		SET OutputRoot.XMLNSC.consultarCifrasControl.idSubetapa = InputRoot.XMLNSC.ns:consultarCifrasControlRequest.idSubetapa;
+		
+		PROPAGATE TO TERMINAL 'out2';
+		
+		IF Environment.nci.consultarCifrasControl.success = true THEN
+			DECLARE countArr INT CARDINALITY(Environment.nci.consultarCifrasControl.response.cifrasControlList.cifrasControl[]);
+			DECLARE response REFERENCE TO Environment.nci.consultarCifrasControl.response.cifrasControlList;
+			DECLARE i INTEGER 1;
+		
+			X : WHILE i <= countArr DO
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].folio = response.cifrasControl[i].folio.folio;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].idSubetapa = response.cifrasControl[i].subetapa.idSubetapa;			
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].totalRegistros = response.cifrasControl[i].totalRegistros;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].registrosCumplieron = response.cifrasControl[i].numRegistrosCumplieron;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].registrosNoCumplieron = response.cifrasControl[i].numregistrosNoCumplieron;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].tipoValidacion = getTipoValidacion_Error(Environment.Variables, response.cifrasControl[i].validacion, 'tipoValidacion'); --valor cat padre (validacion)
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].totalErrores = response.cifrasControl[i].totalErrores;
+				IF FIELDTYPE(response.cifrasControl[i].detalle) IS NULL OR response.cifrasControl[i].detalle IS NULL THEN
+					SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].detalle = '';
+				ELSE
+					SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].detalle = response.cifrasControl[i].detalle;
+				END IF;
+				DECLARE descError CHARACTER '';
+				IF response.cifrasControl[i].numregistrosNoCumplieron > 0 THEN
+					SET descError = getTipoValidacion_Error(Environment.Variables, response.cifrasControl[i].validacion, 'error'); --valor cat (validacion)
+				END IF;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].error = descError;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].fechaRegistro = response.cifrasControl[i].fechaRegistro;
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].fechaRegistroFormato = CAST(response.cifrasControl[i].fechaRegistro AS CHARACTER FORMAT 'yyyy-MM-dd HH:mm:ss');
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl.cifraControl[i].usuario = response.cifrasControl[i].usuarioRegistro;
+			
+				SET i = i + 1;
+			END WHILE X;
+			
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.cifrasControl) IS NULL THEN
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.mensajes.mensaje.codigo = '1002';
+				SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.mensajes.mensaje.descripcion = 'No se encontraron registros';
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCifrasControl.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCifrasControl.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCifrasControl.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out3';
+			RETURN FALSE;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FUNCTION getTipoValidacion_Error(IN variables REFERENCE, IN validacion CHARACTER, IN campo CHARACTER) RETURNS CHARACTER
+BEGIN		
+		/*SET Environment.Variables.tipoValidacion[] = LIST{	ROW('84' as ID_TIPO_VALIDACION, 'ESTRUCTURA' as TIPO_VALIDACION),
+        													ROW('85' as ID_TIPO_VALIDACION, 'CONTENIDO' as TIPO_VALIDACION)
+        												};
+        											
+        SET Environment.Variables.valorError[] = 	LIST{	ROW('86' as ID_VALOR_ERROR, 'ERROR DE LONGITUD DIFERENTE A 450' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('87' as ID_VALOR_ERROR, 'ERROR LINEA COMPLETAMENTE VACIA' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('88' as ID_VALOR_ERROR, 'ERROR PRIMERA LINEA NO CORRESPONDE A ENCABEZADO' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('89' as ID_VALOR_ERROR, 'ERROR ÚLTIMA LINEA NO CORRESPONDE A SUMARIO' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('90' as ID_VALOR_ERROR, 'ERROR EN LA SEGUNDA LINEA NO CORRESPONDE A DETALLE INDIVIDUAL' as VALOR_ERROR, '84' as ID_TIPO_VALIDACION),
+        													ROW('91' as ID_VALOR_ERROR, 'ERROR EN CONTENIDO' as VALOR_ERROR, '85' as ID_TIPO_VALIDACION)
+        												};
+       	*/
+        DECLARE respuesta CHARACTER '';
+        DECLARE v_tipoValidacion CHARACTER '';
+        DECLARE v_error CHARACTER '';
+        
+        DECLARE countArr INT CARDINALITY(variables.valorError[]);
+		DECLARE i INTEGER 1;
+	
+		X : WHILE i <= countArr DO
+        	IF (variables.valorError[i].ID_VALOR_ERROR = validacion) THEN
+        		SET v_error = variables.valorError[i].VALOR_ERROR;
+        		
+        		DECLARE countArr1 INT CARDINALITY(variables.tipoValidacion[]);
+				DECLARE j INTEGER 1;
+				Y : WHILE j <= countArr1 DO
+					IF (variables.tipoValidacion[j].ID_TIPO_VALIDACION = variables.valorError[i].ID_TIPO_VALIDACION) THEN
+						SET v_tipoValidacion = variables.tipoValidacion[j].TIPO_VALIDACION;
+					END IF;
+					
+					SET j = j + 1;
+				END WHILE Y;
+        	END IF;
+        	
+			SET i = i + 1;
+		END WHILE X;
+		        
+        CASE campo
+        WHEN 'tipoValidacion' THEN
+        	SET respuesta = v_tipoValidacion;
+        WHEN 'error' THEN
+        	SET respuesta = v_error;
+        END CASE;
+        
+        return respuesta;
+END;
+
+CREATE COMPUTE MODULE MapeoParametros_consultarCifrasControl
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		
+		SET Environment.valReq.idSubetapa = InputRoot.XMLNSC.ns:consultarCifrasControlRequest.idSubetapa;	
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarCifrasControl_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		SET OutputRoot.XMLNSC.ns:consultarCifrasControlResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

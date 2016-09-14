@@ -1,0 +1,160 @@
+BROKER SCHEMA profuturo.util.func
+
+CREATE FUNCTION setFormatoImporte (IN importe DECIMAL, IN formato CHARACTER) RETURNS CHARACTER
+BEGIN
+              DECLARE importeFormato CHARACTER '';
+              DECLARE valorImporte DECIMAL 0.0;
+              
+              IF importe IS NOT NULL THEN
+                             SET valorImporte = importe;
+              END IF;
+              
+              CASE formato
+              WHEN 'AIVS' THEN
+                             DECLARE pattern CHARACTER '#,##0.000000';
+                             SET importeFormato = CAST(valorImporte AS CHARACTER FORMAT pattern);
+              WHEN 'PESOS' THEN
+                             DECLARE pattern CHARACTER '#,##0.00';
+                             SET importeFormato = CAST(valorImporte AS CHARACTER FORMAT pattern);
+              END CASE;
+ 
+              RETURN importeFormato;
+END;
+
+CREATE FUNCTION setFormatoNumero (IN valor INTEGER) RETURNS CHARACTER
+BEGIN
+	DECLARE importeFormato CHARACTER '0';
+	
+	IF valor IS NOT NULL THEN
+		DECLARE pattern CHARACTER '#,##0';
+		SET importeFormato = CAST(valor AS CHARACTER FORMAT pattern);
+	END IF;
+
+	RETURN importeFormato;
+END;
+
+CREATE FUNCTION getDecimal (IN valor CHARACTER, IN formato CHARACTER) RETURNS DECIMAL
+BEGIN
+	DECLARE valorDecimal DECIMAL;
+	IF valor IS NOT NULL THEN
+		CASE formato
+		WHEN 'PESOS' THEN
+			DECLARE pattern CHARACTER '#,##0.00';
+			SET valorDecimal = CAST(valor AS DECIMAL FORMAT pattern);
+		WHEN 'AIVS' THEN
+			DECLARE pattern CHARACTER '#,##0.000000';
+			SET valorDecimal = CAST(valor AS DECIMAL FORMAT pattern);
+		END CASE;
+	END IF;
+	
+	RETURN valorDecimal;
+END;
+
+CREATE FUNCTION getNumero (IN valor CHARACTER) RETURNS INTEGER
+BEGIN
+	DECLARE valorNumerico INTEGER;
+	IF valor IS NOT NULL THEN
+		DECLARE pattern CHARACTER '#,##0';
+		SET valorNumerico = CAST(valor AS INTEGER FORMAT pattern);
+	END IF;
+	
+	RETURN valorNumerico;
+END;
+
+CREATE FUNCTION remplazarCaracteresPorHTML(IN valor CHARACTER) RETURNS CHARACTER
+BEGIN
+	DECLARE nuevoValor CHARACTER valor;
+	
+	IF CONTAINS(valor, 'Á') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'Á', '&Aacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'á') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'á', '&aacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'É') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'É', '&Eacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'é') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'é', '&eacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'Í') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'Í', '&Iacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'í') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'í', '&iacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'Ó') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'Ó', '&Oacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'ó') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'ó', '&oacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'Ú') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'Ú', '&Uacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'ú') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'ú', '&uacute;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'Ü') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'Ü', '&Uuml;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'ü') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'ü', '&uuml;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'Ñ') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'Ñ', '&Ntilde;'); 
+	END IF;
+	
+	IF CONTAINS(valor, 'ñ') THEN
+		SET nuevoValor = REPLACE(nuevoValor, 'ñ', '&ntilde;'); 
+	END IF;
+	
+	RETURN nuevoValor;
+END;
+
+CREATE PROCEDURE split (IN cadena CHARACTER, IN env REFERENCE, IN delim CHARACTER)
+BEGIN
+   DECLARE P INTEGER;
+   DECLARE idx INTEGER 1;
+
+   SET env.Split = NULL;
+
+   REPEAT
+      SET P = POSITION(delim IN cadena);
+      IF P = 0 THEN
+         SET env.Split.Array[idx] = cadena;
+      ELSE
+         SET env.Split.Array[idx] = LEFT(cadena, P - 1);
+         SET cadena = SUBSTRING(cadena FROM P + LENGTH(delim));
+         SET idx = idx + 1;
+      END IF;
+	  UNTIL P = 0
+   END REPEAT;
+END;
+
+CREATE FUNCTION validarFechaFormato (IN fechaOrigen CHARACTER, IN fechaFormato CHARACTER) RETURNS BOOLEAN
+BEGIN
+	DECLARE CONTINUE HANDLER FOR SQLSTATE LIKE'%' BEGIN END;
+	
+	DECLARE target DATE;
+	SET target = NULL;
+	SET target = CAST(fechaOrigen AS DATE FORMAT fechaFormato);
+	
+	IF target IS NULL THEN
+		RETURN FALSE;
+	END IF;
+	
+	RETURN TRUE;
+END;

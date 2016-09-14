@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://mx.profuturo/iib/nci/Movimientos/MovimientosService/v1/types" version="1.0" 
+	xmlns:tns="http://mx.profuturo/iib/nci/Movimientos/MovimientosService/v1/types"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:mod="http://mx.profuturo/nci/modelo">
+	
+	<xsd:import schemaLocation="../modelo/ModeloNCI.xsd" namespace="http://mx.profuturo/nci/modelo"></xsd:import>
+
+	<xsd:element name="consultarMovimientosPreviosRequest" type="tns:consultarMovimientosPreviosReq"></xsd:element>
+	<xsd:element name="consultarMovimientosPreviosResponse" type="tns:consultarMovimientosPreviosResp"></xsd:element>
+	<xsd:element name="consultarMovPreviosRelacionadosRequest" type="tns:consultarMovPreviosRelacionadosReq"></xsd:element>
+	<xsd:element name="consultarMovPreviosRelacionadosResponse" type="tns:consultarMovPreviosRelacionadosResp"></xsd:element>
+	
+	<xsd:complexType name="consultarMovimientosPreviosReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarMovimientosPreviosResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="sieforesMovimientos" type="tns:ListaMovimientos" minOccurs="0"/>
+					<xsd:element name="total" type="tns:Movimiento"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarMovPreviosRelacionadosReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarMovPreviosRelacionadosResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="movimientosRelacionados" type="tns:ListaMovimientosRelacionados" minOccurs="0"/>
+					<xsd:element name="totalImportePesos" type="xsd:string" minOccurs="0" />
+					<xsd:element name="totalAcciones" type="xsd:string" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="MovimientoRelacionado">
+		<xsd:sequence>
+			<xsd:element name="folio" type="mod:FolioProceso" />
+			<xsd:element name="importePesos" type="xsd:string" />
+			<xsd:element name="totalAcciones" type="xsd:string" />
+			<xsd:element name="numeroRegistros" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaMovimientosRelacionados">
+		<xsd:sequence>
+			<xsd:element name="movimientoRelacionado" type="tns:MovimientoRelacionado" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Movimiento">
+		<xsd:sequence>
+			<xsd:element name="siefore" type="mod:Siefore" minOccurs="0"/>
+			<xsd:element name="subcuentas" type="tns:ListaSubcuentasMovimientos" minOccurs="0"/>
+			<xsd:element name="totales" type="tns:ListaTotalesMovimientos" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+        
+	<xsd:complexType name="TotalesMovimiento">
+		<xsd:sequence>
+			<xsd:element name="regimen" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="totalPesos" type="mod:importe"/>
+			<xsd:element name="totalAcciones" type="mod:importe"/>
+			<xsd:element name="totalRegistros" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="SubcuentaMovimiento">
+		<xsd:sequence>
+			<xsd:element name="subcuenta" type="mod:Subcuenta"/>
+			<xsd:element name="regimen" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="tipoMovimiento" type="xsd:string"/>
+			<xsd:element name="pesos" type="mod:importe"/>
+			<xsd:element name="acciones" type="mod:importe"/>
+			<xsd:element name="totalRegistros" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaMovimientos">
+		<xsd:sequence>
+			<xsd:element name="movimiento" type="tns:Movimiento" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+        
+        <xsd:complexType name="ListaTotalesMovimientos">
+		<xsd:sequence>
+			<xsd:element name="total" type="tns:TotalesMovimiento" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaSubcuentasMovimientos">
+		<xsd:sequence>
+			<xsd:element name="subcuentaMovimiento" type="tns:SubcuentaMovimiento" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

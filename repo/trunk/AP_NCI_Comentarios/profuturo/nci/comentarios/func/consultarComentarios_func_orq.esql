@@ -1,0 +1,57 @@
+BROKER SCHEMA profuturo.nci.comentarios.func
+
+CREATE COMPUTE MODULE consultarComentarios_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types';
+		SET OutputRoot.XMLNSC.consultarComentariosBeanRequest.folio = InputRoot.XMLNSC.ns:consultarComentariosRequest.folio;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.consultarComentarios.success = TRUE THEN	
+			DECLARE tam int CARDINALITY(Environment.nci.consultarComentarios.response.comentarios[]);
+			DECLARE X int 1;
+			WHILE X<=tam DO
+				SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios.comentario[X].folio = Environment.nci.consultarComentarios.response.comentarios[X].folio;
+				SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios.comentario[X].etapa.id = Environment.nci.consultarComentarios.response.comentarios[X].etapa.idEtapa;
+				SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios.comentario[X].etapa.descripcion = Environment.nci.consultarComentarios.response.comentarios[X].etapa.desEtapa;
+				SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios.comentario[X].subetapa.id = Environment.nci.consultarComentarios.response.comentarios[X].subetapa.idSubetapa;
+				SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios.comentario[X].subetapa.descripcion = Environment.nci.consultarComentarios.response.comentarios[X].subetapa.descSubetapa;
+				SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios.comentario[X].fecha = Environment.nci.consultarComentarios.response.comentarios[X].fechaRegistro;
+				SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios.comentario[X].usuario = Environment.nci.consultarComentarios.response.comentarios[X].usuarioCreacion;
+				SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios.comentario[X].comentario = Environment.nci.consultarComentarios.response.comentarios[X].comentario;
+				SET X=X+1;
+			END WHILE;
+			
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarComentariosResponse.comentarios) IS NULL THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarComentariosResponse NAME 'mensajes';	  		
+		        CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarComentariosResponse.mensajes);
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarComentarios.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarComentarios.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarComentarios.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF;
+		
+		RETURN TRUE;	
+	END;	
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_consultarComentarios
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types';		
+		SET Environment.valReq.folio = InputRoot.XMLNSC.ns:consultarComentariosRequest.folio;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarComentarios_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types';
+		SET OutputRoot.XMLNSC.ns:consultarComentariosResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

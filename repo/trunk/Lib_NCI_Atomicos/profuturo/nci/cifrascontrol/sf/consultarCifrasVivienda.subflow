@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_profuturo_nci_cifrascontrol_sf_consultaSumarizadoVivienda_ICifrasControlSoapWSService_s_consultarCifrasVivienda.subflow="gen/profuturo/nci/cifrascontrol/sf/consultaSumarizadoVivienda_ICifrasControlSoapWSService_s_consultarCifrasVivienda.subflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility"
+    nsURI="profuturo/nci/cifrascontrol/sf/consultarCifrasVivienda.subflow" nsPrefix="profuturo_nci_cifrascontrol_sf_consultarCifrasVivienda.subflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" useDefaults="true" udpSupport="true">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="consultarCifrasVivienda" bundleName="profuturo/nci/cifrascontrol/sf/consultarCifrasVivienda" pluginId="Lib_NCI_Atomicos"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Lib_NCI_Atomicos/icons/full/obj16/consultarCifrasVivienda.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Lib_NCI_Atomicos/icons/full/obj30/consultarCifrasVivienda.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="39,155">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="profuturo/nci/cifrascontrol/sf/consultarCifrasVivienda" pluginId="Lib_NCI_Atomicos"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="141,155" computeExpression="esql://routine/profuturo.nci.cifrascontrol.mapeos#MapeoConsultarCifrasVivienda_IN.Main">
+        <translation xmi:type="utility:ConstantString" string="Map IN"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="599,164" computeExpression="esql://routine/profuturo.nci.cifrascontrol.mapeos#MapeoConsultarCifrasVivienda_OUT.Main">
+        <translation xmi:type="utility:ConstantString" string="Map OUT"/>
+      </nodes>
+      <nodes xmi:type="gen_profuturo_nci_cifrascontrol_sf_consultaSumarizadoVivienda_ICifrasControlSoapWSService_s_consultarCifrasVivienda.subflow:FCMComposite_1" xmi:id="FCMComposite_1_7" location="201,156">
+        <translation xmi:type="utility:ConstantString" string="consultaSumarizadoVivienda_ICifrasControlSoapWSService_s"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_7" sourceNode="FCMComposite_1_5" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_7" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_7" sourceTerminalName="OutTerminal.consultaSumarizadoViviendaResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_8" targetNode="FCMComposite_1_5" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

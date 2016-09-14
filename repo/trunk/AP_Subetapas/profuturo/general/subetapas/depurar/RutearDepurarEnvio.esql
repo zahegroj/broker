@@ -1,0 +1,122 @@
+BROKER SCHEMA profuturo.general.subetapas.depurar
+
+CREATE COMPUTE MODULE RutearDepurarEnvio_DOIMSS
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdst NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain ('XMLNSC') NAME 'iniciarSubetapaWrapper';
+		SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.iniciarSubetapaRequest = InputRoot.XMLNSC.ns:depurarProcesamientoRequest;
+		
+		SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.nsdst:depuraTablas.p_FOLIO = InputRoot.XMLNSC.ns:depurarProcesamientoRequest.folio;					
+		SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'depurar';
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE RutearDepurarMovs_DOIMSS
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdst NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		DECLARE labelEnvio CHARACTER 'enviar';
+		DECLARE parametrosFaltantes CHARACTER '';
+		DECLARE parametrosEntrada REFERENCE TO InputRoot.XMLNSC.ns:depurarProcesamientoRequest.parametros;
+		DECLARE paramFechaAccion CHARACTER '';
+		
+		SET Environment.Variables.nombresParametros.parametro[] = LIST {
+        													ROW('ID_ETAPA' as nombre, '' as status),
+        													ROW('ID_SUBETAPA' as nombre, '' as status),
+        													ROW('USUARIO' as nombre, '' as status),
+        													ROW('FECHA_ACCION' as nombre, '' as status),
+        													ROW('TIPO_MOVIMIENTO' as nombre, '' as status),
+        													ROW('ID_INSTANCIA' as nombre, '' as status)
+        												};
+        CALL profuturo.general.subetapas.iniciar.ValidarParametros(parametrosEntrada,
+								Environment.Variables.nombresParametros,
+								OutputLocalEnvironment,
+								labelEnvio,
+								parametrosFaltantes);
+								
+        IF labelEnvio = 'enviar' THEN
+        	SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'FECHA_ACCION';
+			SET paramFechaAccion = Environment.Variables.valorParametro[1].valor;
+			
+			DECLARE resultado BOOLEAN;
+			SET resultado = profuturo.util.func.validarFechaFormato(paramFechaAccion, 'yyyyMMdd');
+			IF resultado = FALSE THEN
+				SET labelEnvio = 'no_depurar';
+				
+				DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+				DECLARE nsEx NAMESPACE 'http://mx.profuturo/iib/iibException/IIBException';
+				
+				SET OutputRoot.XMLNSC.nsFault:Fault.faultcode = 'NS1:Server';
+				SET OutputRoot.XMLNSC.nsFault:Fault.faultstring = 'Error en los parámetros';
+				SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.operacion = '';
+				SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.servicio = '';
+				SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.tipo = '';
+				SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.codigo = '1005';
+				SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.descripcion = 'Parámetro formato incorrecto';
+				SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.servicioOrigen = '';
+				
+				DECLARE varparametros CHARACTER 'El parámetro FECHA_ACCION no cumple con el formato yyyyMMdd';
+				SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.trace = varparametros;
+			END IF;
+		END IF;
+		
+		CASE labelEnvio
+			WHEN 'enviar' THEN
+				DECLARE paramIdEtapa CHARACTER '';
+				DECLARE paramIdSubetapa CHARACTER '';
+				DECLARE paramTipoMovimiento CHARACTER '';
+				SET labelEnvio = 'depurar';
+				CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain ('XMLNSC') NAME 'iniciarSubetapaWrapper';
+				SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.iniciarSubetapaRequest = InputRoot.XMLNSC.ns:depurarProcesamientoRequest;
+				
+				SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'FECHA_ACCION';
+				SET paramFechaAccion = Environment.Variables.valorParametro[1].valor;
+				
+				SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'ID_ETAPA';
+				SET paramIdEtapa = Environment.Variables.valorParametro[1].valor;
+				
+				SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'ID_SUBETAPA';
+				SET paramIdSubetapa = Environment.Variables.valorParametro[1].valor;
+				
+				SET Environment.Variables.valorParametro[] = SELECT T.valores.valor[1] FROM parametrosEntrada.parametro[] as T WHERE T.nombre = 'TIPO_MOVIMIENTO';
+				SET paramTipoMovimiento = Environment.Variables.valorParametro[1].valor;
+			
+				SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.nsdst:depuraTablas.p_FOLIO = InputRoot.XMLNSC.ns:depurarProcesamientoRequest.folio;
+				SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.nsdst:depuraTablas.p_PROCESO = InputRoot.XMLNSC.ns:depurarProcesamientoRequest.idProceso;
+				SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.nsdst:depuraTablas.p_SUBPROCESO = InputRoot.XMLNSC.ns:depurarProcesamientoRequest.idSubproceso;
+				SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.nsdst:depuraTablas.p_ETAPA = paramIdEtapa;
+				SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.nsdst:depuraTablas.p_SUBETAPA = paramIdSubetapa;
+				SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.nsdst:depuraTablas.p_FECHA = paramFechaAccion;
+				SET OutputRoot.XMLNSC.iniciarSubetapaWrapper.nsdst:depuraTablas.p_TIPOMOV1 = paramTipoMovimiento;
+				
+			WHEN 'no_enviar' THEN
+				SET labelEnvio = 'no_depurar';
+				-- BUILD FAULT
+				DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+				DECLARE nsEx NAMESPACE 'http://mx.profuturo/iib/iibException/IIBException';
+				
+				IF FIELDTYPE(OutputRoot.XMLNSC.nsFault:Fault) IS NULL THEN
+					SET OutputRoot.XMLNSC.nsFault:Fault.faultcode = 'NS1:Server';
+					SET OutputRoot.XMLNSC.nsFault:Fault.faultstring = 'Error en los parámetros';
+					SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.operacion = '';
+					SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.servicio = '';
+					SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.tipo = '';
+					SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.codigo = '1005';
+					SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.descripcion = 'Faltan parametros';
+					SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.servicioOrigen = '';
+					
+					DECLARE refReq REFERENCE TO InputRoot.XMLNSC.ns:iniciarSubetapaRequest;
+					DECLARE varparametros CHARACTER 'Faltan los siguientes parámetros o deben contener un valor: ' || parametrosFaltantes;
+					SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.trace = varparametros;
+				END IF;
+		END CASE;
+			
+		SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = labelEnvio;
+		RETURN TRUE;
+	END;
+END MODULE;

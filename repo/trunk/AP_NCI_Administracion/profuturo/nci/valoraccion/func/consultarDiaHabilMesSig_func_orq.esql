@@ -1,0 +1,53 @@
+BROKER SCHEMA profuturo.nci.valoraccion.func
+
+CREATE COMPUTE MODULE consultarDiaHabilMesSig_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1/types';		
+		SET OutputRoot.XMLNSC.consultarDiaHabilMesSig.fechaLiquidacion = InputRoot.XMLNSC.ns:consultarDiaHabilMesSigRequest.fechaLiquidacion;	
+		SET OutputRoot.XMLNSC.consultarDiaHabilMesSig.idSiefore = InputRoot.XMLNSC.ns:consultarDiaHabilMesSigRequest.idSiefore;
+		SET OutputRoot.XMLNSC.consultarDiaHabilMesSig.idRegimen = InputRoot.XMLNSC.ns:consultarDiaHabilMesSigRequest.idRegimen;
+		PROPAGATE TO TERMINAL 'out1';
+		IF Environment.nci.consultarDiaHabilMesSig.success = TRUE THEN
+			IF FIELDTYPE(Environment.nci.consultarDiaHabilMesSig.response.valorAccion.*[1]) IS NOT NULL THEN		
+				SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.valorAccion.id = Environment.nci.consultarDiaHabilMesSig.response.valorAccion.idValorAccion;
+				SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.valorAccion.valorAccion = Environment.nci.consultarDiaHabilMesSig.response.valorAccion.valorAccion;
+				SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.valorAccion.fecha = Environment.nci.consultarDiaHabilMesSig.response.valorAccion.fechaAccion;			
+				SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.valorAccion.siefore.id = Environment.nci.consultarDiaHabilMesSig.response.valorAccion.siefore.idSiefore;
+				SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.valorAccion.siefore.descripcion = Environment.nci.consultarDiaHabilMesSig.response.valorAccion.siefore.descSiefore;
+				SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.valorAccion.regimen.id = Environment.nci.consultarDiaHabilMesSig.response.valorAccion.regimen.id;
+				SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.valorAccion.regimen.descripcion = Environment.nci.consultarDiaHabilMesSig.response.valorAccion.regimen.descripcion;
+			END IF;	
+			
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.valorAccion) IS NULL THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse NAME 'mensajes';
+		        CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.mensajes);
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarValorAccion.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarValorAccion.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarValorAccion.errorTrace;
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarDiaHabilMesSig_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1/types';
+		SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_consultarDiaHabilMesSig
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Administracion/ValorAccionService/v1/types';
+		
+		SET Environment.valReq.idSiefore = InputRoot.XMLNSC.ns:consultarDiaHabilMesSigRequest.idSiefore;
+		SET Environment.valReq.idRegimen = InputRoot.XMLNSC.ns:consultarDiaHabilMesSigRequest.idRegimen;
+	END;
+END MODULE;

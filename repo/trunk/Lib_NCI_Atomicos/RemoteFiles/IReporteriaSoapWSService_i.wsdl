@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IReporteriaSoapWS" targetNamespace="http://reporte.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://reporte.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="IReporteriaSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://reporte.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://reporte.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="IReporteriaSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="cifrasControl">
+    <wsdl:part element="ns1:cifrasControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="cifrasControlResponse">
+    <wsdl:part element="ns1:cifrasControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IReporteriaSoapWS">
+    <wsdl:operation name="cifrasControl">
+      <wsdl:input message="ns1:cifrasControl" name="cifrasControl">
+    </wsdl:input>
+      <wsdl:output message="ns1:cifrasControlResponse" name="cifrasControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

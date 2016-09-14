@@ -1,0 +1,115 @@
+BROKER SCHEMA profuturo.general.subetapas.iniciar.doimss
+
+CREATE COMPUTE MODULE SetRequest_CifraControl
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		DECLARE nsErr NAMESPACE 'http://mx.profuturo/dst/mit/doimss';
+		
+		--CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain ('XMLNSC') NAME 'erroresCargarArchivo';
+		--IF OutputRoot.(XMLNSC.Element)*[1].*:schemaLocation IS NOT NULL THEN
+		--	SET OutputRoot.(XMLNSC.Element)*[1].*:schemaLocation = nsErr;
+        --END IF;        
+        --SET OutputLocalEnvironment.Variables.idArchivo = Environment.iniciar.wrapper.nsdoimss:cargarArchivo.mitafore_id_archivo;
+        
+        SET OutputRoot.XMLNSC.consultarCifrasControl.folio = Environment.iniciar.wrapper.iniciarSubetapaRequest.folio;
+		SET OutputRoot.XMLNSC.consultarCifrasControl.idSubetapa = Environment.iniciar.wrapper.iniciarSubetapaRequest.idSubetapa;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		DECLARE countArr INT CARDINALITY(Environment.nci.consultarCifrasControl.response.cifrasControlList.cifrasControl[]);
+		DECLARE response REFERENCE TO Environment.nci.consultarCifrasControl.response.cifrasControlList;
+		
+		IF (countArr = 0) THEN
+			SET OutputRoot.XMLNSC.resultado = 'EXCEPCION';
+		ELSE
+			SET OutputRoot.XMLNSC.resultado = 'SIN HALLAZGOS';
+						
+			SET OutputLocalEnvironment.Variables.result[] = SELECT n 
+					FROM response.cifrasControl[] AS n
+					WHERE n.numregistrosNoCumplieron > 0;
+			
+			IF (CARDINALITY(OutputLocalEnvironment.Variables.result[]) > 0) THEN
+				SET OutputRoot.XMLNSC.resultado = 'CON HALLAZGOS';
+			END IF;
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ValidarArchivo_BD_Resp
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE resultadoHallazgos CHARACTER 'SIN HALLAZGOS';
+
+		IF FIELDTYPE(InputRoot.XMLNSC.erroresCargarArchivo) IS NOT NULL THEN
+			DECLARE errRef REFERENCE TO InputRoot.XMLNSC.erroresCargarArchivo;
+			DECLARE reglasError INT CARDINALITY(errRef.regla[]);
+			DECLARE i INTEGER 1;
+			
+			X : WHILE i <= reglasError DO
+				IF errRef.errores[i] > 0 THEN
+					SET resultadoHallazgos = 'CON HALLAZGOS';
+				END IF;
+				SET i = i + 1;
+			END WHILE X;			
+		END IF;
+		
+		SET OutputRoot.XMLNSC.resultado = resultadoHallazgos;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapRequestBD_identificarCliente
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		DECLARE nsErr NAMESPACE 'http://mx.profuturo/dst/mit/doimss';
+				
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain ('XMLNSC') NAME 'erroresIdentificarCliente';
+		--IF OutputRoot.(XMLNSC.Element)*[1].*:schemaLocation IS NOT NULL THEN
+		--	SET OutputRoot.(XMLNSC.Element)*[1].*:schemaLocation = nsErr;
+        --END IF;
+        
+        IF FIELDTYPE(Environment.iniciar.wrapper.nsdoimss:identificarCliente) IS NOT NULL THEN        
+	        SET OutputLocalEnvironment.Variables.idArchivo = Environment.iniciar.wrapper.nsdoimss:identificarCliente.idc_id_archivo;
+	        SET OutputLocalEnvironment.Variables.folio = Environment.iniciar.wrapper.nsdoimss:identificarCliente.idc_folio;
+        END IF;
+        
+       	IF FIELDTYPE(Environment.iniciar.wrapper.nsdoimss:identificarClienteReproc) IS NOT NULL THEN        
+	        SET OutputLocalEnvironment.Variables.idArchivo = Environment.iniciar.wrapper.nsdoimss:identificarClienteReproc.idc_id_archivo;
+	        SET OutputLocalEnvironment.Variables.folio = Environment.iniciar.wrapper.nsdoimss:identificarClienteReproc.idc_folio;
+        END IF;
+        
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE IdentificarCliente_BD_Resp
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE resultadoHallazgos CHARACTER 'SIN HALLAZGOS';
+
+		IF FIELDTYPE(InputRoot.XMLNSC.erroresIdentificarCliente) IS NOT NULL THEN
+			DECLARE errRef REFERENCE TO InputRoot.XMLNSC.erroresIdentificarCliente;
+			
+			IF errRef.noIdentificados > 0 THEN
+				SET resultadoHallazgos = 'CON HALLAZGOS';
+			END IF;
+					
+		END IF;
+		
+		SET OutputRoot.XMLNSC.resultado = resultadoHallazgos;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+--EXCEPCION POR NO ENCONTRAR DATOS EN BD CON BASE EN FOLIO Y ID_ARCHIVO
+CREATE COMPUTE MODULE Set_BD_Excep
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET OutputRoot.XMLNSC.resultado = 'EXCEPCION';				
+		RETURN TRUE;
+	END;
+END MODULE;

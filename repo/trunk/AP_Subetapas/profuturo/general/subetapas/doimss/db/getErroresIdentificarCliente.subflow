@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:profuturo_nci_cifrascontrol_db_consultarCifrasControl.subflow="profuturo/nci/cifrascontrol/db/consultarCifrasControl.subflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="profuturo/general/subetapas/doimss/db/getErroresIdentificarCliente.subflow" nsPrefix="profuturo_general_subetapas_doimss_db_getErroresIdentificarCliente.subflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" useDefaults="true" udpSupport="true">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="getErroresIdentificarCliente" bundleName="profuturo/general/subetapas/doimss/db/getErroresIdentificarCliente" pluginId="AP_Subetapas"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/AP_Subetapas/icons/full/obj16/getErroresIdentificarCliente.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/AP_Subetapas/icons/full/obj30/getErroresIdentificarCliente.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="40,128">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="profuturo/general/subetapas/doimss/db/getErroresIdentificarCliente" pluginId="AP_Subetapas"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="135,128" computeExpression="esql://routine/profuturo.general.subetapas.iniciar.doimss#SetRequest_CifraControl.Main">
+        <translation xmi:type="utility:ConstantString" string="Set params"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output1" location="359,129">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="profuturo/general/subetapas/doimss/db/getErroresIdentificarCliente" pluginId="AP_Subetapas"/>
+      </nodes>
+      <nodes xmi:type="profuturo_nci_cifrascontrol_db_consultarCifrasControl.subflow:FCMComposite_1" xmi:id="FCMComposite_1_5" location="237,44">
+        <translation xmi:type="utility:ConstantString" string="consultarCifrasControl"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="OutTerminal.Output1" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

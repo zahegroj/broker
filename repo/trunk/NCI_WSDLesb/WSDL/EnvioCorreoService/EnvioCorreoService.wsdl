@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="EnvioCorreoService"
+	targetNamespace="http://mx.profuturo/iib/nci/Notificaciones/EnvioCorreoService/v1"
+	xmlns:tns="http://mx.profuturo/iib/nci/Notificaciones/EnvioCorreoService/v1" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsd2="http://mx.profuturo/iib/nci/Notificaciones/EnvioCorreoService/v1/types"
+	xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException">
+
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://mx.profuturo/iib/nci/Notificaciones/EnvioCorreoService/v1/types" schemaLocation="EnvioCorreoService.xsd">
+			</xsd:import>
+			<xsd:import namespace="http://mx.profuturo/iib/iibException/IIBException" schemaLocation="../frameworkiib/iibException/IIBException.xsd">
+			</xsd:import>
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="enviarCorreoRequest">
+		<wsdl:part element="xsd2:enviarCorreoRequest" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="enviarCorreoResponse">
+		<wsdl:part element="xsd2:enviarCorreoResponse" name="parameters"/>
+	</wsdl:message>
+	<wsdl:message name="faultMsg">
+    	<wsdl:part element="iibe:iibException" name="parameters"/>
+  	</wsdl:message>
+	
+	<wsdl:portType name="EnvioCorreoPortType">
+		<wsdl:operation name="enviarCorreo">
+			<wsdl:input message="tns:enviarCorreoRequest"/>
+			<wsdl:output message="tns:enviarCorreoResponse"/>
+			<wsdl:fault message="tns:faultMsg" name="fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="EnvioCorreoBinding" type="tns:EnvioCorreoPortType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="enviarCorreo">
+			<soap:operation soapAction="urn:enviarCorreo" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="EnvioCorreoService">
+		<wsdl:port binding="tns:EnvioCorreoBinding" name="EnvioCorreoPort">
+			<soap:address location="http://localhost/iib/Notificaciones/EnvioCorreoService/v1" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

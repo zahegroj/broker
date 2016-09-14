@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://folio.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://folio.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://folio.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="actualizarFolio" type="ns1:actualizarFolio"/>
+<xs:element ibmSchExtn:docRoot="true" name="actualizarFolioResponse" type="ns1:actualizarFolioResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarFolio" type="ns1:consultarFolio"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarFolioARelacionar" type="ns1:consultarFolioARelacionar"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarFolioARelacionarResponse" type="ns1:consultarFolioARelacionarResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarFolioResponse" type="ns1:consultarFolioResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarFoliosRelacionados" type="ns1:consultarFoliosRelacionados"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarFoliosRelacionadosResponse" type="ns1:consultarFoliosRelacionadosResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="generarFolio" type="ns1:generarFolio"/>
+<xs:element ibmSchExtn:docRoot="true" name="generarFolioResponse" type="ns1:generarFolioResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="guardarFolio" type="ns1:guardarFolio"/>
+<xs:element ibmSchExtn:docRoot="true" name="guardarFolioResponse" type="ns1:guardarFolioResponse"/>
+<xs:complexType name="consultarFoliosRelacionados">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:folioRelacionadoBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="folioRelacionadoBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarFoliosRelacionadosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarFoliosRelacionadosResponse" type="ns1:iFolioSoapWSConsultarFoliosRelacionadosResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iFolioSoapWSConsultarFoliosRelacionadosResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:folioRelcionadoBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="folioRelcionadoBeanResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="foliosRelacionados" nillable="true" type="ns1:folioVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="folioVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="canal" type="ns1:canalVO"/>
+      <xs:element minOccurs="0" name="estatusProceso" type="ns1:estatusProcesoVO"/>
+      <xs:element minOccurs="0" name="fehAct" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehCre" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSnapshot" type="xs:string"/>
+      <xs:element minOccurs="0" name="instanciaBpm" type="xs:string"/>
+      <xs:element minOccurs="0" name="proceso" type="ns1:procesoVO"/>
+      <xs:element minOccurs="0" name="subproceso" type="ns1:subprocesoVO"/>
+      <xs:element minOccurs="0" name="usuAct" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="canalVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descCanal" type="xs:string"/>
+      <xs:element minOccurs="0" name="idCanal" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="estatusProcesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descEstatusProceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEstatusProceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="procesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descProceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subprocesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSubproceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarFolioARelacionar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:folioARelacionarBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="folioARelacionarBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaValorAccion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarFolioARelacionarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarFolioARelacionarResponse" type="ns1:iFolioSoapWSConsultarFolioARelacionarResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iFolioSoapWSConsultarFolioARelacionarResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:folioARelacionarBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="folioARelacionarBeanResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="folios" nillable="true" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarFolio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarFolioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarFolioResponse" type="ns1:iFolioSoapWSConsultarFolioResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iFolioSoapWSConsultarFolioResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:folioVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="actualizarFolio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEstatusProceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="usuAct" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="actualizarFolioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActualizarFolioResponse" type="ns1:iFolioSoapWSActualizarFolioResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iFolioSoapWSActualizarFolioResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="guardarFolio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folioBeanRequest" type="ns1:folioBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="folioBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="idCanal" type="xs:short"/>
+      <xs:element minOccurs="0" name="idEstatusProceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSnapshot" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="instanciaBpm" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="guardarFolioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GuardarFolioResponse" type="ns1:iFolioSoapWSGuardarFolioResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iFolioSoapWSGuardarFolioResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="generarFolio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idProceso" type="xs:int"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:int"/>
+      <xs:element minOccurs="0" name="idCanal" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="generarFolioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GenerarFolioResponse" type="ns1:iFolioSoapWSGenerarFolioResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iFolioSoapWSGenerarFolioResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

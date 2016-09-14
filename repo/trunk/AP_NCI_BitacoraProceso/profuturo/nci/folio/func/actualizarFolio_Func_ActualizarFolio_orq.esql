@@ -1,0 +1,46 @@
+BROKER SCHEMA profuturo.nci.folio.func
+
+CREATE COMPUTE MODULE actualizarFolio_Func_ActualizarFolio_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET OutputRoot.XMLNSC.actualizarFolio.folio = InputRoot.XMLNSC.ns:actualizarFolioRequest.FolioProceso.folio;
+		SET OutputRoot.XMLNSC.actualizarFolio.idEstatusProceso = InputRoot.XMLNSC.ns:actualizarFolioRequest.FolioProceso.estatusProceso.idEstatus;
+		SET OutputRoot.XMLNSC.actualizarFolio.usuAct = InputRoot.XMLNSC.ns:actualizarFolioRequest.FolioProceso.usuarioActualizacion;
+		
+		PROPAGATE TO TERMINAL 'out1';
+		
+		IF Environment.nci.actualizarFolio.success = true THEN	
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:actualizarFolioResponse NAME 'mensajes';
+	        CALL profuturo.util.CodigosMensajesCASE('opExito',OutputRoot.XMLNSC.ns:actualizarFolioResponse.mensajes);
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.actualizarFolio.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.actualizarFolio.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.actualizarFolio.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+		END IF; 		
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_actualizarFolio
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		
+		SET Environment.valReq.folio = InputRoot.XMLNSC.ns:actualizarFolioRequest.FolioProceso.folio;
+		SET Environment.valReq.idProceso = InputRoot.XMLNSC.ns:actualizarFolioRequest.FolioProceso.proceso.idProceso;
+		SET Environment.valReq.idSubproceso = InputRoot.XMLNSC.ns:actualizarFolioRequest.FolioProceso.subproceso.idSubproceso;
+		SET Environment.valReq.idEstatusProceso = InputRoot.XMLNSC.ns:actualizarFolioRequest.FolioProceso.estatusProceso.idEstatus;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE actualizarFolio_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET OutputRoot.XMLNSC.ns:actualizarFolioResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

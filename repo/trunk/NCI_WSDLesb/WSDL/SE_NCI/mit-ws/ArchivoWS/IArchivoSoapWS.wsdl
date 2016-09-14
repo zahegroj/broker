@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://archivo.webservice.ws.nci.profuturo.mx/" name="IArchivoSoapWS" targetNamespace="http://archivo.webservice.ws.nci.profuturo.mx/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://archivo.webservice.ws.nci.profuturo.mx/" elementFormDefault="unqualified" targetNamespace="http://archivo.webservice.ws.nci.profuturo.mx/" version="1.0">
+<xs:element name="actualizarArchivo" type="tns:actualizarArchivo"/>
+<xs:element name="actualizarArchivoResponse" type="tns:actualizarArchivoResponse"/>
+<xs:element name="consultarArchivo" type="tns:consultarArchivo"/>
+<xs:element name="consultarArchivoResponse" type="tns:consultarArchivoResponse"/>
+<xs:element name="guardarArchivo" type="tns:guardarArchivo"/>
+<xs:element name="guardarArchivoResponse" type="tns:guardarArchivoResponse"/>
+<xs:complexType name="guardarArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="archivoBeanRequest" type="tns:archivoBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="archivoBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fchMaxVigencia" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehEnvio" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehRecepcionProf" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idEstatusArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="idFilenet" type="xs:long"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+      <xs:element minOccurs="0" name="tamArchivo" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="guardarArchivoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GuardarArchivoResponse" type="tns:iArchivoSoapWSGuardarArchivoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iArchivoSoapWSGuardarArchivoResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="xs:short"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="actualizarArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="idEstatusArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="actualizarArchivoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActualizarArchivoResponse" type="tns:iArchivoSoapWSActualizarArchivoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iArchivoSoapWSActualizarArchivoResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractWebServiceResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="consultarArchivo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idEstatusArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="fechaNci" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="consecutivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarArchivoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarArchivoResponse" type="tns:iArchivoSoapWSConsultarArchivoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iArchivoSoapWSConsultarArchivoResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="response" nillable="true" type="tns:archivoVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="archivoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="estatusArchivo" type="tns:estatusArchivoVO"/>
+      <xs:element minOccurs="0" name="fchMaxVigencia" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehActualizacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehEnvio" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehRecepcionNci" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehRecepcionProf" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="idFilenet" type="xs:long"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+      <xs:element minOccurs="0" name="proceso" type="tns:procesoVO"/>
+      <xs:element minOccurs="0" name="subproceso" type="tns:subprocesoVO"/>
+      <xs:element minOccurs="0" name="tamArchivo" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="estatusArchivoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descEstatusArchivo" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEstatusArchivo" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="procesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descProceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subprocesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSubproceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>  </wsdl:types>
+  <wsdl:message name="guardarArchivo">
+    <wsdl:part element="ns1:guardarArchivo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarArchivo">
+    <wsdl:part element="ns1:actualizarArchivo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardarArchivoResponse">
+    <wsdl:part element="ns1:guardarArchivoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarArchivoResponse">
+    <wsdl:part element="ns1:actualizarArchivoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarArchivo">
+    <wsdl:part element="ns1:consultarArchivo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarArchivoResponse">
+    <wsdl:part element="ns1:consultarArchivoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IArchivoSoapWS">
+    <wsdl:operation name="guardarArchivo">
+      <wsdl:input message="ns1:guardarArchivo" name="guardarArchivo">
+    </wsdl:input>
+      <wsdl:output message="ns1:guardarArchivoResponse" name="guardarArchivoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarArchivo">
+      <wsdl:input message="ns1:actualizarArchivo" name="actualizarArchivo">
+    </wsdl:input>
+      <wsdl:output message="ns1:actualizarArchivoResponse" name="actualizarArchivoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarArchivo">
+      <wsdl:input message="ns1:consultarArchivo" name="consultarArchivo">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultarArchivoResponse" name="consultarArchivoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

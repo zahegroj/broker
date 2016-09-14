@@ -1,0 +1,21 @@
+BROKER SCHEMA profuturo.nci.archivo.mapeos
+
+CREATE COMPUTE MODULE MapeoRegistrarArchivoIN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'IArchivoSoapWSService', 'guardarArchivo');		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoRegistrarArchivoOUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://archivo.webservice.ws.nci.profuturo.mx/';		
+		SET Environment.nci.ra = 'registrado';				
+		IF InputRoot.XMLNSC.ns:guardarArchivoResponse.GuardarArchivoResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

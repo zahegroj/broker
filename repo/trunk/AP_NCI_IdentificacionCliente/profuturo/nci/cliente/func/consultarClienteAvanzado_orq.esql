@@ -1,0 +1,287 @@
+BROKER SCHEMA profuturo.nci.cliente.func
+
+DECLARE INFO_CLIENTE CONSTANT INTEGER 42;
+DECLARE INFO_PERSONA CONSTANT INTEGER 43;
+DECLARE INFO_DOMICIL CONSTANT INTEGER 44;
+DECLARE INFO_TELEFON CONSTANT INTEGER 45;
+DECLARE INFO_CORREO  CONSTANT INTEGER 46;
+DECLARE INFO_CTABANC CONSTANT INTEGER 47;
+DECLARE INFO_COMPLEM CONSTANT INTEGER 48;
+DECLARE INFO_REFEREN CONSTANT INTEGER 49;
+DECLARE INFO_BENEFIC CONSTANT INTEGER 50;
+DECLARE INFO_BENDOMI CONSTANT INTEGER 51;
+DECLARE INFO_BENTELE CONSTANT INTEGER 52;
+DECLARE INFO_BENCORR CONSTANT INTEGER 53;
+DECLARE INFO_OPERATI CONSTANT INTEGER 54;
+
+CREATE COMPUTE MODULE resguardarRequest
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1/types';
+		CALL profuturo.util.CopyMessageHeaders(InputRoot, OutputRoot);
+		
+		SET Environment.nci.clienteAv.req.idProceso = InputRoot.XMLNSC.ns:consultarClienteRequest.idProceso;
+		SET Environment.nci.clienteAv.req.idSubproceso = InputRoot.XMLNSC.ns:consultarClienteRequest.idSubproceso;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarIndicadores_Orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		SET Environment.Variables.tipoCatalogo[] = LIST{	ROW('3' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG)--SUBPROCESO [1]
+        												};
+        DECLARE arrSize INTEGER CARDINALITY(Environment.Variables.tipoCatalogo[]);
+        DECLARE i INTEGER 1;
+        
+		X : WHILE i <= arrSize DO
+			
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = Environment.Variables.tipoCatalogo[i].ID_LINEA_NEG;
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = Environment.Variables.tipoCatalogo[i].ID_TIPO_CATALOGO;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			
+			--recibir la respuesta y ponerla en una lista
+			IF Environment.nci.consultarCatalogo.success = true THEN
+				DECLARE countArr INT CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+				DECLARE j INTEGER 1;
+		
+				Y : WHILE j <= countArr DO			
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].id = Environment.nci.consultarCatalogo.response[j].idCatCatalogo;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].valor = Environment.nci.consultarCatalogo.response[j].valor;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].idPadre = Environment.nci.consultarCatalogo.response[j].idCatPadre;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].idTipoCatalogo = Environment.nci.consultarCatalogo.response[j].idTipoCat;
+					
+					SET j = j + 1;
+				END WHILE Y;
+		
+			ELSE
+				SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCatalogo.errorCode;
+				SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCatalogo.errorMessage;
+				SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCatalogo.errorTrace;
+			
+				PROPAGATE TO LABEL 'nciError';
+				RETURN FALSE;
+			END IF;
+					
+			SET i = i + 1;
+		END WHILE X;
+		
+		IF validarPermisosIndicadores(Environment) THEN
+			DECLARE refPermisoIndicador REFERENCE TO Environment.nci.consultaPermisoIndicador.response.permisosIndicador[>];
+			
+			WHILE LASTMOVE(refPermisoIndicador) DO
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.listaIndicadores NAME 'idIndicador';
+				DECLARE refListaIndicador REFERENCE TO OutputRoot.XMLNSC.listaIndicadores.idIndicador[<];
+				
+				SET refListaIndicador = refPermisoIndicador.configuracionIndicador.indicador.idIndicador;
+				
+				MOVE refPermisoIndicador NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+
+			DECLARE refClientes REFERENCE TO Environment.nci.clientes.informacionCliente[>];
+
+			WHILE LASTMOVE(refClientes) DO
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.listaNumerosCuenta NAME 'numCuenta';
+				DECLARE refNumCuentas REFERENCE TO OutputRoot.XMLNSC.listaNumerosCuenta.numCuenta[<];
+
+				SET refNumCuentas = refClientes.informacionBasica.cliente.numeroCuenta;
+
+				MOVE refClientes NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+
+			PROPAGATE TO TERMINAL 'out1';
+
+			IF Environment.nci.consultaIndicadorBasico.success = FALSE THEN
+				SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultaIndicadorBasico.errorCode;
+				SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultaIndicadorBasico.errorMessage;
+				SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultaIndicadorBasico.errorTrace;
+
+				PROPAGATE TO LABEL 'nciError';
+				RETURN FALSE;
+			END IF;	
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE Map_clienteResponse
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1/types';
+		CALL profuturo.util.CopyMessageHeaders(InputRoot, OutputRoot);
+
+		DECLARE refClientes REFERENCE TO Environment.nci.clientes.informacionCliente[>];
+
+		WHILE LASTMOVE(refClientes) DO
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarClienteResponse.clientes NAME 'informacionCliente';
+			DECLARE refInfoCliente REFERENCE TO OutputRoot.XMLNSC.ns:consultarClienteResponse.clientes.informacionCliente[<];
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_CLIENTE) THEN
+				IF FIELDTYPE(refClientes.informacionBasica.cliente) IS NOT NULL THEN
+					SET refInfoCliente.informacionBasica.cliente = refClientes.informacionBasica.cliente;
+				END IF;
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_PERSONA) THEN
+				IF FIELDTYPE(refClientes.informacionBasica.persona) IS NOT NULL THEN
+					SET refInfoCliente.informacionBasica.persona = refClientes.informacionBasica.persona;
+				END IF;
+			END IF;
+		
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_DOMICIL) THEN
+				
+				IF FIELDTYPE(refClientes.informacionDemografica.domicilios) IS NOT NULL THEN
+					SET refInfoCliente.informacionDemografica.domicilios = refClientes.informacionDemografica.domicilios;
+				END IF;
+			END IF;
+	
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_TELEFON) THEN
+				IF FIELDTYPE(refClientes.informacionDemografica.telefonos) IS NOT NULL THEN
+					SET refInfoCliente.informacionDemografica.telefonos = refClientes.informacionDemografica.telefonos;
+				END IF;
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_CORREO) THEN
+				IF FIELDTYPE(refClientes.informacionDemografica.correos) IS NOT NULL THEN
+					SET refInfoCliente.informacionDemografica.correos = refClientes.informacionDemografica.correos;
+				END IF;
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_CTABANC) THEN
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_COMPLEM) THEN
+				CALL mapearInfoComplementaria_Empty(refInfoCliente);
+				DECLARE refIndicadores REFERENCE TO Environment.nci.consultaIndicadorBasico.response.listaCuentasIndividuales;
+
+				SET InputLocalEnvironment.Variables.indCta[] = SELECT T
+					FROM refIndicadores.cuentaIndividual[] AS T
+					WHERE T.numeroCuentaIndividual = refClientes.informacionBasica.cliente.numeroCuenta;
+
+				CALL mapearInfoComplementaria(refInfoCliente, InputLocalEnvironment.Variables.indCta[>], Environment, InputLocalEnvironment); 
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_REFEREN) THEN
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_BENEFIC) THEN
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_BENDOMI) THEN
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_BENTELE) THEN
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_BENCORR) THEN
+			END IF;
+
+			IF validarPermisoInfoCliente(Environment.nci.consultarPermisosInfoCliente, InputLocalEnvironment, INFO_OPERATI) THEN
+			END IF;
+			
+			MOVE refClientes NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FUNCTION validarPermisosIndicadores(IN env REFERENCE) RETURNS BOOLEAN
+BEGIN
+	DECLARE returnValue BOOLEAN FALSE;
+	IF env.nci.consultaPermisoIndicador.success THEN
+		IF FIELDTYPE(env.nci.consultaPermisoIndicador.response.permisosIndicador) IS NOT NULL THEN
+			SET returnValue = TRUE;
+		END IF;
+	END IF;
+	
+	RETURN returnValue;
+END;
+
+CREATE FUNCTION validarPermisosInfoCliente(IN env REFERENCE) RETURNS BOOLEAN
+BEGIN
+	DECLARE returnValue BOOLEAN FALSE;
+	IF env.nci.consultarPermisosInfoCliente.success THEN
+		IF FIELDTYPE(env.nci.consultarPermisosInfoCliente.response.listaConfiguracionConsultaCliente) IS NOT NULL THEN
+			SET returnValue = TRUE;
+		END IF;
+	END IF;
+	
+	RETURN returnValue;
+END;
+
+CREATE FUNCTION validarPermisoInfoCliente (IN refPermisosInfoCliente REFERENCE, IN refLocalEnv REFERENCE, IN idTipoInformacion INTEGER) RETURNS BOOLEAN
+BEGIN
+	DECLARE returnValue BOOLEAN FALSE;
+
+	SET refLocalEnv.Variables.permisos[] = SELECT T
+		FROM refPermisosInfoCliente.response.listaConfiguracionConsultaCliente.configuracionConsultaCliente[] AS T
+		WHERE T.informacionCliente.tipoInformacion.idTipoInformacion = idTipoInformacion
+		AND T.permiso = TRUE;
+
+	DECLARE existePermiso INTEGER CARDINALITY(refLocalEnv.Variables.permisos[]);
+
+	IF existePermiso > 0 THEN
+		SET returnValue = TRUE;
+	END IF;
+
+	RETURN returnValue;
+END;
+
+CREATE PROCEDURE mapearInfoComplementaria(IN refInfoCliente REFERENCE, IN refIndicadoresCtaInd REFERENCE, IN refEnv REFERENCE, IN refLocalEnv REFERENCE)
+BEGIN
+	DECLARE IND_FEC_CERT CONSTANT INTEGER 61;
+	DECLARE IND_CTA_VIGE CONSTANT INTEGER 58;
+
+	DECLARE refIndicadores REFERENCE TO refIndicadoresCtaInd.listaConfiguracionesIndicadores.configuracionIndicadores[>];
+
+	WHILE LASTMOVE(refIndicadores) DO
+		IF refIndicadores.configuracionIndicador.indicador.idIndicador = IND_FEC_CERT THEN
+			SET refInfoCliente.informacionComplementaria.complementaria.fechaCertificacion = refIndicadores.valorIndicador;
+		END IF;
+		
+		IF refIndicadores.configuracionIndicador.indicador.idIndicador = IND_CTA_VIGE THEN
+			DECLARE vigencia CHARACTER 'No Vigente';
+			DECLARE procesoTerminal CHARACTER '';
+			IF refIndicadores.valorIndicador = 1 THEN
+				SET vigencia = 'Vigente';
+			ELSE
+				DECLARE refCatSubproceso REFERENCE TO refEnv.Variables.catalogos.catalogo[1];
+				IF refIndicadores.detalle <> '' THEN
+					SET procesoTerminal = getValorIdCatalogo(refLocalEnv, refCatSubproceso, CAST(refIndicadores.detalle AS INTEGER));
+				END IF;
+			END IF;
+			SET refInfoCliente.informacionComplementaria.complementaria.cuentaVigente = vigencia;			
+			SET refInfoCliente.informacionComplementaria.complementaria.procesoTerminal = procesoTerminal;
+		END IF;
+		
+		MOVE refIndicadores NEXTSIBLING REPEAT TYPE NAME;
+	END WHILE;
+END;
+
+CREATE PROCEDURE mapearInfoComplementaria_Empty(IN refInfoCliente REFERENCE)
+BEGIN
+	SET refInfoCliente.informacionComplementaria.complementaria.idPatron = '';
+	SET refInfoCliente.informacionComplementaria.complementaria.fechaAutorizacion = '';
+	SET refInfoCliente.informacionComplementaria.complementaria.fechaCertificacion = '';
+	SET refInfoCliente.informacionComplementaria.complementaria.fechaAltaSistema = '';
+	SET refInfoCliente.informacionComplementaria.complementaria.origenAfiliacion = '';
+	SET refInfoCliente.informacionComplementaria.complementaria.estatusCuenta = '';
+	SET refInfoCliente.informacionComplementaria.complementaria.cuentaVigente = '';
+	SET refInfoCliente.informacionComplementaria.complementaria.procesoTerminal = '';
+END;
+
+CREATE PROCEDURE getValorIdCatalogo (IN refLocalEnv REFERENCE, IN refCatalogo REFERENCE, IN id INTEGER) RETURNS CHARACTER
+BEGIN
+	DECLARE valor CHARACTER '';
+	
+	SET refLocalEnv.Variables.catalogo[] = SELECT T
+		FROM refCatalogo.cat[] AS T
+		WHERE T.id = id;
+	
+	IF FIELDTYPE(refLocalEnv.Variables.catalogo) IS NOT NULL THEN
+		SET valor = refLocalEnv.Variables.catalogo[>].valor;
+	END IF;
+	
+	RETURN valor;
+END;

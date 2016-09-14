@@ -1,0 +1,73 @@
+BROKER SCHEMA profuturo.nci.archivo.func
+
+CREATE COMPUTE MODULE consultarArchivoNCI_Func_OrqConsultarArchivo
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types';
+		
+		SET OutputRoot.XMLNSC.consultarArchivo.idSubproceso = InputRoot.XMLNSC.ns:consultarArchivosRequest.idSubproceso;
+		SET OutputRoot.XMLNSC.consultarArchivo.idEstatusArchivo = InputRoot.XMLNSC.ns:consultarArchivosRequest.idEstatusArchivo;
+		SET OutputRoot.XMLNSC.consultarArchivo.fechaArchivoDesde = InputRoot.XMLNSC.ns:consultarArchivosRequest.fechaArchivoDesde;
+		SET OutputRoot.XMLNSC.consultarArchivo.fechaArchivoHasta = InputRoot.XMLNSC.ns:consultarArchivosRequest.fechaArchivoHasta;
+		SET OutputRoot.XMLNSC.consultarArchivo.consecutivo = InputRoot.XMLNSC.ns:consultarArchivosRequest.consecutivo;
+		
+		PROPAGATE TO TERMINAL 'out1';					
+		
+		IF Environment.nci.consultararchivo.res.success = true THEN	
+			SET OutputRoot.XMLNSC.ns:consultarArchivosResponse = '';
+			DECLARE I INTEGER 1;
+			DECLARE J INTEGER;
+			SET J = CARDINALITY(Environment.nci.consultararchivo.res.response[]);
+			WHILE I <= J DO
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].idArchivo = Environment.nci.consultararchivo.res.response[I].idArchivo;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].nombre = Environment.nci.consultararchivo.res.response[I].nombre;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].tamano = Environment.nci.consultararchivo.res.response[I].tamArchivo;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].estatus.idEstatus = Environment.nci.consultararchivo.res.response[I].estatusArchivo.idEstatusArchivo;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].estatus.descripcionEstatus = Environment.nci.consultararchivo.res.response[I].estatusArchivo.descEstatusArchivo;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].proceso.idProceso = Environment.nci.consultararchivo.res.response[I].proceso.idProceso;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].proceso.nombreProceso = Environment.nci.consultararchivo.res.response[I].proceso.descProceso;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].subproceso.idSubproceso = Environment.nci.consultararchivo.res.response[I].subproceso.idSubproceso;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].subproceso.nombreSubproceso = Environment.nci.consultararchivo.res.response[I].subproceso.descSubproceso;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].subproceso.urlArchivo = '';
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].fechaArchivo = Environment.nci.consultararchivo.res.response[I].fehArchivo;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].fechaRecepcion = Environment.nci.consultararchivo.res.response[I].fehRecepcionNci;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].fechaActualizacion = Environment.nci.consultararchivo.res.response[I].fehAct;
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo.archivo[I].folio = Environment.nci.consultararchivo.res.response[I].folioArchivo;
+				
+				SET I = I + 1;
+			END WHILE;
+			
+			IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarArchivosResponse.listaArchivo) IS NULL THEN
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.mensajes.mensaje.codigo = '1002';
+				SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.mensajes.mensaje.descripcion = 'No se encontraron registros';
+			END IF;
+		ELSE
+			SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultararchivo.res.errorCode;
+			SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultararchivo.res.errorMessage;
+			SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultararchivo.res.errorTrace;
+			
+			PROPAGATE TO TERMINAL 'out2';
+			RETURN FALSE;
+		END IF; 
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarArchivos_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types';
+		SET OutputRoot.XMLNSC.ns:consultarArchivosResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_consultarArchivos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types';
+		
+		SET Environment.valReq.idSubproceso = InputRoot.XMLNSC.ns:consultarArchivosRequest.idSubproceso;	
+	END;
+END MODULE;

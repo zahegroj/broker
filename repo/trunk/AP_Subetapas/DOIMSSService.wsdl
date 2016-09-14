@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://schemas.xmlsoap.org/wsdl/" name="DOIMSSService" targetNamespace="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <documentation>
+    <appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="DOIMSSServicePortBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </appinfo>
+  </documentation>
+  <types>
+    <xsd:schema>
+<xsd:import namespace="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/" schemaLocation="DOIMSSService_schema1.xsd"/>
+</xsd:schema>
+  </types>
+  <message name="genMovPreviosResponse">
+    <part element="tns:genMovPreviosResponse" name="parameters">
+    </part>
+  </message>
+  <message name="identificarClienteReproc">
+    <part element="tns:identificarClienteReproc" name="parameters">
+    </part>
+  </message>
+  <message name="genMovPrevios">
+    <part element="tns:genMovPrevios" name="parameters">
+    </part>
+  </message>
+  <message name="ActualizarMovEstatus">
+    <part element="tns:ActualizarMovEstatus" name="parameters">
+    </part>
+  </message>
+  <message name="desmarcarCuentaResponse">
+    <part element="tns:desmarcarCuentaResponse" name="parameters">
+    </part>
+  </message>
+  <message name="depuraTablasResponse">
+    <part element="tns:depuraTablasResponse" name="parameters">
+    </part>
+  </message>
+  <message name="matrizConvivencia">
+    <part element="tns:matrizConvivencia" name="parameters">
+    </part>
+  </message>
+  <message name="desmarcarCuenta">
+    <part element="tns:desmarcarCuenta" name="parameters">
+    </part>
+  </message>
+  <message name="recalcMovPrevios">
+    <part element="tns:recalcMovPrevios" name="parameters">
+    </part>
+  </message>
+  <message name="matrizConvivenciaReproc">
+    <part element="tns:matrizConvivenciaReproc" name="parameters">
+    </part>
+  </message>
+  <message name="matrizConvivenciaReprocResponse">
+    <part element="tns:matrizConvivenciaReprocResponse" name="parameters">
+    </part>
+  </message>
+  <message name="identificarCliente">
+    <part element="tns:identificarCliente" name="parameters">
+    </part>
+  </message>
+  <message name="recalcMovPreviosResponse">
+    <part element="tns:recalcMovPreviosResponse" name="parameters">
+    </part>
+  </message>
+  <message name="identificarClienteResponse">
+    <part element="tns:identificarClienteResponse" name="parameters">
+    </part>
+  </message>
+  <message name="identificarClienteReprocResponse">
+    <part element="tns:identificarClienteReprocResponse" name="parameters">
+    </part>
+  </message>
+  <message name="depuraTablas">
+    <part element="tns:depuraTablas" name="parameters">
+    </part>
+  </message>
+  <message name="cargarArchivoResponse">
+    <part element="tns:cargarArchivoResponse" name="parameters">
+    </part>
+  </message>
+  <message name="generarCifrasControl">
+    <part element="tns:generarCifrasControl" name="parameters">
+    </part>
+  </message>
+  <message name="matrizConvivenciaResponse">
+    <part element="tns:matrizConvivenciaResponse" name="parameters">
+    </part>
+  </message>
+  <message name="ActualizarMovEstatusResponse">
+    <part element="tns:ActualizarMovEstatusResponse" name="parameters">
+    </part>
+  </message>
+  <message name="generarCifrasControlResponse">
+    <part element="tns:generarCifrasControlResponse" name="parameters">
+    </part>
+  </message>
+  <message name="cargarArchivo">
+    <part element="tns:cargarArchivo" name="parameters">
+    </part>
+  </message>
+  <portType name="DOIMSSService">
+    <operation name="cargarArchivo">
+      <input message="tns:cargarArchivo" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/cargarArchivoRequest">
+    </input>
+      <output message="tns:cargarArchivoResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/cargarArchivoResponse">
+    </output>
+    </operation>
+    <operation name="identificarCliente">
+      <input message="tns:identificarCliente" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/identificarClienteRequest">
+    </input>
+      <output message="tns:identificarClienteResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/identificarClienteResponse">
+    </output>
+    </operation>
+    <operation name="identificarClienteReproc">
+      <input message="tns:identificarClienteReproc" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/identificarClienteReprocRequest">
+    </input>
+      <output message="tns:identificarClienteReprocResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/identificarClienteReprocResponse">
+    </output>
+    </operation>
+    <operation name="depuraTablas">
+      <input message="tns:depuraTablas" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/depuraTablasRequest">
+    </input>
+      <output message="tns:depuraTablasResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/depuraTablasResponse">
+    </output>
+    </operation>
+    <operation name="ActualizarMovEstatus">
+      <input message="tns:ActualizarMovEstatus" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/ActualizarMovEstatusRequest">
+    </input>
+      <output message="tns:ActualizarMovEstatusResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/ActualizarMovEstatusResponse">
+    </output>
+    </operation>
+    <operation name="generarCifrasControl">
+      <input message="tns:generarCifrasControl" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/generarCifrasControlRequest">
+    </input>
+      <output message="tns:generarCifrasControlResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/generarCifrasControlResponse">
+    </output>
+    </operation>
+    <operation name="genMovPrevios">
+      <input message="tns:genMovPrevios" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/genMovPreviosRequest">
+    </input>
+      <output message="tns:genMovPreviosResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/genMovPreviosResponse">
+    </output>
+    </operation>
+    <operation name="recalcMovPrevios">
+      <input message="tns:recalcMovPrevios" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/recalcMovPreviosRequest">
+    </input>
+      <output message="tns:recalcMovPreviosResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/recalcMovPreviosResponse">
+    </output>
+    </operation>
+    <operation name="desmarcarCuenta">
+      <input message="tns:desmarcarCuenta" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/desmarcarCuentaRequest">
+    </input>
+      <output message="tns:desmarcarCuentaResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/desmarcarCuentaResponse">
+    </output>
+    </operation>
+    <operation name="matrizConvivencia">
+      <input message="tns:matrizConvivencia" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/matrizConvivenciaRequest">
+    </input>
+      <output message="tns:matrizConvivenciaResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/matrizConvivenciaResponse">
+    </output>
+    </operation>
+    <operation name="matrizConvivenciaReproc">
+      <input message="tns:matrizConvivenciaReproc" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/matrizConvivenciaReprocRequest">
+    </input>
+      <output message="tns:matrizConvivenciaReprocResponse" wsam:Action="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/DOIMSSService/matrizConvivenciaReprocResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="DOIMSSServicePortBinding" type="tns:DOIMSSService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="cargarArchivo">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="identificarCliente">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="identificarClienteReproc">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="depuraTablas">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ActualizarMovEstatus">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="generarCifrasControl">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="genMovPrevios">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="recalcMovPrevios">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="desmarcarCuenta">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="matrizConvivencia">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="matrizConvivenciaReproc">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="DOIMSSService">
+    <port binding="tns:DOIMSSServicePortBinding" name="DOIMSSServicePort">
+      <soap:address location="http://devdatastage:9080/wisd/MITAPP/DOIMSSService"/>
+    </port>
+  </service>
+</definitions>

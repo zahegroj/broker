@@ -1,0 +1,44 @@
+BROKER SCHEMA profuturo.buc.persona.mapeos
+
+
+CREATE COMPUTE MODULE getPersonaEntityByIdentificador_Map_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsPer NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'BUC', 'PersonaEntityService', 'getPersonaEntityByIdentificador');
+		
+		SET OutputRoot.XMLNSC.nsPer:getPersonaEntityByIdentificador.arg0.tipoIdentificador = InputRoot.XMLNSC.personaEntityByIdentificador.tipo;
+		SET OutputRoot.XMLNSC.nsPer:getPersonaEntityByIdentificador.arg0.valor = InputRoot.XMLNSC.personaEntityByIdentificador.valor;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE getPersonaEntityByIdentificador_Map_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+		DECLARE nsPer NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity';
+		
+		SET Environment.buc.getPersonaByIdentificador.response = InputRoot.XMLNSC.nsPer:getPersonaEntityByIdentificadorResponse.return.response;
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE getPersonaEntityByIdentificador_Map_Fault
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		IF FIELDTYPE(InputRoot.XMLNS.nsFault:Fault.detail) IS NOT NULL THEN
+			SET Environment.buc.getPersonaByIdentificador.error = InputRoot.XMLNSC.nsFault:Fault.detail.*[1];
+		ELSE
+			CREATE LASTCHILD OF Environment.buc.getPersonaByIdentificador NAME 'error';
+			CALL profuturo.buc.error.fill_BUCException_Empty(Environment.buc.getPersonaByIdentificador.error);
+			SET Environment.buc.getPersonaByIdentificador.error.mensajeExceptionAplicacion = InputRoot.XMLNSC.nsFault:Fault.faultstring;
+			SET Environment.buc.getPersonaByIdentificador.error.message = InputRoot.XMLNSC.nsFault:Fault.faultcode;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

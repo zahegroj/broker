@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ComIbmFlowOrder.msgnode="ComIbmFlowOrder.msgnode" xmlns:ComIbmTryCatch.msgnode="ComIbmTryCatch.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:profuturo_nci_catalogo_sf_consultarCatalogo.subflow="profuturo/nci/catalogo/sf/consultarCatalogo.subflow" xmlns:profuturo_nci_cifrascontrol_sf_consultarCifrasVivienda.subflow="profuturo/nci/cifrascontrol/sf/consultarCifrasVivienda.subflow"
+    xmlns:profuturo_nci_cifrascontrol_sf_consultarRegistrosCreditoVivienda.subflow="profuturo/nci/cifrascontrol/sf/consultarRegistrosCreditoVivienda.subflow" xmlns:profuturo_util_error_UtilError.subflow="profuturo/util/error/UtilError.subflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="profuturo/nci/cifrascontrol/func/consultarCifrasVivienda_Func.subflow" nsPrefix="profuturo_nci_cifrascontrol_func_consultarCifrasVivienda_Func.subflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" useDefaults="true" udpSupport="true">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="consultarCifrasVivienda_Func" bundleName="profuturo/nci/cifrascontrol/func/consultarCifrasVivienda_Func" pluginId="Lib_NCI_Funcional"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Lib_NCI_Funcional/icons/full/obj16/consultarCifrasVivienda_Func.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Lib_NCI_Funcional/icons/full/obj30/consultarCifrasVivienda_Func.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="32,266">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="profuturo/nci/cifrascontrol/func/consultarCifrasVivienda_Func" pluginId="Lib_NCI_Funcional"/>
+      </nodes>
+      <nodes xmi:type="eflow:FCMSink" xmi:id="OutTerminal.Output" location="754,271">
+        <translation xmi:type="utility:TranslatableString" key="OutTerminal.Output" bundleName="profuturo/nci/cifrascontrol/func/consultarCifrasVivienda_Func" pluginId="Lib_NCI_Funcional"/>
+      </nodes>
+      <nodes xmi:type="ComIbmTryCatch.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_1" location="154,266">
+        <translation xmi:type="utility:ConstantString" string="Try Catch"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_2" location="245,270" computeExpression="esql://routine/profuturo.nci.cifrascontrol.func#consultarCifrasVivienda_func_orq.Main">
+        <translation xmi:type="utility:ConstantString" string="cifrasVivienda_Orq"/>
+      </nodes>
+      <nodes xmi:type="profuturo_util_error_UtilError.subflow:FCMComposite_1" xmi:id="FCMComposite_1_3" location="384,51">
+        <translation xmi:type="utility:ConstantString" string="UtilError"/>
+      </nodes>
+      <nodes xmi:type="profuturo_nci_cifrascontrol_sf_consultarCifrasVivienda.subflow:FCMComposite_1" xmi:id="FCMComposite_1_4" location="502,218">
+        <translation xmi:type="utility:ConstantString" string="consultarCifrasVivienda"/>
+      </nodes>
+      <nodes xmi:type="profuturo_nci_catalogo_sf_consultarCatalogo.subflow:FCMComposite_1" xmi:id="FCMComposite_1_5" location="439,149">
+        <translation xmi:type="utility:ConstantString" string="consultarCatalogo"/>
+      </nodes>
+      <nodes xmi:type="ComIbmFlowOrder.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_6" location="386,210">
+        <translation xmi:type="utility:ConstantString" string="Flow Order"/>
+      </nodes>
+      <nodes xmi:type="profuturo_nci_cifrascontrol_sf_consultarRegistrosCreditoVivienda.subflow:FCMComposite_1" xmi:id="FCMComposite_1_7" location="393,325">
+        <translation xmi:type="utility:ConstantString" string="consultarRegistrosCreditoVivienda"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_1" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.try" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_1" sourceTerminalName="OutTerminal.catch" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_5" targetNode="OutTerminal.Output" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.Output" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_9" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.first" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_10" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_6" sourceTerminalName="OutTerminal.second" targetTerminalName="InTerminal.Input"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_11" targetNode="FCMComposite_1_6" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out1" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_6" targetNode="FCMComposite_1_3" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.out2" targetTerminalName="InTerminal.Input1"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

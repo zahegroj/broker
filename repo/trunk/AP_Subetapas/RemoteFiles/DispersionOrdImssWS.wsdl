@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:impl1="http://TKPRFPC" xmlns:intf="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdlsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="DispersionOrdImssWS_InlineSchema1.xsd"/>
+        <generatedXSD location="DispersionOrdImssWS_InlineSchema2.xsd"/>
+        <binding hasEncoding="false" imported="true" name="soap12DispersionOrdImssWSSoapSoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    
+    
+          <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions">
+<import namespace="http://TKPRFPC" schemaLocation="DispersionOrdImssWS_InlineSchema2.xsd"/>
+<xsd:include schemaLocation="DispersionOrdImssWS_InlineSchema1.xsd"/>
+    </schema>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://TKPRFPC">
+<import namespace="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0" schemaLocation="DispersionOrdImssWS_InlineSchema1.xsd">
+    <!--Add URI of the schema document for the imported namespace using 'schemaLocation' attribute.-->
+  </import>
+<xsd:include schemaLocation="DispersionOrdImssWS_InlineSchema2.xsd"/>
+    </schema>
+    </wsdl:types>
+  <wsdl:message name="validarArchivoDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:validarArchivoDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="borrarStagingDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:borrarStagingDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="iniciarDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:iniciarDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rechazarMovimientosDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:rechazarMovimientosDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="identificarClientesDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:identificarClientesDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="marcarCuentasDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:marcarCuentasDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarMovimientosDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:generarMovimientosDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="acreditarMovimientosDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:acreditarMovimientosDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="borrarStagingDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:borrarStagingDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="identificarClientesDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:identificarClientesDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="informaSubetapaUCAWebServiceResponse">
+    <wsdl:part element="impl:informaSubetapaUCAWebServiceResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="desmarcarCuentasDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:desmarcarCuentasDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="iniciarDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:iniciarDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="informaSubetapaUCAWebServiceRequest">
+    <wsdl:part element="impl:informaSubetapaUCAWebService" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="rechazarMovimientosDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:rechazarMovimientosDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="validarArchivoDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:validarArchivoDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarMovimientosDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:generarMovimientosDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="desmarcarCuentasDispersionOrdIMSSRequest">
+    <wsdl:part element="impl:desmarcarCuentasDispersionOrdIMSS" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="marcarCuentasDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:marcarCuentasDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="acreditarMovimientosDispersionOrdIMSSResponse">
+    <wsdl:part element="impl:acreditarMovimientosDispersionOrdIMSSResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="DispersionOrdImssWSPortType">
+    <wsdl:operation name="iniciarDispersionOrdIMSS">
+      <wsdl:input message="impl:iniciarDispersionOrdIMSSRequest" name="iniciarDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:iniciarDispersionOrdIMSSResponse" name="iniciarDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarArchivoDispersionOrdIMSS">
+      <wsdl:input message="impl:validarArchivoDispersionOrdIMSSRequest" name="validarArchivoDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:validarArchivoDispersionOrdIMSSResponse" name="validarArchivoDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="identificarClientesDispersionOrdIMSS">
+      <wsdl:input message="impl:identificarClientesDispersionOrdIMSSRequest" name="identificarClientesDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:identificarClientesDispersionOrdIMSSResponse" name="identificarClientesDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="marcarCuentasDispersionOrdIMSS">
+      <wsdl:input message="impl:marcarCuentasDispersionOrdIMSSRequest" name="marcarCuentasDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:marcarCuentasDispersionOrdIMSSResponse" name="marcarCuentasDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generarMovimientosDispersionOrdIMSS">
+      <wsdl:input message="impl:generarMovimientosDispersionOrdIMSSRequest" name="generarMovimientosDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:generarMovimientosDispersionOrdIMSSResponse" name="generarMovimientosDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="acreditarMovimientosDispersionOrdIMSS">
+      <wsdl:input message="impl:acreditarMovimientosDispersionOrdIMSSRequest" name="acreditarMovimientosDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:acreditarMovimientosDispersionOrdIMSSResponse" name="acreditarMovimientosDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="desmarcarCuentasDispersionOrdIMSS">
+      <wsdl:input message="impl:desmarcarCuentasDispersionOrdIMSSRequest" name="desmarcarCuentasDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:desmarcarCuentasDispersionOrdIMSSResponse" name="desmarcarCuentasDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechazarMovimientosDispersionOrdIMSS">
+      <wsdl:input message="impl:rechazarMovimientosDispersionOrdIMSSRequest" name="rechazarMovimientosDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:rechazarMovimientosDispersionOrdIMSSResponse" name="rechazarMovimientosDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="borrarStagingDispersionOrdIMSS">
+      <wsdl:input message="impl:borrarStagingDispersionOrdIMSSRequest" name="borrarStagingDispersionOrdIMSSRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:borrarStagingDispersionOrdIMSSResponse" name="borrarStagingDispersionOrdIMSSResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="informaSubetapaUCAWebService">
+      <wsdl:input message="impl:informaSubetapaUCAWebServiceRequest" name="informaSubetapaUCAWebServiceRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:informaSubetapaUCAWebServiceResponse" name="informaSubetapaUCAWebServiceResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="soap12DispersionOrdImssWSSoapSoapBinding" type="impl:DispersionOrdImssWSPortType">
+    <wsdlsoap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="iniciarDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/iniciarDispersionOrdIMSS"/>
+      <wsdl:input name="iniciarDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="iniciarDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="validarArchivoDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/validarArchivoDispersionOrdIMSS"/>
+      <wsdl:input name="validarArchivoDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validarArchivoDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="identificarClientesDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/identificarClientesDispersionOrdIMSS"/>
+      <wsdl:input name="identificarClientesDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="identificarClientesDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="marcarCuentasDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/marcarCuentasDispersionOrdIMSS"/>
+      <wsdl:input name="marcarCuentasDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="marcarCuentasDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generarMovimientosDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/generarMovimientosDispersionOrdIMSS"/>
+      <wsdl:input name="generarMovimientosDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="generarMovimientosDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="acreditarMovimientosDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/acreditarMovimientosDispersionOrdIMSS"/>
+      <wsdl:input name="acreditarMovimientosDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="acreditarMovimientosDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="desmarcarCuentasDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/desmarcarCuentasDispersionOrdIMSS"/>
+      <wsdl:input name="desmarcarCuentasDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="desmarcarCuentasDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rechazarMovimientosDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/rechazarMovimientosDispersionOrdIMSS"/>
+      <wsdl:input name="rechazarMovimientosDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="rechazarMovimientosDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="borrarStagingDispersionOrdIMSS">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/borrarStagingDispersionOrdIMSS"/>
+      <wsdl:input name="borrarStagingDispersionOrdIMSSRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="borrarStagingDispersionOrdIMSSResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="informaSubetapaUCAWebService">
+      <wsdlsoap12:operation soapAction="http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0/informaSubetapaUCAWebService"/>
+      <wsdl:input name="informaSubetapaUCAWebServiceRequest">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="informaSubetapaUCAWebServiceResponse">
+        <wsdlsoap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DispersionOrdImssWS">
+    <wsdl:port binding="impl:soap12DispersionOrdImssWSSoapSoapBinding" name="soap12DispersionOrdImssWSSoap">
+      <wsdlsoap12:address location="https://bpmdesa:9444/ProcessCenter/teamworks/webservices/APRECAU/DispersionOrdImssWS.tws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

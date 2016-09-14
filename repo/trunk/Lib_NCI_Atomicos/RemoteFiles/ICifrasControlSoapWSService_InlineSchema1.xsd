@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://cifras.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://cifras.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://cifras.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="consulta" type="ns1:consulta"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaResponse" type="ns1:consultaResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaSumarizado" type="ns1:consultaSumarizado"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaSumarizadoResponse" type="ns1:consultaSumarizadoResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaSumarizadoTotal" type="ns1:consultaSumarizadoTotal"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaSumarizadoTotalResponse" type="ns1:consultaSumarizadoTotalResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaSumarizadoVivienda" type="ns1:consultaSumarizadoVivienda"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaSumarizadoViviendaResponse" type="ns1:consultaSumarizadoViviendaResponse"/>
+<xs:complexType name="consultaSumarizadoVivienda">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:sumarioArchivoBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="sumarioArchivoBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="idArchivo" type="xs:short"/>
+      <xs:element minOccurs="0" name="idLibAportacion" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaSumarizadoViviendaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaSumarizadoViviendaResponse" type="ns1:iCifrasControlSoapWSConsultaSumarizadoViviendaResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iCifrasControlSoapWSConsultaSumarizadoViviendaResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:sumarioArchivoVivResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="sumarioArchivoVivResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cifrasVivienda">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="cifraVivienda" type="ns1:cifraViviendaVO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifraViviendaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="conceptoImporte" type="ns1:genericCatalogoVO"/>
+      <xs:element minOccurs="0" name="credito" type="xs:string"/>
+      <xs:element minOccurs="0" name="importeAceptadoAclar" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="importeAceptadoOrd" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="importeRechazado" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="importeTotal" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="numeroRegistros" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="genericCatalogoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaSumarizado">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:sumarioArchivoBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaSumarizadoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaSumarizadoResponse" type="ns1:iCifrasControlSoapWSConsultaSumarizadoResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iCifrasControlSoapWSConsultaSumarizadoResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:sumarioArchivoBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="sumarioArchivoBeanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cifrasSumarizadasResponse" type="ns1:cifrasSumarizadasVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasSumarizadasVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="liberacionesAportacion">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="liberacionAportacion" type="ns1:liberacionAportacionVO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="liberacionAportacionVO">
+    <xs:complexContent>
+      <xs:extension base="ns1:genericCatalogoVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cifrasSumarizadas">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="cifraSumarizada" type="ns1:cifraSumVO"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="cifraSumVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="conceptoImporte" type="ns1:genericCatalogoVO"/>
+      <xs:element minOccurs="0" name="importesPorSiefore">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="importePorSiefore" type="ns1:importePorSieforeVO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="importeTotal" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="importeTotalAceptado" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="importeTotalRechazado" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="importePorSieforeVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="creditoVivienda" type="xs:string"/>
+      <xs:element minOccurs="0" name="importeAceptado" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="importeRechazado" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="numRegistros" type="xs:long"/>
+      <xs:element minOccurs="0" name="siefore" type="ns1:genericCatalogoVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consulta">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:cifrasControlBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="folioRel" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubetapa" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaResponse" type="ns1:iCifrasControlSoapWSConsultaResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iCifrasControlSoapWSConsultaResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:cifrasControlBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="cifrasControlBeanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cifrasControlList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="cifrasControl" type="ns1:cifrasControlVO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="detalle" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaRegistro" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="folio" type="ns1:folioVO"/>
+      <xs:element minOccurs="0" name="folioRelacionado" type="ns1:folioVO"/>
+      <xs:element minOccurs="0" name="numRegistrosCumplieron" type="xs:int"/>
+      <xs:element minOccurs="0" name="numregistrosNoCumplieron" type="xs:int"/>
+      <xs:element minOccurs="0" name="subetapa" type="ns1:subetapaVO"/>
+      <xs:element minOccurs="0" name="totalErrores" type="xs:int"/>
+      <xs:element minOccurs="0" name="totalRegistros" type="xs:int"/>
+      <xs:element minOccurs="0" name="usuarioRegistro" type="xs:string"/>
+      <xs:element minOccurs="0" name="validacion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="folioVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="canal" type="ns1:canalVO"/>
+      <xs:element minOccurs="0" name="estatusProceso" type="ns1:estatusProcesoVO"/>
+      <xs:element minOccurs="0" name="fehAct" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehCre" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSnapshot" type="xs:string"/>
+      <xs:element minOccurs="0" name="instanciaBpm" type="xs:string"/>
+      <xs:element minOccurs="0" name="proceso" type="ns1:procesoVO"/>
+      <xs:element minOccurs="0" name="subproceso" type="ns1:subprocesoVO"/>
+      <xs:element minOccurs="0" name="usuAct" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuCre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="canalVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descCanal" type="xs:string"/>
+      <xs:element minOccurs="0" name="idCanal" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="estatusProcesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descEstatusProceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEstatusProceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="procesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descProceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subprocesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSubproceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subetapaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSubetapa" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubetapa" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaSumarizadoTotal">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:sumarioArchivoBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaSumarizadoTotalResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaSumarizadoTotalResponse" type="ns1:iCifrasControlSoapWSConsultaSumarizadoTotalResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iCifrasControlSoapWSConsultaSumarizadoTotalResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:sumarioArchivoTotalResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="sumarioArchivoTotalResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cifrasSumarizadasResponse" type="ns1:cifrasSumarizadasTotalesVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasSumarizadasTotalesVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="liberacionesAportacion">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="liberacionAportacion" type="ns1:liberacionAportacionTotalVO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="liberacionAportacionTotalVO">
+    <xs:complexContent>
+      <xs:extension base="ns1:genericCatalogoVO">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="cifrasTotales" type="ns1:cifraSumTotalVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="cifraSumTotalVO">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="importePorSiefore" nillable="true" type="ns1:importePorSieforeVO"/>
+      <xs:element minOccurs="0" name="importeTotal" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="importeTotalAceptado" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="importeTotalRechazado" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="numRegistros" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

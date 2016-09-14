@@ -1,0 +1,118 @@
+BROKER SCHEMA profuturo.util.validacionparametro.sf
+
+CREATE COMPUTE MODULE validarParametroServicio
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN		
+        DECLARE flagPadre BOOLEAN FALSE;
+        DECLARE descProceso CHARACTER '';
+        DECLARE refValReq REFERENCE TO Environment.valReq;
+        MOVE refValReq FIRSTCHILD;                               
+        WHILE LASTMOVE (refValReq) DO        	
+        	DECLARE valor CHARACTER refValReq;
+            DECLARE nombreParam CHARACTER FIELDNAME(refValReq);
+            DECLARE idTipoCat CHARACTER profuturo.util.func.AsignarTipoCatalogo(nombreParam);
+            DECLARE validar BOOLEAN TRUE;
+            DECLARE validarFolio BOOLEAN FALSE;			
+			IF nombreParam = 'folio' THEN				
+				SET OutputRoot.XMLNSC.consultarFolioRequest.folio = valor;
+				PROPAGATE TO TERMINAL 'out2';			
+				IF Environment.nci.consultarFolio.success THEN					
+					IF FIELDTYPE (Environment.nci.consultarFolio.response.*[1]) IS NULL THEN
+						CREATE LASTCHILD OF Environment.nci.valPar NAME 'validacion';
+	                    DECLARE refValidaciones REFERENCE TO Environment.nci.valPar;
+	                    MOVE refValidaciones LASTCHILD NAME 'validacion';	                    
+	        			SET refValidaciones.idValor = valor;
+	                    SET refValidaciones.nombre = nombreParam;
+	                    SET refValidaciones.estatus = 2;						
+					END IF;
+				ELSE
+					SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarFolio.errorCode;
+					SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarFolio.errorMessage;
+					SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarFolio.errorTrace;										
+					PROPAGATE TO TERMINAL 'out3';
+					RETURN FALSE;
+				END IF;				
+				SET validar = FALSE;
+			END IF;				
+			IF nombreParam = 'idResultado' AND valor = 0 THEN
+				SET validar = FALSE;
+			END IF;		
+			IF nombreParam = 'idProceso' AND valor = 276 THEN
+				SET validar = FALSE;
+			END IF;
+			IF nombreParam = 'idSubproceso' AND valor = 277 THEN
+				SET validar = FALSE;
+			END IF;
+			IF validar THEN
+				SET OutputRoot.XMLNSC.catalogoBeanRequest.idCatalogo = valor;
+			    SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = 1;
+				SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = idTipoCat;				
+				PROPAGATE TO TERMINAL 'out1';				
+	            IF Environment.nci.consultarCatalogo.success THEN
+	            	IF FIELDTYPE (Environment.nci.consultarCatalogo.response) IS NOT NULL THEN	            		
+	         			IF nombreParam = 'idProceso' THEN
+	            			SET flagPadre = TRUE;
+	            			SET descProceso = Environment.nci.consultarCatalogo.response.valor;
+			            END IF;	            		
+	            		IF nombreParam = 'idSubproceso' THEN
+	            			IF flagPadre THEN
+	            				IF  Environment.nci.consultarCatalogo.response.idCatPadre <> Environment.valReq.idProceso THEN	            					
+	            					CREATE LASTCHILD OF Environment.nci.valPar NAME 'validacion';
+				                    DECLARE refValidaciones REFERENCE TO Environment.nci.valPar;
+				                    MOVE refValidaciones LASTCHILD NAME 'validacion';				                    
+				        			SET refValidaciones.idValor = valor;
+				                    SET refValidaciones.nombre = nombreParam;
+				                    SET refValidaciones.estatus = 1;
+				                    SET refValidaciones.idPadre = Environment.valReq.idProceso;
+				                    SET refValidaciones.descPadre = descProceso;
+				                    SET refValidaciones.descValor = Environment.nci.consultarCatalogo.response.valor;
+	            				END IF;
+	            			END IF;
+	            		END IF;
+	                ELSE
+	                	CREATE LASTCHILD OF Environment.nci.valPar NAME 'validacion';
+	                    DECLARE refValidaciones REFERENCE TO Environment.nci.valPar;
+	                    MOVE refValidaciones LASTCHILD NAME 'validacion';
+	                    SET refValidaciones.idValor = valor;
+	                    SET refValidaciones.nombre = nombreParam;
+	                    SET refValidaciones.estatus = 0;                    
+	            	END IF;
+	            ELSE
+	            	SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCatalogo.errorCode;
+					SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCatalogo.errorMessage;
+					SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCatalogo.errorTrace;	            	
+	            	PROPAGATE TO TERMINAL 'out3';
+					RETURN FALSE;
+	            END IF;
+			END IF;			         
+            MOVE refValReq NEXTSIBLING;
+        END WHILE;		
+		DECLARE refValidaciones REFERENCE TO Environment.nci.valPar;
+		MOVE refValidaciones FIRSTCHILD;		
+		WHILE LASTMOVE(refValidaciones) DO
+			IF refValidaciones.estatus = 0 THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC NAME 'mensajes';
+				CALL profuturo.util.CodigosMensajesValParaCASE('sinParametro', OutputRoot.XMLNSC.mensajes, refValidaciones);				
+			ELSEIF refValidaciones.estatus = 1 THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC NAME 'mensajes';
+				CALL profuturo.util.CodigosMensajesValParaCASE('noRelProcSubproc', OutputRoot.XMLNSC.mensajes, refValidaciones);
+			ELSEIF refValidaciones.estatus = 2 THEN
+				CREATE LASTCHILD OF OutputRoot.XMLNSC NAME 'mensajes';
+				CALL profuturo.util.CodigosMensajesValParaCASE('noFolio', OutputRoot.XMLNSC.mensajes, refValidaciones);				
+			END IF;			
+			MOVE refValidaciones NEXTSIBLING REPEAT NAME;
+		END WHILE;			
+		IF FIELDTYPE(OutputRoot.XMLNSC.mensajes) IS NULL THEN
+			CALL profuturo.util.CopyEntireMessage(InputRoot, OutputRoot);
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE PropagarException
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyEntireMessage(InputRoot, OutputRoot);
+		PROPAGATE TO LABEL 'FaultParametros';
+	END;
+END MODULE;

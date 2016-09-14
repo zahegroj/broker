@@ -1,0 +1,20 @@
+BROKER SCHEMA profuturo.nci.bitacora.func
+
+CREATE FILTER MODULE guardarBitacora_Resp_filter
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/BitacoraService/v1/types';
+		DECLARE resultado BOOLEAN FALSE;
+		
+		IF FIELDTYPE(Root.XMLNSC.ns:guardarBitacoraResponse) IS NOT NULL THEN
+			SET resultado = TRUE;
+		ELSEIF FIELDTYPE(Root.XMLNSC.nsFault:Fault) IS NOT NULL THEN
+			SET resultado = FALSE;
+		ELSEIF FIELDTYPE(Root.SOAP.Body.nsFault:Fault) IS NOT NULL THEN
+			SET resultado = FALSE;
+		END IF;
+		
+		RETURN resultado;
+	END;
+END MODULE;

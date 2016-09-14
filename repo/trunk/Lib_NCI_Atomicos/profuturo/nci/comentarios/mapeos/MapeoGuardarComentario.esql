@@ -1,0 +1,28 @@
+BROKER SCHEMA profuturo.nci.comentarios.mapeos
+
+CREATE COMPUTE MODULE MapeoGuardarComentario_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://comentarios.webservice.ws.nci.profuturo.mx/';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'IBitacoraComentarioSoapWSService', 'guardaComentario');
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNSC.ns:guardaComentario.request.comentario = InputRoot.XMLNSC.guardarComentarioBeanRequest.comentario;
+		SET OutputRoot.XMLNSC.ns:guardaComentario.request.folio =  InputRoot.XMLNSC.guardarComentarioBeanRequest.folio;
+		SET OutputRoot.XMLNSC.ns:guardaComentario.request.idEtapa = InputRoot.XMLNSC.guardarComentarioBeanRequest.etapa.idEtapa;
+		SET OutputRoot.XMLNSC.ns:guardaComentario.request.idSubetapa = InputRoot.XMLNSC.guardarComentarioBeanRequest.subetapa.idSubetapa;
+		SET OutputRoot.XMLNSC.ns:guardaComentario.request.usuarioCreacion = InputRoot.XMLNSC.guardarComentarioBeanRequest.usuario;											
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoGuardarComentario_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://comentarios.webservice.ws.nci.profuturo.mx/';
+		SET Environment.nci.guardarComentario = InputRoot.XMLNSC.ns:guardaComentarioResponse.GuardaComentarioResponse;		
+		IF InputRoot.XMLNSC.ns:guardaComentarioResponse.GuardaComentarioResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

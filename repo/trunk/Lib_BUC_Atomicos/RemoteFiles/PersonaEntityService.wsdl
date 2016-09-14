@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns0="http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="PersonaEntityPortBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import namespace="http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity" schemaLocation="PersonaEntityService.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ClienteUnicoProfGNPSOAException">
+    <wsdl:part element="ns0:ClienteUnicoProfGNPSOAException" name="fault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaFisica">
+    <wsdl:part element="ns0:getPersonaFisica" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaMoralResponse">
+    <wsdl:part element="ns0:getPersonaMoralResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaEntityByGeneralesResponse">
+    <wsdl:part element="ns0:getPersonaEntityByGeneralesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaMoralIdentificadoresResponse">
+    <wsdl:part element="ns0:getPersonaMoralIdentificadoresResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaEntityByIdentificadorNegocioRolResponse">
+    <wsdl:part element="ns0:getPersonaEntityByIdentificadorNegocioRolResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContactoPersonaContrato">
+    <wsdl:part element="ns0:getContactoPersonaContrato" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaMoral">
+    <wsdl:part element="ns0:getPersonaMoral" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaFisicaIdentificadores">
+    <wsdl:part element="ns0:getPersonaFisicaIdentificadores" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaFisicaResponse">
+    <wsdl:part element="ns0:getPersonaFisicaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDatosOrigenPersona">
+    <wsdl:part element="ns0:getDatosOrigenPersona" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDatosOrigenPersonaResponse">
+    <wsdl:part element="ns0:getDatosOrigenPersonaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getIdentificadoresByIdPersonsResponse">
+    <wsdl:part element="ns0:getIdentificadoresByIdPersonsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaEntityByIdentificadorNegocioRol">
+    <wsdl:part element="ns0:getPersonaEntityByIdentificadorNegocioRol" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaMoralIdentificadores">
+    <wsdl:part element="ns0:getPersonaMoralIdentificadores" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getIdentificadoresByIdPersons">
+    <wsdl:part element="ns0:getIdentificadoresByIdPersons" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaFisicaIdentificadoresResponse">
+    <wsdl:part element="ns0:getPersonaFisicaIdentificadoresResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaEntityByGenerales">
+    <wsdl:part element="ns0:getPersonaEntityByGenerales" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaEntityByIdentificador">
+    <wsdl:part element="ns0:getPersonaEntityByIdentificador" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getContactoPersonaContratoResponse">
+    <wsdl:part element="ns0:getContactoPersonaContratoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonaEntityByIdentificadorResponse">
+    <wsdl:part element="ns0:getPersonaEntityByIdentificadorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="inactivaIdentificador">
+    <wsdl:part element="ns0:inactivaIdentificador" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="inactivaIdentificadorResponse">
+    <wsdl:part element="ns0:inactivaIdentificadorResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="PersonaEntityServiceDelegateImpl">
+    <wsdl:operation name="getContactoPersonaContrato">
+      <wsdl:input message="ns0:getContactoPersonaContrato" name="getContactoPersonaContratoRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getContactoPersonaContratoResponse" name="getContactoPersonaContratoResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDatosOrigenPersona">
+      <wsdl:input message="ns0:getDatosOrigenPersona" name="getDatosOrigenPersonaRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getDatosOrigenPersonaResponse" name="getDatosOrigenPersonaResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getIdentificadoresByIdPersons">
+      <wsdl:input message="ns0:getIdentificadoresByIdPersons" name="getIdentificadoresByIdPersonsRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getIdentificadoresByIdPersonsResponse" name="getIdentificadoresByIdPersonsResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaEntityByGenerales">
+      <wsdl:input message="ns0:getPersonaEntityByGenerales" name="getPersonaEntityByGeneralesRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getPersonaEntityByGeneralesResponse" name="getPersonaEntityByGeneralesResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaEntityByIdentificador">
+      <wsdl:input message="ns0:getPersonaEntityByIdentificador" name="getPersonaEntityByIdentificadorRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getPersonaEntityByIdentificadorResponse" name="getPersonaEntityByIdentificadorResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaEntityByIdentificadorNegocioRol">
+      <wsdl:input message="ns0:getPersonaEntityByIdentificadorNegocioRol" name="getPersonaEntityByIdentificadorNegocioRolRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getPersonaEntityByIdentificadorNegocioRolResponse" name="getPersonaEntityByIdentificadorNegocioRolResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaFisica">
+      <wsdl:input message="ns0:getPersonaFisica" name="getPersonaFisicaRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getPersonaFisicaResponse" name="getPersonaFisicaResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaFisicaIdentificadores">
+      <wsdl:input message="ns0:getPersonaFisicaIdentificadores" name="getPersonaFisicaIdentificadoresRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getPersonaFisicaIdentificadoresResponse" name="getPersonaFisicaIdentificadoresResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaMoral">
+      <wsdl:input message="ns0:getPersonaMoral" name="getPersonaMoralRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getPersonaMoralResponse" name="getPersonaMoralResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaMoralIdentificadores">
+      <wsdl:input message="ns0:getPersonaMoralIdentificadores" name="getPersonaMoralIdentificadoresRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:getPersonaMoralIdentificadoresResponse" name="getPersonaMoralIdentificadoresResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="inactivaIdentificador">
+      <wsdl:input message="ns0:inactivaIdentificador" name="inactivaIdentificadorRequest">
+    </wsdl:input>
+      <wsdl:output message="ns0:inactivaIdentificadorResponse" name="inactivaIdentificadorResponse">
+    </wsdl:output>
+      <wsdl:fault message="ns0:ClienteUnicoProfGNPSOAException" name="ClienteUnicoProfGNPSOAException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PersonaEntityPortBinding" type="ns0:PersonaEntityServiceDelegateImpl">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getContactoPersonaContrato">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getContactoPersonaContratoRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getContactoPersonaContratoResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDatosOrigenPersona">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getDatosOrigenPersonaRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDatosOrigenPersonaResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getIdentificadoresByIdPersons">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getIdentificadoresByIdPersonsRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getIdentificadoresByIdPersonsResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaEntityByGenerales">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getPersonaEntityByGeneralesRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPersonaEntityByGeneralesResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaEntityByIdentificador">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getPersonaEntityByIdentificadorRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPersonaEntityByIdentificadorResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaEntityByIdentificadorNegocioRol">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getPersonaEntityByIdentificadorNegocioRolRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPersonaEntityByIdentificadorNegocioRolResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaFisica">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getPersonaFisicaRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPersonaFisicaResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaFisicaIdentificadores">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getPersonaFisicaIdentificadoresRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPersonaFisicaIdentificadoresResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaMoral">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getPersonaMoralRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPersonaMoralResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonaMoralIdentificadores">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="getPersonaMoralIdentificadoresRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPersonaMoralIdentificadoresResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="inactivaIdentificador">
+      <soap11:operation soapAction="" style="document"/>
+      <wsdl:input name="inactivaIdentificadorRequest">
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="inactivaIdentificadorResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ClienteUnicoProfGNPSOAException">
+        <soap11:fault name="ClienteUnicoProfGNPSOAException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PersonaEntityService">
+    <wsdl:port binding="ns0:PersonaEntityPortBinding" name="PersonaEntityPort">
+      <soap11:address location="http://GPCOP02PRESTA2:3040/buc/ws/PersonaEntityService"/>
+    </wsdl:port>
+    <wsdl:port binding="ns0:PersonaEntityPortBinding" name="PersonaEntityPort.0">
+      <soap11:address location="http://GPCOP02PRESTA2:3040/buc/ws/PersonaEntityService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

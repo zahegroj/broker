@@ -1,0 +1,70 @@
+BROKER SCHEMA profuturo.general.subetapas
+
+CREATE COMPUTE MODULE BuildExcepcionNoSubetapa
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		DECLARE nsEx NAMESPACE 'http://mx.profuturo/iib/iibException/IIBException';
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';		
+		
+		-- BUILD FAULT
+		SET OutputRoot.XMLNSC.nsFault:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.XMLNSC.nsFault:Fault.faultstring = 'Relación Proceso - Subetapa no encontrada';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.operacion = '';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.servicio = '';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.tipo = '';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.codigo = '1005';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.descripcion = 'Relación Proceso - Subetapa no encontrada';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.servicioOrigen = '';
+		DECLARE refReq REFERENCE TO InputRoot.XMLNSC.ns:iniciarSubetapaRequest;
+		DECLARE varparametros CHARACTER '';
+		SET varparametros = 'Parametros: folio=' || refReq.folio || ', idProceso=' || CAST(refReq.idProceso AS CHARACTER) || 
+			', idSubproceso=' || CAST(refReq.idSubproceso AS CHARACTER) || 
+			', idSubetapa=' || CAST(refReq.idSubetapa AS CHARACTER);
+			
+		IF FIELDTYPE(refReq.parametros) IS NOT NULL AND FIELDTYPE(refReq.parametros.parametro) IS NOT NULL THEN
+			SET varparametros = varparametros || ', parametro[1]=' || refReq.parametros.parametro[1].nombre ||
+			'-' || refReq.parametros.parametro[1].valores.valor[1] ||
+			', parametro[2]=' || refReq.parametros.parametro[2].nombre||
+			'-' || refReq.parametros.parametro[2].valores.valor[1];
+		END IF;
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.trace = varparametros;
+		
+		SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'no_enviar';
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE BuildExcepcionNoSubproceso
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		DECLARE nsEx NAMESPACE 'http://mx.profuturo/iib/iibException/IIBException';
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';		
+		
+		-- BUILD FAULT
+		SET OutputRoot.XMLNSC.nsFault:Fault.faultcode = 'NS1:Server';
+		SET OutputRoot.XMLNSC.nsFault:Fault.faultstring = 'Relación Proceso - Subproceso no encontrada';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.operacion = '';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.servicio = '';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.tipo = '';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.codigo = '1006';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.descripcion = 'Relación Proceso - Subproceso no encontrada';
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.servicioOrigen = '';
+		DECLARE refReq REFERENCE TO InputRoot.XMLNSC.ns:iniciarSubetapaRequest;
+		DECLARE varparametros CHARACTER '';
+		SET varparametros = 'Parametros: folio=' || refReq.folio || ', idProceso=' || CAST(refReq.idProceso AS CHARACTER) || 
+			', idSubproceso=' || CAST(refReq.idSubproceso AS CHARACTER);
+			
+		IF FIELDTYPE(refReq.parametros) IS NOT NULL AND FIELDTYPE(refReq.parametros.parametro) IS NOT NULL THEN
+			SET varparametros = varparametros || ', parametro[1]=' || refReq.parametros.parametro[1].nombre ||
+			'-' || refReq.parametros.parametro[1].valores.valor[1] ||
+			', parametro[2]=' || refReq.parametros.parametro[2].nombre||
+			'-' || refReq.parametros.parametro[2].valores.valor[1];
+		END IF;
+		SET OutputRoot.XMLNSC.nsFault:Fault.detail.nsEx:iibException.errores.error.trace = varparametros;
+		
+		SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'no_depurar';
+		RETURN TRUE;
+	END;
+END MODULE;

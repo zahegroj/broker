@@ -1,0 +1,37 @@
+BROKER SCHEMA profuturo.buc.persona.mapeos
+
+
+CREATE COMPUTE MODULE getPersonaFisicaIdentificadores_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsPer NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'BUC', 'PersonaEntityService', 'getPersonaFisicaIdentificadores');
+		
+		SET OutputRoot.XMLNSC.nsPer:getPersonaFisicaIdentificadores.arg0.idPersona = InputRoot.XMLNSC.personaFisicaIdentificadores.idPersona;
+		SET OutputRoot.XMLNSC.nsPer:getPersonaFisicaIdentificadores.arg1.indicadorLineaNegocio = InputRoot.XMLNSC.personaFisicaIdentificadores.lineaNegocio;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE getPersonaFisicaIdentificadores_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsPer NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/PersonaEntity';
+
+		SET Environment.buc.getPersonaFisicaIdentificadores = InputRoot.XMLNSC.nsPer:getPersonaFisicaIdentificadoresResponse;
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE getPersonaFisicaIdentificadores_Fault
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET Environment.buc.getPersonaFisicaIdentificadores.error = InputRoot.XMLNSC.nsFault:Fault.detail.*[1];
+		RETURN TRUE;
+	END;
+END MODULE;

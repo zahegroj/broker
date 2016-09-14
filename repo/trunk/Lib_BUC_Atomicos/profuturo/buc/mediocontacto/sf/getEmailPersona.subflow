@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ComIbmCompute.msgnode="ComIbmCompute.msgnode" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eflow="http://www.ibm.com/wbi/2005/eflow" xmlns:gen_profuturo_buc_mediocontacto_sf_medioContactoService_getEmailPersona.subflow="gen/profuturo/buc/mediocontacto/sf/medioContactoService_getEmailPersona.subflow" xmlns:utility="http://www.ibm.com/wbi/2005/eflow_utility" nsURI="profuturo/buc/mediocontacto/sf/getEmailPersona.subflow" nsPrefix="profuturo_buc_mediocontacto_sf_getEmailPersona.subflow">
+  <eClassifiers xmi:type="eflow:FCMComposite" name="FCMComposite_1" useDefaults="true" udpSupport="true">
+    <eSuperTypes href="http://www.ibm.com/wbi/2005/eflow#//FCMBlock"/>
+    <translation xmi:type="utility:TranslatableString" key="getEmailPersona" bundleName="profuturo/buc/mediocontacto/sf/getEmailPersona" pluginId="Lib_BUC_Atomicos"/>
+    <colorGraphic16 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Lib_BUC_Atomicos/icons/full/obj16/getEmailPersona.gif"/>
+    <colorGraphic32 xmi:type="utility:GIFFileGraphic" resourceName="platform:/plugin/Lib_BUC_Atomicos/icons/full/obj30/getEmailPersona.gif"/>
+    <composition>
+      <nodes xmi:type="eflow:FCMSource" xmi:id="InTerminal.Input" location="49,109">
+        <translation xmi:type="utility:TranslatableString" key="InTerminal.Input" bundleName="profuturo/buc/mediocontacto/sf/getEmailPersona" pluginId="Lib_BUC_Atomicos"/>
+      </nodes>
+      <nodes xmi:type="gen_profuturo_buc_mediocontacto_sf_medioContactoService_getEmailPersona.subflow:FCMComposite_1" xmi:id="FCMComposite_1_2" location="244,110">
+        <translation xmi:type="utility:ConstantString" string="getEmailPersona"/>
+        <shortDescription xmi:type="utility:ConstantString" string="Invokes WSDL operation and extracts the response from SOAP message."/>
+        <longDescription xmi:type="utility:ConstantString" string="This subflow invokes the WSDL operation and extracts message body from the response message."/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_3" location="147,109" computeExpression="esql://routine/profuturo.buc.mediocontacto.mapeos#getEmailPersona_Map_IN.Main">
+        <translation xmi:type="utility:ConstantString" string="Map IN"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_4" location="390,118" computeExpression="esql://routine/profuturo.buc.mediocontacto.mapeos#getEmailPersona_Map_OUT.Main">
+        <translation xmi:type="utility:ConstantString" string="Map OUT"/>
+      </nodes>
+      <nodes xmi:type="ComIbmCompute.msgnode:FCMComposite_1" xmi:id="FCMComposite_1_5" location="390,35" computeExpression="esql://routine/profuturo.buc.mediocontacto.mapeos#getEmailPersona_Map_Fault.Main">
+        <translation xmi:type="utility:ConstantString" string="Map Fault"/>
+      </nodes>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_1" targetNode="FCMComposite_1_3" sourceNode="InTerminal.Input" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_2" targetNode="FCMComposite_1_2" sourceNode="FCMComposite_1_3" sourceTerminalName="OutTerminal.out" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_3" targetNode="FCMComposite_1_4" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.getEmailPersonaResponse" targetTerminalName="InTerminal.in"/>
+      <connections xmi:type="eflow:FCMConnection" xmi:id="FCMConnection_4" targetNode="FCMComposite_1_5" sourceNode="FCMComposite_1_2" sourceTerminalName="OutTerminal.fault" targetTerminalName="InTerminal.in"/>
+    </composition>
+    <propertyOrganizer/>
+    <stickyBoard/>
+  </eClassifiers>
+</ecore:EPackage>

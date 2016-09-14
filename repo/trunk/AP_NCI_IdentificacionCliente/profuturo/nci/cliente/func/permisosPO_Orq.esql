@@ -1,0 +1,19 @@
+BROKER SCHEMA profuturo.nci.cliente.func
+
+
+CREATE COMPUTE MODULE consultarPermisosPO
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1/types';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:consultarClienteBasicoResponse.clientes) IS NOT NULL THEN
+			SET Environment.nci.clientes = InputRoot.XMLNSC.ns:consultarClienteBasicoResponse.clientes;
+		
+			SET OutputRoot.XMLNSC.consultaPermisoInfoCliente.idSubproceso = Environment.nci.clienteAv.req.idSubproceso;
+			SET OutputRoot.XMLNSC.consultaPermisoIndicador.idSubproceso = Environment.nci.clienteAv.req.idSubproceso;
+		ELSE
+			SET OutputRoot.XMLNSC.ns:consultarClienteResponse.mensajes = InputRoot.XMLNSC.ns:consultarClienteBasicoResponse.mensajes;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;

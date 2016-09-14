@@ -1,0 +1,246 @@
+BROKER SCHEMA profuturo.nci.cifrascontrol.func
+
+CREATE COMPUTE MODULE consultarCifrasSumarizadas_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE totalesAportacionesRow ROW;
+		DECLARE i INTEGER 1;
+		DECLARE numLibApor INTEGER CARDINALITY(InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.idsLiberacion.idLiberacion[]);
+		
+		X : WHILE i <= numLibApor DO
+			
+			SET OutputRoot.XMLNSC.consultaSumarizado.folio = InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.folio;
+			SET OutputRoot.XMLNSC.consultaSumarizado.idArchivo = InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.idArchivo;
+			SET OutputRoot.XMLNSC.consultaSumarizado.idLibAportacion = InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.idsLiberacion.idLiberacion[i];
+			
+			SET OutputRoot.XMLNSC.consultaSumarizadoTotal.folio = InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.folio;
+			SET OutputRoot.XMLNSC.consultaSumarizadoTotal.idArchivo = InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.idArchivo;
+			SET OutputRoot.XMLNSC.consultaSumarizadoTotal.idLibAportacion = InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.idsLiberacion.idLiberacion[i];
+			
+			PROPAGATE TO TERMINAL 'out1';
+			
+			IF Environment.nci.consultarCifrasSumarizadas.success AND Environment.nci.consultarCifrasSumarizadasTotal.success THEN
+				--DETALLE
+				DECLARE formatoImporte CHARACTER 'PESOS';
+				DECLARE j INTEGER 1;
+				DECLARE countArr INTEGER CARDINALITY(Environment.nci.consultarCifrasSumarizadas.response.cifrasSumarizadasResponse.liberacionesAportacion.liberacionAportacion[1].cifrasSumarizadas.cifraSumarizada[]);
+				
+				IF countArr > 0 THEN
+					IF FIELDTYPE(Environment.Variables.ns:consultarCifrasSumarizadasResponse.liberacionesAportacion) IS NULL THEN
+						CREATE LASTCHILD OF Environment.Variables.ns:consultarCifrasSumarizadasResponse NAME 'liberacionesAportacion';
+					END IF;
+					
+					DECLARE refEnvLiberAp REFERENCE TO Environment.Variables.ns:consultarCifrasSumarizadasResponse.liberacionesAportacion;
+					CREATE LASTCHILD OF refEnvLiberAp NAME 'liberacionAportacion';
+					
+					MOVE refEnvLiberAp LASTCHILD NAME 'liberacionAportacion';
+				END IF;
+				
+				Y : WHILE j <= countArr DO
+					
+					DECLARE liberacionesAportacion REFERENCE TO Environment.nci.consultarCifrasSumarizadas.response.cifrasSumarizadasResponse.liberacionesAportacion;
+					DECLARE refEnvLiberAp REFERENCE TO Environment.Variables.ns:consultarCifrasSumarizadasResponse.liberacionesAportacion;
+					MOVE refEnvLiberAp LASTCHILD NAME 'liberacionAportacion';
+					
+					SET refEnvLiberAp.idLiberacion = liberacionesAportacion.liberacionAportacion[1].id;
+					SET refEnvLiberAp.descripcion = liberacionesAportacion.liberacionAportacion[1].descripcion;
+					SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].conceptoImporte.id = liberacionesAportacion.liberacionAportacion[1].cifrasSumarizadas.cifraSumarizada[j].conceptoImporte.id;
+					SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].conceptoImporte.descripcion = liberacionesAportacion.liberacionAportacion[1].cifrasSumarizadas.cifraSumarizada[j].conceptoImporte.descripcion;
+					
+					DECLARE k INTEGER 1;
+					DECLARE countSief INTEGER CARDINALITY(liberacionesAportacion.liberacionAportacion[1].cifrasSumarizadas.cifraSumarizada[j].importesPorSiefore.importePorSiefore[]);
+					
+					Z : WHILE k <= countSief DO
+						DECLARE importesSiefore REFERENCE TO liberacionesAportacion.liberacionAportacion[1].cifrasSumarizadas.cifraSumarizada[j].importesPorSiefore;
+						
+						SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].importesSiefore.importeSiefore[k].siefore.id = importesSiefore.importePorSiefore[k].siefore.id;
+						SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].importesSiefore.importeSiefore[k].siefore.descripcion = importesSiefore.importePorSiefore[k].siefore.descripcion;
+						SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].importesSiefore.importeSiefore[k].importeAceptado = profuturo.util.func.setFormatoImporte(importesSiefore.importePorSiefore[k].importeAceptado, formatoImporte);
+						SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].importesSiefore.importeSiefore[k].importeRechazado = profuturo.util.func.setFormatoImporte(importesSiefore.importePorSiefore[k].importeRechazado, formatoImporte);
+						
+						SET k = k + 1;
+					END WHILE Z;
+					
+					SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].importeAceptado = profuturo.util.func.setFormatoImporte(liberacionesAportacion.liberacionAportacion[1].cifrasSumarizadas.cifraSumarizada[j].importeTotalAceptado, formatoImporte);
+					SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].importeRechazado = profuturo.util.func.setFormatoImporte(liberacionesAportacion.liberacionAportacion[1].cifrasSumarizadas.cifraSumarizada[j].importeTotalRechazado, formatoImporte);
+					SET refEnvLiberAp.cifrasSumarizadas.cifraSumarizada[j].importeTotal = profuturo.util.func.setFormatoImporte(liberacionesAportacion.liberacionAportacion[1].cifrasSumarizadas.cifraSumarizada[j].importeTotal, formatoImporte);
+				
+					SET j = j + 1;
+				END WHILE Y;
+				
+				--TOTALES
+				SET j = 1;
+				SET countArr = CARDINALITY(Environment.nci.consultarCifrasSumarizadasTotal.response.cifrasSumarizadasResponse.liberacionesAportacion.liberacionAportacion[1].cifrasTotales.importePorSiefore[]);
+				
+				Y : WHILE j <= countArr DO
+					DECLARE liberacionesAportacion REFERENCE TO Environment.nci.consultarCifrasSumarizadasTotal.response.cifrasSumarizadasResponse.liberacionesAportacion;
+					DECLARE refEnvLiberAp REFERENCE TO Environment.Variables.ns:consultarCifrasSumarizadasResponse.liberacionesAportacion;
+					MOVE refEnvLiberAp LASTCHILD NAME 'liberacionAportacion';
+
+					SET refEnvLiberAp.cifrasTotales.importesSiefore.importeSiefore[j].siefore.id = liberacionesAportacion.liberacionAportacion.cifrasTotales.importePorSiefore[j].siefore.id;
+					SET refEnvLiberAp.cifrasTotales.importesSiefore.importeSiefore[j].siefore.descripcion = liberacionesAportacion.liberacionAportacion.cifrasTotales.importePorSiefore[j].siefore.descripcion;
+					SET refEnvLiberAp.cifrasTotales.importesSiefore.importeSiefore[j].importeAceptado = profuturo.util.func.setFormatoImporte(liberacionesAportacion.liberacionAportacion.cifrasTotales.importePorSiefore[j].importeAceptado, formatoImporte);
+					SET refEnvLiberAp.cifrasTotales.importesSiefore.importeSiefore[j].importeRechazado = profuturo.util.func.setFormatoImporte(liberacionesAportacion.liberacionAportacion.cifrasTotales.importePorSiefore[j].importeRechazado, formatoImporte);
+					DECLARE numRegistros CHARACTER CAST(liberacionesAportacion.liberacionAportacion.cifrasTotales.importePorSiefore[j].numRegistros AS CHARACTER);
+					SET refEnvLiberAp.cifrasTotales.importesSiefore.importeSiefore[j].numeroRegistros = profuturo.util.func.setFormatoNumero(CAST(numRegistros AS INTEGER));
+										
+					CALL calcularTotalAportacionesSiefore(
+							totalesAportacionesRow,
+							refEnvLiberAp.cifrasTotales.importesSiefore.importeSiefore[j].siefore,
+							liberacionesAportacion.liberacionAportacion.cifrasTotales.importePorSiefore[j].importeAceptado + 
+								liberacionesAportacion.liberacionAportacion.cifrasTotales.importePorSiefore[j].importeRechazado,
+							CAST(numRegistros AS INTEGER));
+					
+					SET j = j + 1;
+				END WHILE Y;
+				
+				IF countArr > 0 THEN
+					DECLARE liberacionesAportacion REFERENCE TO Environment.nci.consultarCifrasSumarizadasTotal.response.cifrasSumarizadasResponse.liberacionesAportacion;
+					DECLARE refEnvLiberAp REFERENCE TO Environment.Variables.ns:consultarCifrasSumarizadasResponse.liberacionesAportacion;
+					MOVE refEnvLiberAp LASTCHILD NAME 'liberacionAportacion';
+
+					SET refEnvLiberAp.cifrasTotales.importeAceptado = profuturo.util.func.setFormatoImporte(liberacionesAportacion.liberacionAportacion.cifrasTotales.importeTotalAceptado, formatoImporte);
+					SET refEnvLiberAp.cifrasTotales.importeRechazado = profuturo.util.func.setFormatoImporte(liberacionesAportacion.liberacionAportacion.cifrasTotales.importeTotalRechazado, formatoImporte);
+					SET refEnvLiberAp.cifrasTotales.importeTotal = profuturo.util.func.setFormatoImporte(liberacionesAportacion.liberacionAportacion.cifrasTotales.importeTotal, formatoImporte);
+					DECLARE numRegistros CHARACTER CAST(liberacionesAportacion.liberacionAportacion.cifrasTotales.numRegistros AS CHARACTER);
+					SET refEnvLiberAp.cifrasTotales.numeroRegistros = profuturo.util.func.setFormatoNumero(CAST(numRegistros AS INTEGER));
+					
+					CALL calcularTotalAportaciones(
+						totalesAportacionesRow,
+						liberacionesAportacion.liberacionAportacion.cifrasTotales.importeTotalAceptado,
+						liberacionesAportacion.liberacionAportacion.cifrasTotales.importeTotalRechazado,
+						liberacionesAportacion.liberacionAportacion.cifrasTotales.importeTotal,
+						CAST(numRegistros AS INTEGER)
+					);
+				END IF;
+				
+				IF FIELDTYPE (Environment.Variables.ns:consultarCifrasSumarizadasResponse.liberacionesAportacion) IS NULL THEN
+					SET OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.mensajes.mensaje.codigo = '1002';
+					SET OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.mensajes.mensaje.descripcion = 'No se encontraron registros';
+				ELSE
+					SET OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.liberacionesAportacion = Environment.Variables.ns:consultarCifrasSumarizadasResponse.liberacionesAportacion;
+				END IF;
+			ELSE
+				--EXCEPTION
+				DECLARE iErr INTEGER 1;
+				IF Environment.nci.consultarCifrasSumarizadas.success = FALSE THEN
+					SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCifrasSumarizadas.errorCode;
+					SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCifrasSumarizadas.errorMessage;
+					SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCifrasSumarizadas.errorTrace;
+				END IF;
+				
+				IF Environment.nci.consultarCifrasSumarizadasTotal.success = FALSE THEN
+					SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCifrasSumarizadasTotal.errorCode;
+					SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCifrasSumarizadasTotal.errorMessage;
+					SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCifrasSumarizadasTotal.errorTrace;
+				END IF;
+				
+				PROPAGATE TO TERMINAL 'out2';
+				RETURN FALSE;
+			END IF;
+				
+			SET i = i + 1;
+		END WHILE X;
+		
+		IF FIELDTYPE(totalesAportacionesRow.totalAportacionSiefore) IS NOT NULL THEN
+			DECLARE formatoImporte CHARACTER 'PESOS';
+			DECLARE refTotalApSiefore REFERENCE TO totalesAportacionesRow;
+			MOVE refTotalApSiefore FIRSTCHILD;
+			
+			WHILE LASTMOVE(refTotalApSiefore) DO
+				
+				CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.totalesAportacion.totalesLiberacionAportacion NAME 'totalAportacionSiefore';
+				DECLARE refTotalAportacionSiefore REFERENCE TO OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.totalesAportacion.totalesLiberacionAportacion;
+				MOVE refTotalAportacionSiefore LASTCHILD NAME 'totalAportacionSiefore';
+				
+				SET refTotalAportacionSiefore.siefore = refTotalApSiefore.siefore; 
+				SET refTotalAportacionSiefore.importeTotal = profuturo.util.func.setFormatoImporte(refTotalApSiefore.importeTotal, formatoImporte);
+				SET refTotalAportacionSiefore.numeroRegistros = profuturo.util.func.setFormatoNumero(refTotalApSiefore.numeroRegistros);
+				
+				MOVE refTotalApSiefore NEXTSIBLING REPEAT TYPE NAME;
+			END WHILE;
+			
+			SET OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.totalesAportacion.importeAceptado = profuturo.util.func.setFormatoImporte(totalesAportacionesRow.importeAceptado, formatoImporte);
+			SET OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.totalesAportacion.importeRechazado = profuturo.util.func.setFormatoImporte(totalesAportacionesRow.importeRechazado, formatoImporte);
+			SET OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.totalesAportacion.importeTotal = profuturo.util.func.setFormatoImporte(totalesAportacionesRow.importeTotal, formatoImporte);
+			SET OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.totalesAportacion.numeroRegistros = profuturo.util.func.setFormatoNumero(totalesAportacionesRow.numeroRegistros);
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE PROCEDURE calcularTotalAportacionesSiefore(IN refTotalesAportacionesRow REFERENCE, IN siefore REFERENCE, IN importeTotal DECIMAL, IN numeroRegistros INTEGER) BEGIN
+	DECLARE sieforeEncontrada BOOLEAN FALSE;
+	
+	IF FIELDTYPE(refTotalesAportacionesRow.totalAportacionSiefore) IS NOT NULL THEN
+		
+		DECLARE refTotalApSiefore REFERENCE TO refTotalesAportacionesRow;
+		MOVE refTotalApSiefore FIRSTCHILD;
+		
+		WHILE LASTMOVE(refTotalApSiefore) DO
+			IF refTotalApSiefore.siefore.id = siefore.id THEN
+				SET refTotalApSiefore.importeTotal = refTotalApSiefore.importeTotal + importeTotal;
+				SET refTotalApSiefore.numeroRegistros = refTotalApSiefore.numeroRegistros + numeroRegistros;
+				SET sieforeEncontrada = TRUE; 
+			END IF;
+			
+			MOVE refTotalApSiefore NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;
+	END IF;
+	
+	IF sieforeEncontrada = FALSE THEN
+		CREATE LASTCHILD OF refTotalesAportacionesRow NAME 'totalAportacionSiefore';
+		DECLARE refTotalApSiefore1 REFERENCE TO refTotalesAportacionesRow;
+		MOVE refTotalApSiefore1 LASTCHILD NAME 'totalAportacionSiefore';
+		SET refTotalApSiefore1.siefore = siefore;
+		SET refTotalApSiefore1.importeTotal = importeTotal;
+		SET refTotalApSiefore1.numeroRegistros = numeroRegistros;
+	END IF;
+END;
+	
+CREATE PROCEDURE calcularTotalAportaciones(IN refTotalesAportacionesRow REFERENCE, IN importeAceptado DECIMAL, IN importeRechazado DECIMAL, IN importeTotal DECIMAL, IN numeroRegistros INTEGER) BEGIN
+	IF FIELDTYPE(refTotalesAportacionesRow.importeAceptado) IS NULL THEN
+		SET refTotalesAportacionesRow.importeAceptado = importeAceptado;
+	ELSE
+		SET refTotalesAportacionesRow.importeAceptado = refTotalesAportacionesRow.importeAceptado + importeAceptado;
+	END IF;
+	
+	IF FIELDTYPE(refTotalesAportacionesRow.importeRechazado) IS NULL THEN
+		SET refTotalesAportacionesRow.importeRechazado = importeRechazado;
+	ELSE
+		SET refTotalesAportacionesRow.importeRechazado = refTotalesAportacionesRow.importeRechazado + importeRechazado;
+	END IF;
+	
+	IF FIELDTYPE(refTotalesAportacionesRow.importeTotal) IS NULL THEN
+		SET refTotalesAportacionesRow.importeTotal = importeTotal;
+	ELSE
+		SET refTotalesAportacionesRow.importeTotal = refTotalesAportacionesRow.importeTotal + importeTotal;
+	END IF;
+	
+	IF FIELDTYPE(refTotalesAportacionesRow.numeroRegistros) IS NULL THEN
+		SET refTotalesAportacionesRow.numeroRegistros = numeroRegistros;
+	ELSE
+		SET refTotalesAportacionesRow.numeroRegistros = refTotalesAportacionesRow.numeroRegistros + numeroRegistros;
+	END IF;
+END;
+
+CREATE COMPUTE MODULE MapeoParametros_consultarCifrasSumarizadas
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		
+		SET Environment.valReq.idLiberacion[1] = InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.idsLiberacion.idLiberacion[1];
+		SET Environment.valReq.idLiberacion[2] = InputRoot.XMLNSC.ns:consultarCifrasSumarizadasRequest.idsLiberacion.idLiberacion[2];	
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE consultarCifrasSumarizadas_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/CifrasControl/CifrasControlService/v1/types';
+		SET OutputRoot.XMLNSC.ns:consultarCifrasSumarizadasResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

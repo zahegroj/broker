@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IBitacoraProcesoSoapWS" targetNamespace="http://bitacora.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://bitacora.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="IBitacoraProcesoSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://bitacora.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://bitacora.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="IBitacoraProcesoSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consultarBitacora">
+    <wsdl:part element="ns1:consultarBitacora" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardarBitacoraResponse">
+    <wsdl:part element="ns1:guardarBitacoraResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarBitacoraResponse">
+    <wsdl:part element="ns1:consultarBitacoraResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardarBitacora">
+    <wsdl:part element="ns1:guardarBitacora" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IBitacoraProcesoSoapWS">
+    <wsdl:operation name="consultarBitacora">
+      <wsdl:input message="ns1:consultarBitacora" name="consultarBitacora">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultarBitacoraResponse" name="consultarBitacoraResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardarBitacora">
+      <wsdl:input message="ns1:guardarBitacora" name="guardarBitacora">
+    </wsdl:input>
+      <wsdl:output message="ns1:guardarBitacoraResponse" name="guardarBitacoraResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tns="http://mx.profuturo/iib/nci/Reportes/ReporteService/v1" xmlns:sch="http://mx.profuturo/iib/nci/Reportes/ReporteService/v1/types" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException" name="ReporteService" targetNamespace="http://mx.profuturo/iib/nci/Reportes/ReporteService/v1">
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://mx.profuturo/iib/nci/Reportes/ReporteService/v1/types" schemaLocation="ReporteService.xsd"/>
+      <xsd:import namespace="http://mx.profuturo/iib/iibException/IIBException" schemaLocation="../frameworkiib/iibException/IIBException.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="obtenerReporteRequest">
+    <wsdl:part element="sch:obtenerReporteRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="obtenerReporteResponse">
+    <wsdl:part element="sch:obtenerReporteResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="faultMsg">
+    <wsdl:part element="iibe:iibException" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="ReportePortType">
+    <wsdl:operation name="obtenerReporte">
+      <wsdl:input message="tns:obtenerReporteRequest"/>
+      <wsdl:output message="tns:obtenerReporteResponse"/>
+      <wsdl:fault message="tns:faultMsg" name="fault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ReporteBinding" type="tns:ReportePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="obtenerReporte">
+      <soap:operation soapAction="urn:obtenerReporte" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ReporteService">
+    <wsdl:port binding="tns:ReporteBinding" name="ReportePort">
+      <soap:address location="http://localhost/iib/nci/Reportes/ReporteService/v1"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

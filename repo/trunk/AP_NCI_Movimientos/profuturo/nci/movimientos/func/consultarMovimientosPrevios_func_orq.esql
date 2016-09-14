@@ -1,0 +1,168 @@
+BROKER SCHEMA profuturo.nci.movimientos.func
+
+CREATE COMPUTE MODULE consultarMovimientosPrevios_func_orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+	    CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Movimientos/MovimientosService/v1/types';		
+		SET Environment.Variables.tipoCatalogo[] = LIST{	ROW('18' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG),--SIEFORES   [1]
+									ROW('21' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG),--REGIMEN    [2]
+									ROW('24' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG),--SUBCUENTAS [3]
+									ROW('25' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG) --TIPO MOVIM [4]
+        							};
+        DECLARE arrSize INTEGER CARDINALITY(Environment.Variables.tipoCatalogo[]);
+        DECLARE i INTEGER 1;
+        
+		X : WHILE i <= arrSize DO
+			
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = Environment.Variables.tipoCatalogo[i].ID_LINEA_NEG;
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = Environment.Variables.tipoCatalogo[i].ID_TIPO_CATALOGO;
+			
+			PROPAGATE TO TERMINAL 'out1';
+			
+			--recibir la respuesta y ponerla en una lista
+			IF Environment.nci.consultarCatalogo.success = true THEN
+				DECLARE countArr INT CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+				DECLARE j INTEGER 1;
+		
+				Y : WHILE j <= countArr DO			
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].id = Environment.nci.consultarCatalogo.response[j].idCatCatalogo;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].valor = Environment.nci.consultarCatalogo.response[j].valor;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].idPadre = Environment.nci.consultarCatalogo.response[j].idCatPadre;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].idTipoCatalogo = Environment.nci.consultarCatalogo.response[j].idTipoCat;
+					
+					SET j = j + 1;
+				END WHILE Y;
+		
+			ELSE
+				SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCatalogo.errorCode;
+				SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCatalogo.errorMessage;
+				SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCatalogo.errorTrace;
+			
+				PROPAGATE TO TERMINAL 'out3';
+				RETURN FALSE;
+			END IF;
+					
+			SET i = i + 1;
+		END WHILE X;
+		
+		--consulta de la BD		
+		SET OutputRoot.XMLNSC.consultarMovimientosPrevios.folio = InputRoot.XMLNSC.ns:consultarMovimientosPreviosRequest.folio;
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'tipoSubcuentaRequest';
+		
+		PROPAGATE TO TERMINAL 'out2';
+		
+		DECLARE refCatSiefores   REFERENCE TO Environment.Variables.catalogos.catalogo[1];
+		DECLARE refCatRegimen    REFERENCE TO Environment.Variables.catalogos.catalogo[2];
+		DECLARE refCatSubcuentas REFERENCE TO Environment.Variables.catalogos.catalogo[3];
+		DECLARE refCaTipoMov     REFERENCE TO Environment.Variables.catalogos.catalogo[4];
+		DECLARE refTipoSubcuenta REFERENCE TO Environment.nci.consultarTipoSubcuenta.response; --refTipoSubcuenta.tipoSubcuenta[].id
+		DECLARE formatoImporte CHARACTER 'PESOS';
+		DECLARE formatoAIVS CHARACTER 'AIVS';
+		
+		SET i = 1;
+		DECLARE countArr INT CARDINALITY(Environment.nci.consultarMovimientosPrevios.movimientosPrevios[]);
+		X : WHILE i <= countArr DO
+			DECLARE refMovPrev REFERENCE TO Environment.nci.consultarMovimientosPrevios.movimientosPrevios[i];
+			
+			SET Environment.Variables.catResp[] = SELECT T FROM refCatSiefores.cat[] as T WHERE T.id = refMovPrev.idSiefore;
+			
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.sieforesMovimientos.movimiento[i].siefore.id = refMovPrev.idSiefore;
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.sieforesMovimientos.movimiento[i].siefore.descripcion = Environment.Variables.catResp[1].valor;  			
+			
+			DECLARE refMovimiento REFERENCE TO OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.sieforesMovimientos.movimiento[i];
+			DECLARE countSubcta INTEGER CARDINALITY(refMovPrev.subcuentas[]);
+			DECLARE j INTEGER 1;
+			Y : WHILE j <= countSubcta DO
+				
+				SET Environment.Variables.catResp[] = SELECT T FROM refTipoSubcuenta.tipoSubcuenta[] as T WHERE T.idTipoSubcuenta = refMovPrev.subcuentas[j].idTipoSubcuenta;
+				
+				SET refMovimiento.subcuentas.subcuentaMovimiento[j].subcuenta.id = Environment.Variables.catResp[1].subcuenta.id;
+				SET refMovimiento.subcuentas.subcuentaMovimiento[j].subcuenta.descripcion = Environment.Variables.catResp[1].subcuenta.descripcion;
+				SET refMovimiento.subcuentas.subcuentaMovimiento[j].regimen = Environment.Variables.catResp[1].regimen.descripcion;
+				
+				SET Environment.Variables.catResp[] = SELECT T FROM refCaTipoMov.cat[] as T WHERE T.id = refMovPrev.subcuentas[j].idTipoMovimiento;
+				
+				SET refMovimiento.subcuentas.subcuentaMovimiento[j].tipoMovimiento = Environment.Variables.catResp[1].valor;
+				SET refMovimiento.subcuentas.subcuentaMovimiento[j].pesos = profuturo.util.func.setFormatoImporte(refMovPrev.subcuentas[j].montoPesos, formatoImporte);
+				SET refMovimiento.subcuentas.subcuentaMovimiento[j].acciones = profuturo.util.func.setFormatoImporte(refMovPrev.subcuentas[j].montoAcciones, formatoAIVS);
+				SET refMovimiento.subcuentas.subcuentaMovimiento[j].totalRegistros = profuturo.util.func.setFormatoNumero(refMovPrev.subcuentas[j].numeroRegistros);
+				
+				IF FIELDTYPE(refMovimiento.totales) IS NULL THEN
+					SET refMovimiento.totales.total[1].regimen = refMovimiento.subcuentas.subcuentaMovimiento[j].regimen;
+					SET refMovimiento.totales.total[1].totalPesos = profuturo.util.func.setFormatoImporte(refMovPrev.subcuentas[j].montoPesos, formatoImporte);
+					SET refMovimiento.totales.total[1].totalAcciones = profuturo.util.func.setFormatoImporte(refMovPrev.subcuentas[j].montoAcciones, formatoAIVS);
+					SET refMovimiento.totales.total[1].totalRegistros = profuturo.util.func.setFormatoNumero(refMovPrev.subcuentas[j].numeroRegistros);
+				ELSE
+					DECLARE k INTEGER 1;
+					DECLARE sumado BOOLEAN FALSE;
+					DECLARE countTot INTEGER CARDINALITY(refMovimiento.totales.total[]);
+					
+					Z : WHILE k <= countTot DO
+						IF refMovimiento.totales.total[k].regimen = refMovimiento.subcuentas.subcuentaMovimiento[j].regimen THEN
+							DECLARE totalPesos DECIMAL profuturo.util.func.getDecimal(refMovimiento.totales.total[k].totalPesos, formatoImporte);
+							DECLARE totalAcciones DECIMAL profuturo.util.func.getDecimal(refMovimiento.totales.total[k].totalAcciones, formatoAIVS);
+							DECLARE totalRegistros INTEGER profuturo.util.func.getNumero(refMovimiento.totales.total[k].totalRegistros);
+							
+							SET totalPesos = totalPesos + refMovPrev.subcuentas[j].montoPesos;
+							SET totalAcciones = totalAcciones + refMovPrev.subcuentas[j].montoAcciones;
+							SET totalRegistros = totalRegistros + refMovPrev.subcuentas[j].numeroRegistros;
+							
+							SET refMovimiento.totales.total[k].totalPesos = profuturo.util.func.setFormatoImporte(totalPesos, formatoImporte);
+							SET refMovimiento.totales.total[k].totalAcciones = profuturo.util.func.setFormatoImporte(totalAcciones, formatoAIVS);
+							SET refMovimiento.totales.total[k].totalRegistros = profuturo.util.func.setFormatoNumero(totalRegistros);
+							
+							SET sumado = TRUE; 
+						END IF;
+						SET k = k + 1;
+					END WHILE Z;
+					
+					IF sumado = FALSE THEN
+						SET refMovimiento.totales.total[countTot + 1].regimen = refMovimiento.subcuentas.subcuentaMovimiento[j].regimen;
+						SET refMovimiento.totales.total[countTot + 1].totalPesos = profuturo.util.func.setFormatoImporte(refMovPrev.subcuentas[j].montoPesos, formatoImporte);
+						SET refMovimiento.totales.total[countTot + 1].totalAcciones = profuturo.util.func.setFormatoImporte(refMovPrev.subcuentas[j].montoAcciones, formatoAIVS);
+						SET refMovimiento.totales.total[countTot + 1].totalRegistros = profuturo.util.func.setFormatoNumero(refMovPrev.subcuentas[j].numeroRegistros);
+					END IF;
+				END IF;
+				
+				SET j = j + 1;
+			END WHILE Y;
+						
+			SET i = i + 1;
+		END WHILE X;
+		
+		DECLARE refMovTotal REFERENCE TO Environment.nci.consultarMovimientosPrevios.movimientosTotal;
+		DECLARE countTot INTEGER CARDINALITY(Environment.nci.consultarMovimientosPrevios.movimientosTotal.subcuentas[]);
+		SET i = 1;
+		X : WHILE i <= countTot DO
+			DECLARE totalSubcta REFERENCE TO Environment.nci.consultarMovimientosPrevios.movimientosTotal.subcuentas[i];
+			
+			SET Environment.Variables.catResp[] = SELECT T FROM refTipoSubcuenta.tipoSubcuenta[] as T WHERE T.idTipoSubcuenta = refMovTotal.subcuentas[i].idTipoSubcuenta;
+			
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.subcuentas.subcuentaMovimiento[i].subcuenta.id = Environment.Variables.catResp[1].subcuenta.id;
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.subcuentas.subcuentaMovimiento[i].subcuenta.descripcion = Environment.Variables.catResp[1].subcuenta.descripcion;
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.subcuentas.subcuentaMovimiento[i].regimen = Environment.Variables.catResp[1].regimen.descripcion;
+			
+			SET Environment.Variables.catResp[] = SELECT T FROM refCaTipoMov.cat[] as T WHERE T.id = refMovTotal.subcuentas[i].idTipoMovimiento;
+			
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.subcuentas.subcuentaMovimiento[i].tipoMovimiento = Environment.Variables.catResp[1].valor;
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.subcuentas.subcuentaMovimiento[i].pesos = profuturo.util.func.setFormatoImporte(refMovTotal.subcuentas[i].montoPesos, formatoImporte);
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.subcuentas.subcuentaMovimiento[i].acciones = profuturo.util.func.setFormatoImporte(refMovTotal.subcuentas[i].montoAcciones, formatoAIVS);
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.subcuentas.subcuentaMovimiento[i].totalRegistros = profuturo.util.func.setFormatoNumero(refMovTotal.subcuentas[i].numeroRegistros);
+				
+			SET i = i + 1;
+		END WHILE X;
+		 
+				
+		IF countArr = 0 THEN
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse NAME 'mensajes';
+	        CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.mensajes);
+		ELSE
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.totales.total.totalPesos = profuturo.util.func.setFormatoImporte(Environment.nci.consultarMovimientosPrevios.movimientosTotal.total.montoPesos, formatoImporte);
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.totales.total.totalAcciones = profuturo.util.func.setFormatoImporte(Environment.nci.consultarMovimientosPrevios.movimientosTotal.total.montoAcciones, formatoAIVS);
+			SET OutputRoot.XMLNSC.ns:consultarMovimientosPreviosResponse.total.totales.total.totalRegistros = profuturo.util.func.setFormatoNumero(Environment.nci.consultarMovimientosPrevios.movimientosTotal.total.numeroRegistros);
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

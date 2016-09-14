@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IFolioSoapWSService" targetNamespace="http://impl.folio.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://folio.webservice.ws.nci.profuturo.mx/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://impl.folio.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <binding hasEncoding="false" imported="true" name="IFolioSoapWSServiceSoapBinding" originalBindingStyle="document"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:import location="IFolioSoapWSService_i.wsdl" namespace="http://folio.webservice.ws.nci.profuturo.mx/">
+    </wsdl:import>
+  <wsdl:binding name="IFolioSoapWSServiceSoapBinding" type="ns1:IFolioSoapWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="consultarFolioARelacionar">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultarFolioARelacionar">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarFolioARelacionarResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarFoliosRelacionados">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultarFoliosRelacionados">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarFoliosRelacionadosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarFolio">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultarFolio">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultarFolioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarFolio">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="actualizarFolio">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="actualizarFolioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardarFolio">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="guardarFolio">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="guardarFolioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generarFolio">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="generarFolio">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="generarFolioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="IFolioSoapWSService">
+    <wsdl:port binding="tns:IFolioSoapWSServiceSoapBinding" name="IFolioSoapWSPort">
+      <soap:address location="http://wasnci.profuturo.mx:8000/mit-ws/services/IFolioSoapWSService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

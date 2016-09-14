@@ -1,0 +1,39 @@
+BROKER SCHEMA profuturo.general.subetapas
+
+CREATE COMPUTE MODULE MapeoParametros_iniciarSubetapa
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		SET Environment.valReq.folio = InputRoot.XMLNSC.ns:iniciarSubetapaRequest.folio;
+		SET Environment.valReq.idProceso = InputRoot.XMLNSC.ns:iniciarSubetapaRequest.idProceso;
+		SET Environment.valReq.idSubproceso = InputRoot.XMLNSC.ns:iniciarSubetapaRequest.idSubproceso;
+		SET Environment.valReq.idSubetapa = InputRoot.XMLNSC.ns:iniciarSubetapaRequest.idSubetapa;		
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE iniciarSubetapa_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		SET OutputRoot.XMLNSC.ns:iniciarSubetapaResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoParametros_depurarProcesamiento
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		SET Environment.valReq.folio = InputRoot.XMLNSC.ns:depurarProcesamientoRequest.folio;
+		SET Environment.valReq.idProceso = InputRoot.XMLNSC.ns:depurarProcesamientoRequest.idProceso;
+		SET Environment.valReq.idSubproceso = InputRoot.XMLNSC.ns:depurarProcesamientoRequest.idSubproceso;
+		
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE depurarProcesamiento_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		SET OutputRoot.XMLNSC.ns:depurarProcesamientoResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

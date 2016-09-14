@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://comentarios.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://comentarios.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://comentarios.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="consultaComentarios" type="ns1:consultaComentarios"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaComentariosResponse" type="ns1:consultaComentariosResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="guardaComentario" type="ns1:guardaComentario"/>
+<xs:element ibmSchExtn:docRoot="true" name="guardaComentarioResponse" type="ns1:guardaComentarioResponse"/>
+<xs:complexType name="guardaComentario">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:bitacoraComentarioBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="bitacoraComentarioBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comentario" type="xs:string"/>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEtapa" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSubetapa" type="xs:short"/>
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="guardaComentarioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GuardaComentarioResponse" type="ns1:iBitacoraComentarioSoapWSGuardaComentarioResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iBitacoraComentarioSoapWSGuardaComentarioResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:basicBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="basicBeanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="responseMessage" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaComentarios">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:bitacoraComentarioBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaComentariosResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaComentariosResponse" type="ns1:iBitacoraComentarioSoapWSConsultaComentariosResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iBitacoraComentarioSoapWSConsultaComentariosResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:bitacoraComentarioBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="bitacoraComentarioBeanResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="comentarios" nillable="true" type="ns1:commentLogVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="commentLogVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="comentario" type="xs:string"/>
+      <xs:element minOccurs="0" name="etapa" type="ns1:etapaVO"/>
+      <xs:element minOccurs="0" name="fechaRegistro" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="subetapa" type="ns1:subetapaVO"/>
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="etapaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="desEtapa" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEtapa" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subetapaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSubetapa" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubetapa" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

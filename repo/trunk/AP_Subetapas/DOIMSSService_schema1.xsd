@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/">
+
+  <xsd:element ibmSchExtn:docRoot="true" name="ActualizarMovEstatus" type="tns:ActualizarMovEstatus"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="ActualizarMovEstatusResponse" type="tns:ActualizarMovEstatusResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="cargarArchivo" type="tns:cargarArchivo"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="cargarArchivoResponse" type="tns:cargarArchivoResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="depuraTablas" type="tns:depuraTablas"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="depuraTablasResponse" type="tns:depuraTablasResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="desmarcarCuenta" type="tns:desmarcarCuenta"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="desmarcarCuentaResponse" type="tns:desmarcarCuentaResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="genMovPrevios" type="tns:genMovPrevios"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="genMovPreviosResponse" type="tns:genMovPreviosResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="generarCifrasControl" type="tns:generarCifrasControl"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="generarCifrasControlResponse" type="tns:generarCifrasControlResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="identificarCliente" type="tns:identificarCliente"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="identificarClienteReproc" type="tns:identificarClienteReproc"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="identificarClienteReprocResponse" type="tns:identificarClienteReprocResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="identificarClienteResponse" type="tns:identificarClienteResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="matrizConvivencia" type="tns:matrizConvivencia"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="matrizConvivenciaReproc" type="tns:matrizConvivenciaReproc"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="matrizConvivenciaReprocResponse" type="tns:matrizConvivenciaReprocResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="matrizConvivenciaResponse" type="tns:matrizConvivenciaResponse"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="recalcMovPrevios" type="tns:recalcMovPrevios"/>
+
+  <xsd:element ibmSchExtn:docRoot="true" name="recalcMovPreviosResponse" type="tns:recalcMovPreviosResponse"/>
+
+  <xsd:complexType name="identificarClienteReproc">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idc_folio" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="identificarClienteReprocResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="recalcMovPrevios">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="p_FOLIO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_PROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBPROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_FECHA_ACCION" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_FOLIO_REL" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV1" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV2" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="recalcMovPreviosResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="genMovPrevios">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="p_FOLIO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_PROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBPROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_FECHA_ACCION" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_FOLIO_REL" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV1" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV2" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="genMovPreviosResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="identificarCliente">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="idc_folio" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="identificarClienteResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="cargarArchivo">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="mitafore_folio" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mitafore_archivo" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mitafore_id_archivo" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="cargarArchivoResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="depuraTablas">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="p_FOLIO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_PROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBPROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_ETAPA" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBETAPA" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_FECHA" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV1" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV2" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="depuraTablasResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="matrizConvivencia">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="p_FOLIO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_FOLIO_REL" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_PROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBPROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV1" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV2" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBETAPA" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_FECHA_ACCION" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="matrizConvivenciaResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ActualizarMovEstatus">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="mov_folio" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mov_proceso" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mov_subproceso" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mov_estatusmov" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fecha_tra" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="seclot" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fecha_accion" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ActualizarMovEstatusResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="desmarcarCuenta">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="mov_folio" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mov_proceso" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="mov_subproceso" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tipo_mov_1" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="tipo_mov_2" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="desmarcarCuentaResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="matrizConvivenciaReproc">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="p_FOLIO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_PROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBPROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV1" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_TIPOMOV2" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBETAPA" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_FECHA_ACCION" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="matrizConvivenciaReprocResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+
+  <xsd:complexType name="generarCifrasControl">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="p_FOLIO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_PROCESO" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="p_SUBPROCESO" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="generarCifrasControlResponse">
+    <xsd:sequence/>
+  </xsd:complexType>
+</xsd:schema>

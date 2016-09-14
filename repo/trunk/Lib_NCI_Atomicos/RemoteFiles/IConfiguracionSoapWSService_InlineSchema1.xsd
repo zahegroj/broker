@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://configuracion.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://configuracion.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://configuracion.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="consultaMatrizConvivencia" type="ns1:consultaMatrizConvivencia"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaMatrizConvivenciaResponse" type="ns1:consultaMatrizConvivenciaResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaPermisoIndicador" type="ns1:consultaPermisoIndicador"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaPermisoIndicadorResponse" type="ns1:consultaPermisoIndicadorResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaPermisoInformacionCliente" type="ns1:consultaPermisoInformacionCliente"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultaPermisoInformacionClienteResponse" type="ns1:consultaPermisoInformacionClienteResponse"/>
+<xs:complexType name="consultaMatrizConvivencia">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaMatrizConvivenciaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaMatrizConvivenciaResponse" type="ns1:iConfiguracionSoapWSConsultaMatrizConvivenciaResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iConfiguracionSoapWSConsultaMatrizConvivenciaResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:matrizConvivenciaBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="matrizConvivenciaBeanResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="consultaMatrizConvivencia" nillable="true" type="ns1:configConvivenciaVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="configConvivenciaVO">
+    <xs:sequence>
+      <xs:element name="convivencia" type="xs:boolean"/>
+      <xs:element minOccurs="0" name="fechaActualizacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idConfigConviv" type="xs:short"/>
+      <xs:element minOccurs="0" name="procesoConv" type="ns1:procesoVO"/>
+      <xs:element minOccurs="0" name="subproceso" type="ns1:subprocesoVO"/>
+      <xs:element minOccurs="0" name="subprocesoConv" type="ns1:subprocesoVO"/>
+      <xs:element minOccurs="0" name="usuarioActualizacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string"/>
+      <xs:element name="vigente" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="procesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descProceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subprocesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSubproceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaPermisoIndicador">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idIndicador" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaPermisoIndicadorResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaPermisoIndicadorResponse" type="ns1:iConfiguracionSoapWSConsultaPermisoIndicadorResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iConfiguracionSoapWSConsultaPermisoIndicadorResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:permisoIndicadorResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="permisoIndicadorResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="permisosIndicador" nillable="true" type="ns1:configuracionPermisoIndicadorVO"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="configuracionPermisoIndicadorVO">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractAuditoriaVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="configuracionIndicador" type="ns1:configuracionIndicadorVO"/>
+          <xs:element minOccurs="0" name="idConfigPermisoIndicador" type="xs:short"/>
+          <xs:element minOccurs="0" name="permiso" type="xs:string"/>
+          <xs:element minOccurs="0" name="subproceso" type="ns1:subprocesoVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="abstractAuditoriaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="fechaActualizacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="usuarioActualizacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="usuarioCreacion" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="configuracionIndicadorVO">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractAuditoriaVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="categoria" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+          <xs:element minOccurs="0" name="idConfiguracionIndicador" type="xs:int"/>
+          <xs:element minOccurs="0" name="indicador" type="ns1:indicadorVO"/>
+          <xs:element minOccurs="0" name="regla" type="xs:string"/>
+          <xs:element minOccurs="0" name="tipoIndicador" type="ns1:tipoIndicadorVO"/>
+          <xs:element minOccurs="0" name="vigencia" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="indicadorVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="idIndicador" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="tipoIndicadorVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="idTipoDatoIndicador" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaPermisoInformacionCliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultaPermisoInformacionClienteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultaPermisoInformacionClienteResponse" type="ns1:iConfiguracionSoapWSConsultaPermisoInformacionClienteResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iConfiguracionSoapWSConsultaPermisoInformacionClienteResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:permisoInformacionClienteBeanResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="permisoInformacionClienteBeanResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listaConfiguracionConsultaCliente">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="configuracionConsultaCliente" type="ns1:configuracionConsultaClienteVO"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="configuracionConsultaClienteVO">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractAuditoriaVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="configuracionSubproceso" type="ns1:configuracionSubprocesoVO"/>
+          <xs:element minOccurs="0" name="idConfiguracionConsultaCliente" type="xs:int"/>
+          <xs:element minOccurs="0" name="informacionCliente" type="ns1:informacionClienteVO"/>
+          <xs:element minOccurs="0" name="permiso" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="vigencia" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="configuracionSubprocesoVO">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractAuditoriaVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="mascaraArchivo" type="xs:string"/>
+          <xs:element minOccurs="0" name="proceso" type="ns1:procesoVO"/>
+          <xs:element minOccurs="0" name="rutaFilesystem" type="xs:string"/>
+          <xs:element minOccurs="0" name="saldoOpera" type="ns1:saldoOperaVO"/>
+          <xs:element minOccurs="0" name="subproceso" type="ns1:subprocesoVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="saldoOperaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSaldoOpera" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="informacionClienteVO">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractAuditoriaVO">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="clasificacionInformacion" type="ns1:clasificacionInformacionVO"/>
+          <xs:element minOccurs="0" name="idInformacionCliente" type="xs:short"/>
+          <xs:element minOccurs="0" name="tipoInformacion" type="ns1:tipoInformacionVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType name="clasificacionInformacionVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="idClasificacionInformacion" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="tipoInformacionVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="idTipoInformacion" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

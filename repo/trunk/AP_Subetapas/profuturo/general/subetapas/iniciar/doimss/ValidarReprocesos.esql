@@ -1,0 +1,52 @@
+BROKER SCHEMA profuturo.general.subetapas.iniciar.doimss
+
+CREATE COMPUTE MODULE ValidarReproceso_IDC
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.nsdoimss:identificarCliente) IS NOT NULL THEN
+			--normal
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'normal';
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.nsdoimss:identificarClienteReproc) IS NOT NULL THEN
+			--reproceso
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'reproceso';
+		END IF;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ValidarReproceso_matrizConvivencia
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.nsdoimss:matrizConvivencia) IS NOT NULL THEN
+			--normal
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'normal_matconv';
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.nsdoimss:matrizConvivenciaReproc) IS NOT NULL THEN
+			--reproceso
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'reproc_matconv';
+		END IF;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE ValidarRecalculo_generarMovPrevios
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsdoimss NAMESPACE 'http://DOIMSSService.mit.ds.profuturo.mx/soapoverhttp/';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.nsdoimss:genMovPrevios) IS NOT NULL THEN
+			--normal
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'normal_genmovs';
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.nsdoimss:recalcMovPrevios) IS NOT NULL THEN
+			--recalculo
+			SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'recalc_genmovs';
+		END IF;
+	END;
+END MODULE;

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ICifrasControlSoapWS" targetNamespace="http://cifras.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://cifras.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="ICifrasControlSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://cifras.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://cifras.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="ICifrasControlSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consultaSumarizadoVivienda">
+    <wsdl:part element="ns1:consultaSumarizadoVivienda" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaSumarizadoViviendaResponse">
+    <wsdl:part element="ns1:consultaSumarizadoViviendaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaSumarizadoTotal">
+    <wsdl:part element="ns1:consultaSumarizadoTotal" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaSumarizadoTotalResponse">
+    <wsdl:part element="ns1:consultaSumarizadoTotalResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaSumarizado">
+    <wsdl:part element="ns1:consultaSumarizado" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaResponse">
+    <wsdl:part element="ns1:consultaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consulta">
+    <wsdl:part element="ns1:consulta" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaSumarizadoResponse">
+    <wsdl:part element="ns1:consultaSumarizadoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ICifrasControlSoapWS">
+    <wsdl:operation name="consultaSumarizadoVivienda">
+      <wsdl:input message="ns1:consultaSumarizadoVivienda" name="consultaSumarizadoVivienda">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaSumarizadoViviendaResponse" name="consultaSumarizadoViviendaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaSumarizado">
+      <wsdl:input message="ns1:consultaSumarizado" name="consultaSumarizado">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaSumarizadoResponse" name="consultaSumarizadoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consulta">
+      <wsdl:input message="ns1:consulta" name="consulta">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaResponse" name="consultaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultaSumarizadoTotal">
+      <wsdl:input message="ns1:consultaSumarizadoTotal" name="consultaSumarizadoTotal">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaSumarizadoTotalResponse" name="consultaSumarizadoTotalResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

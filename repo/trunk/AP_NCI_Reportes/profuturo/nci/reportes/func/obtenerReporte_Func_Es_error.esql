@@ -1,0 +1,14 @@
+BROKER SCHEMA profuturo.nci.reportes.func
+
+
+CREATE FILTER MODULE obtenerReporte_Func_Es_error
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/Reportes/ReporteService/v1/types';
+		IF FIELDTYPE(Root.XMLNSC.ns:obtenerReporteRequest) IS NOT NULL THEN
+			RETURN FALSE;
+		END IF;
+		RETURN TRUE;
+	END;
+
+END MODULE;

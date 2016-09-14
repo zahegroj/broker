@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.profuturo/iib/nci/Reportes/ReporteService/v1" xmlns:iibe="http://mx.profuturo/iib/iibException/IIBException" xmlns:sch="http://mx.profuturo/iib/nci/Reportes/ReporteService/v1/types" xmlns:tns="http://mx.profuturo/iib/nci/Reportes/ReporteService/v1">
+  <xsd:import namespace="http://mx.profuturo/iib/iibException/IIBException" schemaLocation="frameworkiib/iibException/IIBException.xsd"/>
+  <xsd:import namespace="http://mx.profuturo/iib/nci/Reportes/ReporteService/v1/types" schemaLocation="ReporteService/ReporteService.xsd"/>
+
+<!-- BEGIN Global group petaining to all wsdl:message definitions -->
+<!-- END Global group -->
+
+
+<!-- BEGIN Message Definitions for the wsdl:operations  -->
+<!-- END Message Definitions -->
+
+
+</xsd:schema>

@@ -1,0 +1,26 @@
+BROKER SCHEMA profuturo.nci.valoraccion.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarDiaHabilMesSig_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://valorAccion.webservice.ws.nci.profuturo.mx/';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'IValorAccionlSoapWSService', 'consultarDiaHabilMesSig');
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSig.request.fechaLiquidacion = InputRoot.XMLNSC.consultarDiaHabilMesSig.fechaLiquidacion;
+		SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSig.request.idRegimen = InputRoot.XMLNSC.consultarDiaHabilMesSig.idRegimen;
+		SET OutputRoot.XMLNSC.ns:consultarDiaHabilMesSig.request.idSiefore = InputRoot.XMLNSC.consultarDiaHabilMesSig.idSiefore;		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarDiaHabilMesSig_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://valorAccion.webservice.ws.nci.profuturo.mx/';
+		SET Environment.nci.consultarDiaHabilMesSig = InputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.ConsultarDiaHabilMesSigResponse;		
+		IF InputRoot.XMLNSC.ns:consultarDiaHabilMesSigResponse.ConsultarDiaHabilMesSigResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

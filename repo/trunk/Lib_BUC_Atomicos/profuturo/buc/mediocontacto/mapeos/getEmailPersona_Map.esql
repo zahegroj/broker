@@ -1,0 +1,36 @@
+BROKER SCHEMA profuturo.buc.mediocontacto.mapeos
+
+
+CREATE COMPUTE MODULE getEmailPersona_Map_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsCon NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/MedioContacto';
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'BUC', 'MedioContactoService', 'getEmailPersona');
+		
+		SET OutputRoot.XMLNSC.nsCon:getEmailPersona.arg0.idPersona = InputRoot.XMLNSC.emailPersona.idPersona;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE getEmailPersona_Map_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsCon NAMESPACE 'http://ws.delegate.web.clienteUnico.profuturo.com.mx/MedioContacto';
+		
+		SET Environment.buc.getEmailPersona = InputRoot.XMLNSC.nsCon:getEmailPersonaResponse;
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE getEmailPersona_Map_Fault
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsFault NAMESPACE 'http://schemas.xmlsoap.org/soap/envelope/';
+		
+		SET Environment.buc.getEmailPersona.error = InputRoot.XMLNSC.nsFault:Fault.detail.*[1];
+		RETURN TRUE;
+	END;
+END MODULE;

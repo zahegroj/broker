@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types" version="1.0" 
+	xmlns:tns="http://mx.profuturo/iib/nci/BitacoraProcesos/ComentariosService/v1/types"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:mod="http://mx.profuturo/nci/modelo">
+	
+	<xsd:import schemaLocation="../modelo/ModeloNCI.xsd"
+		namespace="http://mx.profuturo/nci/modelo">
+	</xsd:import>
+
+	<xsd:element name="guardarComentarioRequest" type="tns:guardarComentarioReq"></xsd:element>	
+	<xsd:element name="guardarComentarioResponse" type="tns:guardarComentarioResp"></xsd:element>
+	<xsd:element name="consultarComentariosRequest" type="tns:consultarComentariosReq"></xsd:element>
+	<xsd:element name="consultarComentariosResponse" type="tns:consultarComentariosResp"></xsd:element>
+	
+	<xsd:complexType name="guardarComentarioReq">
+		<xsd:sequence>
+			<xsd:element name="comentario" type="tns:Comentario" />				
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="guardarComentarioResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="consultarComentariosReq">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="consultarComentariosResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element name="comentarios" type="tns:ListaComentarios" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+    <xsd:complexType name="ListaComentarios">
+		<xsd:sequence>
+			<xsd:element name="comentario" type="tns:Comentario" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="Comentario">
+		<xsd:sequence>
+			<xsd:element name="folio" type="xsd:string" />
+			<xsd:element name="etapa" type="mod:Etapa" />
+			<xsd:element name="subetapa" type="mod:Subetapa" />
+			<xsd:element name="fecha" type="xsd:dateTime" />
+			<xsd:element name="usuario" type="xsd:string" />			
+			<xsd:element name="comentario">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="300" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>			
+		</xsd:sequence>
+	</xsd:complexType>
+
+</xsd:schema>

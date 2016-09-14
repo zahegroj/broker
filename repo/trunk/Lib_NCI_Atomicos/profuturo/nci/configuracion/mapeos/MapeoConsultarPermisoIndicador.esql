@@ -1,0 +1,36 @@
+BROKER SCHEMA profuturo.nci.configuracion.mapeos
+
+
+CREATE COMPUTE MODULE MapeoConsultarPermisoIndicador_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://configuracion.webservice.ws.nci.profuturo.mx/';
+		
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'IConfiguracionSoapWSService', 'consultaPermisoIndicador');
+		
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.consultaPermisoIndicador.idSubproceso) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.ns:consultaPermisoIndicador.idSubproceso = InputRoot.XMLNSC.consultaPermisoIndicador.idSubproceso;
+		END IF;
+		
+		IF FIELDTYPE(InputRoot.XMLNSC.consultaPermisoIndicador.idIndicador) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.ns:consultaPermisoIndicador.idIndicador = InputRoot.XMLNSC.consultaPermisoIndicador.idIndicador;
+		END IF;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarPermisoIndicador_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://configuracion.webservice.ws.nci.profuturo.mx/';
+		
+		SET Environment.nci.consultaPermisoIndicador = InputRoot.XMLNSC.ns:consultaPermisoIndicadorResponse.ConsultaPermisoIndicadorResponse;
+		IF InputRoot.XMLNSC.ns:consultaPermisoIndicadorResponse.ConsultaPermisoIndicadorResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;

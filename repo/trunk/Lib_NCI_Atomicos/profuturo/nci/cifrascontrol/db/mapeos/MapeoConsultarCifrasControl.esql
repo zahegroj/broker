@@ -1,0 +1,38 @@
+BROKER SCHEMA profuturo.nci.cifrascontrol.db.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarCifrasControl_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);
+		CALL profuturo.util.CopyEntireMessage(InputRoot,OutputRoot);
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'ICifrasControlSoapWSService', 'consulta');
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarCifrasControl_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://cifras.webservice.ws.nci.profuturo.mx/';		
+		SET Environment.nci.consultarCifrasControl = NULL;
+		DECLARE countArr INT CARDINALITY(InputRoot.XMLNSC.cifrasControlResultSet[]);		
+		DECLARE i INTEGER 1;	
+		X : WHILE i <= countArr DO			
+			SET Environment.nci.consultarCifrasControl.response[i].folio = InputRoot.XMLNSC.cifrasControlResultSet[i].folio;
+			SET Environment.nci.consultarCifrasControl.response[i].idSubetapa = InputRoot.XMLNSC.cifrasControlResultSet[i].idSubetapa;
+			SET Environment.nci.consultarCifrasControl.response[i].totalRegistros = InputRoot.XMLNSC.cifrasControlResultSet[i].totalRegistros;
+			SET Environment.nci.consultarCifrasControl.response[i].registrosCumplieron = InputRoot.XMLNSC.cifrasControlResultSet[i].registrosCumplieron;
+			SET Environment.nci.consultarCifrasControl.response[i].registrosNoCumplieron = InputRoot.XMLNSC.cifrasControlResultSet[i].registrosNoCumplieron;
+			SET Environment.nci.consultarCifrasControl.response[i].validacion = InputRoot.XMLNSC.cifrasControlResultSet[i].validacion;
+			SET Environment.nci.consultarCifrasControl.response[i].totalErrores = InputRoot.XMLNSC.cifrasControlResultSet[i].totalErrores;
+			SET Environment.nci.consultarCifrasControl.response[i].detalle = InputRoot.XMLNSC.cifrasControlResultSet[i].detalle;
+			SET Environment.nci.consultarCifrasControl.response[i].fechaRegistro = InputRoot.XMLNSC.cifrasControlResultSet[i].fechaRegistro;
+			SET Environment.nci.consultarCifrasControl.response[i].usuario = InputRoot.XMLNSC.cifrasControlResultSet[i].usuario;			
+			SET i = i + 1;
+		END WHILE X;		
+		IF InputRoot.XMLNSC.ns:consultaResponse.ConsultaResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;

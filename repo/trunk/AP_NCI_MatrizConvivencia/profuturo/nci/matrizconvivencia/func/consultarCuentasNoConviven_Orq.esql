@@ -1,0 +1,133 @@
+BROKER SCHEMA profuturo.nci.matrizconvivencia.func
+
+CREATE COMPUTE MODULE consultarCuentasNoConviven_Orq
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot,OutputRoot);		
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/MatrizConvivencia/MatrizConvivenciaService/v1/types';
+		
+		SET Environment.Variables.tipoCatalogo[] = LIST{	ROW( '3' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG),--SUBPROCESOS   [1]
+        													ROW('19' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG),--VALIDACION    [2]
+        													ROW('20' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG)--ERROR         [3]
+        													--ROW('24' as ID_TIPO_CATALOGO, '1' as ID_LINEA_NEG) --SUBCUENTAS    [4]
+        												};
+        
+        DECLARE arrSize INTEGER CARDINALITY(Environment.Variables.tipoCatalogo[]);
+        DECLARE i INTEGER 1;
+        
+		X : WHILE i <= arrSize DO
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idLineaNegocio = Environment.Variables.tipoCatalogo[i].ID_LINEA_NEG;
+			SET OutputRoot.XMLNSC.catalogoBeanRequest.idTipoCatalogo = Environment.Variables.tipoCatalogo[i].ID_TIPO_CATALOGO;
+			
+			PROPAGATE TO TERMINAL 'out1';
+			
+			--recibir la respuesta y ponerla en una lista
+			IF Environment.nci.consultarCatalogo.success = true THEN
+				DECLARE countArr INT CARDINALITY(Environment.nci.consultarCatalogo.response[]);
+				DECLARE j INTEGER 1;
+		
+				Y : WHILE j <= countArr DO			
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].id = Environment.nci.consultarCatalogo.response[j].idCatCatalogo;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].valor = Environment.nci.consultarCatalogo.response[j].valor;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].idPadre = Environment.nci.consultarCatalogo.response[j].idCatPadre;
+					SET Environment.Variables.catalogos.catalogo[i].cat[j].idTipoCatalogo = Environment.nci.consultarCatalogo.response[j].idTipoCat;
+					
+					SET j = j + 1;
+				END WHILE Y;
+		
+			ELSE
+				SET OutputRoot.XMLNSC.error.errorCode = Environment.nci.consultarCatalogo.errorCode;
+				SET OutputRoot.XMLNSC.error.errorMessage = Environment.nci.consultarCatalogo.errorMessage;
+				SET OutputRoot.XMLNSC.error.errorTrace = Environment.nci.consultarCatalogo.errorTrace;
+			
+				PROPAGATE TO TERMINAL 'out3';
+				RETURN FALSE;
+			END IF;
+					
+			SET i = i + 1;
+		END WHILE X;
+		
+		-- consulta bd		
+		SET OutputRoot.XMLNSC.consultarCuentasNoConviven.folio = InputRoot.XMLNSC.ns:consultarCuentasNoConvivenRequest.folio;
+		IF FIELDTYPE(InputRoot.XMLNSC.ns:consultarCuentasNoConvivenRequest.folioRel) IS NOT NULL THEN
+			SET OutputRoot.XMLNSC.consultarCuentasNoConviven.folioRel = InputRoot.XMLNSC.ns:consultarCuentasNoConvivenRequest.folioRel;
+		END IF;
+		 
+		CREATE FIRSTCHILD OF OutputRoot.XMLNSC Domain('XMLNSC') NAME 'tipoSubcuentaRequest';
+		
+		PROPAGATE TO TERMINAL 'out2';
+		
+		DECLARE refCatSuprocesos REFERENCE TO Environment.Variables.catalogos.catalogo[1];
+		DECLARE refCatValidacion REFERENCE TO Environment.Variables.catalogos.catalogo[2];
+		DECLARE refCatErrores    REFERENCE TO Environment.Variables.catalogos.catalogo[3];
+		--DECLARE refCatSubcuentas REFERENCE TO Environment.Variables.catalogos.catalogo[4];
+		DECLARE refTipoSubcuenta REFERENCE TO Environment.nci.consultarTipoSubcuenta.response; --refTipoSubcuenta.tipoSubcuenta[].id
+		
+		SET i = 1;
+		SET arrSize = CARDINALITY(Environment.nci.cuentasNoConviven.res.cuentaNoConvive[]);
+		
+		WHILE i <= arrSize DO
+			DECLARE refCuentaNoConv REFERENCE TO Environment.nci.cuentasNoConviven.res.cuentaNoConvive[i];
+			
+			SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].numeroCuenta = refCuentaNoConv.numeroCuenta;
+			SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].nss = refCuentaNoConv.nss;
+			SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].curp = refCuentaNoConv.curp;
+			SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].nombreTrabajador = refCuentaNoConv.nombreTrabajador;
+			SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].estatusConvivencia = refCuentaNoConv.descEstatusConvivencia;
+			
+			IF refCuentaNoConv.idErrorNoConvive IS NULL OR refCuentaNoConv.idErrorNoConvive = 421 THEN
+				--PROCESO OPERATIVO
+				SET Environment.Variables.catResp[] = SELECT T FROM refCatValidacion.cat[] as T WHERE T.id = 279; -- PROCESO OPERATIVO NO CONVIVE
+				SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].validacion = Environment.Variables.catResp[1].valor;
+				
+				SET Environment.Variables.catResp[] = SELECT T FROM refCatSuprocesos.cat[] as T WHERE T.id = refCuentaNoConv.idSubrocesoNoConvive;
+				SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].procesoNoConvive.idProceso = refCuentaNoConv.idSubrocesoNoConvive;
+				SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].procesoNoConvive.nombreProceso = Environment.Variables.catResp[1].valor;
+				
+			ELSE
+				--ERROR VALIDACION
+				SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].validacion = getTipoValidacion_Error(Environment.Variables.catalogos, 'validacion', refCuentaNoConv.idErrorNoConvive); 
+				SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].errorValidacion = getTipoValidacion_Error(Environment.Variables.catalogos, 'error', refCuentaNoConv.idErrorNoConvive);
+			END IF;
+			
+			SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].fechaOcurrencia = refCuentaNoConv.fechaOcurrencia;
+			
+			
+			SET Environment.Variables.catResp[] = SELECT T FROM refTipoSubcuenta.tipoSubcuenta[] as T WHERE T.idTipoSubcuenta = refCuentaNoConv.idTipoSubcuenta;
+			
+			SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].subcuenta.id = Environment.Variables.catResp[1].subcuenta.id;
+			SET OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven.cuentaNoConvive[i].subcuenta.descripcion = Environment.Variables.catResp[1].subcuenta.descripcion;
+			 
+			SET i = i + 1;
+		END WHILE;
+		
+		IF FIELDTYPE (OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.cuentasNoConviven) IS NULL THEN
+			CREATE LASTCHILD OF OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse NAME 'mensajes';
+	        CALL profuturo.util.CodigosMensajesCASE('sinRegistros',OutputRoot.XMLNSC.ns:consultarCuentasNoConvivenResponse.mensajes);
+		END IF;
+		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE FUNCTION getTipoValidacion_Error(IN refCatalogos REFERENCE, IN campo CHARACTER, IN idError CHARACTER) RETURNS CHARACTER
+BEGIN
+    DECLARE descripcion CHARACTER '';
+    DECLARE refCatValidacion REFERENCE TO refCatalogos.catalogo[2];
+	DECLARE refCatErrores    REFERENCE TO refCatalogos.catalogo[3];
+	
+    DECLARE errorRow ROW;
+    CASE campo
+    WHEN 'error' THEN
+    	SET errorRow.resultQry[] = SELECT T FROM refCatErrores.cat[] AS T WHERE T.id = idError;
+    	SET descripcion = errorRow.resultQry[1].valor;
+    WHEN 'validacion' THEN
+    	DECLARE validacionRow ROW;
+    	SET errorRow.resultQry[] = SELECT T FROM refCatErrores.cat[] AS T WHERE T.id = idError;
+    	
+    	SET validacionRow.resultQry[] = SELECT T FROM refCatValidacion.cat[] AS T WHERE T.id = errorRow.resultQry[1].idPadre;
+    	SET descripcion = validacionRow.resultQry[1].valor;
+    END CASE;
+    
+    RETURN descripcion;
+END;

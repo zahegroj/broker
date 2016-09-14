@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types" version="1.0" 
+	xmlns:tns="http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:mod="http://mx.profuturo/nci/modelo">
+	
+	<xsd:import schemaLocation="../modelo/ModeloNCI.xsd"
+		namespace="http://mx.profuturo/nci/modelo"></xsd:import>
+
+	<xsd:element name="consultarArchivosRequest" type="tns:consultarArchivosReq"></xsd:element>	
+	<xsd:element name="consultarArchivosResponse" type="tns:consultarArchivosResp"></xsd:element>
+	<xsd:element name="actualizarArchivoRequest" type="tns:actualizarArchivoReq"></xsd:element>	
+	<xsd:element name="actualizarArchivoResponse" type="tns:actualizarArchivoResp"></xsd:element>
+	
+	<xsd:complexType name="consultarArchivosReq">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="idSubproceso" type="xsd:short" />
+			<xsd:element minOccurs="0" name="idEstatusArchivo" type="xsd:short" />
+			<xsd:element minOccurs="1" name="fechaArchivoDesde" type="xsd:dateTime" />
+			<xsd:element minOccurs="1" name="fechaArchivoHasta" type="xsd:dateTime" />
+			<xsd:element minOccurs="0" name="consecutivo" type="xsd:short" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="actualizarArchivoReq">
+		<xsd:sequence>
+			<xsd:element name="idArchivo" type="xsd:short" />
+			<xsd:element name="idEstatusArchivo" type="xsd:short" />
+			<xsd:element name="folio" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarArchivosResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="listaArchivo" type="mod:listaArchivo" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="actualizarArchivoResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

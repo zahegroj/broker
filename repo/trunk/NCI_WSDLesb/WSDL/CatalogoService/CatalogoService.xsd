@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://mx.profuturo/iib/nci/Administracion/CatalogoService/v1/types" version="1.0" 
+	xmlns:tns="http://mx.profuturo/iib/nci/Administracion/CatalogoService/v1/types"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:mod="http://mx.profuturo/nci/modelo">
+	
+	<xsd:import schemaLocation="../modelo/ModeloNCI.xsd"
+		namespace="http://mx.profuturo/nci/modelo"></xsd:import>
+
+	<xsd:element name="consultarCatalogoRequest" type="tns:consultarCatalogoReq"></xsd:element>	
+	<xsd:element name="consultarCatalogoResponse" type="tns:consultarCatalogoResp"></xsd:element>
+	
+	<xsd:complexType name="consultarCatalogoReq">
+		<xsd:sequence>
+			<xsd:element name="idTipoCatalogo" type="xsd:short"/>
+			<xsd:element name="idLineaNegocio" type="xsd:short"/>
+			<xsd:element name="id" type="xsd:short" minOccurs="0"/>
+			<xsd:element name="idPadre" type="xsd:short" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarCatalogoResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="catalogos" type="tns:ListaCatalogo" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Catalogo">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="id" type="xsd:short"/>
+			<xsd:element minOccurs="0" name="valor" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="idPadre" type="xsd:short"/>
+			<xsd:element minOccurs="0" name="idTipoCatalogo" type="xsd:short"/>
+			<xsd:element minOccurs="0" name="descripcion" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="usuarioCreacion" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="usuarioActualizacion" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="fechaCreacion" type="xsd:dateTime"/>
+			<xsd:element minOccurs="0" name="fechaActualizacion" type="xsd:dateTime"/>
+			<xsd:element minOccurs="0" name="vigencia" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ListaCatalogo">
+		<xsd:sequence>
+			<xsd:element name="catalogo" type="tns:Catalogo" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

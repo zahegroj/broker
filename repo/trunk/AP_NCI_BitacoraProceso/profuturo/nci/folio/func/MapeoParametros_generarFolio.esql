@@ -1,0 +1,19 @@
+BROKER SCHEMA profuturo.nci.folio.func
+
+CREATE COMPUTE MODULE MapeoParametros_generarFolio
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET OutputLocalEnvironment = InputLocalEnvironment;
+		SET Environment.valReq.idProceso = InputRoot.XMLNSC.ns:generarFolioRequest.idProceso;
+		SET Environment.valReq.idSubproceso = InputRoot.XMLNSC.ns:generarFolioRequest.idSubproceso;		
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE generarFolio_parametros_invalidos
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/nci/BitacoraProcesos/FolioService/v1/types';
+		SET OutputRoot.XMLNSC.ns:generarFolioResponse.mensajes = InputRoot.XMLNSC.mensajes;
+	END;
+END MODULE;

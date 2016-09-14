@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ITipoSubcuentaSoapWS" targetNamespace="http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="ITipoSubcuentaSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://tipoSubcuenta.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="ITipoSubcuentaSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consulta">
+    <wsdl:part element="ns1:consulta" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultaResponse">
+    <wsdl:part element="ns1:consultaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ITipoSubcuentaSoapWS">
+    <wsdl:operation name="consulta">
+      <wsdl:input message="ns1:consulta" name="consulta">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultaResponse" name="consultaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

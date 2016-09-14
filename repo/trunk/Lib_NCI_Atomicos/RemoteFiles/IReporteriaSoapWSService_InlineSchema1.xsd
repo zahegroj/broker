@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://reporte.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://reporte.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://reporte.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="cifrasControl" type="ns1:cifrasControl"/>
+<xs:element ibmSchExtn:docRoot="true" name="cifrasControlResponse" type="ns1:cifrasControlResponse"/>
+<xs:complexType name="cifrasControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="request" type="ns1:cifrasControlReportRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlReportRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listaAccionesVivienda">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="accionesVivienda" type="ns1:cifrasControlCantidadVivReportBean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="listaImporteAclaracion">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="importe" type="ns1:cifrasControlImporteReportBean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="listaImporteOrdinaria">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="importe" type="ns1:cifrasControlImporteReportBean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="listaImporteVivienda">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="importeVivienda" type="ns1:cifrasControlCantidadVivReportBean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="criterios" type="ns1:cifrasControlInformativoReportBean"/>
+      <xs:element minOccurs="0" name="registros" type="ns1:cifrasControlRegistrosReportBean"/>
+      <xs:element minOccurs="0" name="totalCreditoVivienda" type="ns1:cifrasControlTotalCreditoVivReportBean"/>
+      <xs:element minOccurs="0" name="listaImporteTotal">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="importe" type="ns1:cifrasControlImporteReportBean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlCantidadVivReportBean">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="aceptadoAclaracion" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="aceptadoOrdinaria" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="concepto" type="xs:string"/>
+      <xs:element minOccurs="0" name="creditoDeVivienda" type="xs:string"/>
+      <xs:element minOccurs="0" name="totalAceptado" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="totalGeneral" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="totalRechazado" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlImporteReportBean">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="concepto" type="xs:string"/>
+      <xs:element minOccurs="0" name="profB0" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="profB1" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="profB2" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="profB3" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="profB4" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="profCp" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="profLp" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="totalAceptado" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="totalBasica" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="totalGeneral" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="totalRechazado" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlInformativoReportBean">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="archivo" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaLiquidacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="proceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="subproceso" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlRegistrosReportBean">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="aceptados" type="xs:int"/>
+      <xs:element minOccurs="0" name="profB0" type="xs:int"/>
+      <xs:element minOccurs="0" name="profB1" type="xs:int"/>
+      <xs:element minOccurs="0" name="profB2" type="xs:int"/>
+      <xs:element minOccurs="0" name="profB3" type="xs:int"/>
+      <xs:element minOccurs="0" name="profB4" type="xs:int"/>
+      <xs:element minOccurs="0" name="profCp" type="xs:int"/>
+      <xs:element minOccurs="0" name="profLp" type="xs:int"/>
+      <xs:element minOccurs="0" name="rechazados" type="xs:int"/>
+      <xs:element minOccurs="0" name="subsecuentes" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlTotalCreditoVivReportBean">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="conCredito" type="xs:int"/>
+      <xs:element minOccurs="0" name="sinCredito" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CifrasControlResponse" type="ns1:iReporteriaSoapWSCifrasControlResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iReporteriaSoapWSCifrasControlResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="ns1:cifrasControlReportResponse"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="cifrasControlReportResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="reporte" type="ns1:reportBean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="reportBean">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="archivo" type="xs:base64Binary"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

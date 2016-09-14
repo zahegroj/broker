@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:mod="http://mx.profuturo/nci/modelo" xmlns:tns="http://mx.profuturo/iib/nci/GestionArchivos/ArchivoService/v1/types">
+	
+	<xsd:import namespace="http://mx.profuturo/nci/modelo" schemaLocation="../modelo/ModeloNCI.xsd"/>
+
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarArchivosRequest" type="tns:consultarArchivosReq"/>	
+	<xsd:element ibmSchExtn:docRoot="true" name="consultarArchivosResponse" type="tns:consultarArchivosResp"/>
+	<xsd:element ibmSchExtn:docRoot="true" name="actualizarArchivoRequest" type="tns:actualizarArchivoReq"/>	
+	<xsd:element ibmSchExtn:docRoot="true" name="actualizarArchivoResponse" type="tns:actualizarArchivoResp"/>
+	
+	<xsd:complexType name="consultarArchivosReq">
+		<xsd:sequence>
+			<xsd:element minOccurs="1" name="idSubproceso" type="xsd:short"/>
+			<xsd:element minOccurs="0" name="idEstatusArchivo" type="xsd:short"/>
+			<xsd:element minOccurs="1" name="fechaArchivoDesde" type="xsd:dateTime"/>
+			<xsd:element minOccurs="1" name="fechaArchivoHasta" type="xsd:dateTime"/>
+			<xsd:element minOccurs="0" name="consecutivo" type="xsd:short"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="actualizarArchivoReq">
+		<xsd:sequence>
+			<xsd:element name="idArchivo" type="xsd:short"/>
+			<xsd:element name="idEstatusArchivo" type="xsd:short"/>
+			<xsd:element name="folio" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="consultarArchivosResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="listaArchivo" type="mod:listaArchivo"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="actualizarArchivoResp">
+		<xsd:complexContent>
+			<xsd:extension base="mod:ResponseBase">
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,33 @@
+BROKER SCHEMA profuturo.general.subetapas.informar.doimss
+
+CREATE COMPUTE MODULE MapDepurar_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsbpm NAMESPACE 'http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0';
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		
+		SET OutputRoot.XMLNSC.nsbpm:borrarStagingDispersionOrdIMSS.nsbpm:folio = InputRoot.XMLNSC.ns:informarSubetapaRequest.folio;
+		SET OutputRoot.XMLNSC.nsbpm:borrarStagingDispersionOrdIMSS.nsbpm:estatusProceso = InputRoot.XMLNSC.ns:informarSubetapaRequest.resultado;
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapDepurar_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE nsbpm NAMESPACE 'http://profuturo.mx/procesos/recaudacion/dispersion/ord/imss/1.0';
+		DECLARE nstkp NAMESPACE 'http://TKPRFPC';
+		DECLARE ns NAMESPACE 'http://mx.profuturo/iib/afo/SubetapaService/v1/types';
+		
+		DECLARE resp REFERENCE TO InputRoot.XMLNSC.nsbpm:borrarStagingDispersionOrdIMSSResponse;
+		
+		IF FIELDTYPE (resp.nsbpm:error) IS NULL THEN
+			SET OutputRoot.XMLNSC.ns:informarSubetapaResponse.respuesta = resp.nsbpm:respuesta;
+		ELSE		
+			SET OutputRoot.XMLNSC.ns:informarSubetapaResponse.respuesta = resp.nsbpm:error.nstkp:codigo;
+		END IF;
+		
+		SET OutputLocalEnvironment.Destination.RouterList.DestinationData.labelName = 'resp_fault';
+		RETURN TRUE;
+	END;
+END MODULE;

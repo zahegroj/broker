@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="IFolioSoapWS" targetNamespace="http://folio.webservice.ws.nci.profuturo.mx/" xmlns:ns1="http://folio.webservice.ws.nci.profuturo.mx/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>
+    <wsdl:appinfo source="WMQI_APPINFO">
+      <MRWSDLAppInfo imported="true">
+        <generatedXSD location="IFolioSoapWSService_InlineSchema1.xsd"/>
+      </MRWSDLAppInfo>
+    </wsdl:appinfo>
+  </wsdl:documentation>
+  <wsdl:types>
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://folio.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:tns="http://folio.webservice.ws.nci.profuturo.mx/">
+<xsd:include schemaLocation="IFolioSoapWSService_InlineSchema1.xsd"/>
+    </xs:schema>
+    </wsdl:types>
+  <wsdl:message name="consultarFolioARelacionarResponse">
+    <wsdl:part element="ns1:consultarFolioARelacionarResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarFolio">
+    <wsdl:part element="ns1:generarFolio" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarFolioResponse">
+    <wsdl:part element="ns1:consultarFolioResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarFoliosRelacionadosResponse">
+    <wsdl:part element="ns1:consultarFoliosRelacionadosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarFoliosRelacionados">
+    <wsdl:part element="ns1:consultarFoliosRelacionados" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardarFolio">
+    <wsdl:part element="ns1:guardarFolio" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarFolioResponse">
+    <wsdl:part element="ns1:actualizarFolioResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarFolio">
+    <wsdl:part element="ns1:consultarFolio" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultarFolioARelacionar">
+    <wsdl:part element="ns1:consultarFolioARelacionar" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarFolio">
+    <wsdl:part element="ns1:actualizarFolio" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="generarFolioResponse">
+    <wsdl:part element="ns1:generarFolioResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="guardarFolioResponse">
+    <wsdl:part element="ns1:guardarFolioResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IFolioSoapWS">
+    <wsdl:operation name="consultarFoliosRelacionados">
+      <wsdl:input message="ns1:consultarFoliosRelacionados" name="consultarFoliosRelacionados">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultarFoliosRelacionadosResponse" name="consultarFoliosRelacionadosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarFolioARelacionar">
+      <wsdl:input message="ns1:consultarFolioARelacionar" name="consultarFolioARelacionar">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultarFolioARelacionarResponse" name="consultarFolioARelacionarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarFolio">
+      <wsdl:input message="ns1:consultarFolio" name="consultarFolio">
+    </wsdl:input>
+      <wsdl:output message="ns1:consultarFolioResponse" name="consultarFolioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarFolio">
+      <wsdl:input message="ns1:actualizarFolio" name="actualizarFolio">
+    </wsdl:input>
+      <wsdl:output message="ns1:actualizarFolioResponse" name="actualizarFolioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="guardarFolio">
+      <wsdl:input message="ns1:guardarFolio" name="guardarFolio">
+    </wsdl:input>
+      <wsdl:output message="ns1:guardarFolioResponse" name="guardarFolioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generarFolio">
+      <wsdl:input message="ns1:generarFolio" name="generarFolio">
+    </wsdl:input>
+      <wsdl:output message="ns1:generarFolioResponse" name="generarFolioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

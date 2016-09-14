@@ -1,0 +1,34 @@
+BROKER SCHEMA profuturo.nci.movimientos.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarMovPreviosRelacionados_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		CALL profuturo.util.CopyMessageHeaders(InputRoot, OutputRoot);
+				
+		SET OutputRoot.XMLNSC.consultarMovPreviosRelacionados = InputRoot.XMLNSC.consultarMovPreviosRelacionados; 
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarMovPreviosRelacionados_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE refResponse REFERENCE TO InputRoot.XMLNSC.movPreviosRelacionadosResponse;
+		
+		MOVE refResponse FIRSTCHILD NAME 'movPreviosRelacionados';
+		WHILE LASTMOVE(refResponse) DO
+			CREATE LASTCHILD OF Environment.nci.consultarMovPreviosRelacionados  NAME 'movPreviosRelacionados';
+			DECLARE refMovRel REFERENCE TO Environment.nci.consultarMovPreviosRelacionados.movPreviosRelacionados[<];
+			
+			SET refMovRel.folio = refResponse.folio;
+			SET refMovRel.folioRel = refResponse.folioRel;
+			SET refMovRel.montoPesos = refResponse.montoPesos;
+			SET refMovRel.montoAcciones = refResponse.montoAcciones;
+			SET refMovRel.numeroRegistros = refResponse.numeroRegistros;
+			
+			MOVE refResponse NEXTSIBLING REPEAT TYPE NAME;
+		END WHILE;
+
+		RETURN TRUE;
+	END;
+END MODULE;

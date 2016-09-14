@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://bitacora.webservice.ws.nci.profuturo.mx/" version="1.0" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:ns1="http://bitacora.webservice.ws.nci.profuturo.mx/" xmlns:tns="http://bitacora.webservice.ws.nci.profuturo.mx/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element ibmSchExtn:docRoot="true" name="consultarBitacora" type="ns1:consultarBitacora"/>
+<xs:element ibmSchExtn:docRoot="true" name="consultarBitacoraResponse" type="ns1:consultarBitacoraResponse"/>
+<xs:element ibmSchExtn:docRoot="true" name="guardarBitacora" type="ns1:guardarBitacora"/>
+<xs:element ibmSchExtn:docRoot="true" name="guardarBitacoraResponse" type="ns1:guardarBitacoraResponse"/>
+<xs:complexType name="consultarBitacora">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="idEstatusSubetapa" type="xs:short"/>
+      <xs:element minOccurs="0" name="fechaCreacion" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fechaFinalizado" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="idEtapa" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="consultarBitacoraResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConsultarBitacoraResponse" type="ns1:iBitacoraProcesoSoapWSConsultarBitacoraResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iBitacoraProcesoSoapWSConsultarBitacoraResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="response" nillable="true" type="ns1:bitacoraProcesosVO"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+<xs:complexType abstract="true" name="abstractWebServiceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+      <xs:element minOccurs="0" name="errorTrace" type="xs:string"/>
+      <xs:element name="success" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="bitacoraProcesosVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="estatus" type="ns1:estatusSubetapaVO"/>
+      <xs:element minOccurs="0" name="etapa" type="ns1:etapaVO"/>
+      <xs:element minOccurs="0" name="fechaFin" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="fehReg" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="proceso" type="ns1:procesoVO"/>
+      <xs:element minOccurs="0" name="resultado" type="ns1:resultadoVO"/>
+      <xs:element minOccurs="0" name="subproceso" type="ns1:subprocesoVO"/>
+      <xs:element minOccurs="0" name="usuarioRegistro" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="estatusSubetapaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descEstatusSubetapa" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEstatusSubetapa" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="etapaVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="desEtapa" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEtapa" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="procesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descProceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="resultadoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descResultado" type="xs:string"/>
+      <xs:element minOccurs="0" name="idResultado" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="subprocesoVO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descSubproceso" type="xs:string"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="guardarBitacora">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="bitacoraBean" type="ns1:bitacoraProcesoBeanRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="bitacoraProcesoBeanRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="folio" type="xs:string"/>
+      <xs:element minOccurs="0" name="idEstatus" type="xs:short"/>
+      <xs:element minOccurs="0" name="idEtapa" type="xs:short"/>
+      <xs:element minOccurs="0" name="idResultado" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSubetapa" type="xs:short"/>
+      <xs:element minOccurs="0" name="idSubproceso" type="xs:short"/>
+      <xs:element minOccurs="0" name="usuario" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="guardarBitacoraResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GuardarBitacoraResponse" type="ns1:iBitacoraProcesoSoapWSGuardarBitacoraResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="iBitacoraProcesoSoapWSGuardarBitacoraResponse">
+    <xs:complexContent>
+      <xs:extension base="ns1:abstractWebServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="response" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

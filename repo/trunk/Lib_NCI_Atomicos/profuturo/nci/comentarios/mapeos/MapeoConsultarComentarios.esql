@@ -1,0 +1,24 @@
+BROKER SCHEMA profuturo.nci.comentarios.mapeos
+
+CREATE COMPUTE MODULE MapeoConsultarComentarios_IN
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://comentarios.webservice.ws.nci.profuturo.mx/';
+		CALL profuturo.util.soap.setServicioOrigen(Environment, 'NCI', 'IBitacoraComentarioSoapWSService', 'consultarComentarios');
+		SET OutputRoot.HTTPRequestHeader.SOAPAction = '';
+		SET OutputRoot.XMLNSC.ns:consultaComentarios.request.folio = InputRoot.XMLNSC.consultarComentariosBeanRequest.folio;		
+		RETURN TRUE;
+	END;
+END MODULE;
+
+CREATE COMPUTE MODULE MapeoConsultarComentarios_OUT
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		DECLARE ns NAMESPACE 'http://comentarios.webservice.ws.nci.profuturo.mx/';
+		SET Environment.nci.consultarComentarios = InputRoot.XMLNSC.ns:consultaComentariosResponse.ConsultaComentariosResponse;		
+		IF InputRoot.XMLNSC.ns:consultaComentariosResponse.ConsultaComentariosResponse.success THEN
+			CALL profuturo.util.soap.setServicioOrigen(Environment, '', '', '');
+		END IF;		
+		RETURN TRUE;
+	END;
+END MODULE;
