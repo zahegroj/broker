@@ -1,0 +1,18 @@
+finalizo archivo
+finalizo archivo ( ['MQROOT' : 0x7f0664201cb0]
+  (0x01000000:Name):File     = (
+    (0x03000000:NameValue):Directory    = '/home/jorge/Documents/testFile' (CHARACTER)
+    (0x03000000:NameValue):Name         = 'PREFT.DP.P01534.F160621.DISPAF.C003.TXT' (CHARACTER)
+    (0x03000000:NameValue):LastModified = GMTTIMESTAMP '2016-06-24 13:00:17' (GMTTIMESTAMP)
+    (0x03000000:NameValue):TimeStamp    = '20160624_130058_451330' (CHARACTER)
+    (0x03000000:NameValue):Offset       = 584832856 (INTEGER)
+    (0x03000000:NameValue):Record       = 1293878 (INTEGER)
+    (0x03000000:NameValue):Delimiter    = X'0d0a' (BLOB)
+    (0x03000000:NameValue):IsEmpty      = TRUE (BOOLEAN)
+  )
+  (0x01000000:Name):Wildcard = (
+    (0x03000000:NameValue):WildcardMatch = 'PREFT.DP.P01534.F160621.DISPAF.C003.TXT' (CHARACTER)
+  )
+)
+
+584832856

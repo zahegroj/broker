@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/TestService/" xmlns:ibmSchExtn="http://www.ibm.com/schema/extensions" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/TestService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+      <xsd:element ibmSchExtn:docRoot="true" name="sayHello">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="id" type="xsd:int"/>
+            <xsd:element name="parametros" type="tns:ListaParametros" minOccurs="0"/>
+            <xsd:element name="mensaje" type="xsd:base64Binary" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element ibmSchExtn:docRoot="true" name="sayHelloResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="parametro" type="tns:Parametro" minOccurs="0"/>
+            <xsd:element name="mensaje" type="xsd:string" minOccurs="0"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Parametro">
+      	<xsd:sequence>
+      		<xsd:element name="id" type="xsd:int"/>
+      		<xsd:element name="valor" type="xsd:string"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ListaParametros">
+      	<xsd:sequence>
+      		<xsd:element name="parametro" type="tns:Parametro" maxOccurs="unbounded"/>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>

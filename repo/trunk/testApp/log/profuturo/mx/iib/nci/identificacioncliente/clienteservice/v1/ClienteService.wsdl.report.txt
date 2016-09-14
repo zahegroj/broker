@@ -1,0 +1,30 @@
+
+
+Importing file: /home/jzapatah/Documents/Profuturo/svn/bus/trunk/NCI_WSDLesb/WSDL/ClienteService/ClienteService.wsdl
+
+The WSDL import will proceed with bindings ClienteBinding.
+Creating wsdl schema document for file:///home/jzapatah/Documents/Profuturo/svn/bus/trunk/NCI_WSDLesb/WSDL/ClienteService/ClienteService.wsdl.
+Parsing wsdl binding {http://mx.profuturo/iib/nci/IdentificacionCliente/ClienteService/v1}ClienteBinding.
+Parsing wsdl binding input consultarClientesNoIdentificados.
+Parsing wsdl binding output consultarClientesNoIdentificados.
+Parsing wsdl binding input consultarClienteBasico.
+Parsing wsdl binding output consultarClienteBasico.
+Parsing wsdl binding input consultarCliente.
+Parsing wsdl binding output consultarCliente.
+Processing doc style for operation consultarClientesNoIdentificados.
+Processing doc style for operation consultarClienteBasico.
+Processing doc style for operation consultarCliente.
+Populating WSDL schema ClienteService_wsdl.xsd.
+Creating file ClienteService_wsdl.xsd in the workspace.
+Creating file /testApp/testApp/ClienteService/ClienteService.xsd in the workspace.
+Creating file /testApp/modelo/ModeloNCI.xsd in the workspace.
+Creating file /testApp/testApp/frameworkiib/iibException/IIBException.xsd in the workspace.
+Copying source WSDL ClienteService.wsdl to ClienteService.wsdl.
+
+Elapsed time processing this message definition file: 0.511 seconds
+Number of warnings for this message definition file: 0
+
+
+Number of files processed: 1
+
+

@@ -1,0 +1,7 @@
+ffmpeg -f x11grab -r 25 -s 1366x720 -i :0.0+0,24 -vcodec libx264 -threads 0 video.mkv
+
+ffmpeg -f alsa -f x11grab -r 25 -s 1366x720 -i :0.0+0,24 -vcodec libx264 -threads 0 video.mkv
+
+ffmpeg -video_size 1024x768 -framerate 25 -f x11grab -i :0.0+100,200 -f alsa -ac 2 -i hw:0 output.mkv
+
+ffmpeg -f alsa -i pulse -f x11grab -r 25 -s 1366x720 -i :0.0+0,24 -acodec pcm_s16le -vcodec libx264 -threads 0 output.mkv

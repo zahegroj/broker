@@ -1,0 +1,1 @@
+./iib mqsisetdbparms TESTNODE_jorge -n sftp::sftpSecId -u jorge -p jorge
