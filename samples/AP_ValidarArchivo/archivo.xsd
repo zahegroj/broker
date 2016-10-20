@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.profuturo/archivo" version="1.0" xmlns:tns="http://mx.profuturo/archivo">
+
+	<xsd:element name="errorLinea" type="tns:ErrorLinea"/>
+
+	<xsd:complexType name="ErrorLinea">
+		<xsd:sequence>
+			<xsd:element minOccurs="0" name="numeroLinea" type="xsd:integer"/>
+			<xsd:element minOccurs="0" name="valor" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="esValida" type="xsd:boolean"/>
+			<xsd:element minOccurs="0" name="tipoError" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="descripcion" type="xsd:string"/>
+			<xsd:element minOccurs="0" name="timestamp" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
